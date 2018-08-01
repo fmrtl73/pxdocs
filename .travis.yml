@@ -33,7 +33,7 @@ script:
   # publish site -> public
   - make publish-docker
   # if this is a pull request then we don't want to update algolia or deploy
-  - if [ "${TRAVIS_PULL_REQUEST}" == "true" ]; then exit 0; fi
+  - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
   # update the algolia index
   - make search-index-image
   # update the algoilia index
@@ -43,10 +43,9 @@ script:
   # push the image to gcr
   - echo "pushing image $DEPLOYMENT_IMAGE"
   - gcloud docker -- push $DEPLOYMENT_IMAGE
-  # deploy the image to k8s
   - echo "deploying image $DEPLOYMENT_IMAGE"
   - cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst
-  - cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst | kubectl apply -f -
+  - cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst | kubectl apply -f -  
 notifications:
   email:
     recipients:
