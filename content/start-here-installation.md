@@ -24,8 +24,7 @@ Open needed ports | See Note 1 below.
 Linux kernel | Version 3.10 or greater.
 Docker | Version 1.13.1 or greater.
 Key-value store | See Note 2 below.
-Shared mounts | See Note 3 below.
-Portworx nodes | See Note 4 below.
+Portworx nodes | See Note 3 below.
 
 **Note 1**: Open ports 9001-9016 on all Protworx nodes. Also open the KVDB port. \(As an example, `etcd` typically runs on port 2379\).
 
@@ -39,7 +38,7 @@ Portworx nodes | See Note 4 below.
 
 If you are installing on Kubernetes, continue by clicking below.
 
-{{< widelink url="/platform-install-with-kubernetes" >}}Preparing your Kubernetes Platform{{</widelink>}}
+{{< widelink url="/platform-prep-with-kubernetes" >}}Preparing your Kubernetes Platform{{</widelink>}}
 
 #### Other
 
