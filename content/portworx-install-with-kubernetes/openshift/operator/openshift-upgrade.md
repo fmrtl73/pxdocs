@@ -36,7 +36,7 @@ Before you can upgrade your OpenShift environment to 4.3, you must upgrade Portw
     2. Change the `startPort` value in your `StorageCluster` spec to `17001`:
 
         ```text
-        apiVersion: core.libopenstorage.org/v1alpha1	      
+        apiVersion: core.libopenstorage.org/v1	      
         kind: StorageCluster	      
         metadata:	      
           name: portworx	        

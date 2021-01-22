@@ -20,13 +20,13 @@ This section provides a few examples of common Portworx configurations you can u
 * Portworx with internal KVdb, configured to use all unused devices on the system.
 
 ```text
-apiVersion: core.libopenstorage.org/v1alpha1
+apiVersion: core.libopenstorage.org/v1
 kind: StorageCluster
 metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.5.5
+  image: portworx/oci-monitor:{{% currentVersion %}}
   kvdb:
     internal: true
   storage:
@@ -36,13 +36,13 @@ spec:
 * Portworx with external ETCD, Stork, and Lighthouse.
 
 ```text
-apiVersion: core.libopenstorage.org/v1alpha1
+apiVersion: core.libopenstorage.org/v1
 kind: StorageCluster
 metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.5.5
+  image: portworx/oci-monitor:{{% currentVersion %}}
   kvdb:
     endpoints:
     - etcd:http://etcd-1.net:2379
@@ -66,7 +66,7 @@ metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.6.0.1
+  image: portworx/oci-monitor:{{% currentVersion %}}
   security:
     enabled: true
 ```
@@ -80,7 +80,7 @@ metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.6.0.1
+  image: portworx/oci-monitor:{{% currentVersion %}}
   security:
     enabled: true
     auth:
@@ -94,13 +94,13 @@ spec:
 * Portworx with update and delete strategies, and placement rules.
 
 ```text
-apiVersion: core.libopenstorage.org/v1alpha1
+apiVersion: core.libopenstorage.org/v1
 kind: StorageCluster
 metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.5.5
+  image: portworx/oci-monitor:{{% currentVersion %}}
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
@@ -128,13 +128,13 @@ spec:
 * Portworx with custom image registry, network interfaces, and miscellaneous options
 
 ```text
-apiVersion: core.libopenstorage.org/v1alpha1
+apiVersion: core.libopenstorage.org/v1
 kind: StorageCluster
 metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.5.5
+  image: portworx/oci-monitor:{{% currentVersion %}}
   imagePullPolicy: Always
   imagePullSecret: regsecret
   customImageRegistry: docker.private.io/repo
@@ -152,13 +152,13 @@ spec:
 * Portworx with node specific overrides. Use different devices or no devices on different set of nodes.
 
 ```text
-apiVersion: core.libopenstorage.org/v1alpha1
+apiVersion: core.libopenstorage.org/v1
 kind: StorageCluster
 metadata:
   name: portworx
   namespace: kube-system
 spec:
-  image: portworx/oci-monitor:2.5.5
+  image: portworx/oci-monitor:{{% currentVersion %}}
   storage:
     devices:
     - /dev/sda
