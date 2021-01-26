@@ -328,6 +328,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 | PWX-11967 | The `pxctl status` command now displays which device is being used for the internal KVDB. This will be shown only on the nodes where the internal KVDB is running. |
 | PWX-13718 | Portworx now returns a user-friendly error when a sharedv4 mount command times-out instead of `signal: killed`. |
 | PWX-12367 | Cloudsnap metrics fields have changed with this release. Previously, the fields were `px_backup_stats_status`, `px_backup_stats_size`, and `px_backup_stats_duration_seconds`. These are replaced with `px_backup_stats_backup_status`, `px_backup_stats_backup_size`, and `px_backup_stats_backup_duration_seconds`. |
+| PWX-12271 | Portworx now supports VMware Photon OS 3.0 | 
 
 ### Fixes
 
