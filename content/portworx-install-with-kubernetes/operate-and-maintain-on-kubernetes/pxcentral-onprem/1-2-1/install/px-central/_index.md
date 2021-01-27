@@ -5,6 +5,7 @@ keywords: Install, PX-Central, On-prem, license, GUI, k8s
 description: Learn how to install PX-Central On-prem.
 noicon: true
 hideSections: true
+hidden: true
 ---
 
 You can install PX-Central on any Kubernetes cluster using Helm charts as long as your cluster meets the prerequisites.
@@ -55,11 +56,11 @@ If your cluster is internet-connected, skip this section. If your cluster is air
     * docker.io/library/busybox:1.31
     * docker.io/library/mysql:5.7.22
     * docker.io/portworx/pxcentral-onprem-api:1.2.1
-    * docker.io/portworx/pxcentral-onprem-ui-frontend:1.2.2
-    * docker.io/portworx/pxcentral-onprem-ui-backend:1.2.2
-    * docker.io/portworx/pxcentral-onprem-ui-lhbackend:1.2.2
-    * docker.io/portworx/px-backup:1.2.2
-    * docker.io/portworx/pxcentral-onprem-post-setup:1.2.2
+    * docker.io/portworx/pxcentral-onprem-ui-frontend:1.2.1
+    * docker.io/portworx/pxcentral-onprem-ui-backend:1.2.1
+    * docker.io/portworx/pxcentral-onprem-ui-lhbackend:1.2.0
+    * docker.io/portworx/px-backup:1.2.1
+    * docker.io/portworx/pxcentral-onprem-post-setup:1.2.1
 
 3. Pull the Portworx license server and associated images. How you do this depends on your air-gapped cluster configuration:
 
