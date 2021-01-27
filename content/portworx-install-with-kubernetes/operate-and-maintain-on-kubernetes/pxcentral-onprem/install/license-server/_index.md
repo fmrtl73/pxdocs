@@ -36,7 +36,37 @@ Follow the steps in this section to install the license server component.
     system:serviceaccount:<YOUR_NAMESPACE>:pxcentral-license-server
     ```
 
+## Prepare air-gapped environments
 
+If your cluster is internet-connected, skip this section. If your cluster is air-gapped, you must pull the license server and related Docker images to either your Docker registry or directly onto your nodes.
+
+1. Run the following command to create an environment variable called `kube_version` and assign your Kubernetes version to it:
+
+    ```
+    kube_version=`kubectl version --short | awk -Fv '/Server Version: / {print $3}'`
+    ```
+
+2. Pull the following required Docker images onto your air-gapped environment:
+
+    * docker.io/portworx/px-els:1.0.0
+    * docker.io/portworx/pxcentral-onprem-els-ha-setup:1.1.1
+
+3. Pull the license server and related Docker images. How you do this depends on your air-gapped cluster configuration:
+
+    * If you have a company-wide docker-registry server, pull the Portworx license server and related Docker images from Portworx:
+
+        ```text
+        sudo docker pull <required-docker-images>
+        sudo docker tag <required-docker-images> <company-registry-hostname>:5000<path-to-required-docker-images>
+        sudo docker push <company-registry-hostname>:5000<path-to-required-docker-images>
+        ```
+
+    * If you do not have a company-wide docker-registry server, pull the license server and related Docker images from Portworx onto a computer that can access the internet and send it to your air-gapped cluster. The following example sends the Docker image to the air-gapped cluster over ssh:
+
+        ```text
+        sudo docker pull <required-docker-images>
+        sudo docker save <required-docker-images> | ssh root@<air-gapped-address> docker load
+        ```
 ## Install the license server component
 
 1. Generate the install spec through the **License Server and Monitoring** [spec generator](https://central.portworx.com/specGen/px-central-on-prem-wizard).

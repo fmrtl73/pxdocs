@@ -38,7 +38,7 @@ You can install PX-Central on a Kubernetes cluster that is already running Portw
 
 ## Prepare air-gapped environments
 
-If your cluster is internet-connected, skip this section. If your cluster is air-gapped, you must pull the Portworx license server and related Docker images to either your Docker registry or directly onto your nodes.
+If your cluster is internet-connected, skip this section. If your cluster is air-gapped, you must pull the PX-Central and related Docker images to either your Docker registry or directly onto your nodes.
 
 1. Run the following command to create an environment variable called `kube_version` and assign your Kubernetes version to it:
 
@@ -61,9 +61,9 @@ If your cluster is internet-connected, skip this section. If your cluster is air
     * docker.io/portworx/px-backup:1.2.2
     * docker.io/portworx/pxcentral-onprem-post-setup:1.2.2
 
-3. Pull the Portworx license server and associated images. How you do this depends on your air-gapped cluster configuration:
+3. Pull the PX-Central and related Docker images. How you do this depends on your air-gapped cluster configuration:
 
-    * If you have a company-wide docker-registry server, pull the Portworx license server from Portworx:
+    * If you have a company-wide docker-registry server, pull the PX-Central and related Docker images from Portworx:
 
         ```text
         sudo docker pull <required-docker-images>
@@ -71,7 +71,7 @@ If your cluster is internet-connected, skip this section. If your cluster is air
         sudo docker push <company-registry-hostname>:5000<path-to-required-docker-images>
         ```
 
-    * If you do not have a company-wide docker-registry server, pull the Portworx license server from portworx onto a computer that can access the internet and send it to your air-gapped cluster. The following example sends the docker image to the air-gapped cluster over ssh:
+    * If you do not have a company-wide docker-registry server, pull the PX-Central and related Docker images from Portworx onto a computer that can access the internet and send it to your air-gapped cluster. The following example sends the docker image to the air-gapped cluster over ssh:
 
         ```text
         sudo docker pull <required-docker-images>

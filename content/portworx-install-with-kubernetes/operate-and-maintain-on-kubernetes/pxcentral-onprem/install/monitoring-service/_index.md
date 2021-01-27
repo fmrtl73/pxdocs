@@ -19,6 +19,50 @@ Follow the steps in this section to install the monitoring service.
     system:serviceaccount:<YOUR_NAMESPACE>:px-monitor
     ```
 
+## Prepare air-gapped environments
+
+If your cluster is internet-connected, skip this section. If your cluster is air-gapped, you must pull the monitoring service and related Docker images to either your Docker registry or directly onto your nodes.
+
+1. Run the following command to create an environment variable called `kube_version` and assign your Kubernetes version to it:
+
+    ```
+    kube_version=`kubectl version --short | awk -Fv '/Server Version: / {print $3}'`
+    ```
+
+2. Pull the following required Docker images onto your air-gapped environment:
+
+    * docker.io/cortexproject/cortex:v1.1.0
+    * docker.io/bitnami/cassandra:3.11.6-debian-10-r153
+    * docker.io/library/nginx:1.17
+    * docker.io/bitnami/consul:1.8.0-debian-10-r24
+    * docker.io/pwxbuild/go-dnsmasq:release-1.0.7
+    * docker.io/grafana/grafana:7.1.3
+    * docker.io/prometheus/prometheus:v2.7.1
+    * docker.io/coreos/configmap-reload:v0.0.1
+    * docker.io/coreos/prometheus-config-reloader:v0.34.0
+    * docker.io/coreos/prometheus-operator:v0.34.0
+    * docker.io/portworx/pxcentral-monitor-post-install-setup:1.2.1
+    * docker.io/prometheus/memcached-exporter:v0.4.1
+    * docker.io/library/memcached:1.5.7-alpine
+    * docker.io/library/memcached:1.5.12-alpine
+    * docker.io/portworx/px-operator:1.3.1
+
+3. Pull the monitoring service and related Docker images. How you do this depends on your air-gapped cluster configuration:
+
+    * If you have a company-wide docker-registry server, pull the monitoring service and related Docker images from Portworx:
+
+        ```text
+        sudo docker pull <required-docker-images>
+        sudo docker tag <required-docker-images> <company-registry-hostname>:5000<path-to-required-docker-images>
+        sudo docker push <company-registry-hostname>:5000<path-to-required-docker-images>
+        ```
+
+    * If you do not have a company-wide docker-registry server, pull the monitoring service and related Docker images from Portworx onto a computer that can access the internet and send it to your air-gapped cluster. The following example sends the Docker image to the air-gapped cluster over ssh:
+
+        ```text
+        sudo docker pull <required-docker-images>
+        sudo docker save <required-docker-images> | ssh root@<air-gapped-address> docker load
+        ```
 ## Install the monitoring service
 
 1. Generate the install spec through the **License Server and Monitoring** [spec generator](https://central.portworx.com/specGen/px-central-on-prem-wizard), and enter the following information:
