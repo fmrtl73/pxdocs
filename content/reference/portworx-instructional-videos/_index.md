@@ -16,7 +16,7 @@ The following is a series of easy to digest lectures about Portworx. Videos are 
 
 This short video will explain the Portworx value proposition along with some of the differentiating features such as data mobility, application awareness and infrastructure independence.
 
-{{< youtube  dYPS_FgyXnI >}}
+{{< youtube  ZsguRboKGjM >}}
 
 #### Resources
 
@@ -29,7 +29,7 @@ This short video will explain the Portworx value proposition along with some of 
 
 Learn the basics of Portworx and how it can enable your stateful workloads. This video will discuss the largest fragments of the Portworx platform and how it creates a global namespace to enable virtual volumes for containers.
 
-{{< youtube  AxCmtQcxJFo >}}
+{{< youtube  xZy1Ebssc7Q >}}
 
 #### Resources
 
