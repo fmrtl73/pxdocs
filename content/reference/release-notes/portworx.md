@@ -6,6 +6,26 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.4
+
+February 15, 2021
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-18594 | Storage pools with an auto journal partition can now be expanded with a drive resize operation. Use `pxctl service pool expand -o resize-disk` for this operation. |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-18403 | When running vSphere cloud drives, Portworx initialization sometimes failed due to a time out in looking up the disk paths. <br/><br/>**User impact:** Users with VMs containing 2 or more disks that don't show up in the `/dev/disk/by-id` path saw Portworx initialization time out. Portworx looked for the `/dev/disk/by-id` path for each disk for 2 minutes before timing out.<br/><br/>**Resolution:** Portworx will now perform a `udevadm` trigger if it cannot find the disks; the timeout has been removed. |
+
 ## 2.6.3
 
 January 15, 2021
