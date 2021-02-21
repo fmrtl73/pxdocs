@@ -243,11 +243,14 @@ Navigate to the Prometheus web UI by going to the service ip. You should be able
     ```
 
 2. Download {{< direct-download url="/samples/k8s/pxc/grafana-datasource.yaml" name="grafana-datasource.yaml" >}} file and create the configmap:
-    If you are using your own prometheus set-up make sure to edit this file to point to the right prometheus instance.
 
     ```text
     kubectl -n kube-system create configmap grafana-source-config --from-file=grafana-datasource.yaml
     ```
+
+    {{<info>}}
+**NOTE:** If you did not follow the steps in this document to install Prometheus, make sure you edit this file to match your environment.
+    {{</info>}}
 
 3. Download and apply the following Grafana templates:
 
