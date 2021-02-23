@@ -145,7 +145,7 @@ Note that, when the ClusterPair gets created, Portworx also creates a 100 GiB vo
 Once you apply the above spec on the source cluster, you should be able to check the status of the pairing:
 
 ```text
-storkctl get clusterpair
+storkctl get clusterpair -n migrationnamespace
 ```
 ```output
 NAME               STORAGE-STATUS   SCHEDULER-STATUS   CREATED
