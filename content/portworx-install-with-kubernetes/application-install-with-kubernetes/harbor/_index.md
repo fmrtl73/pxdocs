@@ -10,7 +10,7 @@ noicon: true
 
 This reference architecture document shows how you can deploy [Harbor](https://goharbor.io/), an open-source container image registry, and its dependencies with Portworx on Kubernetes. Under this architecture, Portworx provides reliable and persistent storage to ensure Harbor runs with HA.
 
-## Create StorageClasses
+## Create a StorageClass
 
 All of the components will use a `StorageClass` with 3 replicas, so create and apply the following spec:
 
@@ -48,7 +48,7 @@ For details about the Portworx-specific parameters, refer to the [Portworx Volum
     EOF
     ```
 
-* Harbor is deployed using [Helm](https://helm.sh/), so it will need to be installed and have permissions on the `harbor` namespace. You can find instructions [here](https://helm.sh/docs/topics/rbac/).
+* Harbor is deployed using [Helm](https://helm.sh/), so it will need to be installed and have permissions on the `harbor` namespace. You can find instructions [here](https://v2.helm.sh/docs/using_helm/#role-based-access-control).
 
 ### Deploy dependencies
 
@@ -108,17 +108,7 @@ Harbor requires a PostgreSQL and Redis database.
           schedulerName: stork
           containers:
           - name: postgres
-            image: postgres:13.2
-            readinessProbe:
-              exec:
-                command: ["psql", "-w", "-U", "postgres", "-c", "SELECT 1"]
-              initialDelaySeconds: 15
-              timeoutSeconds: 2
-            livenessProbe:
-              exec:
-                command: ["psql", "-w", "-U", "postgres", "-c", "SELECT 1"]
-              initialDelaySeconds: 45
-              timeoutSeconds: 2
+            image: postgres:9.5
             ports:
             - containerPort: 5432
               name: postgres
@@ -220,11 +210,11 @@ Harbor requires a PostgreSQL and Redis database.
 Enter the following commands to add the Harbor repository and deploy Harbor. Replace `myharbor` with a name of your choosing:
 
 ```text
-NAMESPACE=harbor
 helm repo add harbor https://helm.goharbor.io
-helm install myharbor harbor/harbor \
+NAMESPACE=harbor
+helm install harbor/harbor \
   --set redis.type=external \
-  --set redis.external.addr=redis.$NAMESPACE:6379 \
+  --set redis.external.host=redis.$NAMESPACE \
   --set redis.external.password=password \
   --set database.type=external \
   --set database.external.host=postgres.$NAMESPACE \
@@ -233,8 +223,7 @@ helm install myharbor harbor/harbor \
   --set persistence.persistentVolumeClaim.registry.storageClass=portworx-sc-repl3 \
   --set persistence.persistentVolumeClaim.chartmuseum.storageClass=portworx-sc-repl3 \
   --set persistence.persistentVolumeClaim.jobservice.storageClass=portworx-sc-repl3 \
-  --set persistence.persistentVolumeClaim.trivy.storageClass=portworx-sc-repl3 \
-  --namespace $NAMESPACE
+  --namespace $NAMESPACE --name myharbor
 ```
 
 ## Clean up Harbor
@@ -242,7 +231,7 @@ helm install myharbor harbor/harbor \
 To clean up the environment created above, run the following:
 
 ```text
-helm delete myharbor -n harbor
+helm delete --purge myharbor
 kubectl delete -n harbor \
   deploy/redis \
   svc/redis \
@@ -252,9 +241,8 @@ kubectl delete -n harbor \
   pvc/postgres-pvc \
   pvc/myharbor-harbor-chartmuseum \
   pvc/myharbor-harbor-jobservice \
-  pvc/data-myharbor-harbor-trivy-0 \
   pvc/myharbor-harbor-registry
-kubectl delete sc/portworx-sc-repl3 sc/portworx-sc-repl3-shared
+kubectl delete sc/portworx-sc-repl3
 ```
 
 ## Configuring snapshots
