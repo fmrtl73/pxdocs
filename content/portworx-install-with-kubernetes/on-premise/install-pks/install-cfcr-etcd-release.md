@@ -4,7 +4,7 @@ keywords: Install, on-premises, PKS, Pivotal Container Service, kubernetes, k8s,
 hidden: true
 ---
 
-[CFCR](https://docs-cfcr.cfapps.io/) provides an etcd release which can be deployed in PKS environments.
+**CFCR** provides an etcd release which can be deployed in PKS environments.
 
 ### 1. Clone the CFCR etcd release repo.
 
