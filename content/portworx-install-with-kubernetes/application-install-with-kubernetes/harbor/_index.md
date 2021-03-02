@@ -237,6 +237,14 @@ helm install myharbor harbor/harbor \
   --namespace $NAMESPACE
 ```
 
+If you want to expose the portal as NodePort, you may add the flags:
+
+```
+  --set expose.type=nodePort \
+  --set expose.tls.enabled=false \
+  --set externalURL=http://<hostname.domain>:30002 \
+```
+
 ## Clean up Harbor
 
 To clean up the environment created above, run the following:
