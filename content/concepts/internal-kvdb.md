@@ -32,8 +32,9 @@ Internal KVDB metadata needs to be stored on a persistent disk. There are two wa
 
 ### Metadata Drive (Recommended)
 
-Provide a separate drive to Portworx nodes through the `-metadata` argument.
+Provide a separate drive to Portworx nodes through the `-kvdb_dev` argument.
 
+<!-- Is the following statement still true? -->
 This metadata drive will be used for storing  internal KVDB data as well as Portworx metadata such as journal or timestamp data.
 
 
@@ -49,6 +50,7 @@ If a metadata drive is not provided Portworx will reserve some space in the same
 
 This method is not recommended as the disk will be shared between internal KVDB IO and Portworx volume IO causing degraded internal KVDB performance.
 
+<!-- Shall we update this note? -->
 {{<info>}}
 **NOTE:** If you do not specify the `-metadata` argument, cloud deployments require a 150GB SSD disk for the internal KVDB.
 {{</info>}}
