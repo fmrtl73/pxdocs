@@ -6,6 +6,17 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.6.5
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+
+| PWX-18967 | Portworx occasionally locked volume creation for a prolonged period when taking more than one cloudsnap for the same volume.  <br/><br/>**User Impact:** Users experienced longer response times when creating new volumes. <br/><br/>**Resolution:** Cloudsnaps now lock only the volume they're being taken on, and no longer interfere with volume creation. |
+
 ## 2.6.4.1
 
 February 18, 2021
