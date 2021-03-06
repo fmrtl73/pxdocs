@@ -8,6 +8,8 @@ series: release-notes
 
 ## 2.6.5
 
+March 6, 2021
+
 ### Fixes
 
 The following issues have been fixed:
