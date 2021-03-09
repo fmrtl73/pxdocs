@@ -90,7 +90,7 @@ If your cluster is internet-connected, skip this section. If your cluster is air
     parameters:
         repl: "3"
     ```
-2. Generate the install spec through the **PX-Central** [spec generator](https://central.portworx.com/specGen/wizard).
+2. Generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/px-backup-wizard).
 
      If you're using Portworx for the PX-Central installation, select the **Use storage class** checkbox under the **Storage** section of the **Spec Details** tab, and enter the name of the storage class you created in the previous step.
 
