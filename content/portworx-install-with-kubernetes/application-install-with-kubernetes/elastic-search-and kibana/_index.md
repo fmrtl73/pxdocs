@@ -547,7 +547,8 @@ px-storage-elasticsearch-master-2   Bound     pvc-aa10c4d6-e6b6-11e8-ba45-000c29
 ```
 
 ```text
-pxctl volume list
+PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
+kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl volume list
 ```
 
 ```output
@@ -561,7 +562,7 @@ ID                    NAME                                                SIZE  
 ```
 
 ```text
-pxctl volume list --label pvc=px-storage-elasticsearch-data-0
+kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl volume list --label pvc=px-storage-elasticsearch-data-0
 ```
 
 ```output
@@ -570,7 +571,7 @@ ID                    NAME                                        SIZE      HA  
 ```
 
 ```text
-pxctl volume inspect 507832545683763135
+kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl volume inspect 507832545683763135
 ```
 
 ```output
@@ -632,7 +633,7 @@ Events:            <none>
 ```
 
 ```text
-kubectl exec -it elasticsearch-master-0  curl 'http://elasticsearch.default.svc:9200'
+kubectl exec elasticsearch-master-0  -- curl 'http://elasticsearch.default.svc:9200'
 ```
 
 ```output
@@ -652,7 +653,7 @@ kubectl exec -it elasticsearch-master-0  curl 'http://elasticsearch.default.svc:
 ```
 
 ```text
-kubectl exec -it elasticsearch-master-0  curl 'http://elasticsearch.default.svc:9200/_cat/nodes?v'
+kubectl exec elasticsearch-master-0  -- curl 'http://elasticsearch.default.svc:9200/_cat/nodes?v'
 ```
 
 ```output
@@ -668,7 +669,7 @@ ip        heap.percent ram.percent cpu load_1m load_5m load_15m node.role master
 ```
 
 ```text
-kubectl exec -it elasticsearch-master-0 curl -- -XPUT 'http://elasticsearch.default.svc:9200/customer?pretty&pretty'
+kubectl exec elasticsearch-master-0 -- curl -XPUT 'http://elasticsearch.default.svc:9200/customer?pretty&pretty'
 ```
 
 ```output
@@ -679,7 +680,7 @@ kubectl exec -it elasticsearch-master-0 curl -- -XPUT 'http://elasticsearch.defa
 ```
 
 ```text
-kubectl exec -it elasticsearch-master-0 curl -- -XGET 'http://elasticsearch.default.svc:9200/_cat/indices?v&pretty'
+kubectl exec elasticsearch-master-0 -- curl -XGET 'http://elasticsearch.default.svc:9200/_cat/indices?v&pretty'
 ```
 
 ```output
@@ -688,7 +689,7 @@ green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          0            0   
 ```
 
 ```text
-kubectl exec -it elasticsearch-master-0 curl -- -XPUT 'http://elasticsearch.default.svc:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
+kubectl exec elasticsearch-master-0 -- curl -XPUT 'http://elasticsearch.default.svc:9200/customer/external/1?pretty&pretty' -H 'Content-Type: application/json' -d'
 {
 "name": "Daenerys Targaryen"
 }'
@@ -711,7 +712,7 @@ kubectl exec -it elasticsearch-master-0 curl -- -XPUT 'http://elasticsearch.defa
 ```
 
 ```text
-kubectl exec -it elasticsearch-master-0 curl -- -XGET 'http://elasticsearch.default.svc:9200/customer/external/1?pretty&pretty'
+kubectl exec elasticsearch-master-0 -- curl -XGET 'http://elasticsearch.default.svc:9200/customer/external/1?pretty&pretty'
 ```
 
 ```output
@@ -857,27 +858,29 @@ kubectl logs po/kibana-2713637544-4wxsk
 Insert data into Elasticsearch and verify that Kibana is able to search for the data in Elastic Search.
 This will help create dashboards and visualizations.
 
-Save the data from the following location:
-[Download accounts.json](/samples/k8s/efk/accounts.json?raw=true)
+1. Download a sample file named `accounts.json`:
 
-```text
-kubectl exec -it elasticsearch-master-0 curl -- -XGET 'samples/k8s/efk/accounts.json?raw=true' -o accounts.json
+    ```text
+    kubectl exec elasticsearch-master-0 -- curl -XGET 'https://docs.portworx.com/samples/k8s/efk/accounts.json?raw=true' -o accounts.json
 ```
 
-```text
-kubectl exec -it elasticsearch-master-0 curl -- -H "Content-Type:application/json" -XPOST 'http://elasticsearch.default.svc:9200/bank/account/_bulk?pretty&refresh' --data-binary "@accounts.json"
-```
+2. Insert data into Elasticsearch:
 
-```text
-kubectl exec -it elasticsearch-master-0 curl -- 'http://elasticsearch.default.svc:9200/_cat/indices?v
-```
+    ```text
+    kubectl exec elasticsearch-master-0 -- curl -H "Content-Type:application/json" -XPOST 'http://elasticsearch.default.svc:9200/bank/account/_bulk?pretty&refresh' --data-binary "@accounts.json"
+    ```
 
-```output
-health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-green  open   bank     7Ll5S-NeSHK3subHKhA7Dg   5   1       1000            0      1.2mb        648.1kb
-green  open   .kibana  uJnR9Dp5RdCvAEJ6bg-mEQ   1   1          2            0     10.8kb          5.4kb
-green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          1            0      8.2kb          4.1kb
-```
+3. To retrieve high-level information about each index in your Elasticsearch cluster, enter the following command:
+    ```text
+    kubectl exec elasticsearch-master-0 -- curl 'http://elasticsearch.default.svc:9200/_cat/indices?v'
+    ```
+
+    ```output
+    health status index    uuid                   pri rep docs.count docs.deleted store.size pri.store.size
+    green  open   bank     7Ll5S-NeSHK3subHKhA7Dg   5   1       1000            0      1.2mb        648.1kb
+    green  open   .kibana  uJnR9Dp5RdCvAEJ6bg-mEQ   1   1          2            0     10.8kb          5.4kb
+    green  open   customer -Cort549Sn6q4gmbwicOMA   5   1          1            0      8.2kb          4.1kb
+    ```
 
 Once you have run the above command you should see `bank` and `customer` indices in your elasticsearch cluster.
 Search for them through your Kibana dashboard.
@@ -922,7 +925,7 @@ elasticsearch-data-4   1/1       Running              0          9s
 ```
 
 ```text
-kubectl exec -it elasticsearch-master-0 curl -- 'http://elasticsearch.default.svc:9200/_cat/nodes?v'
+kubectl exec elasticsearch-master-0 -- curl 'http://elasticsearch.default.svc:9200/_cat/nodes?v'
 ```
 
 ```output
@@ -956,7 +959,7 @@ px-storage-elasticsearch-master-2   Bound     pvc-aa10c4d6-e6b6-11e8-ba45-000c29
 ```
 
 ```text
-pxctl volume list
+kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl volume list
 ```
 
 ```output
@@ -1015,7 +1018,7 @@ pdc3-sm19                      Ready                      21d       v1.7.2
 
 Find the docs count on this data node.
 ```text
-kubectl exec -it elasticsearch-master-0 curl --'http://elasticsearch.default.svc:9200/_nodes/elasticsearch-data-3/stats/indices'
+kubectl exec elasticsearch-master-0 -- curl 'http://elasticsearch.default.svc:9200/_nodes/elasticsearch-data-3/stats/indices'
 ```
 
 ```output
@@ -1054,7 +1057,7 @@ elasticsearch-data-3   1/1       Running               0         6s        10.36
 Verify that the same volume has been attached back to the pod which was scheduled post failover.
 
 ```text
-kubectl exec -it elasticsearch-master-0 curl -- 'http://elasticsearch.default.svc:9200/_nodes/elasticsearch-data-3/stats/indices'
+kubectl exec elasticsearch-master-0 -- curl 'http://elasticsearch.default.svc:9200/_nodes/elasticsearch-data-3/stats/indices'
 ```
 
 ```output
