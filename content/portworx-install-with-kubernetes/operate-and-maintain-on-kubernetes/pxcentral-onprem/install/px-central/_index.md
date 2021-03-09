@@ -25,10 +25,9 @@ You can install PX-Central on any Kubernetes cluster using Helm charts as long a
 
     | Port | Component | Purpose | Incoming/Outgoing |
     | :---: |:---:|:---:|:---:|
-    | 31234 | PX-Central | Access from outside | Incoming |
     | 31241 | PX-Central-Keycloak | Access user auth token | Incoming |
-    | 31240 | PX-Central | Metrics store endpoint | Outgoing |
     | 7070 | License server | License validation | Outgoing |
+
 * For GKE clusters, only Ubuntu OS is supported.
 
 {{<info>}}
@@ -135,3 +134,4 @@ If your cluster is internet-connected, skip this section. If your cluster is air
 ## Configure external OIDC endpoints
 
  If you enabled an external OIDC during PX-Central installation, you must manually configure the redirect URI in your OIDC provider. Refer to the [Set up login redirects](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/set-up-login-redirects) article for instructions on how to do this.
+

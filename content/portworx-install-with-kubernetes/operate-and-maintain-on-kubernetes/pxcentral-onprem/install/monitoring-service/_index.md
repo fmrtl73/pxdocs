@@ -19,6 +19,10 @@ Follow the steps in this section to install the monitoring service.
     system:serviceaccount:<YOUR_NAMESPACE>:px-monitor
     ```
 
+* Depending on how you wish to access the `px-backup-ui` service, one of the following ports must be open:
+  * If you use an Ingress rule or a load balancer endpoint, the HTTP port `80` must be open.
+  * If you use the PX-Central endpoint, the port specified in the `spec.type:NodePort` section of the `px-backup-ui` service must be open.
+
 ## Prepare air-gapped environments
 
 If your cluster is internet-connected, skip this section. If your cluster is air-gapped, you must pull the monitoring service and related Docker images to either your Docker registry or directly onto your nodes.
