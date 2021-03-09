@@ -9,9 +9,9 @@ description: Steps on how to upgrade Portworx on Kubernetes
 This guide describes the procedure to upgrade Portworx running as OCI container using [talisman](https://github.com/portworx/talisman).
 
 {{<info>}}
-**NOTE:** 
+**NOTE:**
 
-* If you're upgrading an auth-enabled Portworx cluster to Portworx 2.6.0, you must upgrade Stork to version 2.4.5. 
+* If you're upgrading an auth-enabled Portworx cluster to Portworx 2.6.0, you must upgrade Stork to version 2.4.5.
 * Operator versions prior to 1.4 and Autopilot currently do not support auth-enabled clusters running Portworx 2.6.0. Support for this is planned for a future release
 {{</info>}}
 
@@ -107,9 +107,9 @@ To make container images available to nodes that do not have access to the inter
 
 Once you've made the new container images available for your nodes, perform one of the following steps, depending on how you're storing your images:
 
-- [Step a: Upgrade using local registry server](#step-2a-upgrade-using-local-registry-server): You can pre-load your private registry server with the required Portworx images and have Kubernetes and Portworx fetch the images from there rather than reaching out to the internet. 
+- [Step a: Upgrade using local registry server](#step-2a-upgrade-using-local-registry-server): You can pre-load your private registry server with the required Portworx images and have Kubernetes and Portworx fetch the images from there rather than reaching out to the internet.
 <!-- this doesn't make sense, "using images directly ON your nodes?" or "pulling images directly TO your nodes"? -->
-- [Step b: Upgrade using images directly to your nodes](#step-2b-upgrade-using-images-directly-on-your-nodes): You can load the images directly to your nodes and configure Kubernetes and Portworx to upgrade using those images. 
+- [Step b: Upgrade using images directly to your nodes](#step-2b-upgrade-using-images-directly-on-your-nodes): You can load the images directly to your nodes and configure Kubernetes and Portworx to upgrade using those images.
 
 #### Step 2a: Upgrade using local registry server
 
@@ -177,7 +177,7 @@ One can run the following command to inspect the Portworx cluster:
 
 ```text
 PX_POD=$(kubectl get pods -n kube-system -l name=portworx -o jsonpath='{.items[0].metadata.name}')
-kubectl exec -it $PX_POD -n kube-system /opt/pwx/bin/pxctl cluster list
+kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl cluster list
 ```
 
 ```output

@@ -130,7 +130,7 @@ ip-172-40-50-47.ec2.internal    Ready     node      3h        v1.11.9   3.84.27.
 A single Portworx cluster running across both the Kubernetes clusters
 
 ```text
-kubectl exec -it portworx-d6rk7 -n kube-system /opt/pwx/bin/pxctl status
+kubectl exec portworx-d6rk7 -n kube-system -- /opt/pwx/bin/pxctl status
 ```
 
 ```output

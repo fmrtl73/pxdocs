@@ -128,7 +128,7 @@ Portworx runs as a `DaemonSet` in Kubernetes. Hence, when you add a node or a wo
 4. To open a shell session into one of your Pods, enter the following `kubectl exec` command, specifying your Pod name. This example opens the `cassandra-0` Pod:
 
     ```text
-    kubectl exec cassandra-0
+    kubectl exec -it cassandra-0 -- bash
     ```
 
 5. Use the `nodetool status` command to retrieve information about your Cassandra cluster:

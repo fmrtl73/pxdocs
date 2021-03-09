@@ -186,7 +186,7 @@ Perform the steps in this topic to deploy PostgreSQL with Portworx on Kubernetes
 4. Enter the following `kubectl exec` command, specifying your own pod name, to open a shell session into your pod. This example opens the `postgres-86cb8587c4-l9r48` pod:
 
       ```text
-      kubectl exec -it postgres-86cb8587c4-l9r48 bash
+      kubectl exec -it postgres-86cb8587c4-l9r48 -- bash
       ```
 
       ```
