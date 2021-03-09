@@ -58,6 +58,9 @@ spec:
           claimName: mysql-data
 ```
 
+{{<info>}}
+**NOTE:** You can force a Pod to be scheduled on the same node as a replica by specifying `stork.libopenstorage.org/preferLocalNodeOnly: "true"` in the `spec.template.metadata.annotations` section of your `StatefulSet` object.
+{{</info>}}
 
 ### Initializer (Experimental feature in Stork v1.1)
 
