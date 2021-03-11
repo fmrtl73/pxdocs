@@ -8,8 +8,7 @@ cache:
 
 addons:
   snaps:
-    - name: yq 
-      channel: v3/stable
+    - name: yq
 
 before_install:
   # update gcloud apt source
