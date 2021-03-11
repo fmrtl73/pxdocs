@@ -255,10 +255,10 @@ Navigate to the Prometheus web UI by going to the service ip. You should be able
 3. Download and apply the following Grafana templates:
 
     ```text
-    curl https://raw.githubusercontent.com/portworx/pxdocs/master/static/samples/k8s/pxc/portworx-cluster-dashboard.json -o portworx-cluster-dashboard.json && \
-    curl https://raw.githubusercontent.com/portworx/pxdocs/master/static/samples/k8s/pxc/portworx-node-dashboard.json -o portworx-node-dashboard.json && \
-    curl https://raw.githubusercontent.com/portworx/pxdocs/master/static/samples/k8s/pxc/portworx-volume-dashboard.json -o portworx-volume-dashboard.json && \
-    curl https://raw.githubusercontent.com/portworx/pxdocs/master/static/samples/k8s/pxc/portworx-etcd-dashboard.json -o portworx-etcd-dashboard.json && \
+    curl https://docs.portworx.com/samples/k8s/pxc/portworx-cluster-dashboard.json -o portworx-cluster-dashboard.json && \
+    curl https://docs.portworx.com/samples/k8s/pxc/portworx-node-dashboard.json -o portworx-node-dashboard.json && \
+    curl https://docs.portworx.com/samples/k8s/pxc/portworx-volume-dashboard.json -o portworx-volume-dashboard.json && \
+    curl https://docs.portworx.com/samples/k8s/pxc/portworx-etcd-dashboard.json -o portworx-etcd-dashboard.json && \
     kubectl -n kube-system create configmap grafana-dashboards --from-file=portworx-cluster-dashboard.json --from-file=portworx-node-dashboard.json --from-file=portworx-volume-dashboard.json --from-file=portworx-etcd-dashboard.json
     ```
 4. Finally, download the {{< direct-download url="/samples/k8s/pxc/grafana.yaml" name="grafana.yaml" >}} file and apply it:
