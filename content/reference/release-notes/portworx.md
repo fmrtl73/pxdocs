@@ -28,7 +28,7 @@ The following issues have been fixed:
 
 |**Issue Number**|**Issue Description**|
 |----|----|
-| PWX-18625 | In certain corner cases, when a volume being restored on a destination cluster was deleted before a restore completed, async DR or migration sometimes got stuck. <br/><br/>**User Impact:** Some of the nodes in the destination cluster may have become slow, with logs showing prints similar to this:<br/><code>{code}<br/>time="2021-02-16T21:51:23Z" level=error msg="Failed to attach cloudsnap internally :774477562361631177 err:Volume with ID: 774477562361631177 not found"<br/>{code}</code><br/><br/>**Resolution:** Portworx now fails the restore operation if a volume is deleted before a restore completes. 
+| PWX-18625 | In certain corner cases, when a volume being restored on a destination cluster was deleted before a restore completed, async DR or migration sometimes got stuck. <br/><br/>**User Impact:** Some of the nodes in the destination cluster may have become slow, with logs showing prints similar to this:<br/><code>time="2021-02-16T21:51:23Z" level=error msg="Failed to attach cloudsnap internally :774477562361631177 err:Volume with ID: 774477562361631177 not found"</code><br/><br/>**Resolution:** Portworx now fails the restore operation if a volume is deleted before a restore completes. 
 
 ## 2.6.4
 
