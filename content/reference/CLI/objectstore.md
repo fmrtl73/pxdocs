@@ -198,15 +198,24 @@ ID			NAME									SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS				SNAP-ENABLED
 737202856523964661	myObjectStore								10 GiB	1	no	no		LOWup - detached			no
 ```
 
-## Delete the objectstore
-You can delete the objectstore by running the following command:
+## Delete the object store
 
-```text
-pxctl objectstore delete
-```
+1. To delete the object store, enter the following command:
 
-```output
-Successfully deleted object store
-```
+    ```text
+    pxctl objectstore delete
+    ```
 
-The command fails if the objectstore is still running on any node.
+    ```output
+    Successfully deleted object store
+    ```
+
+    {{<info>}}
+**NOTE:** The `pxctl objectstore delete` command fails if the object store is still running on any node.
+    {{</info>}}
+
+2. Delete the volume you used for the object store, by entering the `pxctl volume delete ` command with the name of that volume. The following example command deletes a volume named `myObjectStore`:
+
+    ```text
+    pxctl volume delete myObjectStore
+    ```
