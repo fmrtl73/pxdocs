@@ -253,6 +253,19 @@ This section describes the fields used to configure the network settings. If the
 | spec.<br>network.<br>mgmtInterface| Indicates the network interface Portworx uses for control plane traffic. | `string` | None |
 
 
+### Volume configuration
+
+This section describes the fields used to configure custom volume mounts for Portworx pods.
+
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>volumes[].<br>name | Unique name for the volume. | `string` | None |
+| spec.<br>volumes[].<br>mountPath | Path within the Portworx container at which the volume should be mounted. Must not contain ':' | `string` | None |
+| spec.<br>volumes[].<br>mountPropagation | Determines how mounts are propagated from the host to container and the other way around. | `string` | `None` |
+| spec.<br>volumes[].<br>readOnly | Volume is mounted read-only if true, read-write otherwise. | `boolean` | false |
+| spec.<br>volumes[].<br>[secret\|configMap\|hostPath] | Specifies the location and type of the mounted volume. This is similar to VolumeSource schema of a Kubernetes pod volume. | `object` | None |
+
+
 ### Placement rules
 
 You can use the placement rules to specify where Portworx should be deployed. By default, the operator deploys Portworx on all worker nodes.
@@ -300,6 +313,7 @@ This section describes the fields used to manage the Stork deployment through th
 | spec.<br>stork.<br>lockImage | Enables locking Stork to the given image. When set to false, the Portworx Operator will overwrite the Stork image to a recommended image for given Portworx version. | `boolean` | `false` |
 | spec.<br>stork.<br>args | A collection of key-value pairs that overrides the default Stork arguments or adds new arguments. | `map[string]string` | None |
 | spec.<br>stork.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826) passed to Stork. | `[]object` | None |
+| spec.<br>stork.<br>volumes[] | A list of volumes passed to Stork pods. The schema is similar to the [top-level volumes](#volume-configuration). | `[]object` | None |
 
 
 ### Lighthouse configuration
@@ -321,10 +335,13 @@ This section provides details on how to deploy and manage Autopilot.
 | spec.<br>autopilot.<br>enabled | Enables or disables Autopilot at any given time. | `boolean` | `false` |
 | spec.<br>autopilot.<br>image | Specifies the Autopilot image. | `string` | None |
 | spec.<br>autopilot.<br>lockImage | Enables locking Autopilot to the given image. When set to false, the Portworx Operator will overwrite the Autopilot image to a recommended image for given Portworx version. | `boolean` | `false` |
-| spec.<br>autopilot.<br>providers | List of data providers for Autopilot. | `[]object` | None |
-| spec.<br>autopilot.<br>providers.<br>name | Unique name of the data provider. | `string` | None |
-| spec.<br>autopilot.<br>providers.<br>type | Type of the data provider. For instance, `prometheus` | `string` | None |
-| spec.<br>autopilot.<br>providers.<br>params | Map of key-value params for the provider. | `map[string]string` | None |
+| spec.<br>autopilot.<br>providers[] | List of data providers for Autopilot. | `[]object` | None |
+| spec.<br>autopilot.<br>providers[].<br>name | Unique name of the data provider. | `string` | None |
+| spec.<br>autopilot.<br>providers[].<br>type | Type of the data provider. For instance, `prometheus` | `string` | None |
+| spec.<br>autopilot.<br>providers[].<br>params | Map of key-value params for the provider. | `map[string]string` | None |
+| spec.<br>autopilot.<br>args | A collection of key-value pairs that overrides the default Autopilot arguments or adds new arguments. | `map[string]string` | None |
+| spec.<br>autopilot.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826) passed to Autopilot. | `[]object` | None |
+| spec.<br>autopilot.<br>volumes[] | A list of volumes passed to Autopilot pods. The schema is similar to the [top-level volumes](#volume-configuration). | `[]object` | None |
 
 ### Node specific configuration
 
