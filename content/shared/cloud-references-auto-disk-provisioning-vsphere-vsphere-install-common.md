@@ -66,5 +66,5 @@ The template follows the following format:
 ```
 "type=<vmdk type>,size=<size of the vmdk>"
 ```
-- __type__: Supported types are _thin_, _zeroedthick_ , _eagerzeroedthick_
+- __type__: Supported types are _thin_, _zeroedthick_ ,_eagerzeroedthick_, _lazyzeroedthick_
 - __size__: This is the size of the VMDK in GiB
