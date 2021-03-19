@@ -43,6 +43,9 @@ Usage:
   pxctl context [flags]
   pxctl context [command]
 
+Aliases:
+  context, ctx
+
 Available Commands:
   create      create a context
   delete      delete a context
@@ -50,6 +53,22 @@ Available Commands:
   set         set the current context
   unset       unset the current context
 
+Flags:
+  -h, --help   help for context
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl context [command] --help" for more information about a command.
 ```
 
 ### Create a context

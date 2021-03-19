@@ -12,7 +12,7 @@ In this document, we are going to show you how to create and manage volumes with
 To view a list of the available commands, run the following command:
 
 ```text
-/opt/pwx/bin/pxctl volume -h
+/opt/pwx/bin/pxctl volume --help
 ```
 
 ```output
@@ -30,6 +30,7 @@ pxctl volume create -s 100 myVolName
 
 Available Commands:
   access               Manage volume access by users or groups
+  check                Perform Background filesystem consistency check operation on the volume
   clone                Create a clone volume
   create               Create a volume
   delete               Delete a volume
@@ -43,6 +44,7 @@ Available Commands:
   snap-interval-update Update volume configuration
   snapshot             Manage volume snapshots
   stats                Volume Statistics
+  trim                 Frees unused blocks in the volume to the portworx pool
   update               Update volume settings
   usage                Show volume usage information
 
@@ -50,18 +52,27 @@ Flags:
   -h, --help   help for volume
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 
 Use "pxctl volume [command] --help" for more information about a command.
 ```
+
+<!--
+We added the following commands:
+- check                Perform Background filesystem consistency check operation on the volume
+- trim                 Frees unused blocks in the volume to the portworx pool
+
+Dow we want to document them?
+-->
 
 In the next sections, we will take a look at these commands individually.
 
@@ -105,10 +116,10 @@ Before you move on, take a bit of time to make sure you understand the following
 * Policies are specified at create time and can be applied to existing volumes.
 
 
-The `pxctl` command-line utility provides a multitude of options for setting the policies on a volume. Let’s get a feel for the available options by running the `pxctl volume create ` with the `-h` flag:
+The `pxctl` command-line utility provides a multitude of options for setting the policies on a volume. Let’s get a feel for the available options by running the `pxctl volume create ` with the `--help` flag:
 
 ```text
-pxctl volume create -h
+pxctl volume create --help
 ```
 
 ```output
@@ -124,49 +135,60 @@ Examples:
 pxctl volume create [flags] volume-name
 
 Flags:
-      --shared                              make this a globally shared namespace volume
-      --secure                              encrypt this volume using AES-256
-      --use_cluster_secret                  Use cluster wide secret key to fetch secret_data
-      --journal                             Journal data for this volume
-      --early_ack                           Reply to async write requests after it is copied to shared memory
-      --async_io                            Enable async IO to backing storage
-      --nodiscard                           Disable discard support for this volume
-      --sticky                              sticky volumes cannot be deleted until the flag is disabled
-      --sharedv4                            export this volume via Sharedv4 at /var/lib/osd/exports
-      --enforce_cg                          enforce group during provision
-      --best_effort_location_provisioning   requested nodes, zones, racks are optional
-      --secret_key string                   secret_key to use to fetch secret_data for the PBKDF2 function
-  -l, --label pairs                         list of comma-separated name=value pairs
-      --io_priority string                  IO Priority (Valid Values: [high medium low]) (default "low")
-      --io_profile string                   IO Profile (Valid Values: [sequential cms db db_remote]) (default "sequential")
   -a, --aggregation_level string            aggregation level (Valid Values: [1 2 3 auto]) (default "1")
-      --nodes string                        comma-separated Node Ids
-      --zones string                        comma-separated Zone names
-      --racks string                        comma-separated Rack names
+      --async_io                            Enable async IO to backing storage
+      --best_effort_location_provisioning   requested nodes, zones, racks are optional
+  -b, --block_size uint                     block size in Bytes (default 4096)
+      --cow_ondemand                        Enable On-demand COW on volume (default true)
+  -d, --daily hh:mm,k                       daily snapshot at specified hh:mm,k (keeps 7 by default)
+      --direct_io                           Enable Direct IO on volume
+      --early_ack                           Reply to async write requests after it is copied to shared memory
+      --enforce_cg                          enforce group during provision
   -g, --group string                        group
+  -h, --help                                help for create
+      --io_priority string                  IO Priority (Valid Values: [high medium low]) (default "low")
+      --io_profile string                   IO Profile (Valid Values: [sequential cms sync_shared db db_remote auto]) (default "auto")
+      --journal                             Journal data for this volume
+  -l, --label pairs                         list of comma-separated name=value pairs
+  -m, --monthly day@hh:mm,k                 monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+      --mount_options string                comma separated list of mount options provided as key=value pairs
+      --nodes string                        comma-separated Node Ids or Pool Ids
+      --nodiscard                           Disable discard support for this volume
   -p, --periodic mins,k                     periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
       --policy string                       policy names separated by comma
-      --storagepolicy string                storage policy name
-  -s, --size uint                           volume size in GB (default 1)
-  -b, --block_size uint                     block size in Bytes (default 32768)
+      --proxy_endpoint string               proxy endpoint provided in the following format '<protocol>://<endpoint>' Ex 'nfs://<nfs-server-ip>'
+      --proxy_nfs_exportpath string         export path for nfs proxy volume
+      --proxy_nfs_subpath string            sub path from the nfs share to which this proxy volume has access to
+      --proxy_write                         Enable proxy write replication for this volume
   -q, --queue_depth uint                    block device queue depth (Valid Range: [1 256]) (default 128)
+      --racks string                        comma-separated Rack names
   -r, --repl uint                           replication factor (Valid Range: [1 3]) (default 1)
       --scale uint                          auto scale to max number (Valid Range: [1 1024]) (default 1)
-  -d, --daily hh:mm,k                       daily snapshot at specified hh:mm,k (keeps 7 by default)
+      --scan_policy string                  Specify filesystem scan policy (Valid Values: [none scan_on_mount repair_on_mount scan_on_next_mount repair_on_next_mount]) (default "none")
+      --secret_key string                   secret_key to use to fetch secret_data for the PBKDF2 function
+      --secret_options string               Secret options is used to pass specific secret parameters. Usage: --secret_options=k1=v1,k2=v2
+      --secure                              encrypt this volume using AES-256
+      --shared                              make this a globally shared namespace volume
+      --sharedv4                            export this volume via Sharedv4 at /var/lib/osd/exports
+      --sharedv4_mount_options string       comma separated list of sharedv4 client mount options provided as key=value pairs
+  -s, --size uint                           volume size in GB (default 1)
+      --sticky                              sticky volumes cannot be deleted until the flag is disabled
+      --storagepolicy string                storage policy name
+      --use_cluster_secret                  Use cluster wide secret key to fetch secret_data
   -w, --weekly weekday@hh:mm,k              weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-  -m, --monthly day@hh:mm,k                 monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
-  -h, --help                                help for create
+      --zones string                        comma-separated Zone names
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 {{<info>}}
@@ -442,20 +464,21 @@ Examples:
 pxctl volume clone [flags] volName
 
 Flags:
-      --name string    clone name
-  -l, --label string   list of comma-separated name=value pairs
   -h, --help           help for clone
+  -l, --label string   list of comma-separated name=value pairs
+      --name string    clone name
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 
@@ -544,9 +567,9 @@ By default, Portworx uses features present in the underlying file system to take
 
 When using the copy-on-write feature to take snapshots, overwriting a block does not update it in place. Instead, every overwrite allocates or updates a new block, and the filesystem metadata is updated to point to this new block. This technique is called redirect-on-write. When using this feature, a block overwrite almost always involves block updates in multiple areas: the target block, any linked indirect file blocks, filesystem metadata blocks, and filesystem metadata indirect file blocks. In a background process separate from the overwrite operation, the old block is freed only if it's not being referenced by a snapshot/clone.
 
-Alongside copy-on-write, the file system checksums all blocks to detect lost writes and stores the checksum values in a different location away from their associated data. 
+Alongside copy-on-write, the file system checksums all blocks to detect lost writes and stores the checksum values in a different location away from their associated data.
 
-While these combined features increase the integrity of the data stored on the filesystem, they also increase the read and write overhead on the drives that use them, slowing down performance and increasing latency during file operations. 
+While these combined features increase the integrity of the data stored on the filesystem, they also increase the read and write overhead on the drives that use them, slowing down performance and increasing latency during file operations.
 
 Depending on your use-case, you may wish to trade off the integrity copy-on-write features offer for increased performance and lower latency. You can do so on a per-volume basis through the `pxctl` command.
 

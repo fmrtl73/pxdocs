@@ -37,6 +37,20 @@ Available Commands:
 
 Flags:
   -h, --help   help for clouddrive
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl clouddrive [command] --help" for more information about a command.
 ```
 
 ### Listing all Cloud Drives
@@ -100,12 +114,12 @@ The `pxctl clouddrive transfer` operation allows you to move your cloud drives f
 The `pxctl clouddrive transfer` command works by:
 
 1. Putting your storage pools in maintenance mode
-2. Detaching the cloud drive from the source node 
+2. Detaching the cloud drive from the source node
 3. Attaching it to the destination node
 4. Ending maintenance mode
 
 {{<info>}}
-**NOTE:** 
+**NOTE:**
 
 * This command is only supported on Google cloud.
 * This is not supported when Portworx is installed using an internal KVDB.
@@ -115,13 +129,13 @@ The `pxctl clouddrive transfer` command works by:
 
 Perform the following steps to transfer cloud drives to a storageless node:
 
-1. Create replacement nodes and add them to your cluster, or identify an existing storageless node you want to transfer your cloud storage drives to. 
+1. Create replacement nodes and add them to your cluster, or identify an existing storageless node you want to transfer your cloud storage drives to.
 2. Enter the `pxctl clouddrive transfer submit` command, specifying the following options:
 
      * The `-s` flag with the ID of the Portworx node that currently owns the drive set. This is the 'NodeID' displayed in the output of the 'pxctl clouddrive list' command.
 
-     * **Optional:** The `-d` flag with the ID of the instance you want to transfer the drive set to. You can find the instance ID of your node by entering the `pxctl clouddrive list` command. The destination instance must be a storageless node (i.e. have no Drive IDs) and in the same zone, if your cluster has zones. 
-     
+     * **Optional:** The `-d` flag with the ID of the instance you want to transfer the drive set to. You can find the instance ID of your node by entering the `pxctl clouddrive list` command. The destination instance must be a storageless node (i.e. have no Drive IDs) and in the same zone, if your cluster has zones.
+
      ```text
      pxctl clouddrive transfer submit -s <source-node-ID> -d <dest-node-ID>
      ```
@@ -129,7 +143,7 @@ Perform the following steps to transfer cloud drives to a storageless node:
      Request to transfer clouddrive submitted, Check status using: pxctl cd transfer status -i 123456789
      ```
 
-Once you start a cloud drive transfer, the operation will run in the background. 
+Once you start a cloud drive transfer, the operation will run in the background.
 
 #### View all running cloud drive transfer jobs
 
@@ -160,9 +174,9 @@ Last updated             : Tue, 01 Dec 2020 11:34:09 UTC
 Transfer Source          : c2a01375-25b6-431d-a3fa-5ee7eb9612f7
 Transfer Destination     : gke-user-cd-transfer-default-pool-abcd3c1c-d7w5
 Status                   : cloud driveset transfer completed successfully
-``` 
+```
 
-### Command reference: pxctl clouddrive transfer 
+### Command reference: pxctl clouddrive transfer
 
 #### pxctl clouddrive transfer
 

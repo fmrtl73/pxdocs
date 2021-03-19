@@ -36,6 +36,7 @@ Aliases:
 Available Commands:
   create      Create a credential for cloud providers
   delete      Delete a credential for cloud
+  delete-refs Delete references to a credential
   list        List all credentials for cloud
   validate    Validate a credential for cloud
 
@@ -43,15 +44,16 @@ Flags:
   -h, --help   help for credentials
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 
 Use "pxctl credentials [command] --help" for more information about a command.
 ```
@@ -112,6 +114,7 @@ Credentials created successfully
 {{<info>}}
 **Note:** This command will create a bucket with the Portworx cluster ID to use for the backups.
 {{</info>}}
+
 <!--
 ### Create credentials on AWS by storing keys as environment variables
 
@@ -148,7 +151,7 @@ You can create and configure credentials for AWS by storing your secret access k
     ```output
     Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
     ```
-    -->
+-->
 
 ### Create credentials on AWS using IAM
 
@@ -312,7 +315,7 @@ Don't forget to replace `<uuid or name>` with the actual `uuid` or `name` of the
 
 ## Delete pending credential references from the KVDB
 
- Requests to delete cloudsnaps are long-running operations, and are executed asynchronously in the background. Portworx stores these requests in the KVDB so that it can resume delete operations if the node restarts or is otherwise interrupted. Portworx periodically retires these delete requests as part of a cleanup routine. 
+ Requests to delete cloudsnaps are long-running operations, and are executed asynchronously in the background. Portworx stores these requests in the KVDB so that it can resume delete operations if the node restarts or is otherwise interrupted. Portworx periodically retires these delete requests as part of a cleanup routine.
 
  If the credentials for these cloudsnaps are configured through Kubernetes secrets, the credential object must be available at the time Portworx attempts to delete it. If the credential object is deleted while the cloudsnap delete requests are pending, these delete requests will fail and continue to remain in the KVDB where they will continue to log alerts about the failure to delete.
 

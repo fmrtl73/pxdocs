@@ -8,10 +8,10 @@ linkTitle: Basics
 
 In this document, we are going to explore the basic operations available through the Portworx command-line tool- `pxctl`.
 
-By default, the CLI displays the information in human readable form. For example, to learn more about the available commands, type `pxctl help`:
+By default, the CLI displays the information in human readable form. For example, to learn more about the available commands, type `pxctl --help`:
 
 ```text
-pxctl help
+pxctl --help
 ```
 
 ```output
@@ -32,7 +32,6 @@ Available Commands:
   eula           Show license agreement
   help           Help about any command
   license        Manage licenses
-  objectstore    Manage the object store
   role           pxctl role
   sched-policy   Manage schedule policies
   secrets        Manage Secrets. Supported secret stores AWS KMS | Vault | DCOS Secrets | IBM Key Protect | Kubernetes Secrets | Google Cloud KMS
@@ -43,17 +42,18 @@ Available Commands:
   volume         Manage volumes
 
 Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -h, --help             help for pxctl
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
-  -v, --version          print version and exit
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -h, --help                 help for pxctl
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+  -v, --version              print version and exit
 
 Use "pxctl [command] --help" for more information about a command.
 ```
@@ -91,7 +91,7 @@ pxctl --version
 ```
 
 ```output
-pxctl version 2.1.0.0-d594892 (OCI)
+pxctl version 2.7.0.0-886586d
 ```
 
 ## Status

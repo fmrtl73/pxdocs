@@ -25,27 +25,47 @@ You can see an overview of the available service operations by running:
 ```
 
 ```output
-NAME:
-   pxctl service - Service mode utilities
+Service mode utilities
 
-USAGE:
-   pxctl service command [command options] [arguments...]
+Usage:
+  pxctl service [flags]
+  pxctl service [command]
 
-COMMANDS:
-     audit, a        Audit the PX node
-     call-home       Enable or disable the call home feature
-     diags, d        creates a new tgz package with minimal essential diagnostic information.
-     drive           Storage drive maintenance
-     email           Email setting commands
-     exit, e         Stop the PX daemon
-     info, i         Show PX module version information
-     kvdb, k         PX Kvdb operations
-     maintenance, m  Maintenance mode operations
-     node-wipe, nw   Wipes PX configuration data on this node
-     pool            Storage pool maintenance
+Aliases:
+  service, sv
 
-OPTIONS:
-   --help, -h  show help
+Available Commands:
+  audit       Audit the PX node
+  call-home   Enable or disable the call home feature
+  diags       creates a new tgz package with minimal essential diagnostic information.
+  drive       Storage drive maintenance
+  email       Email setting commands
+  exit        Stop the PX daemon
+  info        Show PX module version information
+  kvdb        PX Kvdb operations
+  maintenance Maintenance mode operations
+  node        Node maintenance operations
+  node-usage  Volume usage by PX node
+  node-wipe   Wipes PX configuration data on this node
+  pool        Storage pool maintenance
+  slack       Slack setting commands
+
+Flags:
+  -h, --help   help for service
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl service [command] --help" for more information about a command.
 ```
 
 ## Perform a node audit
@@ -94,23 +114,38 @@ pxctl service diags --help
 ```
 
 ```output
-NAME:
-   pxctl service diags - creates a new tgz package with minimal essential diagnostic information.
+creates a new tgz package with minimal essential diagnostic information.
 
-USAGE:
-   pxctl service diags [command options] [arguments...]
+Usage:
+  pxctl service diags [flags]
 
-OPTIONS:
-   -l, --live                gets diags from running px
-   -u, --upload              upload diags to cloud
-   -p, --profile             only dump profile
-   -a, --all                 creates a new tgz package with all the available diagnostic information.
-   -c, --cluster             generate diags for all the nodes in the cluster.
-   -f, --force               force overwrite existing diags.
-   -o, --output string       output file name (default "/var/cores/diags.tar.gz")
-       --dockerhost string   docker host daemon (default "unix:///var/run/docker.sock")
-       --container string    PX container ID
-   -n, --node string         generate diags for a specific remote node with the provided NodeIp or NodeID.
+Aliases:
+  diags, d
+
+Flags:
+  -a, --all                 creates a new tgz package with all the available diagnostic information.
+  -c, --cluster             generate diags for all the nodes in the cluster.
+      --container string    PX container ID
+      --dockerhost string   docker host daemon (default "unix:///var/run/docker.sock")
+  -f, --force               force overwrite existing diags.
+  -h, --help                help for diags
+  -l, --live                gets diags from running px
+  -n, --node string         generate diags for a specific remote node with the provided NodeIp or NodeID.
+  -o, --output string       output file name (default "/var/cores/diags.tar.gz")
+  -p, --profile             only dump profile
+  -u, --upload              upload diags to cloud
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 As an example, here's how to generate the diagnostics package for a container called `px-enterprise`:
@@ -149,16 +184,36 @@ pxctl service kvdb --help
 ```
 
 ```output
-NAME:
-   pxctl service kvdb - PX Kvdb operations
+PX Kvdb operations
 
-USAGE:
-   pxctl service kvdb [command options] [arguments...]
+Usage:
+  pxctl service kvdb [flags]
+  pxctl service kvdb [command]
 
-OPTIONS:
-   endpoints    List the kvdb client endpoints
-   members      List the kvdb cluster members
-   restore      Restore keys and values into kvdb from a kvdb.dump file
+Aliases:
+  kvdb, k
+
+Available Commands:
+  endpoints      List the kvdb client endpoints
+  members        List the kvdb cluster members
+  restore        Restore keys and values into kvdb from a kvdb.dump file
+
+Flags:
+  -h, --help   help for kvdb
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl service kvdb [command] --help" for more information about a command.
 ```
 
 ## Place Portworx in maintenance mode
@@ -172,16 +227,31 @@ pxctl service maintenance --help
 ```
 
 ```output
-NAME:
-   pxctl service maintenance - Maintenance mode operations
+Maintenance mode operations
 
-USAGE:
-   pxctl service maintenance [command options] [arguments...]
+Usage:
+  pxctl service maintenance [flags]
 
-OPTIONS:
-   -x, --exit   exit maintenance mode
-   -e, --enter  enter maintenance mode
-   -c, --cycle  cycle maintenance mode
+Aliases:
+  maintenance, m
+
+Flags:
+  -c, --cycle   cycle maintenance mode
+  -e, --enter   enter maintenance mode
+  -x, --exit    exit maintenance mode
+  -h, --help    help for maintenance
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 Enter maintenance mode with:
@@ -210,21 +280,35 @@ pxctl service drive --help
 ```
 
 ```output
-NAME:
-   pxctl service drive - Storage drive maintenance
+Storage drive maintenance
 
-USAGE:
-   pxctl service drive command [command options] [arguments...]
+Usage:
+  pxctl service drive [flags]
+  pxctl service drive [command]
 
-COMMANDS:
-     add            Add storage
-     check          Check drives
-     rebalance      Rebalance storage
-     replace        Replace source drive with target drive
-     show           Show drives
+Available Commands:
+  add         Add storage
+  check       Check drives
+  rebalance   Rebalance storage
+  replace     Replace source drive with target drive
+  show        Show drives
 
-OPTIONS:
-   --help, -h  show help
+Flags:
+  -h, --help   help for drive
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl service drive [command] --help" for more information about a command.
 ```
 
 ### Add a physical drive to a server
@@ -232,7 +316,7 @@ OPTIONS:
 Use the `pxctl sv drive add` command to add a physical drive to a server. To see an overview of the available flags, run:
 
 ```text
-pxctl sv drive add --help
+pxctl service drive add --help
 ```
 
 ```output
@@ -242,23 +326,25 @@ Usage:
   pxctl service drive add [flags]
 
 Flags:
+      --cache int          Use this drive as a cache device for given pool. (default -1)
+  -d, --drive string       comma-separated source drives
+  -h, --help               help for add
       --journal            Use this drive as a journal device.
       --metadata           Use this drive as a system metadata device.
-  -d, --drive string       comma-separated source drives
-  -s, --spec string        Cloud drive spec in type=<>,size=<> format
   -o, --operation string   start|status (Valid Values: [start status]) (default "start")
-  -h, --help               help for add
+  -s, --spec string        Cloud drive spec in type=<>,size=<> format
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 You can add physical drives to a server using the `pxctl service drive add` command. The following example shows how to add a physical drive:
@@ -521,15 +607,29 @@ pxctl service node-wipe --help
 ```
 
 ```output
-NAME:
-   pxctl service node-wipe - Wipes PX configuration data on this node
+Wipes PX configuration data on this node
 
-USAGE:
-   pxctl service node-wipe [command options] [arguments...]
+Usage:
+  pxctl service node-wipe [flags]
 
-OPTIONS:
-   --storage_devices value, -s value  comma-separated list of storage devices to be wiped.
+Aliases:
+  node-wipe, nw
 
+Flags:
+  -h, --help                     help for node-wipe
+  -s, --storage_devices string   comma-separated list of storage devices to be wiped.
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 Here is an example:
@@ -593,10 +693,22 @@ Usage:
   pxctl service pool update [flags]
 
 Flags:
-      --resize               extend pool to maximum available physical storage
-      --io_priority string   IO Priority (Valid Values: [high medium low]) (default "low")
-      --labels string        comma separated name=value pairs (default "NoLabel")
   -h, --help                 help for update
+      --io_priority string   IO Priority (Valid Values: [high medium low]) (default "low")
+      --labels string        comma separated name=value pairs (empty value to remove label) (default "NoLabel")
+      --resize               extend pool to maximum available physical storage
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 #### Understand the --labels flag behavior
@@ -737,20 +849,24 @@ pxctl service pool delete --help
 ```
 ```output
 Delete pool
+
 Usage:
   pxctl service pool delete [flags]
+
 Flags:
   -h, --help   help for delete
+
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 Before you remove a pool, consider the following requirements:
@@ -783,12 +899,12 @@ You can re-enable volume attachments by running  `pxctl service node uncordon-at
 
 ### Cordon attachments on a node
 
-1. Identify which node you want to cordon attachments from by entering the `pxctl cluster list` command: 
-   
+1. Identify which node you want to cordon attachments from by entering the `pxctl cluster list` command:
+
    ```
    pxctl cluster list
    ```
-   
+
    Find the ID of your node in the first column:
 
    ```output
@@ -827,16 +943,16 @@ Volume attachments re-enabled on node 1cfdb2a5-da08-4158-9883-7fa9e52c59e0.
 
 ## Drain volume attachments
 
-If you have a node with volumes attached to it, you can remove them using the `pxctl service node drain-attachments` command. This command executes volume drain operations as a background job, and will delete all the pods that are using the volumes which are attached on this node. 
+If you have a node with volumes attached to it, you can remove them using the `pxctl service node drain-attachments` command. This command executes volume drain operations as a background job, and will delete all the pods that are using the volumes which are attached on this node.
 
 ### Start volume attachment drain operations
 
-1. Identify which node you want to drain of sharedv4 volumes by entering the `pxctl cluster list` command: 
-   
+1. Identify which node you want to drain of sharedv4 volumes by entering the `pxctl cluster list` command:
+
    ```
    pxctl cluster list
    ```
-   
+
    Find the ID of your desired node in the first column:
 
    ```output
@@ -852,7 +968,7 @@ If you have a node with volumes attached to it, you can remove them using the `p
    ```
 
 2. enter the submit command:
-   
+
    ```text
    pxctl service node drain-attachments submit --node <node-id>
    ```
@@ -879,7 +995,7 @@ JOB			TYPE			STATE	CREATE TIME
 
 ### Monitor volume attachment drain operations
 
-To monitor specific jobs, enter the `pxctl service node drain-attachments status` command with `--job-id` flag, followed by the ID of the specific job you want to see the status for: 
+To monitor specific jobs, enter the `pxctl service node drain-attachments status` command with `--job-id` flag, followed by the ID of the specific job you want to see the status for:
 
 ```
 pxctl service node drain-attachments status --job-id 624258766140697912

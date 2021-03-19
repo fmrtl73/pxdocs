@@ -38,15 +38,16 @@ Flags:
   -h, --help   help for cluster
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 
 Use "pxctl cluster [command] --help" for more information about a command.
 ```
@@ -124,15 +125,16 @@ Flags:
   -h, --help    help for delete
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 ### Related topics
@@ -162,14 +164,30 @@ pxctl cluster provision-status --help
 ```
 
 ```output
-NAME:
-   pxctl cluster provision-status - Show cluster provision status
+Show cluster provision status
 
-USAGE:
-   pxctl cluster provision-status [command options] [arguments...]
+Usage:
+  pxctl cluster provision-status [flags]
 
-OPTIONS:
-   --io_priority value  IO Priority: [high|medium|low] (default: "low")
+Aliases:
+  provision-status, s
+
+Flags:
+  -h, --help                 help for provision-status
+      --io_priority string   IO Priority (Valid Values: [high medium low]) (default "low")
+      --show-labels          Show all labels
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 ## Enabling optimized restores
@@ -197,15 +215,16 @@ Flags:
   -h, --help   help for options
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 
 Use "pxctl cluster options [command] --help" for more information about a command.
 ```
@@ -239,22 +258,30 @@ Update cluster wide options
 
 Usage:
   pxctl cluster options update [flags]
+
 Flags:
       --auto-decommission-timeout uint                  Timeout (in minutes) after which storage-less nodes will be automatically decommissioned. Timeout cannot be set to zero. (default 20)
+      --cache-flush string                              Enable periodic cache flush (Valid Values: [enabled disabled]) (default "disabled")
+      --cache-flush-seconds uint                        Interval at which cache flush would be performed. (default 30)
       --cloudsnap-abort-timeout-minutes uint            Timeout in minutes for stalled cloudsnap abort. Should be => 10 minutes (default 10)
       --cloudsnap-catalog string                        Enable or disable cloudsnap catalog collection (Valid Values: [on off]) (default "off")
+      --cloudsnap-cleanup-failed-hours uint             Time in hours after which the failed cloudsnaps are deleted for a configured credential. 0 disables deleting failed cloudsnaps
       --cloudsnap-max-threads uint                      Number of cloudsnap threads doing concurrent uploads/downloads. Valid values  >= 2  and <= 16, others automatically rounded (default 16)
+      --cloudsnap-metadata-upload-mb-bytes-limit uint   Do not use cloudsnap using metadata optimization if metadata size if over this limit in size in mebibytes. Value set to 0 disables this check. (default 10240)
+      --cloudsnap-metadata-upload-percent-limit uint    Do not use cloudsnap using metadata optimization if metadata size if over this limit in percent with respect to upload size. Value set to 0 disables this check. (default 15)
       --cloudsnap-nw-interface string                   network interface name used by cloudsnaps(data, mgmt, eth0, etc)
+      --cloudsnap-using-metadata-enabled string         Enable cloudsnap using metadata optimization (Valid Values: [on off]) (default "off")
       --concurrent-api-limit uint                       Maximum number of concurrent api invocations allowed (default 20)
-      --disable-provisioning-labels string              Semi-colon separate string
+      --disable-provisioning-labels string              Semi-colon separate string of labels, example 'node=uuid1,uuid2;io_priority=high'. Use '' to reset to default.
       --disabled-temporary-kvdb-loss-support string     Enable or disable temporary kvdb loss support (Valid Values: [on off]) (default "off")
       --domain-policy string                            Domain policy for domains (Valid Values: [strict eventual]) (default "strict")
   -h, --help                                            help for update
       --internal-snapshot-interval uint                 Interval (in minutes) after which internal snapshots are rotated (default 30)
+      --io-profile-derive-interval-minutes uint         Configure periodic interval (in minutes) to compute the IO profile for volume. Only applies to volumes with "auto" IO profile. (default 2)
       --license-expiry-check days                       Number of days to raise alert before license expires. Set to zero to disable alerts. (default 7)
       --license-expiry-check-interval string            Interval for license expiry checks.  Valid only if 'license-expiry-check' is defined. (default "6h")
       --optimized-restores string                       Enable or disable optimized restores (Valid Values: [on off]) (default "off")
-      --provisioning-commit-labels string               Json, example of global rule followed by node specific and pool specific rule: '[{'OverCommitPercent': 200, 'SnapReservePercent': 30},{'OverCommitPercent': 50, 'SnapReservePercent':30, 'LabelSelector':{'node':'node-1,node-2', 'poolLabel':'poolValue'},]'
+      --provisioning-commit-labels string               Json, example of global rule followed by node specific and pool specific rule: '[{'OverCommitPercent': 200, 'SnapReservePercent': 30},{'OverCommitPercent': 50, 'SnapReservePercent':30, 'LabelSelector':{'node':'node-1,node-2', 'poolLabel':'poolValue'},]'. Use '[]' to reset to default.
       --px-http-proxy string                            proxy to be used by px services(cloudsnap, etc) (default "off")
       --re-add-wait-timeout uint                        Timeout (in minutes) after which re-add will abort and new replication node is added instead. Set timeout to zero to disable replica move. (default 1440)
       --repl-move-timeout uint                          Timeout (in minutes) after which offline replicas will be moved to available nodes. Set timeout to zero to disable replica move. (default 1440)
@@ -266,7 +293,8 @@ Flags:
       --sharedv4-mount-timeout-sec uint                 Timeout in seconds for sharedv4 (NFS) mount commands. (default 120)
       --sharedv4-threads uint                           Number of sharedv4 threads. This will affect sharedv4 volume performance as well as the amount of CPU and memory consumed for handling sharedv4 volumes. (default 16)
       --snapshot-schedule-option string                 for detached volumes none will not generate schedule snapshots, optimized will generated one, always will generate them always (Valid Values: [none always optimized]) (default "optimized")
-      --uniqueblocks-size-sched-interval-minutes uint   Configure periodic interval to query unique blocks size for volumes. (default 720)
+      --uniqueblocks-size-sched-interval-minutes uint   Configure periodic interval (in minutes) to query unique blocks size for volumes. (default 720)
+
 Global Flags:
       --ca string            path to root certificate for ssl usage
       --cert string          path to client certificate for ssl usage
@@ -308,9 +336,9 @@ Optimized Restores                   :  on
 
 ## Use a network interface for cloudsnaps
 
-By default, cloudsnaps do not use a specific network interface to upload/download the cloudsnap data. Instead, the underlying Go libraries determine the network interface. If you need to use a specific network interface, you can set one using the `--cloudsnap-nw-interface` option. Setting this option directs Portworx to use the specified interface for all cloudsnap related operations. 
+By default, cloudsnaps do not use a specific network interface to upload/download the cloudsnap data. Instead, the underlying Go libraries determine the network interface. If you need to use a specific network interface, you can set one using the `--cloudsnap-nw-interface` option. Setting this option directs Portworx to use the specified interface for all cloudsnap related operations.
 
-This is a cluster-wide setting, meaning that the chosen network interface must be available on all nodes. If the chosen network interface is not available, Portworx falls-back to the "no interface chosen" default behavior. 
+This is a cluster-wide setting, meaning that the chosen network interface must be available on all nodes. If the chosen network interface is not available, Portworx falls-back to the "no interface chosen" default behavior.
 
 To enable this feature, enter the following `pxctl cluster options update` command with the `--cloudsnap-nw-interface` option and specify your desired network interface and confirm at the prompt:
 
@@ -341,18 +369,18 @@ Successfully updated cluster wide options
 
 ## Configure cache flush operations
 
-On systems with a large amount of memory and heavy IO activity, system memory and page cache experience a lot of activity, resulting in significant memory pressure. On these systems, the Portworx storage process may slow down or get stuck trying to allocate memory. 
+On systems with a large amount of memory and heavy IO activity, system memory and page cache experience a lot of activity, resulting in significant memory pressure. On these systems, the Portworx storage process may slow down or get stuck trying to allocate memory.
 
 To prevent Portworx from slowing or getting stuck, you can preemptively drop system memory pages which are not currently in use, i.e. pages which are inactive and not dirty.
 
-You can configure cache flush operations for all nodes on the cluster using flags with the `pxctl cluster options update` command. 
+You can configure cache flush operations for all nodes on the cluster using flags with the `pxctl cluster options update` command.
 
 {{<info>}}
-**NOTE:** 
+**NOTE:**
 
-* This command is intended for advanced users only. 
+* This command is intended for advanced users only.
 * This operation drops all cached pages for all devices and may impact read performance; you should only apply the config when necessary.
-* Legacy support for cache flush was enabled through an environment variable: `PX_ENABLE_CACHE_FLUSH="true"`. As long as the cache flush feature has not been enabled, Portworx still checks for this env var when a node starts and will enable cache flushing if it's set to `true`. If you disable cache flush using the `pxctl` command, cache flush will be disabled regardless of whether the env var is set to `true` or not.  
+* Legacy support for cache flush was enabled through an environment variable: `PX_ENABLE_CACHE_FLUSH="true"`. As long as the cache flush feature has not been enabled, Portworx still checks for this env var when a node starts and will enable cache flushing if it's set to `true`. If you disable cache flush using the `pxctl` command, cache flush will be disabled regardless of whether the env var is set to `true` or not.
 {{</info>}}
 
 ### Enable cache flush operations

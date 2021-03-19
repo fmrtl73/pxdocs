@@ -31,27 +31,30 @@ Aliases:
 
 Flags:
   -a, --all                   show all volumes, including snapshots
-  -s, --snapshot              show all snapshots (read-only volumes)
-      --snapshot-schedule     show all schedule created snapshots
-  -v, --volumes               show only volumes
-      --node-id string        show all volumes whose replica is present on the given node
-      --name string           volume name used during creation if any
-  -l, --label string          list of comma-separated name=value pairs
-      --sched-policy string   filter volumes by sched policy
-  -p, --parent string         show all snapshots created for given volume
   -g, --group string          show all volumes for given group
   -h, --help                  help for list
+  -l, --label string          list of comma-separated name=value pairs
+      --name string           volume name used during creation if any
+      --node string           show all volumes whose replica is present on the given node
+  -p, --parent string         show all snapshots created for given volume
+      --pool-uid string       show all volumes whose replica is present on the given pool
+      --sched-policy string   filter volumes by sched policy
+  -s, --snapshot              show all snapshots (read-only volumes)
+      --snapshot-schedule     show all schedule created snapshots
+  -t, --time                  show all volumes sorted by creation time
+  -v, --volumes               show only volumes
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 ### User created snapshots
@@ -221,23 +224,24 @@ Examples:
 pxctl volume snap-interval-update [flags] volName
 
 Flags:
+  -d, --daily strings     daily snapshot at specified hh:mm,k (keeps 7 by default)
+  -h, --help              help for snap-interval-update
+  -m, --monthly strings   monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
   -p, --periodic string   periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
       --policy string     policy names separated by comma
-  -d, --daily strings     daily snapshot at specified hh:mm,k (keeps 7 by default)
   -w, --weekly strings    weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-  -m, --monthly strings   monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
-  -h, --help              help for snap-interval-update
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 In the below example, the old snapshot schedule is replaced with a daily snapshot triggered at 15:00 pm (5 snapshots are kept):

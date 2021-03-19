@@ -37,15 +37,16 @@ Flags:
   -h, --help   help for sched-policy
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 
 Use "pxctl sched-policy [command] --help" for more information about a command.
 ```
@@ -71,23 +72,23 @@ Examples:
 pxctl sched-policy create [flags] policy-name
 
 Flags:
-  -p, --periodic string   periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
   -d, --daily strings     daily snapshot at specified hh:mm,k (keeps 7 by default)
-  -w, --weekly strings    weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-  -m, --monthly strings   monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
   -h, --help              help for create
+  -m, --monthly strings   monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+  -p, --periodic string   periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
+  -w, --weekly strings    weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
-
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 {{% content "shared/reference-CLI-sched-policy.md" %}}
@@ -126,22 +127,23 @@ Examples:
 pxctl sched-policy update [flags] policy-name
 
 Flags:
-  -p, --periodic string   periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
   -d, --daily strings     daily snapshot at specified hh:mm,k (keeps 7 by default)
-  -w, --weekly strings    weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-  -m, --monthly strings   monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
   -h, --help              help for update
+  -m, --monthly strings   monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+  -p, --periodic string   periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
+  -w, --weekly strings    weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 Continuing our previous example with the `p1` schedule policy, let's make it so that our policy creates periodic backups every 120 minutes instead of 60:

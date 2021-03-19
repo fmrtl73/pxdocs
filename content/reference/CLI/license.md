@@ -35,15 +35,16 @@ Flags:
   -h, --help   help for license
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 
 Use "pxctl license [command] --help" for more information about a command.
 ```
@@ -108,10 +109,10 @@ pxctl license add <license file>
 
 ## Connect to a license server
 
-You can connect a Portworx cluster to a license server using the `pxctl license setls` command. To see the list of available flags, enter the `-h` flag:
+You can connect a Portworx cluster to a license server using the `pxctl license setls` command. To see the list of available flags, enter the `--help` flag:
 
 ```text
-pxctl license setls --help 
+pxctl license setls --help
 ```
 ```output
 Set license server
@@ -128,11 +129,23 @@ Flags:
   -h, --help                    help for setls
       --import-unknown-ca       auto-import self-signed root CA certificate
   -i, --interval .M.w.d.h.m.s   license borrow interval (.M.w.d.h.m.s [e.g. 1w15m] or number)
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 Connect your Portworx cluster to a license server by entering the `pxctl license setls` command with the following:
 
-* **Optional:** The `--add` option with a comma delimited list of additional feature licenses you want to add. This will add any of the specified feature licenses, as long as the license server has enough available feature license seats. 
+* **Optional:** The `--add` option with a comma delimited list of additional feature licenses you want to add. This will add any of the specified feature licenses, as long as the license server has enough available feature license seats.
 * The license server endpoint.
 
 ```text

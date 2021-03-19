@@ -30,23 +30,24 @@ pxctl auth token generate --auth-config=<authconfig.yaml> --issuer <issuer> --ec
 Flags:
       --auth-config string             (Required) Auth account information file providing email, name, etc.
       --ecdsa-private-keyfile string   ECDSA Private file to sign token
+  -h, --help                           help for generate
       --issuer string                  (Required) Issuer name of token. Do not use https:// in the issuer since it could indicate that this is an OpenID Connect issuer.
       --output string                  Output token to file instead of standard out
       --rsa-private-keyfile string     RSA Private file to sign token
       --shared-secret string           Shared secret to sign token
       --token-duration string          Duration of time where the token will be valid. Postfix the duration by using s for seconds, m for minutes, h for hours, d for days, and y for years. (default "1d")
-  -h, --help                           help for generate
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 As seen above, the `pxctl` command-line tool allows you to generate self-signed tokens in the following ways:

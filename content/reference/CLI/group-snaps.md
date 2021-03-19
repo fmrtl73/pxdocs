@@ -1,6 +1,6 @@
 ---
 title: Group Snaps using pxctl
-keywords: pxctl, command-line tool, cli, reference, group snapshots 
+keywords: pxctl, command-line tool, cli, reference, group snapshots
 description: Explore the CLI reference guide for taking group snapshots of container data volumes using Portworx. Try it today!
 linkTitle: Group Snaps
 weight: 5
@@ -11,7 +11,7 @@ This document explains how to take group snapshots of your container data with P
 First, let's get an overview of the available flags before diving in:
 
 ```text
-pxctl volume snapshot group -h
+pxctl volume snapshot group --help
 ```
 
 ```output
@@ -24,21 +24,23 @@ Aliases:
   group, g
 
 Flags:
+  -d, --delete-on-failure   delete created snaps if not all volumes succeeded in the group
   -g, --group string        group id
+  -h, --help                help for group
   -l, --label string        list of comma-separated name=value pairs
   -v, --volume_ids string   list of comma-separated volume IDs
-  -h, --help                help for group
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 To take a group snapshot of the volumes labelled with `v1=x1`, use this command:

@@ -12,14 +12,32 @@ In order to restore a volume from snapshot use the `pxctl volume restore` comman
 ```
 
 ```output
-NAME:
-   pxctl volume restore - Restore volume from snapshot
+Restore volume from snapshot
 
-USAGE:
-   pxctl volume restore [command options] volume-name-or-ID
+Usage:
+  pxctl volume restore [flags]
 
-OPTIONS:
-   --snapshot value, -s value  snapshot-name-or-ID
+Aliases:
+  restore, r
+
+Examples:
+pxctl volume restore [flags] volName
+
+Flags:
+  -h, --help              help for restore
+  -s, --snapshot string   snapshot-name-or-ID
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 In the below example parent volume `myvol` is restored from its snapshot `mysnap`. Make sure volume is detached in order to restore from the snapshot.

@@ -32,6 +32,7 @@ Examples:
 pxctl storage-policy create --replication 2,min --periodic 60,10 devpolicy
 
 Available Commands:
+  access        Manage storage policy access by users or groups
   create        Create a storage policy
   delete        Delete a storage policy
   inspect       Inspect a storage policy.
@@ -44,19 +45,25 @@ Flags:
   -h, --help   help for storage-policy
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 
 Use "pxctl storage-policy [command] --help" for more information about a command.
 ```
 
+<!--
+We added a new command:
+  access        Manage storage policy access by users or groups
+Do we want to document it?
+-->
 ## Create a Storage Policy
 
 Say we want to create a storage policy named `devpol` with:
@@ -524,28 +531,60 @@ Volume  :  492212712402729915
 
 ## Storage Policy Parameters
 
-`pxctl storage policy create` shows the available options through the `–help` command.
+<!-- We must revisit this -->
+Enter the `pxctl storage policy create --help` command displays the available flags:
 
-Here's the description of the options:
-
+```text
+pxctl storage policy create --help
 ```
-a) If below flags are specified while creating storage policy, the volume creation will have respective spec applied.
-(You need to set a default storage policy to make it in effect)
 
-* sticky - sticky volumes cannot be deleted until the flag is disabled
-* journal - Journal data for volume
-* secure - encrypt volumes using AES-256
-* shared - make a globally shared namespace volumes
-* aggregation_level string aggregation level (Valid Values: [1 2 3 auto]) (default "1")
-* policy string policy names separated by comma
-* periodic mins,k periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
-* daily hh:mm,k daily snapshot at specified hh:mm,k (keeps 7 by default)
-* weekly weekday@hh:mm,k weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-* monthly day@hh:mm,k monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+```output
+Create a storage policy
 
-b) You can specify min, max or equal replication while creating a storage policy.
+Usage:
+  pxctl storage-policy create [flags]
 
-eg. :-
+Aliases:
+  create, c
+
+Examples:
+pxctl storage-policy create [flags] policy-name
+
+Flags:
+  -a, --aggregation_level string   aggregation level (Valid Values: [1 2 3 auto]) (default "1")
+  -d, --daily hh:mm,k              daily snapshot at specified hh:mm,k (keeps 7 by default)
+      --force                      Force volume creation to fail if storage policy rules not followed by volume
+  -h, --help                       help for create
+      --io_profile string          IO Profile (Valid Values: [sequential cms db]) (default "sequential")
+      --journal                    Journal data for volume
+  -m, --monthly day@hh:mm,k        monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+  -p, --periodic mins,k            periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
+      --policy string              policy names separated by comma
+  -r, --replication repl,max/min   replication factor repl,max/min (replication is equal by default)
+      --secure                     encrypt volumes using AES-256
+      --shared                     make a globally shared namespace volumes
+      --sticky                     sticky volumes cannot be deleted until the flag is disabled
+      --update                     Allow volume to update without storage policy restriction
+  -w, --weekly weekday@hh:mm,k     weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+```
+
+<!-- We must fix the this also -->
+
+Note that you can specify min, max or equal replication while creating a storage policy.
+
+Example:
 
 1) replication 2,min
 
@@ -558,7 +597,6 @@ If storage policy creates with replication 2, flag. Volume created will be ensur
 3) replication 2
 
 If storage policy is created with replication 2, Volume created will have exact replication level 2
-```
 
 {{<homelist series="px-storage-policy">}}
 

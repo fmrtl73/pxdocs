@@ -93,15 +93,18 @@ Flags:
   -h, --help   help for cloudmigrate
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl cloudmigrate [command] --help" for more information about a command.
 ```
 
 Now, let's use again the built-in help and take a look at how to start migration:
@@ -117,25 +120,29 @@ Usage:
   pxctl cloudmigrate start [flags]
 
 Flags:
-  -a, --all                 Migrate all volumes
-  -v, --volume_id string    ID of the volume to be migrated
   -c, --cluster_id string   ID of the cluster where the volume should be migrated
   -h, --help                help for start
+  -v, --volume_id string    (Required) ID of the volume to be migrated
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 As the above output shows, you can either migrate all volumes or just one.
 
+
+<!--
+
+It looks like we removed the `-all` flag
 
 ### Migrating all volumes
 
@@ -145,7 +152,8 @@ To migrate all volumes, run `pxctl cloudmigrate start` with the `--all` and `--c
 pxctl cloudmigrate start --all --cluster_id <cluster_id>
 ```
 
-### Migrating a particular volume
+-->
+### Migrating  volume
 
 To migrate a particualr volume, try using:
 

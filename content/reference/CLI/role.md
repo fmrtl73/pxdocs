@@ -39,6 +39,7 @@ Usage:
 Available Commands:
   create      Create a role
   delete      Delete a role
+  inspect     Show permission rules for role(s)
   list        Show all role names
   update      Update a role
 
@@ -46,18 +47,25 @@ Flags:
   -h, --help   help for role
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 
 Use "pxctl role [command] --help" for more information about a command.
 ```
+
+<!--
+We added a new command:
+  inspect     Show permission rules for role(s)
+Do we want to document it?
+-->
 
 ### Creating a custom role from a JSON file
 
@@ -74,7 +82,7 @@ pxctl role create --help
 ```
 
 ```output
-Create a role using a JSON file which specifies the role and its rules.  A role consist of a set of rules defining services
+Create a role using a json file which specifies the role and its rules.  A role consist of a set of rules defining services
 and api's which are allowable.
 e.g. Rule file which allows inspection of any object and listings of only volumes:
   {
@@ -106,19 +114,20 @@ Examples:
 pxctl role create --role-config <path to json file>
 
 Flags:
-      --role-config string   (Required) create role using role json file
   -h, --help                 help for create
+      --role-config string   (Required) create role using role json file
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 #### Role configuration
@@ -180,14 +189,14 @@ This token will now allow access to whichever services and APIs were defined in 
 
 ## Updating the System Guest role
 
-Updating the `system.guest` role will change how Portworx authorization handles users that do not pass a token to any Portworx operation or SDK call. For more information, see the [Guest Role overview.](/concepts/authorization/overview#guest-access). 
+Updating the `system.guest` role will change how Portworx authorization handles users that do not pass a token to any Portworx operation or SDK call. For more information, see the [Guest Role overview.](/concepts/authorization/overview#guest-access).
 
 ### Disabling the System Guest role
 
-To disable the system.guest role, perform the following steps: 
+To disable the system.guest role, perform the following steps:
 
 1. On one of your Portworx nodes, create the following `role.json` file:
-    
+
     ```text
     {
       "name": "system.guest",

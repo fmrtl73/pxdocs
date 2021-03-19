@@ -14,26 +14,35 @@ sudo /opt/pwx/bin/pxctl volume update --help
 
 ```output
 Update volume settings
+
 Usage:
   pxctl volume update [flags]
+
 Examples:
 pxctl volume update [flags] volName
+
 Flags:
-      --async_io string         Enable async IO to backing storage (Valid Values: [on off]) (default "off")
-      --early_ack string        Reply to async write requests after it is copied to shared memory (Valid Values: [on off]) (default "off")
-      --export_options string   set export options
-  -g, --group string            Set/Reset the Group field on a Volume
-  -h, --help                    help for update
-      --io_profile string       IO Profile (Valid Values: [sequential cms db db_remote sync_shared auto]) (default "auto")
-      --journal string          Journal data for this volume (Valid Values: [on off]) (default "off")
-  -l, --label string            list of comma-separated name=value pairs to update (use empty label value to remove label)
-      --nodiscard string        Disable discard support for this volume (Valid Values: [on off]) (default "off")
-      --queue_depth uint        block device queue depth (Valid Range: [1 256]) (default 128)
-      --scale uint              New scale factor (Valid Range: [1 1024]) (default 1)
-      --shared string           set shared setting (Valid Values: [on off]) (default "off")
-      --sharedv4 string         set sharedv4 setting (Valid Values: [on off]) (default "off")
-  -s, --size uint               New size for the volume (GiB) (default 1)
-      --sticky string           set sticky setting (Valid Values: [on off]) (default "off")
+      --async_io string                 Enable async IO to backing storage (Valid Values: [on off]) (default "off")
+      --cow_ondemand string             Enable On-demand COW on volume (Valid Values: [on off]) (default "off")
+      --early_ack string                Reply to async write requests after it is copied to shared memory (Valid Values: [on off]) (default "off")
+      --export_options string           set export options
+  -g, --group string                    Set/Reset the Group field on a Volume
+  -h, --help                            help for update
+      --io_profile string               IO Profile (Valid Values: [sequential cms db db_remote sync_shared auto]) (default "auto")
+      --journal string                  Journal data for this volume (Valid Values: [on off]) (default "off")
+  -l, --label string                    list of comma-separated name=value pairs to update (use empty label value to remove label)
+      --mount_options string            Set mount options for a volume. Provide the mount options as a comma-separated key=value pairs. (Use empty value to reset mount options)
+      --nodiscard string                Disable discard support for this volume (Valid Values: [on off]) (default "off")
+      --proxy_write string              Enable proxy write replication for this volume (Valid Values: [on off]) (default "off")
+      --queue_depth uint                block device queue depth (Valid Range: [1 256]) (default 128)
+      --scale uint                      New scale factor (Valid Range: [1 1024]) (default 1)
+      --scan_policy string              Specify filesystem scan policy (Valid Values: [none scan_on_mount repair_on_mount scan_on_next_mount repair_on_next_mount]) (default "none")
+      --shared string                   set shared setting (Valid Values: [on off]) (default "off")
+      --sharedv4 string                 set sharedv4 setting (Valid Values: [on off]) (default "off")
+      --sharedv4_mount_options string   Set sharedv4 client mount options for a volume. Provide the mount options as a comma-separated key=value pairs. (Use empty value to reset mount options)
+  -s, --size uint                       New size for the volume (GiB) (default 1)
+      --sticky string                   set sticky setting (Valid Values: [on off]) (default "off")
+
 Global Flags:
       --ca string            path to root certificate for ssl usage
       --cert string          path to client certificate for ssl usage
@@ -324,7 +333,7 @@ Follow the instructions below to increase a volume's replication factor and crea
 	```text
 	pxctl volume ha-update \
 	--repl=2 \
-	--node <node-ID|pool-uuid|node-IP> 
+	--node <node-ID|pool-uuid|node-IP>
 	<volume-name>
 	```
 

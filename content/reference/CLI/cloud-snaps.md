@@ -40,7 +40,7 @@ Aliases:
 
 Available Commands:
   backup       Backup a snapshot to cloud
-  backup-group Backup a group of snapshot for a given group id or labels to cloud
+  backup-group Backup a group of snapshot for a given list of volumes, group id, or labels to cloud
   catalog      Display catalog for the backup in cloud
   delete       Delete a cloudsnap from the objectstore. This is not reversible.
   history      Show history of cloudsnap operations
@@ -52,6 +52,20 @@ Available Commands:
 
 Flags:
   -h, --help   help for cloudsnap
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl cloudsnap [command] --help" for more information about a command.
 ```
 
 ### Login to the secrets database
@@ -91,35 +105,37 @@ Aliases:
 
 Examples:
 /opt/pwx/bin/pxctl cred create [flags] <name>
+
 Flags:
-      --s3-disable-ssl
-      --use-iam                        Optional, use instance IAM for credentials, current support only for s3(ec2 IAM)
+      --azure-account-key string
+      --azure-account-name string
+      --bucket string                  Optional pre-created bucket name
       --disable-path-style             optional, required for virtual-host-style access
-      --use-proxy                      optional, currently supported for s3 only, requires cluster wide proxy(under cluster options)
+      --encryption-passphrase string   Passphrase to be used for encrypting data in the cloudsnaps
+      --google-json-key-file string
+      --google-project-id string
+  -h, --help                           help for create
       --provider string                Cloud provider type [s3, azure, google]
       --s3-access-key string
-      --s3-secret-key string
-      --s3-region string
-      --s3-storage-class string        Storage class type [STANDARD, STANDARD_IA]
-      --bucket string                  Optional pre-created bucket name
-      --azure-account-name string
-      --azure-account-key string
-      --google-project-id string
-      --google-json-key-file string
-      --encryption-passphrase string   Passphrase to be used for encrypting data in the cloudsnaps
+      --s3-disable-ssl
       --s3-endpoint strings            Endpoint of the S3 servers, in comma separated host:port format
-  -h, --help
-                     help for create
+      --s3-region string
+      --s3-secret-key string
+      --s3-storage-class string        Storage class type [STANDARD, STANDARD_IA]
+      --use-iam                        Optional, use instance IAM for credentials, current support only for s3(ec2 IAM) and azure
+      --use-proxy                      optional, currently supported for s3 only, requires cluster wide proxy(under cluster options)
+
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 #### Azure
@@ -350,7 +366,7 @@ Flags:
   -f, --full             Force a full backup
   -h, --help             help for backup
       --label pairs      list of comma-separated name=value pairs
-      
+
 Global Flags:
       --ca string            path to root certificate for ssl usage
       --cert string          path to client certificate for ssl usage
@@ -457,11 +473,10 @@ NewVol                        56706279008755778        2e4d4b67-95d7-481e-aec5-1
 If you enter the `pxctl cloudsnap list` command followed by the `--help` flag, you'll see the avaiable options:
 
 ```text
-pxctl cloudsnap list
+pxctl cloudsnap list --help
 ```
 
 ```output
-pxctl cloudsnap list --help
 List snapshot in cloud
 
 Usage:
@@ -471,27 +486,29 @@ Aliases:
   list, l
 
 Flags:
-  -m, --migration             Optional, lists migration related cloudbackups
   -a, --all                   List cloud backups of all clusters in cloud
-  -s, --src string            Optional source volume to list cloud backups
-      --cred-id string        Cloud credentials ID to be used for the backup
-  -c, --cluster string        Optional cluster id to list cloud backups. Current cluster-id is default
-  -t, --status string         Optional backup status(failed. aborted, stopped) to list cloud backups; Defaults to Done
-      --label pairs           Optional list of comma-separated name=value pairs to match with cloudsnap metadata
   -i, --cloudsnap-id string   Optional cloudsnap id to list(lists a single entry)
-  -x, --max uint              Optional number to limit display of backups in each page
+  -c, --cluster string        Optional cluster id to list cloud backups. Current cluster-id is default
+      --cred-id string        Cloud credentials ID to be used for the backup
   -h, --help                  help for list
+      --label pairs           Optional list of comma-separated name=value pairs to match with cloudsnap metadata
+  -x, --max uint              Optional number to limit display of backups in each page
+  -m, --migration             Optional, lists migration related cloudbackups
+  -p, --paginate              Paginate list with user input to continue
+  -s, --src string            Optional source volume to list cloud backups
+  -t, --status string         Optional backup status(failed. aborted, stopped) to list cloud backups; Defaults to Done
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 ### Inspect a cloud snapshot
@@ -550,7 +567,7 @@ pxctl cloudsnap backup-group --help
 ```
 
 ```output
-Backup a group of snapshot for a given group id or labels to cloud
+Backup a group of snapshot for a given list of volumes, group id, or labels to cloud
 
 Usage:
   pxctl cloudsnap backup-group [flags]
@@ -559,23 +576,25 @@ Aliases:
   backup-group, bg
 
 Flags:
+      --cred-id string      Cloud credentials ID to be used for the backup
+  -d, --delete-local        Deletes local snap created for backup after backup is done, also forces next backup to be full
       --full                Force a full backup
       --group string        group id
-      --cred-id string      Cloud credentials ID to be used for the backup
+  -h, --help                help for backup-group
       --label pairs         list of comma-separated name=value pairs
   -v, --volume_ids string   list of comma-separated volume IDs
-  -h, --help                help for backup-group
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 #### Examples
@@ -658,22 +677,48 @@ Aliases:
   restore, r
 
 Flags:
-  -v, --volume string    Volume name to be created for restore
-  -s, --snap string      Cloud-snap id to restore
-  -n, --node string      Optional node ID for provisioning restore volume storage
-      --cred-id string   Cloud credentials ID to be used for the restore
-  -h, --help             help for restore
+  -a, --aggregation_level string            aggregation level(If not specified, inherits cloudsnap's aggregation level) (Valid Values: [1 2 3 auto]) (default "1")
+      --best_effort_location_provisioning   requested nodes, zones, racks are optional
+      --cred-id string                      Cloud credentials ID to be used for the restore
+  -d, --daily hh:mm,k                       daily snapshot at specified hh:mm,k (keeps 7 by default)
+      --enforce_cg                          enforce group during provision
+      --fastpath                            Enable fastpath IO support for this volume(If not specified, inherits cloudsnap's fastpath option)
+  -g, --group string                        group
+  -h, --help                                help for restore
+      --io_priority string                  IO Priority(If not specified, inherits cloudsnap's IO Priority) (Valid Values: [high medium low]) (default "low")
+      --io_profile string                   IO Profile((defaults to cloudsnap's IO Profile) (Valid Values: [sequential cms sync_shared db db_remote]) (default "sequential")
+      --journal                             Journal data for this volume(If not specified, inherits cloudsnap's journal option)
+  -l, --label pairs                         list of comma-separated name=value pairs
+      --match_src_vol_provisioning          provision the restore volume on same pools as the source volume(src volume must exist)
+  -m, --monthly day@hh:mm,k                 monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+      --nodes string                        comma-separated Node Ids or Pool Ids
+      --nodiscard                           Disable discard support for this volume(If not specified, inherits cloudsnap's discard option)
+  -p, --periodic mins,k                     periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
+  -q, --queue_depth uint                    block device queue depth(If not specified, inherits cloudsnap's queuedepth) (Valid Range: [1 256]) (default 128)
+      --racks string                        comma-separated Rack names
+  -r, --repl uint                           replication factor(If not specified, inherits cloudsnaps repl factor) (Valid Range: [1 3]) (default 1)
+      --secret_key string                   secret_key used to decrypt an encrypted volume
+      --secret_options string               Secret options is used to pass specific secret parameters. Usage: --secret_options=k1=v1,k2=v2
+      --shared                              make this a globally shared namespace volume(If not specified, inherits cloudsnap's shared option)
+      --sharedv4                            set sharedv4 setting(if not specified, inherits cloudsnap's sharedv4 option)
+  -s, --snap string                         Cloud-snap id to restore
+      --sticky                              sticky volumes cannot be deleted until the flag is disabled(if not specified, inherits cloudsnap's sticky option)
+      --storagepolicy string                storage policy name(If not specified, inherits cloudsnap's storage policy)
+  -v, --volume string                       Volume name to be created for restore
+  -w, --weekly weekday@hh:mm,k              weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
+      --zones string                        comma-separated Zone names
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 This command is used to restore a successful backup from the cloud. It requires the cloudsnap ID and the credentials for the cloud storage provider or the object storage. Restore happens on any node where storage can be provisioned.
@@ -784,27 +829,33 @@ Aliases:
   schedules, sched
 
 Available Commands:
-  create       Create a cloud-snap schedule
+  create       Create a cloud-snap schedule for a volume
   delete       Delete a cloud-snap schedule
   list         List the configured cloud-snap schedules
+  update       update cloud-snap schedule for a volume
 
 Flags:
   -h, --help   help for schedules
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 
 Use "pxctl cloudsnap schedules [command] --help" for more information about a command.
 ```
 
+<!--
+We added a new command:
+  update       update cloud-snap schedule for a volume
+-->
 #### Creating a cloud backup schedule
 
 Cloud backup schedules can be created using `pxctl cloudsnap schedules create`. To get help on using this command, run:
@@ -814,7 +865,7 @@ pxctl cloudsnap schedules create  --help
 ```
 
 ```output
-Create a cloud-snap schedule
+Create a cloud-snap schedule for a volume
 
 Usage:
   pxctl cloudsnap schedules create [flags]
@@ -822,27 +873,31 @@ Usage:
 Aliases:
   create, c
 
+Examples:
+/opt/pwx/bin/pxctl cloudsnap schedules create [flags] volName
+
 Flags:
-  -f, --full              Force scheduled backups to be full always
-  -v, --volume string     Volume ID to set the cloud-snap schedule
-  -p, --periodic string   Cloudsnap interval in minutes (default "0")
       --cred-id string    Cloud credentials ID to be used for the backup
-  -x, --max uint          Maximum number of cloud snaps to maintain, default 7 (default 7)
   -d, --daily strings     Daily snapshot at specified hh:mm (UTC)
-  -w, --weekly strings    Weekly snapshot at specified weekday@hh:mm (UTC)
-  -m, --monthly strings   Monthly snapshot at specified day@hh:mm (UTC)
+  -f, --full              Force scheduled backups to be full always
   -h, --help              help for create
+  -x, --max uint          Maximum number of cloud snaps to maintain, default 7 (default 7)
+  -m, --monthly strings   Monthly snapshot at specified day@hh:mm (UTC)
+  -p, --periodic string   Cloudsnap interval in minutes (default "0")
+  -r, --retention uint    Retention period for cloud snaps in number of days
+  -w, --weekly strings    Weekly snapshot at specified weekday@hh:mm (UTC)
 
 Global Flags:
-      --ca string        path to root certificate for ssl usage
-      --cert string      path to client certificate for ssl usage
-      --color            output with color coding
-      --config string    config file (default is $HOME/.pxctl.yaml)
-      --context string   context name that overrides the current auth context
-  -j, --json             output in json
-      --key string       path to client key for ssl usage
-      --raw              raw CLI output for instrumentation
-      --ssl              ssl enabled for portworx
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
 Let's look at a simple example:
