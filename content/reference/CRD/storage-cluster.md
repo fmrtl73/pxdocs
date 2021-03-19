@@ -260,7 +260,7 @@ This section describes the fields used to configure custom volume mounts for Por
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
 | spec.<br>volumes[].<br>name | Unique name for the volume. | `string` | None |
-| spec.<br>volumes[].<br>mountPath | Path within the Portworx container at which the volume should be mounted. Must not contain ':' | `string` | None |
+| spec.<br>volumes[].<br>mountPath | Path within the Portworx container at which the volume should be mounted. Must not contain the ':' character. | `string` | None |
 | spec.<br>volumes[].<br>mountPropagation | Determines how mounts are propagated from the host to container and the other way around. | `string` | None |
 | spec.<br>volumes[].<br>readOnly | Volume is mounted read-only if true, read-write otherwise. | `boolean` | false |
 | spec.<br>volumes[].<br>[secret\|configMap\|hostPath] | Specifies the location and type of the mounted volume. This is similar to the VolumeSource schema of a Kubernetes pod volume. | `object` | None |
