@@ -26,9 +26,9 @@ noicon: true
 ## cluster_status stats
 | Name | Description |
 | :--- | :--- |
-| px_cluster_status_cluster_size | Node count for your portworx cluster. **Deprecated**, use cluster_size. |
+| px_cluster_status_cluster_size | Node count for your portworx cluster. **Deprecated**. |
 | px_cluster_status_size | Node count for your portworx cluster |
-| px_cluster_status_cluster_quorum | Indicates if the cluster is in quorum. **Deprecated**, use cluster_quorum. |
+| px_cluster_status_cluster_quorum | Indicates if the cluster is in quorum. **Deprecated**. |
 | px_cluster_status_quorum | Indicates if the cluster is in quorum |
 | px_cluster_status_nodes_online | Number of online nodes in the cluster (includes storage and storageless) |
 | px_cluster_status_nodes_offline | Number of offline nodes in the cluster (includes storage and storageless) |
@@ -44,17 +44,17 @@ noicon: true
 | px_disk_stats_interval_seconds | interval_seconds |
 | px_disk_stats_io_seconds | Time spent doing IO in seconds for this disk |
 | px_disk_stats_progress_io | IO's currently in progress for this disk |
-| px_disk_stats_disk_read_bytes | Total bytes read for this disk. **Deprecated**, use disk_stats_read_bytes. |
+| px_disk_stats_disk_read_bytes | Total bytes read for this disk. **Deprecated**. |
 | px_disk_stats_read_bytes | Total bytes read for this disk |
-| px_disk_stats_write_bytes_seconds | Total written bytes for this disk. **Deprecated**, use disk_stats_written_bytes. |
+| px_disk_stats_write_bytes_seconds | Total written bytes for this disk. **Deprecated**. |
 | px_disk_stats_written_bytes | Total written bytes for this disk |
 | px_disk_stats_read_seconds | Total time spend reading in seconds for this disk |
 | px_disk_stats_write_seconds | Total time spend writing in seconds for this disk |
 | px_disk_stats_read_latency_seconds | Average time spent per read operation in seconds for this disk |
-| px_disk_stats_write_latency | Average time spent per write operation in seconds for this disk. **Deprecated**, use disk_stats_write_latency_seconds. |
+| px_disk_stats_write_latency | Average time spent per write operation in seconds for this disk. **Deprecated**. |
 | px_disk_stats_write_latency_seconds | Average time spent per write operation in seconds |
-| px_disk_stats_disk_num_reads | Total number of read operations completed successfully for this disk. **Deprecated**, use disk_stats_num_reads. |
-| px_disk_stats_disk_num_writes | Total number of write operations completed successfully for this disk. **Deprecated**, use disk_stats_num_writes. |
+| px_disk_stats_disk_num_reads | Total number of read operations completed successfully for this disk. **Deprecated**. |
+| px_disk_stats_disk_num_writes | Total number of write operations completed successfully for this disk. **Deprecated**. |
 | px_disk_stats_num_reads | Total number of read operations completed successfully for this disk |
 | px_disk_stats_num_writes | Total number of write operations completed successfully for this disk |
 | px_disk_stats_num_reads_total | Total number of read operations completed successfully for this disk |
@@ -92,6 +92,7 @@ noicon: true
 | px_kvdb_setendpoints_requests_total | Total number of set endpoint requests from a node |
 | px_kvdb_getendpoints_requests_total | Total number of get endpoint requests from a node |
 | px_kvdb_defragment_requests_total | Total number of defragment requests from a node |
+| px_kvdb_watch_latency_seconds | Time taken in seconds between a kvdb put and a corresponding watch update |
 
 ## kvdb_health_state stats
 | Name | Description |
@@ -114,6 +115,22 @@ noicon: true
 | :--- | :--- |
 | px_node_stats_used_mem | Used memory in bytes |
 | px_node_stats_cpu_usage | Percent of CPU consumption |
+| px_node_stats_procfs_mem_available_bytes | Available memory in bytes |
+| px_node_stats_procfs_mem_dirty_bytes | The total amount of memory waiting to be written back to the disk |
+| px_node_stats_procfs_mem_writeback_bytes | The total amount of memory actively being written back to the disk |
+| px_node_stats_procfs_mem_total_bytes | Total amount of usable RAM which is physical RAM minus a number of reserved bits and the kernel binary code |
+| px_node_stats_procfs_mem_free_bytes | The amount of physical RAM, in bytes, left unused by the system. |
+| px_node_stats_procfs_mem_buffers_bytes | The amount, in bytes, of temporary storage for raw disk blocks |
+| px_node_stats_procfs_mem_cached_bytes | The amount of physical RAM, in bytes, used as cache memory |
+| px_node_stats_procfs_mem_active_anon_bytes | The amount of anonymous and tmpfs/shmem memory, in bytes, that is in active use, or was in active use since the last time the system moved something to swap |
+| px_node_stats_procfs_mem_inactive_anon_bytes | The amount of anonymous and tmpfs/shmem memory, in bytes, that is a candidate for eviction |
+| px_node_stats_procfs_mem_active_file_bytes | The amount of file cache memory, in bytes, that is in active use, or was in active use since the last time the system reclaimed memory |
+| px_node_stats_procfs_mem_inactive_file_bytes | The amount of file cache memory, in bytes, that is newly loaded from the disk, or is a candidate for reclaiming |
+| px_node_stats_procfs_mem_unevictable_bytes | The amount of memory, in bytes, discovered by the pageout code, that is not evictable because it is locked into memory by user programs |
+| px_node_stats_procfs_mem_mlocked_bytes | The total amount of memory, in bytes, that is not evictable because it is locked into memory by user programs |
+| px_node_stats_procfs_mem_anon_pages_bytes | The total amount of memory, in bytes, used by pages that are not backed by files and are mapped into userspace page tables |
+| px_node_stats_procfs_mem_mapped_bytes | The memory, in bytes, used for files that have been mmaped, such as libraries |
+| px_node_stats_procfs_mem_sh_mem_bytes | The total amount of memory, in bytes, used by shared memory (shmem) and tmpfs |
 
 ## node_status stats
 | Name | Description |
@@ -130,15 +147,17 @@ noicon: true
 ## pool_stats stats
 | Name | Description |
 | :--- | :--- |
-| px_pool_stats_pool_written_bytes | Bytes written since last interval for this pool. **Deprecated**, use pool_stats_written_bytes. |
-| px_pool_stats_pool_write_latency_seconds | Average time spent per write operation for this pool. **Deprecated**, use pool_stats_write_latency_seconds. |
-| px_pool_stats_pool_writethroughput | Average number of bytes written per second for this pool. **Deprecated**, use pool_stats_writethroughput. |
-| px_pool_stats_pool_flushed_bytes | Number of flushed bytes since last interval for this pool. **Deprecated**, use pool_stats_flushed_bytes. |
-| px_pool_stats_pool_num_flushes | Number of flush(sync) operations since last interval for this pool. **Deprecated**, use pool_stats_num_flushes. |
-| px_pool_stats_pool_flushms | Latency for flush for this pool. **Deprecated**, use pool_stats_flushms. |
-| px_pool_stats_pool_provisioned_bytes | Provisioned storage space in bytes for this pool. **Deprecated**, use pool_stats_provisioned_bytes. |
-| px_pool_stats_pool_status | Status of this Pool (0=Offline,1=Online). **Deprecated**, use pool_stats_status. |
+| px_pool_stats_pool_written_bytes | Bytes written since last interval for this pool. **Deprecated**. |
+| px_pool_stats_pool_write_latency_seconds | Average time spent per write operation for this pool. **Deprecated**. |
+| px_pool_stats_pool_writethroughput | Average number of bytes written per second for this pool. **Deprecated**. |
+| px_pool_stats_pool_flushed_bytes | Number of flushed bytes since last interval for this pool. **Deprecated**. |
+| px_pool_stats_pool_num_flushes | Number of flush(sync) operations since last interval for this pool. **Deprecated**. |
+| px_pool_stats_pool_flushms | Latency for flush for this pool. **Deprecated**. |
+| px_pool_stats_pool_provisioned_bytes | Provisioned storage space in bytes for this pool. **Deprecated**. |
+| px_pool_stats_pool_status | Status of this Pool (0=Offline,1=Online). **Deprecated**. |
 | px_pool_stats_written_bytes | Bytes written since last interval for this pool |
+| px_pool_stats_num_writes | Number of write operations in the last interval for this pool |
+| px_pool_stats_write_ms | Total time in millisecond spent in writing in the last interval for this pool |
 | px_pool_stats_write_latency_seconds | Average time spent per write operation for this pool |
 | px_pool_stats_writethroughput | Average number of bytes written per second for this pool |
 | px_pool_stats_flushed_bytes | Number of flushed bytes since last interval for this pool |
@@ -205,10 +224,10 @@ noicon: true
 | px_volume_replication_status | Replication Status for this volume (0 : up, 1 : not in quorum, 2 : resync state, 3 : degraded, 4 : detached, 5 : restore) |
 | px_volume_fs_usage_bytes | Used storage space in bytes as reported by the filesystem for this volume |
 | px_volume_fs_capacity_bytes | Total storage space in bytes as reported by the filesystem for this volume |
-| px_volume_vol_read_bytes | Number of successfully read bytes during this interval for this volume. **Deprecated**, use volume_read_bytes. |
-| px_volume_vol_written_bytes | Number of successfully written bytes during this interval for this volume. **Deprecated**, use volume_read_bytes. |
-| px_volume_vol_reads | Number of successfully completed read operations during this interval for this volume. **Deprecated**, use volume_read_bytes. |
-| px_volume_vol_writes | Number of successfully completed write operations during this interval for this volume. **Deprecated**, use volume_read_bytes. |
+| px_volume_vol_read_bytes | Number of successfully read bytes during this interval for this volume. **Deprecated**. |
+| px_volume_vol_written_bytes | Number of successfully written bytes during this interval for this volume. **Deprecated**. |
+| px_volume_vol_reads | Number of successfully completed read operations during this interval for this volume. **Deprecated**. |
+| px_volume_vol_writes | Number of successfully completed write operations during this interval for this volume. **Deprecated**. |
 | px_volume_read_bytes | Number of successfully read bytes during this interval for this volume |
 | px_volume_written_bytes | Number of successfully written bytes during this interval for this volume |
 | px_volume_reads | Number of successfully completed read operations during this interval for this volume |
@@ -218,16 +237,28 @@ noicon: true
 | px_volume_reads_total | Total number of successfully completed read operations for this volume |
 | px_volume_writes_total | Total number of successfully completed write operations for this volume |
 | px_volume_iops | Number of successful completed I/O operations per second during this interval for this volume |
+| px_volume_vol_num_sequential_writes | Number of sequential write I/O operations during this interval for this volume |
+| px_volume_vol_num_sequential_reads | Number of sequential read I/O operations during this interval for this volume |
+| px_volume_vol_num_random_writes | Number of random write I/O operations during this interval for this volume |
+| px_volume_vol_num_random_reads | Number of random read I/O operations during this interval for this volume |
 | px_volume_depth_io | Number of I/O operations currently in progress for this volume |
 | px_volume_readthroughput | Number of bytes read per second during this interval for this volume |
 | px_volume_writethroughput | Number of bytes written per second during this interval for this volume |
-| px_volume_vol_read_latency_seconds | Average time spent per successfully completed read operation in seconds during this interval for this volume. **Deprecated**, use volume_stats_read_latency_seconds. |
-| px_volume_vol_write_latency_seconds | Average time spent per successfully completed write operation in seconds during this interval for this volume. **Deprecated**, use volume_write_latency_seconds. |
+| px_volume_vol_read_latency_seconds | Average time spent per successfully completed read operation in seconds during this interval for this volume. **Deprecated**. |
+| px_volume_vol_write_latency_seconds | Average time spent per successfully completed write operation in seconds during this interval for this volume. **Deprecated**. |
 | px_volume_read_latency_seconds | Average time spent per successfully completed read operation in seconds for this volume |
 | px_volume_write_latency_seconds | Average time spent per successfully completed write operation in seconds for this volume |
 | px_volume_num_long_reads | Number of long reads for this volume |
 | px_volume_num_long_writes | Number of long writes for this volume |
 | px_volume_num_long_flushes | Number of long flushes for this volume |
+| px_volume_replica_read_bytes_total | Total number of successfully read bytes for this replica volume |
+| px_volume_replica_written_bytes_total | Total number of successfully written bytes for this replica volume |
+| px_volume_replica_reads_total | Total number of successfully completed read operations for this replica volume |
+| px_volume_replica_writes_total | Total number of successfully completed write operations for this replica volume |
+| px_volume_replica_flushes_total | Total number of successfully completed flush operations for this replica volume |
+| px_volume_replica_read_ms_total | Total time spent doing read operations in milliseconds for this replica volume |
+| px_volume_replica_write_ms_total | Total time doing write operations in milliseconds for this replica volume |
+| px_volume_replica_flush_ms_total | Total time doing write operations in milliseconds for this replica volume |
 | px_volume_dev_depth_io | Number of I/O operations currently in progress as reported by the kernel pxd device for this volume |
 | px_volume_dev_writethroughput | Number of successfully written bytes per second as reported by the kernel pxd device for this volume |
 | px_volume_dev_readthroughput | Number of successfully read bytes per second as reported by the kernel pxd device for this volume |

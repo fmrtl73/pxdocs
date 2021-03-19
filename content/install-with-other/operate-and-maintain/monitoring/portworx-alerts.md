@@ -24,30 +24,6 @@ Each alert has a severity from one of the following levels:
 
 | Name | ResourceType | Severity | Description | Metric |
 | :--- | :--- | :--- | :--- | :--- |
-| VolGroupOperationFailure | CLUSTER | ALARM | Triggered when a volume group operation fails. | px_alerts_volgroupoperationfailure_total |
-| VolGroupOperationSuccess | CLUSTER | NOTIFY | Triggered when a volume group operation succeeds. | px_alerts_volgroupoperationsuccess_total |
-| VolGroupStateChange | CLUSTER | WARNING | Triggered when a volume group’s state changes. | px_alerts_volgroupstatechange_total |
-| ContainerOperationFailure | CLUSTER | ALARM | Container operation failed | px_alerts_containeroperationfailure_total |
-| ContainerOperationSuccess | CLUSTER | ALARM | Container operation succeeded | px_alerts_containeroperationsuccess_total |
-| ContainerStateChange | CLUSTER | ALARM | Container state changed | px_alerts_containerstatechange_total |
-| LicenseExpiring | CLUSTER | WARNING | Warning triggers 7 days before the installed Portworx Enterprise or Trial license will expire (e.g. “PX-Enterprise license will expire in 6 days, 12:00”). It will also keep triggering after the license has expired (e.g. “Trial license expired 4 days, 06:22 ago”). | px_alerts_licenseexpiring_total |
-| ClusterPairSuccess | CLUSTER | NOTIFY | Triggered when a cluster pair operation succeeds. | px_alerts_clusterpairsuccess_total |
-| ClusterPairFailure | CLUSTER | ALARM | Triggered when a cluster pair operation fails. | px_alerts_clusterpairfailure_total |
-| ClusterDomainAdded | CLUSTER | NOTIFY | Triggered when a cluster domain is added. | px_alerts_clusterdomainadded_total |
-| ClusterDomainRemoved | CLUSTER | NOTIFY | Triggered when a cluster domain is removed. | px_alerts_clusterdomainremoved_total |
-| ClusterDomainActivated | CLUSTER | NOTIFY | Triggered when a cluster domain is activated. | px_alerts_clusterdomainactivated_total |
-| ClusterDomainDeactivated | CLUSTER | NOTIFY | Triggered when a cluster domain is deactivated. | px_alerts_clusterdomaindeactivated_total |
-| MeteringAgentWarning | CLUSTER | WARNING | Triggered when the metering agent encounters a non-critical problem. | px_alerts_meteringagentwarning_total |
-| MeteringAgentCritical | CLUSTER | ALARM | Triggered when the metering agent encounters a critical problem. | px_alerts_meteringagentcritical_total |
-| ClusterLicenseUpdated | CLUSTER | NOTIFY | Triggered when a license is updated for a cluster. | px_alerts_clusterlicenseupdated_total |
-| LicenseExpired | CLUSTER | ALARM | Triggered when the cluster license expires. | px_alerts_licenseexpired_total |
-| LicenseLeaseExpiring | CLUSTER | WARNING | Triggered when the license lease is about to expire since the last lease refresh failed. | px_alerts_licenseleaseexpiring_total |
-| LicenseLeaseExpired | CLUSTER | ALARM | Triggered when the license lease has expired since the last lease refresh failed. | px_alerts_licenseleaseexpired_total |
-| RebalanceJobFinished | CLUSTER | ALARM | Rebalance job finished execution | px_alerts_rebalancejobfinished_total |
-| RebalanceJobStarted | CLUSTER | ALARM | Rebalance job started execution | px_alerts_rebalancejobstarted_total |
-| RebalanceJobPaused | CLUSTER | ALARM | Rebalance job paused execution | px_alerts_rebalancejobpaused_total |
-| RebalanceJobCancelled | CLUSTER | ALARM | Rebalance job cancelled | px_alerts_rebalancejobcancelled_total |
-| LicenseNodesOverAllocated | CLUSTER | ALARM | Too many nodes in cluster | px_alerts_licensenodesoverallocated_total |
 | NodeStartFailure | NODE | ALARM | Triggered when a node in the Portworx cluster fails to start. | px_alerts_nodestartfailure_total |
 | NodeStartSuccess | NODE | NOTIFY | Triggered when a node in the Portworx cluster successfully initializes. | px_alerts_nodestartsuccess_total |
 | NodeStateChange | NODE | ALARM | Node state changed (i.e. it went down, came online etc.) | px_alerts_nodestatechange_total |
@@ -166,3 +142,31 @@ Each alert has a severity from one of the following levels:
 | VolumeResizeSuccessful | VOLUME | NOTIFY | Volume resize operation successful | px_alerts_volumeresizesuccessful_total |
 | VolumeResizeDeferred | VOLUME | NOTIFY | Volume resize operation deferred to next mount | px_alerts_volumeresizedeferred_total |
 | VolumeResizeFailed | VOLUME | ALARM | Volume resize operation failed | px_alerts_volumeresizefailed_total |
+| VolumeAttachFailure | VOLUME | ALARM | Triggered when a volume cannot be attached to the requested node. | px_alerts_volumeattachfailure_total |
+| VolumeDetachFailure | VOLUME | ALARM | Triggered when a volume cannot be detached from a node. | px_alerts_volumedetachfailure_total |
+| VolumeRemoteDetach | VOLUME | NOTIFY | Triggered when a volume is detached from a remote node to allow attaching. | px_alerts_volumeremotedetach_total |
+| VolumeCreateWarning | VOLUME | WARNING | Triggered when a volume creation encounters a non-critical problem. | px_alerts_volumecreatewarning_total |
+| CloudMigrationCanceled | VOLUME | NOTIFY | Triggered when a cloud migration operation is canceled. | px_alerts_cloudmigrationcanceled_total |
+| VolGroupOperationFailure | CLUSTER | ALARM | Triggered when a volume group operation fails. | px_alerts_volgroupoperationfailure_total |
+| VolGroupOperationSuccess | CLUSTER | NOTIFY | Triggered when a volume group operation succeeds. | px_alerts_volgroupoperationsuccess_total |
+| VolGroupStateChange | CLUSTER | WARNING | Triggered when a volume group’s state changes. | px_alerts_volgroupstatechange_total |
+| ContainerOperationFailure | CLUSTER | ALARM | Container operation failed | px_alerts_containeroperationfailure_total |
+| ContainerOperationSuccess | CLUSTER | ALARM | Container operation succeeded | px_alerts_containeroperationsuccess_total |
+| ContainerStateChange | CLUSTER | ALARM | Container state changed | px_alerts_containerstatechange_total |
+| LicenseExpiring | CLUSTER | WARNING | Warning triggers 7 days before the installed Portworx Enterprise or Trial license will expire (e.g. “PX-Enterprise license will expire in 6 days, 12:00”). It will also keep triggering after the license has expired (e.g. “Trial license expired 4 days, 06:22 ago”). | px_alerts_licenseexpiring_total |
+| ClusterPairSuccess | CLUSTER | NOTIFY | Triggered when a cluster pair operation succeeds. | px_alerts_clusterpairsuccess_total |
+| ClusterPairFailure | CLUSTER | ALARM | Triggered when a cluster pair operation fails. | px_alerts_clusterpairfailure_total |
+| ClusterDomainAdded | CLUSTER | NOTIFY | Triggered when a cluster domain is added. | px_alerts_clusterdomainadded_total |
+| ClusterDomainRemoved | CLUSTER | NOTIFY | Triggered when a cluster domain is removed. | px_alerts_clusterdomainremoved_total |
+| ClusterDomainActivated | CLUSTER | NOTIFY | Triggered when a cluster domain is activated. | px_alerts_clusterdomainactivated_total |
+| ClusterDomainDeactivated | CLUSTER | NOTIFY | Triggered when a cluster domain is deactivated. | px_alerts_clusterdomaindeactivated_total |
+| MeteringAgentWarning | CLUSTER | WARNING | Triggered when the metering agent encounters a non-critical problem. | px_alerts_meteringagentwarning_total |
+| MeteringAgentCritical | CLUSTER | ALARM | Triggered when the metering agent encounters a critical problem. | px_alerts_meteringagentcritical_total |
+| ClusterLicenseUpdated | CLUSTER | NOTIFY | Triggered when a license is updated for a cluster. | px_alerts_clusterlicenseupdated_total |
+| LicenseExpired | CLUSTER | ALARM | Triggered when the cluster license expires. | px_alerts_licenseexpired_total |
+| LicenseLeaseExpiring | CLUSTER | WARNING | Triggered when the license lease is about to expire since the last lease refresh failed. | px_alerts_licenseleaseexpiring_total |
+| LicenseLeaseExpired | CLUSTER | ALARM | Triggered when the license lease has expired since the last lease refresh failed. | px_alerts_licenseleaseexpired_total |
+| RebalanceJobFinished | CLUSTER | ALARM | Rebalance job finished execution | px_alerts_rebalancejobfinished_total |
+| RebalanceJobStarted | CLUSTER | ALARM | Rebalance job started execution | px_alerts_rebalancejobstarted_total |
+| RebalanceJobPaused | CLUSTER | ALARM | Rebalance job paused execution | px_alerts_rebalancejobpaused_total |
+| RebalanceJobCancelled | CLUSTER | ALARM | Rebalance job cancelled | px_alerts_rebalancejobcancelled_total |
