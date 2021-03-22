@@ -27,12 +27,12 @@ As of Portworx 1.4, {{<companyName>}} recommends using the `-j auto` option.  Th
 
 If you are upgrading to 1.3 and want to add a journal device to an existing node, follow [these instructions](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/add-journal-dev).
 
-## Volume granular performance tuning
+## Tune volume performance with pxctl
 
-Portworx optimizes performance for specific application access patterns. These can be set by specifying an `io_profile` while creating the volume. For example:
+Portworx optimizes performance for specific application access patterns using IO profiles. You can set these IO profiles by providing the `io_profile` option while creating the volume. For example:
 
 ```text
-pxctl volume create --size=10 --repl=3 --io_profile=sequential demovolume
+pxctl volume create --size=10 --repl=3 --io_profile=db_remote demovolume
 ```
 
 or
@@ -41,34 +41,4 @@ or
 docker volume create -d pxd io_priority=high,size=10G,repl=3,io_profile=random,name=demovolume
 ```
 
-### The sequential profile
-
-This optimizes the read ahead algorithm for sequential access.  Use `io_profile=sequential`.
-
-### The random profile
-
-This records the IO pattern of recent access and optimizes the read ahead and data layout algorithms for short term random patterns.  Use `io_profile=random`.
-
-### CMS
-This is useful for content management systems, like WordPress.  This option applies to a Portworx shared (global namespace) volume.  It implements an attribute cache and supports async writes.  This increases the Portworx memory footprint by 100MB.  Use `io_profile=cms`.
-
-### The db_remote profile
-
-This implements a write-back flush coalescing algorithm.  This algorithm attempts to coalesce multiple `syncs` that occur within a 50ms window into a single sync. Coalesced syncs are acknowledged only after copying to all replicas. In order to do this, the algorithm requires a minimum replication (HA factor) of 2. This mode assumes all replicas do not fail (kernel panic or power loss) simultaneously in a 50 ms window. Use `io_profile=db_remote`.
-
-{{<info>}}
-If there are not enough nodes online, Portworx will automatically disable this algorithm.
-{{</info>}}
-
-### The sync_shared profile
-
-Use this profile to set up the mount settings of your `sharedV4` volumes. This profile sets the following options:
-
-* `sync`
-
-    This option synchronizes all the write operations with your backend storage. If you specify this option, the server and the clients will be able to access modified data immediately.
-
-* `noac`
-
-    This option disables the caching for the file system and metadata (file and directory attributes) on the client-side.
-
+For more information about IO profiles, see the [IO profiles](/concepts/io-profiles) section of the documentation. 
