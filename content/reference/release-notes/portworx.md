@@ -44,6 +44,14 @@ The following issues have been fixed:
 
 * Portworx 2.7.0 is not currently supported on Fedora 33 
 
+### Known issues (Errata)
+
+Portworx is aware of the following issues, check future release notes for fixes on these issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-19022 | Attaching/Mounting a volume on the same host where it was attached internally for background work (such as cloudsnaps) fails to create the virtual kernel device. <br/><br/>**User impact:** The pod may fail to mount the volume and may not start. <br/><br/>**Recommendation:** Detach and re-attach the volume to fix this issue. |
+
 ## 2.6.5
 
 March 6, 2021
