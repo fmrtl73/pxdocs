@@ -10,6 +10,10 @@ series: release-notes
 
 March 23, 2021
 
+### New features
+
+* Announcing the [`auto` IO profile](/concepts/io-profiles#the-auto-profile), which applies an IO profile to optimize volume performance based on the workload data patterns it sees.
+
 ### Improvements
 
 Portworx has upgraded or enhanced functionality in the following areas:
