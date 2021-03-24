@@ -6,6 +6,44 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.7.0
+
+March 23, 2021
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-16376 |	Multiple KVDBs will now run within the same failure domain if there aren't enough failure domains available to place each KVDB on its own.|
+| PWX-11345	| Introducing a new Prometheus metric to track latencies Portworx sees from the KVDB. This metric tracks the total time it takes for a KVDB put operation to result in a corresponding watch update from the KVDB.  |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-18789	| Expanding a pool using the `lazyzeroedthick` disk type in vSphere failed with the error: "found no candidates which have current drive type: lazyzeroedthick". <br/><br/>**User impact:** If a user expanded a pool using the `lazyzeroedthick` disk type in vSphere, it failed with a message like: "could not find a suitable storage distribution candidate due to: found no candidates which have current drive type: lazyzeroedthick". <br/><br/>**Resolution:** This happened because a section for the `lazyzeroedthick` disk type was missing in the storage decision matrix config map that ships with Portworx; this has now been added. |
+| PWX-17578	| Updating volumes with `pxctl` commands sometimes reset other values that were previously set by a spec. <br/><br/>**User impact:** If users updated the `queue-depth` value using the `pxctl volume update --queue-depth` command, the `directIO` value for that volume was reset.<br/><br/>**Resolution:** Portworx no longer resets volume-specific fields when other fields are updated using `pxctl` commands. |
+| PWX-18724 |	When using the runtime option `rt_opts_conf_high` under heavy load, the Portworx storage process sometimes ran out of internal resources and had to restart due to an assertion failure. <br/><br/>**User impact:** Upon restart, the Portworx process  may have gotten stuck in a restart loop, resulting application downtime. <br/><br/>**Resolution:** The resources are now sized correctly when the `rt_opts_conf_high` runtime option is in use. | 
+| PWX-18632 |Portworx displayed expiration dates for permanent licenses.<br/><br/>**User impact:** Users saw a distinct expiration date for their permanent licenses. Despite this reporting error, permanent licenses would not actually expire. <br/><br/>**Resolution:** Portworx now correctly reports permanent licenses as never expiring. |
+| PWX-18513	| If a volume with an io_profile set to `db_remote` and replication level of `1`  was backed-up using a cloudsnap, attempting to restore that cloudsnap would fail through Stork or in PX-Backup. <br/><br/>**User impact:** Users attempting to restore this kind of cloudsnap without providing an additional parameter to force the replication level to 2 encountered an error.<br/><br/>**Resolution:** The cloudsnap restore operation now resets the io_profile to `sequential` if it finds a volume with  a replication level of `1` and io_profile set to `db_remote`. |
+| PWX-18388	| Pool expand operations using the `resize-disk` method failed on vSphere cloud drive setups. <br/><br/>**User impact:** Users with storage pools powered by vShpere cloud drives could not expand them using the `resize-disk` method.<br/><br/>**Resolution:** The `resize-disk` method failed because the `rescan-scsi-bus.sh` script was missing from the Portworx container. This script has been replaced, and users can once again expand vSphere cloud drive storage pools using `resize-disk`. |
+| PWX-18365	| Portworx overrode the cluster option for optimized restores if a different runtime option for optimized restores was provided. <br/><br/>**User impact:** Because Portworx prefers cluster options over runtime options as a standard, users may have been confused when this runtime option behaved differently.<br/><br/>**Resolution:** Portworx no longer honors runtime options for optimized restores; you must use [cluster options](/reference/cli/cluster/#enabling-optimized-restores) to enable optimized restores.|
+| PWX-18210	| The `px/service` node-label is used to control the state of the Portworx service. However, the `px/service=remove` label did not properly remove Portworx.<br/><br/>**User impact:** When users attempted to remove a node, Portworx became stuck in an uninstall loop on that node.<br/><br/>**Resolution:** The `px/service=remove` label now behaves as it previously did, and now uninstalls Portworx on the node as expected. |
+| PWX-17282 |	Previously, every Portworx deployment using the Operator included Stork, regardless of whether or not you enabled the Stork component on the [spec generator](https://central.portworx.com/). <br/><br/>**User impact:** Users' deployments always included Stork, even if they did not want to enable it. <br/><br/>**Resolution:** The spec generator now correctly excludes Stork if you don't enable it. |
+| PWX-19118 | A resize operation performed while a storage node was in the `StorageDown` state caused the `px-storage` process to restart if the node had replica for the volume being resized. <br/><br/>**User impact:** Users experienced no interruptions, but may have seen Portworx restart. <br/><br/>**Resolution:** the `px-storage` process no longer restarts under these circumstances. |
+| PWX-19055 | Portworx clusters did not auto-recover when running on vSphere cloud drives in local mode. <br/><br/>**User Impact:** When users installed Portworx using vSphere cloud drives on local, non-shared datastores and used an internal KVDB, Portworx did not automatically recover if a storage node went down. <br/><br/>**Resolution:** Portworx will no longer incorrectly mark its internal KVDB drives as storage drives, allowing the internal KVDB to recover as expected. |
+| PWX-17217 | Portworx failed to exit maintenance mode after a drive add operation was shown as `done`. <br/><br/>**User impact:**  Portworx stays in maintenance mode and users cannot exit it. <br/><br/>**Resolution:** Portworx now properly exits maintenance mode after a drive add operation. |
+| PWX-19060 | When Portworx was configured to use email <!-- for what? -->, an entry was printed to the log that contained hashed email credentials. <br/><br/>**User impact:** Hashed, potentially sensitive information may have been written to the logs. <br/><br/>**Resolution:** Portworx no longer prints this hashed information into the log. |
+| PWX-19028 | Portworx sometimes hung when evaluating multipart licenses where one of the licenses had expired. <br/><br/>**User impact:** Users saw Portworx hang and had to reset the Portworx node. <br/><br/>**Resolution:** Portworx no longer hangs in this scenario.|
+
+### Notes
+
+* Portworx 2.7.0 is not currently supported on Fedora 33 
+
 ## 2.6.5
 
 March 6, 2021
@@ -40,7 +78,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
-| PWX-18594 | Storage pools with an auto journal partition can now be expanded with a drive resize operation. Use `pxctl service pool expand -o resize-disk` for this operation. |
+| PWX-18549 | Storage pools with an auto journal partition can now be expanded with a drive resize operation. Use `pxctl service pool expand -o resize-disk` for this operation. |
 
 ### Fixes
 
