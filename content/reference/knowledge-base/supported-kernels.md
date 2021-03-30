@@ -73,6 +73,8 @@ apt install linux-headers-$(uname -r)
 | RHEL 7.8	| Up to 3.10.0-1127.el7.x86_64 |
 | RHEL 8.2	| 4.18.0-240.10.1.el8_3.x86_64 |
 | Debian 9	| Up to 4.9.0-12-amd64 |
+| FlatCar Stable | 5.4.77-flatcar |
+| FlatCar Beta | 5.8.18-flatcar |
 
 | **Cloud Distro** | **Kernel Version** |
 | --- | --- |
