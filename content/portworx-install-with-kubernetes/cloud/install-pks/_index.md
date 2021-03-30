@@ -100,7 +100,7 @@ etcd.key:  414  bytes
 
 ## Step 3: Installing Portworx
 
-Portworx supports [PKS](https://pivotal.io/platform/pivotal-container-service) (Pivotal Container Service) on various platforms.
+Portworx supports PKS (Pivotal Container Service) on various platforms.
 
 If running on **AWS**, continue at [Portworx install with AWS Auto Scaling Groups](/portworx-install-with-kubernetes/cloud/aws/aws-asg).
 
