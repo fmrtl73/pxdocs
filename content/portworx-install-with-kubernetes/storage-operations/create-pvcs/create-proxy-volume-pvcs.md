@@ -24,7 +24,7 @@ You can access a full NFS share in Portworx as a proxy volume. Application using
 
   * **parameters.proxy_endpoint:** With the endpoint of the external NFS share Portworx is reflecting from.
     {{<info>}}
-**NOTE:** The <!-- optional? --> `nfs:` prefix instructs Portworx to use the NFS protocol for reflecting an external datasource.
+**NOTE:** The <!-- optional? --> `nfs://` prefix instructs Portworx to use the NFS protocol for reflecting an external datasource.
     {{</info>}}
   * **parameters.proxy_nfs_exportpath:** With the export path on the NFS server.
 
@@ -35,7 +35,7 @@ You can access a full NFS share in Portworx as a proxy volume. Application using
       name: portworx-proxy-volume-volume
     provisioner: kubernetes.io/portworx-volume
     parameters:
-      proxy_endpoint: "nfs:<nfs-share-endpoint>"
+      proxy_endpoint: "nfs://<nfs-share-endpoint>"
       proxy_nfs_exportpath: "/<mount-path>"
     allowVolumeExpansion: true
     ```
@@ -118,7 +118,7 @@ You can associate a sub-path of an NFS share with Portworx as a proxy volume. Un
 
   * **parameters.proxy_endpoint:** With the endpoint of the external NFS share Portworx is reflecting from.
     {{<info>}}
-**NOTE:** The <!-- optional? --> `nfs:` prefix instructs Portworx to use the NFS protocol for reflecting an external datasource.
+**NOTE:** The <!-- optional? --> `nfs://` prefix instructs Portworx to use the NFS protocol for reflecting an external datasource.
     {{</info>}}
   * **parameters.proxy_endpoint:** With the export path on the NFS server.
 
@@ -129,7 +129,7 @@ You can associate a sub-path of an NFS share with Portworx as a proxy volume. Un
       name: portworx-proxy-volume-volume
     provisioner: kubernetes.io/portworx-volume
     parameters:
-      proxy_endpoint: "nfs:<nfs-share-endpoint>"
+      proxy_endpoint: "nfs://<nfs-share-endpoint>"
       proxy_nfs_exportpath: "/<mount-path>"
     allowVolumeExpansion: true
     ```
@@ -214,4 +214,3 @@ You can associate a sub-path of an NFS share with Portworx as a proxy volume. Un
     ```text
     kubectl create -f <pod-name>.yaml
     ```
-
