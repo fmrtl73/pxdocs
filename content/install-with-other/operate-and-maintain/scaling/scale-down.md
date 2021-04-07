@@ -4,11 +4,14 @@ keywords: scale down, scaling
 description: Find out how to remove an offline node from a cluster with this document from Portworx. Discover how to scale-down nodes today!
 ---
 
+<!--
+
+TODO: I'm commenting this out for now. We should probably revisit it as part of the reorg.
 
 {{<info>}}
 This document presents the **non-Kubernetes** method of removing a node. Please refer to the [Decommission a Node ](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/) page if you are running Portworx on Kubernetes.
 {{</info>}}
-
+-->
 
 ## Removing offline Nodes
 
