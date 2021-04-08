@@ -52,7 +52,7 @@ cd acs-engine
 * install Azure CLI:
 
 ```text
-curl -L https://aka.ms/InstallAzureCli | bash
+curl -L "https://aka.ms/InstallAzureCli" | bash
 ```
 
 ### Login to Azure and Set Subscription
@@ -143,7 +143,7 @@ where `your-private.key` is the private key that corresponds to `keyData` in the
 
 Once the DCOS GUI is accessible, then install the DCOS CLI on your local machine
 
-### Install Portworx 
+### Install Portworx
 
 Use the [Run Portworx with Mesosphere DC/OS](/install-with-other/dcos/install) for
 installing the Portworx Frameworks on DCOS.

@@ -171,7 +171,7 @@ fluentd would collect logs from the `path /var/log/containers` and push them to 
 A view of Elastic search indices for cluster level logs collected for all the pods.
 
 ```text
-curl -XGET 'http://10.108.118.191:9200/_cat/indices?v&pretty'
+curl -XGET "http://10.108.118.191:9200/_cat/indices?v&pretty"
 ```
 
 ```output

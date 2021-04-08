@@ -50,7 +50,7 @@ series: support
     ```
   * This can be useful to understand why a particular pod is stuck in creating or terminating state on a node.
 
-### Collecting Portworx logs 
+### Collecting Portworx logs
 
 Please run the following commands on any one of the nodes running Portworx:
 
@@ -77,7 +77,7 @@ We are always available on Slack. Join us! [![Slack](/img/slack.png)](https://po
 
 * Px container will fail to come up if it cannot reach etcd. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
   * The etcd location specified when creating the Portworx cluster needs to be reachable from all nodes.
-  * Run `curl <etcd_location>/version` from each node to ensure reachability. For e.g `curl http://192.168.33.10:2379/version`
+  * Run `curl <etcd_location>/version` from each node to ensure reachability. For e.g `curl "http://192.168.33.10:2379/version"`
 * If you deployed etcd as a Kubernetes service, use the ClusterIP instead of the kube-dns name. Portworx nodes cannot resolve kube-dns entries since px containers are in the host network.
 
 ### Internal Kvdb

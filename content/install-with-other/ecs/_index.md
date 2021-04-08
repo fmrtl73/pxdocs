@@ -70,7 +70,7 @@ This section explains how to provision storage for these EC2 instances by creati
 Note that there is no need to format the EBS volumes once they are created and attached to the EC2 instance. Portworx will pick up the available unformatted drives (if you use the -a option as show below in the next step) or you can point to the appropriate block device for the Portworx to pick up by using the -s option when you launch Portworx with the docker run command.
 
 
-### Step 2: Deploy Portworx 
+### Step 2: Deploy Portworx
 
 Install Portworx on each ECS instance. Portworx will use the EBS volumes you provisioned in step 4.
 
@@ -88,7 +88,7 @@ bundle.  This bundle can be installed by running the following Docker container
 on your host system:
 
 ```text
-latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false&aut=false' | awk '/image: / {print $2}')
+latest_stable=$(curl -fsSL "https://install.portworx.com?type=dock&stork=false&aut=false" | awk '/image: / {print $2}')
 # Download OCI bits (reminder, you will still need to run `px-runc install ..` after this step)
 sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
@@ -112,7 +112,7 @@ sudo /opt/pwx/bin/px-runc install -sysd /dev/null -c MY_CLUSTER_ID \
 Since the Amazon ECS systems do not have the `systemd` service available, we will need to start Portworx service via the custom init-script:
 
 ```text
-sudo curl https://docs.portworx.com/samples/ecs/portworx-sysvinit.sh -o /etc/rc.d/init.d/portworx
+sudo curl "https://docs.portworx.com/samples/ecs/portworx-sysvinit.sh" -o /etc/rc.d/init.d/portworx
 sudo chmod 755 /etc/rc.d/init.d/portworx
 sudo chkconfig --add portworx
 sudo service portworx start
@@ -145,7 +145,7 @@ From your linux workstation download and setup AWS ECS CLI utilities
   1. Download and install ECS CLI ([detail instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html))
 
     ```text
-    sudo curl -o /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+    sudo curl -o /usr/local/bin/ecs-cli "https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest"
     sudo chmod +x /usr/local/bin/ecs-cli
     ```
 

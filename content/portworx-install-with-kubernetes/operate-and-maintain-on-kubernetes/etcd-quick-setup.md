@@ -22,7 +22,7 @@ Following are the requirements from the three nodes that form the etcd cluster:
 Get the etcd tar ball from CoreOS official site.
 
 ```text
-$ ETCD_VER=v3.2.7 && curl -L https://storage.googleapis.com/etcd/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz -o /tmp/etcd.tar.gz
+$ ETCD_VER=v3.2.7 && curl -L "https://storage.googleapis.com/etcd/${ETCD_VER}/etcd-${ETCD_VER}-linux-amd64.tar.gz" -o /tmp/etcd.tar.gz
 ```
 
 You can replace the __ETCD_VER__ with the etcd version you wish to install

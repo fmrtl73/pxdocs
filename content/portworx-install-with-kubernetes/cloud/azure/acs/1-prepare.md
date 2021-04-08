@@ -12,7 +12,7 @@ weight: 2
 The ACS Engine binary files are located [here](https://github.com/Azure/acs-engine/releases). To install the ACS Engine on Linux, run this command:
 
 ```text
-curl -L https://aka.ms/InstallAzureCli | bash
+curl -L "https://aka.ms/InstallAzureCli" | bash
 ```
 
 ### Install the Azure CLI

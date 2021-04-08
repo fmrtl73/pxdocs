@@ -21,7 +21,7 @@ If you installed Portworx using the DaemonSet method, you can follow the steps i
 
 You can use the following command to wipe your entire Portworx cluster:
 ```text
-curl -fsL https://install.portworx.com/px-wipe | bash
+curl -fsL "https://install.portworx.com/px-wipe" | bash
 ```
 
 Above command will run a Kubernetes Job that will perform following operations:

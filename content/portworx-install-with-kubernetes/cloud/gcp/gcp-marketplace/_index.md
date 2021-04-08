@@ -127,7 +127,7 @@ You can remove the old version of the application once all the components in the
 You can uninstall Portworx from your GKE cluster by running the following command:
 
 ```text
-curl -fsL https://install.portworx.com/px-wipe | bash
+curl -fsL "https://install.portworx.com/px-wipe" | bash
 ```
 
 This will remove all Portworx specific state from the nodes and clean all the disks used by Portworx_

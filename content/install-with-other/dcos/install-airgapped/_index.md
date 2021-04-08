@@ -61,7 +61,7 @@ On each agent node you will need to download the certificate from the newly depl
 To do this, run the following command on each agent node, including public agents.
 ```text
 sudo mkdir -p /etc/docker/certs.d/master.mesos:5001
-sudo curl -o /etc/docker/certs.d/master.mesos:5001/ca.crt http://master.mesos:8083/certs/domain.crt
+sudo curl -o /etc/docker/certs.d/master.mesos:5001/ca.crt "http://master.mesos:8083/certs/domain.crt"
 sudo systemctl restart docker
 ```
 ```text

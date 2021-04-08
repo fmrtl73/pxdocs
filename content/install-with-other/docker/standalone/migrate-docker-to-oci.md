@@ -10,7 +10,7 @@ If you already had Portworx running as a Docker container and now want to upgrad
 ### Step 1: Download and deploy the Portworx OCI bundle
 
 ```text
-latest_stable=$(curl -fsSL 'https://install.portworx.com?type=dock&stork=false' | awk '/image: / {print $2}')
+latest_stable=$(curl -fsSL "https://install.portworx.com?type=dock&stork=false" | awk '/image: / {print $2}')
 
 sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \

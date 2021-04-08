@@ -141,7 +141,7 @@ Create a Kubnernetes secret, save the name and namespace in which it's located f
 2. Once you've generated the script, paste it into the command line of the Kubernetes master node in which you want to install PX-Backup and run it:
 
     ```text
-    bash <(curl -s https://raw.githubusercontent.com/portworx/px-central-onprem/<version>/install.sh) --px-store --px-backup --admin-password 'examplePassword' --oidc --pxcentral-namespace portworx --px-license-server --license-password 'examplePassword' --px-backup-organization backup --cluster-name px-central --admin-email admin@portworx.com --admin-user admin
+    bash <(curl -s "https://raw.githubusercontent.com/portworx/px-central-onprem/<version>/install.sh") --px-store --px-backup --admin-password 'examplePassword' --oidc --pxcentral-namespace portworx --px-license-server --license-password 'examplePassword' --px-backup-organization backup --cluster-name px-central --admin-email admin@portworx.com --admin-user admin
     ```
 
     {{<info>}}

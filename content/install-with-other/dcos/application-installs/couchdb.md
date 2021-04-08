@@ -123,7 +123,7 @@ dcos node ssh --master-proxy --leader
 From the DCOS master node, run the CouchDB REST API to any of the nodes on port `5984`. The default credentials are `admin:password` for accessing the REST APIs. A json output of the members in the CouchDB cluster from one of the nodes is shown below.
 
 ```text
-curl -s http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/_membership | python -m json.tool
+curl -s "http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/_membership" | python -m json.tool
 ```
 
 ```output
@@ -144,7 +144,7 @@ curl -s http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thi
 To verify the CouchDB cluster we try to create a new database `testdb` and add a simple document to it.
 
 ```text
-curl -s -X PUT http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/testdb -d {} | python -m json.tool
+curl -s -X PUT "http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/testdb" -d {} | python -m json.tool
 ```
 
 ```output
@@ -154,7 +154,7 @@ curl -s -X PUT http://admin:password@couchdb-0-install.portworx-couchdb.autoip.d
 ```
 
 ```text
-curl -s -X PUT http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/testdb/001 -d '{"name":"Alice"}' | python -m json.tool
+curl -s -X PUT "http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/testdb/001" -d '{"name":"Alice"}' | python -m json.tool
 ```
 
 ```output
@@ -168,7 +168,7 @@ curl -s -X PUT http://admin:password@couchdb-0-install.portworx-couchdb.autoip.d
 Verify the inserted document
 
 ```text
-curl -s http://admin:password@couchdb-1-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/testdb/001 | python -m json.tool
+curl -s "http://admin:password@couchdb-1-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/testdb/001" | python -m json.tool
 ```
 
 ```output

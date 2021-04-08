@@ -151,7 +151,7 @@ dcos node ssh --master-proxy --leader
 From the DCOS master node, run the Elasticsearch REST API to the coordinator address at port 9200. The default credential is `elastic:changeme` for the coordinator. A json output from coordinator node is shown below by accessing the coordinator port `9200`.
 
 ```text
-curl -s -u elastic:changeme http://coordinator.portworx-elastic.l4lb.thisdcos.directory:9200
+curl -s -u elastic:changeme "http://coordinator.portworx-elastic.l4lb.thisdcos.directory:9200"
 ```
 
 ```output
@@ -173,7 +173,7 @@ curl -s -u elastic:changeme http://coordinator.portworx-elastic.l4lb.thisdcos.di
 Loading sample data in REST API from DCOS master node. Below showing an example of inserting a json document.
 
 ```text
- curl -s -u elastic:changeme -XPUT 'coordinator.portworx-elastic.l4lb.thisdcos.directory:9200/books/book/2' -d '
+ curl -s -u elastic:changeme -XPUT "coordinator.portworx-elastic.l4lb.thisdcos.directory:9200/books/book/2" -d '
    {
      "title": "test book 1",
      "author": "bok hun",
@@ -186,7 +186,7 @@ Loading sample data in REST API from DCOS master node. Below showing an example 
 Verify the inserted document
 
 ```text
- curl -s -u elastic:changeme -XGET 'coordinator.portworx-elastic.l4lb.thisdcos.directory:9200/books/book/2?pretty'
+ curl -s -u elastic:changeme -XGET "coordinator.portworx-elastic.l4lb.thisdcos.directory:9200/books/book/2?pretty"
 ```
 
 ```output
@@ -209,7 +209,7 @@ Verify the inserted document
 Repeat inserting 4 more sample documents, then issue a search query to look for string “java” in the entered document.
 
 ```text
- curl -s -u elastic:changeme -XPOST 'coordinator.portworx-elastic.l4lb.thisdcos.directory:9200/books/book/_search' '
+ curl -s -u elastic:changeme -XPOST "coordinator.portworx-elastic.l4lb.thisdcos.directory:9200/books/book/_search" '
   {
      "query" :
      {

@@ -62,7 +62,7 @@ The following variable definitions are required in the `vars.tf` file in the cor
 * 'ssh_fingerprint' :  The fingerprint of your SSH key, best obtained via `ssh-keygen -E md5  -lf ~/.ssh/id_rsa.pub`
 
 In addition for CoreOS, you will need to supply a *'discovery_url'* for the 'etcd' service,
-which can be best obtained from the output of `curl http://discovery.etcd.io/new?size=3`
+which can be best obtained from the output of `curl "http://discovery.etcd.io/new?size=3"`
 
 Make sure the SSH key variables correspond to a valid SSH key in your Digital Ocean profile
 in the Security settings for your account [https://cloud.digitalocean.com/settings/security](https://cloud.digitalocean.com/settings/security)

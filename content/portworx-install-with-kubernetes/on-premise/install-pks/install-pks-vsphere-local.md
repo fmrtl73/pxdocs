@@ -47,7 +47,7 @@ Below are the steps to wipe your entire Portworx installation on PKS.
 1. Run cluster-scoped wipe:
 
 ```text
-curl -fsL https://install.portworx.com/px-wipe | bash -s -- -T pks
+curl -fsL "https://install.portworx.com/px-wipe" | bash -s -- -T pks
 ```
 
 2. Go to each virtual machine and delete the additional vmdks Portworx created.

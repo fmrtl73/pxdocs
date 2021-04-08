@@ -45,7 +45,7 @@ Below are the steps to wipe your entire Portworx installation.
 1. Run cluster-scoped wipe command below. This has to be run from the client machine which has kubectl access.
 
     ```text
-    curl -fsL https://install.portworx.com/px-wipe | bash
+    curl -fsL "https://install.portworx.com/px-wipe" | bash
     ```
 2. Delete the helm release
 

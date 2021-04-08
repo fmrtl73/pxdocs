@@ -20,7 +20,7 @@ This guide describes the procedure to upgrade Portworx running as OCI container 
 To upgrade to the **{{% currentVersion %}}** release, run the following command:
 
 ```text
-curl -fsSL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s
+curl -fsSL "https://install.portworx.com/{{% currentVersion %}}/upgrade" | bash -s
 ```
 
 This runs a script that will start a Kubernetes Job to perform the following operations:
@@ -94,7 +94,7 @@ helm upgrade my-release --set imageVersion={{% currentVersion %}} -f ./helm/char
 You can invoke the upgrade script with the _-t_ to override the default Portworx image. For example below command upgrades Portworx to _portworx/oci-monitor:2.5.0_ image.
 
 ```text
-curl -fsSL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s -- -t 2.5.0
+curl -fsSL "https://install.portworx.com/{{% currentVersion %}}/upgrade" | bash -s -- -t 2.5.0
 ```
 
 ## Airgapped clusters
@@ -117,7 +117,7 @@ If you uploaded the container images to your local registry server, you must run
 
 ```text
 REGISTRY=myregistry.net:5443
-curl -fsL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s -- \
+curl -fsL "https://install.portworx.com/{{% currentVersion %}}/upgrade" | bash -s -- \
     -I $REGISTRY/portworx/talisman -i $REGISTRY/portworx/oci-monitor -t {{% currentVersion %}}
 ```
 
@@ -127,7 +127,7 @@ Fetch and run the upgrade script with the following `curl` command to override t
 
 
 ```text
-curl -fsL https://install.portworx.com/{{% currentVersion %}}/upgrade | bash -s -- -t {{% currentVersion %}}
+curl -fsL "https://install.portworx.com/{{% currentVersion %}}/upgrade" | bash -s -- -t {{% currentVersion %}}
 ```
 
 
