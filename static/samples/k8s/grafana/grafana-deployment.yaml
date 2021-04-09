@@ -4266,7 +4266,7 @@ data:
           "valueMaps": [
             {
               "op": "=",
-              "text": "High",
+              "text": "Low",
               "value": "1"
             },
             {
@@ -4276,7 +4276,7 @@ data:
             },
             {
               "op": "=",
-              "text": "Low",
+              "text": "High",
               "value": "3"
             }
           ],

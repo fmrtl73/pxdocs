@@ -667,7 +667,7 @@
       "valueMaps": [
         {
           "op": "=",
-          "text": "High",
+          "text": "Low",
           "value": "1"
         },
         {
@@ -677,7 +677,7 @@
         },
         {
           "op": "=",
-          "text": "Low",
+          "text": "High",
           "value": "3"
         }
       ],
