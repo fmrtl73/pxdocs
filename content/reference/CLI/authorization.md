@@ -77,7 +77,7 @@ You can create a new context by running the `pxctl context create` command and p
 
 - the name of the context
 - `--token` with the token Portworx must use for this context
-- `--endpoint` with the endpoint for this conext
+- `--endpoint` with the endpoint for this context
 
 Here's an example of how you can create a new context:
 
