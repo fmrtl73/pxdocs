@@ -64,7 +64,7 @@ Asynchronous DR also supports the following CRDs out-of-the-box:
 
 ## Add CRDs
 
-If Portworx doesn't have the CRD you need, you can register a new one. Refer to the [Application Registration](/portworx-install-with-kubernetes/storage-operations/stateful-applications/application-registration/) document for instructions on how to do this. 
+If Portworx doesn't have the CRD you need, you can register a new one. Refer to the [Application Registration](/portworx-install-with-kubernetes/storage-operations/stateful-applications/application-registration/) document for instructions on how to do this.
 
 ## Enable load balancing on cloud clusters
 
@@ -175,9 +175,53 @@ status:
   storageStatus: ""
 ```
 
-{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-schedule-policy.md" %}}
+## Schedule a migration
 
-### Scheduling a migration
+To schedule a migration, you must create a schedule policy.
+
+### Create a schedule policy
+
+1. Paste the following content into a file called `testpolicy.yaml`:
+
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: SchedulePolicy
+    metadata:
+      name: testpolicy
+      namespace: mysql
+    policy:
+      interval:
+        intervalMinutes: 1
+      daily:
+        time: "10:14PM"
+      weekly:
+        day: "Thursday"
+        time: "10:13PM"
+      monthly:
+        date: 14
+        time: "8:05PM"
+    ```
+
+    For details about how you can configure a schedule policy, see the [Schedule Policy](/reference/crd/schedule-policy/) reference page.
+
+2. Apply your spec by entering the following command:
+
+    ```text
+    kubectl apply -f testpolicy.yaml
+    ```
+
+3. Display your schedule policy. Enter the `storkctl get` command passing it the name of your policy:
+
+    ```text
+    storkctl get schedulepolicy
+    ```
+
+    ```output
+    NAME           INTERVAL-MINUTES   DAILY     WEEKLY             MONTHLY
+    testpolicy     1                  10:14PM   Thursday@10:13PM   14@8:05PM
+    ```
+
+### Create a migration schedule
 
 Once a policy has been created, you can use it to schedule a migration. The spec for the MigrationSchedule spec contains the same fields as the Migration spec with the addition of the policy name. The MigrationSchedule object is namespaced like the Migration object.
 

@@ -232,24 +232,7 @@ Use the applicationBackup CRD to specify what namespaces have their applications
 
 The ApplicationBackupSchedule CRD associates a SchedulePolicy with an application backup operation, allowing you to schedule when and how application backups are performed.
 
-1. Create a SchedulePolicy YAML file, specifying the following:
-
-  * **name:** the SchedulePolicy object's name
-  * **policy:**
-      * **interval:** For interval backups, how frequently Portworx will back the application up
-          * **intervalMinutes:** The interval, in minutes, after which Portworx starts the application backup
-          * **retain:** How many backups Portworx will retain.
-      * **daily:** For daily backups, Portworx will start the backup at the specified time every day
-          * **time:**
-          * **retain:** How many backups Portworx will retain.
-      * **weekly:** For weekly backups, Portworx will start the backup at the specified day and time every week
-          * **day:** The backup day, specified by string
-          * **time:** The backup time, specified in 12 hour AM/PM format
-          * **retain:** How many backups Portworx will retain.
-      * **monthly:** for monthly backups, Portworx will start the backup at the specified day and time every month
-          * **date:** The backup day, specified as an integer
-          * **time:** the backup time, specified in 12 hour AM/PM format
-          * **retain:** How many backups Portworx will retain.
+1. Create a file named `backupSchedulePolicy.yaml` with the following content:
 
     ```text
     apiVersion: stork.libopenstorage.org/v1alpha1
@@ -273,19 +256,27 @@ The ApplicationBackupSchedule CRD associates a SchedulePolicy with an applicatio
         retain: 5
     ```
 
-    {{<info>}}
-**NOTE:** If you do not specify the value of the `retain` field, Portworx will use the following default values:
+    For details about how you can configure a schedule policy, see the [SchedulePolicy](/reference/crd/schedule-policy) page.
 
-| Policy | Default value |
-|:---:|:---:|
-| Interval | 10 |
-| Daily | 30 |
-| Weekly | 7 |
-| Monthly | 12 |
-    {{</info>}}
+2. Apply the spec by entering the following command:
+
+    ```text
+    kubectl apply -f backupSchedulePolicy.yaml
+    ```
+
+3. Display your schedule policy. Enter the `storkctl get` command passing it the name of your policy:
+
+    ```text
+    storkctl get schedulepolicy
+    ```
+
+    ```output
+    NAME           INTERVAL-MINUTES   DAILY     WEEKLY             MONTHLY
+    testpolicy     60                 10:14PM   Thursday@10:13PM   14@8:05PM
+    ```
 
 
-2. Create an ApplicationBackupSchedule YAML file, specifying the following:
+3. Create an ApplicationBackupSchedule YAML file, specifying the following:
 
   * **name:** the applicationBackupSchedule object's name
   * **namespace:** the namespace the applicationBackupSchedule exists in

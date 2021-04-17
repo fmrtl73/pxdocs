@@ -5,16 +5,58 @@ keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, re
 description: Find out how to synchronize your cluster by scheduling periodic migrations between them
 ---
 
-In order to keep the Kubernetes resource between your paired source and destination cluster in sync, you need to periodically migrate them.
+To keep the Kubernetes resource between your paired source and destination cluster in sync, you need to periodically migrate them.
 
 For reference,
 
 * **Source Cluster** is the Kubernetes cluster where your applications are running
 * **Destination Cluster** is the Kubernetes cluster where the applications will be failed over, in case of a disaster in the source cluster.
 
-{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-schedule-policy.md" %}}
+## Create a schedule policy
 
-### Scheduling a migration
+To schedule a migration, you must create a schedule policy.
+
+1. Paste the following content into a file called `testpolicy.yaml`:
+
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: SchedulePolicy
+    metadata:
+      name: testpolicy
+      namespace: mysql
+    policy:
+      interval:
+        intervalMinutes: 1
+      daily:
+        time: "10:14PM"
+      weekly:
+        day: "Thursday"
+        time: "10:13PM"
+      monthly:
+        date: 14
+        time: "8:05PM"
+    ```
+
+    For details about how you can configure a schedule policy, see the [Schedule Policy](/reference/crd/schedule-policy/) reference page.
+
+2. Apply your spec by entering the following command:
+
+    ```text
+    kubectl apply -f testpolicy.yaml
+    ```
+
+3. Display your schedule policy. Enter the `storkctl get` command passing it the name of your policy:
+
+    ```text
+    storkctl get schedulepolicy
+    ```
+
+    ```output
+    NAME           INTERVAL-MINUTES   DAILY     WEEKLY             MONTHLY
+    testpolicy     1                  10:14PM   Thursday@10:13PM   14@8:05PM
+    ```
+
+## Schedule a migration
 
 Once a policy has been created, you can use it to schedule a migration. The MigrationSchedule object is namespaced.
 

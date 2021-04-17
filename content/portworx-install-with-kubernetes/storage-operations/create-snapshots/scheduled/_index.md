@@ -22,18 +22,7 @@ Stork version 2.2 or above is required.
 
 ## Create a schedule policy
 
-Schedule policies can be used to specify when a specific action has to be triggered. There are 4 sections in a schedule policy spec:
-
-* **Interval:** the interval in minutes after which the action should be triggered
-* **Daily:** the time at which the action should be triggered every day
-* **Weekly:** the day of the week and the time in that day when the action should be triggered
-* **Monthly:** the date of the month and the time on that date when the action should be triggered.
-
-{{<info>}}
-Note that scheduled snapshots do not occur if the volume you are trying to snapshot is not attached to a container.
-{{</info>}}
-
-### Create a daily policy
+You can use a schedule policy to specify when Portworx should trigger a specific action.
 
 1. Create a file named `daily-policy.yaml`, specifying the following fields and values:
 
@@ -54,6 +43,8 @@ Note that scheduled snapshots do not occur if the volume you are trying to snaps
         retain: 3
     ```
 
+    For more details about how you can configure aschedule policy, see the [Schedule Policy](/reference/crd/schedule-policy/) reference page.
+
 2. Apply the spec:
 
     ```text
@@ -62,36 +53,6 @@ Note that scheduled snapshots do not occur if the volume you are trying to snaps
 
     ```output
     schedulepolicy.stork.libopenstorage.org/daily created
-    ```
-
-### Create a weekly policy
-
-1. Create a file named `weekly-policy`, specifying the following fields and values:
-
-  * **apiVersion:** with the version of the Stork scheduler (this example uses `stork.libopenstorage.org/v1alpha1`)
-  * **kind:** with the `SchedulePolicy` value
-  * **metadata.name:** with the name of the `SchedulePolicy` object (this example uses `weekly`)
-  * **policy.weekly.day:** with the day of the week when Portworx must start the backup (this example uses "Thursday")
-  * **policy.weekly.time:** with the backup time (this example uses "10:13PM")
-  * **policy.retain:** with the number of backups Portworx must retain (this example retains 2 backups)
-
-
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: SchedulePolicy
-    metadata:
-      name: weekly
-    policy:
-      weekly:
-        day: "Thursday"
-        time: "10:13PM"
-        retain: 2
-    ```
-
-2.  Apply the spec:
-
-    ```text
-    kubectl apply -f weekly-policy.yaml
     ```
 
 3. You can check the status of your schedule policy by entering the `storkctl get schedulepolicy` command:
@@ -103,94 +64,104 @@ Note that scheduled snapshots do not occur if the volume you are trying to snaps
     ```output
     NAME      INTERVAL-MINUTES   DAILY     WEEKLY             MONTHLY
     daily     N/A                10:14PM   N/A                N/A
-    weekly    N/A                N/A       Thursday@10:13PM   N/A
     ```
 
-{{<info>}}
-**NOTE:** If you do not specify the value of the `retain` field, Portworx will use the following default values:
-
-| Policy | Default value |
-|:---:|:---:|
-| Interval | 10 |
-| Daily | 30 |
-| Weekly | 7 |
-| Monthly | 12 |
-{{</info>}}
 
 ## Associate a schedule policy with a StorageClass or a Volume
 
-Once you've defined a schedule policy, you can create and associate `StorageClass` and `Volume` specs with it. Perform one of the following steps, depending on whether you want to schedule snapshots for multiple PVCs or a single volume:
+The following sections show how you can associate a schedule policy either with a `Volume` or a `StorageClass`.
+
+{{<info>}}
+**NOTE:** If you associate a schedule policy with a storage class, then you cannot use Stork to manage that schedule policy.
+{{</info>}}
 
 ### Create a VolumeSnapshotSchedule
 
-You can create VolumeSnapshotSchedules to backup specific volumes according to a schedule you define.
+Use a `VolumeSnapshotSchedule` to associate your schedule policy at the CRD level, and back up specific volumes according to a schedule you define.
 
-Create a `VolumeSnapshotSchedule`, specifying:
+1. Create a file called `volume-snapshot-schedule.yaml` specifying the following fields and values:
 
   * **metadata:**
-    * **name:** with the name of this VolumeSnapshotSchedule policy
-    * **namespace:** the namespace in which this policy will exist
-    * **annotations:**
-      * **portworx/snapshot-type:** with the `cloud` or `local` value, depending on what environment you want store your snapshots in
-      * **portworx/cloud-cred-id:** with your cloud environment credentials
-      * **stork.libopenstorage.org/snapshot-restore-namespaces:** with other namespaces snapshots taken with this policy can restore to
+      * **name:** with the name of this VolumeSnapshotSchedule policy
+      * **namespace:** the namespace in which this policy will exist
+      * **annotations:**
+          * **portworx/snapshot-type:** with the `cloud` or `local` value, depending on what environment you want store your snapshots in
+          * **portworx/cloud-cred-id:** with your cloud environment credentials
+          * **stork.libopenstorage.org/snapshot-restore-namespaces:** with other namespaces snapshots taken with this policy can restore to
   * **spec:**
-    * **schedulePolicyName:** with the name of the schedule policy you defined in the steps above
-    * **suspend:** with a boolean value specifying if the schedule should be in a suspended state
-    * **preExecRule:** with the name of a rule to run before taking the snapshot
-    * **postExecRule:** with the name of a rule to run after taking the snapshot
-    * **reclaimPolicy:** with `retain` or `delete`, indicating what Portworx should do with the snapshots that were created using the schedule. Specifying the `delete` value deletes the snapshots created by this schedule when the schedule is deleted.
-    * **template:**
-      * **spec:**
-        * **persistentVolumeClaimName:** with the PVC you want this policy to apply to
+      * **schedulePolicyName:** with the name of the schedule policy you defined in the steps above
+      * **suspend:** with a boolean value specifying if the schedule should be in a suspended state
+      * **preExecRule:** with the name of a rule to run before taking the snapshot
+      * **postExecRule:** with the name of a rule to run after taking the snapshot
+      * **reclaimPolicy:** with `retain` or `delete`, indicating what Portworx should do with the snapshots that were created using the schedule. Specifying the `delete` value deletes the snapshots created by this schedule when the schedule is deleted.
+      * **template:**
+          * **spec:**
+              * **persistentVolumeClaimName:** with the PVC you want this policy to apply to
 
-```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: VolumeSnapshotSchedule
-metadata:
-  name: mysql-snapshot-schedule
-  namespace: mysql
-  annotations:
-    portworx/snapshot-type: cloud
-    portworx/cloud-cred-id: <cred_id>
-    stork.libopenstorage.org/snapshot-restore-namespaces: otherNamespace
-spec:
-  schedulePolicyName: testpolicy
-  suspend: false
-  reclaimPolicy: Delete
-  preExecRule: testRule
-  postExecRule: otherTestRule
-  template:
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: VolumeSnapshotSchedule
+    metadata:
+      name: mysql-snapshot-schedule
+      namespace: mysql
+      annotations:
+        portworx/snapshot-type: cloud
+        portworx/cloud-cred-id: <cred_id>
+        stork.libopenstorage.org/snapshot-restore-namespaces: otherNamespace
     spec:
-      persistentVolumeClaimName: mysql-data
-```
+      schedulePolicyName: testpolicy
+      suspend: false
+      reclaimPolicy: Delete
+      preExecRule: testRule
+      postExecRule: otherTestRule
+      template:
+        spec:
+          persistentVolumeClaimName: mysql-data
+    ```
+
+2. Apply the spec:
+
+    ```text
+    kubectl apply -f volume-snapshot-schedule.yaml
+    ```
 
 ### Create a storage class
 
-Now that we've defined a schedule policy let's create a new `StorageClass` spec. By adding the new annotations, it'll automatically create a schedule for the newly created PVCs.
+Use a `StorageClass` to apply your schedule policy to all PVCs using that `StorageClass`.
 
-Create a new file called `sc-with-snap-schedule.yaml` and paste into it the content from below:
+1. Create a file called `sc-with-snap-schedule.yaml` with the following content:
 
-```text
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-    name: px-sc-with-snap-schedules
-provisioner: kubernetes.io/portworx-volume
-parameters:
-   repl: "2"
-   snapshotschedule.stork.libopenstorage.org/default-schedule: |
-     schedulePolicyName: daily
-     annotations:
-       portworx/snapshot-type: local
-   snapshotschedule.stork.libopenstorage.org/weekly-schedule: |
-     schedulePolicyName: weekly
-     annotations:
-       portworx/snapshot-type: cloud
-       portworx/cloud-cred-id: <credential-uuid>
-```
+    ```text
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
+    metadata:
+        name: px-sc-with-snap-schedules
+    provisioner: kubernetes.io/portworx-volume
+    parameters:
+      repl: "2"
+      snapshotschedule.stork.libopenstorage.org/default-schedule: |
+        schedulePolicyName: daily
+        annotations:
+          portworx/snapshot-type: local
+      snapshotschedule.stork.libopenstorage.org/weekly-schedule: |
+        schedulePolicyName: weekly
+        annotations:
+          portworx/snapshot-type: cloud
+          portworx/cloud-cred-id: <credential-uuid>
+    ```
 
-The above StorageClass references 2 schedules. The `default-schedule` backs up volumes to the local Portworx cluster on a daily basis. The `weekly-schedule` backs up volumes to cloud storage on a weekly basis.
+    {{<info>}}
+**NOTE:** This example references two schedules:
+
+* The `default-schedule` backs up volumes to the local Portworx cluster daily.
+* The `weekly-schedule` backs up volumes to cloud storage every week.
+    {{</info>}}
+
+2. Apply the spec:
+
+    ```text
+    kubectl apply -f
+    ```
 
 ### Specifying the cloud credential to use
 
