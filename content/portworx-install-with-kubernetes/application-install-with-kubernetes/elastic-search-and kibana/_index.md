@@ -893,8 +893,6 @@ Bank Index with its documents
 
 Portworx runs as a DaemonSet in Kubernetes. Hence when you add a new node to your Kuberentes cluster you do not need to explicitly run Portworx on it.
 
-If you did use the [Terraform scripts](https://github.com/portworx/terraporx) to create a kubernetes cluster, you would need to update the minion count and apply the changes via Terraform to add a new Node.
-
 Scale your Elastic Search Cluster:
 
 ```text

@@ -27,5 +27,3 @@ _Portworx_ volumes can be easily accessed through the Nomad `docker` driver by r
     }
     ...
 ```
-
-A complete example for launching MySQL can be found [here](https://github.com/portworx/terraporx/blob/master/hashi-porx/aws/nomad/examples/mysql.nomad)

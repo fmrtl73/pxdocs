@@ -5,6 +5,7 @@ keywords: Install, digital ocean, terraform, terraporx, bare metal
 weight: 4
 linkTitle: DigitalOcean
 noicon: true
+hidden: true
 ---
 
 {{<info>}}

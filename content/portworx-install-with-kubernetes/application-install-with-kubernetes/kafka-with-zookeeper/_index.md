@@ -522,8 +522,6 @@ Kafka says, I am just a messenger
 
 Portworx runs as a DaemonSet in Kubernetes. Hence when you add a new node to your kuberentes cluster you do not need to explicitly run Portworx on it.
 
-If you did use the [Terraform scripts](https://github.com/portworx/terraporx) to create a kubernetes cluster, you would need to update the minion count and apply the changes via Terraform to add a new Node.
-
 The Portworx cluster before scaling the Kubernetes nodes.
 
 ```text

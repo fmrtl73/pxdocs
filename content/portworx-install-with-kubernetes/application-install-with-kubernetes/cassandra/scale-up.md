@@ -8,10 +8,6 @@ weight: 3
 
 Portworx runs as a `DaemonSet` in Kubernetes. Hence, when you add a node or a worker to your Kubernetes cluster, you do not need to install Portworx on it.
 
-{{<info>}}
-**Terraform users:** If you used the [Terraform scripts](https://github.com/portworx/terraporx) to create a Kubernetes cluster, you must update the minion count and apply the changes via Terraform to add a new node.
-{{</info>}}
-
 ### Add a new node
 
 1. Add a new node to your Kubernetes cluster. <!-- I think we added two nodes -->
