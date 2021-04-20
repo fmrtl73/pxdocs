@@ -27,6 +27,7 @@ Perform the steps in this topic to deploy PostgreSQL with Portworx on Kubernetes
     provisioner: kubernetes.io/portworx-volume
     parameters:
       repl: "2"
+    allowVolumeExpansion: true
     ```
 
     Note the following about this `StorageClass`:
