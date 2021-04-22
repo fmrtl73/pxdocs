@@ -80,7 +80,7 @@ The following tables list what features {{< pxEssentials >}} supports and any li
 
 | **Feature** | **Support** |
 |----|----|
-| Scheduler integration: Kubernetes, Mesos, Docker Swarm, Hashicorp Nomad, Openshift | Supported |
+| Scheduler integration: Kubernetes, Openshift | Supported |
 | Integration with Managed K8S services: EKS, AKS, GKE, PKS, IKS, RKE | Supported |
 
 ## Related Topics
