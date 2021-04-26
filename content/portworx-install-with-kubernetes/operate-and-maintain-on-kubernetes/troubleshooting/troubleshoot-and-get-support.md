@@ -36,7 +36,7 @@ series: support
 * Portworx logs:
   * Recent Portworx logs can be gathered by using this kubectl command:
         ```text
-        kubectl logs -n kube-system -l name=portworx --tail=99999
+        kubectl logs -n kube-system -l name=portworx -c portworx --tail=99999
         ```
 
   * If you have access to a particular node, you can use this journalctl command to get all Portworx logs:
@@ -58,7 +58,7 @@ Please run the following commands on any one of the nodes running Portworx:
 uname -a
 docker version
 kubectl version
-kubectl logs -n kube-system -l name=portworx --tail=99999
+kubectl logs -n kube-system -l name=portworx -c portworx --tail=99999
 kubectl get pods -n kube-system -l name=portworx -o wide
 PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
 kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl status

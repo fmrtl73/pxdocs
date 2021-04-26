@@ -36,12 +36,12 @@ Portworx runs as a `DaemonSet` in Kubernetes. Hence, when you add a node or a wo
 
     ```output
     NAME                                 READY     STATUS    RESTARTS   AGE
-    portworx-14g3z                       1/1       Running   0          4h
-    portworx-ggzvz                       0/1       Running   0          2m
-    portworx-hhg0m                       1/1       Running   0          4h
-    portworx-rkdp6                       1/1       Running   0          4h
-    portworx-stvlt                       1/1       Running   0          4h
-    portworx-vxqxh                       1/1       Running   0          4h
+    portworx-14g3z                       2/2       Running   0          4h
+    portworx-ggzvz                       1/2       Running   0          2m
+    portworx-hhg0m                       2/2       Running   0          4h
+    portworx-rkdp6                       2/2       Running   0          4h
+    portworx-stvlt                       2/2       Running   0          4h
+    portworx-vxqxh                       2/2       Running   0          4h
     ```
 
 4. Your Portworx cluster automatically scales as you scale your Kubernetes cluster.  Display the status of your Portworx cluster, by entering the `pxctl status` command:
