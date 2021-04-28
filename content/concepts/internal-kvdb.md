@@ -55,23 +55,38 @@ This method is not recommended as the disk will be shared between internal KVDB 
 **NOTE:** If you do not specify the `-metadata` argument, cloud deployments require a 150GB SSD disk for the internal KVDB.
 {{</info>}}
 
-## Designating internal KVDB nodes (Only Kubernetes)
 
-If your scheduler is kubernetes, you can designate a set of nodes to run internal KVDB. Only those nodes which have the label `px/metadata-node=true` will be a part of the internal KVDB cluster.
+## Designate nodes as KVDB nodes
 
-Use the following command to label nodes in kubernetes
+There are two ways in which you can designate a node as a KVDB node:
 
-```text
-kubectl label nodes <list of node-names> px/metadata-node=true
-```
+- You can use custom labels to designate nodes as KVDB nodes through the `PX_METADATA_NODE_LABEL` environment variable.
 
-Depending upon the labels and their values a decision will be made
+    Example:
 
-- If a node is labeled px/metadata-node=true then it will be a part of the internal KVDB cluster
-- If node is labeled px/metadata-node=false then it will NOT be a part of the internal KVDB cluster
-- If no node labels are found then all the nodes are potential metadata nodes.
-- If an incorrect label is present on the node like px/metadata-node=blah then Portworx will not start on that node.
-- If no node is labelled as px/metadata-node=true , but one node is labeled as px/metadata-node=false then that node will never be a part of KVDB cluster, but rest of the nodes are potential metadata nodes.
+    ```text
+    export PX_METADATA_NODE_LABEL="kubernetes.io/role=infra"
+    ```
+
+- If you are running Portworx on Kubernetes, you can use the `px/metadata-node=true` label to designate the set of nodes that will run the internal KVDB.
+
+    Use the following command to label nodes in Kubernetes:
+
+    ```text
+    kubectl label nodes <list of node-names> px/metadata-node=true
+    ```
+
+    Depending upon the labels and their values a decision will be made
+
+    - If a node is labeled px/metadata-node=true then it will be a part of the internal KVDB cluster
+    - If node is labeled px/metadata-node=false then it will NOT be a part of the internal KVDB cluster
+    - If no node labels are found then all the nodes can potentially run internal kvdb
+    - If an incorrect label is present on the node like px/metadata-node=blah then Portworx will not start on that node.
+    - If no node is labelled as px/metadata-node=true , but one node is labeled as px/metadata-node=false then that node will never be a part of KVDB cluster, but rest of the nodes are potential internal kvdb nodes.
+
+{{<info>}}
+**NOTE:** The `PX_METADATA_NODE_LABEL` environment variable takes precedence over the `px/metadata-node=true` label.
+{{</info>}}
 
 ## KVDB Node Failover
 
