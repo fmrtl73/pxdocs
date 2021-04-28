@@ -15,7 +15,7 @@ You can install PX-Central on any Kubernetes cluster using Helm charts as long a
 
     * 3 worker nodes
     * 4 CPU cores
-    * 8GB of memory
+    * 8 GB of memory
     * A minimum of 1 disk with 100 GB, ideally 2 disks on each node with at least 100 GB each
     * Kubernetes version 1.20.x and below
     * If you wish to use Portworx for the PX-Central installation and your Kubernetes cluster does not have Portworx installed, verify that you have at least 50GB of available disk space on the `/root` file system.
@@ -33,7 +33,9 @@ You can install PX-Central on any Kubernetes cluster using Helm charts as long a
 
 {{<info>}}
 **NOTE:**
-You can install PX-Central on a Kubernetes cluster that is already running Portworx, or on a fresh Kubernetes cluster that does not have Portworx installed.
+
+- You can install PX-Central on a Kubernetes cluster that is already running Portworx, or on a fresh Kubernetes cluster that does not have Portworx installed.
+- If you also wish to install the monitoring service component, you need at least 8 CPU cores and 16 GB of memory.
 {{</info>}}
 
 ## Prepare air-gapped environments

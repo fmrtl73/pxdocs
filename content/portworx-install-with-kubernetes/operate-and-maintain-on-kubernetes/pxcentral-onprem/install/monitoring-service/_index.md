@@ -12,7 +12,6 @@ Follow the steps in this section to install the monitoring service.
 
 * You must first deploy the PX-Backup chart, and all components should be in running state.
 
-
 * If you're running Portworx on Openshfift, then you must add a new  service account to the `privileged` SCC. Enter the `oc edit scc privileged` command and add the following line to the `users` section, replacing `<YOUR_NAMESPACE>` with your namespace:
 
     ```text
