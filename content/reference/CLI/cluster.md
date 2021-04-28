@@ -420,7 +420,7 @@ Successfully updated cluster wide options
 **NOTE:** You can specify the `--cache-flush-seconds` flag alongside the `--cache-flush` flag in a single command:
 
 ```text
-pxctl cluster options update --cach-flush enabled --cache-flush-seconds 300
+pxctl cluster options update --cache-flush enabled --cache-flush-seconds 300
 ```
 {{</info>}}
 
