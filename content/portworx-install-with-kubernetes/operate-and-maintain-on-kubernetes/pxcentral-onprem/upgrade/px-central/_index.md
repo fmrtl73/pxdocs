@@ -11,18 +11,51 @@ If you've installed PX-Central using Helm, you can use Helm to upgrade it as wel
 
 ## Prerequisites
 
-PX-Central must already be installed.
-
+You must have PX-Central with a Helm-based install.
 ## Upgrade
 
-1. Use the following `kubectl delete job` command to delete the post-install job:
+Follow the steps in this section to upgrade PX-Central using Helm.
+
+1. Update your Helm repos:
 
     ```text
-    kubectl delete job -npx-backup pxcentral-post-install-hook
+    helm repo update
     ```
 
-2. Upgrade the chart to the latest version. Enter the `helm upgrade` command, using the `--set` flag to specify any custom values you used during install:
+2. Retrieve all custom values you used during install. Enter the following `helm get values` command to generate a YAML file, adjusting the values of the `<namespace>` and `<release-name>` parameters to match your environment:
 
     ```text
-    helm upgrade px-backup portworx/px-backup --namespace px-backup --set persistentStorage.storageClassName=<STORAGE-CLASS-NAME>,pxbackup.orgName=<PX-BACKUP-ORG-NAME>
+    helm get values --namespace <docs-namespace> <release-name> -o yaml > values.yaml
+    ```
+
+    ```
+    oidc:
+        centralOIDC:
+            defaultPassword: examplePassword
+            defaultUsername: exampleUser
+    operatorToChartUpgrade: true
+    persistentStorage:
+        enabled: true
+        storageClassName: px-sc
+    pxbackup:
+        orgName: exampleOrg
+    pxcentralDBPassword: exampleDbPassword
+    ```
+
+    Note the following about this example output:
+
+    * The `persistentStorage.storageClassName` field displays the name of your storage class (`px-sc`).
+    * The `persistentStorage.enabled: true` field indicates that persistent storage is enabled.
+    * The `pxbackup.orgName` field displays the name of your organization (`my-organization`)
+
+3. Delete the post install hook job:
+
+    ```text
+    kubectl delete job pxcentral-post-install-hook --namespace <namespace>
+    ```
+
+4. Run the `helm upgrade` command, using the `-f` flag to pass the custom `values.yaml` file you generated above and replacing `<namespace>` with your namespace:
+
+    ```text
+    helm upgrade px-backup portworx/px-backup --namespace <namespace>  -f values.yaml
     ```
