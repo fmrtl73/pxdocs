@@ -16,7 +16,6 @@ Portworx has upgraded or enhanced functionality in the following areas:
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
-| PWX-19496 | The CopyOnWrite on demand setting now creates Kubernetes PVCs by default. |
 | PWX-18530 | Storage pool caching now supports caching on SSD pools, which will be cached with NVME drives if they're available. | 
 
 ### Fixes
