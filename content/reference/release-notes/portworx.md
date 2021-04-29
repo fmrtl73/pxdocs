@@ -6,6 +6,42 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.7.1
+
+April 29, 2021
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-19496 | The CopyOnWrite on demand setting now creates Kubernetes PVCs by default. |
+| PWX-18530 | Storage pool caching now supports caching on SSD pools, which will be cached with NVME drives if they're available. | 
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-19368	| If Floating licenses were used on a cluster, wiping a node or the cluster didn't return the license leases back to the license server. <br/><br/>**User impact:** Users had to wait for the license leases to expire in order to reuse them. <br/><br/>**Resolution:** Wiping a node or cluster now correctly releases the license leases back to the license server. |
+| 	PWX-19200 | Portworx was unable to attach AWS cloud drives when running on AWS Outpost. <br/><br/>**User Impact:** When running on AWS Outpost, Portworx failed to attach the backing drives, causing the cluster initialization to fail. <br/><br/>**Resolution:** Portworx now includes the Outpost ARN in the EBS volume creation, which allows the volume to be attached in the instance | 
+| 	PWX-19167 |	In very rare cases, the `px-storage` process sometimes aborted and restarted due to a race condition when releasing resources.<br/><br/>**User impact:** Users experienced no interruptions, but may have seen Portworx restart.<br/><br/>**Resolution:** This race condition no longer occurs. |
+| PWX-19022	|	Pods sometimes failed to mount a volume and may not have started if that volume was first attached for background work and then later attached for mounting purposes. <br/><br/>**User impact:** Users saw their pods fail to start. To correct this, they had to detach and reattach the volume, usually by stopping and restarting the affected application. <br/><br/>**Resolution:** Pods no longer fail to mount volumes under these circumstances.|
+| PWX-18983	|	An issue with security and non-CSI deployments during volume deletion caused Portworx to return incorrect information when it detected an error during a request to inspect a volume. <br/><br/>**User impact:** Users saw incorrect information when inspecting a deleted volume. <br/><br/>**Resolution:** Portworx now displays the correct information when inspecting a volume under these circumstances. |
+| 	PWX-18957	| After recovering an offline cluster from a KVDB backup file, that cluster's license entered an invalid state. This was caused by the ClusterUUID in the restored KVDB having extra quotes. <br/><br/>**User impact:** Users attempting to recover clusters in this manner saw their licenses fail to restore correctly. <br/><br/>**Resolution:** During the recovery process, Portworx now ensures that no extra quotes are added to the ClusterUUID once the recovery is done. |
+| 	PWX-18641	| Portworx displayed an incorrect alert for snapshots when the parent volume's HA level was decreased. <br/><br/>**User impact:** Users may have seen this incorrect alert. <br/><br/>**Resolution:** Portworx will no longer attempt to run HA level reduce operations on snapshots which have an HA level of 1 (which fails and triggers incorrect alert) when the HA level is reduced on the snapshot's parent volume. |
+| PWX-18447	| Portworx enabled the sharedv4/NFS watchdog even if the "--disable-sharedv4" flag was set. <br/><br/>**User impact:** Despite disabling the sharedv4 volume feature, users may have seen errors about NFS/sharedv4 being unhealthy. <br/><br/>**Resolution:** Portworx no longer enables the NFS watchdog if sharedv4/NFS is disabled. |
+| PWX-17697 |	Users couldn't remove storage pool labels. <br/><br/>**User impact:** When users attempted to remove storage pool labels, they saw the command return `Pool properties updated`, but Portworx didn't remove the label.<br/><br/>**Resolution:** Storage pools now have the same behavior as volumes. You can now remove labels by passing `--labels <key=>` without a value to remove the previously added label. |
+|	PWX-7505	| Unsecured nodes could be added to a secured cluster, specifically if those nodes are part of a different Kubernetes cluster with a different configuration manifest. <br/><br/>**User impact:** This allowed any of the unsecured nodes to join a secured cluster. As a result, the API endpoints for the unsecured nodes would be unsecured and allow anyone to execute any pxctl or RPC request. <br/><br/>**Resolution:** Portworx can now be configured using the `PORTWORX_FEATUREGATE_CHECK_NODE_SECURITY` feature gate to prevent unsecured nodes from joining a cluster if at least one node is secured. |
+| PWX-19503 | The `px-storage` process initialization got stuck if the "num_cpu_threads" or "num_io_threads" rt_opts value did not equal the "num_threads" rt_opt value.<br/><br/>**User impact:** Portworx didn't come up, and users needed to remove the "num_threads" rt_opts for the `px-storage` process to finish initialization.<br/><br/>**Resolution:** Portworx initialization no longer gets stuck. |
+| PWX-19383	|	A k8s RBAC issue with the CSI resizer installation caused CSI PVC resizing to fail.<br/><br/>**User impact:** Users saw CSI PVC resize failures. <br/><br/>**Resolution:** The Portworx spec generator now correctly adds the necessary RBAC for the CSI Resizer to function properly. |
+| PWX-19173	|	CSI VolumeSnapshotContent objects incorrectly displayed a restore size of 0.<br/><br/>**User impact:** External backup systems that depend on the CSI VolumeSnapshotContent restore resize sometimes failed. <br/><br/>**Resolution:** The Portworx CSI driver now correctly adds the restore size to a VolumeSnapshotContent object. |
+| PWX-18640	|	The Portworx alert VolumeHAUpdateFailure has been updated to VolumeHAUpdateNotify for cases where the update is not failing. <br/><br/>**User impact:** Users saw misleading VolumeHAUpdateFailure alerts when an update succeeded. <br/><br/>**Resolution:** Portworx alerting system sends the correct alarm event for this case. |
+| PWX-19277 | Cloudsnaps sometimes failed to attach the internal snap for an aggregated volume if the node containing the aggregated replica was down. <br/><br/>**User impact:** While the cloudsnap operation was marked as failed, the error description did not display the correct error message. <br/><br/>**Solution:** Cloudsnaps no longer fail to attach, and error messages now correctly indicate that the node is down. |
+| PWX-19797 | With 2.7.0, cloudsnap imposed restrictions on active cloudsnap commands being processed. <br/><br/> **User impact:** Async DR sometimes failed for some volumes. <br/><br/> **Solution:** 2.7.1 increases the number of commands being processed to a much higher value, thereby avoiding async DR failures. | 
+
 ## 2.7.0
 
 March 23, 2021
