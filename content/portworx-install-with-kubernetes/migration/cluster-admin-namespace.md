@@ -3,6 +3,7 @@ title: "Set up a Cluster Admin namespace for Migration"
 linkTitle: Set up a Cluster Admin namespace
 keywords: cloud, backup, restore, snapshot, DR, migration, 
 description: How to designate a namespace as the cluster admin namespace
+weight: 1
 ---
 
 By default, you can only migrate namespaces in which the Migration object is created.
