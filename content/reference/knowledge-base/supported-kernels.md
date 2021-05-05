@@ -32,27 +32,29 @@ apt install linux-headers-$(uname -r)
 
 | **Linux Distro**	| **Kernel Version** |
 | --- | --- |
-| CentOS 7.5 | 5.4.12-1.el7.elrepo.x86_64 | <!-- Updated  -->
-| CentOS 7.6 | 5.7.7-1.el7.elrepo.x86_64, 5.7.12-1.el7.elrepo.x86_64 | <!-- Updated  --> 
-| CentOS 7.8-vanilla | 3.10.0-1127.el7.x86_64 | <!-- Updated  --> 
-| CentOS 8.2-vanilla | 4.18.0-193.el8.x86_64 | <!-- Updated  -->
-| Ubuntu 16.04 LTS| Up to 5.4.0-29-generic | <!-- Updated  -->
-| Ubuntu 18.04.5 LTS | 5.4.0-1036-gcp, 5.4.0-1036-azure, 5.3.0-1039-gke | <!-- Updated  -->
-| Ubuntu 20.04 LTS| 5.4.0-42-generic | <!-- Updated  -->
-| Fedora 27	| Up to 4.13.9-300.fc27.x86_64 | <!-- Updated  -->
-| Fedora 28	| Up to 5.0.16-100.fc28.x86_64 | <!-- Updated  -->
-| FlatCar Alpha | 5.10.10-flatcar |
-| FlatCar Beta | 5.9.16-flatcar |
-| FlatCar Stable | 5.4.92-flatcar | <!-- New -->
-| RHEL 7.8	| Up to 3.10.0-1160.15.2.el7.x86_64 | <!-- Updated  -->
-| RHEL 8.2	| 4.18.0-193.29.1.el8_2.x86_64, 4.18.0-193.el8_2.x86_64 | <!-- Updated  -->
+| CentOS 7.5 | 5.4.12-1.el7.elrepo.x86_64 |
+| CentOS 7.6 | 5.7.7-1.el7.elrepo.x86_64, 5.7.12-1.el7.elrepo.x86_64 | <!-- Missing  --> 
+| CentOS 7.8-vanilla | 3.10.0-1127.el7.x86_64 |
+| CentOS 8.2-vanilla | 4.18.0-193.el8.x86_64 |
+| Ubuntu 16.04 LTS| Up to 4.4.0-116-generic |
+| Ubuntu 18.04.5 LTS | 5.4.0-1040-gcp, 5.4.0-1036-azure, 5.3.0-1039-gke |
+| Ubuntu 20.04 LTS| 5.4.0-72-generic |
+| Ubuntu 20.10 | 5.8.0-1028-gcp | <!-- New -->
+| Fedora 27	| Up to 4.13.9-300.fc27.x86_64 |
+| Fedora 28	| Up to 5.0.16-100.fc28.x86_64|
+| FlatCar Alpha | 5.10.25-flatcar |
+| FlatCar Beta | 5.10.25-flatcar |
+| FlatCar Stable | 5.10.25-flatcar | <!-- New -->
+| RHEL 7.8	| Up to 3.10.0-1160.24.1.el7.x86_64 |
+| RHEL 8.2	| 4.18.0-193.29.1.el8_2.x86_64, 4.18.0-193.el8_2.x86_64 |
 | RHEL 8.3 (Ootpa) | 4.18.0-240.1.1.el8_3.x86_64, 4.18.0-240.15.1.el8_3.x86_64 | <!-- New -->
-| Debian 9	| Up to 4.9.0-14-amd64 | <!-- Updated  -->
-| Debian 10 | Up to 4.19.0-14-cloud-amd64 | <!-- Updated  -->
+| RHEL 8.4 BETA | 4.18.0-293.el8.x86_64 | <!-- New -->
+| Debian 9	| Up to 4.9.0-14-amd64 | <!-- Missing  --> 
+| Debian 10 | Up to 4.19.0-16-cloud-amd64 |
 
 | **Cloud Distro** | **Kernel Version** |
 | --- | --- |
-| Amazon Linux v2	| 4.14.214-160.339.amzn2.x86_64 | <!-- Updated  --> 
+| Amazon Linux v2	| 4.14.219-164.354.amzn2.x86_64 |
 
 
 
