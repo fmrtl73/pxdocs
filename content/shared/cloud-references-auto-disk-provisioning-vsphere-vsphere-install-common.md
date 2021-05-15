@@ -10,6 +10,7 @@ hidden: true
 You will need to provide Portworx with a vCenter server user that will need to either have the full Admin role or, for increased security, a custom-created role with the following minimum [vSphere privileges](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.security.doc/GUID-FEAB5DF5-F7A2-412D-BF3D-7420A355AE8F.html):
 
 * Datastore
+    * Allocate space
     * Browse datastore
     * Low level file operations
     * Remove file
@@ -23,6 +24,7 @@ You will need to provide Portworx with a vCenter server user that will need to e
     * Add or remove device
     * Advanced configuration
     * Change Settings
+    * Extend virtual disk
     * Modify device settings
     * Remove disk
 
