@@ -6,6 +6,32 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.7.2
+
+May 18, 2021
+
+
+### Notes
+
+* Portworx 2.7.2 no longer supports installations on Ubuntu 16.04 with the 4.15.0-142-generic kernel. Upgrade to Ubuntu 18.04. See the list of [supported kernels](/reference/knowledge-base/supported-kernels) for information.
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-20106 | Portworx now supports various kernels hosted on IBM Cloud in air-gapped environments. Specifically, Portworx supports the 4.15.0-142-generic kernel on Ubuntu 18.04. |
+| PWX-20072 | Users can now install Portworx from the IBM catalog onto a private cluster and enable the integrated license and billing feature for these clusters. |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-14559 | The Read and write throughput values in Grafana and Prometheus were erroneously transposed. <br/><br/>**User impact:** Users saw read throughput values where they expected to see write throughput values, and vice versa. <br/><br/>**Resolution:** These values now reflect the correct metric in Grafana and Prometheus. |
+
 ## 2.7.1
 
 April 29, 2021
