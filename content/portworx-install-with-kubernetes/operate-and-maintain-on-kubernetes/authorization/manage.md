@@ -54,7 +54,7 @@ secret:
           storage: 2Gi
     ```
 
-For creation of secure CSI volumes, see [Securing your CSI volumes](/portworx-install-with-kubernetes/storage-operations/csi/#secure-your-volumes).
+For creation of secure CSI volumes, see [Securing your CSI volumes](/portworx-install-with-kubernetes/storage-operations/csi/security).
 
 ## Stork
 When using CRDs consumed by Stork, you must use the same authorization model

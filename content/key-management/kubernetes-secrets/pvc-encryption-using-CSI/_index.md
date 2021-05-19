@@ -6,7 +6,7 @@ description: Instructions on using Kubernetes Secrets with Portworx for encrypti
 noicon: true
 series: kubernetes-secret-uses
 series2: k8s-pvc-enc
-hidden: true
+hidden: false
 ---
 
 This article discusses the PVC encryption methods used with the Kubernetes Container Storage Interface. For detaile about using Portworx with CSI, refer to the [Portworx with CSI](/portworx-install-with-kubernetes/storage-operations/csi/) page.
