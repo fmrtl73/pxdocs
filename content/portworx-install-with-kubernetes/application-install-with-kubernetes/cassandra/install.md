@@ -17,8 +17,7 @@ weight: 2
 1. Enter the following `kubectl apply` command to create a headless service:
 
     ```text
-    kubectl apply -f - <<'_EOF'
-    ---
+    kubectl apply -f - <<EOF
     apiVersion: v1
     kind: Service
     metadata:
@@ -31,8 +30,7 @@ weight: 2
         - port: 9042
       selector:
         app: cassandra
-    ---
-    _EOF
+    EOF
     ```
 
     ```output
@@ -47,8 +45,7 @@ weight: 2
 2. Use the following `kubectl apply` command to create a storage class:
 
     ```text
-    kubectl apply -f - <<'_EOF'
-    ---
+    kubectl apply -f - <<EOF
     kind: StorageClass
     apiVersion: storage.k8s.io/v1
     metadata:
@@ -59,8 +56,7 @@ weight: 2
       priority_io: "high"
       group: "cassandra_vg"
       fg: "true"
-    ---
-    _EOF
+    EOF
     ```
 
     ```output
@@ -77,13 +73,15 @@ weight: 2
 3. The following command creates a stateful set with three replicas and uses the STORK scheduler to place your Pods closer to where their data is located:
 
       ```text
-      kubectl apply -f - <<'_EOF'
-      ---
-      apiVersion: "apps/v1beta1"
+      kubectl apply -f - <<EOF
+      apiVersion: "apps/v1"
       kind: StatefulSet
       metadata:
         name: cassandra
       spec:
+        selector:
+          matchLabels:
+            app: cassandra
         serviceName: cassandra
         replicas: 3
         template:
@@ -110,8 +108,8 @@ weight: 2
                   cpu: "500m"
                   memory: 1Gi
                 requests:
-                cpu: "500m"
-                memory: 1Gi
+                  cpu: "500m"
+                  memory: 1Gi
               securityContext:
                 capabilities:
                   add:
@@ -169,7 +167,7 @@ weight: 2
             resources:
               requests:
                 storage: 1Gi
-      ---
+      EOF
       ```
 
       ```output

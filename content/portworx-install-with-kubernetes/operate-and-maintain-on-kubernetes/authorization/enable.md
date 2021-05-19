@@ -116,7 +116,7 @@ setup an environment variable from a Secret:
     kubectl create secret generic pxkeys \
       --from-literal=system-secret=$PORTWORX_AUTH_SYSTEM_KEY \
       --from-literal=shared-secret=$PORTWORX_AUTH_SHARED_SECRET \
-      --from-literal=stork-secret=$PORTWORX_AUTH_SHARED_SECRET
+      --from-literal=stork-secret=$PORTWORX_AUTH_STORK_KEY
     ```
 
 3. Edit your Portworx manifest YAML to include the following:
