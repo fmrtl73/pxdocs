@@ -1,5 +1,5 @@
 ---
-title: Install Portworx on AWS EKS using the Operator
+title: Install Portworx on AWS EKS and EKS-D using the Operator
 linkTitle: Install using the Operator
 keywords: Install, on cloud, EKS, Elastic Kubernetes Service, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on an AWS EKS (Elastic Kubernetes Service) cluster.
@@ -10,7 +10,10 @@ noicon: true
 This topic explains how to install Portworx with EKS (Elastic Kubernetes Service). Follow the steps in this topic in order.
 
 {{<info>}}
-**NOTE:** You can follow these procedures to deploy Portworx on AWS Outposts.
+**NOTE:**
+
+ - You can follow these procedures to deploy Portworx on AWS Outposts.
+ - Follow the steps in this section to install Portworx on EKS-D.
 {{</info>}}
 
 ## Prepare
