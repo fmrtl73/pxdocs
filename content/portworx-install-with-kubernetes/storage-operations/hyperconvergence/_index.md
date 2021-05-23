@@ -1,8 +1,8 @@
 ---
-title: Run Hyper Converged
+title: Run Hyper Converged Using Stork
 weight: 2
-keywords: hyper-convergence, kubernetes, k8s, stork
-description: Learn how to run your applications hyperconverged with their data
+keywords: hyper-convergence, stork, kubernetes, k8s
+description: Learn how to use Stork to run your applications hyperconverged with their data
 noicon: true
 series: k8s-storage
 ---
