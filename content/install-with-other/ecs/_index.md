@@ -54,7 +54,7 @@ Create a custom IAM role and Select Role Type "Amazon EC2 Role for Container Ser
 
 Use the created custom IAM role `ECS` for this ECS cluster and the security group should allow inbound ssh access from your network.
 
-Your EC2 instances must have the correct IAM role set. Follow these [IAM instructions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html).
+Your EC2 instances must have the correct IAM role set.
 
 After the ECS cluster "ecs-demo1" successfully launches, the corresponding EC2 instances that belong to this ECS cluster can be found under the "ECS instance" tab of ECS console or from AWS EC2 console. Each of this EC2 instances is running with an amazon-ecs-agent in the docker container.
 
