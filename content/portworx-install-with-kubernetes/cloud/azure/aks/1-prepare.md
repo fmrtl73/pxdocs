@@ -15,7 +15,7 @@ Follow the steps [here](https://docs.microsoft.com/en-us/cli/azure/install-azure
 
 ```text
 az login
-az account set –subscription <Your-Azure-Subscription-UUID>
+az account set -–subscription <Your-Azure-Subscription-UUID>
 ```
 
 ### Check locations to create AKS cluster
@@ -37,7 +37,7 @@ canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth
 ### Create an Azure Resource Group
 Create a Resource Group by specifying its name and location in which you will be deploying your AKS cluster.
 ```text
-az group create –name <resource-group-name> –location <location>
+az group create -–name <resource-group-name> –-location <location>
 ```
 
 ### Create a Service Principal and secret in Azure AD

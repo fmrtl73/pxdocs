@@ -23,7 +23,7 @@ Follow the steps [here](https://docs.microsoft.com/en-us/cli/azure/install-azure
 
 ```text
 az login
-az account set –subscription <Your-Azure-Subscription-UUID>
+az account set -–subscription <Your-Azure-Subscription-UUID>
 ```
 
 ### Create the Azure resource group and location
@@ -45,7 +45,7 @@ canadacentral,canadaeast,uksouth,ukwest,koreacentral,koreasouth
 ### Create an Azure resource group by specifying a name and a location
 
 ```text
-az group create –name <region-name> –location <location>
+az group create -–name <region-name> -–location <location>
 ```
 
 ### Create a service principal in Azure AD
