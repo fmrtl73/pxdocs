@@ -1243,7 +1243,7 @@
         {
           "alias": "Bytes Written Throughput",
           "dsType": "influxdb",
-          "expr": "px_volume_num_long_reads{volumename=~\"[[Volumes]]\"}",
+          "expr": "px_volume_vol_written_bytes{volumename=~\"[[Volumes]]\"}",
           "format": "time_series",
           "groupBy": [
             {
@@ -1638,7 +1638,7 @@
         {
           "alias": "Bytes Read Throughput",
           "dsType": "influxdb",
-          "expr": "px_volume_vol_written_bytes{volumename=~\"[[Volumes]]\"}",
+          "expr": "px_volume_vol_read_bytes{volumename=~\"[[Volumes]]\"}",
           "format": "time_series",
           "groupBy": [
             {
