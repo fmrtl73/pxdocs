@@ -54,7 +54,7 @@ Skip these steps if you are not using the Portworx Operator.
 1. Download the version manifest
 
     ```text
-    curl -o versions "https://install.portworx.com/$PXVER/version"
+    curl -o versions "https://install.portworx.com/$PXVER/version?kbver=$KBVER"
     ```
 
 2. Store the version manifest
