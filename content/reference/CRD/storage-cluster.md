@@ -195,6 +195,7 @@ This section explains the fields used to configure the `StorageCluster` object.
 | spec.<br>security | An object for specifying Portworx Security configurations. Refer to the [Operator Security page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/enable/) for more details. | `object` | None |
 | spec.<br>featureGates | A collection of key-value pairs specifying which Portworx features should be enabled or disabled. [^1] | `map[string]string` | None |
 | spec.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826). Similar to how environment variables are provided in Kubernetes, you can directly provide values to Portworx or import them from a source like a `Secret`, `ConfigMap`, etc. | `[]object` | None |
+| spec.<br>metadata.<br>annotations | A map of components and custom annotations. [^2] | map[string]map[string]string | None |
 
 [^1]: As an example, here's how you can enable the `CSI` feature.
     ```text
@@ -203,6 +204,16 @@ This section explains the fields used to configure the `StorageCluster` object.
         CSI: "true"
     ```
     Please note that you can also use `CSI: "True"` or `CSI: "1"`.
+
+[^2]: As an example, here is how to configure annotations for storage pods, change `custom-domain/custom-key: custom-val` accordingly.
+    ```text
+    spec:
+      metadata:
+        annotations:
+          pod/storage:
+            custom-domain/custom-key: custom-val
+    ```
+    Please note that StorageCluster.spec.metadata.annotations is different from StorageCluster.metadata.annotations. Currently custom annotations are only supported on storage pods.
 
 ### KVdb configuration
 
@@ -220,15 +231,16 @@ This section provides details about the fields used to configure the storage for
 
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
-| spec.<br>storage.<br>useAll | If set to `true`, Portworx uses all available, unformatted, and unpartitioned devices. [^2] | `boolean` | `true` |
-| spec.<br>storage.<br>useAllWithPartitions | If  set to `true`, Portworx uses all the available and unformatted devices. [^2] | `boolean` |  `false` |
+| spec.<br>storage.<br>useAll | If set to `true`, Portworx uses all available, unformatted, and unpartitioned devices. [^3] | `boolean` | `true` |
+| spec.<br>storage.<br>useAllWithPartitions | If  set to `true`, Portworx uses all the available and unformatted devices. [^3] | `boolean` |  `false` |
 | spec.<br>storage.<br>forceUseDisks | If set to `true`, Portworx uses a device even if there's a file system on it. Note that Portworx may wipe the drive before using it. | `boolean` | `false` |
 | spec.<br>storage.<br>devices[] | Specifies the list of devices Portworx should use. | `[]string` | None |
+| spec.<br>storage.<br>cacheDevices[] | Specifies the list of cache devices Portworx should use. | `[]string` | None |
 | spec.<br>storage.<br>journalDevice | Specifies the device Portworx uses for journaling. | `string` | None |
 | spec.<br>storage.<br>systemMetadataDevice | Indicates the device Portworx uses to store metadata. For better performance, specify a system metadata device when using Portworx with the internal KVdb. | `string` | None |
 | spec.<br>storage.<br>kvdbDevice | Specifies the device Portworx uses to store internal KVDB data. | `string` | None |
 
-[^2]: Note that Portworx ignores this filed if you specify the storage devices using the `spec.storage.devices` field.
+[^3]: Note that Portworx ignores this filed if you specify the storage devices using the `spec.storage.devices` field.
 
 ### Cloud storage configuration
 
@@ -236,6 +248,7 @@ This section explains the fields used to configure Portworx with cloud storage. 
 
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
+| spec.<br>cloudStorage.<br>provider | Specifies the cloud provider name, such as: pure, azure, aws, gce, vsphere, ibm, csi. | `string` | None |
 | spec.<br>cloudStorage.<br>deviceSpecs[] | A list of the specs for your cloud storage devices. Portworx creates a cloud disk for every device. | `[]string` | None |
 | spec.<br>cloudStorage.<br>journalDeviceSpec | Specifies the cloud device Portworx uses for journaling. | `string` | None |
 | spec.<br>cloudStorage.<br>systemMetadataDeviceSpec | Indicates the cloud device Portworx uses for metadata. For performance, specify a system metadata device when using Portworx with the internal KVdb. | `string` | None |
