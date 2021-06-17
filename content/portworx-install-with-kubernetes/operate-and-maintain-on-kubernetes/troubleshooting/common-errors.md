@@ -82,3 +82,19 @@ description: Common errors
     YAML-spec via the Portworx spec generator page in [PX-Central](https://central.portworx.com), and copy the volume-mounts into your Portworx spec.
 
     | [Container runtime](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)   | Supported since   | Required volume mounts                 |
+
+#### Failed to provision PVC on IBM Openshift clusters:
+
+  * If you use spec generator to create StorageCluster and deploy on IBM Openshift cluster,  it may fail to create PVCs with following error:
+      ```
+      Events:
+      Type     Reason              Age                 From                         Message
+          ------              ----                ----                         -------
+        Warning  ProvisioningFailed  40s (x20 over 29m)  persistentvolume-controller  Failed to provision volume with StorageClass "px-db": Get "http://172.21.215.48:9001/v1/osd-volumes/versions": dial tcp 172.21.215.48:9001: i/o timeout
+      ```
+  
+  * **EXPLANATION**:<br/> This error is caused by missing PVC controller. Please update StorageCluster custom resource with following annotation:
+      ```
+      portworx.io/pvc-controller: "true"
+      ```
+  
