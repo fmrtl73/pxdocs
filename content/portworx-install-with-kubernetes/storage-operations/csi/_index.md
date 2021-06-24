@@ -26,7 +26,7 @@ The following table shows the core features supported by CSI and which minimum v
 | Stork [^1] | 2.2 | 1.13 |  |
 | Volume Expansion (resizing) | 2.2 | 1.16 | 1.14 |
 | [Generic Ephemeral Volumes](/portworx-install-with-kubernetes/storage-operations/csi/ephemeral) | 2.2 | 1.21 | 1.19 |
-| [CSI Raw Block](/portworx-install-with-kubernetes/storage-operations/csi/volumelifecycle) | 2.8 | 1.14 | 1.13.12 |
+| [CSI Raw Block](/portworx-install-with-kubernetes/storage-operations/csi/rawblock) | 2.8 | 1.14 |  |
 
 {{<companyName>}} does not recommend that you use alpha Kubernetes features in production as the API and core functionality are not finalized. Users that adopt alpha features in production may need to perform costly manual upgrades.
 

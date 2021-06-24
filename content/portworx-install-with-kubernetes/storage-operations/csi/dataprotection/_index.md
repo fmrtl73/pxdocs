@@ -5,6 +5,45 @@ description: This explains how you can protect your data against failures with S
 weight: 3
 ---
 
+## Setup CSI Volume Snapshotting 
+
+In order to use VolumeSnapshots with the Portworx CSI Driver and Portworx Operator, you must complete the following steps:
+
+1. Install the VolumeSnapshot CRDs:
+
+    * For Kubernetes 1.20+, use v1:
+
+      ```text
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v4.1.1/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v4.1.1/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v4.1.1/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
+      ```
+
+    * For Kubernetes 1.17-1.19, use v1beta1:
+
+      ```text
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.3/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.3/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.3/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
+      ```
+    
+
+2. Install the Snapshot Controller:
+
+    * For Kubernetes 1.20+, use v4:
+
+      ```text
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v4.1.1/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v4.1.1/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml
+      ```
+
+    * For Kubernetes 1.17-1.19, use v3:
+
+      ```text
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.3/deploy/kubernetes/snapshot-controller/rbac-snapshot-controller.yaml
+      kubectl apply -f https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v3.0.3/deploy/kubernetes/snapshot-controller/setup-snapshot-controller.yaml
+      ```
+
 ## Take snapshots of CSI-enabled volumes
 
 For Kubernetes 1.17+, CSI Snapshotting is in beta is supported by the Portworx CSI Driver.

@@ -5,13 +5,6 @@ description: This explains how to use ephemeral volumes with the Portworx CSI Dr
 weight: 5
 ---
 
-There are two main ways to create ephemeral CSI volumes within Kubernetes:
-
-1. **Generic Ephemeral volumes** - Implemented in Kubernetes and respects namespace quotas and volume creation Kubernetes RBAC.
-2. **Inline Ephemeral volumes** - Implemented at the CSI Driver level. This method is insecure for typical application volume usage and is currently deprecated. In a future Portworx release, will be disabling this feature by default in favor of Generic Ephemeral volumes.
-
-Both of these ephemeral volume types will provision Portworx volumes on pod creation and delete the volumes on pod teardown. Ephemeral volumes are strictly for data that does not need to be persisted beyond pod deletion.
-
 ## Generic Ephemral volumes
 
 Generic ephemeral volumes is a newer feature and is in beta (enabled by default) as of Kubernetes 1.21. These volumes also work with typical storage operations such as snapshotting, cloning, resizing, and storage capacity tracking.

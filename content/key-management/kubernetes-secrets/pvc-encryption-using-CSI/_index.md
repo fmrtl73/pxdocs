@@ -1,5 +1,6 @@
 ---
 title: Encrypting PVCs using CSI and Kubernetes Secrets
+linkTitle: PVC Encryption with CSI and Kubernetes
 weight: 1
 keywords: Portworx, Kubernetes, Kubernetes Secrets, containers, storage, encryption, CSI
 description: Instructions on using Kubernetes Secrets with Portworx for encrypting PVCs on CSI using StorageClass
@@ -41,7 +42,7 @@ The CSI implementation reads the Kubernetes secret px-secret and passes its cont
 Enter the following `kubectl create secret generic` command:
 
 ```text
-kubectl create secret generic px-secret --from-literal=SECRET_NAME=volume-secrets --from-literal=SECRET_KEY=mysql-pvc-secret-key --from-literal=SECRET_CONTEXT=portworx
+kubectl create secret generic px-secret -n portworx --from-literal=SECRET_NAME=volume-secrets --from-literal=SECRET_KEY=mysql-pvc-secret-key --from-literal=SECRET_CONTEXT=portworx
 ```
 
 #### Step 3: Create a CSI storage class for encrypted PVC.

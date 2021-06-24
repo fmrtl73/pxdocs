@@ -7,136 +7,125 @@ weight: 2
 
 ## Create and use persistent volumes
 
-To enable CSI for a StorageClass, set the `provisioner` value to `pxd.portworx.com`:
+Create and use volumes with CSI by configuring specs you create for your storage class, PVC, and volumes:
 
-```text
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: portworx-csi-sc
-provisioner: pxd.portworx.com
-parameters:
-  repl: "1"
-```
+1. Enable CSI for a StorageClass by setting the `provisioner` value to `pxd.portworx.com`:
 
-To create a PersistentVolumeClaim based on your CSI-enabled StorageClass, reference the StorageClass you created above with the `storageClassName` parameter:
-
-```text
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-   name: px-mysql-pvc
-spec:
-   storageClassName: portworx-csi-sc
-   accessModes:
-     - ReadWriteOnce
-   resources:
-     requests:
-       storage: 2Gi
-```
-
-Once you've created a storage class and PVC, you can create a volume as part of a deployment by referencing the PVC. This example creates a MySQL deployment referencing the `px-mysql-pvc` PVC you created in the step above:
-
-```text
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mysql
-spec:
-  selector:
-    matchLabels:
-      app: mysql
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
-  replicas: 1
-  template:
+    ```text
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
     metadata:
-      labels:
-        app: mysql
-        version: "1"
+      name: portworx-csi-sc
+    provisioner: pxd.portworx.com
+    parameters:
+      repl: "1"
+    ```
+
+2. Create a PersistentVolumeClaim based on your CSI-enabled StorageClass by referencing the StorageClass you created above with the `storageClassName` parameter:
+
+    ```text
+    kind: PersistentVolumeClaim
+    apiVersion: v1
+    metadata:
+      name: px-mysql-pvc
     spec:
-      containers:
-      - image: mysql:5.6
-        name: mysql
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: password
-        ports:
-        - containerPort: 3306
-        volumeMounts:
-        - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
-      volumes:
-      - name: mysql-persistent-storage
-        persistentVolumeClaim:
-          claimName: px-mysql-pvc
- ```
+      storageClassName: portworx-csi-sc
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 2Gi
+    ```
 
-<!--
+3. Create a volume by referencing the PVC. This example creates a MySQL deployment referencing the `px-mysql-pvc` PVC you created in the step above:
 
-### Mixing hardcoded and template values
-
-
-You can mix hardcoded and template values in your StorageClass.
-
-Hardcode the secret name, but use template values for the namespace to allow users to create PVCs on any namespace using your hardcoded secret.
-
-```text
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: portworx-csi-sc
-provisioner: pxd.portworx.com
-parameters:
-  repl: "1"
-  csi.storage.k8s.io/provisioner-secret-name: px-secret
-  csi.storage.k8s.io/provisioner-secret-namespace: ${pvc.namespace}
-```
-
-Hardcode the namespace but use template values for the secret to allow users to specify their own secret in the PVC, but only on the namespace you specify:
-
-```text
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: portworx-csi-sc
-provisioner: pxd.portworx.com
-parameters:
-  repl: "1"
-  csi.storage.k8s.io/provisioner-secret-name: ${pvc.name}
-  csi.storage.k8s.io/provisioner-secret-namespace: portworx
-```
--->
+    ```text
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: mysql
+    spec:
+      selector:
+        matchLabels:
+          app: mysql
+      strategy:
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 1
+        type: RollingUpdate
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            app: mysql
+            version: "1"
+        spec:
+          containers:
+          - image: mysql:5.6
+            name: mysql
+            env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: password
+            ports:
+            - containerPort: 3306
+            volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+          volumes:
+          - name: mysql-persistent-storage
+            persistentVolumeClaim:
+              claimName: px-mysql-pvc
+    ```
 
 ## Create shared CSI-enabled volumes
 
-You can create shared CSI-enabled volumes using one of two methods:
+Create shared CSI-enabled volumes by configuring the specs for you create for your storage class and PVCs:
 
-* Using a PVC's AccessMode parameter
-* Using StorageClass parameters
+1. Create a StorageClass `storageclass.yaml` file and apply it:
 
-### Sharedv4
+    ```text
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
+    metadata:
+      name: portworx-csi-sc
+    provisioner: pxd.portworx.com
+    parameters:
+      repl: "1"
+    ```
 
-In your PVC, if you use `ReadWriteMany`, Portworx defaults to a `Sharedv4` volume type.
+2. Apply the `storageclass.yaml` file:
 
-* In your SC, if you use the parameter `Sharedv4=true` and `ReadWriteMany` in your PVC, Portworx uses the Sharedv4 volume type.
-* In your SC, if you use the parameter `Shared=true` and `ReadWriteMany` in your PVC, Portworx uses the Shared volume type.
+    ```text
+    kubectl apply -f storageclass.yaml
+    ```
 
+3. Create a sharedv4 PVC by creating the following `shared-pvc.yaml` file:
+
+    ```text
+    kind: PersistentVolumeClaim
+    apiVersion: v1
+    metadata:
+      name: px-mysql-pvc
+    spec:
+      storageClassName: portworx-csi-sc
+      accessModes:
+        - ReadWriteMany
+      resources:
+        requests:
+          storage: 2Gi
+    ```
+
+4. Apply the `shared-pvc.yaml` file:
+
+    ```text
+    kubectl apply -f shared-pvc.yaml
+    ```
 
 ## Clone volumes with CSI
 
 You can clone CSI-enabled volumes, duplicating both the volume and content within it.
 
-1. Enable the `VolumePVCDataSource` [feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/):
-
-      ```text
-      --feature-gates=VolumePVCDataSource=true
-      ```
-
-2. Create a PVC that references the PVC you wish to clone, specifying the `dataSource` with the kind and name of the target PVC you wish to clone. The following spec creates a clone of the `px-mysql-pvc` PVC in a YAML file named `clonePVC.yaml`:
+1. Create a PVC that references the PVC you wish to clone, specifying the `dataSource` with the kind and name of the target PVC you wish to clone. The following spec creates a clone of the `px-mysql-pvc` PVC in a YAML file named `clonePVC.yaml`:
 
       ```text
       kind: PersistentVolumeClaim
@@ -155,7 +144,7 @@ You can clone CSI-enabled volumes, duplicating both the volume and content withi
           name: px-mysql-pvc
       ```
 
-3. Apply the `clonePVC.yaml` spec to create the clone:
+2. Apply the `clonePVC.yaml` spec to create the clone:
 
       ```text
       kubectl apply -f clonePVC.yaml

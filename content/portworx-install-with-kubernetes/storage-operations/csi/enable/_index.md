@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: Enable CSI
 keywords: csi, install, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk
 description: This explains at a high level what the Portworx CSI Driver as compared to the Portworx in-tree plugin
 weight: 1
@@ -20,9 +20,13 @@ The Portworx CSI Driver requires additional components called `CSI Sidecars` in 
 
 ## Portworx CSI installed by default
 
-Starting with the Portworx Operator 1.5 and higher, CSI is installed by default unless explicitly disabled. Due to the nature of CSI and its dependencies, it is highly recommend to use the Portworx Operator instead of the spec generator for installation.
+Starting with the Portworx [Operator 1.5 and higher](/reference/crd/storage-cluster/), CSI is installed by default unless explicitly disabled. Due to the nature of CSI and its dependencies, it is highly recommend to use the Portworx Operator instead of the spec generator for installation.
 
 The Portworx Operator easily manages all CSI components based on your Kubernetes and Portworx versions. This makes upgrading Kubernetes and Portworx versions far easier.
+
+{{<info>}}**Note**:
+Explicitly disabling CSI will also prevent the Pure Storage FlashBade DirectAccess mode from working.
+{{</info>}}
 
 ## Portworx Operator 1.4 and earlier
 
@@ -31,16 +35,26 @@ Older operator versions do not enable CSI by default. It is highly recommended t
 To enable CSI on older Portworx Operator versions, you may set the following CSI feature gate:
 
 ```
-
+spec:
+  featureGates:
+    CSI: "true"
 ```
 
-{{<info>}}**Openshift users**:
+## Openshift installation:
+
 You must add the `px-csi-account` service account to the privileged security context.
 
 ```text
 oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:px-csi-account
 ```
+
+
+{{<info>}}**Note**:
+If you experience the following error:
+"errorUnable to update cluster as v1alpha1 version of ... Remove these CRDs to allow the upgrade to proceed", 
+follow [this solution from RedHat](https://access.redhat.com/solutions/5372561).
 {{</info>}}
+
 
 ## Contribute
 
