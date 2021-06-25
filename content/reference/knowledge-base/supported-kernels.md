@@ -36,7 +36,7 @@ apt install linux-headers-$(uname -r)
 | CentOS 7.6 | 5.7.7-1.el7.elrepo.x86_64, 5.7.12-1.el7.elrepo.x86_64 | <!-- Missing  --> 
 | CentOS 7.8-vanilla | 3.10.0-1127.el7.x86_64 |
 | CentOS 8.2-vanilla | 4.18.0-193.el8.x86_64 |
-| Ubuntu 16.04 | 4.15.0-142-generic |
+| Ubuntu 16.04 | 4.15.0-142-generic, 4.15.0-144-generic |
 | Ubuntu 18.04.5 LTS | 5.4.0-1040-gcp, 5.4.0-1036-azure, 5.3.0-1039-gke, IBM Cloud: 4.15.0-142 |
 | Ubuntu 20.04 LTS| 5.4.0-72-generic |
 | Ubuntu 20.10 | 5.8.0-1028-gcp | <!-- New -->

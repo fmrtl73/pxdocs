@@ -12,7 +12,7 @@ June 25, 2021
 
 ### Notes
 
-* Portworx 2.7.2.1 once again supports installations on Ubuntu 16.04 with the 4.15.0-142-generic kernel. See the list of [supported kernels](/reference/knowledge-base/supported-kernels) for information.
+* Portworx 2.7.2.1 once again supports installations on Ubuntu 16.04 with the 4.15.0-142-generic and 4.15.0-144-generic kernels. See the list of [supported kernels](/reference/knowledge-base/supported-kernels) for information.
 
 ### Fixes
 
