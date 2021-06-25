@@ -22,7 +22,7 @@ A Stork `Rule` is a Custom Resource Definition (CRD) that allows to define actio
       * If background is set to _true_, add `${WAIT_CMD}` as shown in the examples below. This is a placeholder and Stork will replace it with an appropriate command to wait for the command is done.
     * **value**: This is the actual action content. For example, the command to run.
     * **runInSinglePod**: If _true_, the action will be run on a single pod that matches the selectors.
-
+* **container**: specifies the container in which Stork will execute the action.
 ## Step 2: Create snapshots that reference the rules
 
 Once you have the rules applied in your cluster, you can reference them in the `VolumeSnapshot` or `GroupVolumeSnapshot` for individual and group snapshots respectively.
@@ -45,6 +45,23 @@ Use following fields in the GroupVolumeSnapshot spec to specify pre and post rul
 
 This section covers examples of creating 3DSnapshots for various applications.
 
+### Specify the container in which Stork will execute the action
+
+The following example rule configures Stork to execute the action in a container named `<my_container>`:
+
+```text
+apiVersion: stork.libopenstorage.org/v1alpha1
+kind: Rule
+metadata:
+  name: mysql-pre-backup-rule
+  namespace: mysql-1-pvc-mysql
+  annotations:
+    "stork/cmdexecutor-image": "openstorage/cmdexecutor:latest"
+rules:
+  - podSelector:
+      app: mysql
+    container: <my_container>
+```
 ### Hello world
 
 Below rule is a generic example on how to run an echo command on a single pod that matches the label selector app=foo.
