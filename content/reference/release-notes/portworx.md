@@ -21,6 +21,11 @@ The following issues have been fixed:
 |**Issue Number**|**Issue Description**|
 |----|----|
 | PWX-20594 | Portworx erroneously allowed the creation of large replication sets, causing the `px-storage` process to create a core file.<br/><br/>**User impact:** Users required help from support to fix the volume definition.<br/><br/>**Resolution:** Portworx no longer allows the creation of replication sets larger than 3. |
+| PWX-20629 | I/O did not progress for Portworx volumes and mount points until the `px-storage` process was restarted. <br/><br/>**User impact:** I/O may not have progressed and users may have had to restart the `px-storage` process.<br/><br/>**Resolution:** Portworx no longer requires a restart of the `px-storage` process. |
+| PWX-20619 | I/O to the sharedv4 volumes was blocked while the NFS server reloaded the exports. When there were a large number of sharedv4 volumes being exported from the node, I/O was blocked for a prolonged period of time. <br/><br/>**User impact:** Apps using the `df` command saw it take a long time to complete, causing pods to reset unnecessarily when `df` was used as a health-check. Removing one of the export options fixed this issue.<br/><br/>**Resolution:** The `df` command will no longer slow down under these circumstances. |
+| PWX-20640 | When uploading diagnostics, Portworx made its configuration file immutable. <br/><br/>**User impact:** When made immutable, configuration files may interfere with Opershift upgrades.<br/><br/>**Resolution:** Portworx no longer makes its configuration file immutable when uploading diagnostics. | 
+
+
 
 ## 2.7.2
 
