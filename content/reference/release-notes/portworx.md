@@ -6,6 +6,22 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.7.2.1
+
+June 25, 2021
+
+### Notes
+
+* Portworx 2.7.2.1 once again supports installations on Ubuntu 16.04 with the 4.15.0-142-generic kernel. See the list of [supported kernels](/reference/knowledge-base/supported-kernels) for information.
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-20594 | Portworx erroneously allowed the creation of large replication sets, causing the `px-storage` process to create a core file.<br/><br/>**User impact:** Users required help from support to fix the volume definition.<br/><br/>**Resolution:** Portworx no longer allows the creation of replication sets larger than 3. |
+
 ## 2.7.2
 
 May 18, 2021
