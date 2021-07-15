@@ -6,6 +6,32 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.7.3
+
+July 15, 2021
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-20641 | RedHat OpenShift 4.7.16 write locks partitions Portworx uses during upgrades. Portworx versions 2.5.x through 2.7.2.1 generated chattr-protected immutable /etc/pwx/.private.json files. Lastly, OpenShift 4.7 started protecting root-partition (using read-only mountpoints).<br/><br/>**User impact:** These files were sometimes collected into OpenShift's historical snapshots and interfered with OpenShift upgrades.<br/><br/>**Resolution:** the `px-runc` statup service now scans and fixes any immutable .private.json files found in CoreOS file-system snapshots and OpenShift snapshots. This works for both read-only and read-write partitions. | 
+| PWX-15391 | When using an internal KVDB, Portworx encountered an error if one of the KVDB nodes went down. <br/><br/>**User impact:** Users saw impacted filesystems enter read-only mode. <br/><br/>**Resolution:** The run-flat feature keeps the Portworx volumes online, even if the KVDB is down. New create/attach/mount operations are not allowed, but existing volumes don't see an I/O interruption as long as all the replicas of the volume are online. Note the following implications for the external and internal KVDB: <br/><br/>**External KVDB:** as long as all the Portworx nodes continue to stay up, all the volume replicas should stay online and with no I/O interruption. However, if any node goes down, volumes with a replica on the down nodes will see an outage. <br/><br/>**Internal KVDB:** if the KVDB is down, it almost certainly implies that at least 2 Portworx nodes are down. Any volumes with a replica on the down nodes will see an I/O interruption. |
+| PWX-20075 | CSI VolumeSnapshotContent objects incorrectly displayed a restore size of 0.<br/><br/>**User impact:** External backup systems that depend on the CSI VolumeSnapshotContent restore resize sometimes failed. <br/><br/>**Resolution:** The Portworx CSI driver now correctly adds the restore size to new CSI volume snapshots, and snapshot contents will have the correct RestoreSize. |
+| PWX-19518 | Overwriting a cluster wide secret when using Vault Namespaces failed with the `NotFound` error. <br/><br/>**User impact:** Users were unable to use Vault as their secret management store. <br/><br/>**Resolution:** The issue has been fixed and Portworx now uses the correct vault namespace while resetting the cluster wide secret. |
+| PWX-20149 | Portworx encrypted volume creation failed due to lock expiration.<br/><br/>**User impact:** In certain scenarios, Portworx encrypted volume creation took longer than expected and eventually timed out. <br/><br/>**Resolution:** Portworx no longer times-out when creating encrypted devices. |
+| PWX-20519 | On vSphere environments experiencing high I/O latency, Portworx cluster installation failed while setting-up the internal KVDB. <br/><br/>**User impact:** Users saw the internal KVDB fail to initialize the disks within the allocated time.<br/><br/>**Resolution:** Portworx now initializes a "thin" disk, rather than a "zeroedThick" disk by default; this option can be overridden. |
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-20323 | Portworx now tries to reconnect to the KVDB at least 3 times before restarting the Portworx process. |
+| PWX-19994 | Added two new runtime options: <br/><br/><ul><li> quorum_timeout_in_seconds: To set the maximum time for which nodes will wait in seconds to reach quorum. After this timeout PX will restart</li><li>kv_snap_lock_duration_in_mins: To set the maximum timeout for which PX will wait for a kvdb snapshot operation to complete. After this timeout PX will panic and restart if the snapshot does not complete.</li></ul>| 
+
 ## 2.7.2.1
 
 June 25, 2021
