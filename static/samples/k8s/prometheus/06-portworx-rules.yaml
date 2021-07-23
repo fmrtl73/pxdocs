@@ -36,7 +36,7 @@ data:
             used.
       # --- Portworx Storage Alerts ---
       - alert: PortworxStorageUsageCritical
-        expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes)) < 20
+        expr: 100 * (px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes) > 80
         for: 5m
         labels:
           issue: Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is high.
@@ -46,7 +46,7 @@ data:
             80% used for more than 10 minutes.
           summary: Portworx storage capacity is at {{$value}}% used.
       - alert: PortworxStorageUsage
-        expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes)) < 30
+        expr: 100 * (px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes) > 70
         for: 5m
         labels:
           issue: Portworx storage {{$labels.volumeid}} usage on {{$labels.host}} is critical.
@@ -135,7 +135,7 @@ data:
             Please check licenses and/or license server.
       # --- Miscellanies Alerts ---
       - alert: PXBackupError
-        expr: px_backup_stats_status == 2
+        expr: px_backup_stats_backup_status == 2
         labels:
           issue: Cloudsnap backup error
           severity: warning
