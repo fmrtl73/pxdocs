@@ -248,7 +248,7 @@ This section explains the fields used to configure Portworx with cloud storage. 
 
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
-| spec.<br>cloudStorage.<br>provider | Specifies the cloud provider name, such as: pure, azure, aws, gce, vsphere, ibm, csi. | `string` | None |
+| spec.<br>cloudStorage.<br>provider | Specifies the cloud provider name, such as: pure, azure, aws, gce, vsphere. | `string` | None |
 | spec.<br>cloudStorage.<br>deviceSpecs[] | A list of the specs for your cloud storage devices. Portworx creates a cloud disk for every device. | `[]string` | None |
 | spec.<br>cloudStorage.<br>journalDeviceSpec | Specifies the cloud device Portworx uses for journaling. | `string` | None |
 | spec.<br>cloudStorage.<br>systemMetadataDeviceSpec | Indicates the cloud device Portworx uses for metadata. For performance, specify a system metadata device when using Portworx with the internal KVdb. | `string` | None |
