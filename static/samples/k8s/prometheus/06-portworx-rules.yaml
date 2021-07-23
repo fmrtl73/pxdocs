@@ -34,19 +34,6 @@ data:
             70% used for more than 10 minutes.
           summary: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is at {{$value}}%
             used.
-      - alert: PortworxVolumeWillFill
-        expr: (px_volume_usage_bytes / px_volume_capacity_bytes) > 0.7
-          and predict_linear(px_cluster_disk_available_bytes[1h], 14 * 86400) < 0
-        for: 10m
-        labels:
-          issue: Disk volume {{$labels.volumeid}} on {{$labels.host}} is predicted to
-            fill within 2 weeks.
-          severity: warning
-        annotations:
-          description: Disk volume {{$labels.volumeid}} on {{$labels.host}} is over 70%
-            full and has been predicted to fill within 2 weeks for more than 10 minutes.
-          summary: Portworx volume {{$labels.volumeid}} on {{$labels.host}} is over 70%
-            full and is predicted to fill within 2 weeks.
       # --- Portworx Storage Alerts ---
       - alert: PortworxStorageUsageCritical
         expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_available_bytes)) < 20
