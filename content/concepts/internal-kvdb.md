@@ -133,27 +133,4 @@ In an event of a cluster failure such as:
 
 Portworx can recover its internal KVDB cluster from one of the backup files that are dumped on each of the nodes.
 
-Follow these steps to recover.
-
-### Step 1: Identify the latest and golden KVDB backup file
-
-A timestamp is associated with each internal KVDB backup that is taken. Choose the latest backup file from all the nodes.
-
-### Step 2: Rename the backup file
-
-On the node where the latest backup exists, rename the backup file to `pwx_kvdb_disaster_recovery_golden.dump`.
-
-```text
-cp /var/lib/osd/kvdb_backup/pwx_kvdb_schedule_153664_2019-02-06T22:30:39-08:00.dump /var/lib/osd/kvdb_backup/pwx_kvdb_disaster_recovery_golden.dump
-```
-
-### Step 3: Restart Portworx
-
-On the node where the golden dump exists, restart Portworx service.
-
-Portworx will be able to recover the internal KVDB cluster from the golden dump only if
-
-- Nodes from the existing (old) internal KVDB cluster are **NOT** healthy.
-- There is only one node with the file `pwx_kvdb_disaster_recovery_golden.dump`
-
-As soon as this node recovers the internal KVDB cluster, all other Portworx nodes will start coming back up one by one.
+Please reach out to Portworx support to recover your cluster from such a state.
