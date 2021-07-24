@@ -1,5 +1,5 @@
 ---
-title: Install on-premise
+title: Install on-premises
 weight: 2
 logoList: true
 keywords: Install, on-premises, kubernetes, k8s
