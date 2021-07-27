@@ -1,18 +1,13 @@
 ---
 title: Upgrade Portworx using a Nomad job
-linkTitle: Upgrade Portworx using a Nomad job
+linkTitle: Upgrade Portworx
 keywords: post-install, upgrade, Nomad
 description: Learn how to upgrade Portworx using a Nomad job.
 weight: 1
 series: px-as-a-nomad-job
 series2: px-postinstall-nomad-job
 noicon: true
-hidden: true
 ---
-
-{{<info>}}
-This document presents the **Nomad** method of upgrading a Portworx cluster. Please refer to the [Upgrade Portworx on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/) page if you want to upgrade Portworx on Kubernetes.
-{{</info>}}
 
 Upgrade Portworx with Nomad by editing the `portworx.nomad` file you used for initial deployment and updating the container version.
 

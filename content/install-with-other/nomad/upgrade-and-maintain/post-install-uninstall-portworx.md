@@ -1,19 +1,13 @@
 ---
 title: Uninstall Portworx using a Nomad job
-linkTitle: Uninstall Portworx using a Nomad job
+linkTitle: Uninstall Portworx
 keywords: Uninstall, Nomad
 description: Learn how to uninstall Portworx using a Nomad job.
-weight: 2
+weight: 5
 series: px-as-a-nomad-job
 series2: px-postinstall-nomad-job
 noicon: true
-hidden: true
 ---
-
-{{<info>}}
-This document presents the **Nomad** method of uninstalling a Portworx cluster. Please refer to the [Uninstall on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/) page if you are running Portworx on Kubernetes.
-{{</info>}}
-
 
 There are two steps to completely uninstall Portworx from Nomad:
 
@@ -56,10 +50,13 @@ job "px-node-wiper" {
 
       # container config
       config {
-        image        = "portworx/px-node-wiper:2.0.3.6"
+        image        = "portworx/px-node-wiper:2.5.0"
         network_mode = "host"
         ipc_mode = "host"
         privileged = true
+        args = [
+            "--removedata"
+        ]
 
         volumes = [
             "/etc/pwx:/etc/pwx",
@@ -114,4 +111,11 @@ ID        Node ID   Task Group     Version  Desired  Status    Created  Modified
 145b8fda  e074a6b0  px-node-wiper  0        run      complete  57s ago  34s ago
 4b9f527f  6138409d  px-node-wiper  0        run      complete  57s ago  33s ago
 d4ca97ae  2299a3b6  px-node-wiper  0        run      complete  57s ago  33s ago
+```
+
+Delete the wiper job once completed:
+
+```text
+nomad job stop px-node-wiper
+nomad system gc
 ```

@@ -9,9 +9,12 @@ disableprevnext: true
 scrollspy-container: false
 ---
 
-The Portworx CSI Driver has been verified on both [Kubernetes](/portworx-install-with-kubernetes/storage-operations/csi/) and Nomad. The CSI Driver supports all existing Portworx features as well as most CSI features. See the table below for a detailed picture of what features we support for each scheduler.
+The Portworx CSI Driver has been verified on both [Kubernetes](/portworx-install-with-kubernetes/storage-operations/csi/) and [Nomad](/install-with-other/nomad/). The CSI Driver supports all existing Portworx features as well as most CSI features. See the table below for a detailed picture of what features we support for each scheduler.
 
-For scheduler-specific information, refer to the [Portworx CSI Driver on Kubernetes](/portworx-install-with-kubernetes/storage-operations/csi/) section of the documentation. 
+For scheduler-specific information, refer to the follow pages:
+
+* [CSI Driver on Kubernetes](/portworx-install-with-kubernetes/storage-operations/csi/)
+* [CSI Driver on Nomad](/install-with-other/nomad//)
 
 ## Core Features support
 | **Feature**  | **Kubernetes** | **Nomad** |
@@ -33,12 +36,18 @@ For scheduler-specific information, refer to the [Portworx CSI Driver on Kuberne
 
 | **Feature**                         | **Supported**                                                              |
 |-------------------------------------|----------------------------------------------------------------------------|
-| Volume Placement Strategies         | Yes                                                                        |
-| Auth Token Secrets                  | Yes                                                                        |
-| Autopilot                           | Yes                                                                        |
-| Generic Ephemeral Volumes           | Yes                                                                        |
-| Encryption with K8s secrets         | Yes                                                                        |
-| CSI Migration (in-tree -> Portworx) | No                                               |
+| Volume Placement Strategies             | Yes                                                                    |
+| Auth Token Secrets                      | Yes                                                                    |
+| Autopilot                               | Yes                                                                    |
+| Generic Ephemeral Volumes               | Yes                                                                    |
+| Encryption with K8s secrets             | Yes                                                                    |
+| CSI Migration (Portworx in-tree -> CSI) | No - coming soon                                                       |
+
+## Nomad specific features
+
+| **Feature**                         | **Supported**                                                              |
+|-------------------------------------|----------------------------------------------------------------------------|
+| Pre-provisioned volume registration | Yes                                                                        |
 
 ## PX-Backup & Stork
 
