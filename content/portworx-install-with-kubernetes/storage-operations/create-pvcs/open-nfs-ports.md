@@ -83,6 +83,34 @@ If you do need to manually assign and open NFS ports, follow the steps in the  s
 
 ### Open NFS ports on Debian-based Linux
 
+#### Debian 10
+
+1. Modify the `/etc/default/nfs-kernel-server` file. Uncomment or add the `RPCMOUNTDARGS` field and add the `--port 9024` option to the value:
+   
+   ```text
+   ...
+   RPCMOUNTDOPTS="--manage-gids --port 9024"
+   ```
+
+2. Enter the following `systemctl` command to restart the mountd service:
+
+    ```text
+    systemctl restart nfs-mountd.service
+    ```
+
+3. Verify that the mountd service is running on the port you configured by searching the output of `rcpinfo -p`:
+   
+    ```text
+    rpcinfo -p | grep 'tcp.*mountd'
+    ```
+    ```output
+    100005    1   tcp   9024  mountd
+    100005    2   tcp   9024  mountd
+    100005    3   tcp   9024  mountd
+    ```
+
+#### Debian 9 and lower
+
 1. Modify the `/run/sysconfig/nfs-utils` file, uncommenting or adding the following fields and assigning the associated values:
 
     * `RPCNFSDARGS=" 8 --port 9023"`: append the `--port 9023` option to any existing values.
