@@ -17,15 +17,16 @@ This document describes how to use Portworx **sharedv4** (ReadWriteMany) volumes
 
 Sharedv4 volumes are useful when you want multiple PODs to access the same PVC \(volume\) at the same time. They can use the same volume even if they are running on different hosts. They provide a global namespace and the semantics are POSIX compliant.
 
+To increase fault tolerance, you can enable sharedv4 service volumes. With this feature enabled, every sharedv4 volume has a Kubernetes service associated with it. Sharedv4 service volumes expose the volume via a Kubernetes service IP. If the sharedv4 (NFS) server goes offline and requires a failover, application pods won't need to restart. 
+
 **Step1: Create Storage Class**
 
-Create the storageclass:
+1. Create the following storageClass, specifying your own values for the following fields:
 
-```text
-kubectl create -f examples/volumes/portworx/portworx-sharedv4-sc.yaml
-```
-
-Example:
+  * The `metadata.name` field with a name for your storageClass
+  * The `parameters.repl` field with the replication factor you'd like to set
+  * The `sharedv4` field set to `true`
+  * (Optional) The `sharedv4_svc_type` set to either `ClusterIP` or `Loadbalancer`
 
 ```text
 kind: StorageClass
@@ -36,9 +37,16 @@ provisioner: kubernetes.io/portworx-volume
 parameters:
    repl: "2"
    sharedv4: "true"
+   sharedv4_svc_type: "ClusterIP"
 ```
 
-Note the `sharedv4` field in the list of parameters is set to true. Verifying storage class is created:
+2. Apply the storageClass:
+
+```text
+kubectl apply -f examples/volumes/portworx/portworx-sharedv4-sc.yaml
+```
+
+3. Verify the storage class is created:
 
 ```text
 kubectl describe storageclass px-sharedv4-sc
@@ -49,7 +57,7 @@ Name:	  	   px-sharedv4-sc
 IsDefaultClass:	   No
 Annotations:	   <none>
 Provisioner:	   kubernetes.io/portworx-volume
-Parameters:	   repl=2,sharedv4=true
+Parameters:	   repl=2,sharedv4=true,sharedv4_svc_type=ClusterIP
 Events:			<none>
 ```
 
@@ -160,7 +168,19 @@ pod1      1/1       Running   0          2m
 pod2      1/1       Running   0          1m
 ```
 
-## Updating a shared volume to sharedv4 volume
+## Update a sharedv4 volume to sharedv4 service volume
+
+Perform the following steps to convert a sharedv4 volume to use the new sharedv4 service feature:
+
+1. Detach the volume by scaling down the app.
+2. Run the following `pxctl` command:
+
+  ```text
+  pxctl volume update --sharedv4_service_type=ClusterIP <volume>
+  ```
+
+
+## Update a legacy shared volume to a sharedv4 volume
 
 You can update an existing shared volume to use the new v4 protocol and convert it into a sharedv4 volume. Run the following pxctl command to update the volume setting
 
