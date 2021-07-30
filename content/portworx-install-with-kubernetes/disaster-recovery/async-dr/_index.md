@@ -178,7 +178,7 @@ status:
 
 ## Schedule a migration
 
-To schedule a migration, you must create a schedule policy.
+To schedule a migration, you must create a schedule policy or a namespaced schedule policy. The `NamespacedSchedulePolicy` is namespace-scoped while `SchedulePolicy` is cluster-scoped.
 
 ### Create a schedule policy
 
@@ -189,7 +189,6 @@ To schedule a migration, you must create a schedule policy.
     kind: SchedulePolicy
     metadata:
       name: testpolicy
-      namespace: mysql
     policy:
       interval:
         intervalMinutes: 1
@@ -222,9 +221,50 @@ To schedule a migration, you must create a schedule policy.
     testpolicy     1                  10:14PM   Thursday@10:13PM   14@8:05PM
     ```
 
+### Create a namespaced schedule policy
+
+1. Paste the following content into a file called `namespaced-testpolicy.yaml`:
+
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: NamespacedSchedulePolicy
+    metadata:
+      name: testpolicy
+      namespace: <namespace-for-sched-policy>
+    policy:
+      interval:
+        intervalMinutes: 1
+      daily:
+        time: "10:14PM"
+      weekly:
+        day: "Thursday"
+        time: "10:13PM"
+      monthly:
+        date: 14
+        time: "8:05PM"
+    ```
+
+2. Apply your spec by entering the following command:
+
+    ```text
+    kubectl apply -f namespaced-testpolicy.yaml
+    ```
+
+3. Display your namespacedschedule policy. Enter the `kubectl -n <namespace-for-sched-policy>  get` command passing it the name of your policy:
+
+    ```text
+    kubectl -n <namespace-for-sched-policy>  get namespacedschedulepolicy
+    ```
+
+    ```output
+    NAME           AGE
+    testpolicy     1s
+    ```
+
 ### Create a migration schedule
 
-Once a policy has been created, you can use it to schedule a migration. The spec for the MigrationSchedule spec contains the same fields as the Migration spec with the addition of the policy name. The MigrationSchedule object is namespaced like the Migration object.
+Once a schedule policy or namespaced schedule policy has been created, you can use it to schedule a migration. The spec for the MigrationSchedule spec contains the same fields as the Migration spec with the addition of the policy name. The MigrationSchedule object is namespaced like the Migration object.
+Stork will first look for namespaced schedule policy in the same namespace of migration/backup. If a namespaced schedule policy with the specified name is not found it will look for global SchedulePolicy with the same name.
 
 Note that `startApplications` should be set to false in the spec. Otherwise, the first Migration will start the pods on the remote cluster and will succeed. But all subsequent migrations will fail since the volumes will be in use.
 
