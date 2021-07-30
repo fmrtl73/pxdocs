@@ -108,7 +108,7 @@ Status:
 You can see 3 VolumeSnapshots which are part of the group snapshot. The name of the VolumeSnapshot is in the _Volume Snapshot Name_ field. For more details on the VolumeSnapshot, you can do:
 
 ```text
-kubectl get volumesnapshot <volume-snapshot-name> -o yaml
+kubectl get volumesnapshot.volumesnapshot.external-storage.k8s.io/<volume-snapshot-name> -o yaml
 ```
 
 ### Snapshots across namespaces

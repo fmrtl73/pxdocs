@@ -46,10 +46,10 @@ spec:
   persistentVolumeClaimName: mysql-data
 ```
 
-Once you apply the above object you can check the status of the snapshots using `kubectl`:
+Once you apply the above object you can check the status of the snapshots using the `kubectl get volumesnapshot.volumesnapshot.external-storage.k8s.io/` command with the name of your snapshot appended:
 
 ```text
-kubectl get volumesnapshot
+kubectl get volumesnapshot.volumesnapshot.external-storage.k8s.io/mysql-snapshot
 ```
 
 ```output
