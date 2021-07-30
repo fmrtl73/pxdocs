@@ -84,7 +84,7 @@ Once you've ensured you meet the prerequisites and your physical network topolog
     ```
 
     {{<info>}}
-**NOTE:** You can add FlashArray configuration information to this file if you're configuring both FlashBlade and FlashArray together. Refer to the [JSON file](/shared/pure-json-reference.md) reference for more information.
+**NOTE:** You can add FlashArray configuration information to this file if you're configuring both FlashBlade and FlashArray together. Refer to the [JSON file](/reference/pure-json-reference/) reference for more information.
     {{</info>}}
 
 2. Enter the following `kubectl create` command to create a Kubernetes secret called `px-pure-secret`:
