@@ -8,7 +8,7 @@ noicon: true
 ---
 
 {{<info>}}
-**NOTE:** This feature is currently in beta. 
+**NOTE:** This is an early access feature, reach out to your account team to enable it. 
 {{</info>}}
 
 You can use Portworx with Pure Storage FlashArray as a cloud storage provider. This allows you to store your data on-premises with FlashArray while benefiting from Portworx cloud drive features, such as:
