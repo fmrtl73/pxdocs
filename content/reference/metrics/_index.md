@@ -12,6 +12,11 @@ noicon: true
 | px_backup_stats_backup_status | Status for this backup (0=InProgress,1=Done,2=Failed) |
 | px_backup_stats_backup_size | Size in bytes for this backup |
 | px_backup_stats_backup_duration_seconds | Duration in seconds for this backup |
+| px_backup_stats_backup_uploaded_bytes_mbs | Delta bytes uploaded in MB/s from last interval for this backup |
+| px_backup_stats_download_size_bytes | Size of downloaded bytes during backup/restore from cloud |
+| px_backup_stats_upload_size_bytes | Size of uploaded bytes during backup/restore from cloud |
+| px_backup_stats_get_apis_invoked | Number of times GET API was invoked |
+| px_backup_stats_put_apis_invoked | Number of times PUT API was invoked |
 
 ## cluster stats
 | Name | Description |
@@ -131,6 +136,9 @@ noicon: true
 | px_node_stats_procfs_mem_anon_pages_bytes | The total amount of memory, in bytes, used by pages that are not backed by files and are mapped into userspace page tables |
 | px_node_stats_procfs_mem_mapped_bytes | The memory, in bytes, used for files that have been mmaped, such as libraries |
 | px_node_stats_procfs_mem_sh_mem_bytes | The total amount of memory, in bytes, used by shared memory (shmem) and tmpfs |
+| px_node_stats_num_skinnysnaps | The number of SkinnySnaps |
+| px_node_stats_skinnysnaps_num_repls_skips | The number of target replicas skipped for a snapshot due to SkinnySnap |
+| px_node_stats_skinnysnaps_num_repls_snapshots | The number of target replicas that underwent a snapshot operation due to SkinnySnap |
 
 ## node_status stats
 | Name | Description |
