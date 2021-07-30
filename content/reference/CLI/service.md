@@ -107,7 +107,11 @@ Call home feature successfully disabled
 
 ## Generate a complete diagnostics package
 
-When there is an operational failure, you can use the `pxctl service diags <name-of-px-container>` command to generate a complete diagnostics package. This package will be automatically uploaded to Portworx if `--upload` is specified. Additionally, the service package can be mailed to Portworx at support@portworx.com. The package will be available at /var/cores/diags.tgz inside the Portworx container.
+When there is an operational failure, you can use the `pxctl service diags` command to generate a complete diagnostics package. 
+
+The diagnostics package will be available at /var/cores. It will be automatically uploaded to Pure1 if telemetry is enabled. 
+
+See [Auto-uploading diags using Pure1 integration ](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/collecting-diagnostics/#auto-uploading-diags-using-pure1-integration) for details on enabling Pure1 telemetry.
 
 ```text
 pxctl service diags --help
@@ -133,7 +137,6 @@ Flags:
   -n, --node string         generate diags for a specific remote node with the provided NodeIp or NodeID.
   -o, --output string       output file name (default "/var/cores/diags.tar.gz")
   -p, --profile             only dump profile
-  -u, --upload              upload diags to cloud
 
 Global Flags:
       --ca string            path to root certificate for ssl usage
@@ -151,14 +154,21 @@ Global Flags:
 As an example, here's how to generate the diagnostics package for a container called `px-enterprise`:
 
 ```text
-pxctl service diags --container px-enterprise
+pxctl service diags -a
 ```
-
 ```output
-PX container name provided:  px-enterprise
-INFO[0000] Connected to Docker daemon.  unix:///var/run/docker.sock
-Getting diags files...
-Generated diags: /tmp/diags.tar.gz
+Connected to Docker daemon.  unix:///var/run/docker.sock
+Running PX diagnostics on local node....
+Using PX OCI container: 2.8.0.0-c60727b
+Archived cores to: /var/cores/test-k8s1-node0-px-cores.20210514230349.tgz, cleaning up archived cores...
+Removing /var/cores/core-px-storage-sig6-user0-group0-pid312-time1620773250...
+Getting diags file....
+Creating a diags tar ball...
+Executing core cleanup...
+Finished core cleanup.
+Removing /var/cores/test-k8s1-node0-px-cores.20210514230349.tgz...
+Generated diags:  /var/cores/test-k8s1-node0-diags-20210514230401.tar.gz
+Done generating PX diagnostics.
 ```
 
 ## Get the version of the installed software
