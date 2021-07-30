@@ -55,7 +55,3 @@ Portworx uses a single secret for both FlashArray and FlashBlade configuration. 
 
 * [Disk provisioning on Pure Storage FlashArray](/cloud-references/auto-disk-provisioning/pure-flash-array/)
 * [Configure FlashBlade as a Direct Access filesystem](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flashblade/)
-
-## Known issues
-
-If you manually disconnect any connected volumes from FlashArray, the Portworx node will become stuck attempting to reconnect to the original volume instead of moving into maintenance mode. Eventually, this node will become a storageless node.

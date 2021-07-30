@@ -99,3 +99,7 @@ Once deployed, Portworx detects that the FlashArray secret is present when it st
 
 * [Pure.json file reference](/reference/pure-json-reference/)
 * [Configure FlashBlade as a Direct Access filesystem](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flashblade/)
+
+## Known issues
+
+If you manually disconnect any connected volumes from FlashArray, the Portworx node may become stuck attempting to reconnect to the original volume if there are pending I/Os. Reconnecting the volume will resolve this issue at the next Portworx restart and the node will return to a healthy state.
