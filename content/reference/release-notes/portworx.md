@@ -6,6 +6,102 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.8.0
+
+July 30, 2021
+
+### New features
+
+Portworx by Pure Storage is proud to introduce the following new features:
+
+* Early access support for [Pure FlashBlade as a Direct Access filesystem](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flashblade). With this feature, Portworx directly provisions FlashBlade NFS filesystems, maps them to a user PVC, and mounts them to pods. Reach out to your account team to enable this feature. 
+* Early access support for [Pure FlashArray cloud drives](/cloud-references/auto-disk-provisioning/pure-flash-array/). Use FlashArrays as a cloud storage provider. Reach out to your account team to enable this feature. 
+* [Snapshot optimization using extent metadata](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snapshot-methods): Reduce the amount of data sent to your cloud storage provider when taking cloud snapshots. 
+* [SkinnySnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/skinnysnaps): improve the performance of your storage pools when taking volume snapshots. 
+* [Sharedv4 service volumes](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs): improve fault tolerance by associating sharedv4 volumes with a Kubernetes service.
+* You can now install [Portworx on Nomad with CSI enabled](/install-with-other/nomad/installation/install-as-a-nomad-job).
+* [Install and scale](/cloud-references/auto-disk-provisioning/tanzu/install) a Portworx cluster on VMware Tanzu with CSI.
+* [With Pure1 integration](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/collecting-diagnostics), Portworx can now automatically upload it's diags to Pure Storage's call home service called **Pure1**.
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-20720 | Portworx now supports SharedV4 volumes on VMware Photon hosts |
+| PWX-20131 | You can now resize disk pools with disks of size 32TiB on Azure for up to 32TiB. |
+| PWX-20060 | The Portworx spec generator now creates the GA/v1 API version of the CSI VolumeSnapshot CRDs. |
+| PWX-18845 | Portworx now supports Amazon General Purpose SSD volumes (gp3). | 
+| PWX-10281 | The Portworx CSI driver now supports Raw Block volumes for RWO PVCs. | 
+| PWX-20102 | Licensing improvement: Autopilot licenses are now automatically included with all Portworx Enterprise licenses, including floating licenses.|
+| PWX-19553 | Alerts now bypass the API queue. As a result, `pxctl` will still show alerts even when the API queue is full. | 
+| PWX-19496 | Kubernetes PVCs will now get created by the CopyOnWrite on demand setting by default. |
+| PWX-19340 | Volumes can now be tagged for automatic `fstrim` during volume create and/or volume update. <br/><br/>To enable automatic fstrim on a volume during volume create: `pxctl volume create --auto_fstrim -s 20 v1`<br/><br/>To enable automatic fstrim on a volume during volume update: `pxctl volume update --auto_fstrim on v1`<br/><br/>To disable  automatic fstrim on a volume during volume update: `pxctl volume update --auto_fstrim off v1` | 
+| PWX-19320 | Portworx CSI Driver volumes will now be rounded up to the nearest GiB to match the Portworx in-tree volume plugin. This change only occurs for new volumes and volume size updates. | 
+| PWX-20803 | Added photon support for pool caching. Portworx will try to install the required packages if enabled. If they fail, the Portworx installation will fail. Pool caching requires the following available packages: <ul><li>device-mapper</li><li>mdadm</li><li>lvm2</li><li>thin-provisioning-tools</li></ul> |
+| PWX-20527 | The maximum number of cloud drives per node (not per pool) has increased from 12 to 32. Note that specific cloud providers may impose their own limits (remaining at 12), and that there are still limits per pool that may come into effect sooner. | @Adam Krpan
+| PWX-20423 | Sharedv4 Export Options Improvements: The storage class option `export_options` can now take any NFS export option as a comma separated list of strings. Portworx will apply those export options on the node where the volume is attached and exported over NFS. |
+| PWX-20204 | For cloud drive, the requirement to specify `skip_deprecation` has been removed and users can now use the `pxctl sv drive add` command without that. |
+| PWX-18529 | Portworx will now report back home in trial license installations | 
+
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-20780 | Pods using encrypted sharedv4 volumes sometimes got stuck in the terminating state. <br/><br/>**User impact:** If a node hosting a replica of a sharedv4 encrypted volume (server node) was rebooted, the application pods accessing that volume sometimes got stuck in the terminating state. <br/><br/>**Resolution:** Portworx now detects when a `sharedv4` encrypted volume server node restarts, and will automatically restart application pods using that volume to recover them to a functional state. |
+| PWX-20417 | On Kubernetes-v1.20.1 on the containerd-v1.4.4 container runtime,the Portworx installer used an invalid cgroups-path. <br/><br/> **User impact:** Portworx failed to install <br/><br/> **Resolution:** Portworx now properly installs on this Kubernetes version and runtime. |
+| PWX-20789 | A pool expand status message was incorrect. <br/><br/>**User impact:** The status message in the pool expand operation that appears in the `pxctl service pool show` command output was inaccurate when the operation type was `add-disk`. Users saw the incorrect size amount by which the pool was being expanded by, but the operation functioned properly. <br/><br/>**Resolution:** The status message now correctly states the size of the the pool that is expanding.|
+| PWX-20327 |  When running on cloud at scale (more than 200 nodes), if there are certain nodes flapping or restarting in a loop, it would cause healthy PX nodes to slow down processing kvdb watch updates. <br/><br/>**User impact:** Certain volume operations (for example, create or attach) take a long time or fail. | 
+| PWX-20085 | Portworx failed to install when both `-metadata` and `-kvdbDevice` options were passed. <br/><br/>**User impact:** Users saw their installations fail if they provided both options. <br/><br/> **Resolution:**  If users provide both options, Portworx installation will no longer fail. It now defaults to using the `-metadata` device for KVDB to maintain backward compatibility. |
+| PWX-19771 | Communication between nodes could block forever. <br/><br/>**User impact:** Users sometimes saw volume access or management pend forever without timing out. <br/><br/>**Resolution:** All communications in the Portworx cluster now timeout. A new `pxctl cluster options` allows you to configure a default RPC timeout. | 
+| PWX-20733 | If a custom container registry was specified and the cluster was using containerd, the oci-monitor attempted to pull the Portworx Enterprise image from the wrong registry. <br/><br/> **User impact:** Users saw installation fail. <br/><br/>**Resolution:** oci-monitor now pulls the Portworx Enterprise image from the correct custom registry. | <!-- @Zoran Rajic -->
+| PWX-20614 | When multiple oci-monitor container images are present (using the same image-hash but a different name), Kubernetes sometimes started the wrong container image. <br/><br/>**User impact:** Users potentially saw the wrong Portworx Enterprise image to be loaded on the nodes. <br/><br/>**Resolution:** The oci-monitor now consults multiple configuration entries when deciding which px-enterprise image needs to be loaded." |
+| PWX-20456 | Fixes the installation problem with containerd-v1.4.6 container runtime, running in "systemd cgroups" mode.<br/><br/>**User impact:** If one is running a Kubernetes cluster configured with containerd-v1.4.6 (or higher) container runtime with systemd cgroups driver, Portworx service would fail to start.<br/><br/>**Resolution:** Portworx startup issues are now resolved when using this container runtime/configuration.| 
+| PWX-20423 | The `security_label` export option was removed after a node reboot. <br/><br/>**User Impact:** When using `sharedv4` with **SELinux** enabled, an app using `sharedv4` volumes sometimes saw permission issues if the node where the volume was attached was rebooted. <br/><br/>**Resolution:** Improvements to the `sharedv4` volumes resolved this issue. |
+| PWX-20319 | Fixes an issue with Portworx service restarts hanging indefinitely, when DBus service is not responding. <br/><br/>**User impact:** On host-systems that have a non-responsive DBus service, Portworx startup used to hang indefinitely. <br/><br/> **Resolution:** Portworx startup no longer hangs if it cannot connect to the DBus service. |
+| PWX-20236 | In some scenarios, volume unmount may fail due to EIO errors on mount path, which could be due to prolonged downtime on the volume.  <br/><br/>**User Impact:** Pods may fail to terminate and reboot. <br/><br/>**Resolution:** Continue to unmount the volume even when readlink fails with EIO on mount path. This allows pods to continue with remount of the volume.  | 
+| PWX-20187 | When passing a Kubernetes secret for etcd username/password using environment variables, they were taken and used "as is", rather than being "expanded" and replaced with the actual values from Kubernetes secret. <br/><br/>**User impact:** When specifying the etcd username/password, the environment variables (e.g. populated by Kubernetes secrets) were not being "expanded" before configuring etcd connection. <br/><br/>**Resolution:** You can now specify the etcd username/password via the environment variables. |
+| PWX-20092 | Queued backups may fail if the volume replica is reduced in such a way that the replica on the node assigned for queued backup gets removed. <br/><br/>**User Impact:** Queued backups failed. <br/><br/>**Resolution:** Users can wait for queued backups to complete before running the ha-reduce command, or re-issue the backup command once the HA reduce is complete. |
+| PWX-19805 | Portworx couldn't unmask the `rpcbind` service. <br/><br/>**User impact:** Portworx could not properly integrate with NFS services, if NFS services were masked on the host. As a consequence, sharedV4 volumes could not be served from that host. <br/><br/>**Resolution:** The Portworx service startup/restart now checks for masked NFS services, and automatically unmasks them. | 
+| PWX-19802 | Migrations were failing with error - "Too many cloudsnap requests please try again" <br/><br/>**User Impact:** If a cluster migration was triggered which migrated more than 200 volumes at once, the migration would fail since PX would rate limit the cloudsnap requests. <br/><br/>**Resolution:** Cluster Migration will not fail if the internal cloud snap requests are rate limited. PX will gracefully handle those "busy" errors and retry the operation until it succeeds. |
+| PWX-19568 | When an NVMe partition is specified as a storage device, the device state is shown as "offline". <br/><br/>**User impact:** Users sometimes saw their partitioned NVMe drive state as "offline". <br/><br/>**Resolution:** NVMe partitions given as storage devices now correctly show as "online". | 
+| PWX-19250 | Talisman px-wipe does not support etcd with username and password <br/><br/>**User impact:** Using automated cluster-wipe procedure would not purge the cluster's data from the key-value database, when an external username/password -enabled EtcD was configured as cluster's KVDB. <br/><br/>**Resolution:** The cluster-wipe procedure should now purge the data also from username/password -enabled EtcD." | 
+| PWX-19209 | OCI-Mon/containerd occasional install/upgrade glitches <br/><br/>**User impact:** During Portworx upgrades on containerd container-runtimes, there was a race-condition with the cleanup of install-container, which could block the upgrade until the node got rebooted. <br/><br/>**Resolution:** The cleanup procedure was improved, so the race-condition no longer occurs" |
+| PWX-18704 | Drive add not respecting limit_drive_per_pool <br/><br/>**User impact:** When a runtime option `limit_drive_per_pool` was set to 2, a pool delete/initialize/drive add operation sometimes resulted in pools of more than 2 drives.<br/><br/>**Resolution:** The `px-runc` install-time configuration `limit_drives_per_pool` is now honoured during drive.  | 
+| PWX-18370 | A tracker file from previous Portworx version was not getting deleted during wipe causing sharedv4 volume mount issues. <br/><br/>**User impact:** If you deleted a Portworx version and reinstalled a new version, the wipe process did not remove a tracker file used for sharedv4 volumes. This will fail to mount new sharedv4 volumes after reinstallation. <br/><br/>**Resolution:** The tracker file is now removed.|
+| PWX-20485 | In versions earlier than Portworx 2.7.0, pxctl volume check on ext4 formatted secure pxd volume returns the "Background Volume Service not supported on Encrypted volumes" error. <br/><br/>**User Impact:** Users couldn't use `pxctl` to do volume checks on ext4 formatted secure pxd volumes. A workaround was fsck directly from within the Portworx container. <br/><br/>**Resolution:**  Portworx now supports volume check on ext4 formatted secure pxd volume using pxctl. |
+| PWX-20303 | Fixed an issue where KVDB updates were not pulled in from other nodes when this node is unable to get the updates from KVDB. | 
+| PWX-20398 | Fixed an issue where request processing started before the px-storage process was initialized causing it to restart. <br/><br/>**User impact:** These restarts may have created core files, users may have seen the process restart.|
+| PWX-20690 | The px-storage process incorrectly finished processing internal timestamps causing it to restart. <br/><br/>**User impact:** These restarts may have created core files, users may have seen the process restart.  |
+| PWX-19005 | Cloudsnaps may be stuck irrespective of whether you issued stop on the cloudsnap taskID. This sometimes happened when the local snapshot was deleted while cloudsnap was still active. In these conditions, snap detach operations failed and caused cloudsnaps to get stuck. <br/><br/>**User Impact:** Users saw stuck cloudsnaps, which could only be fixed by restarting the node where the stuck cloudsnap was active. <br/><br/>**Resolution:** Detach failures are not retried forever, minimizing this scenario. |
+| PWX-20708 | Cloudsnap size was not tracked correctly for incremental cloudsnaps in cloudsnap metadata. <br/><br/>**User Impact:** Users may not see correct cloudsnap size because of this issue. <br/><br/>**Resolution:** Now the incremental cloudsnap size is tracked correctly. |
+| PWX-20364 | An incorrect check searched all nodes in ReplicaSets to be online. <br/><br/>**User impact:** Cloudsnaps may fail on restart if some of the replica nodes are online. <br/><br/>**Resolution:** Removed the check for online nodes. | 
+| PWX-20237 | Cloudsnap operations did not choose the node where the previous cloudsnap was executed, specifically for reducing the HA level volume. <br/><br/> **User impact:** Some cloudsnaps could be shown as full, even though it could have been incremental. <br/><br/>**Resolution:** If the volume replicas differ between previous cloudsnap and current cloudsnap, Portworx now chooses the same replica node where the previous backup ran. |
+
+
+### Known issues (Errata)
+
+Portworx is aware of the following issues, check future release notes for fixes on these issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PD-896 | With 2.8.0, the `--sharedv4_service_type` option was added to the `pxctl volume create` and `pxctl volume update` commands. This new option is not applicable to non-Kubernetes environments, such as `Nomad`. This option works only in the Kubernetes environment. |
+| PWX-20666 | The issue occurs during the first boot of a newly created cluster, and if the node contains Ubuntu 20.04/Fedora CoreOS 33.20210301.3.1 as the host and you use the `-j auto` option. Any Linux distribution using `systemd` version 245 and above seems to have this problem. Ubuntu 18.04 containers use version 237 of `systemd`. <br/><br/>**User impact** Portworx takes additional time to come up.<br></br>**Recommendation:** Do not use the `-j auto` option. If you use the option, then consider installing parted command on the host. If that is not possible, wait for Portworx to reach stability. You must only wait for the first boot after new cluster creation.|
+| PWX-20836 | When using Portworx cloud drives and using a node selector in the StorageCluster CRD specification, a node may come up with a drive configuration that is different from what is specified in the StorageCluster CRD under the node selector. <br/><br/> This occurs when one Portworx node creates a drive based on the node selector configuration. If that drive is not currently being used by that node, another node that is trying to initialize may pick up this available drive (even if that newly created drive does not match with the user specified configuration for that node).| 
+| OPERATOR-410 | A workaround for deploying Operator on OCP (IBM) with nodes labeled as worker/master: Remove the nodeAffinity `node-role.kubernetes.io/master` from the live StorageCluster spec to deploy OCI pods on master nodes. | 
+| PD-891 | Currently Photon OS versions 3.0 and 4.0 do not allow a user to install `mdadm` using default `yum` and `tdnf` repositories. As this package is a must for px-cache deployment Pure Storage does not support caching on Photon OS on version 2.8.0 | 
+| PWX-20839 | Portworx 2.8.0 does not support the Photon distro for px-cache. |
+| PWX-20586 | When creating a burst of PVCs (a large number of PVCs within few seconds) with the Portworx CSI driver or a separate Portworx PVC controller, the Portworx volume creations can get stuck in a pending state. Under this condition, `pxctl volume list` will show these volumes as “down - attached”. The volume creates will eventually converge and complete, but this can take more than 1 hour.<br/><br/>**Workaround:** Stagger PVC creations in smaller batches if using the CSI driver or the Portworx PVC controller.|
+| PWX-13190 | The `pxctl credentials delete <uid>` command is currently not supported for k8s secret provider. To delete the credentials use `kubectl delete secret <> -n <namespace>`, where `<namespace>` is where Portworx is installed. |
+| PWX-9487 | In a metro DR setup where Portworx spans across 2 data centers, a node can be started with an argument `--cluster_domain` and value set to `witness`. This node will act as a witness node between the two data centers and it will also contribute to quorum even if it is started as storageless node. | 
+| PWX-20766 | The Portworx CSI Driver on Openshift 3.11 may have issues starting up when a node is rebooted. Customers are advised to upgrade to Openshift 4.0+ or Kubernetes 1.13.12+.|
+| PWX-20766 |  The Portworx CSI Driver will not be enabled by default in the PX-Installer for Kubernetes 1.12 and earlier unless a flag `csiAlpha=true` is provided. |
+| PWX-20423 | Portworx uses a set of default export options in storage classes which cannot currently be overridden. The `export_options` parameter only allows extending the current default options. | 
+
 ## 2.7.3
 
 July 15, 2021
@@ -17,7 +113,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 | **Improvement Number** | **Improvement Description** |
 |----|----|
 | PWX-20323 | Portworx now tries to reconnect to the KVDB at least 3 times before restarting the Portworx process. |
-| PWX-19994 | Added two new runtime options: <br/><br/><ul><li> quorum_timeout_in_seconds: To set the maximum time for which nodes will wait in seconds to reach quorum. After this timeout PX will restart</li><li>kv_snap_lock_duration_in_mins: To set the maximum timeout for which PX will wait for a kvdb snapshot operation to complete. After this timeout PX will panic and restart if the snapshot does not complete.</li></ul>| 
+| PWX-19994 | Added two new runtime options: <br/><br/>`quorum_timeout_in_seconds`: Sets the maximum time for which nodes will wait in seconds to reach quorum. After this timeout, Portworx will restart.<br/><br/>`kv_snap_lock_duration_in_mins`: Sets the maximum timeout for which Portworx will wait for a KVDB snapshot operation to complete. After this timeout, Portworx will panic and restart if the snapshot does not complete.| 
 
 ### Fixes
 
