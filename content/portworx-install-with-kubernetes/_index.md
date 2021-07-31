@@ -21,9 +21,12 @@ Before you install Portworx on Kubernetes, ensure that you're using a supported 
 
 | **Type** | **Supported Kubernetes Version** |
 |---|---|
-| On-prem Kubernetes | <ul><li>1.11</li><li>1.13</li><li>1.14</li><li>1.15</li><li>1.16</li><li>1.17</li><li>1.18</li><li>1.19</li><li>1.20</li></ul> |
-| Managed Kubernetes | <ul><li>**KOPS:** 1.19</li><li>**GKE:** 1.17</li><li>**AKS:** 1.19</li><li>**EKS:** 1.19</li><li>**IKS:** 1.19</li><li>**PKS:** 1.17</li></ul> |
-| Distribution Kubernetes | <ul><li>**Openshift 3.11:** 1.11</li><li>**Openshift 4.2:** 1.14</li><li>**Openshift 4.3:** 1.16</li><li>**Openshift 4.4:** 1.17</li><li>**Openshift 4.5:** 1.18</li><li>**Openshift 4.6:** 1.19</li><li>**Openshift 4.7:** 1.20</li><li>**RKE:** 1.20</li><li>**Anthos On-prem** 1.2, 1.3, 1.4, 1.5, 1.6 </li><li>**Anthos Baremetal** 1.6 </li></ul> |
+| On-prem Kubernetes | <ul><li>1.13</li><li>1.14</li><li>1.16</li><li>1.17</li><li>1.18</li><li>1.19</li><li>1.20</li><li>1.21</li></ul> |
+| Managed Kubernetes | <ul><li>**KOPS:** 1.20</li><li>**GKE:** 1.19</li><li>**AKS:** 1.20</li><li>**EKS:** 1.20</li><li>**IKS:** 1.19</li><li>**PKS:** 1.17</li></ul> |
+| Distribution Kubernetes | <ul><li>**Openshift 4.3:** 1.16</li><li>**Openshift 4.4:** 1.17</li><li>**Openshift 4.5:** 1.18</li><li>**Openshift 4.6:** 1.19</li><li>**Openshift 4.7:** 1.20</li><li>**Openshift 4.8:** 1.21</li></ul> |
+
+<!-- need associated OCP k8s versions  -->
+<!-- RKE gone? Anthos gone? -->
 
 {{<info>}}
 **K3s users:** You must use CSI integration to generate / use PVCs.
