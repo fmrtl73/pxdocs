@@ -73,7 +73,7 @@ Once you've ensured you meet the prerequisites and your physical network topolog
 
     ```text
     {
-      "FlashBlade": [
+      "FlashBlades": [
         {
       	  "MgmtEndPoint": "<fb-management-endpoint>",
       	  "APIToken": "<fb-api-token>",

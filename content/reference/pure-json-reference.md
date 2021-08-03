@@ -21,7 +21,7 @@ Portworx uses a single secret for both FlashArray and FlashBlade configuration. 
             "APIToken": "<second-fa-api-token>"
         }
     ],
-    "FlashBlade": [
+    "FlashBlades": [
         {
             "MgmtEndPoint": "<fb-management-endpoint>",
             "APIToken": "<fb-api-token>",
