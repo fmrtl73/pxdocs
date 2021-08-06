@@ -129,6 +129,7 @@ plugin "docker" {
           args = [
               "-c", "px-cluster-nomadv1",
               "-a",
+              "-b",
               "-k", "consul://127.0.0.1:8500",
               "--endpoint", "0.0.0.0:9015"
           ]
