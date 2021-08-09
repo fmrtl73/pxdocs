@@ -108,6 +108,7 @@ plugin "docker" {
         env {
           AUTO_NODE_RECOVERY_TIMEOUT_IN_SECS = "1500"
           PX_TEMPLATE_VERSION                = "V4"
+          CSI_ENDPOINT                       = "unix://var/lib/osd/csi/csi.sock"
         }
 
         # CSI Driver conifg
