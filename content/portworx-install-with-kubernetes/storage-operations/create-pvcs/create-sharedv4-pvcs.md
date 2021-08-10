@@ -19,6 +19,18 @@ Sharedv4 volumes are useful when you want multiple PODs to access the same PVC \
 
 To increase fault tolerance, you can enable sharedv4 service volumes. With this feature enabled, every sharedv4 volume has a Kubernetes service associated with it. Sharedv4 service volumes expose the volume via a Kubernetes service IP. If the sharedv4 (NFS) server goes offline and requires a failover, application pods won't need to restart. 
 
+{{<info>}}
+**Notes about Sharedv4 service volumes:**
+
+* This is an early access feature.
+* Sharedv4 service volumes currently only support NFSv3.
+* Sharedv4 service volumes are intended for use within the Kubernetes cluster where the volume resides.
+
+**Known issue:** 
+
+On failover, Applications may receive an error for non idempotent requests. For example, if an `mkdir` call is issued prior to failover, the client can resend it to the new server, which returns an `EEXIST` error if the directory was created by the first call.
+{{</info>}}
+
 **Step1: Create Storage Class**
 
 1. Create the following storageClass, specifying your own values for the following fields:
