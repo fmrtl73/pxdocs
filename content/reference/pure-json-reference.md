@@ -25,12 +25,12 @@ Portworx uses a single secret for both FlashArray and FlashBlade configuration. 
         {
             "MgmtEndPoint": "<fb-management-endpoint>",
             "APIToken": "<fb-api-token>",
-            "NFSEndPoint": "<fb-nfs-endpoint>",
+            "NFSEndPoint": "<fb-nfs-endpoint>"
         },
         {
             "MgmtEndPoint": "<fb-management-endpoint>",
             "APIToken": "<fb-api-token>",
-            "NFSEndPoint": "<fb-nfs-endpoint>",
+            "NFSEndPoint": "<fb-nfs-endpoint>"
         }
     ]
 }
