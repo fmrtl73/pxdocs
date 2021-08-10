@@ -53,7 +53,7 @@ The following steps will allow you to create a generic ephemeral volume with the
                     type: my-frontend-volume
                 spec:
                   accessModes: [ "ReadWriteOnce" ]
-                  storageClassName: "scratch-storage-class"
+                  storageClassName: "portworx-csi-sc"
                   resources:
                     requests:
                       storage: 1Gi

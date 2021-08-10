@@ -45,7 +45,7 @@ Currently, only ReadWriteOnce PVCs can be created with the block volume mode.
     kind: PersistentVolumeClaim
     apiVersion: v1
     metadata:
-       name: px-mysql-pvc
+       name: px-csi-raw-block-pvc
     spec:
        volumeMode: Block
        storageClassName: portworx-csi-sc
