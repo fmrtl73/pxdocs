@@ -11,7 +11,7 @@ scrollspy-container: false
 
 The Portworx CSI Driver has been verified on both [Kubernetes](/portworx-install-with-kubernetes/storage-operations/csi/) and [Nomad](/install-with-other/nomad/). The CSI Driver supports all existing Portworx features as well as most CSI features. See the table below for a detailed picture of what features we support for each scheduler.
 
-For scheduler-specific information, refer to the follow pages:
+For scheduler-specific information, refer to the following pages:
 
 * [CSI Driver on Kubernetes](/portworx-install-with-kubernetes/storage-operations/csi/)
 * [CSI Driver on Nomad](/install-with-other/nomad//)
