@@ -39,7 +39,7 @@ NFS export rules define access writes and privileges for a filesystem exported f
 
 Direct Access dynamically creates filesystems on FlashBlade that are managed by Portworx on demand, while proxy volumes are created by users and then used by Portworx as required.
 
-The following existing Portworx parameters used for proxy filesystems don't apply to Pure Direct Access filesystems:
+The following existing Portworx parameters don't apply to Pure Direct Access filesystems:
 
   * shared
   * sharedv4
