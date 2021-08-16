@@ -38,3 +38,10 @@ The Operator includes first-class support for Portworx Security in the `StorageC
 2. You can now apply the StorageCluster spec and wait until Portworx is ready. 
 
 Once you've enabled security in Portworx, continue to the next section.
+
+{{<info>}}
+**Note:**
+To use pxctl with security enabled, see using [pxctl with security enabled](/cloud-references/security/kubernetes/shared-secret-model-operator/use-pxctl-security-enabled/). Otherwise, all pxctl commands will fail with access denied.
+{{</info>}}
+
+
