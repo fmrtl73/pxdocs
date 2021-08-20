@@ -21,6 +21,7 @@ FlashBlade Direct Access filesystems support the following:
 
 {{<info>}}
 **NOTE:** 
+
 * FlashBlade Direct Access filesystems do not support subpaths. 
 * Autopilot does not support FlashBlade volumes.
 {{</info>}}
