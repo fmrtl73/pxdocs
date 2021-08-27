@@ -105,6 +105,19 @@ Portworx is aware of the following issues, check future release notes for fixes 
 | PD-914 | When a pod that is using a sharedv4 *service* volume, is scheduled on the same node where the volume is attached, Portworx sets up the pod to access the volume locally via a bind mount. If the pod is scheduled on a different node, the pod uses an NFS mount to access the volume remotely. If there is a sharedv4 service failover, the volume gets attached to a different node. After the failover, pods that were accessing the volume remotely over NFS, continue to have an access to the volume. But the pods that were accessing the volume locally via bind-mount, lose access to the volume even after Portworx is ready on the node since the volume is no longer attached to that node. Such pods need to be deleted and recreated so that they start accessing the volume remotely over NFS. If the stork is enabled in the Kuberenetes cluster, it automatically deletes such pods. But sometimes a manual intervention may be required if the stork is either not installed or fails to restart such pods. <br/><br/>**Recommendation:** Enable stork to reduce the likelihood of running into this issue. If you do run into this issue, use the command `kubectl pod delete -n <namespae> <pod>` to delete the pods which cannot access sharedv4 service volume anymore because the sharedv4 service failed over to another node. <br/><br/>This problem does not apply to the pods that are using "sharedv4" volumes without the `service` feature. <br/><br/>This problem does not apply to the pods that are accessing "sharedv4 service" volumes remotely i.e. from a node other than the one where volume is attached. |
 | PD-926 | For information about Sharedv4 service known issues, see the notes in the [Provision a Sharedv4 Volume](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs) section of the documentation.  |
 
+## 2.7.4
+
+August 27, 2021
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-21057 | Pods failed to come up with restored PVCs that were encrypted with vault namespace secrets. <br/><br/>**User impact:** Pods using PVC that is cloned from snapshot, which is encrypted using vault namespace secrets, will remain in container creating. <br/><br/>**Resolution:** Portworx now fixed this issue to copy over the required values for encrypted volumes for cloned PVC. Pods will not remain in container creating for this issue. |
+| PWX-21139 | In a DR setup, during the failover and failback of an encrypted volume, some labels that Portworx used for encrypting the volumes got removed. <br/><br/>**User impact:** Failback or restore of encrypted volumes using per-volume secrets would fail as restore of the volume on the source cluster would fail. <br/><br/>**Resolution:** The cloud backups and restores done as a part of failover and failback of encrypted volumes ensure that the encryption related labels are not removed. |
+
 ## 2.7.3
 
 July 15, 2021
