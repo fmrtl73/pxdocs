@@ -146,7 +146,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-    storage: 10Gi
+      storage: 10Gi
   storageClassName: portworx-pso-fb-v3
 ```
 
