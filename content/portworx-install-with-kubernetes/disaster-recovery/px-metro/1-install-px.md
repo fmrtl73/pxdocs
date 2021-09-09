@@ -9,37 +9,50 @@ The goal of this document is to setup a single Portworx cluster that spans acros
 
 ## Prerequisites
 
-* **Kubernetes Clusters**: At least two Kubernetes clusters which are part of the same metropolitan area network with a maximum network latency of 10ms between them
-* **Version**: A single Portworx cluster of v2.1 or later installed on across Kubernetes clusters and Stork v2.2.4 or later on both clusters
-* **Network Connectivity**: Ports 9001 to 9020 open between the two Kubernetes clusters
-* **External Kvdb**: A kvdb like etcd or consul setup outside of the Kubernetes clusters
-* **License**: A DR enabled {{< pxEnterprise >}} license on both the source and destination clusters to use this feature
+* **Kubernetes Clusters**: At least two Kubernetes clusters which are part of the same metropolitan area network with a
+  maximum network latency of 10ms between them.
+* **Version**: A single Portworx cluster of v2.1 or later installed on across Kubernetes clusters and Stork v2.2.4 or
+  later on both clusters.
+* **Network Connectivity**: Ports 9001 to 9020 open between the two Kubernetes clusters.
+* **External Kvdb**: A kvdb like etcd or consul setup outside of the Kubernetes clusters.
+* **License**: A DR enabled {{< pxEnterprise >}} license on both the source and destination clusters to use this feature.
+
+{{<info>}}
+**NOTE**: Additional steps are required when installing on a Tanzu cluster. Check below for details {{</info>}}
 
 ## Installing Portworx
+
 In this mode of operation, a single Portworx cluster will stretch across multiple Kubernetes clusters.
 
 ### New Installation
 
-To install Portworx on each of the Kubernetes clusters, you will need to generate a separate Portworx Kubernetes manifest file for each of them using the Portworx spec generator in [PX-Central](https://central.portworx.com).
+To install Portworx on each of the Kubernetes clusters, you will need to generate a separate Portworx Kubernetes
+manifest file for each of them using the Portworx spec generator in [PX-Central](https://central.portworx.com).
 
-While generating the spec file for each Kubernetes cluster, make sure you provide the same values for the following arguments:
+While generating the spec file for each Kubernetes cluster, make sure you provide the same values for the following
+arguments:
 
 * **Cluster ID** (Portworx install argument: `-c`)
 * **Kvdb Endpoints**  (Portworx install argument: `-k`)
 
-Specifying the same **ClusterID** and **Kvdb Endpoints** in each Kubernetes manifest file ensures that a single Portworx cluster will stretch across multiple Kubernetes clusters.
+Specifying the same **ClusterID** and **Kvdb Endpoints** in each Kubernetes manifest file ensures that a single Portworx
+cluster will stretch across multiple Kubernetes clusters.
 
 ### Existing Installation
-If you already have an existing Kubernetes cluster, you can add another Kubernetes cluster and let its nodes join the same Portworx cluster.
+
+If you already have an existing Kubernetes cluster, you can add another Kubernetes cluster and let its nodes join the
+same Portworx cluster.
 
 To achieve this, make sure you provide the following arguments same as your existing cluster:
 
 * **Cluster ID** (Portworx install argument: `-c`)
 * **Kvdb Endpoints**  (Portworx install argument: `-k`)
 
-Specifying the same **ClusterID** and **Kvdb Endpoints** as your existing cluster ensures that a single Portworx cluster will stretch across multiple Kubernetes clusters.
+Specifying the same **ClusterID** and **Kvdb Endpoints** as your existing cluster ensures that a single Portworx cluster
+will stretch across multiple Kubernetes clusters.
 
-If your Kubernetes clusters have exactly the same configuration, you can use the URL specified by the `portworx.com/install-source` annotation on the existing Portworx DaemonSet to fetch the spec for your new cluster:
+If your Kubernetes clusters have exactly the same configuration, you can use the URL specified by
+the `portworx.com/install-source` annotation on the existing Portworx DaemonSet to fetch the spec for your new cluster:
 
 ```text
 apiVersion: apps/v1
@@ -61,18 +74,23 @@ spec:
         name: portworx
 ```
 
-Otherwise you can always generate a new spec using the Portworx spec generator in [PX-Central](https://central.portworx.com).
+Otherwise you can always generate a new spec using the Portworx spec generator
+in [PX-Central](https://central.portworx.com).
 
 {{<info>}}
-**Note**: If your existing Kubernetes cluster uses internal kvdb, then you cannot stretch your Portworx clusters across multiple Kubernetes cluster. This mode of deployments requires an external kvdb running outside your Kubernetes cluster
+**NOTE**: If your existing Kubernetes cluster uses internal kvdb, then you cannot stretch your Portworx clusters across
+multiple Kubernetes cluster. This mode of deployments requires an external kvdb running outside your Kubernetes cluster
 {{</info>}}
 
 ### Specifying cluster domains
 
-A cluster domain identifies a subset of nodes from the stretch Portworx cluster that are a part of the same failure domain. In this case, your Kubernetes clusters are separated across a metropolitan area network and we wish to achieve DR across them. So each Kubernetes cluster and its nodes are one cluster domain. This cluster domain
-information needs to be explicitly specified to Portworx through the `-cluster_domain` install argument.
+A cluster domain identifies a subset of nodes from the stretch Portworx cluster that are a part of the same failure
+domain. In this case, your Kubernetes clusters are separated across a metropolitan area network and we wish to achieve
+DR across them. So each Kubernetes cluster and its nodes are one cluster domain. This cluster domain information needs
+to be explicitly specified to Portworx through the `-cluster_domain` install argument.
 
-Once you have generated the Kubernetes manifest file, add the `cluster_domain` argument in the args section of the daemonset. You can also edit a running Portworx DaemonSet and add this new field.
+Once you have generated the Kubernetes manifest file, add the `cluster_domain` argument in the args section of the
+daemonset. You can also edit a running Portworx DaemonSet and add this new field.
 
 ```text
       containers:
@@ -87,19 +105,55 @@ Once you have generated the Kubernetes manifest file, add the `cluster_domain` a
 
 The value for `cluster_domain` needs to be different for each Kubernetes cluster.
 
-  * You can name your cluster domains with arbitrary names like **datacenter1** and **datacenter2** identifying in which Datacenter your Kubernetes clusters are running.
-  * You can name them based on your cloud provider's zone names such as **us-east-1a**, **us-east-1b**.
+* You can name your cluster domains with arbitrary names like **datacenter1** and **datacenter2** identifying in which
+  Datacenter your Kubernetes clusters are running.
+* You can name them based on your cloud provider's zone names such as **us-east-1a**, **us-east-1b**.
+
+
+#### Installing on a Tanzu cluster
 
 {{<info>}}
-Only deploy Portworx in this mode when your Kubernetes clusters are separated by a metropolitan area network with a maximum latency of 10ms. It is not recommended to run in this mode if your Kubernetes clusters are across regions like AWS regions `us-east` and `us-west`.
+**NOTE**: This section is intended for users who are using Tanzu, skip this section if you're not using Tanzu.
 {{</info>}}
 
-A cluster domain and, in turn, the set of nodes which are a part of that domain are associated with either of the following states:
+The existing Sync DR implementation assumes the availability of cloud drives for each of the two clusters. In Tanzu cloud drive is a PVC, which is a cluster-scoped resource and in order to help clusters distinguish between their drives,
+they should be labeled accordingly.
 
-* **Active State**: Nodes from an active cluster domain participate in the cluster activities. Applications **can** be scheduled on the nodes which are a part of an active cluster domain.
-* **Inactive State**: Nodes from an inactive cluster domain do not participate in the cluster activities. Applications **cannot** be scheduled on such nodes.
+* Label your worker nodes **on both** clusters with the `px-dr` label. Set your cluster domain as a
+  value.
 
-Once the Kubernetes manifest is applied on both the clusters, Portworx will form the stretch cluster. You can run the following commands to ensure Portworx is successfully installed in a stretch fashion.
+    ```
+    kubectl label nodes <list_of_nodes or --all> px-dr=<cluster_domain_name>
+    ```
+
+* Add the `--node_pool_label` parameter to the spec with a key `px-dr`
+
+    ```text
+          containers:
+            - name: portworx
+              image: portworx/oci-monitor:2.8
+              args:
+                ["-k", "etcd:http://100.26.199.167:2379,etcd:http://100.26.199.168:2379,etcd:http://100.26.199.169:2379", "-c", "px-dr-cluster", "-cluster_domain", "us-east-1a", "-a", "-secret_type", "k8s",
+                 "-x", "kubernetes", --node_pool_label=px-dr]
+    ```
+
+{{<info>}}
+**NOTE:** 
+
+* Other arguments are for illustration purposes only, Use args from your existing specs. Only add `--node_pool_label=px-dr`. {{</info>}}
+* Only deploy Portworx in this mode when your Kubernetes clusters are separated by a metropolitan area network with a maximum latency of 10ms. Pure Storage does not recommended you run in this mode if your Kubernetes clusters are distributed across regions, such as AWS regions `us-east` and `us-west`. 
+{{</info>}}
+
+A cluster domain and, in turn, the set of nodes which are a part of that domain are associated with either of the
+following states:
+
+* **Active State**: Nodes from an active cluster domain participate in the cluster activities. Applications **can** be
+  scheduled on the nodes which are a part of an active cluster domain.
+* **Inactive State**: Nodes from an inactive cluster domain do not participate in the cluster activities.
+  Applications **cannot** be scheduled on such nodes.
+
+Once the Kubernetes manifest is applied on both the clusters, Portworx will form the stretch cluster. You can run the
+following commands to ensure Portworx is successfully installed in a stretch fashion.
 
 **Kubernetes Cluster 1 running in `us-east-1a`**
 
@@ -172,8 +226,9 @@ Global Storage Pool
 
 ### Cluster Domains Status
 
-When Stork is deployed along with Portworx in this mode it automatically creates a ClusterDomainStatus object. This can be used to find out the current state of all the cluster domains.
-Each Kubernetes cluster where Stork is deployed will have this object automatically created. You can use the following commands to get the current status:
+When Stork is deployed along with Portworx in this mode it automatically creates a ClusterDomainStatus object. This can
+be used to find out the current state of all the cluster domains. Each Kubernetes cluster where Stork is deployed will
+have this object automatically created. You can use the following commands to get the current status:
 
 ```text
 storkctl get clusterdomainsstatus
