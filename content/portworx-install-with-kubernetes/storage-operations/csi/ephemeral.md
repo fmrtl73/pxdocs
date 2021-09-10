@@ -5,7 +5,7 @@ description: This explains how to use ephemeral volumes with the Portworx CSI Dr
 weight: 5
 ---
 
-## Generic Ephemral volumes
+## Generic Ephemeral volumes
 
 Generic ephemeral volumes is a newer feature and is in beta (enabled by default) as of Kubernetes 1.21. These volumes also work with typical storage operations such as snapshotting, cloning, resizing, and storage capacity tracking.
 
