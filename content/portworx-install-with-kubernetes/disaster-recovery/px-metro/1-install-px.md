@@ -140,7 +140,7 @@ they should be labeled accordingly.
 {{<info>}}
 **NOTE:** 
 
-* Other arguments are for illustration purposes only, Use args from your existing specs. Only add `--node_pool_label=px-dr`. {{</info>}}
+* Other arguments are for illustration purposes only, Use args from your existing specs. Only add `--node_pool_label=px-dr`.
 * Only deploy Portworx in this mode when your Kubernetes clusters are separated by a metropolitan area network with a maximum latency of 10ms. Pure Storage does not recommended you run in this mode if your Kubernetes clusters are distributed across regions, such as AWS regions `us-east` and `us-west`. 
 {{</info>}}
 
