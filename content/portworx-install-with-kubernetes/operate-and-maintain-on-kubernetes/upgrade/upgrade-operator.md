@@ -18,6 +18,7 @@ If you're using the Portworx Operator, you can upgrade or change your Portworx v
 ## Prerequisites
 
 * You must already be running Portworx through the Operator, this method will not work for other Portworx deployments
+* You must be running the [latest available version](https://github.com/libopenstorage/operator/releases) of the Operator
 
 ## Upgrade Portworx
 
