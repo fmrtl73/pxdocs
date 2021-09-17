@@ -204,7 +204,7 @@ spec:
       annotations:
         description: Portworx license server is unreachable. Please check license server health and connection to license server.
         summary: Portworx instance {{$labels.instance}} is not able to reach the license server.
-      expr: px_alerts_licenseserverdown_total > 0
+      expr: px_alerts_licenseserverdown > 0
       labels:
         issue: Portworx license server is unreachable
         severity: warning

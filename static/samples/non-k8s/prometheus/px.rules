@@ -118,7 +118,7 @@ Alert PortworxLicenseExpiry
   }
 
 Alert PortworxLicenseServerDown
-  IF px_alerts_licenseserverdown_total > 0
+  IF px_alerts_licenseserverdown > 0
   LABELS {
     severity = "warning",
     issue = "Portworx license server is unreachable.",

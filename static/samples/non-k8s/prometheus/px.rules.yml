@@ -106,7 +106,7 @@ groups:
       description: Portworx node {{$labels.node}} of cluster {{$labels.cluster}} reports
         its license (or license lease) expiring in {{$value}} days.
   - alert: PortworxLicenseServerDown
-    expr: px_alerts_licenseserverdown_total > 0
+    expr: px_alerts_licenseserverdown > 0
     labels:
       severity: warning
       issue: Portworx license server is unreachable
