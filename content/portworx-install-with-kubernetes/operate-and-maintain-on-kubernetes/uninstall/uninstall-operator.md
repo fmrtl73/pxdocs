@@ -58,5 +58,5 @@ If you're using the Portworx Operator, you can uninstall Portworx by adding a de
 3. Enter the `kubectl delete` command, specifying the name of your `StorageCluster` object:
 
 ```text
-kubectl delete <your-storagecluster>
+kubectl delete stc <your-storagecluster> -n <name-space>
 ```
