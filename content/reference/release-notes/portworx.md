@@ -6,6 +6,31 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.8.1
+
+Sept 20, 2021
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-21172 | In a Metro  DR configuration, there can be multiple cluster domains within the same cluster. When a sharedv4 volume is created, its replicas are placed across these cluster domains. <br/><br/>If an app requests a sharedv4 volume, then there is no guarantee which replica node will act as the sharedv4 NFS server.<br/><br/>This improvement ensures that whenever a sharedv4 application is started in any of the domains, the volume is attached to a node in the same domain where the application is running, guaranteeing minimum latency. | 
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-21227 | While trying to run IOs on multiple volumes with an overlapped overwrite pattern, an `sm abort` error sometimes occurred on one of the nodes. <br/><br/>**User impact:** This error caused Portworx to restart. <br/><br/>**Resolution:** This rare deadlock during resync no longer occurs. |
+| PWX-21002 | A deadlock in the `NFSWatchdog` path caused lock contention and an inspect command to hang. <br/><br/>**User impact:** Users experienced a mounting issue for the affected volume and saw the pod stuck in the `ContainerCreating` state. <br/><br/>**Resolution:** This deadlock has been eliminated. |
+| PWX-21224 | Setting cloudsnap threads to 4 or less resulted in cloudsnap backups in hung state. <br/><br/> **User Impact:** With cloudsnap threads (Cloudsnap maximum threads field in cluster options) set to 4 or below and doing more than 10 cloudsnaps at the same time, cloudsnaps would be in hung/stuck state without making any progress. <br/><br/>**Resolution:** Incorect check for thread count resulted in deadlock causing the above scenario, which has been addressed in this release. |
+| PWX-20949	| Issue" Cloudsnap restore may fail with error message "Restore failed due to stall". This happens if restore incorrectly thinks that the node is in maintenance mode. <br/><br/>**User Impact:** These restores may never complete and user may with need to restart the node where the restore is stalled or reissue the restore command<br/><br/>**Resolution:** This change fixes the issue where cloudsnap does not interpret node status. An upper layer module handles it preventing the issue.| 
+| PWX-19533 | Fixed an issue where a node may accumulate over-writes for a volume causing the `px-storage` process to restart.<br/><br/>**User impact:** None |
+| PWX-21163 | Prometheus was unable to access the Portworx internal etcd on a multi network interface setup, hence etcd alerts are not seen.<br/><br/>**User impact:** Prometheus alerts and monitoring did not work properly for the alerts related to internal etcd on a multi-network interface setup.<br/><br/>**Resolution:** Portworx is now allowed internal etcd access from all network devices, giving Prometheus access to scrape alerts. | 
+
 ## 2.8.0
 
 July 30, 2021
