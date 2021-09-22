@@ -21,6 +21,19 @@ scrollspy-container: false
     <i class="material-icons">arrow_forward_ios</i>
 </a>
 </li>
+<li class="list-series__item mdl-card mdl-shadow--2dp">
+<a href="https://central.docs.portworx.com">
+    <div class="mdl-card__title">
+    <homelistseriestitle class="mdl-card__title-text">
+        PX-Central on-premises documentation
+    </homelistseriestitle>
+    </div>
+    <div class="mdl-card__supporting-text">
+        <p>PX-Central on-premises is a graphical user interface that allows you to monitor and manage your Portworx clusters.</p>
+    </div>
+    <i class="material-icons">arrow_forward_ios</i>
+</a>
+</li>
 </ul>
 
 {{<info>}}
