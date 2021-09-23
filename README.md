@@ -89,3 +89,17 @@ make reset-theme
 ## Deployment to production
 
 Deployment of your changes is handled by Travis upon a git push to the git repo.  Once you have made changes and viewed them locally - a `git push` of the version branch you are working on will result in the content being deployed into production.
+
+## AsciiDoc support
+
+This doc set now features **experimental** support for AsciiDoc. 
+
+Currently, all includes or references must be absolute and rely on a directory (`/docs`) that's built for into the container at buildtime. Format absolute links from this directory like so:
+
+```
+include::/docs/content/test2.ad[]
+```
+
+**Note:**
+
+I don't currently recommend using this for production purposes. If you need to use an AsciiDoc feature, ask first. 
