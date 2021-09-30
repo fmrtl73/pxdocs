@@ -325,6 +325,9 @@ This section describes the fields used to manage the Stork deployment through th
 | spec.<br>stork.<br>image | Specifies the Stork image. | `string` | None |
 | spec.<br>stork.<br>lockImage | Enables locking Stork to the given image. When set to false, the Portworx Operator will overwrite the Stork image to a recommended image for given Portworx version. | `boolean` | `false` |
 | spec.<br>stork.<br>args | A collection of key-value pairs that overrides the default Stork arguments or adds new arguments. | `map[string]string` | None |
+| spec.<br>stork.<br>args.verbose | Set to `true` to enable verbose logging | `boolean` | `false` |
+| spec.<br>stork.<br>args.admin-namespace | Change the admin namespace | `string` | `kube-system` |
+| spec.<br>stork.<br>args.webhook-controller | Set to `true` to make Stork the default scheduler for workloads using Portworx volumes | `boolean` | `false` |
 | spec.<br>stork.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826) passed to Stork. | `[]object` | None |
 | spec.<br>stork.<br>volumes[] | A list of volumes passed to Stork pods. The schema is similar to the [top-level volumes](#volume-configuration). | `[]object` | None |
 
