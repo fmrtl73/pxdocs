@@ -63,19 +63,19 @@ This example secures a storage class by hardcoding the token and namespace. User
     * `csi.storage.k8s.io/node-publish-secret-name: ${pvc.name}`
     * `csi.storage.k8s.io/node-publish-secret-namespace: ${pvc.namespace}`
 
-    ```text
-    kind: StorageClass
-    apiVersion: storage.k8s.io/v1
-    metadata:
-      name: portworx-csi-sc
-    provisioner: pxd.portworx.com
-    parameters:
-      repl: "1"
-      csi.storage.k8s.io/provisioner-secret-name: ${pvc.name}
-      csi.storage.k8s.io/provisioner-secret-namespace: ${pvc.namespace}
-      csi.storage.k8s.io/node-publish-secret-name: ${pvc.name}
-      csi.storage.k8s.io/node-publish-secret-namespace: ${pvc.namespace}
-    ```
+       ```text
+       kind: StorageClass
+       apiVersion: storage.k8s.io/v1
+       metadata:
+         name: portworx-csi-sc
+       provisioner: pxd.portworx.com
+       parameters:
+         repl: "1"
+         csi.storage.k8s.io/provisioner-secret-name: ${pvc.name}
+         csi.storage.k8s.io/provisioner-secret-namespace: ${pvc.namespace}
+         csi.storage.k8s.io/node-publish-secret-name: ${pvc.name}
+         csi.storage.k8s.io/node-publish-secret-namespace: ${pvc.namespace}
+       ```
 2. Make sure your user also creates a secret in their PVC's namespace with the same name as the PVC. For example, a PVC named "px-mysql-pvc" must have an associated secret named "px-mysql-pvc". Enter the following command to create the secret:
 
     ```text

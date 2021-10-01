@@ -117,20 +117,20 @@ Create a StorageClass spec, specifying your own values for the following:
 * **parameters.pure_export_rules** with any NFS [export rules](https://support.purestorage.com/FlashBlade/Purity_FB/Data_Protocols/NFSv3/Mounting_a_File_System_Using_NFS_to_a_Client) you desire
 * **mountOptions** with any CSI mount options you desire
 
-```text
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: portworx-pso-fb-v3
-provisioner: pxd.portworx.com
-parameters:
-  backend: "pure_file"
-  pure_export_rules: "*(rw)"
-mountOptions:
-  - nfsvers=3
-  - tcp
-allowVolumeExpansion: true
-```
+    ```text
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
+    metadata:
+      name: portworx-pso-fb-v3
+    provisioner: pxd.portworx.com
+    parameters:
+      backend: "pure_file"
+      pure_export_rules: "*(rw)"
+    mountOptions:
+      - nfsvers=3
+      - tcp
+    allowVolumeExpansion: true
+    ```
 
 ### Create a PVC
 

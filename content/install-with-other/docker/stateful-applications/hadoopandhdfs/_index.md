@@ -97,9 +97,9 @@ When a DataNode has not been in contact via a heartbeat with the NameNode for 10
 
 There are 2 implications of this process:
 
-1- Rebuilding a DataNode replica from scratch is a time consuming operation. The amount of time depends on the total size of the replica and the available I/O in the cluster. For largest data sets, recovering a DataNode can take an hour or more.
+1. Rebuilding a DataNode replica from scratch is a time consuming operation. The amount of time depends on the total size of the replica and the available I/O in the cluster. For largest data sets, recovering a DataNode can take an hour or more.
 
-2- While the rebuild operation is taking place, the read and write performance of the rest of the cluster suffers. This is because while replication can happen fastest if all I/O is used for replication, this would bring cluster performance down to zero during the rebuild operation. Therefore, the NameNode throttles re-replication traffic to two outbound replication streams per DataNode, per heartbeat. This is configurable via dfs.namenode.replication.max-streams, however turning this up reduces cluster performance even more. The effect of this is worse if you have compounded or multiple failures in your cluster and need to rebuild multiple nodes.
+2. While the rebuild operation is taking place, the read and write performance of the rest of the cluster suffers. This is because while replication can happen fastest if all I/O is used for replication, this would bring cluster performance down to zero during the rebuild operation. Therefore, the NameNode throttles re-replication traffic to two outbound replication streams per DataNode, per heartbeat. This is configurable via dfs.namenode.replication.max-streams, however turning this up reduces cluster performance even more. The effect of this is worse if you have compounded or multiple failures in your cluster and need to rebuild multiple nodes.
 
 **Portworx replication**
 
@@ -160,73 +160,73 @@ Here’s how you can check if your volume is full and then increase its size.
 
 1. Run the volume inspect command.This should tell you the capacity of the volume and how much is used.
 
-   ```text
-   pxctl volume inspect hdfs_volume
-   ```
+    ```text
+    pxctl volume inspect hdfs_volume
+    ```
 
-   ```output
-         Volume                   	:  658175664581050143
-         Name        	             :  hdfs_volume
-         Size        	             :  500 GiB
-         Format      	             :  ext4
-         HA          		         :  3
-         IO Priority 	             :  LOW
-         Creation time	       	 :  Feb 25 22:52:17 UTC 2017
-         Shared      	             :  no
-         Status      		         :  up
-         State       	 	        :  Attached: 643ca9a6-972e-41d3-8a84-a2b27b21a1cc
-         Device Path 	        	 :  /dev/pxd/pxd658175664581050143
-         Reads       	             :  32
-         Reads MS    	       	  :  44
-         Bytes Read  	        	 :  352256
-         Writes      		     	:  61
-         Writes MS   	        	 :  104
-         Bytes Written          	  :  536870912000
-         IOs in progress       	   :  0
-         Bytes used  	        	 :  500 GiB
-         Replica sets on nodes:
-                     Set  0
-                                 Node  :  192.168.56.101
-                                 Node  :  192.168.56.106
-                               Node  :  192.168.56.105
-   ```
+    ```output
+          Volume                   	:  658175664581050143
+          Name        	             :  hdfs_volume
+          Size        	             :  500 GiB
+          Format      	             :  ext4
+          HA          		         :  3
+          IO Priority 	             :  LOW
+          Creation time	       	 :  Feb 25 22:52:17 UTC 2017
+          Shared      	             :  no
+          Status      		         :  up
+          State       	 	        :  Attached: 643ca9a6-972e-41d3-8a84-a2b27b21a1cc
+          Device Path 	        	 :  /dev/pxd/pxd658175664581050143
+          Reads       	             :  32
+          Reads MS    	       	  :  44
+          Bytes Read  	        	 :  352256
+          Writes      		     	:  61
+          Writes MS   	        	 :  104
+          Bytes Written          	  :  536870912000
+          IOs in progress       	   :  0
+          Bytes used  	        	 :  500 GiB
+          Replica sets on nodes:
+                      Set  0
+                                  Node  :  192.168.56.101
+                                  Node  :  192.168.56.106
+                                Node  :  192.168.56.105
+    ```
 
-  You can see that the volume above is full, since all the space is used up.
+    You can see that the volume above is full, since all the space is used up.
 
 2. Run the resize command to increase the size of the volume per your new requirement.
 
-   ```text
-   pxctl volume update hdfs_volume –-size 1000
-   ```
+    ```text
+    pxctl volume update hdfs_volume –-size 1000
+    ```
 
-  ```output
-   Resize Volume: Volume hdfs\_volume resized to 1000GB
-  ```
+    ```output
+    Resize Volume: Volume hdfs\_volume resized to 1000GB
+    ```
 
- 3. Run volume inspect again and you’ll see that the size of the volume has been increased:
+3. Run volume inspect again and you’ll see that the size of the volume has been increased:
 
- ```text
- pxctl volume inspect
- ```
+    ```text
+    pxctl volume inspect
+    ```
 
- ```output
-  hdfs\_volume Volume : 658175664581050143
-  Name : hdfs\_volume
-  Size : 1000 GiB
-  Format : ext4
-  HA : 3
-  IO Priority : LOW
-  Creation time : Feb 25 22:52:17 UTC 2017
-  Shared : no
-  Status : up
-  State : Attached: 643ca9a6-972e-41d3-8a84-a2b27b21a1cc
-  Device Path : /dev/pxd/pxd658175664581050143
-  Reads : 32 Reads MS : 44 Bytes Read : 352256
-  Writes : 122 Writes MS : 232 Bytes Written : 536870912000
-  IOs in progress : 0 Bytes used : 500 GiB
-  Replica sets on nodes:
-  Set 0 Node : 192.168.56.101 Node : 192.168.56.106 Node : 192.168.56.105
-```
+    ```output
+      hdfs\_volume Volume : 658175664581050143
+      Name : hdfs\_volume
+      Size : 1000 GiB
+      Format : ext4
+      HA : 3
+      IO Priority : LOW
+      Creation time : Feb 25 22:52:17 UTC 2017
+      Shared : no
+      Status : up
+      State : Attached: 643ca9a6-972e-41d3-8a84-a2b27b21a1cc
+      Device Path : /dev/pxd/pxd658175664581050143
+      Reads : 32 Reads MS : 44 Bytes Read : 352256
+      Writes : 122 Writes MS : 232 Bytes Written : 536870912000
+      IOs in progress : 0 Bytes used : 500 GiB
+      Replica sets on nodes:
+      Set 0 Node : 192.168.56.101 Node : 192.168.56.106 Node : 192.168.56.105
+    ```
 
 #### Simplified installation and configuration of Hadoop
 

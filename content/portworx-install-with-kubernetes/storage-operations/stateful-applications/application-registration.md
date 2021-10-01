@@ -57,24 +57,24 @@ To register a new CRD with Stork, perform the following steps:
   * **resources.suspendOptions.path:** (Optional) With the path in the CRD spec which contains the option to suspend the application.
   * **resources.suspendOptions.type:** (Optional) With the type of the field that is used to suspend the operation. For example, `int`, if the field contains the replica count for the application.
 
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: ApplicationRegistration
-    metadata:
-      name: myappname
-    resources:
-    - PodsPath: <POD_PATH> 
-      group: <CRD_GROUP_NAME>
-      version: <CRD_VERSION>
-      kind: <CR_KIND>
-      # to keep status of CR on migration <!-- where does this apply? to keepStatus below it? can you elaborate more on the statement? -->
-      keepStatus: false
-      # To disable CR on migration, 
-      # CR spec path for disable 
-      suspendOptions:
-        path: <spec_path>
-        type: <type_of_value_to_set> (can be "int"/"bool")
-    ```
+       ```text
+       apiVersion: stork.libopenstorage.org/v1alpha1
+       kind: ApplicationRegistration
+       metadata:
+         name: myappname
+       resources:
+       - PodsPath: <POD_PATH> 
+         group: <CRD_GROUP_NAME>
+         version: <CRD_VERSION>
+         kind: <CR_KIND>
+         # to keep status of CR on migration <!-- where does this apply? to keepStatus below it? can you elaborate more on the statement? -->
+         keepStatus: false
+         # To disable CR on migration, 
+         # CR spec path for disable 
+         suspendOptions:
+           path: <spec_path>
+           type: <type_of_value_to_set> (can be "int"/"bool")
+       ```
 
     The following example ApplicationRegistration allows Stork to back-up, restore, or migrate a `datastax/cassandra` operator: 
 

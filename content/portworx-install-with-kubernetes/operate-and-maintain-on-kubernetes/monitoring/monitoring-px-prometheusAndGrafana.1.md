@@ -101,41 +101,41 @@ kubectl apply -f <service-monitor.yaml>
       * **channel:** with the Slack channel you want to send notifications to.
       * **text:** with the text of the notification
 
-    ```text
-    global:
-      # Global variables
-    route:
-      group_by: [Alertname]
-      receiver: email_and_slack
-    receivers:
-    - name: email_and_slack
-      email_configs:
-      - to:
-        from:
-        smarthost:
-        auth_username:
-        auth_identity:
-        auth_password:
-        text: |-
-          {{ range .Alerts }}
-            *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
-            *Description:* {{ .Annotations.description }}
-            *Details:*
-            {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-            {{ end }}
-          {{ end }}
-      slack_configs:
-      - api_url:
-        channel:
-        text: |-
-          {{ range .Alerts }}
-            *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
-            *Description:* {{ .Annotations.description }}
-            *Details:*
-            {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
-            {{ end }}
-          {{ end }}
-    ```
+            ```text
+            global:
+              # Global variables
+            route:
+              group_by: [Alertname]
+              receiver: email_and_slack
+            receivers:
+            - name: email_and_slack
+              email_configs:
+              - to:
+                from:
+                smarthost:
+                auth_username:
+                auth_identity:
+                auth_password:
+                text: |-
+                  {{ range .Alerts }}
+                    *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
+                    *Description:* {{ .Annotations.description }}
+                    *Details:*
+                    {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                    {{ end }}
+                  {{ end }}
+              slack_configs:
+              - api_url:
+                channel:
+                text: |-
+                  {{ range .Alerts }}
+                    *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
+                    *Description:* {{ .Annotations.description }}
+                    *Details:*
+                    {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+                    {{ end }}
+                  {{ end }}
+            ```
 
     {{<info>}}
 For a description of the properties in this schema, see the [Configuration file](https://prometheus.io/docs/alerting/configuration/#configuration-file) section of the Prometheus documentation.

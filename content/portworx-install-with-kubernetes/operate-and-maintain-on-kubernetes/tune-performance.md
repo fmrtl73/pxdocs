@@ -41,18 +41,18 @@ To improve performance, adjust storage class parameters in the following ways:
 * Prioritize volume traffic by setting the `priority_io:` field to `high`
 * Choose the replication factor best suited to your high availability needs
 
-```text
-kind: StorageClass
-apiVersion: storage.k8s.io/v1beta1
-metadata:
- name: px-storage-class
-provisioner: kubernetes.io/portworx-volume
-allowVolumeExpansion: true
-parameters:
- repl: "2"
- priority_io: "high"
- nodiscard: "true"
-```
+    ```text
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1beta1
+    metadata:
+     name: px-storage-class
+    provisioner: kubernetes.io/portworx-volume
+    allowVolumeExpansion: true
+    parameters:
+     repl: "2"
+     priority_io: "high"
+     nodiscard: "true"
+    ```
 
 ## Modify Portworx resource consumption
 
@@ -122,16 +122,16 @@ Configure these values as runtime options:
     apiVersion: core.libopenstorage.org/v1
     kind: StorageCluster
     metadata:
-    name: px-cluster
+        name: px-cluster
     namespace: kube-system
     spec:
-    image: portworx/oci-monitor:2.7.0
-    ...
-    runtimeOptions:
-        rt_opts_conf_high: "1"
-        num_threads: "16"
-        num_io_threads: "12"
-        num_cpu_threads: "16"
+        image: portworx/oci-monitor:2.7.0
+        ...
+        runtimeOptions:
+            rt_opts_conf_high: "1"
+            num_threads: "16"
+            num_io_threads: "12"
+            num_cpu_threads: "16"
     ```
 
 

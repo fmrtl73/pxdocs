@@ -19,166 +19,166 @@ This section provides a few examples of common Portworx configurations you can u
 
 * Portworx with internal KVdb, configured to use all unused devices on the system.
 
-```text
-apiVersion: core.libopenstorage.org/v1
-kind: StorageCluster
-metadata:
-  name: portworx
-  namespace: kube-system
-spec:
-  image: portworx/oci-monitor:{{% currentVersion %}}
-  kvdb:
-    internal: true
-  storage:
-    useAll: true
-```
+    ```text
+    apiVersion: core.libopenstorage.org/v1
+    kind: StorageCluster
+    metadata:
+      name: portworx
+      namespace: kube-system
+    spec:
+      image: portworx/oci-monitor:{{% currentVersion %}}
+      kvdb:
+        internal: true
+      storage:
+        useAll: true
+    ```
 
 * Portworx with external ETCD, Stork, and Lighthouse.
 
-```text
-apiVersion: core.libopenstorage.org/v1
-kind: StorageCluster
-metadata:
-  name: portworx
-  namespace: kube-system
-spec:
-  image: portworx/oci-monitor:{{% currentVersion %}}
-  kvdb:
-    endpoints:
-    - etcd:http://etcd-1.net:2379
-    - etcd:http://etcd-2.net:2379
-    - etcd:http://etcd-3.net:2379
-    authSecret: px-etcd-auth
-  stork:
-    enabled: true
-    args:
-      health-monitor-interval: "100"
-  userInterface:
-    enabled: true
-```
+    ```text
+    apiVersion: core.libopenstorage.org/v1
+    kind: StorageCluster
+    metadata:
+      name: portworx
+      namespace: kube-system
+    spec:
+      image: portworx/oci-monitor:{{% currentVersion %}}
+      kvdb:
+        endpoints:
+        - etcd:http://etcd-1.net:2379
+        - etcd:http://etcd-2.net:2379
+        - etcd:http://etcd-3.net:2379
+        authSecret: px-etcd-auth
+      stork:
+        enabled: true
+        args:
+          health-monitor-interval: "100"
+      userInterface:
+        enabled: true
+    ```
 
 * Portworx with Security enabled.
 
-```text
-apiVersion: core.libopenstorage.org/v1
-kind: StorageCluster
-metadata:
-  name: portworx
-  namespace: kube-system
-spec:
-  image: portworx/oci-monitor:{{% currentVersion %}}
-  security:
-    enabled: true
-```
+    ```text
+    apiVersion: core.libopenstorage.org/v1
+    kind: StorageCluster
+    metadata:
+      name: portworx
+      namespace: kube-system
+    spec:
+      image: portworx/oci-monitor:{{% currentVersion %}}
+      security:
+        enabled: true
+    ```
 
 * Portworx with Security enabled, guest access disabled, a custom self signed issuer/secret location, and five day token lifetime.
 
-```text
-apiVersion: core.libopenstorage.org/v1
-kind: StorageCluster
-metadata:
-  name: portworx
-  namespace: kube-system
-spec:
-  image: portworx/oci-monitor:{{% currentVersion %}}
-  security:
-    enabled: true
-    auth:
-      guestAccess: 'Disabled'
-      selfSigned:
-        issuer: 'openstorage.io'
-        sharedSecret: 'my-k8s-secret'
-        tokenLifetime: '5d'
-```
+    ```text
+    apiVersion: core.libopenstorage.org/v1
+    kind: StorageCluster
+    metadata:
+      name: portworx
+      namespace: kube-system
+    spec:
+      image: portworx/oci-monitor:{{% currentVersion %}}
+      security:
+        enabled: true
+        auth:
+          guestAccess: 'Disabled'
+          selfSigned:
+            issuer: 'openstorage.io'
+            sharedSecret: 'my-k8s-secret'
+            tokenLifetime: '5d'
+    ```
 
 * Portworx with update and delete strategies, and placement rules.
 
-```text
-apiVersion: core.libopenstorage.org/v1
-kind: StorageCluster
-metadata:
-  name: portworx
-  namespace: kube-system
-spec:
-  image: portworx/oci-monitor:{{% currentVersion %}}
-  updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 20%
-  deleteStrategy:
-    type: UninstallAndWipe
-  placement:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: px/enabled
-            operator: NotIn
-            values:
-            - "false"
-          - key: node-role.kubernetes.io/master
-            operator: DoesNotExist
-    tolerations:
-    - key: infra/node
-      operator: Equal
-      value: "true"
-      effect: NoExecute
-```
+    ```text
+    apiVersion: core.libopenstorage.org/v1
+    kind: StorageCluster
+    metadata:
+      name: portworx
+      namespace: kube-system
+    spec:
+      image: portworx/oci-monitor:{{% currentVersion %}}
+      updateStrategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxUnavailable: 20%
+      deleteStrategy:
+        type: UninstallAndWipe
+      placement:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: px/enabled
+                operator: NotIn
+                values:
+                - "false"
+              - key: node-role.kubernetes.io/master
+                operator: DoesNotExist
+        tolerations:
+        - key: infra/node
+          operator: Equal
+          value: "true"
+          effect: NoExecute
+    ```
 
 * Portworx with custom image registry, network interfaces, and miscellaneous options
 
-```text
-apiVersion: core.libopenstorage.org/v1
-kind: StorageCluster
-metadata:
-  name: portworx
-  namespace: kube-system
-spec:
-  image: portworx/oci-monitor:{{% currentVersion %}}
-  imagePullPolicy: Always
-  imagePullSecret: regsecret
-  customImageRegistry: docker.private.io/repo
-  network:
-    dataInterface: eth1
-    mgmtInterface: eth1
-  secretsProvider: vault
-  runtimeOptions:
-    num_io_threads: "10"
-  env:
-  - name: VAULT_ADDRESS
-    value: "http://10.0.0.1:8200"
-```
+    ```text
+    apiVersion: core.libopenstorage.org/v1
+    kind: StorageCluster
+    metadata:
+      name: portworx
+      namespace: kube-system
+    spec:
+      image: portworx/oci-monitor:{{% currentVersion %}}
+      imagePullPolicy: Always
+      imagePullSecret: regsecret
+      customImageRegistry: docker.private.io/repo
+      network:
+        dataInterface: eth1
+        mgmtInterface: eth1
+      secretsProvider: vault
+      runtimeOptions:
+        num_io_threads: "10"
+      env:
+      - name: VAULT_ADDRESS
+        value: "http://10.0.0.1:8200"
+    ```
 
 * Portworx with node specific overrides. Use different devices or no devices on different set of nodes.
 
-```text
-apiVersion: core.libopenstorage.org/v1
-kind: StorageCluster
-metadata:
-  name: portworx
-  namespace: kube-system
-spec:
-  image: portworx/oci-monitor:{{% currentVersion %}}
-  storage:
-    devices:
-    - /dev/sda
-    - /dev/sdb
-  nodes:
-  - selector:
-      labelSelector:
-        matchLabels:
-          px/storage: "nvme"
-    storage:
-      devices:
-      - /dev/nvme1
-      - /dev/nvme2
-  - selector:
-      labelSelector:
-        matchLabels:
-          px/storage: "false"
-    storage:
-      devices: []
-```
+    ```text
+    apiVersion: core.libopenstorage.org/v1
+    kind: StorageCluster
+    metadata:
+      name: portworx
+      namespace: kube-system
+    spec:
+      image: portworx/oci-monitor:{{% currentVersion %}}
+      storage:
+        devices:
+        - /dev/sda
+        - /dev/sdb
+      nodes:
+      - selector:
+          labelSelector:
+            matchLabels:
+              px/storage: "nvme"
+        storage:
+          devices:
+          - /dev/nvme1
+          - /dev/nvme2
+      - selector:
+          labelSelector:
+            matchLabels:
+              px/storage: "false"
+        storage:
+          devices: []
+    ```
 
 ## StorageCluster Schema
 

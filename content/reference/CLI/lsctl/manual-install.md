@@ -45,26 +45,26 @@ Perform the steps in this topic to manually install a Portworx license server.
     * If your cluster is air-gapped, add `--air-gapped` and `--nic` with the network interface your host uses to connect with the rest of the cluster.
     * If you're using SSL, add `-enable-ssl`. If you're using non-default paths for your SSL certificates, you may need to append the command above with the `-ssl-certs </path/to/server-bundle.pem>` and `-ssl-key /path/to/server-key.pem` flags.
 
-    ```text
-    version: '2.2'
-    services:
-      px-els-main:
-        container_name: px-els
-        image: portworx/px-els:1.0.0
-        # command: -nic eth0 -extl-port 7070
-        privileged: true
-        network_mode: host
-        restart: always
-        volumes:
-          - /opt/pwx-ls/bin:/export_bin
-          - /etc/pwx-ls:/data
-          - /proc:/hostproc
-        healthcheck:
-            test: ["CMD", "curl", "-fI", "http://127.0.0.1:7069/api/1.0/instances/~/health"]
-            interval: 2m30s
-            timeout: 30s
-            retries: 3
-    ```
+       ```text
+       version: '2.2'
+       services:
+         px-els-main:
+           container_name: px-els
+           image: portworx/px-els:1.0.0
+           # command: -nic eth0 -extl-port 7070
+           privileged: true
+           network_mode: host
+           restart: always
+           volumes:
+             - /opt/pwx-ls/bin:/export_bin
+             - /etc/pwx-ls:/data
+             - /proc:/hostproc
+           healthcheck:
+               test: ["CMD", "curl", "-fI", "http://127.0.0.1:7069/api/1.0/instances/~/health"]
+               interval: 2m30s
+               timeout: 30s
+               retries: 3
+       ```
 
     ```text
     docker-compose up -d

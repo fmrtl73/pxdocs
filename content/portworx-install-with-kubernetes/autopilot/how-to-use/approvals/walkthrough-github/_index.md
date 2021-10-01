@@ -80,17 +80,17 @@ Autopilot needs access to the Github repository to create & manage PRs.
     * `author` with the name of the Git author to use for the PRs Autopilot will create for approval purposes.
     * `email` with the email of the Git user to use for the PRs Autopilot will create for approval purposes.
 
-    ```text
-      providers:
-       - name: github
-         type: github-scm
-         github:
-           user: harsh-px
-           repo: flux-get-started
-           folder: workloads
-           author: harsh-px
-           email: harsh@portworx.com
-    ```
+      ```text
+        providers:
+        - name: github
+          type: github-scm
+          github:
+            user: harsh-px
+            repo: flux-get-started
+            folder: workloads
+            author: harsh-px
+            email: harsh@portworx.com
+      ```
 
     {{<info>}}**NOTE:** The sample ConfigMap above is written for the [harsh-px/flux-get-started](https://github.com/harsh-px/flux-get-started) repo.{{</info>}}
 
@@ -169,69 +169,69 @@ Create the storage and application spec files:
     
     * The `SIZE` environment variable in this spec instructs pgbench to write 8GiB of data to the volume. Since the PVC is only 10GiB in size, Autopilot will resize the PVC when needed.
 
-    ```text
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: pgbench
-      labels:
-        app: pgbench
-    spec:
-      selector:
-        matchLabels:
-          app: pgbench
-      strategy:
-        rollingUpdate:
-          maxSurge: 1
-          maxUnavailable: 1
-        type: RollingUpdate
-      replicas: 1
-      template:
+        ```text
+        apiVersion: apps/v1
+        kind: Deployment
         metadata:
+          name: pgbench
           labels:
             app: pgbench
         spec:
-          schedulerName: stork
-          containers:
-            - image: postgres:9.5
-              name: postgres
-              ports:
-              - containerPort: 5432
-              env:
-              - name: POSTGRES_USER
-                value: pgbench
-              - name: POSTGRES_PASSWORD
-                value: superpostgres
-              - name: PGBENCH_PASSWORD
-                value: superpostgres
-              - name: PGDATA
-                value: /var/lib/postgresql/data/pgdata
-              volumeMounts:
-              - mountPath: /var/lib/postgresql/data
-                name: pgbenchdb
-            - name: pgbench
-              image: portworx/torpedo-pgbench:latest
-              imagePullPolicy: "Always"
-              env:
-                - name: PG_HOST
-                  value: 127.0.0.1
-                - name: PG_USER
-                  value: pgbench
-                - name: SIZE
-                  value: "8"
-              volumeMounts:
-              - mountPath: /var/lib/postgresql/data
-                name: pgbenchdb
-              - mountPath: /pgbench
-                name: pgbenchstate
-          volumes:
-          - name: pgbenchdb
-            persistentVolumeClaim:
-              claimName: pgbench-data
-          - name: pgbenchstate
-            persistentVolumeClaim:
-              claimName: pgbench-state
-    ```
+          selector:
+            matchLabels:
+              app: pgbench
+          strategy:
+            rollingUpdate:
+              maxSurge: 1
+              maxUnavailable: 1
+            type: RollingUpdate
+          replicas: 1
+          template:
+            metadata:
+              labels:
+                app: pgbench
+            spec:
+              schedulerName: stork
+              containers:
+                - image: postgres:9.5
+                  name: postgres
+                  ports:
+                  - containerPort: 5432
+                  env:
+                  - name: POSTGRES_USER
+                    value: pgbench
+                  - name: POSTGRES_PASSWORD
+                    value: superpostgres
+                  - name: PGBENCH_PASSWORD
+                    value: superpostgres
+                  - name: PGDATA
+                    value: /var/lib/postgresql/data/pgdata
+                  volumeMounts:
+                  - mountPath: /var/lib/postgresql/data
+                    name: pgbenchdb
+                - name: pgbench
+                  image: portworx/torpedo-pgbench:latest
+                  imagePullPolicy: "Always"
+                  env:
+                    - name: PG_HOST
+                      value: 127.0.0.1
+                    - name: PG_USER
+                      value: pgbench
+                    - name: SIZE
+                      value: "8"
+                  volumeMounts:
+                  - mountPath: /var/lib/postgresql/data
+                    name: pgbenchdb
+                  - mountPath: /pgbench
+                    name: pgbenchstate
+              volumes:
+              - name: pgbenchdb
+                persistentVolumeClaim:
+                  claimName: pgbench-data
+              - name: pgbenchstate
+                persistentVolumeClaim:
+                  claimName: pgbench-state
+        ```
    
 ### Step 3b: AutopilotRule with approvals enabled
 
@@ -239,39 +239,39 @@ Create an AutopilotRule with `enforcement: approvalRequired` in the spec.
 
 * Create a YAML spec for the autopilot rule named `autopilotrule-approval-example.yaml` and place the following content inside it:
 
-```text
-apiVersion: autopilot.libopenstorage.org/v1alpha1
-kind: AutopilotRule
-metadata:
-  name: volume-resize
-spec:
-  #### enforcement indicates that actions from this rule need approval
-  enforcement: approvalRequired
-  ##### selector filters the objects affected by this rule given labels
-  selector:
-    matchLabels:
-      app: postgres
-  ##### namespaceSelector selects the namespaces of the objects affected by this rule
-  namespaceSelector:
-    matchLabels:
-      type: db
-  ##### conditions are the symptoms to evaluate. All conditions are AND'ed
-  conditions:
-    # volume usage should be less than 50%
-    expressions:
-    - key: "100 * (px_volume_usage_bytes / px_volume_capacity_bytes)"
-      operator: Gt
-      values:
-        - "50"
-  ##### action to perform when condition is true
-  actions:
-  - name: openstorage.io.action.volume/resize
-    params:
-      # resize volume by scalepercentage of current size
-      scalepercentage: "100"
-      # volume capacity should not exceed 400GiB
-      maxsize: "400Gi"
-```
+    ```text
+    apiVersion: autopilot.libopenstorage.org/v1alpha1
+    kind: AutopilotRule
+    metadata:
+      name: volume-resize
+    spec:
+      #### enforcement indicates that actions from this rule need approval
+      enforcement: approvalRequired
+      ##### selector filters the objects affected by this rule given labels
+      selector:
+        matchLabels:
+          app: postgres
+      ##### namespaceSelector selects the namespaces of the objects affected by this rule
+      namespaceSelector:
+        matchLabels:
+          type: db
+      ##### conditions are the symptoms to evaluate. All conditions are AND'ed
+      conditions:
+        # volume usage should be less than 50%
+        expressions:
+        - key: "100 * (px_volume_usage_bytes / px_volume_capacity_bytes)"
+          operator: Gt
+          values:
+            - "50"
+      ##### action to perform when condition is true
+      actions:
+      - name: openstorage.io.action.volume/resize
+        params:
+          # resize volume by scalepercentage of current size
+          scalepercentage: "100"
+          # volume capacity should not exceed 400GiB
+          maxsize: "400Gi"
+    ```
 
 * Wait until the objects meet the conditions specified in the rule. For example, if the rule is to expand a volume when it's usage is greater than 50%, wait for this condition.
 

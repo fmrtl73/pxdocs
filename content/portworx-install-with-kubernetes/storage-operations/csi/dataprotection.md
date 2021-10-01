@@ -55,52 +55,52 @@ Given you already have a [CSI PVC and StorageClass](/portworx-install-with-kuber
     * The `csi.storage.k8s.io/snapshotter-secret-name` parameter with your encryption and/or authorization secret
     * The `csi.storage.k8s.io/snapshotter-secret-namespace` parameter with the namespace your secret is in
 
-      ```text
-      apiVersion: snapshot.storage.k8s.io/v1beta1
-      kind: VolumeSnapshotClass
-      metadata:
-        name: px-csi-snapclass
-        annotations:
-          snapshot.storage.kubernetes.io/is-default-class: "true"
-      driver: pxd.portworx.com
-      deletionPolicy: Delete
-      parameters:
-        csi.storage.k8s.io/snapshotter-secret-name: px-user-token
-        csi.storage.k8s.io/snapshotter-secret-namespace: portworx
-      ```
+         ```text
+         apiVersion: snapshot.storage.k8s.io/v1beta1
+         kind: VolumeSnapshotClass
+         metadata:
+           name: px-csi-snapclass
+           annotations:
+             snapshot.storage.kubernetes.io/is-default-class: "true"
+         driver: pxd.portworx.com
+         deletionPolicy: Delete
+         parameters:
+           csi.storage.k8s.io/snapshotter-secret-name: px-user-token
+           csi.storage.k8s.io/snapshotter-secret-namespace: portworx
+         ```
 
 2. Create a VolumeSnapshot:
 
-      ```text  
-      apiVersion: snapshot.storage.k8s.io/v1beta1
-      kind: VolumeSnapshot
-      metadata:
-        name: px-csi-snapshot
-      spec:
-        volumeSnapshotClassName: px-csi-snapclass
-        source:
-          persistentVolumeClaimName: px-mysql-pvc
-      ```
+   ```text  
+   apiVersion: snapshot.storage.k8s.io/v1beta1
+   kind: VolumeSnapshot
+   metadata:
+     name: px-csi-snapshot
+   spec:
+     volumeSnapshotClassName: px-csi-snapclass
+     source:
+       persistentVolumeClaimName: px-mysql-pvc
+   ```
 
 3. Restore from a VolumeSnapshot:
 
-      ```text
-      apiVersion: v1
-      kind: PersistentVolumeClaim
-      metadata:
-        name: px-csi-pvc-restored 
-      spec:
-        storageClassName: portworx-csi-sc
-        dataSource:
-          name: px-csi-snapshot
-          kind: VolumeSnapshot
-          apiGroup: snapshot.storage.k8s.io
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 1Gi
-      ```
+   ```text
+   apiVersion: v1
+   kind: PersistentVolumeClaim
+   metadata:
+     name: px-csi-pvc-restored 
+   spec:
+     storageClassName: portworx-csi-sc
+     dataSource:
+       name: px-csi-snapshot
+       kind: VolumeSnapshot
+       apiGroup: snapshot.storage.k8s.io
+     accessModes:
+       - ReadWriteOnce
+     resources:
+       requests:
+         storage: 1Gi
+   ```
 
 
 See the [Kubernetes-CSI snapshotting documentation](https://kubernetes-csi.github.io/docs/snapshot-restore-feature.html) for more examples and documentation. 

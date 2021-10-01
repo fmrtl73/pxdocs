@@ -40,17 +40,17 @@ On failover, Applications may receive an error for non idempotent requests. For 
   * The `sharedv4` field set to `true`
   * (Optional) The `sharedv4_svc_type` set to either `ClusterIP` or `Loadbalancer`
 
-```text
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-    name: px-sharedv4-sc
-provisioner: kubernetes.io/portworx-volume
-parameters:
-   repl: "2"
-   sharedv4: "true"
-   sharedv4_svc_type: "ClusterIP"
-```
+        ```text
+        kind: StorageClass
+        apiVersion: storage.k8s.io/v1
+        metadata:
+            name: px-sharedv4-sc
+        provisioner: kubernetes.io/portworx-volume
+        parameters:
+          repl: "2"
+          sharedv4: "true"
+          sharedv4_svc_type: "ClusterIP"
+        ```
 
 2. Apply the storageClass:
 

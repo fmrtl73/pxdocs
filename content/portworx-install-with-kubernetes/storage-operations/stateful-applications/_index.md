@@ -62,25 +62,25 @@ You can specify your object store credentials directly in the BackupLocation con
           * **endpoint:** the URL or IP address of your bucket
           * **disableSSL:** whether or not to disable SSL
 
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: BackupLocation
-    metadata:
-      name: mysql
-      namespace: mysql-app
-      annotations:
-        stork.libopenstorage.org/skipresource: "true"
-    location:
-      type: s3
-      path: "bucket-name"
-      sync: true
-      s3Config:
-        region: us-east-1
-        accessKeyID: ABCDEF1234567890
-        secretAccessKey: ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890
-        endpoint: "https://bucketEndpoint.com"
-        disableSSL: false
-    ```
+                ```text
+                apiVersion: stork.libopenstorage.org/v1alpha1
+                kind: BackupLocation
+                metadata:
+                  name: mysql
+                  namespace: mysql-app
+                  annotations:
+                    stork.libopenstorage.org/skipresource: "true"
+                location:
+                  type: s3
+                  path: "bucket-name"
+                  sync: true
+                  s3Config:
+                    region: us-east-1
+                    accessKeyID: ABCDEF1234567890
+                    secretAccessKey: ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890
+                    endpoint: "https://bucketEndpoint.com"
+                    disableSSL: false
+                ```
 
     {{<info>}}
 **Note:** If you use URL as your bucket endpoint, you must include the http prefix: either `https://` or `http://`, depending on whether or not you're using SSL.
@@ -108,22 +108,22 @@ You can specify your object store credentials directly in the BackupLocation con
       * **disableSSL:** whether or not to disable SSL
       * **encryptionKey:** your secret's encryption key
 
-    ```text
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: s3secret
-        namespace: mysql
-        annotations:
-          stork.libopenstorage.org/skipresource: "true"
-      stringData:
-        region: us-east-1
-        accessKeyID: AB123AB43678AABCD12P
-        secretAccessKey: b7D9pA3214Vafo8432023ajksndas43242kjsnfdk
-        endpoint: "70.0.0.141:9010"
-        disableSSL: "false"
-        encryptionKey: "testKey"
-      ```
+          ```text
+            apiVersion: v1
+            kind: Secret
+            metadata:
+              name: s3secret
+              namespace: mysql
+              annotations:
+                stork.libopenstorage.org/skipresource: "true"
+            stringData:
+              region: us-east-1
+              accessKeyID: AB123AB43678AABCD12P
+              secretAccessKey: b7D9pA3214Vafo8432023ajksndas43242kjsnfdk
+              endpoint: "70.0.0.141:9010"
+              disableSSL: "false"
+              encryptionKey: "testKey"
+            ```
 
 2. Apply the Secret's YAML file:
 
@@ -141,20 +141,20 @@ You can specify your object store credentials directly in the BackupLocation con
       * **secretConfig:** the Secret object containing your bucket's credentials
       * **sync:** If you're restoring to a new cluster, set `sync` to true to allow your new cluster to retrieve the previous backups from your backup location.
 
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: BackupLocation
-    metadata:
-      name: mysql-backup
-      namespace: mysql
-      annotations:
-        stork.libopenstorage.org/skipresource: "true"
-    location:
-      type: s3
-      path: "bucket-name"
-      secretConfig: s3secret
-      sync: true
-    ```
+             ```text
+             apiVersion: stork.libopenstorage.org/v1alpha1
+             kind: BackupLocation
+             metadata:
+               name: mysql-backup
+               namespace: mysql
+               annotations:
+                 stork.libopenstorage.org/skipresource: "true"
+             location:
+               type: s3
+               path: "bucket-name"
+               secretConfig: s3secret
+               sync: true
+             ```
 
     {{<info>}}
 **Note:** If you use URL as your bucket endpoint, you must include the http prefix: either `https://` or `http://`, depending on whether or not you're using SSL.
@@ -184,21 +184,21 @@ Use the applicationBackup CRD to specify what namespaces have their applications
       * **preExecRule:** what rule to run before performing backup
       * **postExecRule:** what rule to run after performing backup
 
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: ApplicationBackup
-    metadata:
-      name: backup
-      namespace: mysql-app
-    spec:
-      backupLocation: mysql
-      namespaces:
-      - mysql-app
-      reclaimPolicy: Delete
-      selectors:
-      preExecRule:
-      postExecRule:
-    ```
+             ```text
+             apiVersion: stork.libopenstorage.org/v1alpha1
+             kind: ApplicationBackup
+             metadata:
+               name: backup
+               namespace: mysql-app
+             spec:
+               backupLocation: mysql
+               namespaces:
+               - mysql-app
+               reclaimPolicy: Delete
+               selectors:
+               preExecRule:
+               postExecRule:
+             ```
 
 2. Apply the YAML:
 
@@ -280,29 +280,26 @@ The ApplicationBackupSchedule CRD associates a SchedulePolicy with an applicatio
 
   * **name:** the applicationBackupSchedule object's name
   * **namespace:** the namespace the applicationBackupSchedule exists in
-  * **spec:**
-      * **schedulePolicyName:** the name of the schedule policy that defines when backup actions happen
-      * **template:**
-          * **spec:**
-              * **backupLocation:** the name of the backup location spec
-              * **namespaces:** namespaces which will be backed up
-              * **reclaimPolicy:** what happens to objects in the object store when the `ApplicationBackup` object is deleted
+  * **spec.schedulePolicyName:** the name of the schedule policy that defines when backup actions happen
+  * **spec.template.spec.backupLocation:** the name of the backup location spec
+  * **spec.template.spec.namespaces:** namespaces which will be backed up
+  * **spec.template.spec.reclaimPolicy:** what happens to objects in the object store when the `ApplicationBackup` object is deleted
 
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: ApplicationBackupSchedule
-    metadata:
-      name: backup
-      namespace: mysql
-    spec:
-      schedulePolicyName: testpolicy
-      template:
-        spec:
-          backupLocation: mysql
-          namespaces:
-          - mysql
-          reclaimPolicy: Delete
-    ```
+       ```text
+       apiVersion: stork.libopenstorage.org/v1alpha1
+       kind: ApplicationBackupSchedule
+       metadata:
+         name: backup
+         namespace: mysql
+       spec:
+         schedulePolicyName: testpolicy
+         template:
+           spec:
+             backupLocation: mysql
+             namespaces:
+             - mysql
+             reclaimPolicy: Delete
+       ```
 
 ## Restore an application
 
@@ -324,31 +321,30 @@ annotations:
 
   * **name:** the ApplicationRestore object's name
   * **namespace:** the ApplicationRestore object's namespace
-  * **spec:**
-      * **backupName:** the name of the `applicationBackup` object to restore from
-      * **backupLocation:** which backup location object to get application backups from
-      * **namespaceMapping:** a map of source and destination namespaces, allowing you to restore a backup to a different namespace
-      * **replacePolicy:** specifies whether you want to delete or retain any matching existing resource in the target namespace
+  * **spec.backupName:** the name of the `applicationBackup` object to restore from
+  * **spec.backupLocation:** which backup location object to get application backups from
+  * **spec.namespaceMapping:** a map of source and destination namespaces, allowing you to restore a backup to a different namespace
+  * **spec.replacePolicy:** specifies whether you want to delete or retain any matching existing resource in the target namespace
 
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: ApplicationRestore
-    metadata:
-      name: restore
-      namespace: mysql-app
-    spec:
-      backupName: backup
-      backupLocation: mysql
-      namespaceMapping:
-        mysql: mysql
-      replacePolicy: Delete
-    ```
+       ```text
+       apiVersion: stork.libopenstorage.org/v1alpha1
+       kind: ApplicationRestore
+       metadata:
+         name: restore
+         namespace: mysql-app
+       spec:
+         backupName: backup
+         backupLocation: mysql
+         namespaceMapping:
+           mysql: mysql
+         replacePolicy: Delete
+       ```
 
     {{<info>}}
 **Note:** You can run the `storkctl get applicationbackup -n namespace` command to help you see which backup to restore from.
     {{</info>}}
 
-2. Apply the YAML:
+1. Apply the YAML:
 
     ```text
     kubectl apply -f appRestore.yaml
@@ -397,20 +393,19 @@ You can clone an application to a different namespace. You must create the `Appl
 
     * **name:** the ApplicationClone object's name
     * **namespace:** the ApplicationClone object's namespace
-    * **spec:**
-        * **sourceNamespace:** the namespace you want to clone applications _from_
-        * **destinationNamespace:** the namespace you want to clone applications _to_
+    * **spec.sourceNamespace:** the namespace you want to clone applications _from_
+    * **spec.destinationNamespace:** the namespace you want to clone applications _to_
 
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: ApplicationClone
-    metadata:
-      name: clone-mysql
-      namespace: kube-system
-    spec:
-      sourceNamespace: mysql-app
-      destinationNamespace: clone-mysql
-    ```
+       ```text
+       apiVersion: stork.libopenstorage.org/v1alpha1
+       kind: ApplicationClone
+       metadata:
+         name: clone-mysql
+         namespace: kube-system
+       spec:
+         sourceNamespace: mysql-app
+         destinationNamespace: clone-mysql
+       ```
 
 2. Apply the YAML file:
 

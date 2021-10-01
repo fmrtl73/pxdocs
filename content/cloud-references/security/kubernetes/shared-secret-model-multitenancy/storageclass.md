@@ -16,22 +16,22 @@ operations:
 * _node-publish_ (mount/unmount)
 * _controller-expand_
 
-```text
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: px-storage
-provisioner: pxd.portworx.com
-parameters:
-  repl: "1"
-  csi.storage.k8s.io/provisioner-secret-name: px-user-token
-  csi.storage.k8s.io/provisioner-secret-namespace: ${pvc.namespace}
-  csi.storage.k8s.io/node-publish-secret-name: px-user-token
-  csi.storage.k8s.io/node-publish-secret-namespace: ${pvc.namespace}
-  csi.storage.k8s.io/controller-expand-secret-name: px-user-token
-  csi.storage.k8s.io/controller-expand-secret-namespace: ${pvc.namespace}
-allowVolumeExpansion: true
-```
+    ```text
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+      name: px-storage
+    provisioner: pxd.portworx.com
+    parameters:
+      repl: "1"
+      csi.storage.k8s.io/provisioner-secret-name: px-user-token
+      csi.storage.k8s.io/provisioner-secret-namespace: ${pvc.namespace}
+      csi.storage.k8s.io/node-publish-secret-name: px-user-token
+      csi.storage.k8s.io/node-publish-secret-namespace: ${pvc.namespace}
+      csi.storage.k8s.io/controller-expand-secret-name: px-user-token
+      csi.storage.k8s.io/controller-expand-secret-namespace: ${pvc.namespace}
+    allowVolumeExpansion: true
+    ```
 
 Note the value `${pvc.namespace}`. This will ensure that the CSI controller
 gets the appropriate token, which is tied to the namespace of the PVC.

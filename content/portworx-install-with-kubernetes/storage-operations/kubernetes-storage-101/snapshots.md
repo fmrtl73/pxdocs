@@ -71,17 +71,17 @@ You can restore both single and group volume snapshots by creating a VolumeSnaps
     * **sourceName** The name of the VolumeSnapshot or groupVolumeSnapshot object you want to restore
     * **sourceNamespace** The namespace the source VolumeSnapshot or groupVolumeSnapshot object exists in
 
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: VolumeSnapshotRestore
-    metadata:
-      name: mysql-snap-inrestore
-      namespace: default
-    spec:
-      groupSnapshot: true
-      sourceName: mysql-snapshot
-      sourceNamespace: mysql-snap-restore-splocal
-    ```
+       ```text
+       apiVersion: stork.libopenstorage.org/v1alpha1
+       kind: VolumeSnapshotRestore
+       metadata:
+         name: mysql-snap-inrestore
+         namespace: default
+       spec:
+         groupSnapshot: true
+         sourceName: mysql-snapshot
+         sourceNamespace: mysql-snap-restore-splocal
+       ```
 
 2. Apply the YAML file:
 

@@ -32,16 +32,16 @@ You can use a schedule policy to specify when Portworx should trigger a specific
   * **policy.daily.time:** with the backup time (this example uses "10:14PM")
   * **policy.retain:** with the number of backups Portworx must retain (this example retains 3 backups)
 
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: SchedulePolicy
-    metadata:
-      name: daily
-    policy:
-      daily:
-        time: "10:14PM"
-        retain: 3
-    ```
+         ```text
+         apiVersion: stork.libopenstorage.org/v1alpha1
+         kind: SchedulePolicy
+         metadata:
+           name: daily
+         policy:
+           daily:
+             time: "10:14PM"
+             retain: 3
+         ```
 
     For more details about how you can configure aschedule policy, see the [Schedule Policy](/reference/crd/schedule-policy/) reference page.
 
@@ -94,30 +94,28 @@ Use a `VolumeSnapshotSchedule` to associate your schedule policy at the CRD leve
       * **preExecRule:** with the name of a rule to run before taking the snapshot
       * **postExecRule:** with the name of a rule to run after taking the snapshot
       * **reclaimPolicy:** with `retain` or `delete`, indicating what Portworx should do with the snapshots that were created using the schedule. Specifying the `delete` value deletes the snapshots created by this schedule when the schedule is deleted.
-      * **template:**
-          * **spec:**
-              * **persistentVolumeClaimName:** with the PVC you want this policy to apply to
+      * **template.spec.persistentVolumeClaimName:** with the PVC you want this policy to apply to
 
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: VolumeSnapshotSchedule
-    metadata:
-      name: mysql-snapshot-schedule
-      namespace: mysql
-      annotations:
-        portworx/snapshot-type: cloud
-        portworx/cloud-cred-id: <cred_id>
-        stork.libopenstorage.org/snapshot-restore-namespaces: otherNamespace
-    spec:
-      schedulePolicyName: testpolicy
-      suspend: false
-      reclaimPolicy: Delete
-      preExecRule: testRule
-      postExecRule: otherTestRule
-      template:
-        spec:
-          persistentVolumeClaimName: mysql-data
-    ```
+            ```text
+            apiVersion: stork.libopenstorage.org/v1alpha1
+            kind: VolumeSnapshotSchedule
+            metadata:
+              name: mysql-snapshot-schedule
+              namespace: mysql
+              annotations:
+                portworx/snapshot-type: cloud
+                portworx/cloud-cred-id: <cred_id>
+                stork.libopenstorage.org/snapshot-restore-namespaces: otherNamespace
+            spec:
+              schedulePolicyName: testpolicy
+              suspend: false
+              reclaimPolicy: Delete
+              preExecRule: testRule
+              postExecRule: otherTestRule
+              template:
+                spec:
+                  persistentVolumeClaimName: mysql-data
+            ```
 
 2. Apply the spec:
 

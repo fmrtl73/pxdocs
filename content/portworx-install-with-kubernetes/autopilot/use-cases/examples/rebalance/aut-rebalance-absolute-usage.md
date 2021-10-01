@@ -16,29 +16,30 @@ hidden: true
 ## Example
 
 The following example Autopilot rule will rebalance all storage pools which meet either of following conditions:
+
 * Pool's **provision** space is _over 120%_ 
 * Pool's **used** space is _over 60%_
 
-```text
-apiVersion: autopilot.libopenstorage.org/v1alpha1
-kind: AutopilotRule
-metadata:
-  name: pool-rebalance-absolute
-spec:
-  conditions:
-    requiredMatches: 1
-    expressions:
-    - key: 100 * (px_pool_stats_provisioned_bytes/ on (pool) px_pool_stats_total_bytes) 
-      operator: Gt 
-      values:
-        - "120"
-    - key: 100 * (px_pool_stats_used_bytes/ on (pool) px_pool_stats_total_bytes) 
-      operator: Gt 
-      values:
-        - "70"
-  actions:
-    - name: "openstorage.io.action.storagepool/rebalance"
-```
+    ```text
+    apiVersion: autopilot.libopenstorage.org/v1alpha1
+    kind: AutopilotRule
+    metadata:
+      name: pool-rebalance-absolute
+    spec:
+      conditions:
+        requiredMatches: 1
+        expressions:
+        - key: 100 * (px_pool_stats_provisioned_bytes/ on (pool) px_pool_stats_total_bytes) 
+          operator: Gt 
+          values:
+            - "120"
+        - key: 100 * (px_pool_stats_used_bytes/ on (pool) px_pool_stats_total_bytes) 
+          operator: Gt 
+          values:
+            - "70"
+      actions:
+        - name: "openstorage.io.action.storagepool/rebalance"
+    ```
 
 The AutopilotRule spec consists of two important sections: `conditions` and `actions`.
 
@@ -153,32 +154,32 @@ First, create the storage and application spec files:
 
   1. Create a YAML spec for the autopilot rule named `autopilotrule-pool-rebalance-example.yaml` and place the following content inside it:
 
-```text
-apiVersion: autopilot.libopenstorage.org/v1alpha1
-kind: AutopilotRule
-metadata:
- name: pool-rebalance-absolute
-spec:
-  conditions:
-    requiredMatches: 1
-    expressions:
-    - key: 100 * (px_pool_stats_provisioned_bytes/ on (pool) px_pool_stats_total_bytes) 
-      operator: Gt 
-      values:
-        - "120"
-    - key: 100 * (px_pool_stats_used_bytes/ on (pool) px_pool_stats_total_bytes) 
-      operator: Gt 
-      values:
-        - "70"
-  actions:
-    - name: "openstorage.io.action.storagepool/rebalance"
-```
+    ```text
+    apiVersion: autopilot.libopenstorage.org/v1alpha1
+    kind: AutopilotRule
+    metadata:
+      name: pool-rebalance-absolute
+    spec:
+      conditions:
+        requiredMatches: 1
+        expressions:
+        - key: 100 * (px_pool_stats_provisioned_bytes/ on (pool) px_pool_stats_total_bytes) 
+          operator: Gt 
+          values:
+            - "120"
+        - key: 100 * (px_pool_stats_used_bytes/ on (pool) px_pool_stats_total_bytes) 
+          operator: Gt 
+          values:
+            - "70"
+      actions:
+        - name: "openstorage.io.action.storagepool/rebalance"
+    ```
 
 2. Apply the rule
 
-```text
-kubectl apply -f autopilotrule-pool-rebalance-example.yaml
-```
+    ```text
+    kubectl apply -f autopilotrule-pool-rebalance-example.yaml
+    ```
 
 ### Monitor
 

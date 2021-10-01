@@ -20,15 +20,15 @@ You can identify this error in the following ways:
     error level=error msg="Could not init boot manager" error="failed to generate a new node identity: create CSI volume (CreateVolume) error: PVC: kube-system/px-do-not-delete-... failed to get bound to a PV"
     ```
 
-To correct this error, check if the CSI driver exists in your cluster by running the following command:
-  
-```text
-kubectl get csidriver
-```
-```output
-NAME                     ATTACHREQUIRED   PODINFOONMOUNT   MODES        AGE
-csi.vsphere.vmware.com   true             false            Persistent   6d22h
-```
+    To correct this error, check if the CSI driver exists in your cluster by running the following command:
+    
+    ```text
+    kubectl get csidriver
+    ```
+    ```output
+    NAME                     ATTACHREQUIRED   PODINFOONMOUNT   MODES        AGE
+    csi.vsphere.vmware.com   true             false            Persistent   6d22h
+    ```
 
 * If the driver is not present in the system, contact your cluster administrator to install the vSphere CSI driver.
 * If the CSI driver exists, check the StorageClass name you’re using for installation. Ensure that StorageClass has the CSI driver name set as a provisioner.

@@ -47,16 +47,16 @@ A PersistentVolume (PV) is a piece of storage in the cluster that has been provi
   * **parameters.repl:** with the number of replicas Portworx should create (this example creates two replicas)
   * **parameters.priority_io:** with the type of the storage pool (this example uses a high-priority storage pool)
 
-    ```text
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-      name: mysql-sc
-    provisioner: kubernetes.io/portworx-volume
-    parameters:
-      repl: "3"
-      priority_io: "high"
-    ```
+        ```text
+        apiVersion: storage.k8s.io/v1
+        kind: StorageClass
+        metadata:
+          name: mysql-sc
+        provisioner: kubernetes.io/portworx-volume
+        parameters:
+          repl: "3"
+          priority_io: "high"
+        ```
 
     For more details about how you can configure a storage class, see the [Using Dynamic Provisioning](/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) section of the Portworx documentation.
 

@@ -54,20 +54,20 @@ Create the storage class which refers to the CSI secret you created in step 2 ab
   * `csi.storage.k8s.io/node-publish-secret-name` and the name of your CSI secret
   * `csi.storage.k8s.io/node-publish-secret-namespace` and the namespace in which your CSI secret is located
 
-```text
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: portworx-sc
-provisioner: pxd.portworx.com
-parameters:
-  repl: "1"
-  secure: "true"
-  csi.storage.k8s.io/provisioner-secret-name: px-secret
-  csi.storage.k8s.io/provisioner-secret-namespace: portworx
-  csi.storage.k8s.io/node-publish-secret-name: px-secret
-  csi.storage.k8s.io/node-publish-secret-namespace: portworx
-```
+    ```text
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+      name: portworx-sc
+    provisioner: pxd.portworx.com
+    parameters:
+      repl: "1"
+      secure: "true"
+      csi.storage.k8s.io/provisioner-secret-name: px-secret
+      csi.storage.k8s.io/provisioner-secret-namespace: portworx
+      csi.storage.k8s.io/node-publish-secret-name: px-secret
+      csi.storage.k8s.io/node-publish-secret-namespace: portworx
+    ```
 
 
 ### Encrypt your volumes per PVC

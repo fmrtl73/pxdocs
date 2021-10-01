@@ -107,10 +107,10 @@ Failure domains in terms of RACK information can be passed in as described [here
       kind: StorageClass
       apiVersion: storage.k8s.io/v1
       metadata:
-      name: portworx-sc
+        name: portworx-sc
       provisioner: kubernetes.io/portworx-volume
       parameters:
-      repl: "3"
+        repl: "3"
       ```
 
 * Portworx makes best effort to distribute volumes evenly across all nodes and based on the `iopriority` that is requested. When Portworx cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to create the volume with the next available `iopriority` level.

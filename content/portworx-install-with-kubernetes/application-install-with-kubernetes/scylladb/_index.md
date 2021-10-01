@@ -259,30 +259,30 @@ Storage requirements? The sc mentions SSDs, and there's probably a minimum stora
   * Host IP
   * Pod IP
 
-    ```text
-    kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
-    ```
+        ```text
+        kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
+        ```
 
-    ```output
-    {
-      "name": "scylla-0",
-      "hostname": "ravi-blr-dev-dour-shoulder-3",
-      "hostIP": "70.0.87.120",
-      "PodIP": "10.233.121.53"
-    }
-    {
-      "name": "scylla-1",
-      "hostname": "ravi-blr-dev-dour-shoulder-1",
-      "hostIP": "70.0.87.82",
-      "PodIP": "10.233.76.19"
-    }
-    {
-      "name": "scylla-2",
-      "hostname": "ravi-blr-dev-dour-shoulder-2",
-      "hostIP": "70.0.87.118",
-      "PodIP": "10.233.127.67"
-    }
-    ```
+        ```output
+        {
+          "name": "scylla-0",
+          "hostname": "ravi-blr-dev-dour-shoulder-3",
+          "hostIP": "70.0.87.120",
+          "PodIP": "10.233.121.53"
+        }
+        {
+          "name": "scylla-1",
+          "hostname": "ravi-blr-dev-dour-shoulder-1",
+          "hostIP": "70.0.87.82",
+          "PodIP": "10.233.76.19"
+        }
+        {
+          "name": "scylla-2",
+          "hostname": "ravi-blr-dev-dour-shoulder-2",
+          "hostIP": "70.0.87.118",
+          "PodIP": "10.233.127.67"
+        }
+        ```
 
 5. Enter the `ssh` command to open a shell session into one of your nodes:
 
@@ -481,30 +481,30 @@ The steps in this exercise simulate a pod failure and demonstrate Portworx and K
   * Host IP
   * Pod IP
 
-    ```text
-    kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
-    ```
+        ```text
+        kubectl get pods -l app=scylla -o json | jq '.items[] | {"name": .metadata.name,"hostname": .spec.nodeName, "hostIP": .status.hostIP, "PodIP": .status.podIP}'
+        ```
 
-    ```output
-    {
-      "name": "scylla-0",
-      "hostname": "ravi-blr-dev-dour-shoulder-3",
-      "hostIP": "70.0.87.120",
-      "PodIP": "10.233.121.53"
-    }
-    {
-      "name": "scylla-1",
-      "hostname": "ravi-blr-dev-dour-shoulder-2",
-      "hostIP": "70.0.87.118",
-      "PodIP": "10.233.127.68"
-    }
-    {
-      "name": "scylla-2",
-      "hostname": "ravi-blr-dev-dour-shoulder-2",
-      "hostIP": "70.0.87.118",
-      "PodIP": "10.233.127.67"
-    }
-    ```
+        ```output
+        {
+          "name": "scylla-0",
+          "hostname": "ravi-blr-dev-dour-shoulder-3",
+          "hostIP": "70.0.87.120",
+          "PodIP": "10.233.121.53"
+        }
+        {
+          "name": "scylla-1",
+          "hostname": "ravi-blr-dev-dour-shoulder-2",
+          "hostIP": "70.0.87.118",
+          "PodIP": "10.233.127.68"
+        }
+        {
+          "name": "scylla-2",
+          "hostname": "ravi-blr-dev-dour-shoulder-2",
+          "hostIP": "70.0.87.118",
+          "PodIP": "10.233.127.67"
+        }
+        ```
 
 14. Enter the following `SELECT` statement to read the columns from the `demodb.emp` table:
 

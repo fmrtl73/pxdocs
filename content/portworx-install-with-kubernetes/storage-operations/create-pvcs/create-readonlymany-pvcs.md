@@ -15,21 +15,21 @@ This guide provides steps for mounting a disk in the `ReadOnlyMany`(ROM) access 
     * **readOnly:** with the `true` value
     * **claimName:** with the name of the PVC you created in the step above
 
-    ```text
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: pvpod
-    spec:
-      containers:
-      - name: test-container
-        image: gcr.io/google_containers/test-webserver
-        volumeMounts:
-        - name: test-vol
-          mountPath: /test-portworx-volume
-      volumes:
-      - name: test-vol
-        persistentVolumeClaim:
-          claimName: pvcsc001
-          readOnly: true
-    ```
+        ```text
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: pvpod
+        spec:
+          containers:
+          - name: test-container
+            image: gcr.io/google_containers/test-webserver
+            volumeMounts:
+            - name: test-vol
+              mountPath: /test-portworx-volume
+          volumes:
+          - name: test-vol
+            persistentVolumeClaim:
+              claimName: pvcsc001
+              readOnly: true
+        ```

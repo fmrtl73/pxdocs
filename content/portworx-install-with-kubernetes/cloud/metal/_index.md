@@ -63,33 +63,33 @@ By using Terraform, you avoid the complexity of manually installing and configur
         * The **portworx_version** key with a version of Portworx you want to deploy. If you do not specify a version, Terraform will apply the latest available version of Portworx.
         * The **portworx_license** key with a Portworx license key to activate when Portworx deploys. If you do not specify a portworx license, Portworx will deploy and start in trial mode. 
         
-    ```text
-    # variables.tf
-    variable "metal_auth_token" {}
-    variable "metal_project_id" {}
-    variable "gcp_project_id" {}
+            ```text
+            # variables.tf
+            variable "metal_auth_token" {}
+            variable "metal_project_id" {}
+            variable "gcp_project_id" {}
 
-    # main.tf
-    module "anthos-on-baremetal" {
-      source  = "equinix/anthos-on-baremetal/metal" 
-      version = "0.5.1"
-     
-      gcp_project_id = var.gcp_project_id
-      metal_auth_token = var.metal_auth_token
-      metal_project_id = var.metal_project_id
-      metal_create_project = false 
-      ha_control_plane = true 
-      facility = "da11"
-      cp_plan = "c3.medium.x86"
-      worker_plan = "c3.medium.x86" 
-      worker_count = 3
-      storage_module = "portworx"
-      storage_options = {
-        portworx_version = "2.7"
-        portworx_license = "abc-example-key-123"
-      }
-    }
-    ```
+            # main.tf
+            module "anthos-on-baremetal" {
+              source  = "equinix/anthos-on-baremetal/metal" 
+              version = "0.5.1"
+             
+              gcp_project_id = var.gcp_project_id
+              metal_auth_token = var.metal_auth_token
+              metal_project_id = var.metal_project_id
+              metal_create_project = false 
+              ha_control_plane = true 
+              facility = "da11"
+              cp_plan = "c3.medium.x86"
+              worker_plan = "c3.medium.x86" 
+              worker_count = 3
+              storage_module = "portworx"
+              storage_options = {
+                portworx_version = "2.7"
+                portworx_license = "abc-example-key-123"
+              }
+            }
+            ```
 
     {{<info>}}
 **NOTE:** For reference information on other variables you can modify to further customize your Portworx deployment, see the [Available variables](https://github.com/equinix/terraform-metal-anthos-on-baremetal#available-variables) section of the project's GitHub Readme.

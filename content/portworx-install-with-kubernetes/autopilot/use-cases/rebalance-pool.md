@@ -19,28 +19,28 @@ The following example Autopilot rule will rebalance all storage pools which meet
 * Pool's **provision** space is _over 20%_ or _under 20%_ of mean value across pools
 * Pool's **used** space is _over 20%_ or _under 20%_ of mean value across pools
 
-```text
-apiVersion: autopilot.libopenstorage.org/v1alpha1
-kind: AutopilotRule
-metadata:
- name: pool-rebalance
-spec:
-  conditions:
-    requiredMatches: 1
-    expressions:
-    - keyAlias: PoolProvDeviationPerc
-      operator: NotInRange
-      values:
-        - "-20"
-        - "20"
-    - keyAlias: PoolUsageDeviationPerc
-      operator: NotInRange
-      values:
-        - "-20"
-        - "20"
-  actions:
-    - name: "openstorage.io.action.storagepool/rebalance"
-```
+    ```text
+    apiVersion: autopilot.libopenstorage.org/v1alpha1
+    kind: AutopilotRule
+    metadata:
+      name: pool-rebalance
+    spec:
+      conditions:
+        requiredMatches: 1
+        expressions:
+        - keyAlias: PoolProvDeviationPerc
+          operator: NotInRange
+          values:
+            - "-20"
+            - "20"
+        - keyAlias: PoolUsageDeviationPerc
+          operator: NotInRange
+          values:
+            - "-20"
+            - "20"
+      actions:
+        - name: "openstorage.io.action.storagepool/rebalance"
+    ```
 
 The AutopilotRule spec consists of two important sections: `conditions` and `actions`.
 
@@ -158,34 +158,34 @@ Create the storage and application spec files:
 
 1.  Create a YAML spec for the autopilot rule named `autopilotrule-pool-rebalance-example.yaml` and place the following content inside it:
 
-```text
-apiVersion: autopilot.libopenstorage.org/v1alpha1
-kind: AutopilotRule
-metadata:
- name: pool-rebalance
-spec:
-  conditions:
-    requiredMatches: 1
-    expressions:
-    - keyAlias: PoolProvDeviationPerc
-      operator: NotInRange
-      values:
-        - "-20"
-        - "20"
-    - keyAlias: PoolUsageDeviationPerc
-      operator: NotInRange
-      values:
-        - "-20"
-        - "20"
-  actions:
-    - name: "openstorage.io.action.storagepool/rebalance"
-```
+    ```text
+    apiVersion: autopilot.libopenstorage.org/v1alpha1
+    kind: AutopilotRule
+    metadata:
+    name: pool-rebalance
+    spec:
+      conditions:
+        requiredMatches: 1
+        expressions:
+        - keyAlias: PoolProvDeviationPerc
+          operator: NotInRange
+          values:
+            - "-20"
+            - "20"
+        - keyAlias: PoolUsageDeviationPerc
+          operator: NotInRange
+          values:
+            - "-20"
+            - "20"
+      actions:
+        - name: "openstorage.io.action.storagepool/rebalance"
+    ```
 
 2. Apply the rule:
 
-```text
-kubectl apply -f autopilotrule-pool-rebalance-example.yaml
-```
+    ```text
+    kubectl apply -f autopilotrule-pool-rebalance-example.yaml
+    ```
 
 ### Monitor
 

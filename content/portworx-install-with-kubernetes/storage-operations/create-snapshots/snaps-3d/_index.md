@@ -109,16 +109,16 @@ Creating the below VolumeSnapshot will do the following:
 * Once the rule is executed, Stork will take a snapshot of the _mysql-data_ PVC.
 * After the snapshot has been triggered, Stork will terminate any background actions that may exist in the rule _px-presnap-rule_.
 
-```text
-apiVersion: volumesnapshot.external-storage.k8s.io/v1
-kind: VolumeSnapshot
-metadata:
-  name: mysql-3d-snapshot
-  annotations:
-    stork.rule/pre-snapshot: px-presnap-rule
-spec:
-  persistentVolumeClaimName: mysql-data
-```
+    ```text
+    apiVersion: volumesnapshot.external-storage.k8s.io/v1
+    kind: VolumeSnapshot
+    metadata:
+      name: mysql-3d-snapshot
+      annotations:
+        stork.rule/pre-snapshot: px-presnap-rule
+    spec:
+      persistentVolumeClaimName: mysql-data
+    ```
 
 ### MongoDB
 
@@ -164,17 +164,17 @@ Creating the below VolumeSnapshot will do the following:
 * Once the rule is executed, Stork will take a snapshot of the _px-mongo-pvc_ PVC.
 * After the snapshot has been triggered, Stork will run the _px-mongodb-postsnap-rule_ rule on pod using the _px-mongo-pvc_ PVC.
 
-```text
-apiVersion: volumesnapshot.external-storage.k8s.io/v1
-kind: VolumeSnapshot
-metadata:
-  name: mongodb-3d-snapshot
-  annotations:
-    stork.rule/pre-snapshot: px-mongodb-presnap-rule
-    stork.rule/post-snapshot: px-mongodb-postsnap-rule
-spec:
-  persistentVolumeClaimName: px-mongo-pvc
-```
+    ```text
+    apiVersion: volumesnapshot.external-storage.k8s.io/v1
+    kind: VolumeSnapshot
+    metadata:
+      name: mongodb-3d-snapshot
+      annotations:
+        stork.rule/pre-snapshot: px-mongodb-presnap-rule
+        stork.rule/post-snapshot: px-mongodb-postsnap-rule
+    spec:
+      persistentVolumeClaimName: px-mongo-pvc
+    ```
 
 ### Cassandra
 

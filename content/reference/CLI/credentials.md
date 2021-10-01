@@ -96,16 +96,16 @@ Enter the `pxctl credentials create` command, specifying:
 * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
 * The name of your cloud credentials
 
-```text
-pxctl credentials create \
-  --provider s3 \
-  --s3-access-key <YOUR-SECRET-ACCESS-KEY>
-  --s3-secret-key <YOUR-ACCESS-KEY-ID> \
-  --s3-region us-east-1 \
-  --s3-endpoint s3.amazonaws.com \
-  --s3-storage-class STANDARD \
-  <NAME>
-```
+    ```text
+    pxctl credentials create \
+      --provider s3 \
+      --s3-access-key <YOUR-SECRET-ACCESS-KEY>
+      --s3-secret-key <YOUR-ACCESS-KEY-ID> \
+      --s3-region us-east-1 \
+      --s3-endpoint s3.amazonaws.com \
+      --s3-storage-class STANDARD \
+      <NAME>
+    ```
 
 ```output
 Credentials created successfully

@@ -98,69 +98,69 @@ Create the storage and application spec files:
     
     * The `SIZE` environment variable in this spec instructs pgbench to write 8GiB of data to the volume. Since the PVC is only 10GiB in size, Autopilot will resize the PVC when needed.
 
-    ```text
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: pgbench
-      labels:
-        app: pgbench
-    spec:
-      selector:
-        matchLabels:
-          app: pgbench
-      strategy:
-        rollingUpdate:
-          maxSurge: 1
-          maxUnavailable: 1
-        type: RollingUpdate
-      replicas: 1
-      template:
+        ```text
+        apiVersion: apps/v1
+        kind: Deployment
         metadata:
+          name: pgbench
           labels:
             app: pgbench
         spec:
-          schedulerName: stork
-          containers:
-            - image: postgres:9.5
-              name: postgres
-              ports:
-              - containerPort: 5432
-              env:
-              - name: POSTGRES_USER
-                value: pgbench
-              - name: POSTGRES_PASSWORD
-                value: superpostgres
-              - name: PGBENCH_PASSWORD
-                value: superpostgres
-              - name: PGDATA
-                value: /var/lib/postgresql/data/pgdata
-              volumeMounts:
-              - mountPath: /var/lib/postgresql/data
-                name: pgbenchdb
-            - name: pgbench
-              image: portworx/torpedo-pgbench:latest
-              imagePullPolicy: "Always"
-              env:
-                - name: PG_HOST
-                  value: 127.0.0.1
-                - name: PG_USER
-                  value: pgbench
-                - name: SIZE
-                  value: "8"
-              volumeMounts:
-              - mountPath: /var/lib/postgresql/data
-                name: pgbenchdb
-              - mountPath: /pgbench
-                name: pgbenchstate
-          volumes:
-          - name: pgbenchdb
-            persistentVolumeClaim:
-              claimName: pgbench-data
-          - name: pgbenchstate
-            persistentVolumeClaim:
-              claimName: pgbench-state
-    ```
+          selector:
+            matchLabels:
+              app: pgbench
+          strategy:
+            rollingUpdate:
+              maxSurge: 1
+              maxUnavailable: 1
+            type: RollingUpdate
+          replicas: 1
+          template:
+            metadata:
+              labels:
+                app: pgbench
+            spec:
+              schedulerName: stork
+              containers:
+                - image: postgres:9.5
+                  name: postgres
+                  ports:
+                  - containerPort: 5432
+                  env:
+                  - name: POSTGRES_USER
+                    value: pgbench
+                  - name: POSTGRES_PASSWORD
+                    value: superpostgres
+                  - name: PGBENCH_PASSWORD
+                    value: superpostgres
+                  - name: PGDATA
+                    value: /var/lib/postgresql/data/pgdata
+                  volumeMounts:
+                  - mountPath: /var/lib/postgresql/data
+                    name: pgbenchdb
+                - name: pgbench
+                  image: portworx/torpedo-pgbench:latest
+                  imagePullPolicy: "Always"
+                  env:
+                    - name: PG_HOST
+                      value: 127.0.0.1
+                    - name: PG_USER
+                      value: pgbench
+                    - name: SIZE
+                      value: "8"
+                  volumeMounts:
+                  - mountPath: /var/lib/postgresql/data
+                    name: pgbenchdb
+                  - mountPath: /pgbench
+                    name: pgbenchstate
+              volumes:
+              - name: pgbenchdb
+                persistentVolumeClaim:
+                  claimName: pgbench-data
+              - name: pgbenchstate
+                persistentVolumeClaim:
+                  claimName: pgbench-state
+        ```
 
 ####  AutopilotRule spec
 

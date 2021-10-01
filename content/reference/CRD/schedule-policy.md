@@ -51,16 +51,16 @@ An interval `SchedulePolicy` includes the following fields and values:
 * **metadata.namespace:** the name of your namespace (this example uses `mysql`)
 * **policy.interval.intervalInMinutes:** the interval, in minutes, after which Portworx triggers the operation (this example triggers the operation every minute)
 
-```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: SchedulePolicy
-metadata:
-  name: testpolicy
-  namespace: mysql
-policy:
-  interval:
-    intervalMinutes: 1
-```
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: SchedulePolicy
+    metadata:
+      name: testpolicy
+      namespace: mysql
+    policy:
+      interval:
+        intervalMinutes: 1
+    ```
 
 ### Daily SchedulePolicy
 
@@ -72,16 +72,16 @@ A daily `SchedulePolicy` includes the following fields and values:
 * **metadata.namespace:** the name of your namespace (this example uses `mysql`)
 * **policy.daily.time:** the time of the day when Portworx will trigger the operation (this example triggers the operation every day at 10:14 PM)
 
-```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: SchedulePolicy
-metadata:
-  name: testpolicy
-  namespace: mysql
-policy:
-  daily:
-    time: "10:14PM"
-```
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: SchedulePolicy
+    metadata:
+      name: testpolicy
+      namespace: mysql
+    policy:
+      daily:
+        time: "10:14PM"
+    ```
 
 ### Weekly SchedulePolicy
 
@@ -94,17 +94,17 @@ A weekly `SchedulePolicy` includes the following fields and values:
 * **policy.weekly.day:** the day of the week when Portworx will trigger the operation (this example triggers the operation every Thursday)
 * **policy.weekly.time:** the time of the day when Portworx will trigger the operation (this example triggers the operation at 10:13 PM)
 
-```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: SchedulePolicy
-metadata:
-  name: testpolicy
-  namespace: mysql
-policy:
-  weekly:
-    day: "Thursday"
-    time: "10:13PM"
-```
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: SchedulePolicy
+    metadata:
+      name: testpolicy
+      namespace: mysql
+    policy:
+      weekly:
+        day: "Thursday"
+        time: "10:13PM"
+    ```
 
 ### Monthly SchedulePolicy
 
@@ -117,14 +117,14 @@ A monthly `SchedulePolicy` includes the following fields and values:
 * **policy.monthly.day:** the day of the month when Portworx will trigger the operation (this example triggers the operation on the 14th of every month)
 * **policy.monthly.time:** the time of the day when Portworx will trigger the operation (this example triggers the operation at 8:05 PM)
 
-```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: SchedulePolicy
-metadata:
-  name: testpolicy
-  namespace: mysql
-policy:
-  monthly:
-    date: 14
-    time: "8:05PM"
-```
+    ```text
+    apiVersion: stork.libopenstorage.org/v1alpha1
+    kind: SchedulePolicy
+    metadata:
+      name: testpolicy
+      namespace: mysql
+    policy:
+      monthly:
+        date: 14
+        time: "8:05PM"
+    ```

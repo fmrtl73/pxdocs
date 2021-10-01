@@ -45,72 +45,72 @@ The `ClusterConfig` dictates what resources `eksctl` requests from EKS for the p
         * **storageless-nodes.iam.attachPolicyARNs:** with the ARN of the IAM policy you created for Portworx in the **Grant Portworx the needed AWS permissions** step
     * **availabilityZones:** with the availabilty zones applicable to your region
 
-    ```text
-    apiVersion: eksctl.io/v1alpha5
-    kind: ClusterConfig
-    metadata:
-      name: px-eksctl
-      region: us-east-1
-      version: "1.14"
-    managedNodeGroups:
-      - name: storage-nodes
-        instanceType: m4.xlarge
-        minSize: 3
-        maxSize: 3
-        volumeSize: 20
-        #ami: auto
-        amiFamily: AmazonLinux2
-        labels: {role: worker, "portworx.io/node-type": "storage"}
-        tags:
-          nodegroup-role: worker
-        ssh:  
-          allow: true
-          publicKeyPath: ~/.ssh/aws-vm.pub
-        iam:
-          attachPolicyARNs:
-            - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
-            - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
-            - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
-            - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
-            - <arn-of-your-portworx-aws-iam-policy>
-          withAddonPolicies:
-            imageBuilder: true
-            autoScaler: true
-            ebs: true
-            fsx: true
-            efs: true
-            albIngress: true
-            cloudWatch: true
-      - name: storageless-nodes
-        instanceType: m4.xlarge
-        minSize: 3
-        maxSize: 6
-        desiredCapacity: 4
-        volumeSize: 20
-        amiFamily: AmazonLinux2
-        labels: {role: worker}
-        tags:
-          nodegroup-role: worker-storageless
-        ssh:
-          allow: true
-          publicKeyPath: ~/.ssh/aws-vm.pub
-        iam:
-          attachPolicyARNs:
-            - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
-            - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
-            - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
-            - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
-            - <arn-of-your-portworx-aws-iam-policy>
-          withAddonPolicies:
-            imageBuilder: true
-            autoScaler: true
-            ebs: true
-            fsx: true
-            efs: true
-            albIngress: true
-            cloudWatch: true
-    availabilityZones: [ 'us-east-1a', 'us-east-1b', 'us-east-1c' ]
-    ```
+        ```text
+        apiVersion: eksctl.io/v1alpha5
+        kind: ClusterConfig
+        metadata:
+          name: px-eksctl
+          region: us-east-1
+          version: "1.14"
+        managedNodeGroups:
+          - name: storage-nodes
+            instanceType: m4.xlarge
+            minSize: 3
+            maxSize: 3
+            volumeSize: 20
+            #ami: auto
+            amiFamily: AmazonLinux2
+            labels: {role: worker, "portworx.io/node-type": "storage"}
+            tags:
+              nodegroup-role: worker
+            ssh:  
+              allow: true
+              publicKeyPath: ~/.ssh/aws-vm.pub
+            iam:
+              attachPolicyARNs:
+                - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+                - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+                - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+                - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+                - <arn-of-your-portworx-aws-iam-policy>
+              withAddonPolicies:
+                imageBuilder: true
+                autoScaler: true
+                ebs: true
+                fsx: true
+                efs: true
+                albIngress: true
+                cloudWatch: true
+          - name: storageless-nodes
+            instanceType: m4.xlarge
+            minSize: 3
+            maxSize: 6
+            desiredCapacity: 4
+            volumeSize: 20
+            amiFamily: AmazonLinux2
+            labels: {role: worker}
+            tags:
+              nodegroup-role: worker-storageless
+            ssh:
+              allow: true
+              publicKeyPath: ~/.ssh/aws-vm.pub
+            iam:
+              attachPolicyARNs:
+                - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+                - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+                - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+                - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+                - <arn-of-your-portworx-aws-iam-policy>
+              withAddonPolicies:
+                imageBuilder: true
+                autoScaler: true
+                ebs: true
+                fsx: true
+                efs: true
+                albIngress: true
+                cloudWatch: true
+        availabilityZones: [ 'us-east-1a', 'us-east-1b', 'us-east-1c' ]
+        ```
 
 2. Enter the following `eksctl create cluster` command, specifying the name of the `clusterConfig` file you created in the step above:
 

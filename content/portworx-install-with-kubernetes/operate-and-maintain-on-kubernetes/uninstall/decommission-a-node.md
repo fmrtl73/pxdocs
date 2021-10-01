@@ -76,49 +76,49 @@ Another way to achieve this is to use [inter-pod affinity](https://kubernetes.io
 * Basically we will define a pod affinity rule in your applications that ensure that application pods get scheduled only on nodes where the Portworx pod is running.
 * Consider below nginx example:
 
-  ```text
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx-deployment
-spec:
-  selector:
-    matchLabels:
-      app: nginx
-  replicas: 1
-  template:
+      ```text
+    apiVersion: apps/v1
+    kind: Deployment
     metadata:
-      labels:
-        app: nginx
+      name: nginx-deployment
     spec:
-      affinity:
-        # Inter-pod affinity rule restricting nginx pods to run only on nodes where Portworx pods are running (Portworx pods have a label
-        # name=portworx which is used in the rule)
-        podAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: name
-                operator: In
-                values:
-                - "portworx"
-            topologyKey: kubernetes.io/hostname
-            namespaces:
-            - "kube-system"
-      hostNetwork: true
-      containers:
-      - name: nginx
-        image: nginx
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: nginx-persistent-storage
-          mountPath: /usr/share/nginx/html
-      volumes:
-      - name: nginx-persistent-storage
-        persistentVolumeClaim:
-          claimName: px-nginx-pvc
-  ```
+      selector:
+        matchLabels:
+          app: nginx
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            app: nginx
+        spec:
+          affinity:
+            # Inter-pod affinity rule restricting nginx pods to run only on nodes where Portworx pods are running (Portworx pods have a label
+            # name=portworx which is used in the rule)
+            podAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: name
+                    operator: In
+                    values:
+                    - "portworx"
+                topologyKey: kubernetes.io/hostname
+                namespaces:
+                - "kube-system"
+          hostNetwork: true
+          containers:
+          - name: nginx
+            image: nginx
+            ports:
+            - containerPort: 80
+            volumeMounts:
+            - name: nginx-persistent-storage
+              mountPath: /usr/share/nginx/html
+          volumes:
+          - name: nginx-persistent-storage
+            persistentVolumeClaim:
+              claimName: px-nginx-pvc
+      ```
 
 ## Step 4. Uncordon the node
 

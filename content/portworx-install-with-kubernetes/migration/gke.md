@@ -34,29 +34,29 @@ Mount the secret created above in the Stork deployment. Run `kubectl edit deploy
 
 * Add the following under spec.template.spec:
 
-```text
-volumes:
-- name: gke-creds
-  secret:
-     secretName: gke-creds
-```
+    ```text
+    volumes:
+    - name: gke-creds
+      secret:
+        secretName: gke-creds
+    ```
 
 * Add the following under spec.template.spec.containers
 
-```text
-volumeMounts:
-- mountPath: /root/.gke/
-  name: gke-creds
-  readOnly: true
-```
+    ```text
+    volumeMounts:
+    - mountPath: /root/.gke/
+      name: gke-creds
+      readOnly: true
+    ```
 
 * Add the following under spec.template.spec.containers
 
-```text
-env:
-- name: CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE
-  value: /root/.gke/gcs-key.json
-```
+    ```text
+    env:
+    - name: CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE
+      value: /root/.gke/gcs-key.json
+    ```
 
 Save the changes and wait for all the Stork pods to be in running state after applying the
 changes:

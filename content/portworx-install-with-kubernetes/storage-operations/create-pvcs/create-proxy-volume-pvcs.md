@@ -29,18 +29,18 @@ You can access a full NFS share in Portworx as a proxy volume. Application using
   * **parameters.proxy_nfs_exportpath:** With the export path on the NFS server.
   * **parameters.mount_options:** With the standard linux NFS mount options to use while mounting the NFS share.
 
-    ```text
-    kind: StorageClass
-    apiVersion: storage.k8s.io/v1
-    metadata:
-      name: portworx-proxy-volume-volume
-    provisioner: kubernetes.io/portworx-volume
-    parameters:
-      proxy_endpoint: "nfs://<nfs-share-endpoint>"
-      proxy_nfs_exportpath: "/<mount-path>"
-      mount_options: "vers=4.0"
-    allowVolumeExpansion: true
-    ```
+        ```text
+        kind: StorageClass
+        apiVersion: storage.k8s.io/v1
+        metadata:
+          name: portworx-proxy-volume-volume
+        provisioner: kubernetes.io/portworx-volume
+        parameters:
+          proxy_endpoint: "nfs://<nfs-share-endpoint>"
+          proxy_nfs_exportpath: "/<mount-path>"
+          mount_options: "vers=4.0"
+        allowVolumeExpansion: true
+        ```
 
 {{<info>}}
 **NOTE:** The example above uses NFS version 4. You can replace the "vers" field value with your desired NFS version.
@@ -57,21 +57,21 @@ You can access a full NFS share in Portworx as a proxy volume. Application using
   * **spec.accessModes:** With the access mode you want to assign to your volumes.
   * **spec.resources.requests.storage:** With the amount of storage you want to allocate to a created volume.
 
-    ```text
-    kind: PersistentVolumeClaim
-    apiVersion: v1
-    metadata:
-      name: nfs-data
-      labels:
-        app: nginx
-    spec:
-      storageClassName: portworx-proxy-volume-volume
-      accessModes:
-        - <access-mode>
-      resources:
-        requests:
-          storage: <storage-amount>
-    ```
+        ```text
+        kind: PersistentVolumeClaim
+        apiVersion: v1
+        metadata:
+          name: nfs-data
+          labels:
+            app: nginx
+        spec:
+          storageClassName: portworx-proxy-volume-volume
+          accessModes:
+            - <access-mode>
+          resources:
+            requests:
+              storage: <storage-amount>
+        ```
 
 4. Apply the spec:
 
@@ -128,17 +128,17 @@ You can associate a sub-path of an NFS share with Portworx as a proxy volume. Un
     {{</info>}}
   * **parameters.proxy_endpoint:** With the export path on the NFS server.
 
-    ```text
-    kind: StorageClass
-    apiVersion: storage.k8s.io/v1
-    metadata:
-      name: portworx-proxy-volume-volume
-    provisioner: kubernetes.io/portworx-volume
-    parameters:
-      proxy_endpoint: "nfs://<nfs-share-endpoint>"
-      proxy_nfs_exportpath: "/<mount-path>"
-    allowVolumeExpansion: true
-    ```
+        ```text
+        kind: StorageClass
+        apiVersion: storage.k8s.io/v1
+        metadata:
+          name: portworx-proxy-volume-volume
+        provisioner: kubernetes.io/portworx-volume
+        parameters:
+          proxy_endpoint: "nfs://<nfs-share-endpoint>"
+          proxy_nfs_exportpath: "/<mount-path>"
+        allowVolumeExpansion: true
+        ```
 
 2. Apply the spec:
 
@@ -156,23 +156,23 @@ You can associate a sub-path of an NFS share with Portworx as a proxy volume. Un
   * **spec.accessModes:** With the access mode you want to assign to your volumes.
   * **spec.resources.requests.storage:** With the amount of storage you want to allocate to a created volume.
 
-    ```text
-    kind: PersistentVolumeClaim
-    apiVersion: v1
-    metadata:
-      name: nfs-data
-      annotations:
-        px/proxy-nfs-subpath: "<path>/<sub-path>"
-      labels:
-        app: nginx
-    spec:
-      storageClassName: portworx-proxy-volume-volume
-      accessModes:
-        - <access-mode>
-      resources:
-        requests:
-          storage: <storage-amount>
-    ```
+        ```text
+        kind: PersistentVolumeClaim
+        apiVersion: v1
+        metadata:
+          name: nfs-data
+          annotations:
+            px/proxy-nfs-subpath: "<path>/<sub-path>"
+          labels:
+            app: nginx
+        spec:
+          storageClassName: portworx-proxy-volume-volume
+          accessModes:
+            - <access-mode>
+          resources:
+            requests:
+              storage: <storage-amount>
+        ```
 
     {{<info>}}
 **NOTE:** This PVC can only access the `<sub-path>` directory and its contents.
