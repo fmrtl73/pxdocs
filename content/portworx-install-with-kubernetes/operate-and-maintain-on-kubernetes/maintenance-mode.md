@@ -1,12 +1,12 @@
 ---
 title: Maintenance Commands
 hidden: true
-keywords: service, maintenance, drive removal, drive replacement, pool list, pool priority, kubernetes, k8s
+keywords: service, maintenance, drive removal, pool list, pool priority, kubernetes, k8s
 description: Explore commands needed for maintenance operations using Portworx.  Try today!
 ---
 
 Service level commands are related to maintenance of drives and drive pools.
-The most common cases would be for Disk addition/replacement
+The most common cases would be for Disk addition
 
 Here are some of the commands that are needed for maintenance operations
 
@@ -48,7 +48,6 @@ USAGE:
 COMMANDS:
      show           Show drives
      add            Add storage
-     replace        Replace source drive with target drive
      rebalance, rs  Rebalance storage
 
 OPTIONS:
@@ -178,79 +177,6 @@ Pool ID: 0
 	Drives:
 	2: /dev/sdb, 0 B allocated of 7.3 TiB, Online
 	1: /dev/sde, 3.0 GiB allocated of 7.3 TiB, Online
-Pool ID: 1
-	IO_Priority: HIGH
-	Size: 1.7 TiB
-	Status: Online
-	Has meta data: Yes
-	Drives:
-	1: /dev/sdj, 1.0 GiB allocated of 1.7 TiB, Online
-```
-
-## Replace a drive that is already part of the Portworx cluster
-
-### Step 1: Enter Maintenance mode
-
-```text
-pxctl service  maintenance --enter
-```
-
-```output
-This is a disruptive operation, PX will restart in maintenance mode.
-Are you sure you want to proceed ? (Y/N): y
-Entering maintenance mode...
-```
-
-### Step 2: Replace old drive with a new drive
-
-Ensure the replacement drive is already available in the system.
-
-For e.g., Replace drive /dev/sde with /dev/sdc
-
-```text
-pxctl service drive replace --source /dev/sde --target /dev/sdc --operation start
-```
-
-```output
-"Replace operation is in progress"
-```
-
-Check the replace status
-
-```text
-pxctl service drive replace --source /dev/sde --target /dev/sdc --operation status
-```
-
-```output
-"Started on 16.Dec 22:17:06, finished on 16.Dec 22:17:06, 0 write errs, 0 uncorr. read errs\n"
-```
-
-### Step 3: Exit Maintenance mode
-
-```text
-pxctl service  maintenance --exit
-```
-
-```output
-Exiting maintenance mode...
-```
-
-### Step 4: Check if the drive has been successfully replaced
-
-```text
-pxctl service drive show
-```
-
-```output
-PX drive configuration:
-Pool ID: 0
-	IO_Priority: LOW
-	Size: 15 TiB
-	Status: Online
-	Has meta data: No
-	Drives:
-	1: /dev/sdc, 3.0 GiB allocated of 7.3 TiB, Online
-	2: /dev/sdb, 0 B allocated of 7.3 TiB, Online
 Pool ID: 1
 	IO_Priority: HIGH
 	Size: 1.7 TiB
