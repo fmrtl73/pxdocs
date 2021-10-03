@@ -77,11 +77,11 @@ Drive Set List
 
 ### Inspecting Cloud Drives
 
-To display more detailed information about the drives attached to a node, run the `pxctl clouddrive inspect` with the `--nodeid` id flag and pass it the id of the node.
+To display more detailed information about the drives attached to a node, run the `pxctl clouddrive inspect` with the `--node` id flag and pass it the id of the node.
 
 
 ```text
-pxctl clouddrive inspect --nodeid ip-172-20-53-168.ec2.internal
+pxctl clouddrive inspect --node ip-172-20-53-168.ec2.internal
 ```
 
 ```output
