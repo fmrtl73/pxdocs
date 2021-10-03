@@ -63,7 +63,7 @@ To upgrade the Portworx OCI bundle, simply re-run the [first step](#step-1-insta
 The following coomands upgrade your Portworx OCI bundle to the latest stable:
 
 ```text
-latest_stable=$(curl -fsSL "https://install.portworx.com?type=dock&stork=false&aut=false" | awk '/image: / {print $2}')
+latest_stable=$(curl -fsSL "https://install.portworx.com?type=dock&stork=false&aut=false" | awk '/image: / {print $2}' | head -1)
 sudo docker run --entrypoint /runc-entry-point.sh \
     --rm -i --privileged=true \
     -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
