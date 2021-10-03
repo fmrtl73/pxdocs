@@ -6,13 +6,13 @@ keywords: portworx, VMware, vSphere, EKS Anywhere, Amazon EKS Anywhere
 ---
 
 
-Portworx can be installed on a Kubernetes cluster running on vSphere and managed by EKS Anywhere.
+Portworx can be installed on a Kubernetes cluster running on vSphere and managed by [Amazon EKS Anywhere](https://anywhere.eks.amazonaws.com).
 
 ### Prerequisites
 
 Before you install Portworx on vSphere, ensure that you meet the following prerequisiites:
 
-|**Specification**| **Supported Value**|
+|**Environment**|**Resources**|
 |------|------|
 |Deployment Host<br/>**Note**: The same vSphere host where you deploy EKS-Anywhere.| VM OS: Linux <br/>vCPU: 4 <br/> Memory: 16 GB <br/> Disk storage: 200 GB|
 |Control-Plane VMs| Minimum: 1 <br/> Recommended: 3 <br/>vCPUs: 2 <br/> RAM: 8 GB <br/> OS Volume: 25 GB|
