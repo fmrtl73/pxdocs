@@ -14,11 +14,11 @@ series: k8s-storage-snapshots
 
 Stork version 2.2 or above is required.
 
-{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-cloud-snap-creds-prereq.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-cloud-snap-creds-prereq.md" >}}
 
 ### Storkctl
 
-{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" >}}
 
 ## Create a schedule policy
 

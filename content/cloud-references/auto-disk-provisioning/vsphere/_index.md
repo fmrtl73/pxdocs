@@ -13,14 +13,14 @@ This guide explains how the Portworx Dynamic Disk Provisioning feature works wit
 
 ## Architecture
 
-{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-shared-arch.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-shared-arch.md" >}}
 
 
 ## Limiting storage nodes
 
-{{% content "shared/cloud-references-auto-disk-provisioning-asg-limit-storage-nodes.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-asg-limit-storage-nodes.md" >}}
 
-{{% content "shared/cloud-references-auto-disk-provisioning-asg-examples-vsphere.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-asg-examples-vsphere.md" >}}
 
 ## Availability across failure domains
 
@@ -30,4 +30,4 @@ Since Portworx is a storage overlay that automatically replicates your data, {{<
 
 {{<info>}}Run these steps from a machine which has kubectl access to your cluster.{{</info>}}
 
-{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-px-install.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-px-install.md" >}}

@@ -91,4 +91,4 @@ show databases;
 exit
 ```
 
-{{% content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-application-install-with-kubernetes-discussion-forum.md" >}}

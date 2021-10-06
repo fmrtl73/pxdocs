@@ -69,7 +69,7 @@ sudo docker run --restart=always --name px -d --net=host       \
 
 The following arguments are provided to the Portworx daemon:
 
-{{% content "shared/install-with-other-docker-cmdargs.md" %}}
+{{< content "shared/install-with-other-docker-cmdargs.md" >}}
 
 ### Docker runtime command options
 

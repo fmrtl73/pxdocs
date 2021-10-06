@@ -24,7 +24,7 @@ Kubernetes cluster. If you fetched the Portworx specs from the Portworx spec gen
 * Cloud snapshots using below method is supported in Portworx version 1.4 and above.
 * Cloud snapshots (for aggregated volumes) using below method is supported in Portworx version 2.0 and above.
 
-{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-cloud-snap-creds-prereq.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-cloud-snap-creds-prereq.md" >}}
 
 ### Create cloud snapshots
 
@@ -38,11 +38,11 @@ Once you've created a cloud snapshot, you can restore it to a new PVC or the ori
 
 #### Restore a cloud snapshot to a new PVC
 
-{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-restore-pvc-from-snap.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-restore-pvc-from-snap.md" >}}
 
 #### Restore a cloud snapshot to the original PVC
 
-{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-in-place-restore-pvc-from-snap.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-in-place-restore-pvc-from-snap.md" >}}
 
 
 ### References
@@ -264,5 +264,5 @@ Example:
 
 ## The naming scheme for cloud backups
 
-{{% content "shared/cloud-snaps-naming-scheme.md" %}}
+{{< content "shared/cloud-snaps-naming-scheme.md" >}}
 

@@ -44,13 +44,13 @@ Provide the Google credentials to Portworx by using any one of these methods
 
 ### Google instance IAM roles (Recommended)
 
-{{% content "shared/gce/instance-role.md" %}}
+{{< content "shared/gce/instance-role.md" >}}
 
 ### Google Service Accounts
 
 #### Step 1: Create a service account
 
-{{% content "shared/gce/service-account.md" %}}
+{{< content "shared/gce/service-account.md" >}}
 
 #### Step 2: Create a Kubernetes secret for the Google credentials.
 

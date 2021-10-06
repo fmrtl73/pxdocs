@@ -8,12 +8,12 @@ weight: 3
 
 ## Install
 
-{{% content "shared/operator-install.md" %}}
+{{< content "shared/operator-install.md" >}}
 
-{{% content "shared/portworx-install-with-kubernetes-shared-generate-the-spec-footer-operator.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-shared-generate-the-spec-footer-operator.md" >}}
 
-{{% content "shared/operator-apply-the-spec.md" %}}
+{{< content "shared/operator-apply-the-spec.md" >}}
 
-{{% content "shared/operator-monitor.md" %}}
+{{< content "shared/operator-monitor.md" >}}
 
-{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-post-install.md" >}}

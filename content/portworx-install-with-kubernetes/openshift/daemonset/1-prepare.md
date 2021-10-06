@@ -7,6 +7,6 @@ aliases:
   - /portworx-install-with-kubernetes/on-premise/openshift/daemonset/1-prepare/
 ---
 
-{{% content "shared/portworx-install-with-kubernetes-on-premise-openshift-support-notice.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-on-premise-openshift-support-notice.md" >}}
 
-{{% content "shared/portworx-install-with-kubernetes-on-premise-openshift-1-prepare.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-on-premise-openshift-1-prepare.md" >}}

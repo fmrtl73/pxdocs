@@ -49,7 +49,7 @@ If you created a custom role with the permissions above,  select "Propagate to c
 
 ### Step 2: Create a Kubernetes secret with your vCenter user and password
 
-{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-secret.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-secret.md" >}}
 
 ### Step 3: Generate specifications
 
@@ -75,5 +75,5 @@ Generate the spec file using the Portworx [Spec Generator](https://central.portw
         - **Enable Telemetry**
 
 
-{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" >}}
 

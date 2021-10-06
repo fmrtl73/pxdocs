@@ -6,11 +6,11 @@ description: Learn how to manage snapshots using pxctl
 weight: 4
 ---
 
-{{% content "shared/reference-CLI-intro-snapshots.md" %}}
+{{< content "shared/reference-CLI-intro-snapshots.md" >}}
 
 ## Creating snapshots
 
-{{% content "shared/reference-CLI-creating-snapshots.md" %}}
+{{< content "shared/reference-CLI-creating-snapshots.md" >}}
 
 ## Listing Snapshots
 
@@ -146,13 +146,13 @@ Only detached snapshots can be deleted.
 
 ## Restoring snapshots
 
-{{% content "shared/reference-CLI-restore-volume-from-snapshot.md" %}}
+{{< content "shared/reference-CLI-restore-volume-from-snapshot.md" >}}
 
 ## Snapshot schedule policies
 
 You can use the `pxctl sched-policy` command to create and manage your snapshot schedule policies.
 
-{{% content "shared/reference-CLI-sched-policy.md" %}}
+{{< content "shared/reference-CLI-sched-policy.md" >}}
 
 For more information on how to create, list, update, and delete your snapshot schedule policies with `pxctl`, see [this page](/reference/cli/sched-policy).
 

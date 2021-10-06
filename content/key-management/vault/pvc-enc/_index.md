@@ -9,7 +9,7 @@ series2: k8s-pvc-enc
 hidden: true
 ---
 
-{{% content "shared/key-management-intro.md" %}}
+{{< content "shared/key-management-intro.md" >}}
 
 There are two ways in which Portworx volumes can be encrypted and are dependent on how the Vault secret key is provided to Portworx.
 
@@ -19,7 +19,7 @@ In this method, Portworx will use the cluster wide secret key to encrypt PVCs.
 
 #### Step 1: Set a cluster wide secret
 
-{{% content "shared/key-management-set-cluster-wide-secret.md" %}}
+{{< content "shared/key-management-set-cluster-wide-secret.md" >}}
 
 If you are using Vault Namespaces use the following command to set the cluster-wide secret key in a specific vault namespace:
 
@@ -27,7 +27,7 @@ If you are using Vault Namespaces use the following command to set the cluster-w
 pxctl secrets set-cluster-key --secret_options=vault-namespace=<name of vault-namespace>
 ```
 
-{{% content "shared/key-management-storage-class-encryption.md" %}}
+{{< content "shared/key-management-storage-class-encryption.md" >}}
 
 ### Encryption using PVC annotations
 
@@ -35,11 +35,11 @@ In this method, each PVC can be encrypted with its own secret key.
 
 #### Step 1: Create a Storage Class
 
-{{% content "shared/key-management-enc-storage-class-spec.md" %}}
+{{< content "shared/key-management-enc-storage-class-spec.md" >}}
 
 #### Step 2: Create a PVC with annotations
 
-{{% content "shared/key-management-other-providers-pvc-encryption.md" %}}
+{{< content "shared/key-management-other-providers-pvc-encryption.md" >}}
 
 {{<info>}}
 **IMPORTANT:** Make sure secret `your-secret-key` exists in Vault.
@@ -51,7 +51,7 @@ If you have **Vault Namespaces** enabled and your secret resides inside a specif
 
 #### Step 1: Create a Storage Class
 
-{{% content "shared/key-management-enc-storage-class-spec.md" %}}
+{{< content "shared/key-management-enc-storage-class-spec.md" >}}
 
 #### Step 2: Create a PVC with annotations
 

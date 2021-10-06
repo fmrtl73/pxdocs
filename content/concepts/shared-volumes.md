@@ -7,4 +7,4 @@ weight: 400
 series: concepts
 ---
 
-{{% content "shared/concepts-shared-volumes.md" %}}
+{{< content "shared/concepts-shared-volumes.md" >}}

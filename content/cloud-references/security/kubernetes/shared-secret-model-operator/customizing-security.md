@@ -5,4 +5,4 @@ weight: 60
 series: ra-shared-secrets-model
 ---
 
-{{% content "shared/cloud-references-security-kubernetes-shared-secret-model-customizing-operator-security.md" %}}
+{{< content "shared/cloud-references-security-kubernetes-shared-secret-model-customizing-operator-security.md" >}}

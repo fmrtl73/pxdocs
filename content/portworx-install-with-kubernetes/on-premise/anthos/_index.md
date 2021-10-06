@@ -20,7 +20,7 @@ Portworx has been certified with the following Anthos versions:
 
 ## Architecture
 
-{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-shared-arch.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-shared-arch.md" >}}
 
 ## Installation
 
@@ -28,7 +28,7 @@ This topic explains how to install Portworx with Kubernetes on Anthos. Follow th
 
 {{<info>}}Run these steps from the anthos admin station or any other machine which has kubectl access to your cluster.{{</info>}}
 
-{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-install-common.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-install-common.md" >}}
 
 #### Max storage nodes
 
@@ -55,7 +55,7 @@ export VER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
 curl -fsL -o px-spec.yaml "https://install.portworx.com/{{% currentVersion %}}?kbver=$VER&mz=$MAX_NUMBER_OF_NODES_PER_ZONE&csida=true&c=portworx-demo-cluster&b=true&st=k8s&csi=true&vsp=true&ds=$VSPHERE_DATASTORE_PREFIX&vc=$VSPHERE_VCENTER&s=%22$VSPHERE_DISK_TEMPLATE%22&misc=-rt_opts%20kvdb_failover_timeout_in_mins=25"
 ```
 
-{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" >}}
 
 ## Known issues
 

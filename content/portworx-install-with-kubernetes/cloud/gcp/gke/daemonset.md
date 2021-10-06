@@ -11,14 +11,14 @@ This document shows how to install Portworx with Google Kubernetes Engine (GKE).
 
 ### Prerequisites
 
-{{% content "shared/portworx-install-with-kubernetes-cloud-gcp-prerequisites.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-cloud-gcp-prerequisites.md" >}}
 
 ## Create a GKE cluster
 
-{{% content "shared/operator-daemonset-configure-gcloud.md" %}}
+{{< content "shared/operator-daemonset-configure-gcloud.md" >}}
 
 ## Install
 
-{{% content "shared/portworx-install-with-kubernetes-cloud-gcp-install-gke.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-cloud-gcp-install-gke.md" >}}
 
-{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-post-install.md" >}}

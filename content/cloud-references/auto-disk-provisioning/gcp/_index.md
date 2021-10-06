@@ -27,11 +27,11 @@ To manage and auto provision GCP disks, Portworx needs access to the GCP Compute
 
 ### Using instance privileges
 
-{{% content "shared/gce/instance-role.md" %}}
+{{< content "shared/gce/instance-role.md" >}}
 
 ### Using an account file
 
-{{% content "shared/gce/service-account.md" %}}
+{{< content "shared/gce/service-account.md" >}}
 
 This json file needs to be made available on any GCP instance that will run Portworx.  Place this file under a `/etc/pwx/` directory on each GCP instance.  For example, `/etc/pwx/gcp.json`.
 
@@ -79,6 +79,6 @@ Ensure that these disks are created in the same zone as the GCP node group.
 
 ### Limiting storage nodes
 
-{{% content "shared/cloud-references-auto-disk-provisioning-asg-limit-storage-nodes.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-asg-limit-storage-nodes.md" >}}
 
-{{% content "shared/cloud-references-auto-disk-provisioning-asg-examples-gcp.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-asg-examples-gcp.md" >}}

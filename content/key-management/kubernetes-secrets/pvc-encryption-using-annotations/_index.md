@@ -9,7 +9,7 @@ series2: k8s-pvc-enc
 hidden: true
 ---
 
-{{% content "shared/key-management-intro.md" %}}
+{{< content "shared/key-management-intro.md" >}}
 
 {{<info>}}
 **NOTE:** Supported from {{< pxEnterprise >}} 1.4 onwards

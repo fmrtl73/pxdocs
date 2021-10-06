@@ -9,7 +9,7 @@ series2: k8s-pvc-enc
 hidden: true
 ---
 
-{{% content "shared/key-management-intro.md" %}}
+{{< content "shared/key-management-intro.md" >}}
 
 ### Encryption using per volume secrets
 
@@ -17,7 +17,7 @@ In this method each volume will use its own unique passphrase for encryption. Po
 
 #### Step 1: Create a Storage Class
 
-{{% content "shared/key-management-enc-storage-class-spec.md" %}}
+{{< content "shared/key-management-enc-storage-class-spec.md" >}}
 
 #### Step 2: Create a Persistent Volume Claim
 
@@ -63,11 +63,11 @@ In this method a default cluster wide secret will be set for the Portworx cluste
 
 #### Step 1: Set the cluster wide secret key
 
-{{% content "shared/key-management-set-cluster-wide-passphrase.md" %}}
+{{< content "shared/key-management-set-cluster-wide-passphrase.md" >}}
 
 #### Step 2: Create a Storage Class
 
-{{% content "shared/key-management-enc-storage-class-spec.md" %}}
+{{< content "shared/key-management-enc-storage-class-spec.md" >}}
 
 #### Step 3: Create a Persistent Volume Claim
 
@@ -89,12 +89,12 @@ spec:
 
 ```
 
-{{% content "shared/key-management-aws-kms-px-secret-name-default.md" %}}
+{{< content "shared/key-management-aws-kms-px-secret-name-default.md" >}}
 
-{{% content "shared/key-management-aws-kms-shared-secure-flag.md" %}}
+{{< content "shared/key-management-aws-kms-shared-secure-flag.md" >}}
 
 {{<info>}}
-{{% content  "shared/key-management-shared-secret-warning-note.md" %}}
+{{< content  "shared/key-management-shared-secret-warning-note.md" >}}
 {{</info>}}
 
 ### Encryption using named secrets
@@ -103,11 +103,11 @@ In this method Portworx will use the named secret created by you for encrypting 
 
 #### Step 1: Create a Named Secret
 
-{{% content "shared/key-management-gcloud-kms-named-secrets.md" %}}
+{{< content "shared/key-management-gcloud-kms-named-secrets.md" >}}
 
 #### Step 2: Create a Storage Class
 
-{{% content "shared/key-management-enc-storage-class-spec.md" %}}
+{{< content "shared/key-management-enc-storage-class-spec.md" >}}
 
 #### Step 3: Create a Persistent Volume Claim
 
@@ -129,14 +129,14 @@ spec:
 
 ```
 
-{{% content "shared/key-management-aws-kms-shared-px-secret-name-mysecret.md" %}}
+{{< content "shared/key-management-aws-kms-shared-px-secret-name-mysecret.md" >}}
 
 {{<info>}}
 A single named secret can be used for encrypting multiple volumes.
 {{</info>}}
 
-{{% content "shared/key-management-aws-kms-shared-secure-flag.md" %}}
+{{< content "shared/key-management-aws-kms-shared-secure-flag.md" >}}
 
 {{<info>}}
-{{% content  "shared/key-management-shared-secret-warning-note.md" %}}
+{{< content  "shared/key-management-shared-secret-warning-note.md" >}}
 {{</info>}}

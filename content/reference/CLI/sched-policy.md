@@ -91,7 +91,7 @@ Global Flags:
       --ssl                  ssl enabled for portworx
 ```
 
-{{% content "shared/reference-CLI-sched-policy.md" %}}
+{{< content "shared/reference-CLI-sched-policy.md" >}}
 
 ### List schedule policies
 

@@ -7,7 +7,7 @@ description: Common errors
 
 #### Failed to apply spec due Forbidden: may not be used when type is ClusterIP
 
-{{% content "shared/upgrade/upgrade-nodeport-issue.md" %}}
+{{< content "shared/upgrade/upgrade-nodeport-issue.md" >}}
 
 #### Failed DNS resolution:
   * If you encounter the following error:

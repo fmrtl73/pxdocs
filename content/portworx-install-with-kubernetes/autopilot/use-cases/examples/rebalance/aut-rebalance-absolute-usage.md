@@ -7,11 +7,11 @@ weight: 200
 hidden: true
 ---
 
-{{% content "shared/autopilot/aut-rebalance-intro.md" %}}
+{{< content "shared/autopilot/aut-rebalance-intro.md" >}}
 
 ## Prerequisites
 
-{{% content "shared/autopilot/aut-rebalance-prereqs.md" %}}
+{{< content "shared/autopilot/aut-rebalance-prereqs.md" >}}
 
 ## Example
 

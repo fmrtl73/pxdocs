@@ -6,11 +6,11 @@ description: "Auto-rebalance storage pools"
 weight: 300
 ---
 
-{{% content "shared/autopilot/aut-rebalance-intro.md" %}}
+{{< content "shared/autopilot/aut-rebalance-intro.md" >}}
 
 ## Prerequisites
 
-{{% content "shared/autopilot/aut-rebalance-prereqs.md" %}}
+{{< content "shared/autopilot/aut-rebalance-prereqs.md" >}}
 
 ## Example
 

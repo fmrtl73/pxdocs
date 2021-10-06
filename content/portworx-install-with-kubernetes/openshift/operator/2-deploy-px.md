@@ -21,15 +21,15 @@ If you're installing Portworx on OpenShift on a cloud environment, Portworx requ
 
 ### OpenShift on AWS
 
-{{% content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" >}}
 
 ### OpenShift on GCP
 
-{{% content "shared/portworx-install-with-kubernetes-cloud-gcp-service-account.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-cloud-gcp-service-account.md" >}}
 
 ### OpenShift on Azure
 
-{{% content "shared/azure-cloud-user-requirements.md" %}}
+{{< content "shared/azure-cloud-user-requirements.md" >}}
 
 ## Open ports for worker nodes
 
@@ -68,6 +68,6 @@ To install Portworx with OpenShift, you will first generate `StorageCluster` spe
 
 If you're not using the OpenShift console, you can create the StorageCluster object using the `oc` command:
 
-{{% content "shared/portworx-install-with-kubernetes-on-premise-openshift-apply-the-spec-oc.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-on-premise-openshift-apply-the-spec-oc.md" >}}
 
-{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-post-install.md" >}}

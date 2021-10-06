@@ -30,7 +30,7 @@ This runs a script that will start a Kubernetes Job to perform the following ope
 
 If you see any issues, review the [Troubleshooting](#troubleshooting) section on this page.
 
-{{% content "shared/upgrade/upgrade-to-2-1-2.md" %}}
+{{< content "shared/upgrade/upgrade-to-2-1-2.md" >}}
 
 ### Upgrade Portworx using Helm
 
@@ -148,7 +148,7 @@ To resolve this problem:
 
 ### Failed to apply spec due Forbidden: may not be used when type is ClusterIP
 
-{{% content "shared/upgrade/upgrade-nodeport-issue.md" %}}
+{{< content "shared/upgrade/upgrade-nodeport-issue.md" >}}
 
 ### Find out status of Portworx pods
 

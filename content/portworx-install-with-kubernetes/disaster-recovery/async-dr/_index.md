@@ -13,7 +13,7 @@ weight: 2
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be reachable by the source cluster.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
 * **Default Storage Class**: Make sure you have configured only one default storage class. Having multiple default storage classes will cause PVC migrations to fail.
-{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" >}}
 * **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
 * If the destination cluster runs on **GKE**, follow the steps in the [Migration with Stork on GKE](/portworx-install-with-kubernetes/migration/gke/) page.
 * If the destination cluster runs on **EKS**, follow the steps in the [Migration with Stork on EKS](/portworx-install-with-kubernetes/migration/eks/) page.
@@ -94,7 +94,7 @@ spec:
   type: loadBalancer
 ```
 
-{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-cluster-pair.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-disaster-recovery-cluster-pair.md" >}}
 
 ```text
 apiVersion: stork.libopenstorage.org/v1alpha1

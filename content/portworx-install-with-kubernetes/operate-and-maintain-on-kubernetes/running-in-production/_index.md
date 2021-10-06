@@ -99,7 +99,7 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 * For applications needing node level availability and read parallelism across nodes, you should use a replication factor of 2 or 3.
 
-    {{% content "shared/max-replication-factor.md" %}}
+    {{< content "shared/max-replication-factor.md" >}}
 
     The following example creates a StorageClass for a PVC with a replication factor of 3:
 

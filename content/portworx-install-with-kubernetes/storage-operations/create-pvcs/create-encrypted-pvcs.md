@@ -8,7 +8,7 @@ series: k8s-vol
 
 ## Volume encryption
 
-{{% content "shared/encryption/intro.md" %}}
+{{< content "shared/encryption/intro.md" >}}
 
 Use the following steps to get started with encrypted PVCs
 

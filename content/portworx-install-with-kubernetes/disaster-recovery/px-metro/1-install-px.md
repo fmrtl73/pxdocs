@@ -222,7 +222,7 @@ Global Storage Pool
 
 `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
 
-{{% content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" >}}
 
 ### Cluster Domains Status
 

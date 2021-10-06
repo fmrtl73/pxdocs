@@ -7,7 +7,7 @@ hidden: true
 
 #### Step 2: Create a StorageClass
 
-{{% content "shared/key-management-enc-storage-class-spec.md" %}}
+{{< content "shared/key-management-enc-storage-class-spec.md" >}}
 
 #### Step 3: Create Persistent Volume Claim
 Create a PVC that uses the above `px-secure-sc` storage class.

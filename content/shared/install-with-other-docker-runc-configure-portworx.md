@@ -19,7 +19,7 @@ sudo /opt/pwx/bin/px-runc install -c MY_CLUSTER_ID \
 
 #### Command-line arguments
 
-{{% content "shared/install-with-other-docker-cmdargs.md" %}}
+{{< content "shared/install-with-other-docker-cmdargs.md" >}}
 
 #### Examples
 

@@ -23,7 +23,7 @@ Before you can install Portworx on EKS using `pxctl`, you must meet the followin
 
 ### Grant Portworx the needed AWS permissions
 
-{{% content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" >}}
 
 #### Create a ClusterConfig
 
@@ -120,7 +120,7 @@ The `ClusterConfig` dictates what resources `eksctl` requests from EKS for the p
     eksctl create cluster -f <my-clusterConfig>.yml
     ```
 
-{{% content "shared/operator-install.md" %}}
+{{< content "shared/operator-install.md" >}}
 
 ### Generate the spec
 
@@ -141,11 +141,11 @@ To install Portworx with Kubernetes, you must first generate Kubernetes manifest
     * On the **Customize** tab, select the **Amazon Elastic Container Service for Kubernetes (EKS)** option
     * Under the **Environment Variables** dropdown on the **Customize** tab, create an environment variable named `ENABLE_ASG_STORAGE_PARTITIONING` with a value of **true**
 
-{{% content "shared/operator-apply-the-spec.md" %}}
+{{< content "shared/operator-apply-the-spec.md" >}}
 
-{{% content "shared/operator-monitor.md" %}}
+{{< content "shared/operator-monitor.md" >}}
 
-{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-post-install.md" >}}
 
 ## Further reading
 

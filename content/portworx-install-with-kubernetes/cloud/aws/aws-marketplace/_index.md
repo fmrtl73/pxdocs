@@ -15,7 +15,7 @@ Before you can install Portworx, you must configure AWS permissions:
 
 ### Grant Portworx the needed AWS permissions
 
-{{% content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-cloud-aws-1-prepare.md" >}}
 
 ### Configure IAM permissions
 You can configure the IAM permissions in multiple ways. Follow the steps most appropriate for you:

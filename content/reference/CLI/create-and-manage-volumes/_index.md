@@ -354,7 +354,7 @@ You can pass the inline specs through the scheduler application template. The fo
 
 ## The global namespace
 
-{{% content "shared/concepts-shared-volumes.md" %}}
+{{< content "shared/concepts-shared-volumes.md" >}}
 
 
 ### Related topics
@@ -433,9 +433,9 @@ In the above example, the `794896567744466024` volume is mounted in two containe
 
 ## Create volume snapshots
 
-{{% content "shared/reference-CLI-intro-snapshots.md" %}}
+{{< content "shared/reference-CLI-intro-snapshots.md" >}}
 
-{{% content "shared/reference-CLI-creating-snapshots.md" %}}
+{{< content "shared/reference-CLI-creating-snapshots.md" >}}
 
 Snapshots are read-only. To restore a volume from a snapshot, use the `pxctl volume restore` command.
 
@@ -503,7 +503,7 @@ Volume clone successful: 55898055774694370
 
 ## Restore a volume
 
-{{% content "shared/reference-CLI-restore-volume-from-snapshot.md" %}}
+{{< content "shared/reference-CLI-restore-volume-from-snapshot.md" >}}
 
 
 ### Related topics

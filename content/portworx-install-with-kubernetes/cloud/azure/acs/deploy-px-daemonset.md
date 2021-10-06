@@ -7,8 +7,8 @@ weight: 4
 ---
 
 ## Install
-{{% content "shared/portworx-install-with-kubernetes-shared-1-generate-the-spec-footer.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-shared-1-generate-the-spec-footer.md" >}}
 
-{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" >}}
 
-{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-post-install.md" >}}

@@ -192,7 +192,7 @@ Global Flags:
 
 ## Enabling optimized restores
 
-{{% content "shared/reference-CLI-optimized-restores-definition.md" %}}
+{{< content "shared/reference-CLI-optimized-restores-definition.md" >}}
 
 First, let's take a look at the available subcommands and flags:
 

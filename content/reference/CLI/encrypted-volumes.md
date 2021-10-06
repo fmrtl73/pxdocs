@@ -8,7 +8,7 @@ weight: 14
 
 ## Encrypted Volumes
 
-{{% content "shared/encryption/intro.md" %}}
+{{< content "shared/encryption/intro.md" >}}
 
 To know more about the supported secret providers and how to configure them with Portworx, refer to the [Setup Secrets Provider](/key-management) page.
 

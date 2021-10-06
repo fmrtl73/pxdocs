@@ -13,7 +13,7 @@ This document describes how to dynamically provision a volume using Kubernetes a
 Using Dynamic Provisioning and Storage Classes you don't need to create Portworx volumes out of band and they will be created automatically.
 Using Storage Classes objects an admin can define the different classes of Portworx Volumes that are offered in a cluster. Following are the different parameters that can be used to define a Portworx Storage Class
 
-{{% content "shared/portworx-install-with-kubernetes-volume-options.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-volume-options.md" >}}
 
 {{<info>}}
 **NOTE:** For the list of Kubernetes-specific parameters that you can use with a Portworx Storage class, see the [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/) page of the Kubernetes documentation.

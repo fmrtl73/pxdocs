@@ -8,11 +8,11 @@ keywords: portworx, PKS, kubernetes
 noicon: true
 ---
 
-{{% content "shared/on-prem-pks-common-install.md" %}}
+{{< content "shared/on-prem-pks-common-install.md" >}}
 
 ### Architecture
 
-{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-shared-arch.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-shared-arch.md" >}}
 
 ### ESXi datastore preparation
 
@@ -20,11 +20,11 @@ Create one or more shared datastore(s) or datastore cluster(s) which is dedicate
 
 <!--### Generating the Portworx specs -->
 
-{{% content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-install-common.md" %}}
+{{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-install-common.md" >}}
 
-{{% content "portworx-install-with-kubernetes/on-premise/install-pks/vsphere-pks-generate-spec-internal-kvdb.md" %}}
+{{< content "portworx-install-with-kubernetes/on-premise/install-pks/vsphere-pks-generate-spec-internal-kvdb.md" >}}
 
-{{% content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-4-apply-the-spec.md" >}}
 
 {{<info>}}
 **NOTE:** Some errors, such as incorrect vSphere user credentials, are only shown in the portworx container logs. To display these errors, use the `kubectl logs` command:

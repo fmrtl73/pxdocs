@@ -103,4 +103,4 @@ ID        Node ID   Task Group  Version  Desired  Status    Created     Modified
 c44ee856  6138409d  portworx    0        stop     complete  20m15s ago  4m46s ago
 ```
 
-{{% content "shared/upgrade/upgrade-to-2-1-2.md" %}}
+{{< content "shared/upgrade/upgrade-to-2-1-2.md" >}}

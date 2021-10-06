@@ -42,7 +42,7 @@ az group create -–name <resource-group-name> –-location <location>
 
 ### Create a Service Principal and secret in Azure AD
 
-{{% content "shared/azure-cloud-user-requirements.md" %}}
+{{< content "shared/azure-cloud-user-requirements.md" >}}
 
 ### Create the AKS cluster
 

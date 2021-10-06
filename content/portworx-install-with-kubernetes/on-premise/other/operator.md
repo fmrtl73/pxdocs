@@ -21,10 +21,10 @@ This topic provides instructions for installing Portworx with Kubernetes on-prem
     kubectl create -f https://install.portworx.com/?comp=pxoperator
     ```
 
-{{% content "shared/portworx-install-with-kubernetes-shared-generate-the-spec-footer-operator.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-shared-generate-the-spec-footer-operator.md" >}}
 
-{{% content "shared/operator-apply-the-spec.md" %}}
+{{< content "shared/operator-apply-the-spec.md" >}}
 
-{{% content "shared/operator-monitor.md" %}}
+{{< content "shared/operator-monitor.md" >}}
 
-{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-post-install.md" >}}

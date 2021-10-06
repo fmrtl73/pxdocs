@@ -6,7 +6,7 @@ description: Configure migrations to use service account
 weight: 3
 ---
 
-{{% content "shared/configure-migrations-to-use-service-accounts.md" %}}
+{{< content "shared/configure-migrations-to-use-service-accounts.md" >}}
 
 You can use this cluster pair to create migrations or migration schedules.
 See the [Synchronous DR for Kubernetes](/portworx-install-with-kubernetes/disaster-recovery/px-metro/) or the [Asynchronous DR](/portworx-install-with-kubernetes/disaster-recovery/async-dr/) section for more details.

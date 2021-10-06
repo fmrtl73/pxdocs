@@ -13,7 +13,7 @@ This section provides instructions for managing your authentication credentials 
 - DC/OS Secrets
 - KVDB
 
-{{% content "shared/reference-CLI-secrets-definition.md" %}}
+{{< content "shared/reference-CLI-secrets-definition.md" >}}
 
 Before using the `pxctl secrets` command to manage your secrets, make sure you've configured a secret store provider. See the [Secret store management](/key-management/) page for more details.
 

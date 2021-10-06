@@ -23,5 +23,5 @@ For newer volumes if you do not provide any secret key, they will use per volume
 
 
 {{<info>}}
-{{% content "shared/key-management-aws-kms-warning-note.md" %}}
+{{< content "shared/key-management-aws-kms-warning-note.md" >}}
 {{</info>}}

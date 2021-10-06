@@ -333,7 +333,7 @@ UUID                        NAME            ACCOUNT NAME        ENCRYPTION      
 
 `pxctl credentials list` only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed. The credentials will be stored as part of the secret endpoint given to Portworx for persisting authentication across reboots.
 
-{{% content "shared/reference-CLI-secrets-definition.md" %}}
+{{< content "shared/reference-CLI-secrets-definition.md" >}}
 
 You can find more details on how to manage your cloud credentials with `pxctl` by checking out the [Credentials](/reference/cli/credentials) page.
 
@@ -773,7 +773,7 @@ Note that the restored volume will not be attached or mounted automatically.
 
 ### The naming scheme for cloud backups
 
-{{% content "shared/cloud-snaps-naming-scheme.md" %}}
+{{< content "shared/cloud-snaps-naming-scheme.md" >}}
 
 ### Deleting a Cloud Backup
 

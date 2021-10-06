@@ -300,7 +300,7 @@ For more information about dynamically resizing a volume (PVC) using Kubernetes 
 
 You can use the `pxctl volume ha-update` command to increase or decrease the replication factor for a given Portworx volume.
 
-{{% content "shared/max-replication-factor.md" %}}
+{{< content "shared/max-replication-factor.md" >}}
 
 ### Increase the replication factor
 

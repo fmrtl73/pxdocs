@@ -31,8 +31,8 @@ Once you've created a snapshot, you can restore it to a new PVC or the original 
 
 ### Restore a local snapshot to a new PVC
 
-{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-restore-pvc-from-snap.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-restore-pvc-from-snap.md" >}}
 
 ### Restore a local snapshot to the original PVC
 
-{{% content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-in-place-restore-pvc-from-snap.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-in-place-restore-pvc-from-snap.md" >}}

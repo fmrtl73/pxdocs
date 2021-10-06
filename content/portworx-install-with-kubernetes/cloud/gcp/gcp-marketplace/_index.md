@@ -10,7 +10,7 @@ series: px-k8s-gcp
 
 ## Prerequisites
 
-{{% content "shared/portworx-install-with-kubernetes-cloud-gcp-prerequisites.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-cloud-gcp-prerequisites.md" >}}
 
 ## Permissions
 
@@ -93,7 +93,7 @@ NS=<namespace_where_you_installed_portworx>
 kubectl apply -n $NS license.yaml
 ```
 
-{{% content "shared/portworx-install-with-kubernetes-cloud-gcp-install-gke.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-cloud-gcp-install-gke.md" >}}
 
 ### Edit the Portworx DaemonSet
 
@@ -111,7 +111,7 @@ REPORTING_SECRET: Name of the secret generated above
 REPORTING_SECRET_NAMESPACE: Namespace where you installed Portworx
 ```
 
-{{% content "shared/portworx-install-with-kubernetes-post-install.md" %}}
+{{< content "shared/portworx-install-with-kubernetes-post-install.md" >}}
 
 ## Upgrade
 
