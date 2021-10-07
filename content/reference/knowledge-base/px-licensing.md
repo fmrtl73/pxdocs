@@ -8,21 +8,23 @@ weight: 4
 
 ## Introduction
 
-Starting with the v1.2.8 release, the Portworx products support the following license types:
+This topic explains various Portworx license types, and how you can use them.
+
+{{<info>}}
+**NOTE:** If you already set up your cluster using any of the paid or free Portworx licenses (trial, extended, traditional), you can switch to pay-as-you-go (PAYG) billing by acquiring a PAYG account key from Portworx, Inc. support. For more information about switching to PAYG, refer to the [pay-as-you-go](https://docs.portworx.com/reference/knowledge-base/licensing/pay-as-you-go) topic.
+{{</info>}}
+
+Portworx products support the following license types:
 
 |      License type      |  Description
 |:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------
-| Portworx Developer           | Embedded into [px-developer](/install-with-other/docker/standalone/px-developer), free license that supports select functionality.
-| Trial                  | Automatically installed with [{{< pxEnterprise >}}](/), enables functionality for 30 days.
+| Portworx Essentials           | Free Portworx license with limited functionality, suitable to run small production or proof-of-concept workloads.
+| Trial                  | Default license installed with 30 days trial period for full [{{< pxEnterprise >}}](/)functionality.
 | {{< pxEnterprise >}} VM       | Enterprise license, suitable for Virtual Machine (VM) installs on-prem and in cloud
 | {{< pxEnterprise >}} Metal    | Enterprise license, suitable for installs on any bare metal hardware
 
 
-Depending on the type of the container you are installing, a different license will be automatically activated:
-
-* [px-developer](/install-with-other/docker/standalone/px-developer) container activates free PX-Developer license, and
-* [{{< pxEnterprise >}}](/) automatically
-activates the Trial license (limited to 30 days), which can be upgraded to a {{< pxEnterprise >}} license at any time.
+Depending on the type of the container you are installing, a different license will be automatically activated. For example, the [{{< pxEnterprise >}}](/) automatically activates the Trial license (limited to 30 days), which you can upgrade to a {{< pxEnterprise >}} license at any time.
 
 ## Checking your License
 
@@ -79,32 +81,9 @@ In the table below, we can see the overview of features that are controlled via 
 
 ## Type of Licenses
 
-### PX-Developer License
+### Portworx Essential License 
 
-The PX-Developer license is a default license for [px-developer](/install-with-other/docker/standalone/px-developer) containers.
-The PX-Developer license is permanent and free, and provides a select set of functionality.
-It supports the following features:
-
-```text
-pxctl license list
-```
-
-```output
-DESCRIPTION                  ENABLEMENT    ADDITIONAL INFO
-Number of nodes maximum             3
-Number of volumes maximum         256
-Volume capacity [TB] maximum        1
-Storage aggregation                no      feature upgrade needed
-Shared volumes                    yes
-Volume sets                       yes
-BYOK data encryption               no      feature upgrade needed
-Resize volumes on demand           no      feature upgrade needed
-Snapshot to object store           no      feature upgrade needed
-Bare-metal hosts                  yes
-Virtual machine hosts             yes
-Product SKU                  PX-Developer  permanent
-```
-
+For more information about Portworx Essentials and license, refer to the [Portworx Essentials](https://docs.portworx.com/concepts/portworx-essentials) topic.
 
 ### Trial License
 
@@ -138,7 +117,7 @@ The normal functionality may be restored at any time, by purchasing and installi
 * The Trial license can be upgraded into a {{< pxEnterprise >}} license by contacting
 support@portworx.com, and activating via the activation code or via the
 license file (see [{{< pxEnterprise >}}](#portworx-enterprise-license) below for details)
-* The Trial license itself cannot be upgraded or extended with another Trial, or downgraded into PX-Developer license.
+* The Trial license itself cannot be upgraded or extended with another Trial.
 
 
 ### Portworx Enterprise License
@@ -193,8 +172,8 @@ on the Portworx volumes, nor will it interrupt the active IO operations.
 
 #### License transfer
 
-From {{< pxEnterprise >}} 1.4.0 onwards, a valid enterprise license can be transferred between two Portworx clusters. Both Portworx clusters need to be operational at the time of license transfer.
-The source cluster must have a valid {{< pxEnterprise >}} license, while the destination cluster can have either a valid or expired Trial license, PX-Developer, or expired {{< pxEnterprise >}} license.
+You can transfer a valid enterprise license between two Portworx clusters. Both Portworx clusters need to be operational at the time of license transfer.
+The source cluster must have a valid {{< pxEnterprise >}} license, while the destination cluster can have either a valid or expired Trial license or expired {{< pxEnterprise >}} license.
 
 License transfer command requires 'clusterUUID' from the source cluster, (available via `pxctl cluster list` command) and remote Portworx cluster node IP.
 
@@ -215,8 +194,7 @@ DESCRIPTION:
    Note that both Portworx clusters need to be operational at the time this
    command is ran.
    The source cluster must have a valid {{< pxEnterprise >}} license, while the
-   destination cluster can have either a valid or expired Trial license,
-   PX-Developer, or expired {{< pxEnterprise >}} license.
+   destination cluster can have either a valid or expired Trial license or expired {{< pxEnterprise >}} license.
 
 EXAMPLE:
    pxctl license transfer f91531d9-bf65-46f5-9619-eb99128e3270 10.0.15.201
