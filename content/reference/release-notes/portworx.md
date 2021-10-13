@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.8.1.1
+
+Oct 13, 2021
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-21506 | One of the Internal folders used for mounting the legacy shared (FUSE) volumes was always created, even if shared (FUSE) volumes were already present on the system. <br/><br/>**User impact:** Mount paths used by shared (FUSE) volumes had wider permissions than desired.<br/><br/>**Resolution:** This change prevents the internal mount path, specifically `/opt/pwx/oci/rootfs/pxmounts`, from being created when there are no shared volumes being used. |
+
 ## 2.8.1
 
 Sept 20, 2021
