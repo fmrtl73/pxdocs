@@ -210,6 +210,7 @@ This section explains the fields used to configure the `StorageCluster` object.
     spec:
       metadata:
         annotations:
+          portworx.io/misc-args: "-cluster_domain cluster-1"
           pod/storage:
             custom-domain/custom-key: custom-val
     ```
