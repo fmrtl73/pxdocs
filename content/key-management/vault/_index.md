@@ -9,83 +9,81 @@ series: key-management
 noicon: true
 ---
 
-Portworx can integrate with Vault to store your encryption keys/secrets, credentials or passwords. This guide will get a Portworx cluster connected to a Vault endpoint. The vault endpoint could be used to store secrets that will be used for encrypting volumes.
+Portworx can integrate with Vault to store your encryption keys, secrets, and credentials. This topic explains how to get a Portworx cluster connected to a Vault endpoint, and use it to store secrets that you can use for encrypting volumes.
 
 ## Setting up Vault
 
-Peruse [this section](https://www.vaultproject.io/docs/install) for help on setting up Vault in your setup. This includes installation, setting up policies and configuring secrets.
+Refer to the [Vault install page](https://www.vaultproject.io/docs/install) for setting up Vault in your setup. This includes installation, setting up policies, and configuring secrets.
 
-## Vault Credentials
+## Vault credentials
 
-Portworx requires the following Vault credentials to use its APIs
+Portworx requires the following Vault credentials to use its APIs:
 
+* **Vault Address [VAULT_ADDR]**
 
-- **Vault Address [VAULT_ADDR]**
+    Vault server address expressed as a URL and port. For example: `https://192.168.11.11:8200`
 
-    Address of the Vault server expressed as a URL and port, for example: `https://192.168.11.11:8200`
+* **Vault Token [VAULT_TOKEN]**
 
-- **Vault Token [VAULT_TOKEN]**
+    Vault authentication token. Refer to the [Vault tokens](https://www.vaultproject.io/docs/concepts/tokens) page for more information about Vault tokens. If you are using the [Kubernetes authentication method](#using-kubernetes-authentication-method) of Vault, then you need not provide the actual token to Portworx.
 
-   Vault authentication token. Follow [this](https://www.vaultproject.io/docs/concepts/tokens) doc for more information about Vault Tokens. If you are using Vault's Kubernetes Auth method you won't need to provide the actual token to Portworx.
-
-- **Vault Base Path [VAULT_BASE_PATH]**
+* **Vault Base Path [VAULT_BASE_PATH]**
 
     The base path under which Portworx has access to secrets.
 
-- **Vault Backend Path [VAULT_BACKEND_PATH]**
+* **Vault Backend Path [VAULT_BACKEND_PATH]**
 
     The custom backend path if different than the default `secret`
 
-- **Vault CA Certificate [VAULT_CACERT]**
+* **Vault CA Certificate [VAULT_CACERT]**
 
-    Path to a PEM-encoded CA certificate file that needs to be present on all Portworx nodes. This file is used to verify the Vault server's SSL certificate.
+    Path to a PEM-encoded CA certificate file that needs to be present on all Portworx nodes. This file is used to verify the SSL certificate of Vault server.
     This variable takes precedence over `VAULT_CAPATH`.
 
-- **Vault CA Path [VAULT_CAPATH]**
+* **Vault CA Path [VAULT_CAPATH]**
 
-    Path to a directory of PEM-encoded CA certificate files that needs to be present on all Portworx nodes. These certificates are used to verify the Vault server's SSL certificate.
+    Path to a directory of PEM-encoded CA certificate files that needs to be present on all Portworx nodes.
 
-- **Vault Client Certificate [VAULT_CLIENT_CERT]**
+* **Vault Client Certificate [VAULT_CLIENT_CERT]**
 
-    Path to a PEM-encoded client certificate that needs to be present on all Portworx nodes. This file is used for TLS communication with the Vault server.
+    Path to a PEM-encoded client certificate that needs to be present on all Portworx nodes. This file is used  for TLS communication with the Vault server.
 
-- **Vault Client Key [VAULT_CLIENT_KEY]**
+* **Vault Client Key [VAULT_CLIENT_KEY]**
 
-    Path to an unencrypted, PEM-encoded private key  which corresponds to the matching client certificate. This key file needs to be present on all Portworx nodes.
+    Path to an unencrypted, PEM-encoded private key which corresponds to the matching client certificate. This key file needs to be present on all Portworx nodes.
 
-- **Vault TLS Server Name [VAULT_TLS_SERVER_NAME]**
+* **Vault TLS Server Name [VAULT_TLS_SERVER_NAME]**
 
-    Name to use as the SNI host when connecting via TLS.
+    Name to use as the SNI host when you connect using TLS.
 
-- **Vault Auth Method [VAULT_AUTH_METHOD]**
+* **Vault Auth Method [VAULT_AUTH_METHOD]**
 
-    Specifies the Auth method that Portworx should use while authenticating with Vault. Currently supported Auth Methods: "Kubernetes".
+    Specifies the authentication method that Portworx should use while authenticating with Vault. "Kubernetes" is the currently supported authenication method.
 
-- **Vault Auth Kubernetes Role [VAULT_AUTH_KUBERNETES_ROLE]**
+* **Vault Auth Kubernetes Role [VAULT_AUTH_KUBERNETES_ROLE]**
 
-    Name of the Kubernetes Auth Role created in vault for Portworx. This field is set only when using Kubernetes Auth Method.
+    Name of the Kubernetes "Auth Role" created in Vault for Portworx. This field is set only when using the Kubernetes authentication method.
 
-- **Vault Namespace [VAULT_NAMESPACE]**
+* **Vault Namespace [VAULT_NAMESPACE]**
 
-    This option allows you to set a global vault namespace for the Portworx cluster. All vault requests by PX will use this vault namespace if an override is not provided.
-
+    Allows you to set a global Vault namespace for the Portworx cluster. All Vault requests by Portworx use this Vault namespace,  if you do not provide an override.
 
 ## Kubernetes users
 
-### Step 1: Choose Vault Auth Method
+### 1. Choose the Vault authentication method.
 
-Auth methods are responsible for authenticating Portworx with Vault. Based on your Vault configuration and the Auth method you choose, you must use one of the following two methods:
+  Authentication methods are responsible for authenticating Portworx with Vault. Based on your Vault configuration and the authentication method you choose, you must use one of the following two methods:
 
-* **Using Token Auth:** In this method a static vault token will be provided to Portworx.
-* **Using Kubernetes Auth:** In this method, Portworx will use Kubernetes service account to fetch and refresh Vault Tokens.
+  * **Using token authetication:** A static Vault token is provided to Portworx.
+  * **Using Kubernetes authentication:** Portworx uses Kubernetes service account to fetch and refresh Vault tokens.
 
-#### Using Token Auth Method
+#### Using token authentication method
 
-With this method, Portworx requires a Vault static token to be provided through a Kubernetes secret.
+With this method, Portworx requires a Vault static token that you should provide through a Kubernetes secret.
 
-##### Step 1a: Provide Vault credentials to Portworx
+   * Provide Vault credentials to Portworx.
 
-Portworx reads the Vault credentials required to authenticate with Vault through a Kubernetes secret. Create a Kubernetes secret with the name `px-vault` in the `portworx` namespace. Following is an example kubernetes secret spec
+     Portworx reads the Vault credentials required to authenticate with Vault through a Kubernetes secret. Create a Kubernetes secret with the name `px-vault` in the `portworx` namespace. Following is an example Kubernetes secret spec:
 
 ```text
 apiVersion: v1
@@ -106,41 +104,37 @@ data:
   VAULT_NAMESPACE: <base64 encoded value of the global vault namespace for portworx>
 ```
 
-Portworx will look for this secret with name `px-vault` under the `portworx` namespace. While installing Portworx it creates a kubernetes role binding which grants access to reading kubernetes secrets only from the `portworx` namespace.
+Portworx searches for this secret with name `px-vault` under the `portworx` namespace.
 
 {{<info>}}
 **NOTE:**
 
-* If the VAULT_TOKEN provided in the secret above is refreshed, you must manually update this secret.
+* If the `VAULT_TOKEN` provided in the secret above is refreshed, then you must manually update this secret.
 * If you installed Portworx using the Operator, then you must create the Kubernetes secret in the same namespace in which you deployed Portworx.
 {{</info>}}
 
-Now that you've configured Vault using the Vault auth method, proceed to [Step 2](#step-2-setup-vault-as-the-secrets-provider-for-portworx).
+After configuring Vault using the Vault authentication method, proceed to [Step 2](#2-setup-vault-as-the-secrets-provider-for-portworx).
 
-#### Using Kubernetes Auth Method
+#### Using Kubernetes authentication method
 
-This method allows Portworx to authenticate with Vault using a Kubernetes service account token. You can find more information on how to setup Kubernetes Vault Auth in the [Vault documentation](https://www.vaultproject.io/docs/auth/kubernetes).
+This method allows Portworx to authenticate with Vault using a Kubernetes service account token. For more information about how to setup Kubernetes Vault authentication, refer to the [Vault documentation](https://www.vaultproject.io/docs/auth/kubernetes).
 
-##### Step 1a: Create a ServiceAccount for vault auth delegation
+  * Create a `ServiceAccount` for Vault authentication delegation.
 
-Run the following `kubectl create` commands to create a ServiceAccount and ClusterRoleBinding. This ServiceAccount and its associated token is used by Vault to authenticate requests from Portworx. Vault uses the [Kubernetes TokenReview API](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#tokenreview-v1-authentication-k8s-io).
+    Run the following `kubectl create` commands to create a `ServiceAccount` and `ClusterRoleBinding`. Vault uses this `ServiceAccount` and its associated token to authenticate requests from Portworx. Vault uses the [Kubernetes TokenReview API](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.18/#tokenreview-v1-authentication-k8s-io).
 
 ```text
 kubectl create serviceaccount vault-auth -n kube-system
 kubectl create clusterrolebinding vault-tokenreview-binding --clusterrole=system:auth-delegator --serviceaccount=kube-system:vault-auth
 ```
 
-##### Step 1b: Enable Kubernetes Auth in Vault
-
-Enter the following `vault auth` command to enable Kubernetes auth in Vault:
+  * Enable Kubernetes authentication in Vault. Enter the following `vault auth` command to enable Kubernetes authentication in Vault:
 
 ```text
 vault auth enable kubernetes
 ```
 
-##### Step 1c: Create a Kubernetes Auth Config in Vault
-
-Enter the following `export` commands to get the Kubernetes ServiceAccount's JWT token and CA certificate:
+  * Create a Kubernetes authentication configuration in Vault. Enter the following `export` commands to get the JWT token and CA certificate of Kubernetes `ServiceAccount`:
 
 ```text
 export VAULT_SA_NAME=$(kubectl get sa vault-auth -n kube-system \
@@ -153,7 +147,7 @@ export SA_CA_CRT=$(kubectl get secret $VAULT_SA_NAME -n kube-system \
      -o jsonpath="{.data['ca\.crt']}" | base64 --decode; echo)
 ```
 
-Enter the following `vault write` command, replacing `<kubernetes-endpoint>` with your kubernetes api-server endpoint to write a Kubernetes Auth Config to Vault:
+    Enter the following `vault write` command, replacing `<kubernetes-endpoint>` with your kubernetes `api-server` endpoint to write a Kubernetes authentication configuration to Vault:
 
 ```text
 vault write auth/kubernetes/config \
@@ -162,9 +156,7 @@ vault write auth/kubernetes/config \
         kubernetes_ca_cert="$SA_CA_CRT"
 ```
 
-##### Step 1d: Create a Kubernetes Auth Role for Portworx
-
-Create a Kubernetes Auth Role called `portworx` in Vault:
+  * Create a Kubernetes authentication role for Portworx, named `portworx`, in Vault:
 
 ```text
 vault write auth/kubernetes/role/portworx \
@@ -174,8 +166,8 @@ vault write auth/kubernetes/role/portworx \
         ttl=<ttl>
 ```
 
-{{<info>}}
-**NOTE:** If you deployed Portworx using the Operator, then you must enter the following command to create a Kubernetes auth role, replacing `<namespace>` with the namespace in which you deployed Portworx:
+    {{<info>}}
+**NOTE:** If you deployed Portworx using the Operator, then you must enter the following command to create a Kubernetes authentication role, replacing `<namespace>` with the namespace in which you deployed Portworx:
 
 ```text
 vault write auth/kubernetes/role/portworx \
@@ -184,11 +176,11 @@ vault write auth/kubernetes/role/portworx \
         policies=portworx \
         ttl=<ttl>
 ```
-{{</info>}}
+    {{</info>}}
 
-##### Step 1e: Provide Vault credentials to Portworx
+  * Provide Vault credentials to Portworx.
 
-Portworx reads the Vault credentials required to authenticate with Vault through a Kubernetes secret. Create a Kubernetes secret with the name `px-vault` in the `portworx` namespace. You can refer to the following example Kubernetes secret spec when creating yours:
+    Portworx reads the Vault credentials required to authenticate with Vault through a Kubernetes secret. Create a Kubernetes secret with the name `px-vault` in the `portworx` namespace. Refer to the following example Kubernetes secret specification to create your own secret:
 
 ```text
 apiVersion: v1
@@ -210,79 +202,34 @@ data:
   VAULT_NAMESPACE: <base64 encoded value of the global vault namespace for portworx>
 ```
 
-{{<info>}}
-**NOTE:** Set the value of VAULT_AUTH_KUBERNETES_ROLE to the base64 encoded value of the role created in Step 1d.
-{{</info>}}
+    {{<info>}}
+  **NOTE:** Set the value of `VAULT_AUTH_KUBERNETES_ROLE` to the `base64` encoded value of the role created in the previous step.
+    {{</info>}}
 
-Portworx will look for this secret with name `px-vault` under the `portworx` namespace. While installing Portworx it creates a kubernetes role binding which grants access to reading kubernetes secrets only from the `portworx` namespace.
+    Portworx searches for this secret with name `px-vault` under the `portworx` namespace. While installing Portworx, it creates a Kubernetes role binding that grants access to reading Kubernetes secrets only from the `portworx` namespace.
 
-{{<info>}}
+    {{<info>}}
 **NOTE:** If you installed Portworx using the Operator, then you must create the Kubernetes secret in the same namespace in which you deployed Portworx.
-{{</info>}}
+    {{</info>}}
 
-### Step 2: Setup Vault as the secrets provider for Portworx
+### 2. Setup Vault as the secrets provider for Portworx
 
 #### New Installation
 
-When generating the [Portworx Kubernetes spec file](https://central.portworx.com), select `Vault` from the "Secrets type" list.
+When generating the [Portworx Kubernetes specification file](https://central.portworx.com), select `Vault` from the "Secrets type" list.
 
 #### Existing Installation
 
-For an existing Portworx cluster follow these steps to configure Vault as the secrets provider
+For an existing Portworx cluster, perform the following step to configure Vault as the secrets provider:
 
-##### Step 2a: Add Permissions to access kubernetes secrets
-
-{{<info>}}
-**NOTE:** If you deployed Portworx using the Operator, then you can skip this section as the installer already added these permissions.
-{{</info>}}
-
-Portworx needs permissions to access the `px-vault` secret created in Step 1. The following Kubernetes spec grants Portworx access to all the secrets defined under the `portworx` namespace
-
-```text
-cat <<EOF | kubectl apply -f -
-# Namespace to store credentials
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: portworx
----
-# Role to access secrets under portworx namespace only
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: px-role
-  namespace: portworx
-rules:
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "create", "update", "patch"]
----
-# Allow portworx service account to access the secrets under the portworx namespace
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: px-role-binding
-  namespace: portworx
-subjects:
-- kind: ServiceAccount
-  name: px-account
-  namespace: kube-system
-roleRef:
-  kind: Role
-  name: px-role
-  apiGroup: rbac.authorization.k8s.io
-EOF
-```
-
-##### Step 2b: Edit the Portworx Daemonset
-
-Edit the Portworx daemonset `secret_type` field to `vault`, so that all the new Portworx nodes will also start using Vault.
+  * Edit the Portworx DaemonSet `secret_type` field to `vault`, so that all the new Portworx nodes start using Vault:
 
 ```text
 kubectl edit daemonset portworx -n kube-system
 ```
 
-Add the `"-secret_type", "vault"` arguments to the `portworx` container in the daemonset. It should look something like this:
+    Add the `"-secret_type", "vault"` arguments to the `portworx` container in the DaemonSet. It should look something like this:
+
 ```text
 containers:
   - args:
@@ -297,34 +244,33 @@ containers:
     name: portworx
 ```
 
-Editing the DaemonSet will restart all the Portworx pods.
+    Editing the DaemonSet will restart all the Portworx pods.
 
-{{<info>}}
+    {{<info>}}
 **NOTE:** If you installed Portworx using the Operator, then you must edit your `StorageCluster` object, setting the value of the `specs.secretsProvider` field to `vault`.
-{{</info>}}
+    {{</info>}}
 
 ## Other users {#other-users}
 
-### Step 1: Provide Vault credentials to Portworx.
+1. Provide Vault credentials to Portworx.
 
-Provide the following Vault credentials (key value pairs) as environment variables to Portworx
+    Provide the following Vault credentials (key value pairs) as environment variables to Portworx:
 
+    * (Required) `VAULT_ADDR=`vault endpoint address
+    * (Required) `VAULT_TOKEN=`vault token
+    * (Optional) `VAULT_BASE_PATH=`vault base path>
+    * (Optional) `VAULT_BACKEND_PATH=`custom backend path if different than the default `secret`
+    * (Optional) `VAULT_CACERT=`file path where the CA Certificate is present on all the nodes
+    * (Optional) `VAULT_CAPATH=`file path where the Certificate Authority is present on all the nodes
+    * (Optional) `VAULT_CLIENT_CERT=`file path where the Client Certificate is present on all the nodes
+    * (Optional) `VAULT_CLIENT_KEY=`file path where the Client Key is present on all the nodes
+    * (Optional) `VAULT_TLS_SERVER_NAME=`TLS server name
 
-- [Required] VAULT_ADDR=<vault endpoint address>
-- [Required] VAULT_TOKEN=<vault token>
-- [Optional] VAULT_BASE_PATH=<vault base path>
-- [Optional] VAULT_BACKEND_PATH=<custom backend path if different than the default "secret">
-- [Optional] VAULT_CACERT=<file path where the CA Certificate is present on all the nodes>
-- [Optional] VAULT_CAPATH=<file path where the Certificate Authority is present on all the nodes>
-- [Optional] VAULT_CLIENT_CERT=<file path where the Client Certificate is present on all the nodes>
-- [Optional] VAULT_CLIENT_KEY=<file path where the Client Key is present on all the nodes>
-- [Optional] VAULT_TLS_SERVER_NAME=<TLS server name>
+    {{<info>}}
+**NOTE:** Providing `VAULT_NAMESPACE` as environment variable is not supported. Please specify the vault namespace through `pxctl` commands as shown in subsequent sections.
+    {{</info>}}
 
-{{<info>}}
-**NOTE:** Providing VAULT_NAMESPACE as environment variable is not supported. Please specify the vault namespace through pxctl commands as shown in subsequent sections.
-{{</info>}}
-
-### Step 2: Set up Vault as the secrets provider for Portworx.
+2. Set up Vault as the secrets provider for Portworx.
 
 #### New installation
 
@@ -332,10 +278,11 @@ While installing Portworx set the input argument `-secret_type` to `vault`.
 
 #### Existing installation
 
-Based on your installation method provide the `-secret_type vault` input argument and restart Portworx on all the nodes.
+Based on your installation method, provide the `-secret_type vault` input argument and restart Portworx on all the nodes.
 
 ## Vault security policies
-If Vault is configured strictly with policies then the Vault Token provided to Portworx should follow one of the following policies:
+
+If you configured Vault strictly with policies, then the Vault token provided to Portworx should follow one of the following policies:
 
  ```text
  # Read and List capabilities on mount to determine which version of kv backend is supported
@@ -381,48 +328,25 @@ If Vault is configured strictly with policies then the Vault Token provided to P
  ```
 
 {{<info>}}
-**Note**: Portworx supports only the kv backend of Vault
+**Note**: Portworx supports only the kv backend of Vault.
 {{</info>}}
 
-All the above Vault related fields as well as the cluster secret key can be set using the Portworx CLI which is explained in the next section.
+You can set all the above Vault related fields and the cluster secret key using the Portworx CLI, which is explained in the next section.
 
 
 ## Key generation with Vault
 
-The following sections describe the key generation process with Portworx and Vault which can be used for encrypting volumes. More info about encrypted volumes [here](/reference/cli/encrypted-volumes)
+The following sections describe the key generation process with Portworx and Vault, which you can use for encrypting volumes. For more information about encrypted volumes, refer to the [Encrypted volumes using pxctl](/reference/cli/encrypted-volumes) page.
 
 ### Setting cluster wide secret key
 
-A cluster wide secret key is a common key that can be used to encrypt all your volumes. You can set the cluster secret key using the following command.
+A cluster-wide secret key is a common key that you can to encrypt all your volumes. Run the following command to set the cluster secret key:
 
 ```text
 pxctl secrets set-cluster-key --secret <cluster-wide-secret-key>
 ```
 
-This command needs to be run just once for the cluster. If you have added the cluster secret key through the config.json, the above command will overwrite it. Even on subsequent Portworx restarts, the cluster secret key in config.json will be ignored for the one set through the CLI.
-
-## \(Optional\) Authenticating with Vault using the Portworx CLI
-
-If you do not wish to set Vault environment variables, you can authenticate Portworx with Vault using the Portworx CLI. Run the following command:
-
-```text
-pxctl secrets vault login \
-  --vault-address <vault-endpoint-address> \
-  --vault-token <vault-token>
-```
-
-{{<info>}}
-**Important:**
-You need to run this command on all Portworx nodes, so that you could create and mount encrypted volumes on all nodes.
-{{</info>}}
-
-{{<info>}}
-**Important:**
-Make sure that the secret key has been created in Vault.
-{{</info>}}
-
-If the CLI is used to authenticate with Vault, for every restart of the Portworx container it needs to be re-authenticated with Vault by running the `vault login` command.
-
+You should run this command only once for the cluster. If you added the cluster secret key through the `config.json`, then the command above overwrites it. Even on subsequent Portworx restarts, the cluster secret key in `config.json` will be ignored for the one set through the CLI.
 
 ## Using Vault with Portworx
 
