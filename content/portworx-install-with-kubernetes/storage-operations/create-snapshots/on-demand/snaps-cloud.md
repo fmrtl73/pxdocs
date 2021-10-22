@@ -44,7 +44,6 @@ Once you've created a cloud snapshot, you can restore it to a new PVC or the ori
 
 {{< content "shared/portworx-install-with-kubernetes-storage-operations-create-snapshots-k8s-in-place-restore-pvc-from-snap.md" >}}
 
-
 ### References
 
 * For details about how you can restore a snapshot to a new PVC or the original PVC, see the [Restore cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-cloud#restore-cloud-snapshots) section.

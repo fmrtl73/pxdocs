@@ -7,6 +7,19 @@ hidden: true
 
 When you perform an in-place restore to a PVC, Stork takes the pods using that PVC offline, restores the volume from the snapshot, then brings the pods back online.
 
+{{<info>}}
+**NOTE:** 
+In-place restore using VolumeSnapshotRestore works only for applications deployed using the `stork` scheduler. 
+If you're not using the Stork scheduler, Portworx displays the following error when describing the VolumeSnapshotRestore resource:
+
+```output
+Events:
+  Type     Reason  Age               From   Message
+  ----     ------  ----              ----   -------
+  Warning  Failed  5s (x2 over 15s)  stork  application not scheduled by stork scheduler
+```
+{{</info>}}
+
 1. Create a `VolumeSnapshotRestore` YAML file specifying the following:
 
      * **apiVersion** as `stork.libopenstorage.org/v1alpha1`
