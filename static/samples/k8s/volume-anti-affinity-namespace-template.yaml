@@ -1,0 +1,16 @@
+apiVersion: portworx.io/v1beta2
+kind: VolumePlacementStrategy
+metadata:
+  name: namespace-template-volume-anti-affinity
+spec:
+  volumeAntiAffinity:
+    - matchExpressions:
+      - key: "namespace"
+        operator: In
+        values:
+        - "${pvc.namespace}"
+      - key: app
+        operator: In
+        values:
+        - "appname"
+      topologyKey: "kubernetes.io/hostname"

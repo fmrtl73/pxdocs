@@ -19,6 +19,10 @@ Portworx provides a [CustomResouceDefinition (CRD)](https://kubernetes.io/docs/c
     - [Schema](#schema-3)
     - [Example use cases](#example-use-cases-3)
 
+Additional Information:
+
+- [Templates](#templates)
+
 
 ### replicaAffinity
 
@@ -100,3 +104,13 @@ By default, Portworx automatically adds the following labels to each of its stor
 ##### Example use cases
 
 * {{< open-in-new-tab url="/samples/k8s/volume-placement-cassandra-volume-anti-affinity.yaml" name="Do not collocate with other cassandra volumes" >}}
+
+
+### Templates
+
+Parameter values in `matchExpressions` may use predefined templates. The `VolumePlacementStrategy` will automatically resolve these templates at provision time as detailed below:
+
+* key: `namespace`
+    * `${pvc.namespace}`
+        * Replaced with namespace of the `PersistentVolumeClaim` that triggered provisioning
+        * Example: {{< open-in-new-tab url="/samples/k8s/volume-anti-affinity-namespace-template.yaml" name="Do not collocate with other app volumes within the same namespace" >}}
