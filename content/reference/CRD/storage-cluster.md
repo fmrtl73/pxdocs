@@ -196,6 +196,8 @@ This section explains the fields used to configure the `StorageCluster` object.
 | spec.<br>featureGates | A collection of key-value pairs specifying which Portworx features should be enabled or disabled. [^1] | `map[string]string` | None |
 | spec.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826). Similar to how environment variables are provided in Kubernetes, you can directly provide values to Portworx or import them from a source like a `Secret`, `ConfigMap`, etc. | `[]object` | None |
 | spec.<br>metadata.<br>annotations | A map of components and custom annotations. [^2] | map[string]map[string]string | None |
+| spec.<br>resources.<br>cpu | Specifies the cpu that the Portworx container will use, for example: `"4000m"` |  `string`  | None |
+| spec.<br>resources.<br>memory | Specifies the memory that the Portworx container will use, for example: `"4Gi"` | `string` | None |
 
 [^1]: As an example, here's how you can enable the `CSI` feature.
     ```text
