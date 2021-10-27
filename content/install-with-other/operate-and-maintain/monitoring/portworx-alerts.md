@@ -178,3 +178,4 @@ Each alert has a severity from one of the following levels:
 | PoolExpandInProgress | POOL | NOTIFY | Triggered when a pool expand operation starts. | px_alerts_poolexpandinprogress |
 | PoolExpandSuccessful | POOL | NOTIFY | Triggered when a pool expand operation succeeds. | px_alerts_poolexpandsuccessful |
 | PoolExpandFailed | POOL | ALARM | Triggered when a pool expand operation fails. | px_alerts_poolexpandfailed |
+| FileSystemModuleDependency | NODE | ALARM | Triggered during Portworx installation if there is a filesystem module dependency failure. | px_alerts_filesystemmoduledependency_total |
