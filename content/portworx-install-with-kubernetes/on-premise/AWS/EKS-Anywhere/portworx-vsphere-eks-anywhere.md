@@ -10,7 +10,7 @@ Portworx can be installed on a Kubernetes cluster running on vSphere and managed
 
 ### Prerequisites
 
-Before you install Portworx on vSphere, ensure that you meet the following prerequisiites:
+Before you install Portworx on vSphere, ensure that you meet the following prerequisites:
 
 |**Environment**|**Resources**|
 |------|------|
