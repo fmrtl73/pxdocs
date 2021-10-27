@@ -140,6 +140,10 @@ clusterpair.stork.libopenstorage.org/remotecluster created
 
 Note that, when the ClusterPair gets created, Portworx also creates a 100 GiB volume called `ObjectstoreVolume`. If you plan to migrate volumes that are significanlty larger than 100GiB, make sure you check out first the [Migrating Large Volumes](#migrating-large-volumes) section.
 
+{{<info>}}
+If an `Invalid token for already paired cluster` error displays, enter the `pxctl cluster pair list` command to check for any any existing cluster pairs and delete them. Re-apply the stork cluster pair yaml once you've deleted the cluster pairs.
+{{</info>}}
+
 #### Verifying the Pair status
 
 Once you apply the above spec on the source cluster, you should be able to check the status of the pairing:
