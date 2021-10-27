@@ -112,6 +112,22 @@ If the PVC creation is failing, this could be due the following reasons
 * Describe the PVC using `kubectl describe pvc <pvc-name>` and look at errors in the events section which might be causing failure of the PVC creation.
 * Make sure you are running Kubernetes 1.6 and above. Kubernetes 1.5 does not have our native driver which is required for PVC creation.
 
+### PVC Controller
+
+If you are running Portworx in AKS and run into port conflict in the PVC controller, you can overwrite the default PVC Controller ports using the `portworx.io/pvc-controller-port` and `portworx.io/pvc-controller-secure-port` annotations on the `StorageCluster` object:
+
+```text
+apiVersion: core.libopenstorage.org/v1
+kind: StorageCluster
+metadata:
+  name: portworx
+  namespace: kube-system
+  annotations:
+    portworx.io/pvc-controller-port: "10261"
+    portworx.io/pvc-controller-secure-port: "10262"
+...
+```
+
 ### DNS policy updates
 
 If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pods-dns-policy) parameter for the PX-OCI service, please also restart the PX-OCI service\(s\) after changing/editing the YAML-spec:
