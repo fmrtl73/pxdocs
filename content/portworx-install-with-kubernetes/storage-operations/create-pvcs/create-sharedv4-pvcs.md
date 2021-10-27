@@ -23,8 +23,8 @@ To increase fault tolerance, you can enable sharedv4 service volumes. With this 
 **Notes about Sharedv4 service volumes:**
 
 * This is an early access feature.
-* Sharedv4 service volumes currently only support NFSv3.
 * Sharedv4 service volumes are intended for use within the Kubernetes cluster where the volume resides.
+* Sharedv4 service volumes default to using NFSv4.0.
 
 **Known issue:** 
 
