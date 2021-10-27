@@ -32,6 +32,10 @@ The following tables list what features {{< pxEssentials >}} supports and any li
 | Telemetry requirement (install/operate) | Users must have telemetry enabled in order to use {{< pxEssentials >}}.|
 | Licensing | Users must have a {{< pxEssentials >}} license (available for free at PX-Central)|
 
+{{<info>}}
+**Note:** The storage value you set at the time of deployment cannot be expanded until you activate the trial/enterprise license.
+{{</info>}}
+
 ### PX-Store
 
 | **Feature** | **Support** |
