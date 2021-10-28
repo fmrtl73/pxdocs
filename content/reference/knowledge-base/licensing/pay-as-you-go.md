@@ -27,10 +27,21 @@ If you already set up your cluster using any of the paid or free Portworx licens
 
     * **Operator-based installations**
   
-        From the master node in your cluster, store the `stc` as an environment variable:
+        The following spec needs adding to the StorageCluster object:
+
+        ```text
+        env:
+        - name: "SAAS_ACCOUNT_KEY_STRING"
+          valueFrom:
+            secretKeyRef:
+              name: px-saas-key
+              key: account-key
+        ```
+
+        Use {{kubectl edit stc}}, or patch with:
         
         ```text
-        stc=$(kubectl get stc -n kube-system | awk '{if(NR>1)print $1}')
+        stc=$(kubectl get stc -n portworx -o jsonpath='{.items[0].metadata.name}')
         ```
 
         Patch the stc using the secret you created in step 1:
