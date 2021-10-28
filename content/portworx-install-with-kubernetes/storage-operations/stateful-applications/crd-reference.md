@@ -50,7 +50,7 @@ metadata:
   name: azure
   namespace: mysql
   annotations:
-    stork.libopenstorage.ord/skipresource: "true"
+    stork.libopenstorage.org/skipresource: "true"
 location:
   type: azure
   path: "bucket-name"
@@ -76,7 +76,7 @@ metadata:
   name: gcs
   namespace: mysql
   annotations:
-    stork.libopenstorage.ord/skipresource: "true"
+    stork.libopenstorage.org/skipresource: "true"
 location:
   type: google
   path: "bucket-name"
