@@ -317,6 +317,8 @@ This section provides details on how to enable monitoring for Portworx.
 | --- | --- | --- | --- |
 | spec.<br>monitoring.<br>prometheus.<br>enabled | Enables or disables a Prometheus cluster. | `boolean` | `false` |
 | spec.<br>monitoring.<br>prometheus.<br>exportMetrics | Expose the Portworx metrics to an external or operator deployed Prometheus. | `boolean` | `false` |
+| spec.<br>monitoring.<br>prometheus.<br>alertManager.<br>enabled | Enable Prometheus Alertmanager | `boolean` |
+| spec.<br>monitoring.<br>telemetry.<br>enabled | Enable telemetry | `boolean` | 
 
 ### Stork configuration
 

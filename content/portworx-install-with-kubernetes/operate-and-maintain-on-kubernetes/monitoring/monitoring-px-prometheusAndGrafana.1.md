@@ -1,5 +1,6 @@
 ---
-title: Prometheus and Grafana
+title: Install Prometheus and Grafana using Daemonset
+linkTitle: Prometheus and Grafana Daemonset
 keywords: monitoring, prometheus, alertmanager, servicemonitor, grafana, Kubernetes, k8s
 description: How to use Prometheus and Grafana for monitoring Portworx on Kubernetes
 ---
