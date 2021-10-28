@@ -39,6 +39,7 @@ On failover, Applications may receive an error for non idempotent requests. For 
   * The `parameters.repl` field with the replication factor you'd like to set
   * The `sharedv4` field set to `true`
   * (Optional) The `sharedv4_svc_type` set to either `ClusterIP` or `Loadbalancer`
+  * (Optional) Any `sharedv4_mount_options` you want to pass to the NFS client. The default values are: `(rw,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,acregmin=60,acdirmin=60,soft,proto=tcp,timeo=1200,retrans=4,sec=sys,mountvers=3,mountport=9024,mountproto=tcp,local_lock=none)`
 
         ```text
         kind: StorageClass
@@ -47,9 +48,10 @@ On failover, Applications may receive an error for non idempotent requests. For 
             name: px-sharedv4-sc
         provisioner: kubernetes.io/portworx-volume
         parameters:
-          repl: "2"
-          sharedv4: "true"
-          sharedv4_svc_type: "ClusterIP"
+           repl: "2"
+           sharedv4: "true"
+           sharedv4_svc_type: "ClusterIP"
+           sharedv4_mount_options: "vers=4.1"
         ```
 
 2. Apply the storageClass:
