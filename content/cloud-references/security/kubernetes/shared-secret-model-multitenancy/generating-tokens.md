@@ -112,6 +112,12 @@ You can find more information on the rules of each of the value on the
     kubectl -n <tenant namespace> create secret \
       generic px-user-token --from-literal=auth-token=$TENANT_TOKEN
     ```
+4. Annotate the Kubernetes secret so that other components like Stork and PX-Backup do not backup this resource.
+
+    ```text
+    kubectl -n <tenant namespace> annotate secret px-user-token \
+      stork.libopenstorage.org/skipresource=true
+    ```
 
 Kubernetes storage classes can now be set up to use this secret to
 get access to the token to communicate with Portworx.

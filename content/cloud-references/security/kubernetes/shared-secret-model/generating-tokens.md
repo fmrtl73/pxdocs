@@ -104,6 +104,12 @@ the secret is saved in the environment variable `$PORTWORX_AUTH_SHARED_SECRET`.
     kubectl -n portworx create secret \
       generic px-user-token --from-literal=auth-token=$KUBE_TOKEN
     ```
+5. Annotate the Kubernetes secret so that other components like Stork and PX-Backup do not backup this resource.
+
+    ```text
+    kubectl -n portworx annotate secret px-user-token \
+      stork.libopenstorage.org/skipresource=true
+    ```
 
 You can now set up Kubernetes storage classes to use this secret to
 get access to the token to communicate with Portworx.
