@@ -6,6 +6,18 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.8.1.2
+
+Nov 2, 2021
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-21485 | The NFS `rpc-statd` service sometimes failed to start on Portworx nodes, preventing sharedv4 volumes from mounting. <br/><br/>**User Impact:** Application pods using sharedv4 volumes sometimes became stuck in the `ContainerCreating` state, with volume mount operations failing with the error: `mount.nfs: rpc.statd is not running but is required for remote locking.mount.nfs: Either use '-o nolock' to keep locks local, or start statd.\nmount.nfs: an incorrect mount option was specified`<br/><br/>**Resolution:** Portworx now detects when `rpc-statd` is either not running or is in an inconsistent state, and restarts it to ensure that sharedv4/NFS mounts proceed. |
+
 ## 2.8.1.1
 
 Oct 13, 2021
