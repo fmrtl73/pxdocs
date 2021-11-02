@@ -511,6 +511,29 @@ Global Flags:
       --ssl                  ssl enabled for portworx
 ```
 
+Run the following command to list cloudsnaps of a volume that are not present in the cluster, but the volume belonged to this cluster in the past:
+
+```text
+pxctl cloudsnap list -d
+```
+
+Output:
+```text
+SOURCEVOLUME	SOURCEVOLUMEID	CLOUD-SNAP-ID		CREATED-TIME	TYPE	STATUS	BELONGS-TO-CLUSTER	NAMESPACE
+testvol	 521362534280354159	 4c668781-0ab7-4699-86cd-a0c01d17b162/521362534280354159-116521897362456321	Wed, 24 Mar 2021 20:42:58 UTC	Manual Done	Yes
+```
+
+```text
+pxctl cloudsnap list -d -c 4f568y9-23446acd7-0987-24875
+```
+
+Output:
+```
+Failed to enumerate backups:  Invalid arguements, cloudsnaps of deleted voluemes/MissingSrcVolumes can be listed for current cluster only
+```
+
+The above command lists only the cloudsnaps of deleted volumes for current cluster. Therefore, the cluster-uuid/bucket input is not expected and returns error to the caller.
+
 ### Inspect a cloud snapshot
 
 The `pxctl cloudsnap list` command displays all the cloud snapshots for a given credential, source volume, or type of cloud snapshot. To view more details about a particular cloud snapshot, you must specify the `-i` flag with the ID of the cloud snapshot you want to inspect.
@@ -807,6 +830,10 @@ pxctl cloudsnap list
 SOURCEVOLUME     CLOUD-SNAP-ID                    CREATED-TIME            STATUS
 dvol        pqr9-cl1/520877607140844016-50466873928636534    Fri, 07 Apr 2017 20:22:43 UTC    Done
 ```
+
+{{<info>}}
+**Note:** Portworx cloudsnap deletes are optimized with S3 batch-deletes API.
+{{</info>}}
 
 ### Cloud backup schedules
 
