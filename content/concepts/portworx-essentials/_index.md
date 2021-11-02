@@ -41,7 +41,7 @@ The following tables list what features {{< pxEssentials >}} supports and any li
 | **Feature** | **Support** |
 |----|----|
 | Container-optimized volumes with elastic scaling (no application downtime) | Supported |
-| Maximum number of volumes per cluster | 500 |
+| Maximum number of volumes per cluster | 200 |
 | Maximum volume size | 1TB |
 | Storage performance tiers (high, medium, low) | Supported |
 | Application-aware I/O tuning | Supported |
