@@ -47,7 +47,40 @@ Expand a cloud-based pool by entering the `pxctl service pool expand` command wi
 * The `--uid` option with the ID of the pool you wish to resize
 
 ```text
-pxctl service pool expand --operation auto --size 1000 --uid 3
+pxctl service pool expand --operation auto --size 1000 --uid <pool-UUID>
+```
+
+For example:
+
+```text
+pxctl service pool expand --operation auto --size 1000 --uid 46f7e68b-3892-4ddd-88fc-aef346e61d89
+```
+
+Run the following command to find the UUID for a pool:
+
+```text
+pxctl service pool show
+```
+
+Output:
+```text
+PX drive configuration:
+Pool ID: 0
+        UUID:  46f7e68b-3892-4ddd-88fc-aef346e61d89
+        IO Priority:  HIGH
+        Labels:  iopriority=HIGH,medium=STORAGE_MEDIUM_SSD
+        Size: 384 GiB
+        Status: Online
+        Has metadata:  Yes
+        Balanced:  Yes
+        Drives:
+        1: /dev/sde, Total size 128 GiB, Online
+        2: /dev/sdf, Total size 128 GiB, Online
+        3: /dev/sdg, Total size 128 GiB, Online
+        Cache Drives:
+        No Cache drives found in this pool
+Journal Device:
+        1: /dev/sdc1, STORAGE_MEDIUM_SSD
 ```
 
 ## Expand a pool manually
