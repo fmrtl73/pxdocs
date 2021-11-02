@@ -53,17 +53,7 @@ status:
   storageStatus: ""
 ```
 
-Make the following changes in the `options` section of your `ClusterPair`:
-
-* This example uses a single storage fabric. Thus, you must delete the `<insert_storage_options_here>: ""` line.
-* By default, every seventh migration is a full migration. To make every migration incremental, specify `mode: DisasterRecovery` as follows:
-
-      ```
-      options:
-         mode: DisasterRecovery
-      ```
-
-Once you've made the changes, save the resulting spec to a file named `clusterpair.yaml`.
+Save the above spec to a file named `clusterpair.yaml`.
 
 {{<info>}}
 **NOTE:**
