@@ -28,6 +28,11 @@ Since Portworx is a storage overlay that automatically replicates your data, {{<
 
 ## Installation
 
-{{<info>}}Run these steps from a machine which has kubectl access to your cluster.{{</info>}}
+{{<info>}}
+**NOTE:**
+
+- Run these steps from a machine which has `kubectl` access to your cluster.
+- If you provide a vSphere datastore cluster as an input, Portworx uses a DRS recommendation API that returns the correct datastore to use from the selected datastore cluster. 
+{{</info>}}
 
 {{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-px-install.md" >}}

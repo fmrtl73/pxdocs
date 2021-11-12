@@ -18,6 +18,10 @@ noicon: true
 
 Create one or more shared datastore(s) or datastore cluster(s) which is dedicated for Portworx storage. Use a common prefix for the names of the datastores or datastore cluster(s). We will be giving this prefix during Portworx installation later in this guide.
 
+{{<info>}}
+**NOTE:** If you provide a vSphere datastore cluster as an input, Portworx uses a DRS recommendation API that returns the correct datastore to use from the selected datastore cluster. 
+{{</info>}}
+
 <!--### Generating the Portworx specs -->
 
 {{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-install-common.md" >}}
