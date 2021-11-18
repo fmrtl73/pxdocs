@@ -22,6 +22,7 @@ Just like with other cloud providers, FlashArray interacts with the underlying d
 {{<info>}}
 **NOTE:** FlashArray volumes are not the same as Portworx volumes; multiple Portworx volumes can reside on a single FlashArray volume. This makes it theoretically possible for Portworx to place multiple replicas on the same FlashArray volume. 
 {{</info>}}
+
 ### Architecture
 
 * Portworx runs on each node and forms a storage pool based on configuration information provided in the storageCluster spec.
@@ -72,7 +73,10 @@ Once you've configured your physical network and ensured that you meet the prere
     ```
 
     {{<info>}}
-**NOTE:** You can add FlashBlade configuration information to this file if you're configuring both FlashArray and FlashBlade together. Refer to the [JSON file](/reference/pure-json-reference/) reference for more information.
+  **NOTE:** 
+
+  * You can add FlashBlade configuration information to this file if you're configuring both FlashArray and FlashBlade together. Refer to the [JSON file](/reference/pure-json-reference/) reference for more information.
+  * Do not add the FlashArray information into the Pure secret json file if using vSphere as a cloud provider.
     {{</info>}}
 
 1. Enter the following `kubectl create` command to create a Kubernetes secret called `px-pure-secret`:
@@ -94,6 +98,13 @@ Once you've configured your physical network and ensured that you meet the prere
    * Ensure **CSI** is enabled
 
 Once deployed, Portworx detects that the FlashArray secret is present when it starts up and uses the described FlashArray(s) as the storage provider. It then picks a backend for each drive to use, creates volumes, and attaches the volumes using iSCSI or Fibre Channel. 
+
+{{<info>}}
+**NOTE:** 
+
+* FlashArray currently does not support two NIC interfaces that you set up (for example, one for management and one for datapath). For a workaround, refer to the [iSCSI offload configuration](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/storage_administration_guide/iscsi-offload-config) section of the Red Hat documentation.
+* If you have multiple NICs on your virtual machine, then FlashArray does not distinguish the NICs that include iSCSI and the others without iSCSI.  
+{{</info>}}
 
 ## Related topics
 
