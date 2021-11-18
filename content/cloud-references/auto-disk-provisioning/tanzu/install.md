@@ -22,6 +22,22 @@ noicon: true
 * Enable Workload Management according to [VMware Best Practices](https://docs.vmware.com/en/VMware-vSphere/7.0/vmware-vsphere-with-tanzu/GUID-3040E41B-8A54-4D23-8796-A123E7CAE3BA.html).
 * Ensure the required ports in the `9001:9020`  range are open on all nodes.
 
+{{<info>}}
+**Note**:
+If you're using encrypted volumes on Tanzu clusters with PhotonOS, Portworx recommends that you install the following packages all nodes:
+
+- device-mapper
+- cryptsetup
+
+You can install these packages using the following commands:
+
+```
+yum update -y
+yum install device-mapper
+yum install cryptsetup
+```
+{{</info>}}
+
 ## Create the StorageClass
 
 CSI cloud drive configuration requires a StorageClass with the CSI driver set as a provisioner to be installed in the Kubernetes cluster.
@@ -50,22 +66,6 @@ CSI cloud drive configuration requires a StorageClass with the CSI driver set as
 ## Install Portworx
 
 As part of the installation, you'll use the spec generator. Perform the following steps to create your Portworx spec and configure your Cloud Drives. This installation method uses the Operator. 
-
-{{<info>}}
-**Note**:
-To use encrypted volumes on Tanzu clusters with PhotonOS, Portworx recommends you to install the following packages installed on all the nodes.
-
-- device-mapper
-- cryptsetup
-
-You can install these packages using the following commands:
-
-```
-yum update -y
-yum install device-mapper
-yum install cryptsetup
-```
-{{</info>}}
 
 To install Portworx with Kubernetes, you must first generate Kubernetes manifests that you will deploy in your cluster:
 
