@@ -23,7 +23,7 @@ Just like with other cloud providers, FlashArray interacts with the underlying d
 **NOTE:** FlashArray volumes are not the same as Portworx volumes; multiple Portworx volumes can reside on a single FlashArray volume. This makes it theoretically possible for Portworx to place multiple replicas on the same FlashArray volume. 
 {{</info>}}
 
-### Architecture
+## Architecture
 
 * Portworx runs on each node and forms a storage pool based on configuration information provided in the storageCluster spec.
 * When a user creates a PVC, Portworx provisions the volume from the storage pool. 
