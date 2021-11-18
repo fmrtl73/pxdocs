@@ -51,6 +51,22 @@ CSI cloud drive configuration requires a StorageClass with the CSI driver set as
 
 As part of the installation, you'll use the spec generator. Perform the following steps to create your Portworx spec and configure your Cloud Drives. This installation method uses the Operator. 
 
+{{<info>}}
+**Note**:
+To use encrypted volumes on Tanzu clusters with PhotonOS, Portworx recommends you to install the following packages installed on all the nodes.
+
+- device-mapper
+- cryptsetup
+
+You can install these packages using the following commands:
+
+```
+yum update -y
+yum install device-mapper
+yum install cryptsetup
+```
+{{</info>}}
+
 To install Portworx with Kubernetes, you must first generate Kubernetes manifests that you will deploy in your cluster:
 
  1. Navigate to <a href="https://central.portworx.com" target="tab">PX-Central</a> and log in, or create an account
@@ -70,6 +86,8 @@ To install Portworx with Kubernetes, you must first generate Kubernetes manifest
  5. Select VMware Tanzu Cloud Platform and specify disk size and storage class name you will be using for drives
 
     ![Screenshot showing Tanzu configuration](/img/wmvare-tanzu-configuration.png)
+
+
 
 
 ## Open required ports on TKGS
