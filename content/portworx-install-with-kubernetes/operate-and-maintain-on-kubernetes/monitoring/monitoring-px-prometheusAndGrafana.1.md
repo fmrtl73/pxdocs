@@ -34,10 +34,11 @@ Grafana is a dashboarding and visualization tool with integrations to several ti
 ## Installation
 
 ### Install the Prometheus Operator
-Download {{< direct-download url="/samples/k8s/grafana/prometheus-operator.yaml" name="prometheus-operator.yaml" >}} and apply it:
+Enter the following commands to download and apply the Prometheus Operator YAML for your Kubernetes version:
 
 ```text
-kubectl apply -f <prometheus-operator.yaml>
+VER=$(kubectl version --short | awk -Fv '/Server Version: / {print $3}')
+kubectl apply -f  "http://install.portworx.com/2.9/?comp=prometheus-operator&kbver=$VER"
 ```
 
 ### Install the Service Monitor
