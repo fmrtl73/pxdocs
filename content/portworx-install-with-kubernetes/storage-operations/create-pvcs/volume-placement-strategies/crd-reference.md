@@ -34,8 +34,7 @@ Additional Information:
 |**matchExpressions**|matchExpressions is a list of label selector requirements. The requirements are ANDed.<br/><br/>The labels provided here are matched against the following:<ul><li>Kubernetes node labels</li><li>PVC labels</li><li>Portworx storage pool labels</li></ul>|Yes * <br/><br/>* required if topologyKey is empty | empty|
 |**topologyKey** | Key for the node label that the system uses to denote a topology domain. The key can be for any node label that is present on the Kubernetes node. <br/><br/>{{<info>}}**NOTE:** Using topologyKey requires nodes to be consistently labelled, i.e. every node in the cluster must have an appropriate label matching topologyKey. If some or all nodes are missing the specified topologyKey label, it can lead to unintended behavior.{{</info>}}|Yes* <br/><br/>* required if matchExpressions is empty|empty|
 |**weight**|Specifies the weight of the rule. If more than one rule matches, then the rule with the highest weight is applied.|Yes|0|
-
-<!--|**affectedReplicas**|Number indicating the number of volume replicas that are affected by this rule.|Yes|0 (Interpreted as all volume replicas)|-->
+|**affected_replicas**|Specifies the number of volume replicas affected by this rule.|Yes|0 (Interpreted as all volume replicas)|
 
 ##### Example use cases
 
