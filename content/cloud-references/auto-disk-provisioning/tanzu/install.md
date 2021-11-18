@@ -31,7 +31,7 @@ If you're using encrypted volumes on Tanzu clusters with PhotonOS, Portworx reco
 
 You can install these packages using the following commands:
 
-```
+```text
 yum update -y
 yum install device-mapper
 yum install cryptsetup
