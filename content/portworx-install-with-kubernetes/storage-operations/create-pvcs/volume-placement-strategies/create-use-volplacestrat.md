@@ -49,6 +49,10 @@ Create your VolumePlacementStrategy along with your other storage resources:
 
 ### Create other storage specs
 
+#### Use a StorageClass
+
+You can associate your VolumePlacementStrategy with a StorageClass and then reference that StorageClass in your PVC. 
+
 1. Create a StorageClass that references the VolumePlacementStrategy you created in the **Construct a VolumePlacementStrategy spec** steps above by specifying the `placement_strategy` parameter with the name of your VolumePlacementStrategy:
 
       ```text
@@ -80,6 +84,34 @@ Create your VolumePlacementStrategy along with your other storage resources:
            requests:
              storage: 2Gi
       ```
+4. Save and apply your PVC with the `kubectl apply` command:
+
+      ```text
+      kubectl apply -f yourPVC.yaml
+      ```
+
+#### Reference a VolumePlacementStrategy directly in a PVC
+
+You can reference your VolumePlacementStrategy directly in your PVC using an annotation.
+
+1. Create a PVC which references the VolumePlacementStrategy you created in the **Construct a VolumePlacementStrategy spec** steps above by specifying `placement_strategy` as an annotation with the name of your VolumePlacementStrategy:
+
+      ```text
+      kind: PersistentVolumeClaim
+        apiVersion: v1
+        metadata:
+          annotations: 
+            placement_strategy: "postgres-volume-affinity"
+          name: postgres-pvc
+        spec:
+          storageClassName: postgres-storage-class
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 2Gi
+      ```
+
 4. Save and apply your PVC with the `kubectl apply` command:
 
       ```text
