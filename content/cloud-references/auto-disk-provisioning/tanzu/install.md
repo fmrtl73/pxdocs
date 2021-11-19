@@ -87,38 +87,7 @@ To install Portworx with Kubernetes, you must first generate Kubernetes manifest
 
     ![Screenshot showing Tanzu configuration](/img/wmvare-tanzu-configuration.png)
 
+6. On the **Customize** tab, add the following under the Environment Variables section:
 
-
-
-## Open required ports on TKGS
-
-{{<info>}}
-**IMPORTANT:** If you aren't installing Portworx on TKGS, skip this section.
-{{</info>}}
-
-Portworx requires open ports on the `9001:9020` port range between all nodes. To open these required ports on TKGS, you must SSH into a running node and configure the `iptables` manually.
-
-{{<info>}}
-**NOTE:** If you enable autoscaling on your cluster, new nodes will come up with ports closed. 
-{{</info>}}
-
-Perform the following steps to open the ports on TKGS nodes:
-
-1. Run the following command from your active terminal:
-
-    ```text
-    for pod in $(kubectl get pods -n kube-system -l name=portworx | grep -v NAME | awk '{print $1}');\
-    do kubectl exec -t $pod -n kube-system -- nsenter --mount=/host_proc/1/ns/mnt bash -c \
-      "iptables -A INPUT -p tcp --match multiport --dports 9001:9020 -j ACCEPT";\
-    done
-    ```
-
-    Once you've issued this command, the cluster will finish deploying. This usually takes between 5-10 minutes.
-
-2. Watch the pods to ensure Portworx has deployed successfully:
-
-    ```text
-    watch kubectl get pods -n kube-system -l name=portworx
-    ```
-
-[https://vsphere-csi-driver.sigs.k8s.io/supported_features_matrix.html]: https://vsphere-csi-driver.sigs.k8s.io/supported_features_matrix.html
+    * In the `name` field, add `PRE-EXEC`
+    * In the `value` field, add `iptables -A INPUT -p tcp --match multiport --dports 9001:9020 -j ACCEPT`
