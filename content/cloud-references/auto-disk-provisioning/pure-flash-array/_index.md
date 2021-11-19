@@ -52,6 +52,7 @@ Before you can use Portworx with FlashArray, you must ensure your physical netwo
 * FlashArray must be running a minimum Purity//FA version of at least 4.8. Refer to the [Supported models and versions](/reference/pure-reference/supported-versions/) topic for more information. 
 * Latest linux multipath software package installed for your operating system. Refer to the [Linux recommended settings](https://support.purestorage.com/Solutions/Linux/Linux_Reference/Linux_Recommended_Settings) article of the Pure Storage documentation for recommendations.
 * If using iSCSI, the latest iSCSI initiator software for your operating system
+* Both multipath and iSCSI, if being used, should have their services enabled in `systemd` so that they start after reboots. 
 * If using Fibre Channel, the latest Fibre Channel initiator software for your operating system
 * The FlashArray should be time-synced with the same time service as the Kubernetes cluster
 
