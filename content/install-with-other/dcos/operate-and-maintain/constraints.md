@@ -19,16 +19,16 @@ Use the DCOS CLI command `dcos node` to identify which nodes in the Mesos cluste
 
 If not using Mesosphere, then follow the instructions appropriate for your OS distribution and environment to install both Apache Mesos and Marathon.
 
-## Add constraints on slave nodes
+## Add constraints on agent nodes
 If the size of your Mesos cluster is larger than the maximum number of nodes supported for a Portworx release,
 or if it is not possible to install Portworx on all nodes in the Mesos cluster,
 then you will need to use Mesos "constraints", in order to restrict/constrain jobs that use Portworx volumes to only run
-on Mesos-slave nodes where Portworx is running.   (Please check the Portworx release notes for maximum Portworx cluster size).
+on Mesos agent nodes where Portworx is running.   (Please check the Portworx release notes for maximum Portworx cluster size).
 Otherwise, {{<companyName>}} recommends simply deploying Portworx on all nodes in a Mesos cluster, thereby avoiding the need to use "constraints".
 
 The following steps are required only for configuring and using "constraints".
 
-For each Mesosphere Agent node or Mesos-slave that is participating in the Portworx cluster,
+For each Mesosphere Agent node or Mesos agent that is participating in the Portworx cluster,
 specify Mesos attributes that allow for affinity of tasks to nodes that are part of the Portworx cluster.
 
 If using Mesosphere/DCOS:
@@ -50,7 +50,7 @@ systemctl restart mesos-slave
 systemctl status mesos-slave -l
 ```
 
-Please note that restarting a dcos/mesos-slave to change the MESOS_ATTRIBUTES will cause the node to register under a new UUID.
+Please note that restarting a dcos/mesos agent to change the MESOS_ATTRIBUTES will cause the node to register under a new UUID.
 
 ## Deploy Portworx with 'constraints'
 When deploying the Portworx framework you would then add the following constraint to node.placement_constraint

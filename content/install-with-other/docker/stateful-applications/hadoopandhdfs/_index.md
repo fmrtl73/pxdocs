@@ -52,7 +52,7 @@ For the purposes of this discussion, there are a few important architectural com
 
 HDFS is composed of a few specialized services. They include:
 
-* _NameNode_ The NameNode stores cluster metadata and decides where data blocks are written and reads are served. Only one NameNode is ever in control of a cluster. However, when running Hadoop in HA mode, there are two NameNodes, one Active \(master\) and one Standby \(slave\). If the Active node dies, the Standby node takes over.
+* _NameNode_ The NameNode stores cluster metadata and decides where data blocks are written and reads are served. Only one NameNode is ever in control of a cluster. However, when running Hadoop in HA mode, there are two NameNodes, one Active \(master\) and one Standby \(agent\). If the Active node dies, the Standby node takes over.
 
 * _JournalNode_ The JournalNode is responsible for coordinating the Active and Standby NameNodes. Any change to the Active NameNode is synchronously replicated to the Standby NameNode.
 

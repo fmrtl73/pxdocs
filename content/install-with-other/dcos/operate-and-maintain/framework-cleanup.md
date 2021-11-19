@@ -47,7 +47,7 @@ This section presents the **DC/OS** method of cleaning up the Portworx framework
 {{</info>}}
 
 If you are trying to cleanup Portworx framework, you will have to perform additional steps to cleanup the remnants
-from slave nodes. Run the commands below on all the private agents where Portworx was running.
+from agent nodes. Run the commands below on all the private agents where Portworx was running.
 
 ### Stop the Portworx service
 ```text
@@ -90,7 +90,7 @@ sudo rm -rf /opt/pwx
 sudo rmmod -f px
 ```
 
-### Cleanup slaves with script
+### Cleanup agents with script
 Alternatively, if you have the DC/OS CLI installed, then you can execute the above steps on all the nodes by running the following script:
 
 ```text
