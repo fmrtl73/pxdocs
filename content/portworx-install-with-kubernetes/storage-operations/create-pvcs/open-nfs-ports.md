@@ -319,3 +319,71 @@ By default, the `nfs-server.service` configuration file is located under the fol
     100024    1   udp   9025  status
     100024    1   tcp   9025  status
     ```
+
+### Open NFS ports on PhotonOS
+
+1. Modify the `/etc/default/nfs-utils` file, and add parameters to assign ports to services:
+
+    ```text
+    MOUNTD_OPTS="--port 9024"
+    NFSD_OPTS="--port 9023"
+    STATD_OPTS="--port 9025 --outgoing-port 9026"
+    ```
+
+2. Add `/etc/modprobe.d/lockd.conf` file to assign ports to `nlockmgr` service, also reconfigure runtime ports:
+
+    ```text
+    cat > /etc/modprobe.d/lockd.conf << .
+    options lockd nlm_tcpport=9027
+    options lockd nlm_udpport=9028
+    .
+
+    sysctl -w fs.nfs.nlm_tcpport=9027 fs.nfs.nlm_udpport=9028
+    ```
+
+3. Restart NFS services:
+
+    ```text
+    systemctl daemon-reload
+    systemctl restart nfs-server nfs-mountd rpc-statd
+    ```
+
+4. Open up the ports 9001 to 9020 in `iptables` firewall, restart service:
+
+    ```text
+    # add Portworx ports 9001..9028 before "COMMIT"
+    sed -i~ '/^COMMIT/i -A INPUT -p tcp -m multiport --dports 111,9001:9028 -j ACCEPT' \
+      /etc/systemd/scripts/ip4save
+    systemctl restart iptables
+    ```
+
+5. Verify that the NFS services are running on the ports you just configured:
+
+    ```text
+    rpcinfo -p
+    ```
+    ```output
+    program vers proto   port  service
+     100000    4   tcp    111  portmapper
+     100000    3   tcp    111  portmapper
+     100000    2   tcp    111  portmapper
+     100000    4   udp    111  portmapper
+     100000    3   udp    111  portmapper
+     100000    2   udp    111  portmapper
+     100005    1   udp   9024  mountd
+     100005    1   tcp   9024  mountd
+     100005    2   udp   9024  mountd
+     100005    2   tcp   9024  mountd
+     100005    3   udp   9024  mountd
+     100005    3   tcp   9024  mountd
+     100024    1   udp   9025  status
+     100024    1   tcp   9025  status
+     100003    3   tcp   9023  nfs
+     100003    4   tcp   9023  nfs
+     100021    1   udp   9027  nlockmgr
+     100021    3   udp   9027  nlockmgr
+     100021    4   udp   9027  nlockmgr
+     100021    1   tcp   9028  nlockmgr
+     100021    3   tcp   9028  nlockmgr
+     100021    4   tcp   9028  nlockmgr
+    ```
