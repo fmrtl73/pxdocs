@@ -154,7 +154,3 @@ spec:
 
 * [Pure.json file reference](/reference/pure-reference/pure-json-reference/)
 * [Disk provisioning on Pure Storage FlashArray](/cloud-references/auto-disk-provisioning/pure-flash-array/)
-
-## Known issues
-
-The `pxctl volume inspect` command won't show the "Bytes used" information of a FlashBlade volume. 
