@@ -60,7 +60,7 @@ Before you install Portworx, ensure that your physical network is configured app
 
 ### Prerequisites
 
-* FlashBlade must be running Purity//FB version 2.2.0 or greater.
+* FlashBlade must be running Purity//FB version 2.2.0 or greater. Refer to the [Supported models and versions](/reference/pure-reference/supported-versions/) topic for more information. 
 * Your cluster must have local drives on each node. Portworx needs local drives on the node (block devices) for the journal and for at least one storage pool. 
 * The latest NFS software package installed on your operating system (nfs-utils or nfs-common)
 * FlashBade can be accessed as a shared resource from all the cluster nodes. Specifically, both `NFSEndPoint` and `MgmtEndPoint` IP addresses must be accessible from all nodes. 
@@ -85,7 +85,7 @@ Once you've ensured you meet the prerequisites and your physical network topolog
     ```
 
     {{<info>}}
-**NOTE:** You can add FlashArray configuration information to this file if you're configuring both FlashBlade and FlashArray together. Refer to the [JSON file](/reference/pure-json-reference/) reference for more information.
+**NOTE:** You can add FlashArray configuration information to this file if you're configuring both FlashBlade and FlashArray together. Refer to the [JSON file](/reference/pure-reference/pure-json-reference/) reference for more information.
     {{</info>}}
 
 2. Enter the following `kubectl create` command to create a Kubernetes secret called `px-pure-secret`:
@@ -152,7 +152,7 @@ spec:
 
 ## Related topics
 
-* [Pure.json file reference](/reference/pure-json-reference/)
+* [Pure.json file reference](/reference/pure-reference/pure-json-reference/)
 * [Disk provisioning on Pure Storage FlashArray](/cloud-references/auto-disk-provisioning/pure-flash-array/)
 
 ## Known issues

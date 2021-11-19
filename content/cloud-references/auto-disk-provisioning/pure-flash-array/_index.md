@@ -49,7 +49,7 @@ Before you can use Portworx with FlashArray, you must ensure your physical netwo
 ### Prerequisites
 
 * An on-prem kubernetes cluster with FlashArray
-* FlashArray must be running a minimum Purity//FA version of at least 4.8
+* FlashArray must be running a minimum Purity//FA version of at least 4.8. Refer to the [Supported models and versions](/reference/pure-reference/supported-versions/) topic for more information. 
 * Latest linux multipath software package installed for your operating system. Refer to the [Linux recommended settings](https://support.purestorage.com/Solutions/Linux/Linux_Reference/Linux_Recommended_Settings) article of the Pure Storage documentation for recommendations.
 * If using iSCSI, the latest iSCSI initiator software for your operating system
 * If using Fibre Channel, the latest Fibre Channel initiator software for your operating system
@@ -75,7 +75,7 @@ Once you've configured your physical network and ensured that you meet the prere
     {{<info>}}
   **NOTE:** 
 
-  * You can add FlashBlade configuration information to this file if you're configuring both FlashArray and FlashBlade together. Refer to the [JSON file](/reference/pure-json-reference/) reference for more information.
+  * You can add FlashBlade configuration information to this file if you're configuring both FlashArray and FlashBlade together. Refer to the [JSON file](/reference/pure-reference/pure-json-reference/) reference for more information.
   * Do not add the FlashArray information into the Pure secret json file if using vSphere as a cloud provider.
     {{</info>}}
 
@@ -108,7 +108,7 @@ Once deployed, Portworx detects that the FlashArray secret is present when it st
 
 ## Related topics
 
-* [Pure.json file reference](/reference/pure-json-reference/)
+* [Pure.json file reference](/reference/pure-reference/pure-json-reference/)
 * [Configure FlashBlade as a Direct Access filesystem](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flashblade/)
 
 ## Known issues

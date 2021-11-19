@@ -4,7 +4,6 @@ linkTitle: FlashBlade and FlashArray JSON
 description: 
 keywords: FlashArray, FlashBlade
 weight: 4
-noicon: true
 ---
 
 Portworx uses a single secret for both FlashArray and FlashBlade configuration. If you're planning on using both together, specify all of your FlashBlade and FlashArray entries in a single JSON file.  
