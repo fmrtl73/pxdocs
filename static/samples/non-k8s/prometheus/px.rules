@@ -101,11 +101,6 @@ Alert PortworxMemberDown
 
 # Tuneable license-expiry alert, reported by each node individually, works for both regular and floating licenses.
 # - note: if #days drops into negative, the license has already expired
-# - ALERT-based alternatives:
-#   IF px_alerts_licenseexpired_total > 0 (LicenseExpired) Raised when regular license has expired
-#   IF px_alerts_licenseexpiring_total > 0 (LicenseExpiring) Raised when regular license is about to expire
-#   IF px_alerts_licenseleaseexpired_total > 0 (LicenseLeaseExpired) Raised when floating license has expired on a node
-#   IF px_alerts_licenseleaseexpiring_total > 0 (LicenseLeaseExpiring) Raised when floating license is about to expire on a node
 Alert PortworxLicenseExpiry
   IF px_node_status_license_expiry < 5
   LABELS {
