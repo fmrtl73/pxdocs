@@ -82,7 +82,7 @@ Once you've configured your physical network and ensured that you meet the prere
 1. Enter the following `kubectl create` command to create a Kubernetes secret called `px-pure-secret`:
 
     ```text
-    kubectl create secret generic px-pure-secret --namespace kube-system --from-file=pure.json
+    kubectl create secret generic px-pure-secret --namespace kube-system --from-file=pure.json=<file path>
     ```
     ```output
     secret/px-pure-secret created
