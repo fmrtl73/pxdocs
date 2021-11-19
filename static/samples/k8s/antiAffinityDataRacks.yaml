@@ -4,10 +4,10 @@ metadata:
   name: anti-ssd-pool-placement
 spec:
   replicaAntiAffinity:
-  topologyKey: failure-domain.beta.kubernetes.io/rack
+    -  topologyKey: failure-domain.beta.kubernetes.io/rack
   replicaAffinity:
-    -  matchExpressions:
+    - matchExpressions:
       - key: mediatype
         operator: NotIn
         values:
-        - "SATA" 
+        - "SATA"
