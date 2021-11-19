@@ -183,6 +183,14 @@ Once the pairing is configured, applications can be migrated repeatedly to the d
 
 When the clusterpair gets created, Portworx automatically creates a 100G volume named *ObjectstoreVolume*. If you attempt to migrate a volume significantly larger than 100G, you will find out that the ObjectStore volume doesn't provide sufficient disk space and the migration will fail.
 
+{{<info>}}
+**NOTE:** Pure Storage does not recommend using the Portworx internal objectstore for facilitating Async DR or Migrations in production. Instead, use an external objectstore which is setup outside the Kubernetes clusters, such as: 
+* Minio s3 
+* AWS s3
+* GCE Object Storage
+* Azure Blob Storage
+{{</info>}}
+
 As an example, say you want to migrate a 1 TB volume. If so, you would need to update the size of the *ObjectstoreVolume* by running:
 
 

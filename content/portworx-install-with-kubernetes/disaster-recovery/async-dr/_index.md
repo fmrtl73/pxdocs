@@ -17,6 +17,7 @@ weight: 2
 * **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
 * If the destination cluster runs on **GKE**, follow the steps in the [Migration with Stork on GKE](/portworx-install-with-kubernetes/migration/gke/) page.
 * If the destination cluster runs on **EKS**, follow the steps in the [Migration with Stork on EKS](/portworx-install-with-kubernetes/migration/eks/) page.
+* An external objectstore, such as Minio s3, AWS s3, GCE Object Storage, or Azure Blob Storage, must be setup outside the Kubernetes clusters. If an external objectstore is not provided, Portworx will create an internal objectstore with a 100G backing volume. **Pure Storage does not recommend using the internal objectstore in production.**
 
 ## Overview
 
