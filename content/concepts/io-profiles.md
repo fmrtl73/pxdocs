@@ -20,7 +20,7 @@ Portworx currently features the following IO profiles:
 
 
 ### The auto profile
-If you don't provide an IO profile, Portworx will default to `auto`. This profile attempts to automatically apply an IO profile that is most appropriate for the data patterns it sees. It does this by continuously analyzing the IO pattern of traffic in the background. 
+If you don't provide an IO profile, Portworx will default to `auto`. This profile automatically applies an IO profile that based on congifuration details it sees, and switches between `none` and `db_remote`. Portworx chooses `db_remote` when a volume's replication factor is greater than or equal to 2, otherwise it defaults to `none`.
 
 ### The db profile
 Databases typically result in a large number of flush operations on the disk. Because a flush forces Portworx to wait until the data is synched on the disk, it can slow down traffic. When the `db` profile is active, Portworx batches flush operations for a quicker write response time. 
