@@ -7,6 +7,18 @@ weight: 350
 series: release-notes
 ---
 
+## 1.3.1
+
+November 22, 2021
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Number**|**Improvement Description**|
+|----|----|
+| PD-1035 | Autopilot 1.3.1 now supports Kubernetes 1.22 and higher |
+
 ## 1.3.0
 
 Sep 02, 2020
