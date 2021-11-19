@@ -65,6 +65,7 @@ Before you install Portworx, ensure that your physical network is configured app
 * The latest NFS software package installed on your operating system (nfs-utils or nfs-common)
 * FlashBade can be accessed as a shared resource from all the cluster nodes. Specifically, both `NFSEndPoint` and `MgmtEndPoint` IP addresses must be accessible from all nodes. 
 * You've set up the secret, management endpoint, and API token on your FlashBlade.
+* If you want to use Stork as the main scheduler, you must use Stork version 2.7.0 or greater.
 
 ### Deploy Portworx
 
