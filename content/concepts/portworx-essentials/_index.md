@@ -87,6 +87,32 @@ The following tables list what features {{< pxEssentials >}} supports and any li
 | Scheduler integration: Kubernetes, Openshift | Supported |
 | Integration with Managed K8S services: EKS, AKS, GKE, PKS, IKS, RKE | Supported |
 
+## The FlashBlade and FlashArray {{< pxEssentials >}} license
+
+If you're using Portworx with FlashBlade or FlashArray, you have access to an enhanced version of the {{< pxEssentials >}} license. Portworx enables this license when it detects the presence of the `pure.json` secret and at least one valid set of credentials.
+
+| **Feature** | **Support** |
+|----|----|
+| Maximum number of nodes | No limit |
+| Number of volumes per cluster maximum | 200 (does not include direct access volumes) |
+| Volume capacity [TB] maximum | 40 |
+| Node disk capacity extension | yes |
+| Number of snapshots per volume maximum | 5 |
+| Number of attached volumes per node maximum | 128	|
+| Storage aggregation | no (feature upgrade needed)	|
+| Shared volumes | yes |
+| Volume sets | yes	|
+| Limit BYOK encryption to cluster-wide secrets	| yes |
+| Resize volumes on demand | yes |
+| Snapshot to object store [CloudSnap] | yes |
+| Number of CloudSnaps daily per volume maximum | 1	|
+| Cluster-level migration [Kube-motion/Data Migration] | no	(feature upgrade needed) |
+| Disaster Recovery [PX-DR] | no (feature upgrade needed) |
+| Autopilot Capacity Management	| no (feature upgrade needed) |
+| OIDC Security	| no (feature upgrade needed) |
+| Bare-metal hosts | yes |
+| Virtual machine hosts | yes |
+
 ## Related Topics
 
 Get started with {{< pxEssentials >}} now:
