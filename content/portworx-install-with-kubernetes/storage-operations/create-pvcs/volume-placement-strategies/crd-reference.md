@@ -21,6 +21,7 @@ Portworx provides a [CustomResouceDefinition (CRD)](https://kubernetes.io/docs/c
 
 Additional Information:
 
+- [topologyKey](#topologykey)
 - [Templates](#templates)
 
 
@@ -103,6 +104,12 @@ By default, Portworx automatically adds the following labels to each of its stor
 ##### Example use cases
 
 * {{< open-in-new-tab url="/samples/k8s/volume-placement-cassandra-volume-anti-affinity.yaml" name="Do not collocate with other cassandra volumes" >}}
+
+### topologyKey
+If `topologyKey` is not set, by default the rule will avoid/colocate volumes at the node level using built-in unique node identifiers.
+
+##### Portworx Built-in
+`topologyKey` can use the built-in key `portworx.io/pool` that is set automatically as a unique key/value on every Portworx pool. This can be used with volumeAffinity/volumeAntiAffinity to control volume placement at the pool level.
 
 
 ### Templates
