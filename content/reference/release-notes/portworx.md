@@ -28,6 +28,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 | PWX-21373 | The following template can now be used in a `VolumePlacementStrategy` for the `volumeAntiAffinity` or `volumeAffinity` to automatically constrain the `MatchExpressions` to the PVC namespace.<br``- key: "namespace"``<br>&nbsp;``values:``<br>&nbsp;``- "${pvc.namespace}"``<br>You can now separate interaction between different namespaces when using volume (anti-)affinity in VPS. |
 | PWX-21506 | One of the folders used by legacy shared (fuse) volumes will not created unless shared volumes are created and mounted. This change prevents the internal mount path, specifically (`/opt/pwx/oci/rootfs/pxmounts`), from being created when there are no shared volumes being used. |
 | PWX-21994 | Added support for the `cgroup V2 -configured` hosts. |
+| PWX-21662 | Portworx now supports OpenShift version 4.9. | 
 | PWX-21341 | Added the `sharedv4_failover_strategy` storageClass parameter whose value can be either `aggressive` or `normal`. The `aggressive` strategy uses a shorter failover grace period than the one used by the `normal` strategy. If `sharedv4_failover_strategy` is unspecified, then the default for sharedv4 service volumes is `aggressive` and that for sharedv4 volumes is `normal`. The value for this parameter can be changed using the `pxctl volume update` command as well. An empty value clears the setting. |
 | PWX-21684 | Telemetry is now disabled by default opn the spec generator. Enable telemetry under advanced settings. |
 
