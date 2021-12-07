@@ -31,6 +31,7 @@ Portworx has upgraded or enhanced functionality in the following areas:
 | PWX-21662 | Portworx now supports OpenShift version 4.9. | 
 | PWX-21341 | Added the `sharedv4_failover_strategy` storageClass parameter whose value can be either `aggressive` or `normal`. The `aggressive` strategy uses a shorter failover grace period than the one used by the `normal` strategy. If `sharedv4_failover_strategy` is unspecified, then the default for sharedv4 service volumes is `aggressive` and that for sharedv4 volumes is `normal`. The value for this parameter can be changed using the `pxctl volume update` command as well. An empty value clears the setting. |
 | PWX-21684 | Telemetry is now disabled by default opn the spec generator. Enable telemetry under advanced settings. |
+| PWX-21895 | KDVB Metrics are now disabled by default, lowering the amount of metrics generated. You can reenable them by adding `kvdb_metrics_enable=1` as a runtime option.
 
 ### Fixes
 
