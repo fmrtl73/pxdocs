@@ -60,7 +60,7 @@ In this section, you will use Docker containers running directly on EC2 instance
 
 5. Create three Cassandra containers that are using the new Portworx volumes. <!-- We should provide the commands -->
     {{<info>}}
-**NOTE:** Portworx uses port 7000, which is Cassandra's default data and storage port. To avoid a conflict, you must edit your `cassandra.yaml` file manually, or download this [`cassandra_conf.tar` file](https://s3.amazonaws.com/rlui-dcos-hadoop/cassandra_conf.tar) and extract it in the `/etc` folder. This step is not required if you are running on Kubernetes or Mesosphere.
+**NOTE:** Portworx uses port 7000, which is Cassandra's default data and storage port. To avoid a conflict, you must edit your `cassandra.yaml` file manually. This step is not required if you are running on Kubernetes or Mesosphere.
   {{</info>}}
 
 6. On each node, set the following environment variables that are pointing to the IP addresses of your nodes:
