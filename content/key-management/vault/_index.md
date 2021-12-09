@@ -9,7 +9,7 @@ series: key-management
 noicon: true
 ---
 
-Portworx can integrate with Vault to store your encryption keys, secrets, and credentials. This topic explains how to get a Portworx cluster connected to a Vault endpoint, and use it to store secrets that you can use for encrypting volumes.
+Portworx can integrate with Vault to store your encryption keys/secrets, credentials or passwords. This guide will get a Portworx cluster connected to a Vault endpoint. The Vault endpoint could be used to store secrets that will be used for encrypting volumes.
 
 ## Setting up Vault
 
@@ -46,7 +46,7 @@ Portworx requires the following Vault credentials to use its APIs:
 
 * **Vault Client Certificate [VAULT_CLIENT_CERT]**
 
-    Path to a PEM-encoded client certificate that needs to be present on all Portworx nodes. This file is used  for TLS communication with the Vault server.
+    Path to a PEM-encoded client certificate that needs to be present on all Portworx nodes. This file is used for TLS communication with the Vault server.
 
 * **Vault Client Key [VAULT_CLIENT_KEY]**
 
@@ -74,7 +74,7 @@ Portworx requires the following Vault credentials to use its APIs:
 
   Authentication methods are responsible for authenticating Portworx with Vault. Based on your Vault configuration and the authentication method you choose, you must use one of the following two methods:
 
-  * **Using token authetication:** A static Vault token is provided to Portworx.
+  * **Using Token authetication:** A static Vault token is provided to Portworx.
   * **Using Kubernetes authentication:** Portworx uses Kubernetes service account to fetch and refresh Vault tokens.
 
 #### Using token authentication method
@@ -340,7 +340,7 @@ The following sections describe the key generation process with Portworx and Vau
 
 ### Setting cluster wide secret key
 
-A cluster-wide secret key is a common key that you can to encrypt all your volumes. Run the following command to set the cluster secret key:
+A cluster-wide secret key is a common key that you can use to encrypt all your volumes. Run the following command to set the cluster secret key:
 
 ```text
 pxctl secrets set-cluster-key --secret <cluster-wide-secret-key>

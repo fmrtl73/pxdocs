@@ -51,7 +51,7 @@ On failover, Applications may receive an error for non idempotent requests. For 
            repl: "2"
            sharedv4: "true"
            sharedv4_svc_type: "ClusterIP"
-           sharedv4_mount_options: "vers=4.1"
+           sharedv4_mount_options: "vers=4.0"
         ```
 
 2. Apply the storageClass:
