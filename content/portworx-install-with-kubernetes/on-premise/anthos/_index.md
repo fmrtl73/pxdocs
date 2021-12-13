@@ -16,6 +16,7 @@ Portworx has been certified with the following Anthos versions:
 * 1.5
 * 1.6, including Anthos on bare metal
 * 1.7, including Anthos on bare metal
+* 1.8, including Anthos on bare metal
 
 
 ## Architecture
