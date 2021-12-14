@@ -15,11 +15,35 @@ There are two ways in which Portworx volumes can be encrypted and are dependent 
 
 ### Encryption using Storage Class
 
-In this method, Portworx will use the cluster wide secret key to encrypt PVCs.
+In this method, Portworx uses the cluster wide secret key to encrypt PVCs.
 
-#### Step 1: Set a cluster wide secret
+  ![Concept](/img/vault-px-concept.png)
+
+- By default, Portworx looks for the secret in path `secret/<secret-name>` and gets the first value under the path. Users can modify the path with BACKEND_PATH or BASE_PATH, depending on the vault's version.
+- The **cluster wide secret** is the global secret-name for the cluster.
+- secret-name can be modified with annotations. See the next section for an example.
+
+From the diagram:
+
+- The top-most secret can be accessed with default BACKEND_PATH `secret/` and secret-name `px-vault`.
+- The middle secret can be accessed with default BACKEND_PATH `secret/` and secret-name `custom/name`.
+- The bottom secret can be accessed with BACKEND_PATH `aws-secret/` and secret-name `aws-vault`.
+
+
+#### Step 1: Store the secret in Vault
+
+
+```text
+vault kv put secret/px-vault foo=bar 
+```
+
+#### Step 2: Set a cluster wide secret
 
 {{< content "shared/key-management-set-cluster-wide-secret.md" >}}
+
+{{<info>}}
+**NOTE:** To use the secret we just created, enter `px-vault` for the the cluster wide sceret.
+{{</info>}}
 
 If you are using Vault Namespaces use the following command to set the cluster-wide secret key in a specific vault namespace:
 
@@ -42,7 +66,7 @@ In this method, each PVC can be encrypted with its own secret key.
 {{< content "shared/key-management-other-providers-pvc-encryption.md" >}}
 
 {{<info>}}
-**IMPORTANT:** Make sure secret `your-secret-key` exists in Vault.
+**IMPORTANT:** Make sure secret `your-secret-name` exists in Vault.
 {{</info>}}
 
 ### Encryption using PVC annotations with Vault Namespaces
@@ -61,10 +85,10 @@ apiVersion: v1
 metadata:
   name: secure-mysql-pvc
   annotations:
-    px/secret-name: <your-secret-key>
+    px/secret-name: <your-secret-name>
     px/vault-namespace: <your-vault-namesapce>
 spec:
-  storageClassName: portworx-sc
+  storageClassName: px-secure-sc
   accessModes:
   - ReadWriteOnce
   resources:

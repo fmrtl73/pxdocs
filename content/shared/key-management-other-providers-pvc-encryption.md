@@ -11,9 +11,9 @@ apiVersion: v1
 metadata:
   name: secure-mysql-pvc
   annotations:
-    px/secret-name: your-secret-key
+    px/secret-name: your-secret-name
 spec:
-  storageClassName: portworx-sc
+  storageClassName: px-secure-sc
   accessModes:
   - ReadWriteOnce
   resources:
