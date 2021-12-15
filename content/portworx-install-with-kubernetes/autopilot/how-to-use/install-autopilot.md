@@ -60,6 +60,22 @@ This ConfigMap serves as a configuration for Autopilot.
 To install Autopilot, fetch the Autopilot manifest from the Portworx spec generator by clicking [here](https://install.portworx.com/?comp=autopilot)
 and apply it in your cluster.
 
+
+#### Autopilot with PX-Security 
+
+If you're installing Autopilot with PX-Security using the Operator, you must modify the StorageCluster yaml. Add the following PX_SHARED_SECRET env var to the `autopilot` section: 
+
+```text
+  autopilot:
+...
+    env:
+    - name: PX_SHARED_SECRET
+      valueFrom:
+        secretKeyRef:
+          key: apps-secret
+          name: px-system-secrets
+```
+
 ## Upgrading Autopilot
 
 To upgrade Autopilot, change the image tag in the deployment with the `kubectl set image` command. The following example upgrades Autopilot to the 1.3.0 version:

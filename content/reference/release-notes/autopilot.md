@@ -7,6 +7,16 @@ weight: 350
 series: release-notes
 ---
 
+## 1.3.2
+
+December 14, 2021
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+|**Improvement Number**|**Improvement Description**|
+|----|----|
+| PD-1047 | Autopilot 1.3.2 now supports installations that use PX-Security. Follow the instructions in [Autopilot Install and Setup](/portworx-install-with-kubernetes/autopilot/how-to-use/install-autopilot/#autopilot-with-px-security) to use Autopilot with PX-Security. |
+
 ## 1.3.1
 
 November 22, 2021
