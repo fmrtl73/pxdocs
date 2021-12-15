@@ -348,7 +348,7 @@ By default, the `nfs-server.service` configuration file is located under the fol
     systemctl restart nfs-server nfs-mountd rpc-statd
     ```
 
-4. Open up the ports 9001 to 9020 in `iptables` firewall, restart service:
+4. Open up the ports 9001 to 9028 in `iptables` firewall, restart service:
 
     ```text
     # add Portworx ports 9001..9028 before "COMMIT"
