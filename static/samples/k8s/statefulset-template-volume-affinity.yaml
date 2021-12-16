@@ -1,0 +1,11 @@
+apiVersion: portworx.io/v1beta2
+kind: VolumePlacementStrategy
+metadata:
+  name: statefulset-template-volume-affinity
+spec:
+  volumeAffinity:
+    - matchExpressions:
+      - key: "px/statefulset-pod"
+        operator: In
+        values:
+        - "${pvc.statefulset-pod}"

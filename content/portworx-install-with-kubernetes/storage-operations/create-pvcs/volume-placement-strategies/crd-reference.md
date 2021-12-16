@@ -120,3 +120,10 @@ Parameter values in `matchExpressions` may use predefined templates. The `Volume
     * `${pvc.namespace}`
         * Replaced with namespace of the `PersistentVolumeClaim` that triggered provisioning
         * Example: {{< open-in-new-tab url="/samples/k8s/volume-anti-affinity-namespace-template.yaml" name="Do not collocate with other app volumes within the same namespace" >}}
+* key: `px/statefulset-pod`
+    * `${pvc.statefulset-pod}`
+        * Replaced with the `StatefulSet` pod name the `PersistentVolumeClaim` belongs to
+        * Matches corresponding label key/value applied to the volume
+        * Use this with multiple `volumeClaimTemplates` in a `StatefulSet` to relate volumes for the same replica pod to each other
+        * Works with `Immediate` binding mode
+        * Example: {{< open-in-new-tab url="/samples/k8s/statefulset-template-volume-affinity.yaml" name="Collocate volumes that belong to the same StatefulSet pod" >}}
