@@ -37,10 +37,10 @@ noicon: true
 | px_cluster_status_quorum | Indicates if the cluster is in quorum |
 | px_cluster_status_nodes_online | Number of online nodes in the cluster (includes storage and storageless) |
 | px_cluster_status_nodes_offline | Number of offline nodes in the cluster (includes storage and storageless) |
-| px_cluster_status_nodes_storage_down | Number of storage nodes where the storage that is full or down |
-| px_cluster_status_storage_nodes_online | Number of nodes with storage that are marked online |
-| px_cluster_status_storage_nodes_offline | Number of nodes with storage that are marked offline |
-| px_cluster_status_storage_nodes_decommissioned | Number of nodes with storage that are marked as decommissioned |
+| px_cluster_status_nodes_storage_down | Number of nodes where the storage is full or down |
+| px_cluster_status_storage_nodes_online | Number of storage nodes that are online |
+| px_cluster_status_storage_nodes_offline | Number of storage nodes that are offline |
+| px_cluster_status_storage_nodes_decommissioned | Number of storage nodes that are decommissioned |
 
 ## disk_stats stats
 | Name | Description |
@@ -167,6 +167,7 @@ noicon: true
 | px_pool_stats_num_writes | Number of write operations in the last interval for this pool |
 | px_pool_stats_write_ms | Total time in millisecond spent in writing in the last interval for this pool |
 | px_pool_stats_write_latency_seconds | Average time spent per write operation for this pool |
+| px_pool_stats_write_iops | Average number of completed write operations per second for this pool |
 | px_pool_stats_writethroughput | Average number of bytes written per second for this pool |
 | px_pool_stats_flushed_bytes | Number of flushed bytes since last interval for this pool |
 | px_pool_stats_num_flushes | Number of flush(sync) operations since last interval for this pool |
@@ -245,6 +246,8 @@ noicon: true
 | px_volume_reads_total | Total number of successfully completed read operations for this volume |
 | px_volume_writes_total | Total number of successfully completed write operations for this volume |
 | px_volume_iops | Number of successful completed I/O operations per second during this interval for this volume |
+| px_volume_write_iops | Average number of completed write operations per second for this volume |
+| px_volume_read_iops | Average number of completed read operations per second for this volume |
 | px_volume_vol_num_sequential_writes | Number of sequential write I/O operations during this interval for this volume |
 | px_volume_vol_num_sequential_reads | Number of sequential read I/O operations during this interval for this volume |
 | px_volume_vol_num_random_writes | Number of random write I/O operations during this interval for this volume |
@@ -259,6 +262,7 @@ noicon: true
 | px_volume_num_long_reads | Number of long reads for this volume |
 | px_volume_num_long_writes | Number of long writes for this volume |
 | px_volume_num_long_flushes | Number of long flushes for this volume |
+| px_volume_num_db_flushes | Number of DB flushes for this volume |
 | px_volume_replica_read_bytes_total | Total number of successfully read bytes for this replica volume |
 | px_volume_replica_written_bytes_total | Total number of successfully written bytes for this replica volume |
 | px_volume_replica_reads_total | Total number of successfully completed read operations for this replica volume |
