@@ -11,6 +11,7 @@ noicon: true
 
 Portworx can integrate with Vault to store your encryption keys, secrets, and credentials. This topic explains how to connect a Portworx cluster to a Vault development server endpoint and use it to store secrets that you can use for encrypting volumes.
 
+
 <!-- Since we only provide instructions for setting up a Vault development environment, we should mention that somewhere. -->
 
 ## Set up Vault

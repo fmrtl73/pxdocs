@@ -17,7 +17,31 @@ For reference:
 * **Source Cluster** is the Kubernetes cluster where your applications are running.
 * **Destination Cluster** is the Kubernetes cluster where the applications will be failed over, in case of a disaster in the source cluster.
 
-{{< content "shared/portworx-install-with-kubernetes-disaster-recovery-cluster-pair.md" >}}
+## Generate and Apply a ClusterPair Spec
+
+In Kubernetes, you must define a trust object called **ClusterPair**. Portworx requires this object to communicate with the destination cluster. The ClusterPair object pairs the Portworx storage driver with the Kubernetes scheduler, allowing the volumes and resources to be migrated between clusters.
+
+The ClusterPair is generated and used in the following way:
+
+   * The **ClusterPair** spec is generated on the **destination** cluster.
+   * The generated spec is then applied on the **source** cluster
+
+Perform the following steps to create a cluster pair:
+
+{{<info>}}
+**NOTE:** You must run the `pxctl` commands in this document either on your Portworx nodes directly, or from inside the Portworx containers on your master Kubernetes node. 
+{{</info>}}
+
+### Generate a ClusterPair on the destination cluster
+
+To generate the **ClusterPair** spec, run the following command on the **destination** cluster:
+
+```text
+storkctl generate clusterpair -n migrationnamespace remotecluster
+```
+Here, the name (remotecluster) is the Kubernetes object that will be created on the **source** cluster representing the pair relationship.
+
+During the actual migration, you will reference this name to identify the destination of your migration.
 
 ```text
 apiVersion: stork.libopenstorage.org/v1alpha1
@@ -53,17 +77,7 @@ status:
   storageStatus: ""
 ```
 
-Make the following changes in the `options` section of your `ClusterPair`:
-
-* This example uses a single storage fabric. Thus, you must delete the `<insert_storage_options_here>: ""` line.
-* By default, every seventh migration is a full migration. To make every migration incremental, specify `mode: DisasterRecovery` as follows:
-
-      ```
-      options:
-         mode: DisasterRecovery
-      ```
-
-Once you've made the changes, save the resulting spec to a file named `clusterpair.yaml`.
+Save the resulting spec to a file named `clusterpair.yaml`.
 
 {{<info>}}
 **NOTE:**
