@@ -111,7 +111,7 @@ plugin "docker" {
             CSI_ENDPOINT                       = "unix://var/lib/osd/csi/csi.sock"
           }
 
-          # CSI Driver conifg
+          # CSI Driver config
           csi_plugin {
             id        = "portworx"
             type      = "monolith"

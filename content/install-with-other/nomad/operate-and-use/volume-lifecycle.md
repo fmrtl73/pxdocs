@@ -25,11 +25,6 @@ The following steps will allow you to dynamically provision a Portworx CSI volum
     capacity_max = "1G"
 
     capability {
-      access_mode     = "single-node-reader-only"
-      attachment_mode = "file-system"
-    }
-
-    capability {
       access_mode     = "single-node-writer"
       attachment_mode = "file-system"
     }
@@ -90,11 +85,6 @@ To register a pre-provisioned volume, you must first create a volume on one of t
     external_id  = "1055712112955862813"
 
     capability {
-      access_mode     = "single-node-reader-only"
-      attachment_mode = "file-system"
-    }
-
-    capability {
       access_mode     = "single-node-writer"
       attachment_mode = "file-system"
     }
@@ -122,7 +112,7 @@ Perform the following steps to dynamically provision a shared Portworx CSI volum
     capacity_max = "1G"
 
     capability {
-      access_mode     = "multi-node-multi-write"
+      access_mode     = "multi-node-multi-writer"
       attachment_mode = "file-system"
     }
     ```
