@@ -32,8 +32,13 @@ manifest file for each of them using the Portworx spec generator in [PX-Central]
 While generating the spec file for each Kubernetes cluster, make sure you provide the same values for the following
 arguments:
 
+##### Operator Install
+* **Cluster ID** (StorageCluster: metadata.name)
+* **Kvdb Endpoints** (StorageCluster: spec.kvdb.endpoints)
+
+##### DaemonSet Install
 * **Cluster ID** (Portworx install argument: `-c`)
-* **Kvdb Endpoints**  (Portworx install argument: `-k`)
+* **Kvdb Endpoints** (Portworx install argument: `-k`)
 
 Specifying the same **ClusterID** and **Kvdb Endpoints** in each Kubernetes manifest file ensures that a single Portworx
 cluster will stretch across multiple Kubernetes clusters.
@@ -45,33 +50,38 @@ same Portworx cluster.
 
 To achieve this, make sure you provide the following arguments same as your existing cluster:
 
+##### Operator Install
+* **Cluster ID** (StorageCluster: metadata.name)
+* **Kvdb Endpoints** (StorageCluster: spec.kvdb.endpoints)
+
+##### DaemonSet Install
 * **Cluster ID** (Portworx install argument: `-c`)
-* **Kvdb Endpoints**  (Portworx install argument: `-k`)
+* **Kvdb Endpoints** (Portworx install argument: `-k`)
 
 Specifying the same **ClusterID** and **Kvdb Endpoints** as your existing cluster ensures that a single Portworx cluster
 will stretch across multiple Kubernetes clusters.
 
 If your Kubernetes clusters have exactly the same configuration, you can use the URL specified by
-the `portworx.com/install-source` annotation on the existing Portworx DaemonSet to fetch the spec for your new cluster:
+the `install-source` annotation on the existing Portworx installation to fetch the spec for your new cluster:
 
+##### Operator Install
+Use the `portworx.io/install-source` annotation:
+```text
+apiVersion: core.libopenstorage.org/v1
+kind: StorageCluster
+metadata:
+  annotations:
+    portworx.io/install-source: "https://install.portworx.com/{{% currentVersion %}}?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
+```
+
+##### DaemonSet Install
+Use the `portworx.com/install-source` annotation:
 ```text
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: portworx
-  namespace: kube-system
-  labels:
-    k8s-app: fluentd-logging
   annotations:
     portworx.com/install-source: "https://install.portworx.com/{{% currentVersion %}}?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
-spec:
-  selector:
-    matchLabels:
-      name: portworx
-  template:
-    metadata:
-      labels:
-        name: portworx
 ```
 
 Otherwise you can always generate a new spec using the Portworx spec generator
@@ -89,9 +99,20 @@ domain. In this case, your Kubernetes clusters are separated across a metropolit
 DR across them. So each Kubernetes cluster and its nodes are one cluster domain. This cluster domain information needs
 to be explicitly specified to Portworx through the `-cluster_domain` install argument.
 
-Once you have generated the Kubernetes manifest file, add the `cluster_domain` argument in the args section of the
-daemonset. You can also edit a running Portworx DaemonSet and add this new field.
+Once you have generated the Kubernetes manifest file, add the `cluster_domain` argument. You can also edit a running Portworx install and add this new field.
 
+##### Operator Install
+Use the `portworx.io/misc-args` annotation to add a `-cluster_domain` argument:
+```text
+apiVersion: core.libopenstorage.org/v1
+kind: StorageCluster
+metadata:
+  annotations:
+    portworx.io/misc-args: "-cluster_domain us-east-1a"
+```
+
+##### DaemonSet Install
+Add the `-cluster_domain` argument in the `args` section of the DaemonSet:
 ```text
       containers:
         - name: portworx
@@ -102,7 +123,7 @@ daemonset. You can also edit a running Portworx DaemonSet and add this new field
              "-x", "kubernetes"]
 
 ```
-
+<br/><br/>
 The value for `cluster_domain` needs to be different for each Kubernetes cluster.
 
 * You can name your cluster domains with arbitrary names like **datacenter1** and **datacenter2** identifying in which
