@@ -17,7 +17,7 @@ This document describes how to use Portworx **sharedv4** (ReadWriteMany) volumes
 
 Sharedv4 volumes are useful when you want multiple PODs to access the same PVC \(volume\) at the same time. They can use the same volume even if they are running on different hosts. They provide a global namespace and the semantics are POSIX compliant.
 
-To increase fault tolerance, you can enable sharedv4 service volumes. With this feature enabled, every sharedv4 volume has a Kubernetes service associated with it. Sharedv4 service volumes expose the volume via a Kubernetes service IP. If the sharedv4 (NFS) server goes offline and requires a failover, application pods won't need to restart. 
+To increase fault tolerance, you can enable **Sharedv4 service** volumes. With this feature enabled, every sharedv4 volume has a Kubernetes service associated with it. Sharedv4 service volumes expose the volume via a Kubernetes service IP. If the sharedv4 (NFS) server goes offline and requires a failover, application pods won't need to restart. 
 
 {{<info>}}
 **Notes about Sharedv4 service volumes:**
@@ -25,10 +25,8 @@ To increase fault tolerance, you can enable sharedv4 service volumes. With this 
 * This is an early access feature.
 * Sharedv4 service volumes are intended for use within the Kubernetes cluster where the volume resides.
 * Sharedv4 service volumes default to using NFSv4.0.
-
-**Known issue:** 
-
-On failover, Applications may receive an error for non idempotent requests. For example, if an `mkdir` call is issued prior to failover, the client can resend it to the new server, which returns an `EEXIST` error if the directory was created by the first call.
+* <u>Known issues</u>: 
+  * On failover, Applications may receive an error for non idempotent requests. For example, if an `mkdir` call is issued prior to failover, the client can resend it to the new server, which returns an `EEXIST` error if the directory was created by the first call.
 {{</info>}}
 
 **Step1: Create Storage Class**
