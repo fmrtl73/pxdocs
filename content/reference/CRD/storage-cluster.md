@@ -387,3 +387,9 @@ This section provides details on how to override certain cluster level configura
 | spec.<br>security.<br>auth.<br>selfSigned.<br>tokenLifetime | The length operator-generated tokens will be alive until being refreshed. | `string` | 24h |
 | spec.<br>security.<br>auth.<br>selfSigned.<br>issuer | The issuer name to be used when configuring Portworx Security. This field maps to the `PORTWORX_AUTH_JWT_ISSUER` environment variable in the Portworx Daemonset. | `string` | operator.portworx.io |
 | spec.<br>security.<br>auth.<br>selfSigned.<br>sharedSecret | The Kubernetes secret name for retrieving and storing your shared secret. This field can be used to add a pre-existing shared secret or for customizing which secret name the operator will use for its auto-generated shared secret key. This field maps to the `PORTWORX_AUTH_JWT_SHAREDSECRET` environment variable in the Portworx Daemonset. | `string` | px-shared-secret |
+
+### StorageCluster Annotations
+
+| Annotation | Description |
+| --- | --- |
+| `portworx.io/misc-args` | Arguments that you specify in this annotation are passed to portworx container verbatim. For example:<br>`portworx.io/misc-args: "-cluster_domain cluster-1"` |

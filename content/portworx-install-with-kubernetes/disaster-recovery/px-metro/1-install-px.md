@@ -130,7 +130,6 @@ The value for `cluster_domain` needs to be different for each Kubernetes cluster
   Datacenter your Kubernetes clusters are running.
 * You can name them based on your cloud provider's zone names such as **us-east-1a**, **us-east-1b**.
 
-
 #### Installing on a Tanzu cluster
 
 {{<info>}}
