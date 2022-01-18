@@ -37,19 +37,27 @@ Following is a table that maps each version in the dropdown to the git branch in
 
 ## Running the site locally
 
-To develop the docs site locally - first ensure you have [docker](https://docs.docker.com/install/) installed.
+To develop the docs site locally:
 
-Pull in the theme from the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo using below command:
+1. Ensure you have [docker](https://docs.docker.com/install/) installed.
+2. Initialize the submodules the Makefile depends on: 
+   
+   ```
+   git submodule init
+   git submodule update
+   ```
 
-```bash
-make update-theme
-```
+3. Pull in the theme from the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo using below command:
 
-Now, launch the website locally using:
+   ```bash
+   make update-theme
+   ```
 
-```bash
-make develop
-```
+4. Launch the website locally using:
+
+   ```bash
+   make develop
+   ```
 
 You can then view the site in your browser at [http://localhost:1313](http://localhost:1313).  As you edit content in the `content` folder - the browser will refresh automatically as you save files.
 
