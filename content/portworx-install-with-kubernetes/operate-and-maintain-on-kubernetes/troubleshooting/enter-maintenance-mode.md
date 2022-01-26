@@ -11,13 +11,7 @@ This guide describes a recommended workflow for putting a Portworx node in maint
 
 Before putting Portworx in maintenance mode on a node, applications running on that node using Portworx need to be migrated. If Portworx is in maintenance mode, existing application pods will end up with read-only volumes and new pods will fail to start.
 
-You have 2 options for migrating applications.
-
-**Migrate all pods**
-
-* Drain the node using: `kubectl drain <node>`
-
-**Migrate selected pods**
+Perform the following steps to migrate select pods:
 
 1. Cordon the node using:
 
@@ -31,7 +25,7 @@ You have 2 options for migrating applications.
     kubectl delete pod <pod-name>
     ```
 
-* Since application pods are expected to be managed by a controller like `Deployement` or `StatefulSet`, Kubernetes will spin up a new replacement pod on another node.
+    Since application pods are expected to be managed by a controller like `Deployement` or `StatefulSet`, Kubernetes will spin up a new replacement pod on another node.
 
 ### Step 2. Enter maintenance mode
 

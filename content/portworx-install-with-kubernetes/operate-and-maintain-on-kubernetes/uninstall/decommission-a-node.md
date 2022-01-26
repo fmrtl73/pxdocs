@@ -16,17 +16,7 @@ This guide describes a recommended workflow for decommissioning a Portworx node 
 
 If you plan to remove Portworx from a node, applications running on that node using Portworx need to be migrated. If Portworx is not running, existing application containers will end up with read-only volumes and new ones will fail to start.
 
-You have 2 options for migrating applications.
-
-**Migrate all pods**
-
-* Drain the node using:
-
-    ```text
-    kubectl drain <node>
-    ```
-
-**Migrate selected pods**
+Perform the following steps to migrate select pods:
 
 1. Cordon the node using:
 
@@ -40,7 +30,7 @@ You have 2 options for migrating applications.
     kubectl delete pod <pod-name>
     ```
 
-   * Since application pods are expected to be managed by a controller like `Deployement` or `StatefulSet`, Kubernetes will spin up a new replacement pod on another node.
+   Since application pods are expected to be managed by a controller like `Deployement` or `StatefulSet`, Kubernetes will spin up a new replacement pod on another node.
 
 ## Step 2. Decommission Portworx
 
