@@ -10,6 +10,10 @@ series: kb
 ### Can Portworx run in the cloud? On-premises? Both?
 Portworx clusters can run in the cloud or on premises. The volume format is the same, regardless of running in the cloud or on-prem.  When running in the cloud, Portworx aggregates and virtualizes the various underlying cloud volumes.
 
+### Does Portworx support non-disruptive upgrades?
+
+Portworx supports non-disruptive upgrades; however, other factors can cause downtime. In addition, every environment is different such as Portworx DaemonSet vs. Operator, the number of replicas per volume, type of volume, version of Portworx, upgrading Stork, and other factors such as Air-gapped environments and kernel upgrades being done in parallel. Therefore, we recommended consulting with technical support if your goal is to achieve a non-disruptive upgrade.
+
 ### Is there a Hardware/Software compatibility list?
 Hardware : No. But there are minimum resource recommendation listed [here](/start-here-installation/#installation-prerequisites)
 
@@ -94,4 +98,4 @@ Yes, {{< pxEnterprise >}} supports data encryption-at-rest and also encryption-i
 {{< pxEnterprise >}} supports cloudsnaps which enable the DevOps engineers to periodically back the data volumes in incremental snaps and restore the volume anywhere they want.
 
 ## Did we miss your question?
-If so, please let us know here: <a class="email" title="Submit feedback" href="mailto:support@portworx.com?subject={{site.feedback_subject_line}} feedback&body=I have some feedback about the {{page.title}} page"><i class="fa fa-envelope-o"></i> Feedback</a>
+If so, please let us know here: <a class="email" title="Submit feedback" href="mailto:support@purestorage.com?subject={{site.feedback_subject_line}} feedback&body=I have some feedback about the {{page.title}} page"><i class="fa fa-envelope-o"></i> Feedback</a>
