@@ -6,6 +6,10 @@ description: Learn how to deploy highly available S3 compliant object storage on
 hidden: true
 ---
 
+{{<info>}}
+**WARNING:** This configuration is not supported in production for external workloads.
+{{</info>}}
+
 This document explains how to expose a highly available S3 compliant Objectstore from a Portworx cluster.
 
 The Objectstore module has the following commands:
