@@ -236,6 +236,14 @@ status:
   storageStatus: ""
 ```
 
+### Apply the ClusterPair spec on the source cluster
+
+To apply the ClusterPair spec, copy the YAML file to your source cluster master node and apply the ClusterPair (your YAML file name could be different):
+
+```text
+kubectl apply -f <clusterpair-name>.yaml -n <namespace>
+```
+
 ## Enable disaster recovery mode
 
 You can enable disaster recovery mode by specifying the following fields in the `options` section of your `ClusterPair`:
