@@ -33,9 +33,9 @@ Following are the authentication details required by Portworx to use the AWS KMS
 
     AWS Secret Token Key (if configured) of the account which has permissions to access KMS APIs
 
-- **AWS Customer Master Key [AWS_CMK]** [required]
+- **AWS KMS key [AWS_CMK]** [required]
 
-    AWS Customer Master Key.
+    AWS KMS key.
     The CMK can be found out from AWS's resource ARN. Here is an example ARN for CMK:
     ```
         arn:aws:kms:us-east-1::key/<cmk-id>
@@ -109,7 +109,7 @@ cat /etc/pwx/config.json
     "secret": {
         "secret_type": "aws-kms",
         "aws": {
-               "AWS_CMK": "your-customer-master-key-id",
+               "AWS_CMK": "your-aws-kms-key-id",
                "AWS_REGION": "you-aws-region-to-which-this-cmk-belongs"
         },
     }

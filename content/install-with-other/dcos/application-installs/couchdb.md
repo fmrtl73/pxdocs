@@ -114,13 +114,13 @@ dcos portworx-couchdb endpoints cluster-port
 }
 ```
 
-Connect to the master node to access the CouchDB service
+Connect to the main node to access the CouchDB service
 
 ```text
 dcos node ssh --master-proxy --leader
 ```
 
-From the DCOS master node, run the CouchDB REST API to any of the nodes on port `5984`. The default credentials are `admin:password` for accessing the REST APIs. A json output of the members in the CouchDB cluster from one of the nodes is shown below.
+From the DCOS main node, run the CouchDB REST API to any of the nodes on port `5984`. The default credentials are `admin:password` for accessing the REST APIs. A json output of the members in the CouchDB cluster from one of the nodes is shown below.
 
 ```text
 curl -s "http://admin:password@couchdb-0-install.portworx-couchdb.autoip.dcos.thisdcos.directory:5984/_membership" | python -m json.tool

@@ -85,7 +85,7 @@ For a more detailed setup, maintenance and tuning information refer the followin
 
 ### Securing with certificates in Kubernetes
 
-SSL certificates for etcd can be stored as Kubernetes secrets. Three files are required - in this example, the CA certificate is `kvdb-ca.crt`, the etcd certificate `kvdb.crt` and the etcd key `kvdb.key`. These files should be copied to a directory on the Kubernetes master (`kvdb-secrets`). Next, create a secret from these files:
+SSL certificates for etcd can be stored as Kubernetes secrets. Three files are required - in this example, the CA certificate is `kvdb-ca.crt`, the etcd certificate `kvdb.crt` and the etcd key `kvdb.key`. These files should be copied to a directory on the Kubernetes control plane node (`kvdb-secrets`). Next, create a secret from these files:
 
 ```text
 kubectl -n kube-system create secret generic px-kvdb-auth --from-file=kvdb-secrets/

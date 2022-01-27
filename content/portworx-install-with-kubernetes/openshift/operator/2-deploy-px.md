@@ -33,7 +33,7 @@ If you're installing Portworx on OpenShift on a cloud environment, Portworx requ
 
 ## Open ports for worker nodes
 
-Ensure ports 17001-17020 on worker nodes are reachable from master and other worker nodes.
+Ensure ports 17001-17020 on worker nodes are reachable from the control plane node and other worker nodes.
 
 ## Create a secret for Portworx Essentials
 

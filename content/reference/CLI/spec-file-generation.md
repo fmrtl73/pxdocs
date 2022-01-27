@@ -29,8 +29,8 @@ Below are the parameters you can specify when generating the spec file.
 | stork | Specify if you want to install Stork | stork=true |
 | coreos | REQUIRED if target nodes are running coreos. | coreos=true |
 | osft | REQUIRED if installing on Openshift. | osft =true |
-| mas | Specify if Portworx should run on the Kubernetes master node. For Kubernetes 1.6.4 and prior, this needs to be true (default is false) | mas=true |
-| z | Instructs Portworx to run in zero storage mode on Kubernetes master. | z=true |
+| mas | Specify if Portworx should run on the Kubernetes control plane node. For Kubernetes 1.6.4 and prior, this needs to be true (default is false) | mas=true |
+| z | Instructs Portworx to run in zero storage mode on the Kubernetes control plane node. | z=true |
 | f | Instructs Portworx to use any available, unused and unmounted drives or partitions. Portworx will never use a drive or partition that is mounted. | f=true |
 | st | Select the secrets type (_aws_, _kvdb_ or _vault_) | st=vault |
 | j | (Portworx 1.3 and higher) Specify a separate block device as a journaling device for px metadata. | j=/dev/sde |

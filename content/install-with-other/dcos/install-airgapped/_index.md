@@ -12,14 +12,14 @@ This guide will help you install the Portworx Universe for DC/OS which contains 
 This guide is based on the [DC/OS guide](https://docs.mesosphere.com/1.12/administering-clusters/deploying-a-local-dcos-universe) to install a local universe.
 
 ## Download the pre-requisites
-First you will need to download 3 files and transfer them to each of you DC/OS Master nodes
+First you will need to download 3 files and transfer them to each of you DC/OS main nodes
 
 * [dcos-local-px-universe-http.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px-local-universe/docker/local-universe/dcos-local-px-universe-http.service)
 * [dcos-local-px-universe-registry.service](https://raw.githubusercontent.com/portworx/universe/version-3.x-px-local-universe/docker/local-universe/dcos-local-px-universe-registry.service)
 * [local-universe.tar.gz](https://s3-us-west-1.amazonaws.com/px-dcos/local-universe_1.11.3_05122018_144403_df8e5c8.tar.gz)
 
 ## Install the services
-On each of your Master nodes run the following steps:
+On each of your main nodes run the following steps:
 
 #### Load the universe container into docker
 The local universe could be a large file and may take few minutes to load.

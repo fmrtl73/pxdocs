@@ -91,7 +91,7 @@ From the DCOS workstation, verify the task; it will show `9` tasks.
   proxylite-0-server  10.0.2.96   root    R    proxylite-0-server__f7d4d08a-507f-4b7d-856a-6c3e264b03dc
 ```
 
-In the above example, the DCOS Mesos cluster is running with 1 master, 1 public slave and 5 private slave agents. Elasticsearch components will be distributed evenly on every slave agents. See below diagram of the example setup.
+In the above example, the DCOS Mesos cluster is running with 1 main, 1 public and 5 private agents. Elasticsearch components will be distributed evenly on every private agent. See below diagram of the example setup.
 
 ![Elasticsearch example setup](/img/elasticsearch-px-universe-006.PNG)
 

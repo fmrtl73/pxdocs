@@ -130,7 +130,7 @@ Now we’ll have access to the API service from pods in the default namespace.
 
 ## Limitations
 
-1. The `ports` sections in above rukes is a whitelist of ports you want to give access to pods that are not selected by the `podSelector`. Users are expected to add additional ports they wish to grant accesss.
+1. The `ports` sections in above rukes is an allowlist of ports you want to give access to pods that are not selected by the `podSelector`. Users are expected to add additional ports they wish to grant accesss.
 2. The above NetworkPolicies do not apply to user pods running on the host network. Users are expected to use [Pod Security Policies](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) to prevent pods from running on host network.
 3. Policies in Step 3 and 4 only affect to the namespace they are applied in. Apply the network policies in each user namespace to achieve the same effect.
 4. The network policies take effect only if the CNI network plugin installed in your Kubernetes cluster supports it. [Calico](https://docs.projectcalico.org/v2.0/getting-started/kubernetes/tutorials/simple-policy) was used to test the specs in this doc.

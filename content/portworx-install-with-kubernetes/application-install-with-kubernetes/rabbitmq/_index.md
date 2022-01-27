@@ -498,7 +498,7 @@ Configure a policy named `perf-test-with-ha`  with the following settings:
 
 *  The `rabbitmqctl set_policy perf-test-with-ha '^perf-test'` portion of the command only applies these settings to queues that begin with `perf-test`
 * Sets the [ha-mode parameter](https://www.rabbitmq.com/ha.html#mirroring-arguments) equal to `2`.
-* Places the [queue-masters](https://www.rabbitmq.com/ha.html#behaviour) on the least-loaded node.
+* Places the [queue leader](https://www.rabbitmq.com/ha.html#behaviour) on the least-loaded node.
 * Sets up the queues as [lazy](https://www.rabbitmq.com/lazy-queues.html). RabbitMQ will save the queues to disk as early as possible.
 
 ```text

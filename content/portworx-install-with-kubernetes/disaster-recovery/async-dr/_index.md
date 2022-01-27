@@ -107,7 +107,7 @@ The ClusterPair is generated and used in the following way:
 Perform the following steps to create a cluster pair:
 
 {{<info>}}
-**NOTE:** You must run the `pxctl` commands in this document either on your Portworx nodes directly, or from inside the Portworx containers on your master Kubernetes node. 
+**NOTE:** You must run the `pxctl` commands in this document either on your Portworx nodes directly, or from inside the Portworx containers on your Kubernetes control plane node. 
 {{</info>}} 
 
 ### Create object store credentials for cloud clusters
