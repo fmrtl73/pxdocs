@@ -35,7 +35,6 @@ apt install linux-headers-$(uname -r)
 | CentOS 7.5 | 5.4.12-1.el7.elrepo.x86_64 |
 | CentOS 7.8-vanilla | 3.10.0-1127.el7.x86_64 |
 | CentOS 8.2-vanilla | 4.18.0-240.22.1.el8_3.x86_64 |
-| Ubuntu 16.04.7 LTS | 4.4.0-116-generic | 
 | Ubuntu 18.04.5 LTS | 5.4.0-1040-gcp |
 | Ubuntu 20.04.02 LTS | 5.4.0-73-generic | 
 | Ubuntu 20.10 | 5.8.0-1031-gcp | 

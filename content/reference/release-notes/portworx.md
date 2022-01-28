@@ -6,6 +6,59 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.9.1
+
+Jan 27, 2021
+
+### New features
+
+Portworx by Pure Storage is proud to introduce the following new features:
+
+* Support for [Pure FlashBlade as a Direct Access filesystem](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flashblade) has graduated from early access to Generally Available! With this feature, Portworx directly provisions FlashBlade NFS filesystems, maps them to a user PVC, and mounts them to pods. Reach out to your account team to enable this feature. 
+* Support for [Pure FlashArray cloud drives](/cloud-references/auto-disk-provisioning/pure-flash-array/) has graduated from early access to Generally Available! Use FlashArrays as a cloud storage provider. Reach out to your account team to enable this feature. 
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PWX-22105 | Portworx now supports PKS distributions based on "containerd" container runtimes. |
+| PWX-21721 | The `pxctl status` command's response time is now reduced when telemetry is enabled. This was done by running telemetry status asynchronously and caching its status. |
+| PWX-20642 | Portworx no longer requires global permissions on all datastores. Users can now specify which datastores to give Portworx access to. |
+| PWX-22195 | Improved Portworx logs by adding a co-relation ID to every API request and will be logged at all levels. |
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-22197 | CSI provided drives may have incorrect classification of media type: Disks based on flash media getting classified as Magnetic disks. <br/><br/>**User impact:** Portworx may incorrectly classify other storage attributes which are derived from the storage media like IO Priority, etc. <br/><br/>**Resolution:** CSI provided drives are now correctly classified. If you’ve had your drives incorrectly classified, you can manually change the io_priority of the pool using the `pxctl sv pool update` command. |
+| PWX-22079 | A golang panic (stacktrace) occurred when there was an error initializing the storage layer.<br/><br/>**User impact:** When there was an error while initializing the storage-layer, golang sometimes panicked (stacktrace output), and the real error was masked.<br/><br/>**Resolution:** Portworx now properly handles errors from the storage layer, and no longer causes golang panics. |
+| PWX-21605 | Portworx keeps a track of the number of NFS threads configured on a node. If the number of threads drops below 80% of the configured value it will reset it to the configured thread count. However a variance of 80% was too large, and on an overloaded system could cause the system to run with fewer number of threads than desired. <br/><br/>**User impact:** On certain overloaded systems, sharedV4 application pods could see NFS timeouts since the NFS server had less number of threads than the configured amount. <br/><br/>**Resolution:** Portworx will now keep the NFS thread count within 95% of the configured value. |
+| PWX-22313 | Transitioning a storageless node into a storage node caused other nodes in the cluster to receive a NodeDown event (for the storageless node) with an IP which matches with the new storage node. This caused the sharedV4 server to assume that there were no sharedV4 clients active on that IP. <br/><br/>**User impact:** A sharedV4 app running on such a node which transitions could see I/O errors.<br/><br/>**Resolution:** Portworx on peer nodes will now detect these transitions, ignore NodeDown events for the same duplicate IP, and avoid removing the client for the sharedV4 volumes. |
+| PWX-22244 | When `fsGroup` is set on the volume, the kubelet has to perform a recursive permissions change on the mount path. This can take time and delay the pod creation when there are a large number of files in the volume. In Kubernetes 1.20 or later, there is a setting `fsGroupChangePolicy: OnRootMismatch` which tells kubelet to skip the recursive permissions change if the permissions on the root (mount path) are correct. This prevented the delay in pod creation, but was rendered ineffective when Portworx reset a permissions value. <br/><br/>**User impact:** Specifying `fsGroupChangePolicy: OnRootMismatch` did not alleviate the pod creation delay caused by the `fsGroup` setting. |
+| PWX-22237 | A race condition in Portworx during storageless node initialization sometimes created an orphaned entry in `pxctl clouddrive list` where that node's entry was not present in `pxctl status`. <br/><br/>**User impact:** The node list between `pxctl status` and `pxctl clouddrive list` was not in sync. <br/><br/>**Resolution:** Portworx now handles this race condition and ensures that such orphaned entries are removed.| 
+| PWX-22218 | Portworx failed to mount volumes into asymmetrical shared mounts. <br/><br/>**User impact:** When using asymmetrical shared mounts (e.g. mounting different directories between host/container), it was not possible to mount Portworx volumes into these directories. <br/><br/>**Resolution:** After the fix, asymmetrical shared mounts work properly (i.e. you can mount volumes into such directories). |
+| PWX-22178 | On Kubernetes installations that use the CRI-O container runtime, setting up a custom bidirectional (shared) mount for the Portworx pod did not propagate to `portworx.service`. Instead, it would be set up as a regular bind-mount, that could not be used to mount the PXD devices. <br/><br/>**Resolution:** The bidirectional mounts are now properly propagated to `portworx.service`.|
+| PWX-21544 | When coming out of run-flat mode after more than 10 minutes have elapsed, a Portworx quorum node sometimes failed to start a watch on the internal KVDB because the required KVDB revision had already been compacted. <br/><br/>**User impact:** When using an internal KVDB, there may have been a brief outage when Portworx exits run-flat mode. |
+
+
+### Known issues (Errata)
+
+Portworx is aware of the following issues, check future release notes for fixes on these issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PD-1076 | When using Portworx with FlashArray, if new drives are added while paths are down, it may not have all connections established and may result in failures when only a certain subset of paths go down, even if others are live. <br/><br/>**Workaround:** This can be recovered after all paths are present with `pxctl sv m --cycle`, which will detach and reattach the drives, hopefully ensuring all paths are added back. |
+| PD-1068 | When using Portworx with FlashArray, expanding a pool by resizing when some paths are down (even if some are still up) may result in issues, as the single paths may not pick up the new path size and fail the multipath resize operation. <br/><br/>**Workaround:** Run the resize again when all paths are restored to resolve the issue and complete the expansion. |
+| PD-1038 | Portworx pool expand operations fail to resize when some multipath connection paths of FA are down. <br/><br/>**Workaround:** After the network is restored, you can run `iscsiadm -m session --rescan` and expand the pool again. | 
+| PD-1067 | Disabling a port on the FlashArray will also remove it from the list of ports in the REST API, and thus Portworx will not attach it. This can cause some multipath paths to remain offline even after the port is reattached, especially if Portworx had a restart while the port was down. <br/><br/>**Workaround:** You can recover the faulty paths by running the `pxctl sv m --cycle` command to reattach them and bring back the missing paths. Note that unless all paths are down, Portworx will still function fine, just with reduced iSCSI/FC-layer redundancy. |
+| PD-1062 | `px-pure-secret` contains FlashArray and FlashBlade connection information, specifically management endpoint and token. The secret is loaded when Portworx starts, therefore it needs to be present before Portworx is deployed. Also, any changes to the secret after Portworx is already started will not be detected. <br/><br/>**Workaround:** If you need to change array backends or renew the token, you must restart Portworx. This also applies to FlashArray disk provisioning, and impacts changes to the FA/FB essentials licenses. |
+| PD-1045 | In the cloud drive mode of deployment with a FlashArray, a restart of the primary controller or a network outage to the FlashArray could cause a storage node to transition into a storageless node. This transition happens since another storageless node in the cluster picks up the disks and starts as a storage node.  The original storage node however still ends up having the signature of the old disks and starts up as a storageless node with StorageInit failure. This happens only if Portworx on this node is unable to cleanly detach its disks due to the primary controller on FlashArray being down.<br/><br/>Similarly, after the primary controller restarts or a network outage occurs, a storage node could see errors from the backend disk, or the internal KVDB could see errors from the KVDB disk and cause Portworx or the internal KVDB on that node to enter an error state. <br/><br/>**Workaround:** Once the primary controller is back, restart Portworx on the impacted node to recover. |
+| PD-1063 | If the Kubernetes ETCD is unstable, Portworx may experience intermittent access issues to the Kubernetes API. <br/><br/>**Workaround:** If a pool expand operation fails with the error message: `could not retrieve portworx-storage-decision-matrix config map: etcdserver: leader changed"`, retry the pool expand operation. |
+
 ## 2.9.0
 
 Nov 22, 2021

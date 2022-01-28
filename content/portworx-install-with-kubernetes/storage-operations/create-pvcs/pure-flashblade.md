@@ -6,10 +6,6 @@ keywords:
 description: 
 ---
 
-{{<info>}}
-**NOTE:** This is an early access feature, reach out to your account team to enable it. 
-{{</info>}}
-
 On-premises users who want to use Pure Storage FlashBlade with Portworx on Kubernetes can attach FlashBlade as a Direct Access filesystem. Used in this way, Portworx directly provisions FlashBlade NFS filesystems, maps them to a user PVC, and mounts them to pods. Once mounted, Portworx writes data directly onto FlashBlade. As a result, this mounting method doesn't use storage pools.
 
 FlashBlade Direct Access filesystems support the following:
