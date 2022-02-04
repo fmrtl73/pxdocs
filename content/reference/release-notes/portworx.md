@@ -6,9 +6,25 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.9.1.1
+
+Feb 3, 2022
+
+{{<info>}}
+**ADVISORY:** Pure Storage strongly recommends users of the 2.9.1 release upgrade to 2.9.1.1.
+{{</info>}}
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-22787 | Under a certain race condition, Portworx could generate a core and restart itself. This could happen when an application pod tries to attach a volume on a node while the volume is already attached on another node in the cluster.  <br/><br/>**User impact:**  Portworx on the node where the application pod is trying to attach the volume would generate a core and restart. The Portworx service auto-recovered from this after the restart. Only PX 2.9.1 was impacted by this issue.  <br/><br/>**Resolution:** The issue causing Portworx to restart has been fixed. |
+
 ## 2.9.1
 
-Jan 27, 2021
+Jan 27, 2022
 
 ### New features
 
