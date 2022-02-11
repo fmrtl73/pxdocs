@@ -40,10 +40,8 @@ Create a Resource Group by specifying its name and location in which you will be
 az group create -–name <resource-group-name> –-location <location>
 ```
 
-### Create a Service Principal and secret in Azure AD
-
-{{< content "shared/azure-cloud-user-requirements.md" >}}
-
 ### Create the AKS cluster
 
 Create the AKS cluster in the above Resource Group using either the Azure CLI or the Azure Portal. This is described on the [AKS docs page](https://docs.microsoft.com/en-us/azure/aks/). If you have already deployed an AKS cluster, then create the Service Principal for the Resource Group in which your AKS cluster is present.
+
+{{< content "shared/azure-cloud-user-requirements.md" >}}

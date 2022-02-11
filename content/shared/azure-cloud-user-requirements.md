@@ -5,16 +5,51 @@ keywords:
 hidden: true
 ---
 
-1. Create a service principal in Azure AD
+### Create a custom role for Portworx
+
+```text
+az role definition create --role-definition '{
+        "Name": "portworx-cloud-drive",
+        "Description": "",
+        "AssignableScopes": [
+            "/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9"
+        ],
+        "Permissions": [
+            {
+                "Actions": [
+                    "Microsoft.ContainerService/managedClusters/agentPools/read",
+                    "Microsoft.Compute/disks/delete",
+                    "Microsoft.Compute/disks/write",
+                    "Microsoft.Compute/disks/read",
+                    "Microsoft.Compute/virtualMachines/write",
+                    "Microsoft.Compute/virtualMachines/read",
+                    "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/write",
+                    "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/read"
+                ],
+                "NotActions": [],
+                "DataActions": [],
+                "NotDataActions": []
+            }
+        ]
+}'
+```
+
+### Create a Service Principal and secret in Azure AD
+
+1. Find the AKS cluster Infrastructure Resource Group:
 
     ```text
-    az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9"
+    az aks show -n <aks-cluster-name> -g <aks-resource-group> | jq -r '.nodeResourceGroup'
     ```
-    ```output
+
+1. Create a service principal for Portworx with the custom role:
+
+    ```text
+    az ad sp create-for-rbac --role=portworx-cloud-drive --scopes="/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9/resourceGroups/<aks-infrastructure-resource-group>"
     {
       "appId": "1311e5f6-xxxx-xxxx-xxxx-ede45a6b2bde",
-      "displayName": "azure-cli-2017-10-27-07-37-41",
-      "name": "http://azure-cli-2017-10-27-07-37-41",
+      "displayName": "azure-cli-2020-10-10-10-10-10",
+      "name": "http://azure-cli-2020-10-10-10-10-10",
       "password": "ac49a307-xxxx-xxxx-xxxx-fa551e221170",
       "tenant": "ca9700ce-xxxx-xxxx-xxxx-09c48f71d0ce"
     }
