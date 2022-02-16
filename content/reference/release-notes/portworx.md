@@ -162,9 +162,21 @@ Portworx is aware of the following issues, check future release notes for fixes 
 | PD-1024 | When using Portworx with FlashBlade (FB), users store login credentials, such as FA/FB IPs and access tokens, in the `px-pure-secret` Kubernetes secret. In the event that an access token expires or is otherwise invalidated, Portworx automatically provisions workloads onto the next accessible FB to avoid interruptions. <br/><br/>As a result, users may not be alerted when FlashBlades become inaccessible, and workloads can concentrate on the remaining FlashBlades, impacting performance. <br/><br/>**Workaround:** To avoid this issue, ensure the credentials stored in `px-pure-secret` are valid. If you find invalid credentials, correct them and restart Portworx to restore full use.|
 
 
+## 2.8.1.4
+
+Feb 15, 2022
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-21514 | In vSphere environments, Portworx sometimes failed to remove KVDB drives. <br/><br/>**User impact:** Users saw an additional KVDB drive when they listed all available drives in the Portworx cluster. |
+
 ## 2.8.1.3
 
-Jan 24, 2021
+Jan 24, 2022
 
 ### Notes
 
