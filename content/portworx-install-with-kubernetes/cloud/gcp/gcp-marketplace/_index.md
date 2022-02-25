@@ -3,7 +3,7 @@ title: GCP Marketplace
 logo: /logos/gcp.png
 weight: 2
 keywords: Install, GCP Marketplace, Google Cloud Platform, Kubernetes, k8s, gcloud
-description: Setup a production-ready Portworx cluster on Google Cloud Platform Marketplace.
+description: Set up a production-ready Portworx cluster on Google Cloud Platform Marketplace.
 noicon: true
 series: px-k8s-gcp
 ---

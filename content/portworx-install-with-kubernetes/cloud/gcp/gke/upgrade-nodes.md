@@ -14,11 +14,11 @@ If you're running Portworx on GKE and want to migrate to nodes with more resourc
 
 1. [Add a new node pool](https://cloud.google.com/kubernetes-engine/docs/how-to/node-pools#add) containing your desired node type.
 
-2. Ensure all nodes in the new node pool have Portworx in storageless mode.
+2. Ensure that all nodes in the new node pool have Portworx in storageless mode.
 
 3. [Disable auto scaling](https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-autoscaler#disable_autoscaling) in the old pool.
 
-4. Choose a node from your old node pool you want to remove:
+4. Choose a node from your old node pool that you want to remove:
 
     ```text
     pxctl cluster list
@@ -34,7 +34,7 @@ If you're running Portworx on GKE and want to migrate to nodes with more resourc
     492596eb-94f3-4422-8cb8-bc72878d4be5	147.75.99.189	0.125078	34 GB		33 GB		N/A		1.1.4-6b35842	Online
     ```
 
-5. Once you've chosen a node ID, enter the following `kubectl` command to drain the node, specify your own <node-id>: 
+5. Once you've chosen a node ID, enter the following `kubectl` command to drain the node, replacing `<node-id>` with the ID of the node that you want to remove: 
     
     ```text
     kubectl drain <node-id> --ignore-daemonsets --delete-emptydir-data
@@ -54,7 +54,7 @@ If you're running Portworx on GKE and want to migrate to nodes with more resourc
 
 8. In the GKE console, find the node by name and [delete the instance](https://cloud.google.com/compute/docs/instances/deleting-instance#delete_an_instance). 
 
-9. Choose a storageless node and restart Portworx so it becomes a storage node:
+9. Choose a storageless node and restart Portworx so that it becomes a storage node:
 
     ```text
     kubectl label <node> px/service=restart --overwrite
@@ -68,4 +68,4 @@ If you're running Portworx on GKE and want to migrate to nodes with more resourc
     pxctl service node uncordon-attachments --node <node-id>
     ```
 
-Repeat steps 5 to 10 for each remaining node in your cluster. 
+Repeat steps 4 through 10 for each remaining node in your cluster that you want to remove. 
