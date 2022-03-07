@@ -63,7 +63,7 @@ A PersistentVolume (PV) is a piece of storage in the cluster that has been provi
 2. Apply the spec:
 
     ```text
-    kubectl apply -f mysql-sc.yaml.yaml
+    kubectl apply -f mysql-sc.yaml
     ```
 
 3. Create a file called `mysql-pvc.yaml` with the following content:
