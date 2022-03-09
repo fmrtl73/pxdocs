@@ -15,7 +15,7 @@ When a pod runs on the same host as its volume, it is known as convergence or hy
 
 The recommended method to run your pods hyperconverged is to use [Stork](/portworx-install-with-kubernetes/storage-operations/stork).
 
-Once you have installed Stork, all you need to do is add `schedulerName: stork` in your application specs. Stork will then ensure that the nodes with data for a volume get prioritized when pods are being scheduled.
+Once you have installed Stork, the webhook controller is enabled by default and will use Stork as the scheduler. If you have disabled `webhook-controller` with the flag, all you need to do is add `schedulerName: stork` in your application specs. Stork will then ensure that the nodes with data for a volume get prioritized when pods are being scheduled.
 
 For example, this is how you would specify the scheduler name in a MySQL deployment:
 
@@ -62,15 +62,19 @@ spec:
 **NOTE:** You can force a Pod to be scheduled on the same node as a replica by specifying `stork.libopenstorage.org/preferLocalNodeOnly: "true"` in the `spec.template.metadata.annotations` section of your `StatefulSet` object.
 {{</info>}}
 
+
+### Disabling scheduler convergence
+You can disable Stork's hyperconverged pod prioritization with the `stork.libopenstorage.org/disableHyperconvergence: "true"` pod annotation.
+
 ### Initializer (Experimental feature in Stork v1.1)
 
 If you are not able to update the schedulerName for you applications to use
-stork, you can enable the app-initializer feature. This uses the Kubernetes
+Stork, you can enable the app-initializer feature. This uses the Kubernetes
 [AdmissionController Initializer](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#initializers)
-feature to automatically update the scheduler to stork if your application
+feature to automatically update the scheduler to Stork if your application
 (deployment or statefulset) is using volumes backed by Portworx.
 
 To enable the Initializer you need to:
 * [Enable the Intializer feature in your Kubernetes cluster](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#enable-initializers-alpha-feature) since it is an alpha feature in Kubernetes.
-* Add "--app-initializer=true" option in the stork deployment
+* Add "--app-initializer=true" option in the Stork deployment
 * Add the [stork-initializer spec](https://raw.githubusercontent.com/libopenstorage/stork/master/specs/stork-initializer.yaml) to your Kubernetes cluster using `kubectl apply -f stork-initializer.yaml`

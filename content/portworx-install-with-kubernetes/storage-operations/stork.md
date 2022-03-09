@@ -28,9 +28,11 @@ Stork project page](https://github.com/libopenstorage/stork#running-stork)
 
 ## Using Stork with your applications
 
-To take advantage of the feature of Stork, you need to specify it as the
+To take advantage of the features of Stork, it needs to be used as the scheduler for your applications. On newer versions of stork this is enabled by default with the webhook controller when Stork is enabled.
+
+If the `webhook-controller` is disabled, you need to specify Stork as the
 scheduler to be used when creating your applications. This can be done by adding
-the schedulerName to your application.
+`schedulerName: stork` to your application.
 
 An example of a mysql deployment which uses Stork as the scheduler can be found
 [here](https://github.com/libopenstorage/stork/blob/master/specs/mysql.yaml).
