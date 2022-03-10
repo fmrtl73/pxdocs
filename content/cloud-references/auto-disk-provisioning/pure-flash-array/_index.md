@@ -52,6 +52,10 @@ Before you can use Portworx with FlashArray, you must ensure your physical netwo
 * If using Fibre Channel, the latest Fibre Channel initiator software for your operating system
 * The FlashArray should be time-synced with the same time service as the Kubernetes cluster
 
+{{<info>}}
+**WARNING:** Portworx with FlashArray does not support user friendly names in the `multipath.conf` file.
+{{</info>}}
+
 ### Deploy Portworx
 
 Once you've configured your physical network and ensured that you meet the prerequisites, you're ready to deploy Portworx:
