@@ -76,7 +76,7 @@ Please see the documentation [here](/concepts/shared-volumes), or view our YouTu
 Portworx snapshots are redirect-on-write snapshots and are thin clones.
 
 ### What's the largest cluster size that's been tested?  Supported?
-{{< pxEnterprise >}} supports 1000 nodes in the same cluster.  But this is only a QA/qualification limit.
+{{< pxEnterprise >}} supports 512 nodes in the same cluster.  But this is only a QA/qualification limit.
 
 ### How quickly is node failure detected?
 On the order of milliseconds.
