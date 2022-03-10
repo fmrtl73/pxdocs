@@ -74,10 +74,7 @@ Once you've configured your physical network and ensured that you meet the prere
     ```
 
     {{<info>}}
-  **NOTE:** 
-
-  * You can add FlashBlade configuration information to this file if you're configuring both FlashArray and FlashBlade together. Refer to the [JSON file](/reference/pure-reference/pure-json-reference/) reference for more information.
-  * Do not add the FlashArray information into the Pure secret json file if using vSphere as a cloud provider.
+**NOTE:** You can add FlashBlade configuration information to this file if you're configuring both FlashArray and FlashBlade together. Refer to the [JSON file](/reference/pure-reference/pure-json-reference/) reference for more information.
     {{</info>}}
 
 1. Enter the following `kubectl create` command to create a Kubernetes secret called `px-pure-secret`:
@@ -93,10 +90,18 @@ Once you've configured your physical network and ensured that you meet the prere
 **NOTE:** You must name the secret `px-pure-secret`.
     {{</info>}}
 
-3. Generate an [install spec](/portworx-install-with-kubernetes/on-premise/other) for your on-prem cluster. Make the following selections when you create your spec using the spec generator:
+1. Generate an [install spec](/portworx-install-with-kubernetes/on-premise/other) for your on-prem cluster. Make the following selections when you create your spec using the spec generator:
 
    * On the **Storage** tab, select the **Cloud** storage environment. <!-- TODO: need UI example from dev. -->
    * Ensure **CSI** is enabled
+
+1. Edit the install spec file that you generated and add a value for [`spec.cloudStorage.provider`](/reference/crd/storage-cluster/#cloud-storage-configuration).
+
+1. Apply the spec:
+
+   ```text
+   kubectl apply -f <spec-file>
+   ```
 
 Once deployed, Portworx detects that the FlashArray secret is present when it starts up and uses the described FlashArray(s) as the storage provider. It then picks a backend for each drive to use, creates volumes, and attaches the volumes using iSCSI or Fibre Channel. 
 
