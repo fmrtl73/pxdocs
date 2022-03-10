@@ -7,6 +7,12 @@ weight: 3
 ---
 
 This guide explains how the Portworx Dynamic Disk Provisioning feature works within Kubernetes on VMware Tanzu.
+
+{{<info>}}
+**NOTE**: Portworx does not support Tanzu Community Edition.
+{{</info>}}
+
+
 ## Architecture
 
 When Portworx is deployed within Tanzu, the Cloud Drive (CD) module does the following:
