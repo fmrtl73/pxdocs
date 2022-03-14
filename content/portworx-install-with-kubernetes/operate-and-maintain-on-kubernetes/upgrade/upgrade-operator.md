@@ -22,6 +22,16 @@ If you're using the Portworx Operator, you can upgrade or change your Portworx v
 
 ## Upgrade Portworx
 
+{{<info>}}
+  **NOTE:** When Portworx is managing the underlying storage devices in an Anthos deployment, add the following annotation to the `StorageCluster` spec:
+
+  ```text
+  portworx.io/misc-args: "-rt_opts wait-before-retry-period-in-secs=360"
+  ```
+
+  This annotation ensures that during an Anthos or a Portworx upgrade, Portworx does not failover internal KVDB to a storageless node. 
+{{</info>}}
+
 1. Enter the `kubectl edit` command to modify your storage cluster:
 
       ```text

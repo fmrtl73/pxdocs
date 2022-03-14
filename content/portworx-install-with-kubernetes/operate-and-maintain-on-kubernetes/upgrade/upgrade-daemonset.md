@@ -17,6 +17,19 @@ This guide describes the procedure to upgrade Portworx running as OCI container 
 
 ## Upgrade Portworx
 
+{{<info>}}
+  **NOTE:** When Portworx is managing the underlying storage devices in an Anthos deployment, add the following runtime argument to the `DaemonSet` spec:
+
+  ```text
+  containers:
+    - name: portworx
+      args:
+        ["-c", "<cluster-name>", "-rt_opts" ,"wait-before-retry-period-in-secs=360"]
+  ```
+
+  This annotation ensures that during an Anthos or a Portworx upgrade, Portworx does not failover internal KVDB to a storageless node. 
+{{</info>}}
+
 To upgrade to the **{{% currentVersion %}}** release, run the following command:
 
 ```text
