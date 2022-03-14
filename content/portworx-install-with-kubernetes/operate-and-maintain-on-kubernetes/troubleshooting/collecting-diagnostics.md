@@ -7,7 +7,7 @@ description: Find out how to collect diagnostics for a Portworx cluster
 
 ## About diagnostics
 
-A Portworx diagnostics bundle (often referred to as just "diags") is a support bundle that contains all the information our support team would need to diagnose an issue in your cluster. It mainly contains
+A Portworx diagnostics bundle (often referred to as just "diags") is a support bundle that contains all the information our support team would need to diagnose an issue in your cluster. It mainly contains:
 
 * PX journald logs
 * Output from common PX CLI command that provide details about cluster, nodes and volumes
@@ -18,9 +18,9 @@ A Portworx diagnostics bundle (often referred to as just "diags") is a support b
 
 ## Auto-uploading diags using Pure1 integration
 
-With PX 2.8.0 or above, Portworx can now automatically upload it's diags to Pure Storage's call home service called **Pure1**. The primary benefits of this are
+With PX 2.8.0 or above, Portworx can now automatically upload its diags to Pure Storage's call home service called **Pure1**. The primary benefits of this are:
 
-* End users don't have to copy out diag bundles from their cluster nodes and upload them to support tickets
+* You don't have to copy out diag bundles from your cluster nodes and upload them to support tickets
 * When nodes run into issues, they automatically collect diags and call home them. This allows Portworx support to get ahead of the issues and reduces the time to resolution.
 
 When working on a support case, provide your Cluster UUID to Portworx support. They will be able to retrieve your diags from Pure1.
@@ -50,7 +50,7 @@ pxctl status | grep 'Cluster UUID'
 
 * Portworx 2.8.0 or above
 * For Operator based installations, Portworx Operator 1.5.0 or above
-* For DaemonSet based installs, ensure that you have generated the Portworx spec using https://central.portworx.com/
+* For DaemonSet based installs, a Portworx spec generated using [the spec generator](https://central.portworx.com/)
 * Outbound access to the internet to allow connection to Pure1
 
 ## Enabling Pure1 integration
@@ -59,7 +59,7 @@ Enabling telemetry adds a new `telemetry` sidecar container to Portworx pods. Th
 
 ### Fresh installs
 
-This is automatically enabled for all new clusters with PX 2.8.0 or above. See [Pre-requisites](#pre-requisites).
+Telemetry and metrics collector are disabled by default for all new clusters with PX 2.8.0 or above. See [Pre-requisites](#pre-requisites).
 
 ### Upgrades 
 
@@ -69,22 +69,20 @@ If you are upgrading from PX version prior to 2.8.0, follow the [Enabling Pure1 
 
 #### Operator based install
 
-To disable the telemetry integration with Pure1, you have to add the following section in your StorageCluster spec
+To enable the metrics collector and telemetry integration with Pure1, add the following section in your StorageCluster spec:
 
 ```text
 spec:
   monitoring:
     telemetry:
-      enabled: false 
+      enabled: true 
 ```
 
-{{<info>}}Note that above is in addition to any existing fields in your StorageCluster spec{{</info>}}
-
-This will remove the `telemetry` container from Portworx pod.
+This adds the `telemetry` container to the Portworx pod.
 
 #### DaemonSet based install
 
-To disable telemetry integration for DaemonSet based install, simply remove the `telemetry` container from the Portworx DaemonSet.
+To disable the metrics collector and telemetry integration for DaemonSet based install, remove the `telemetry` container from the Portworx DaemonSet.
 
 ## Collecting diagnostics
 
