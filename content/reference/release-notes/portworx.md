@@ -6,6 +6,14 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.9.1.3
+
+Mar 15, 2022
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-22943 | Portworx with FA cloud drives was erroneously able to start with the `user_friendly_names` setting enabled. <br/><br/>**User impact:** Portworx installs successfully initially, but on restart it won't be able to identify its own drives. This could cause Portworx to create new drives ignoring the already created ones. <br/><br/>**Resolution:** Portworx no longer starts if the multipath `user_friendly_names` setting is enabled. If after installing this version you receive this error, update your multipath configuration. |
+
 ## 2.9.1.1
 
 Feb 3, 2022
