@@ -23,7 +23,7 @@ sudo docker run --restart=always                            \
        portworx/px-lighthouse:latest
 ```
 
-Visit *http://{IP_ADDRESS}:login* in the browser and login with `admin/Password1`
+Visit *http://{IP_ADDRESS}/login* in the browser and login with `admin/Password1`
 
 ## Adding a Portworx cluster
 
