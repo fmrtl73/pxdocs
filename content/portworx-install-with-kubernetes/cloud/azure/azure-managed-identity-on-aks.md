@@ -102,4 +102,14 @@ Perform the following steps to enable Azure managed identity on new AKS cluster:
                     secretKeyRef:
                       name: px-azure
                       key: AZURE_CLIENT_ID
+    name: AZURE_CLIENT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: px-azure
+                      key: AZURE_CLIENT_SECRET
+    name: AZURE_TENANT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: px-azure
+                      key: AZURE_TENANT_ID
     ```
