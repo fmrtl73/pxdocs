@@ -30,12 +30,13 @@ You can now build graphs:
 
 ![Building a Graph with Prometheus](/img/building-a-graph-with-prometheus.png "Building a Graph with Prometheus")
 
-**Note**
+{{<info>}}**NOTE:** You can also see the stats by running the following curl command:
 
-A curl request on port 9001 also shows the stats:
-
-![Curl Request on 9001](/img/curl-request-on-9001.png "Curl Request on 9001")
+```text
+curl http://<hostname-or-ip>:9001/metrics
+```
+{{</info>}}
 
 ## Related topics
 
-For information on the available Portworx metrics, refer to the [Portworx metrics for monitoring reference](/reference/metrics/). 
+For information on the available Portworx metrics, refer to the [Portworx metrics for monitoring reference](/reference/metrics/).
