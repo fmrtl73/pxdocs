@@ -40,16 +40,16 @@ Portworx uses a single secret for both FlashArray and FlashBlade configuration. 
 
 |**Key**|**Value**| **Required?** |
 |----|----|----|
-| `MgmtEndPoint` | Your FlashArray management endpoint.<br/>**Data type:** string | Yes |
-| `APIToken` | Your FlashArray API token.<br/>**Data type:** string | Yes |
+| `MgmtEndPoint` | Your FlashArray management endpoint.<br/>**Data type:** string<br/>**Format:** either an IP address or a fully qualified domain name (without a protocol) | Yes |
+| `APIToken` | Your FlashArray API token.<br/>**Data type:** string<br/>**Format:** XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX | Yes |
 
 ### FlashBlade object reference
 
 |**Key**|**Value**| **Required?** |
 |----|----|----|
-| `MgmtEndPoint` | Your FlashBlade management endpoint.<br/>**Data type:** string | Yes |
-| `APIToken` | Your FlashBlade API token.<br/>**Data type:** string | Yes |
-| `NFSEndPoint` | Your FlashBlade NFS endpoint.<br/>**Data type:** string |  Yes |
+| `MgmtEndPoint` | Your FlashBlade management endpoint.<br/>**Data type:** string<br/>**Format:** either an IP address or a fully qualified domain name (without a protocol) | Yes |
+| `APIToken` | Your FlashBlade API token.<br/>**Data type:** string<br/>**Format:** T-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXX | Yes |
+| `NFSEndPoint` | Your FlashBlade NFS endpoint.<br/>**Data type:** string<br/>**Format:** either an IP address or a fully qualified domain name (without a protocol) |  Yes |
 
 ## Related topics
 
