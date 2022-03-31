@@ -32,11 +32,11 @@ manifest file for each of them using the Portworx spec generator in [PX-Central]
 While generating the spec file for each Kubernetes cluster, make sure you provide the same values for the following
 arguments:
 
-##### Operator Install
+#### Operator Install
 * **Cluster ID** (StorageCluster: metadata.name)
 * **Kvdb Endpoints** (StorageCluster: spec.kvdb.endpoints)
 
-##### DaemonSet Install
+#### DaemonSet Install
 * **Cluster ID** (Portworx install argument: `-c`)
 * **Kvdb Endpoints** (Portworx install argument: `-k`)
 
@@ -50,11 +50,11 @@ same Portworx cluster.
 
 To achieve this, make sure you provide the following arguments same as your existing cluster:
 
-##### Operator Install
+#### Operator Install
 * **Cluster ID** (StorageCluster: metadata.name)
 * **Kvdb Endpoints** (StorageCluster: spec.kvdb.endpoints)
 
-##### DaemonSet Install
+#### DaemonSet Install
 * **Cluster ID** (Portworx install argument: `-c`)
 * **Kvdb Endpoints** (Portworx install argument: `-k`)
 
@@ -64,7 +64,7 @@ will stretch across multiple Kubernetes clusters.
 If your Kubernetes clusters have exactly the same configuration, you can use the URL specified by
 the `install-source` annotation on the existing Portworx installation to fetch the spec for your new cluster:
 
-##### Operator Install
+#### Operator Install
 Use the `portworx.io/install-source` annotation:
 ```text
 apiVersion: core.libopenstorage.org/v1
@@ -74,7 +74,7 @@ metadata:
     portworx.io/install-source: "https://install.portworx.com/{{% currentVersion %}}?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
 ```
 
-##### DaemonSet Install
+#### DaemonSet Install
 Use the `portworx.com/install-source` annotation:
 ```text
 apiVersion: apps/v1
@@ -101,7 +101,7 @@ to be explicitly specified to Portworx through the `-cluster_domain` install arg
 
 Once you have generated the Kubernetes manifest file, add the `cluster_domain` argument. You can also edit a running Portworx install and add this new field.
 
-##### Operator Install
+#### Operator Install
 Use the `portworx.io/misc-args` annotation to add a `-cluster_domain` argument:
 ```text
 apiVersion: core.libopenstorage.org/v1
@@ -111,7 +111,7 @@ metadata:
     portworx.io/misc-args: "-cluster_domain us-east-1a"
 ```
 
-##### DaemonSet Install
+#### DaemonSet Install
 Add the `-cluster_domain` argument in the `args` section of the DaemonSet:
 ```text
       containers:
@@ -237,6 +237,32 @@ Global Storage Pool
         Total Used      :  0 B
         Total Capacity  :  900 GiB
 ```
+
+### Synchronizing secrets for PX-Security
+
+If you set up Metro DR and enable PX-Security, you need to synchronize the system secrets between the two Kubernetes clusters. The system secrets are stored under the `px-system-secret` kubernetes secret in the namespace where Portworx is installed. This secret is used by Portworx nodes for generating system tokens, and these tokens are used for node to node communication. 
+
+When deployed with Operator, each operator instance creates its own unique system secret. To synchronize this secret between the two clusters, use the following steps:
+
+1. Create a copy of the `px-system-secret` from the source cluster by running the following command:
+   
+   ```text
+   kubectl -n <ns> get secret px-system-secrets -oyaml > px-system-secret.source
+   ```
+
+1. On the destination cluster, delete the existing `px-system-secret` with the following command:
+   
+   ```text
+   kubectl -n <ns> delete secret px-system-secrets
+   ```
+
+1. On the destination cluster, run the following command:
+   
+   ```text
+   kubectl -n <ns> apply -f px-system-secret.source
+   ```
+
+1. Bounce PX pods one node at a time in a rolling update fashion on the DR cluster. This can be done by adding a placeholder env variable to the StorageCluster spec. That will trigger a rolling bounce of all the PX pods in the DR cluster.
 
 ### Install storkctl
 
