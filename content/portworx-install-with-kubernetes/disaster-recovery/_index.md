@@ -37,6 +37,25 @@ The option has the following characteristics:
 * Volumes are automatically **replicated** across the Kubernetes clusters as they share the same Portworx storage fabric.
 * This option will have zero **RPO** and **RTO** less than 60 seconds.
 
+## Portworx quorum overview 
+
+In a Portworx cluster, a quorum is the minimum number of online storage nodes required for the cluster to be up and running. If any additional nodes go offline beyond this threshold, then the cluster loses quorum causing all operations to stop and Portworx does not process any IOs.
+
+In a Metro DR setup, one Portworx cluster stretches across two data centers in a Metro Area Network. The same quorum rules apply in such a deployment. All the storage nodes across these two data centers contribute to quorum. 
+
+When you deploy Portworx clusters in the Metro DR method, Portworx quorum can be lost in the event of a data center failure or network partition.
+
+### Using a witness node
+
+To solve the quorum issue, you can deploy a witness site that is used as the quorum tie-breaker when there is a network partition or when a data center goes offline. The witness node is a single virtual machine and a special Portworx storage-less node that participates in quorum, but does not store any data. A witness node is usually in another third data center.
+
+### Using external etcd
+
+Portworx does not support internal `kvdb` with Metro DR. You need to set up a separate, three node `etcd` cluster for Portworx. One `etcd` node needs to be running in each data center and one node should be running on the witness node. 
+
+{{<info>}}
+**NOTE**: For more information about setting up a witness node, refer to the [Setup a witness node](/portworx-install-with-kubernetes/disaster-recovery/px-metro/1-install-px/#setup-a-witness-node) section.
+{{</info>}}
 
 ### How
 

@@ -16,9 +16,11 @@ The goal of this document is to setup a single Portworx cluster that spans acros
 * **Network Connectivity**: Ports 9001 to 9020 open between the two Kubernetes clusters.
 * **External Kvdb**: A kvdb like etcd or consul setup outside of the Kubernetes clusters.
 * **License**: A DR enabled {{< pxEnterprise >}} license on both the source and destination clusters to use this feature.
+* **Witness node requirements**: 4 cores minimum, 8 cores recommended, 4GB minimum, 8GB recommended
 
 {{<info>}}
-**NOTE**: Additional steps are required when installing on a Tanzu cluster. Check below for details {{</info>}}
+**NOTE**: Additional steps are required when installing on a Tanzu cluster. Check below for details 
+{{</info>}}
 
 ## Installing Portworx
 
@@ -238,31 +240,19 @@ Global Storage Pool
         Total Capacity  :  900 GiB
 ```
 
-### Synchronizing secrets for PX-Security
+### Setup a witness node
 
-If you set up Metro DR and enable PX-Security, you need to synchronize the system secrets between the two Kubernetes clusters. The system secrets are stored under the `px-system-secret` kubernetes secret in the namespace where Portworx is installed. This secret is used by Portworx nodes for generating system tokens, and these tokens are used for node to node communication. 
+To set up a witness node: 
 
-When deployed with Operator, each operator instance creates its own unique system secret. To synchronize this secret between the two clusters, use the following steps:
+1. Install the [Docker engine](https://docs.docker.com/engine/install/).
 
-1. Create a copy of the `px-system-secret` from the source cluster by running the following command:
-   
-   ```text
-   kubectl -n <ns> get secret px-system-secrets -oyaml > px-system-secret.source
-   ```
+2. Install the witness node, after the Docker engine is up and running:
 
-1. On the destination cluster, delete the existing `px-system-secret` with the following command:
-   
-   ```text
-   kubectl -n <ns> delete secret px-system-secrets
-   ```
+    ```txt
+    chmod +x ./witness-install.sh ./witness-install.sh --cluster-id=px-cluster – etcd="etcd:http://70.0.68.196:2379,etcd:http://70.0.93.183:2379,etcd:http://70.0.68.196:2379"
+    ```
 
-1. On the destination cluster, run the following command:
-   
-   ```text
-   kubectl -n <ns> apply -f px-system-secret.source
-   ```
-
-1. Bounce PX pods one node at a time in a rolling update fashion on the DR cluster. This can be done by adding a placeholder env variable to the StorageCluster spec. That will trigger a rolling bounce of all the PX pods in the DR cluster.
+3. Set up a single storage-less Portworx node on the designated VM using the [witness script](#appendix).
 
 ### Install storkctl
 
@@ -313,3 +303,70 @@ Status:
 ```
 
 Once your Portworx stretch cluster is installed, you can proceed to next step.
+
+## Appendix
+
+Following is the witness script mentioned in the [Setup a witness node](#setup-a-witness-node) section:
+
+```txt
+#!/bin/bash
+
+  PX_DOCKER_IMAGE=portworx/px-enterprise:2.7.0
+
+  function usage()
+  {
+  echo "Install Portworx as a witness node"
+  echo ""
+  echo "./install-witness.sh"
+  echo "--help"
+  echo "--cluster-id=$CLUSTER_ID"
+  echo "--etcd=$ETCD"
+  echo "--docker-image=$PX_DOCKER_IMAGE"
+  echo ""
+  }
+
+  while [ "$1" != "" ]; do
+  PARAM=`echo $1 | awk -F= '{print $1}'`
+  VALUE=`echo $1 | awk -F= '{print $2}'`
+  case $PARAM in
+  --help)
+  usage
+  exit
+  ;;
+  --cluster-id)
+  CLUSTER_ID=$VALUE
+  ;;
+  --docker-image)
+  PX_DOCKER_IMAGE=$VALUE
+  ;;
+  --etcd)
+  ETCD=$VALUE
+  ;;
+  *)
+  echo "ERROR: unknown parameter \"$PARAM\""
+  usage
+  exit 1
+  ;;
+  Once PX is up and running place the witness node in maintenance.
+  esac
+  shift
+  done
+
+  sudo docker run --entrypoint /runc-entry-point.sh \
+  --rm -i --privileged=true \
+  -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
+  $PX_DOCKER_IMAGE
+
+  /opt/pwx/bin/px-runc install -k $ETCD -c $CLUSTER_ID --cluster_domain witness -a
+
+  sudo systemctl daemon-reload
+  sudo systemctl enable portworx
+  sudo systemctl start portworx
+
+  watch -n 1 --color /opt/pwx/bin/pxctl --color status 
+```
+
+In the witness script:
+
+* the `--cluster_domain` argument is set to witness to indicate that this is a witness node and it contributes to quorum.
+* the `clusterID` and the `etcd` details need to be the same as they have been provided to the two other Portworx installations done in the Kubernetes clusters.
