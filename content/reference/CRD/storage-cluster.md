@@ -200,6 +200,17 @@ This section explains the fields used to configure the `StorageCluster` object.
 | spec.<br>resources.<br>memory | Specifies the memory that the Portworx container will use, for example: `"4Gi"` | `string` | None |
 
 [^1]: As an example, here's how you can enable the `CSI` feature.
+
+    For Operator 1.8 and higher:
+
+    ```text
+    spec:
+      csi:
+        enabled: true
+        installSnapshotController: false
+    ```
+    For Operator 1.7 and earlier:
+
     ```text
     spec:
       featureGates:

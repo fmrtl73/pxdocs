@@ -20,13 +20,40 @@ The Portworx CSI Driver requires additional components called `CSI Sidecars` in 
 
 ## Portworx CSI installed by default
 
-Starting with the Portworx [Operator 1.5 and higher](/reference/crd/storage-cluster/), CSI is installed by default unless explicitly disabled. Due to the nature of CSI and its dependencies, it is highly recommend to use the Portworx Operator instead of the spec generator for installation.
+Starting with the Portworx [Operator 1.5 and higher](/reference/crd/storage-cluster/), CSI is enabled by default for new Portworx installations. Due to the nature of CSI and its dependencies, it is highly recommend to use the Portworx Operator instead of the spec generator for installation.
 
 The Portworx Operator easily manages all CSI components based on your Kubernetes and Portworx versions. This makes upgrading Kubernetes and Portworx versions far easier.
 
 {{<info>}}**Note**:
 Explicitly disabling CSI will also prevent the Pure Storage FlashBade DirectAccess mode from working.
 {{</info>}}
+
+## Portworx Operator 1.8 and higher
+
+Starting with the Portworx [Operator 1.8 and higher](/reference/crd/storage-cluster/), new syntax is available for CSI, which is enabled by default for new Portworx installations. The default values are as follows:
+
+```text
+spec:
+  csi:
+    enabled: true
+    installSnapshotController: false
+```
+
+### Migrations to Operator 1.8
+
+If you migrate from an earlier version to Operator 1.8, your `spec` is automatically converted to match the new syntax. It will reflect the value you had previously set for `spec.featureGates.CSI`.
+
+If you previously [enabled Snapshot Controller manually](/portworx-install-with-kubernetes/storage-operations/csi/dataprotection/#setup-csi-volume-snapshotting), your existing controller will still work but `spec.csi.installSnapshotController` will be set to `false`. If you wish to switch to a Snapshot Controller installation that is managed by Portworx, remove your Snapshot Controller deployment and set `spec.csi.installSnapshotController` equal to `true`.
+
+## Portworx Operator 1.5 through 1.7
+
+CSI is installed and enabled by default for new installations as [previously described](#portworx-csi-installed-by-default). The syntax is as follows:
+
+```
+spec:
+  featureGates:
+    CSI: "true"
+```
 
 ## Portworx Operator 1.4 and earlier
 
@@ -40,9 +67,9 @@ spec:
     CSI: "true"
 ```
 
-## Openshift installation:
+## Openshift installation
 
-You must add the `px-csi-account` service account to the privileged security context.
+If you are using Openshift, you must add the `px-csi-account` service account to the privileged security context.
 
 ```text
 oc adm policy add-scc-to-user privileged system:serviceaccount:kube-system:px-csi-account
