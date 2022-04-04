@@ -124,3 +124,19 @@ pxctl cluster options update --skinnysnap-num-repls 2
 ```output
 Successfully updated cluster-wide options
 ```
+
+
+### Restore SkinnySnaps
+
+Replication for SkinnySnaps differ from the parent volumes. Use one of the following methods to restore these kinds of snapshots:
+
+#### Perform an in-place restore
+
+1. [Reduce the parent volume replication factor](/reference/cli/updating-volumes/#decreasing-the-replication-factor) to match with the replication of SkinnySnap and the replica location.
+2. [Perform an in-place restore](/reference/cli/snapshots/#restoring-snapshots).
+3. [Increase the replication factor](/reference/cli/updating-volumes/#increase-the-replication-factor) to restore high availability to the parent volume.
+
+#### Clone the SkinnySnap
+
+1. Clone the SkinnySnap and increase the replication factor to a desired value. 
+2. Use a [pre-provisioned volume](/portworx-install-with-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes/) to point the application to this new clone. 
