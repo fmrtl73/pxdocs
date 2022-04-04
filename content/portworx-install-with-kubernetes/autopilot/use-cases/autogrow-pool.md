@@ -22,6 +22,10 @@ Autopilot uses Portworx APIs to expand storage pools, and these APIs currently s
 
 ## Example
 
+{{<info>}}
+**NOTE**: You can also use the `resize-disk` scale type to expand Portworx storage pools. See [the Autopilot reference documentation](/portworx-install-with-kubernetes/autopilot/reference/#openstorage-io-action-storagepool-expand) for details on each parameter for the Autopilot expand action.
+{{</info>}}
+
 The following example Autopilot rule uses the `add-disk` scale type to expand a **250GiB** Portworx storage pool composed of a single **250GiB** drive by **100%** whenever its available capacity is lower than **50%** up to a maximum volume size of **2TB**:
 
 ```text
