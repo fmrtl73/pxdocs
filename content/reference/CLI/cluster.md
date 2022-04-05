@@ -294,6 +294,7 @@ Flags:
       --sharedv4-threads uint                           Number of sharedv4 threads. This will affect sharedv4 volume performance as well as the amount of CPU and memory consumed for handling sharedv4 volumes. (default 16)
       --snapshot-schedule-option string                 for detached volumes none will not generate schedule snapshots, optimized will generated one, always will generate them always (Valid Values: [none always optimized]) (default "optimized")
       --uniqueblocks-size-sched-interval-minutes uint   Configure periodic interval (in minutes) to query unique blocks size for volumes. (default 720)
+      --volume-expiration-minutes uint                  The number of minutes a volume snapshot is retained after you delete a volume. A value greater than zero enables the trash can feature.
 
 Global Flags:
       --ca string            path to root certificate for ssl usage

@@ -49,3 +49,13 @@ pxctl volume restore --snapshot mysnap myvol
 ```output
 Successfully started restoring volume myvol from mysnap.
 ```
+
+To restore a volume from the [trash can](/reference/cli/trashcan/), specify the --trashcan flag:
+
+```text
+pxctl volume restore --trashcan trashedvol myvol
+```
+
+```output
+Successfully started restoring volume myvol from trashedvol.
+```

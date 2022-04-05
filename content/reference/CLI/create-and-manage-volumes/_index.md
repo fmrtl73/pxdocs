@@ -415,6 +415,27 @@ ID			NAME		SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	STATUS				SNAP-ENABLED
 800735594334174869	testvol3	1 GiB	1	no	no		LOW		up - detached			no
 ```
 
+## List volumes in trash can
+
+When the [trash can](/reference/cli/trashcan/) is enabled, you can list volumes in the trash can with the following command:
+
+```text
+pxctl volume list --trashcan
+```
+
+This displays output similar to the following:
+
+```output
+DELETE TIME                   ID                  NAME                  SIZE   HA  SHARED  ENCRYPTED  IO_PRIORITY  STATUS         DELETE_TIMER
+Tue Mar 29 21:51:16 UTC 2022  780196670250220779  newvol-tc-1648590676  1 GiB  1   no      no         LOW          up - detached  9m33s
+```
+
+In the sample output above, the trash can volume name is in the format `<original-vol-name>-tc-<original-vol-id>`.
+
+### Related topics
+
+* To learn how to enable the volume trash can feature on a cluster, see [Volume trash can](/reference/cli/trashcan/).
+
 ## Locate volumes
 
 The `pxctl volume locate` command displays the mounted location of a volume in the containers running on the node:
@@ -508,6 +529,7 @@ Volume clone successful: 55898055774694370
 
 ### Related topics
 
+* To learn how to enable the volume trash can feature on a cluster, see [Volume trash can](/reference/cli/trashcan/).
 * For information about restoring a Portworx volume with data from a snapshot through Kubernetes, refer to the [Restore snapshots](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/snapshots/#restore-snapshots) page.
 
 
