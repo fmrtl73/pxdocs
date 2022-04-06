@@ -10,34 +10,36 @@ This document describes how to use Portworx **sharedv4** (ReadWriteMany) volumes
 
 ## Prerequisites
 
-* sharedv4 volumes must not be disabled on your cluster
-* NFS ports between nodes [must be open](/portworx-install-with-kubernetes/storage-operations/create-pvcs/open-nfs-ports/)
+* sharedv4 volumes must not be disabled on your cluster.
+* NFS ports between nodes [must be open](/portworx-install-with-kubernetes/storage-operations/create-pvcs/open-nfs-ports/).
 
 ## Provision a Sharedv4 Volume
 
-Sharedv4 volumes are useful when you want multiple PODs to access the same PVC \(volume\) at the same time. They can use the same volume even if they are running on different hosts. They provide a global namespace and the semantics are POSIX compliant.
+[Sharedv4 volumes](/concepts/shared-volumes/) are useful when you want multiple PODs to access the same PVC (volume) at the same time. They can use the same volume even if they are running on different hosts. They provide a global namespace and the semantics are POSIX compliant.
 
-To increase fault tolerance, you can enable **Sharedv4 service** volumes. With this feature enabled, every sharedv4 volume has a Kubernetes service associated with it. Sharedv4 service volumes expose the volume via a Kubernetes service IP. If the sharedv4 (NFS) server goes offline and requires a failover, application pods won't need to restart. 
+To increase fault tolerance, you can enable **Sharedv4 service** volumes by [setting a value](#step-1-create-a-storageclass) for `sharedv4_svc_type`. With this feature enabled, every sharedv4 volume has a Kubernetes service associated with it. Sharedv4 service volumes expose the volume via a Kubernetes service IP. If the sharedv4 (NFS) server goes offline for a sharedv4 service volume and the volume requires a [failover](/concepts/shared-volumes/#sharedv4-failover-and-failover-strategy), only application pods that were running on the 2 nodes involved in failover need to be restarted.
 
 {{<info>}}
 **Notes about Sharedv4 service volumes:**
 
-* This is an early access feature.
 * Sharedv4 service volumes are intended for use within the Kubernetes cluster where the volume resides.
 * Sharedv4 service volumes default to using NFSv4.0.
 * <u>Known issues</u>: 
   * On failover, Applications may receive an error for non idempotent requests. For example, if an `mkdir` call is issued prior to failover, the client can resend it to the new server, which returns an `EEXIST` error if the directory was created by the first call.
 {{</info>}}
 
-**Step1: Create Storage Class**
+### Step 1: Create a StorageClass
 
 1. Create the following storageClass, specifying your own values for the following fields:
 
   * The `metadata.name` field with a name for your storageClass
   * The `parameters.repl` field with the replication factor you'd like to set
   * The `sharedv4` field set to `true`
-  * (Optional) The `sharedv4_svc_type` set to either `ClusterIP` or `Loadbalancer`
-  * (Optional) Any `sharedv4_mount_options` you want to pass to the NFS client. The default values are: `(rw,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,acregmin=60,acdirmin=60,soft,proto=tcp,timeo=1200,retrans=4,sec=sys,mountvers=3,mountport=9024,mountproto=tcp,local_lock=none)`
+  * (Optional) The `sharedv4_svc_type` field set to `ClusterIP` if you want to enable the sharedv4 service feature
+  * (Optional) The `sharedv4_failover_strategy` field set to `normal` or `aggressive` (shorter failover grace period)
+{{<info>}}
+  **NOTE**: The default value for `sharedv4_failover_strategy` in sharedv4 volumes is `normal`, and the default value for `sharedv4_failover_strategy` in sharedv4 service volumes is `aggressive`.
+{{</info>}}
 
         ```text
         kind: StorageClass
@@ -64,15 +66,15 @@ kubectl describe storageclass px-sharedv4-sc
 ```
 
 ```output
-Name:	  	   px-sharedv4-sc
-IsDefaultClass:	   No
-Annotations:	   <none>
-Provisioner:	   kubernetes.io/portworx-volume
-Parameters:	   repl=2,sharedv4=true,sharedv4_svc_type=ClusterIP
-Events:			<none>
+Name:        px-sharedv4-sc
+IsDefaultClass:    No
+Annotations:     <none>
+Provisioner:     kubernetes.io/portworx-volume
+Parameters:    repl=2,sharedv4=true,sharedv4_svc_type=ClusterIP
+Events:     <none>
 ```
 
-**Step2: Create Persistent Volume Claim**
+### Step 2: Create persistent volume claim
 
 Creating a ReadWriteMany persistent volume claim:
 
@@ -111,7 +113,7 @@ px-sharedv4-pvc   Bound     pvc-a38996b3-76e9-11e7-9d47-080027b25cdf 10Gi       
 
 ```
 
-**Step3: Create Pods which uses Persistent Volume Claim**
+### Step 3: Create pods which use the persistent volume claim
 
 We will start two pods which use the same shared volume.
 
@@ -179,17 +181,31 @@ pod1      1/1       Running   0          2m
 pod2      1/1       Running   0          1m
 ```
 
-## Update a sharedv4 volume to sharedv4 service volume
+## Convert a sharedv4 volume to a sharedv4 service volume
 
 Perform the following steps to convert a sharedv4 volume to use the new sharedv4 service feature:
 
-1. Detach the volume by scaling down the app.
-2. Run the following `pxctl` command:
+1. Detach the volume by scaling down the application pods down to 0.
+1. Run the following `pxctl` command:
 
   ```text
   pxctl volume update --sharedv4_service_type=ClusterIP <volume>
   ```
 
+1. Scale the pods back up to start the application.
+
+## Convert a sharedv4 service volume to a sharedv4 volume
+
+
+Perform the following steps to convert a sharedv4 service volume to a sharedv4 volume:
+
+1. Detach the volume by scaling the application pods down to 0.
+1. Run the following `pxctl` command:
+
+  ```text
+  pxctl volume update --sharedv4_service_type="" <volume>
+  ```
+1. Scale the pods back up to start the application.
 
 ## Update a legacy shared volume to a sharedv4 volume
 
@@ -199,5 +215,5 @@ You can update an existing shared volume to use the new v4 protocol and convert 
 pxctl volume update --sharedv4=on <vol-name>
 ```
 
-{{<info>}}To access PV/PVCs with a non-root user refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users)
+{{<info>}}To access PV/PVCs with a non-root user, refer [here](/portworx-install-with-kubernetes/storage-operations/create-pvcs/access-via-non-root-users).
 {{</info>}}
