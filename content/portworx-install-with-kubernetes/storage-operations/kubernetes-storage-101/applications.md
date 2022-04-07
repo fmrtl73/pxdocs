@@ -201,7 +201,7 @@ In the above spec,
 
 ## Useful References
 
-* [Interactive tutorial - Cassandra Stateful Set on Portworx](https://www.katacoda.com/portworx/scenarios/px-cassandra)
-* [Interactive tutorial - HA PostgreSQL on Kubernetes with Portworx](https://www.katacoda.com/portworx/scenarios/px-k8s-postgres-all-in-one)
-* [Interactive tutorial - Deploy Kafka and Zookeeper on Kubernetes using Portworx volumes] (https://www.katacoda.com/portworx/scenarios/px-kafka)
-* [Interactive tutorial - Deploy Mongo on Portworx volumes using Helm](https://www.katacoda.com/portworx/scenarios/px-helm-mongo)
+* [Interactive tutorial - Cassandra Stateful Set on Portworx](https://play.instruqt.com/embed/portworx/tracks/px-cassandra-2-6?token=em_jXUaiIqY-ytFcXEx)
+* [Interactive tutorial - HA PostgreSQL on Kubernetes with Portworx](https://play.instruqt.com/embed/portworx/tracks/px-k8s-postgres-all-in-one?token=em_8fntBRLNv6ojyejP)
+* [Interactive tutorial - Deploy Kafka and Zookeeper on Kubernetes using Portworx volumes] (https://play.instruqt.com/embed/portworx/tracks/px-kafka?token=em_ZDwFV1S7m6sQCZ5o)
+* [Interactive tutorial - Deploy Mongo on Portworx volumes using Helm](https://play.instruqt.com/embed/portworx/tracks/px-helm-mongo?token=em_mQ7CBQc0ZgRZ0wNE)

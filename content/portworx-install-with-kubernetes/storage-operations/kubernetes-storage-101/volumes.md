@@ -103,10 +103,10 @@ A PVC can be
 
 ## Useful References
 
-* [Interactive tutorial - Resize Kubernetes volumes using kubectl](https://www.katacoda.com/portworx/scenarios/px-k8s-kubectl-resize-volume)
-* [Interactive tutorial - Persistent volumes on Kubernetes using Portworx](https://www.katacoda.com/portworx/scenarios/px-k8s-vol-basic)
-* [Interactive tutorial - Using Portworx Shared Volumes](https://www.katacoda.com/portworx/scenarios/px-k8s-vol-shared)
-* [Interactive tutorial - Encrypting volumes on Kubernetes](https://www.katacoda.com/portworx/scenarios/px-k8s-encryption)
+* [Interactive tutorial - Resize Kubernetes volumes using kubectl](https://play.instruqt.com/embed/portworx/tracks/px-k8s-kubectl-resize-volume?token=em_PnLyj2gfw7yGC_qO)
+* [Interactive tutorial - Persistent volumes on Kubernetes using Portworx](https://play.instruqt.com/embed/portworx/tracks/px-k8s-vol-basic?token=em_i84NTcoJqiT3C-x_)
+* [Interactive tutorial - Using Portworx Shared Volumes](https://play.instruqt.com/embed/portworx/tracks/px-k8s-vol-shared?token=em_2bqZqJRck18stZG_)
+* [Interactive tutorial - Encrypting volumes on Kubernetes](https://play.instruqt.com/embed/portworx/tracks/px-k8s-encryption?token=em_-04VTFKA0A9gPzhE)
 * [Kubernetes Storage documentation](https://kubernetes.io/docs/concepts/storage/volumes/)
 
 ## Related videos

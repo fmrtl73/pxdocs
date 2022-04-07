@@ -65,7 +65,7 @@ In this video, learn how Portworx runs on any distribution of Kubernetes and wha
 #### Resources
 
  - [Install with Kubernetes](/portworx-install-with-kubernetes/)
- - [Try Installing Portworx on Kubernetes yourself](https://www.katacoda.com/portworx/scenarios/deploy-px-k8s)
+ - [Try Installing Portworx on Kubernetes yourself](https://play.instruqt.com/embed/portworx/tracks/deploy-px-k8s-2-6?token=em_qFw-geFyUsN91lXc)
  - [Access Kubernetes Spec Generator in PX-Central](https://central.portworx.com/)
 
 ## Understanding Volume Replication
@@ -78,7 +78,7 @@ In this video, learn how Portworx runs on any distribution of Kubernetes and wha
 
  - [Topology Info for Replication Placement Docs](/concepts/update-geography-info/)
  - [Dynamic Provisioning Parameters](/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/)
- - [Example deploying MySQL with Portworx Replication](https://www.katacoda.com/portworx/scenarios/px-mysql)
+ - [Example deploying MySQL with Portworx Replication](https://play.instruqt.com/embed/portworx/tracks/px-mysql?token=em_QA3AzPZquo_D_fLH)
 
 ## Volume snapshot types
 
@@ -126,7 +126,7 @@ Shared volumes or volume shares allow multiple readers and writers for applicati
 #### Resources
 
  - [Portworx Shared Volumes Docs](/concepts/shared-volumes/)
- - [Portworx Shared volumes on Kubernets Tutorial](https://www.katacoda.com/portworx/scenarios/px-k8s-vol-shared)
+ - [Portworx Shared volumes on Kubernets Tutorial](https://play.instruqt.com/embed/portworx/tracks/px-k8s-vol-shared?token=em_2bqZqJRck18stZG_)
  - [CLI Reference for Shared Volumes](/reference/cli/create-and-manage-volumes/#the-global-namespace)
 
 ## Capacity Management (AutoPilot)
