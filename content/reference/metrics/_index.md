@@ -6,6 +6,7 @@ weight: 3
 noicon: true
 ---
 
+
 ## backup_stats stats
 | Name | Description |
 | :--- | :--- |
@@ -139,6 +140,9 @@ noicon: true
 | px_node_stats_num_skinnysnaps | The number of SkinnySnaps |
 | px_node_stats_skinnysnaps_num_repls_skips | The number of target replicas skipped for a snapshot due to SkinnySnap |
 | px_node_stats_skinnysnaps_num_repls_snapshots | The number of target replicas that underwent a snapshot operation due to SkinnySnap |
+| px_node_stats_relaxed_reclaim_pending | The number of volumes in RelaxedReclaim pending queue |
+| px_node_stats_relaxed_reclaim_skipped | The number of volume deletes that were skipped from being delayed even when RelaxedReclaim was enabled. |
+| px_node_stats_relaxed_reclaim_deleted | The number of volume deletes done through RelaxedReclaim |
 
 ## node_status stats
 | Name | Description |
@@ -255,6 +259,8 @@ noicon: true
 | px_volume_depth_io | Number of I/O operations currently in progress for this volume |
 | px_volume_readthroughput | Number of bytes read per second during this interval for this volume |
 | px_volume_writethroughput | Number of bytes written per second during this interval for this volume |
+| px_volume_vol_bytes_reclaimed | Number of bytes reclaimed by fstrim operation |
+| px_volume_vol_bytes_reclaimable | Number of bytes reclaimable on the volume as seen by fstrim operation |
 | px_volume_vol_read_latency_seconds | Average time spent per successfully completed read operation in seconds during this interval for this volume. **Deprecated**. |
 | px_volume_vol_write_latency_seconds | Average time spent per successfully completed write operation in seconds during this interval for this volume. **Deprecated**. |
 | px_volume_read_latency_seconds | Average time spent per successfully completed read operation in seconds for this volume |
