@@ -6,7 +6,7 @@ description: Maintain volumes using filesystem trim
 weight: 17
 ---
 
-A typical Portworx volume is formatted with either ext4 or xfs and then used by a container application to store its content files and directories. Over time, your application might create and delete files and directories. On the volume, the space which was previous used by a deleted file gets freed in the filesystem metadata and the underlying block device is unaware of this fact. This can lead to the following inefficiencies:
+A typical Portworx volume is formatted with ext4 and then used by a container application to store its content files and directories. Over time, your application might create and delete files and directories. On the volume, the space which was previous used by a deleted file gets freed in the filesystem metadata and the underlying block device is unaware of this fact. This can lead to the following inefficiencies:
 
 * On thin provisioned volumes, the freed space in the volume does not translate into free space in the pool. This means that other volumes in the pool that require space might not be able to get it from the pool.
 * On SSDs, the block device performs better when it has knowledge of all the freed blocks that the user no longer requires. This information is used by the SSD firmware to perform wear-leveling more efficiently to improve the service life of the storage device and also provide better I/O performance. When the information about the blocks freed in the filesystem is not available to the block device, it creates hot spots in the device that cause it to wear more than rest of the blocks in the device.
@@ -17,7 +17,7 @@ You can use automatic filesystem trim operations, or you can perform filesystem 
 
 ## Automatic filesystem trim operations
 
-You can enable automatic filesystem trimming (auto fstrim) at the volume, node, or cluster level. When all of the following conditions are met, auto fstrim monitors the unused space in all filesystems mounted on Portworx volumes and automatically triggers a trim job to return unused space back to the pool, and you do not have to manually issue trim jobs:
+Automatic filesystem trim is disabled by default. You can enable automatic filesystem trimming (auto fstrim) at the volume, node, or cluster level. When all of the following conditions are met, auto fstrim monitors the unused space in all filesystems mounted on Portworx volumes and automatically triggers a trim job to return unused space back to the pool, and you do not have to manually issue trim jobs:
 
 * Volumes have `nodiscard` enabled
 * Auto fstrim is enabled at the cluster level _or_ on the node where the volume is attached
