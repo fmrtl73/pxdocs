@@ -27,11 +27,12 @@ With asynchronous DR, you can replicate Kubernetes applications and their data b
 * The standby Kubernetes cluster has running controllers, configuration and PVCs that map to a local volumes.
 * Incremental changes in Kubernetes applications and Portworx data are continuously sent to the standby cluster.
 
-The following Kubernetes resources are supported as part of the Asynchronous DR feature:
+The Asynchronous DR feature supports the following Kubernetes resources:
 
-* PV
-* PVC
+* PersistentVolumeClaim
+* PersistentVolume
 * Deployment
+* DeploymentConfig
 * StatefulSet
 * ConfigMap
 * Service
@@ -42,7 +43,16 @@ The following Kubernetes resources are supported as part of the Asynchronous DR 
 * RoleBinding
 * ClusterRole
 * ClusterRoleBinding
+* ImageStream
 * Ingress
+* Route
+* Template
+* CronJob
+* ResourceQuota
+* ReplicaSet
+* LimitRange
+* NetworkPolicy
+* PodDisruptionBudget
 
 Asynchronous DR also supports the following CRDs out-of-the-box:
 
