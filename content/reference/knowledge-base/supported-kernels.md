@@ -28,6 +28,35 @@ apt install linux-headers-$(uname -r)
 
 ## Qualified distros and kernel versions
 
+
+### 2.10
+
+| **Linux Distro**	| **Kernel Version** |
+| --- | --- |
+| CentOS 7.5 | 5.4.12-1.el7.elrepo.x86_64 |
+| CentOS 7.8-vanilla | 3.10.0-1127.el7.x86_64 |
+| CentOS 8.2-vanilla | 4.18.0-240.22.1.el8_3.x86_64 |
+| Ubuntu 18.04.5 LTS | 5.4.0-1040-gcp |
+| Ubuntu 20.04.02 LTS | 5.4.0-73-generic | 
+| Ubuntu 20.10 | 5.13.0-1019-gcp | 
+| Ubuntu 21.04 | 5.11.0-1007-gcp |
+| Fedora 27	| Up to 4.13.9-300.fc27.x86_64 |
+| Fedora 28	| Up to 4.16.3-301.fc28.x86_64 |
+| FlatCar Alpha | 5.10.93-flatcar |
+| FlatCar Beta | 5.10.93-flatcar |
+| FlatCar Stable | 5.10.107-flatcar | 
+| RHEL 7.6 | 4.20.13-1.el7.elrepo.x86_64 | 
+| RHEL 7.8	| Up to 3.10.0-1160.25.1.el7.x86_64 |
+| RHEL 8.4 BETA | 4.18.0-293.el8.x86_64 |
+| Debian 9	| Up to 4.9.0-15-amd64 | 
+| Debian 10 | Up to 4.19.0-16-cloud-amd64 |
+
+| **Cloud Distro** | **Kernel Version** |
+| --- | --- |
+| Amazon Linux v2	| 4.14.225-169.362.amzn2.x86_64 |
+| Photon 3.0 | 4.19.132-6.ph3 | 
+| Photon 4.0 | 5.10.4-16.ph4 | 
+
 ### 2.9
 
 | **Linux Distro**	| **Kernel Version** |
