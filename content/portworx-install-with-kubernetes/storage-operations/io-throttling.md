@@ -1,26 +1,94 @@
 ---
-title: IO throttling
+title: Application I/O Control
 keywords: stork, kubernetes, k8s
 description: 
 weight: 910
 ---
 
-<!-- Consider putting this in the CLI section, rather than here. -->
+Portworx volumes are created from a common storage pool and share their available IOPS and bandwidth between all other provisioned Portworx volumes. If an application's volumes start consuming too many resources, it can become a "noisy neighbor" and reduce the I/O and network bandwidth available to other volumes in the pool. 
 
-Portworx volumes are created from a common backend pool and share their available IOPS and bandwidth amongst all other provisioned Portworx volumes. The Portworx IO throttling feature provides you with a method for controlling an individual Portworx volume’s IOPS or bandwidth usage of backend pool resources. Some of the advantages of this feature include:
+The Portworx Application I/O Control feature provides you with a method for controlling an individual Portworx volume’s IOPS or bandwidth usage from within Kubernetes. You can define quotas through a StorageClass which prevent any applications from using excessive bandwidth. When you need to adjust the bandwidth, you can do so in real-time by updating the values in the StorageClass. 
 
-* **Prevents starvation:** Without this feature, one Portworx volume could take over the entire bandwidth available in the backend or the network (for remote attached devices). This can happen due to unintentional jobs scheduled on Portworx volumes in the production cluster (e.g. an `fio` job on a Portworx volume) or an application software bug.
-* **Prevents cascading failures:** IO generated from a small number of Portworx volumes could overwhelm the backend bandwidth of one pool or node. This can delay processing on one node, and block other Portworx volumes used on other nodes. In a worst-case scenario, this could cause multiple nodes on the cluster to go offline. IO throttling addresses this issue.
-* **Adds IO specific resource management:** When Portworx is working together with Kubernetes, this completes the Kubernetes Resource Management for pods and containers in a significant way by adding an IO specific resource management mechanism to the existing CPU and memory resource management.
-* **Persists through volume administration:** This feature adds the IO throttling limit as an intrinsic attribute of Portworx volumes, meaning that the whole Portworx cluster can observe it regardless of normal volume administration operations. For example, the throttling limit is observed after a volume is mounted to a different node.
-* **Updates in real time:** Nondisruptive real-time updates to the IO throttling limits are supported, and you can observe throttling effects immediately after updating.
+<!-- For example, if you're performing testing or staging operations in one namespace in a cluster, a bug or misconfiguration in your test applications could impact volume performance for production applications in another namespace. You can prevent this by using the Application I/O Control StorageClass parameters to cap your test application volume bandwidth. -->
+
+In addition to defining parameters in a StorageClass, you can set Application I/O Control values for volumes using the `pxctl` command line interface. 
 
 
 {{<info>}}
-**NOTE:** By default, no IO throttling is set for any volumes.
+**NOTE:** By default, this feature is not enabled.
 {{</info>}}
 
+## Prerequisites
+
+* Application I/O Control is supported for kernel 4.6 or higher.
+* Only the cgroup mount path `/sys/fs/cgroup/blkio` is supported. This is typically set by `mount -t cgroup -o blkio none /sys/fs/cgroup/blkio`. Uncommon distributions could have a different cgroup mount path.
+
 ## Create volumes
+
+{{<info>}}
+**NOTE:**
+
+* You can set a maximum rate for IOPS and a maximum rate for bandwidth at the same time. However, you cannot set a read parameter for both IOPS and bandwidth at the same time or a write parameter for both at the same time. For example, setting `--max_iops 1024,off --max_bandwidth off,2` will work, but setting `--max_iops 1024,off --max_bandwidth 2,off` will prompt error. 
+
+* Once you set Application I/O Control values, you can check alerts or logs for messages indicating that Application I/O Control is not enabled. For example: `IO throttling supported from kernel v4.6, this node has kernel v3.10` indicates that Application I/O Control is not supported.
+
+* IOPS might be misleading due to batching of small blocksize IOs into a larger one before IO reaches the pxd device, especially when using sharedV4 volumes. Bandwidth throttling is more consistent.
+{{</info>}}
+
+### Apply using a StorageClass
+
+You can apply Application I/O Control through a StorageClass.
+
+To configure IOPS throttling in a StorageClass, use the following format:
+
+```text
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: portworx-io-profile
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "2"
+  io_profile: "db_remote"
+  io_throttle_rd_iops: "1024"
+  io_throttle_wr_iops: "1024"
+```
+
+To configure bandwidth throttling in a StorageClass, use the following format:
+
+```text
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: portworx-io-profile
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "2"
+  io_profile: "db_remote"
+  io_throttle_rd_bw: "10"
+  io_throttle_wr_bw: "10"
+```
+
+You can also configure read IOPS throttling and write bandwidth throttling, or the inverse. For example:
+
+```text
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: portworx-io-profile
+provisioner: kubernetes.io/portworx-volume
+parameters:
+  repl: "2"
+  io_profile: "db_remote"
+  io_throttle_rd_iops: "1024"
+  io_throttle_wr_bw: "10"
+```
+
+{{<info>}}
+**NOTE:**The minimum value for `rd_bw` and `wr_bw` is `1`, and the minimum value for `rd_iops` and `wr_iops` is `256`.
+{{</info>}}
+
+### Create using pxctl
 
 When you create volumes using `pxctl`, you can specify the `--max_bandwidth` and `--max_iops` flags to restrict the storage resources that volume uses:
 
@@ -31,9 +99,13 @@ pxctl volume create --max_bandwidth <ReadBW>,<WriteBW> <volname/volid>
 pxctl volume create --max_iops <ReadIOPS>,<WriteIOPS> <volname/volid> 
 ```
 
-## Update volumes
+{{<info>}}
+**NOTE:**The minimum value for `--max_bandwidth` is `1`, and the minimum value for `--max_iops` is `256`.
+{{</info>}}
 
-If you want to add IO throttling to an existing volume, or change its throttling values, you can do so using the `--max_bandwidth` and `--max_iops` flags with the `pxctl volume update` commands:
+## Update volumes using pxctl
+
+If you want to add Application I/O Control to an existing volume, or change its throttling values, you can do so using the `--max_bandwidth` and `--max_iops` flags with the `pxctl volume update` commands:
 
 ```text
 pxctl volume update --max_bandwidth <ReadBW>,<WriteBW> <volname/volid> 
