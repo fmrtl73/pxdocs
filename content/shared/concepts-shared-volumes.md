@@ -13,6 +13,7 @@ Through shared and sharedv4 volumes (also known as a **global namespace**), a si
 
 * You do not need to use shared/sharedv4 volumes to have your data accessible on any host in the cluster. Any Portworx volumes can be exclusively accessed from any host as long as they are not simultaneously accessed. Shared volumes are for providing simultaneous (concurrent or shared) access to a volume from multiple hosts at the same time.
 * You do not necessarily need a replication factor of greater than 1 on your volume in order for it to be shared. Even a volume with a replication factor of 1 can be shared on as many nodes as there are in your cluster.
+* IOPS might be misleading due to batching of small blocksize I/Os into a larger one before I/O reaches the `pxd` device, especially when using sharedV4 volumes. Bandwidth is more consistent.
 {{</info>}}
 
 A typical pattern is for a single container to have one or more volumes. Conversely, many scenarios would benefit from multiple containers being able to access the same volume, possibly from different hosts. Accordingly, the shared volume feature enables a single volume to be read/write accessible by multiple containers. Example use cases include:
