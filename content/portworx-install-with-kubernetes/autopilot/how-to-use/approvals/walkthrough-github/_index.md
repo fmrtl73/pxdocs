@@ -40,7 +40,7 @@ Autopilot needs access to the Github repository to create & manage PRs.
 
 ### Step 2a: Create a personal access token
 
-1. Follow the instructions in the [Creating a personal access token](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token) document to create a token Autopilot will use to access the Github repo.
+1. Follow the instructions in the [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) document to create a token Autopilot will use to access the Github repo.
      Select the **repo** scope when creating the token. That is the only permission Autopilot needs.
 2. Base64 encode the token:
      ```text

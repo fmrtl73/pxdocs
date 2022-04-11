@@ -12,6 +12,9 @@ IgnoreURLs:
 - "https://learn.hashicorp.com/consul"
 - "https://www.vaultproject.io/"
 - "https://docs.vmware.com/"
+- "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token"
+- "http://docs.rancher.com/rancher/latest/en/quick-start-guide/"
+- "https://docs.rancher.com/rancher/v1.2/en/hosts/amazon/"
 IgnoreDirs:
 - "css"
 - "icons"
