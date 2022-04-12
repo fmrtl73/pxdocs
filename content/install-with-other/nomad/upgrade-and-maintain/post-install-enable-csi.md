@@ -16,14 +16,14 @@ Enable Portworx CSI with Nomad by editing the `portworx.nomad` file you used for
     csi_plugin {
         id = "portworx"
         type = "monolith"
-        mount_dir = "/var/lib/osd/csi"
+        mount_dir = "/var/lib/csi"
     }
     ```
 
 2. Add the following environment variable under the "env" stanza:
 
     ```text
-    CSI_ENDPOINT = "unix://var/lib/osd/csi/csi.sock"
+    CSI_ENDPOINT = "unix:///var/lib/csi/csi.sock"
     ```
 
 3. Rerun the `portworx.nomad` file:
