@@ -196,6 +196,7 @@ This section explains the fields used to configure the `StorageCluster` object.
 | spec.<br>featureGates | A collection of key-value pairs specifying which Portworx features should be enabled or disabled. [^1] | `map[string]string` | None |
 | spec.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826). Similar to how environment variables are provided in Kubernetes, you can directly provide values to Portworx or import them from a source like a `Secret`, `ConfigMap`, etc. | `[]object` | None |
 | spec.<br>metadata.<br>annotations | A map of components and custom annotations. [^2] | map[string]map[string]string | None |
+| spec.<br>metadata.<br>labels | A map of components and custom labels. [^3] | map[string]map[string]string | None |
 | spec.<br>resources.<br>cpu | Specifies the cpu that the Portworx container will use, for example: `"4000m"` |  `string`  | None |
 | spec.<br>resources.<br>memory | Specifies the memory that the Portworx container will use, for example: `"4Gi"` | `string` | None |
 
@@ -218,15 +219,27 @@ This section explains the fields used to configure the `StorageCluster` object.
     ```
     Please note that you can also use `CSI: "True"` or `CSI: "1"`.
 
-[^2]: As an example, here is how to configure annotations for storage pods, change `custom-domain/custom-key: custom-val` accordingly.
+[^2]: The following example configures annotations for storage pods. Change `<custom-domain/custom-key>: <custom-val>` to whatever `key: val` pairs you wish to provide.
+
     ```text
     spec:
       metadata:
         annotations:
           pod/storage:
-            custom-domain/custom-key: custom-val
+            <custom-domain/custom-key>: <custom-val>
     ```
-    Please note that StorageCluster.spec.metadata.annotations is different from StorageCluster.metadata.annotations. Currently custom annotations are only supported on storage pods.
+    Note that `StorageCluster.spec.metadata.annotations` is different from `StorageCluster.metadata.annotations`. Currently, custom annotations are only supported on storage pods.
+
+[^3]: The following example configures labels for the `portworx-api` service. Change `<custom-label-key>: <custom-val>` to whatever `key: val` pairs you wish to provide.
+
+    ```text
+    spec:
+      metadata:
+        labels:
+          service/portworx-api:
+            <custom-label-key>: <custom-val>
+    ```
+    Note that `StorageCluster.spec.metadata.labels` is different from `StorageCluster.metadata.labels`. Currently, custom labels are only supported on the `portworx-api` service.
 
 ### KVdb configuration
 
@@ -244,8 +257,8 @@ This section provides details about the fields used to configure the storage for
 
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
-| spec.<br>storage.<br>useAll | If set to `true`, Portworx uses all available, unformatted, and unpartitioned devices. [^3] | `boolean` | `true` |
-| spec.<br>storage.<br>useAllWithPartitions | If  set to `true`, Portworx uses all the available and unformatted devices. [^3] | `boolean` |  `false` |
+| spec.<br>storage.<br>useAll | If set to `true`, Portworx uses all available, unformatted, and unpartitioned devices. [^4] | `boolean` | `true` |
+| spec.<br>storage.<br>useAllWithPartitions | If  set to `true`, Portworx uses all the available and unformatted devices. [^4] | `boolean` |  `false` |
 | spec.<br>storage.<br>forceUseDisks | If set to `true`, Portworx uses a device even if there's a file system on it. Note that Portworx may wipe the drive before using it. | `boolean` | `false` |
 | spec.<br>storage.<br>devices[] | Specifies the list of devices Portworx should use. | `[]string` | None |
 | spec.<br>storage.<br>cacheDevices[] | Specifies the list of cache devices Portworx should use. | `[]string` | None |
@@ -253,7 +266,7 @@ This section provides details about the fields used to configure the storage for
 | spec.<br>storage.<br>systemMetadataDevice | Indicates the device Portworx uses to store metadata. For better performance, specify a system metadata device when using Portworx with the internal KVdb. | `string` | None |
 | spec.<br>storage.<br>kvdbDevice | Specifies the device Portworx uses to store internal KVDB data. | `string` | None |
 
-[^3]: Note that Portworx ignores this filed if you specify the storage devices using the `spec.storage.devices` field.
+[^4]: Note that Portworx ignores this filed if you specify the storage devices using the `spec.storage.devices` field.
 
 ### Cloud storage configuration
 
@@ -301,6 +314,7 @@ You can use the placement rules to specify where Portworx should be deployed. By
 | spec.<br>placement.<br>nodeAffinity | Use this field to restrict Portwox on certain nodes. It works similarly to the [Kubernetes node affinity](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L2692) feature. | `object` | None |
 | spec.<br>placement.<br>tolerations[] | Specifies a list of tolerations that will be applied to Portworx pods so that they can run on nodes with matching taints.| `[]object` | None |
 
+For Operator 1.8 and higher, if you have topology labels [`topology.kubernetes.io/region`](https://kubernetes.io/docs/reference/labels-annotations-taints/#topologykubernetesioregion) or [`topology.kubernetes.io/zone`](https://kubernetes.io/docs/reference/labels-annotations-taints/#topologykubernetesiozone) specified on worker nodes, Operator would deploy Stork, Stork scheduler, CSI and PVC controller pods with [`topologySpreadConstraints`](https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/) to distribute pod replicas across Kubernetes failure domains.
 
 ### Update strategy
 
@@ -346,6 +360,14 @@ This section describes the fields used to manage the Stork deployment through th
 | spec.<br>stork.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826) passed to Stork. | `[]object` | None |
 | spec.<br>stork.<br>volumes[] | A list of volumes passed to Stork pods. The schema is similar to the [top-level volumes](#volume-configuration). | `[]object` | None |
 
+### CSI configuration
+
+This section provides details on how to configure CSI for the StorageCluster. Note this is for Operator 1.8 and higher only.
+
+| Field | Description | Type | Default |
+| --- | --- | --- | --- |
+| spec.<br>csi.<br>enabled | Flag indicating whether CSI needs to be installed for the storage cluster. | `boolean` | true |
+| spec.<br>csi.<br>installSnapshotController | Flag indicating whether CSI Snapshot Controller needs to be installed for the storage cluster. | `boolean` | false |
 
 ### Lighthouse configuration
 

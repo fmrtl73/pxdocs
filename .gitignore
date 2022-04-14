@@ -6,3 +6,4 @@ htmltest/bin/htmltest
 htmltest/tmp/.htmltest/refcache.json
 htmltest/tmp/.htmltest/htmltest.log
 .sw?
+.idea/
