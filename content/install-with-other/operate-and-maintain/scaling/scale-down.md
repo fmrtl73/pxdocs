@@ -216,6 +216,67 @@ Global Storage Pool
         Total Capacity  :  576 GiB
 ```
 
+### Suspend active cloudsnap operations
+
+1. Identify any active cloudsnap operations being run on the node you intend to decommission:
+
+    ```text
+    pxctl cloudsnap status
+    ```
+
+    The `STATE` of active operations shows as `Backup-Active`:
+    
+    ```output
+    NAME                                    SOURCEVOLUME        STATE           NODE            TIME-ELAPSED        COMPLETED   
+    0ddf4424-c7a7-4435-a80d-278535e49860    885345022234521857  Backup-Done     10.13.90.125    39.746191264s       Tue, 22 Mar 2022 22:53:37 UTC
+    31ab4e56-f0d2-4bdf-a236-3c3ccf47f276    186701534582547510  Backup-Done     10.13.90.122    1.677455484s        Tue, 22 Mar 2022 23:59:49 UTC
+    274c0d4c-12a4-403f-8b0b-73176c2d03e2    885345022234521857  Backup-Done     10.13.90.125    27.550329395s       Wed, 23 Mar 2022 00:00:15 UTC
+    ee91a94e-b311-4c4d-ba02-2307865c1b93    649554470078043771  Backup-Active   10.13.90.125    5m12.61653365s
+
+    ```
+
+    From this output, identify the volumes with active backups. For example, if node 10.13.90.125 is being decommissioned, then the volume with active backup is `649554470078043771`.
+
+1. Identify the namespace of the volume the cloudsnap operation is occuring on. The namespace is displayed under the `Labels` section in the output from the following command. Replace `<source_volume>` with the `SOURCEVOLUME` value for the volume that is in a `Backup-Active` state from the previous output:
+
+    ```text
+    pxctl volume inspect <source_volume>
+    ```
+    ```output
+    Volume               :  649554470078043771
+    Name                 :  pvc-d509932e-7772-4ac5-9bc0-d4827680f6de
+    Size                 :  500 GiB
+    Format               :  ext4
+    HA                   :  3
+    IO Priority          :  LOW
+    Creation time        :  Mar 22 20:37:52 UTC 2022
+    Shared               :  v4 (service)
+    Status               :  up
+    State                :  Attached: 78dbf17e-28b1-4c78-b35b-10f4e076cac8 (10.13.90.119)
+    Last Attached        :  Mar 22 20:37:58 UTC 2022
+    Device Path          :  /dev/pxd/pxd649554470078043771
+    Labels               :  mount_options=nodiscard=true,namespace=vdbench,nodiscard=true,pvc=vdbench-pvc-sharedv4,repl=3,sharedv4=true,sharedv4_svc_type=ClusterIP
+    ...
+    ```
+
+1. Suspend backup operations for the volume and wait for current backup to complete:
+
+    ```text
+    storkctl suspend volumesnapshotschedule vdbench-pvc-sharedv4-schedule  -n vdbench
+    ```
+1. Verify the suspension. The `SUSPEND` field will show as `true`:
+
+    ```text
+    storkctl get volumesnapshotschedule -n vdbench 
+    ```
+    ```output
+    NAME                            PVC                    POLICYNAME   PRE-EXEC-RULE   POST-EXEC-RULE   RECLAIM-POLICY   SUSPEND   LAST-SUCCESS-TIME
+    vdbench-pvc-sharedv4-schedule   vdbench-pvc-sharedv4   testpolicy                                    Delete           true      22 Mar 22 17:10 PDT
+    ```
+
+Repeat these steps until all active snaps complete and all backup operations are suspended on the node you want to decommission.
+
+
 ### Placing the node in maintenance mode
 After identifying the node to be removed (see section "Identify the node to remove from the cluster" above), place the node in maintenance mode.
 
