@@ -6,17 +6,18 @@ weight: 6
 series: kb
 ---
 
-## Portworx 2.8.0
+## Portworx 2.10.0
 
-This upgrade path was tested with Portworx 2.8.0 and Operator 1.6.0.
+This upgrade path was tested with Portworx 2.10.0 and Operator 1.8.0.
 
 {{<info>}}
 **NOTE:** If you are not on the same OCP version as in the tested upgrade example shown below, please upgrade to the next available version that is used in the upgrade path and continue as shown in the table below.
 {{</info>}}
 
-| **Channel version** | **OpenShift version** | **K8s version** |
-|---------------------|-----------------------|-----------------|
-| stable-4.6          | 4.6.48                | v1.19.14        |
-| stable-4.7          | 4.7.39                | v1.20.11        |
-| stable-4.8          | 4.8.23                | v1.21.6         |
-| stable-4.9          | 4.9.10                | v1.22.3         |
+| **Channel version** | **OpenShift version** | **Kubernetes version** |
+|---------------------|-----------------------|------------------------|
+| stable-4.6          | 4.6.56                | v1.19.16+6175753       |
+| stable-4.7          | 4.7.45                | v1.20.14+0d60930       |
+| stable-4.8          | 4.8.35                | v1.21.8+ee73ea2        |
+| force 4.9           | 4.9.24                | v1.22.5+5c84e52        |
+| fast-4.10           | 4.10.6                | v1.23.5+b0357ed        |
