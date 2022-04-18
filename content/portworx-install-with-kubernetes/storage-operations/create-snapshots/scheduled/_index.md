@@ -165,7 +165,7 @@ Use a `StorageClass` to apply your schedule policy to all PVCs using that `Stora
 
 {{<info>}}Specifying the `portworx/cloud-cred-id` is required only if you have more than one cloud credentials configured. If you have a single one, by default, that credential is used.{{</info>}}
 
-Let's list all the available cloud credentails we have.
+Let's list all the available cloud credentials we have.
 
 ```text
 PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')

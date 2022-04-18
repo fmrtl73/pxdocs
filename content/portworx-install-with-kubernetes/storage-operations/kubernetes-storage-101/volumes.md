@@ -72,7 +72,7 @@ spec:
 In above PVC,
 
 * **name: postgres-db** gives the name of the PVC.
-* **storageClassName: portworx-sc-db** indicates that this PVC should be creating using the provisioner and paramters specified in the *portworx-sc-db* StorageClass.
+* **storageClassName: portworx-sc-db** indicates that this PVC should be creating using the provisioner and parameters specified in the *portworx-sc-db* StorageClass.
 * **ReadWriteOnce** indicates that only one pod is allowed to read and write to the volume.
 * **storage: 10Gi** indicates this is a 10GiB PVC.
 

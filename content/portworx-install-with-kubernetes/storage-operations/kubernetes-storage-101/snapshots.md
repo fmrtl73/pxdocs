@@ -95,7 +95,7 @@ You can restore both single and group volume snapshots by creating a VolumeSnaps
 
 ## Migration
 
-Migration is reffered to the operation of transferring application workloads (e.g Deployments, Statefulsets, Jobs, ConfigMaps etc) and their data (PVCs) across Kubernetes clusters.
+Migration is referred to the operation of transferring application workloads (e.g Deployments, Statefulsets, Jobs, ConfigMaps etc) and their data (PVCs) across Kubernetes clusters.
 
 Common use cases for this would be:
 

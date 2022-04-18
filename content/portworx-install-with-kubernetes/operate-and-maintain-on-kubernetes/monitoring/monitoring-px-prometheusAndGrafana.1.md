@@ -9,7 +9,7 @@ description: How to use Prometheus and Grafana for monitoring Portworx on Kubern
 Prometheus is an opensource monitoring and alerting toolkit. Prometheus consists of several components some of which are listed below:
 
 - The Prometheus server which scrapes(collects) and stores time series data based on a pull mechanism.
-- A rules engine which allows generation of Alerts based on the scraped metrices.
+- A rules engine which allows generation of Alerts based on the scraped metrics.
 - An alertmanager for handling alerts.
 - Multiple integrations for graphing and dashboarding.
 

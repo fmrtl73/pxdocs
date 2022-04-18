@@ -43,7 +43,7 @@ The `ClusterConfig` dictates what resources `eksctl` requests from EKS for the p
         * **storageless-nodes.maxSize:** with the maximum number of storageless allowed on your cluster
         * **storageless-nodes.desiredCapacity:** with the ideal number of storageless nodes preferred on your cluster
         * **storageless-nodes.iam.attachPolicyARNs:** with the ARN of the IAM policy you created for Portworx in the **Grant Portworx the needed AWS permissions** step
-    * **availabilityZones:** with the availabilty zones applicable to your region
+    * **availabilityZones:** with the availability zones applicable to your region
 
         ```text
         apiVersion: eksctl.io/v1alpha5

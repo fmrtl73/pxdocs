@@ -1,7 +1,7 @@
 ---
 title: Rejoin a decommissioned Portworx node back to the cluster in Kubernetes
 hidden: true
-keywords: rejoin decomissioned node, Kubernetes, k8s
+keywords: rejoin decommissioned node, Kubernetes, k8s
 description: This guide provides a recommended workflow for rejoining a decommissioned node with its original cluster.
 ---
 

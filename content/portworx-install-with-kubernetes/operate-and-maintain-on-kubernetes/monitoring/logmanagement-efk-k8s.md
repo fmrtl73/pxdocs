@@ -8,7 +8,7 @@ description: Portworx logs management on Kubernetes using Elastic Search, Kibana
 Portworx logs management on Kubernetes using Elastic search, Kibana and Fluentd.
 
 ## Portworx logs on Kubernetes
-Portworx runs as a DaemonSet on the Kubernetes cluster which ensures that it runs on each node as part of the Kubernetes cluster. To allow access to the logs of a failed node, pod or a container in kubernetes we would have to adopt a complete logging solution. The need to access or view logs of failed container workloads means that we would need to enable storage and the logs should have a seperate lifecycle than that of the container that creates it.
+Portworx runs as a DaemonSet on the Kubernetes cluster which ensures that it runs on each node as part of the Kubernetes cluster. To allow access to the logs of a failed node, pod or a container in kubernetes we would have to adopt a complete logging solution. The need to access or view logs of failed container workloads means that we would need to enable storage and the logs should have a separate lifecycle than that of the container that creates it.
 
 Elastic Search, FluentD and Kibana allow us to setup a complete logging solution for accessing logs of the Portworx pods scheduled on the Kubernetes cluster.
 

@@ -256,7 +256,7 @@ OPTIONS:
    --resize             extend pool to maximum available physical storage
 ```
 
-During create each pool is benchmarked and assigned an io_prioriy classification automatically - high/medium/low. However, sometimes it is desirable for the operator to explicity designate a classification.
+During create each pool is benchmarked and assigned an io_prioriy classification automatically - high/medium/low. However, sometimes it is desirable for the operator to explicitly designate a classification.
 To update pool 0 priority classification to 'MEDIUM'
 
 ```text

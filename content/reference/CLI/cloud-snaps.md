@@ -470,7 +470,7 @@ NewVol                        56706279008755778        2e4d4b67-95d7-481e-aec5-1
 **Note:** This command assumes that all your credentials are properly set up. If that is not the case, the cloud backups won't show up.
 {{</info>}}
 
-If you enter the `pxctl cloudsnap list` command followed by the `--help` flag, you'll see the avaiable options:
+If you enter the `pxctl cloudsnap list` command followed by the `--help` flag, you'll see the available options:
 
 ```text
 pxctl cloudsnap list --help
@@ -529,7 +529,7 @@ pxctl cloudsnap list -d -c 4f568y9-23446acd7-0987-24875
 
 Output:
 ```
-Failed to enumerate backups:  Invalid arguements, cloudsnaps of deleted voluemes/MissingSrcVolumes can be listed for current cluster only
+Failed to enumerate backups:  Invalid arguments, cloudsnaps of deleted voluemes/MissingSrcVolumes can be listed for current cluster only
 ```
 
 The above command lists only the cloudsnaps of deleted volumes for current cluster. Therefore, the cluster-uuid/bucket input is not expected and returns error to the caller.

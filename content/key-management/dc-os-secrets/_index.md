@@ -56,7 +56,7 @@ Create a secret in DC/OS using the enterprise cli:
 dcos security secrets create --value=<secret-value> pwx/secrets/cluster-wide-secret-key
 ```
 
-For more details on ways to create Secrets in DC/OS refer [DC/OS documentaion](https://docs.mesosphere.com/1.11/security/ent/secrets/create-secrets)
+For more details on ways to create Secrets in DC/OS refer [DC/OS documentation](https://docs.mesosphere.com/1.11/security/ent/secrets/create-secrets)
 
 A cluster wide secret key is a common key that can be used to encrypt all your volumes. You can set the cluster secret key using the following command:
 

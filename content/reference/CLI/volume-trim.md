@@ -29,7 +29,7 @@ Auto fstrim takes into account current workloads in the system and dynamically a
 **NOTE:**
 
 * Enabling auto fstrim or changing IO rates has a small delay before taking effect.
-* If a volume is unmounted or detatched, Portworx automatically stops auto fstrim on that volume. If the volume is remounted, auto fstrim automatically starts again.
+* If a volume is unmounted or detached, Portworx automatically stops auto fstrim on that volume. If the volume is remounted, auto fstrim automatically starts again.
 {{</info>}}
 
 ### Enable auto fstrim

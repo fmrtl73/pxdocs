@@ -52,7 +52,7 @@ On each swarm node, perform the following steps to install Portworx.
 
 ### Step 2: Configure Portworx under runC
 
-{{<info>}}Specifiy `-x swarm` in the px-runc install command below to select Docker Swarm as your scheduler.{{</info>}}
+{{<info>}}Specify `-x swarm` in the px-runc install command below to select Docker Swarm as your scheduler.{{</info>}}
 
 {{< content "shared/install-with-other-docker-runc-configure-portworx.md" >}}
 

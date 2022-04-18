@@ -106,7 +106,7 @@ location:
 |projectID| Your Google Cloud Platform (GCP) [project ID](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) | **Default:** None | Yes |
 |accountKey| Your GCP JSON [service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) | **Default:** None | Yes |
 
-<!-- there are pxctl commands to take this in, you pass that JSON object to it in the form of a file, there should be instrcutions on it, if not, we should write them. -->
+<!-- there are pxctl commands to take this in, you pass that JSON object to it in the form of a file, there should be instructions on it, if not, we should write them. -->
 
 ## ApplicationBackup
 

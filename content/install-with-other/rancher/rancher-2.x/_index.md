@@ -42,7 +42,7 @@ Perform the following steps to install Portworx:
 
 5. Populate the various required sections of the **Configuration Options** of the Helm chart form:
 
-     * In the **Key Value Store Paramters** section, specify an internal or external ETCD.
+     * In the **Key Value Store Parameters** section, specify an internal or external ETCD.
 
         ![Screenshot showing the KVDB section of the Helm chart form](/img/rancherKvdb.png)
 

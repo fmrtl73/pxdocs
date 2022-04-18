@@ -111,9 +111,9 @@ The `-raid <0|10>` option is different than the volume replication factor.  For 
 --cpus <#.#>                  Specify maximum number of CPUs Portworx can use (e.g. --cpus=1.5)
 --cpu-shares <#>              Specify CPU shares (relative weight)
 --cpuset-cpus <val>           Specify CPUs in which to allow execution (<val> is range <#-#>, or sequence <#,#>)
---memory <bytes>              Specify maximum ammount of memory Portworx can use
+--memory <bytes>              Specify maximum amount of memory Portworx can use
 --memory-reservation <bytes>  Specify memory reservation soft limit (must be smaller than '--memory')
---memory-swap <bytes>         Specify maximum ammount of RAM+SWAP memory Portworx can use
+--memory-swap <bytes>         Specify maximum amount of RAM+SWAP memory Portworx can use
 --memory-swappiness <0-100>   Specify percentage of container's anonymous pages host can swap out
 ```
 

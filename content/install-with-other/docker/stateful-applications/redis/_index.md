@@ -74,9 +74,9 @@ redis:6379>
 docker kill some-redis
 ```
 
-### Start a new redis-server instance with volume persistance
+### Start a new redis-server instance with volume persistence
 
-Start another redis-server container called `other-redis` using the original `redis_vol` to show data persistance.
+Start another redis-server container called `other-redis` using the original `redis_vol` to show data persistence.
 
 ```text
 docker run --name other-redis  -v redis_vol:/data --volume-driver=pxd  -d redis redis-server --appendonly yes

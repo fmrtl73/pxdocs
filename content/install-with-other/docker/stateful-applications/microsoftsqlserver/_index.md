@@ -73,4 +73,4 @@ jeff-coreos-2 core # docker inspect --format '{{ .Mounts }}' 46eff5a9cbd6
 [{mssqlvol_snap_0628 /var/lib/osd/mounts/mssqlvol_snap_0628 /var/opt/mssql pxd  true rprivate}]
 ```
 
-For futher reading on running an MS-SQL container image with Docker, refer to [this](https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-linux-2017#a-idpersista-persist-your-data) page.
+For further reading on running an MS-SQL container image with Docker, refer to [this](https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-docker?view=sql-server-linux-2017#a-idpersista-persist-your-data) page.

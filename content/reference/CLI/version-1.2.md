@@ -128,7 +128,7 @@ The argument is the name or ID of the snapshot that you wish to delete. The snap
 
 #### Snapshot schedules
 
-In addtion to creating snapshots explicitly with the `pxctl snap create` command, you can create them automatically according to a per-volume schedule. There are four scheduling options, which you can combine as desired. A daily snapshot is created every day at a specified time, a weekly snapshot is created on a specified day of the week, and a monthly snapshot is created on a specified day of the month. Finally, you can specify that snapshots should be created at a fixed interval, say every 60 minutes. The example below sets a schedule of daily snapshots at 8:00 a.m. and 6:00 p.m., a weekly snapshot on Friday at 11:30 p.m., and a monthly snapshot on the 1st of the month at 6:00 a.m.
+In addition to creating snapshots explicitly with the `pxctl snap create` command, you can create them automatically according to a per-volume schedule. There are four scheduling options, which you can combine as desired. A daily snapshot is created every day at a specified time, a weekly snapshot is created on a specified day of the week, and a monthly snapshot is created on a specified day of the month. Finally, you can specify that snapshots should be created at a fixed interval, say every 60 minutes. The example below sets a schedule of daily snapshots at 8:00 a.m. and 6:00 p.m., a weekly snapshot on Friday at 11:30 p.m., and a monthly snapshot on the 1st of the month at 6:00 a.m.
 
 ```text
 pxctl volume create --daily @08:00 --daily @18:00 --weekly Friday@23:30 --monthly 1@06:00 myvol

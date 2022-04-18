@@ -102,7 +102,7 @@ The snapshot can then be used as a regular Portworx volume.
 
 ### Mount
 
-Mount operation mounts the Portworx volume in the propagated mount location. If the device is un-attached, `Mount` will implicitly perform an attach as well. Mounts are reference counted and are idempotent. The same volume can be mounted at muliple locations on the same node. The same device can be mounted at the same location multiple times.
+Mount operation mounts the Portworx volume in the propagated mount location. If the device is un-attached, `Mount` will implicitly perform an attach as well. Mounts are reference counted and are idempotent. The same volume can be mounted at multiple locations on the same node. The same device can be mounted at the same location multiple times.
 
 #### Attach
 
@@ -126,7 +126,7 @@ Running it again will create a second instance of busybox, another bind mount an
 
 ### Unmount
 
-Umount operation unmounts the Portworx volume from the propagated mount location. If this is the last surviving mount on a volume, then the volume is detached as well. Once succesfully unmounted the volume can be mounted on any other node in the system.
+Umount operation unmounts the Portworx volume from the propagated mount location. If this is the last surviving mount on a volume, then the volume is detached as well. Once successfully unmounted the volume can be mounted on any other node in the system.
 
 #### Detach
 

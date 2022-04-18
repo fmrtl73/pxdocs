@@ -53,7 +53,7 @@ uname -r
 
 #### Selecting drives for an installation
 
-* Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicity by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. Refer to [scheduler guides](./) for specifics for your scheduler.
+* Storage can be provided to Portworx explicitly by passing in a list of block devices. `lsblk -a` will display a list of devices on the system. This is accomplished by the '-s' flag as a runtime parameter. It can also be provided implicitly by passing in the '-a' flag. In this mode, Portworx will pick up all the available drives that are not in use. When combined with '-f', Portworx will pick up drives even if they have a filesystem on them (mounted drives are still excluded).  Note that not all nodes need to contribute storage; a node can operate in the storageless mode with the '-z' switch. Refer to [scheduler guides](./) for specifics for your scheduler.
 
 * HW RAID - If there are many drives in a server and drive failure tolerance is required per server, enable HW RAID (if available) and give the block device from a HW RAID volume for Portworx to manage.
 
@@ -74,7 +74,7 @@ Portworx replicated volumes distributes data across failure domains. For on-prem
 
 ### Topology in cloud environments
 
-Portworx auto-detects availabilty zones and regions and provisions replicas across
+Portworx auto-detects availability zones and regions and provisions replicas across
   different zones. For e.g., see below for the partial output of `pxctl status`:
 
 ```text

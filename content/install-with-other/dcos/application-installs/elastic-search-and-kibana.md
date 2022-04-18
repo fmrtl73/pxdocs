@@ -19,7 +19,7 @@ This framework is only supported directly by Portworx, Inc.. Please contact supp
 
 Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
 
-Running this framework requires a priveleged user that can run sudo without tty access \(See [here](https://www.shell-tips.com/2014/09/08/sudo-sorry-you-must-have-a-tty-to-run-sudo)\). The default user for this framework is set to `nobody`. If `nobody` does not have the appropriate priveleges please update the user during install.
+Running this framework requires a privileged user that can run sudo without tty access \(See [here](https://www.shell-tips.com/2014/09/08/sudo-sorry-you-must-have-a-tty-to-run-sudo)\). The default user for this framework is set to `nobody`. If `nobody` does not have the appropriate privileges please update the user during install.
 
 The Portworx-ElasticSearch service can be found in the DC/OS catalog:
 
@@ -51,7 +51,7 @@ Click on “Review and Install” and then “Install” to start the installati
 
 #### Check installation
 
-Monitor the DCOS service screen untill all `9 + 1` tasks are completed.
+Monitor the DCOS service screen until all `9 + 1` tasks are completed.
 
 ![Elasticsearch install status](/img/elasticsearch-px-universe-004.PNG)
 

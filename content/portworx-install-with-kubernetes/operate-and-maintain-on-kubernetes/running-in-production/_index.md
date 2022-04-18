@@ -64,7 +64,7 @@ Portworx replicated volumes distributes data across failure domains. For on-prem
 
 #### Topology in cloud environments
 
-Portworx auto-detects availabilty zones and regions and provisions replicas across different zones. For e.g., see below for the partial output of `pxctl status`
+Portworx auto-detects availability zones and regions and provisions replicas across different zones. For e.g., see below for the partial output of `pxctl status`
 
 ```text
 pxctl status

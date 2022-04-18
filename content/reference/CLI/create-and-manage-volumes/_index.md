@@ -215,7 +215,7 @@ pxctl volume create --nodes=LocalNode localVolume
 Volume successfully created: 756818650657204847
 ```
 
-The following commmand helps you to check if the replica of the volume is on the node where the command was run:
+The following command helps you to check if the replica of the volume is on the node where the command was run:
 
 ```text
 pxctl volume inspect localVolume
@@ -377,7 +377,7 @@ Volume myOldVol successfully deleted.
 
 ## Import volumes
 
-You can import files from a directory into an existing volume. The exisitng files on the volume are retained or overwritten.
+You can import files from a directory into an existing volume. The existing files on the volume are retained or overwritten.
 
 For example, the following command imports files from the `/path/to/files` directory into `myVol`:
 

@@ -10,7 +10,7 @@ Portworx with Kubernetes. It allows users to co-locate pods with their data,
 provides seamaless migration of pods in case of storage errors and makes it
 easier to create and restore snapshots of Portworx volumes
 
-Stork consists of 2 components, the Stork scheduler and an extender. Both of these componenets run in HA mode with 3 replicas by default.
+Stork consists of 2 components, the Stork scheduler and an extender. Both of these components run in HA mode with 3 replicas by default.
 
 ## Install
 

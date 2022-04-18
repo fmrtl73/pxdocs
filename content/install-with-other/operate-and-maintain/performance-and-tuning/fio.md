@@ -83,7 +83,7 @@ docker run --rm -it -v myvol:/mnt antonipx/fio  --blocksize=64k --filename=/mnt/
 ```
 
 Additional Factors to consider when running a read test:
-* Every read test should be preceeded by a dataset population step.
+* Every read test should be preceded by a dataset population step.
 * Before starting the test make sure the cache is purged, to prevent cache reads.
 * Use the option "--readonly" to direct fio to perform read on existing dataset.
 

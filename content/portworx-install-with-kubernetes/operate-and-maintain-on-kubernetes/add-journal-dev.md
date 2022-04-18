@@ -2,7 +2,7 @@
 title: Adding journal device to existing PX Nodes
 hidden: true
 keywords: journal device, kubernetes, k8s
-description: Discover how to add a journal device  to a PX node to increase performace.
+description: Discover how to add a journal device  to a PX node to increase performance.
 ---
 
 ## Adding Journal Device to an existing node.

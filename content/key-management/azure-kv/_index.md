@@ -54,7 +54,7 @@ To generate Portworx spec for Kubernetes, refer instructions, [click here](/port
 During installation,
 
 1. Use argument `-secret_type azure-kv -cluster_secret_key <secret-id>` when starting Portworx to specify the secret type as vault and the cluster-wide secret key.
-2. Use `-e` docker option to expose the Azure Key Vault enviornment variables.
+2. Use `-e` docker option to expose the Azure Key Vault environment variables.
 
 #### Existing installation
 

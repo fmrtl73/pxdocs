@@ -25,7 +25,7 @@ Follow Docker documentation to install Docker EE 2.x https://docs.docker.com/ins
 
 Follow Docker documentation to install UCP https://docs.docker.com/ee/ucp/admin/install.
 
-{{<info>}}Note that UCP version must be 3.1.x or higher for RBAC compatability https://docs.docker.com/ee/ucp/release-notes.{{</info>}}
+{{<info>}}Note that UCP version must be 3.1.x or higher for RBAC compatibility https://docs.docker.com/ee/ucp/release-notes.{{</info>}}
 
 #### Install UCP
 

@@ -109,4 +109,4 @@ parameters:
 
 Any PVC created using the above storage class will have a replication factor of 2 and will have one copy of its data on `rack1` and the other copy on `rack2`
 
-To do the same for regions and zones, you can use `regions` and `zones` as paramters in the StorageClass respectively.
+To do the same for regions and zones, you can use `regions` and `zones` as parameters in the StorageClass respectively.

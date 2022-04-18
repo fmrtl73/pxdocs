@@ -84,7 +84,7 @@ Consider the following scenarios for a 3 node cluster:
 <!-- 
 #### Load balance
 
-accross all nodes, look at # replicas each node has, try and distribute replicas across all nodes so that load is similar across the cluster.
+across all nodes, look at # replicas each node has, try and distribute replicas across all nodes so that load is similar across the cluster.
 
 Specifically, when a snapshot is taken, Portworx looks at all the nodes where a snapshot can be taken, the total # of replicas for volumes it has, and tries to divide the workload.  
 -->

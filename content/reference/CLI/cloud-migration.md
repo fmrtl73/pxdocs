@@ -155,7 +155,7 @@ pxctl cloudmigrate start --all --cluster_id <cluster_id>
 -->
 ### Migrating  volume
 
-To migrate a particualr volume, try using:
+To migrate a particular volume, try using:
 
 ```text
 pxctl cloudmigrate start --volume_id <volumeId> --cluster_id <cluster_id>

@@ -6,7 +6,7 @@ description: Instructions for creating and using VolumePlacementStrategies.
 
 Create your VolumePlacementStrategy along with your other storage resources:
 
-### Prerequisities
+### Prerequisites
 
 * **Portworx version**: 2.1.2 and above
 

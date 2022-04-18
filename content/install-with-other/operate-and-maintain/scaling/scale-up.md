@@ -8,7 +8,7 @@ description: Discover how to add a new node to a Portworx cluster and how to add
 This document presents the **non-Kubernetes** method of scaling your Portworx cluster. Please refer to the [Scale or Restrict](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/scale-or-restrict/) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
-## Adding Storage to exising Portworx Cluster Nodes
+## Adding Storage to existing Portworx Cluster Nodes
 
 This section illustrates how to add a new node to a Portworx cluster and how to add additional storage to the Portworx Cluster once a new node is added.
 

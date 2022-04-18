@@ -404,7 +404,7 @@ This section provides details on how to override certain cluster level configura
 | --- | --- | --- | --- |
 | spec.<br>nodes[] | A list of node specific configurations. | `[]object` | None |
 | spec.<br>nodes[].<br>selector | Selector for the node(s) to which the configuration in this section will be applied. | `object` | None |
-| spec.<br>nodes[].<br>selector.<br>.nodeName | Name of the node to which this configuration will be applied. Node name takes precendence over `selector.labelSelector`. | `string` | None |
+| spec.<br>nodes[].<br>selector.<br>.nodeName | Name of the node to which this configuration will be applied. Node name takes precedence over `selector.labelSelector`. | `string` | None |
 | spec.<br>nodes[].<br>selector.<br>.labelSelector | [Kubernetes style label selector](https://github.com/kubernetes/apimachinery/blob/master/pkg/apis/meta/v1/types.go) for nodes to which this configuration will be applied. | `object` | None |
 | spec.<br>nodes[].<br>network | Specify network configuration for the selected nodes, similar to the one [specified at cluster level](#network-configuration). If this network configuration is empty, then cluster level values are used. | `object` | None |
 | spec.<br>nodes[].<br>storage | Specify storage configuration for the selected nodes, similar to the one [specified at cluster level](#storage-configuration). If some of the config is left empty, the cluster level storage values are passed to the nodes. If you don't want to use a cluster level value and set the field to empty, then explicitly set an empty value for it so no value is passed to the nodes. For instance, set `spec.nodes[0].storage.kvdbDevice: ""`, to not use kvdb device for the selected nodes. | `object` | None |
