@@ -46,6 +46,8 @@ az role definition create --role-definition '{
 
     ```text
     az ad sp create-for-rbac --role=portworx-cloud-drive --scopes="/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9/resourceGroups/<aks-infrastructure-resource-group>"
+    ```
+    ```output
     {
       "appId": "1311e5f6-xxxx-xxxx-xxxx-ede45a6b2bde",
       "displayName": "azure-cli-2020-10-10-10-10-10",
@@ -57,6 +59,7 @@ az role definition create --role-definition '{
 
 2. Create a secret called `px-azure` to give Portworx access to Azure APIs by updating the following fields with the associated fields from the service principal you created in the step above:
 
+
     ```text
     kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_TENANT_ID=<tenant> \
                                                           --from-literal=AZURE_CLIENT_ID=<appId> \
@@ -65,3 +68,5 @@ az role definition create --role-definition '{
     ```output
     secret/px-azure created
     ```
+
+Now that you've created the secret, you're ready to create the spec and deploy Portworx. The spec generator automatically incorporates the secret that you created, and Portworx will fetch the secret to authenticate. Proceed to the next section to install Portworx.
