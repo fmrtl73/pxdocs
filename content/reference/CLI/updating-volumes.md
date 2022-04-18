@@ -339,7 +339,7 @@ Follow the instructions below to increase a volume's replication factor and crea
 	<volume-name>
 	```
 
-3. Monitor the replication operation by entering the following `pxctl alerts show` command:
+3. Monitor the replication operation by entering the following [`pxctl alerts show`](/reference/cli/alerts/#reported-alerts) command:
 
 	```text
 	pxctl alerts show --type volume
@@ -405,7 +405,7 @@ The `ha-update` command can be used to reduce the replication factor as well. Fo
 	Update Volume Replication: Replication update started successfully for volume exampleVolume
 	```
 
-2. Monitor the replication operation by entering the following `pxctl alerts show` command:
+2. Monitor the replication operation by entering the following [`pxctl alerts show`](/reference/cli/alerts/#reported-alerts) command:
     ```text
     pxctl alerts show --type volume
     ```

@@ -135,7 +135,7 @@ NODE       ObjectstoreSuccess             SEVERITY_TYPE_NOTIFY
 NODE       ObjectstoreStateChange         SEVERITY_TYPE_NOTIFY
 ```
 
-For more details on alerts, please see [this page](/install-with-other/operate-and-maintain/monitoring/portworx-alerts).
+For more details on alerts, see [Portworx Alerts](/install-with-other/operate-and-maintain/monitoring/portworx-alerts).
 
 ## Reported alerts
 
@@ -153,6 +153,15 @@ NODE    ObjectstoreSuccess    a64136b9-4dd2-4314-8ce6-b8429e2fca73    NOTIFY    
 CLUSTER    NodeStartSuccess    173460ec-3f1f-4015-9fc1-34c2e165657f    NOTIFY        1    May 28 16:52:36 UTC 2019    May 28 16:52:36 UTC 2019    Node 70.0.76.50 Exiting Maintenance mode.
 ```
 
+You can also constrain which alert types the `show` command returns by including the `--type` flag with one of the following values: `volume`, `node`, `cluster`, `drive`, and `all` (default). For example:
+
+```text
+pxctl alerts show --type volume
+```
+```output
+Type      ID            Resource                Severity    Count    LastSeen            FirstSeen            Description
+VOLUME    VolumeCreateSuccess    445516405819839095            NOTIFY        1    May 28 16:51:43 UTC 2019    May 28 16:51:43 UTC 2019    Volume (Name: tesvol Id: 445516405819839095) created successfully.
+```
 
 ## Purging alerts
 
@@ -181,7 +190,11 @@ Type    ID    Resource    Severity    Count    LastSeen    FirstSeen    Descript
 ```
 
 {{<info>}}
-{{<companyName>}} recommends setting up monitoring with Prometheus and AlertsManager. If you are using Portworx with Kubernetes, head over to [this page](https://2.1.docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/). If you are using Portworx with other orchestrators, check out [this page](/install-with-other/operate-and-maintain/monitoring/alerting/).
+{{<companyName>}} recommends setting up monitoring with Prometheus and AlertsManager.
+
+* If you are using Portworx with Kubernetes, see [Install Prometheus and Grafana using Daemonset](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/).
+* If you are using Portworx with other orchestrators, see [Alerting with Portworx](/install-with-other/operate-and-maintain/monitoring/alerting/).
+
 {{</info>}}
 
 
