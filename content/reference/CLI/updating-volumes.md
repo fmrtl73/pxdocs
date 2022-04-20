@@ -93,6 +93,8 @@ Volume	:  970758537931791410
 
 Note that the `shared` field is shown as `no`, indicating that `clitest` is not a shared volume.
 
+Before turning on sharing, make sure no applications are actively using the volume. Kubernetes users can scale down their application pods so that the volume is in a detached state.
+
 Next, let's turn on sharing:
 
 ```text
