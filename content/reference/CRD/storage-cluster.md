@@ -17,7 +17,7 @@ Note that using the Portworx spec generator is the recommended way of generating
 
 This section provides a few examples of common Portworx configurations you can use for manually configuring your Portworx cluster. Update the default values in these files to match your environment.
 
-* Portworx with internal KVdb, configured to use all unused devices on the system.
+* Portworx with internal KVDB, configured to use all unused devices on the system.
 
     ```text
     apiVersion: core.libopenstorage.org/v1
@@ -241,15 +241,15 @@ This section explains the fields used to configure the `StorageCluster` object.
     ```
     Note that `StorageCluster.spec.metadata.labels` is different from `StorageCluster.metadata.labels`. Currently, custom labels are only supported on the `portworx-api` service.
 
-### KVdb configuration
+### KVDB configuration
 
-This section explains the fields used to configure Portworx with a KVdb. Note that, if you don't specify the endpoints, the operator starts Portworx with the internal KVdb.
+This section explains the fields used to configure Portworx with a KVDB. Note that, if you don't specify the endpoints, the operator starts Portworx with the internal KVDB.
 
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
-| spec.<br>kvdb.<br>internal | Specifies if Portworx starts with the [internal KVdb](/concepts/internal-kvdb). | `boolean` | `true` |
-| spec.<br>kvdb.endpoints[]<br> | A list of endpoints for your external key-value database like ETCD or Consul. This field takes precedence over the `spec.kvdb.internal` field. That is, if you specify the endpoints, Portworx ignores the `spec.kvdb.internal` field and it uses the external KVdb. | `[]string` | None |
-| spec.<br>kvdb.<br>authSecret | Indicates the name of the secret Portworx uses to authenticate against your KVdb. The secret must be placed in the same namespace as the `StorageCluster` object. The secret should provide the following information: <br> -  The username and password stored under the `username` and `password` keys, if you're using a username/password authentication schema. <br> - The CA certificate stored under the `kvdb-ca.crt` key and the certificate key stored under the `kvdb.key`, if you're using certificates for authentication. <br> - The ACL token stored under the `acl-token` key, if you're using ACL tokens for authentication. | `string` | None |
+| spec.<br>kvdb.<br>internal | Specifies if Portworx starts with the [internal KVDB](/concepts/internal-kvdb). | `boolean` | `true` |
+| spec.<br>kvdb.endpoints[]<br> | A list of endpoints for your external key-value database like ETCD or Consul. This field takes precedence over the `spec.kvdb.internal` field. That is, if you specify the endpoints, Portworx ignores the `spec.kvdb.internal` field and it uses the external KVDB. | `[]string` | None |
+| spec.<br>kvdb.<br>authSecret | Indicates the name of the secret Portworx uses to authenticate against your KVDB. The secret must be placed in the same namespace as the `StorageCluster` object. The secret should provide the following information: <br> - `username` (optional) <br> - `password` (optional) <br> - `kvdb-ca.crt` (the CA certificate) <br> - `kvdb.key` (certificate key) <br> - `kvdb.crt` (etcd certificate) <br> - `acl-token` (optional) <br>For example, create a directory called etcd-secrets, copy the files into it and create a secret with `kubectl -n kube-system create secret generic px-kvdb-auth --from-file=etcd-secrets/`| `string` | None |
 
 ### Storage configuration
 
@@ -263,7 +263,7 @@ This section provides details about the fields used to configure the storage for
 | spec.<br>storage.<br>devices[] | Specifies the list of devices Portworx should use. | `[]string` | None |
 | spec.<br>storage.<br>cacheDevices[] | Specifies the list of cache devices Portworx should use. | `[]string` | None |
 | spec.<br>storage.<br>journalDevice | Specifies the device Portworx uses for journaling. | `string` | None |
-| spec.<br>storage.<br>systemMetadataDevice | Indicates the device Portworx uses to store metadata. For better performance, specify a system metadata device when using Portworx with the internal KVdb. | `string` | None |
+| spec.<br>storage.<br>systemMetadataDevice | Indicates the device Portworx uses to store metadata. For better performance, specify a system metadata device when using Portworx with the internal KVDB. | `string` | None |
 | spec.<br>storage.<br>kvdbDevice | Specifies the device Portworx uses to store internal KVDB data. | `string` | None |
 
 [^4]: Note that Portworx ignores this filed if you specify the storage devices using the `spec.storage.devices` field.
@@ -277,7 +277,7 @@ This section explains the fields used to configure Portworx with cloud storage. 
 | spec.<br>cloudStorage.<br>provider | Specifies the cloud provider name, such as: pure, azure, aws, gce, vsphere. | `string` | None |
 | spec.<br>cloudStorage.<br>deviceSpecs[] | A list of the specs for your cloud storage devices. Portworx creates a cloud disk for every device. | `[]string` | None |
 | spec.<br>cloudStorage.<br>journalDeviceSpec | Specifies the cloud device Portworx uses for journaling. | `string` | None |
-| spec.<br>cloudStorage.<br>systemMetadataDeviceSpec | Indicates the cloud device Portworx uses for metadata. For performance, specify a system metadata device when using Portworx with the internal KVdb. | `string` | None |
+| spec.<br>cloudStorage.<br>systemMetadataDeviceSpec | Indicates the cloud device Portworx uses for metadata. For performance, specify a system metadata device when using Portworx with the internal KVDB. | `string` | None |
 | spec.<br>cloudStorage.<br>kvdbDeviceSpec | Specifies the cloud device Portworx uses for an internal KVDB. | `string` | None |
 | spec.<br>cloudStorage.<br>maxStorageNodesPerZone | Indicates the maximum number of storage nodes per zone. If this number is reached, and a new node is added to the zone, Portworx doesn't provision drives for the new node. Instead, Portworx starts the node as a compute-only node. | `uint32` | None |
 | spec.<br>cloudStorage.<br>maxStorageNodes | Specifies the maximum number of storage nodes. If this number is reached, and a new node is added, Portworx doesn't provision drives for the new node. Instead, Portworx starts the node as a compute-only node. As a best practice, it is recommended to use the `maxStorageNodesPerZone` field. | `uint32` | None |
@@ -331,7 +331,7 @@ This section provides details on how to specify an uninstall strategy for your P
 
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
-| spec.<br>deleteStrategy.<br>type | Indicates what happens when the Portworx `StorageCluster` object is deleted. By default, there is no delete strategy, which means only the Kubernetes components deployed by the operator are removed.  The Portworx `systemd` service continues to run, and the Kubernetes applications using the Portworx volumes are not affected. Portworx supports the following delete strategies: <br> - `Uninstall` - Removes all Portworx components from the system and leaves the devices and KVdb intact. <br> - `UninstallAndWipe` - Removes all Portworx components from the system and wipes the devices and metadata from KVdb.  | `string`| None |
+| spec.<br>deleteStrategy.<br>type | Indicates what happens when the Portworx `StorageCluster` object is deleted. By default, there is no delete strategy, which means only the Kubernetes components deployed by the operator are removed.  The Portworx `systemd` service continues to run, and the Kubernetes applications using the Portworx volumes are not affected. Portworx supports the following delete strategies: <br> - `Uninstall` - Removes all Portworx components from the system and leaves the devices and KVDB intact. <br> - `UninstallAndWipe` - Removes all Portworx components from the system and wipes the devices and metadata from KVDB.  | `string`| None |
 
 ### Monitoring configuration
 
@@ -407,7 +407,7 @@ This section provides details on how to override certain cluster level configura
 | spec.<br>nodes[].<br>selector.<br>.nodeName | Name of the node to which this configuration will be applied. Node name takes precedence over `selector.labelSelector`. | `string` | None |
 | spec.<br>nodes[].<br>selector.<br>.labelSelector | [Kubernetes style label selector](https://github.com/kubernetes/apimachinery/blob/master/pkg/apis/meta/v1/types.go) for nodes to which this configuration will be applied. | `object` | None |
 | spec.<br>nodes[].<br>network | Specify network configuration for the selected nodes, similar to the one [specified at cluster level](#network-configuration). If this network configuration is empty, then cluster level values are used. | `object` | None |
-| spec.<br>nodes[].<br>storage | Specify storage configuration for the selected nodes, similar to the one [specified at cluster level](#storage-configuration). If some of the config is left empty, the cluster level storage values are passed to the nodes. If you don't want to use a cluster level value and set the field to empty, then explicitly set an empty value for it so no value is passed to the nodes. For instance, set `spec.nodes[0].storage.kvdbDevice: ""`, to not use kvdb device for the selected nodes. | `object` | None |
+| spec.<br>nodes[].<br>storage | Specify storage configuration for the selected nodes, similar to the one [specified at cluster level](#storage-configuration). If some of the config is left empty, the cluster level storage values are passed to the nodes. If you don't want to use a cluster level value and set the field to empty, then explicitly set an empty value for it so no value is passed to the nodes. For instance, set `spec.nodes[0].storage.kvdbDevice: ""`, to prevent using the KVDB device for the selected nodes. | `object` | None |
 | spec.<br>nodes[].<br>env | Specify extra environment variables for the selected nodes. Cluster level environment variables are combined with these and sent to the selected nodes. If same variable is present at cluster level, then the node level variable takes precedence. | `object` | None |
 | spec.<br>nodes[].<br>runtimeOptions | Specify runtime options for the selected nodes. If specified, cluster level options are ignored and only these runtime options are passed to the nodes.  | `object` | None |
 
