@@ -180,6 +180,18 @@ This section provides a few examples of common Portworx configurations you can u
           devices: []
     ```
 
+* Portworx with a cluster domain defined.
+
+  ```text
+      apiVersion: core.libopenstorage.org/v1
+      kind: StorageCluster
+      metadata:
+        name: portworx
+        namespace: kube-system
+      annotations:
+        portworx.io/misc-args: "-cluster_domain example-cluster-domain-name”
+  ```
+
 ## StorageCluster Schema
 
 This section explains the fields used to configure the `StorageCluster` object.

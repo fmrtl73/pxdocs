@@ -101,10 +101,16 @@ domain. In this case, your Kubernetes clusters are separated across a metropolit
 DR across them. So each Kubernetes cluster and its nodes are one cluster domain. This cluster domain information needs
 to be explicitly specified to Portworx through the `-cluster_domain` install argument.
 
-Once you have generated the Kubernetes manifest file, add the `cluster_domain` argument. You can also edit a running Portworx install and add this new field.
+Once you have generated the Kubernetes manifest file, add the `cluster_domain` argument. You can also edit a running Portworx install and add this new field. The value for `cluster_domain` must be different for each Kubernetes cluster, for example:
 
-#### Operator Install
-Use the `portworx.io/misc-args` annotation to add a `-cluster_domain` argument:
+* You can name your cluster domains with arbitrary names like **datacenter1** and **datacenter2** identifying in which
+  Datacenter your Kubernetes clusters are running.
+* You can name them based on your cloud provider's zone names such as **us-east-1a**, **us-east-1b**.
+
+#### Using the Operator
+
+Use the `portworx.io/misc-args` annotation to add a `-cluster_domain` argument with the cluster domain name of your cluster environment. The following example uses a cluster domain of `us-east-1a`:
+
 ```text
 apiVersion: core.libopenstorage.org/v1
 kind: StorageCluster
@@ -113,8 +119,10 @@ metadata:
     portworx.io/misc-args: "-cluster_domain us-east-1a"
 ```
 
-#### DaemonSet Install
-Add the `-cluster_domain` argument in the `args` section of the DaemonSet:
+#### Using the DaemonSet
+
+Add the `-cluster_domain` argument in the `args` section of the DaemonSet. The following example uses a cluster domain of `us-east-1a`:
+
 ```text
       containers:
         - name: portworx
@@ -125,12 +133,6 @@ Add the `-cluster_domain` argument in the `args` section of the DaemonSet:
              "-x", "kubernetes"]
 
 ```
-<br/><br/>
-The value for `cluster_domain` needs to be different for each Kubernetes cluster.
-
-* You can name your cluster domains with arbitrary names like **datacenter1** and **datacenter2** identifying in which
-  Datacenter your Kubernetes clusters are running.
-* You can name them based on your cloud provider's zone names such as **us-east-1a**, **us-east-1b**.
 
 #### Installing on a Tanzu cluster
 
