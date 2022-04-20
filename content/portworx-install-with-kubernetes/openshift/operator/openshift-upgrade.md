@@ -8,11 +8,11 @@ weight: 4
 
 Before you can upgrade your OpenShift environment to 4.3, you must upgrade Portworx to 2.3.5 and expose a new port range so that Portworx can continue to operate. Perform the following steps to upgrade Portworx to 2.3.5 in preparation for upgrading your OpenShift environment:
 
-1. From the OpenShift console, upgrade the Portworx Operator to version 1.1.1 newer.
+1. From the OpenShift console, upgrade the Portworx Operator to version 1.1.1 or newer.
 
 2. [Upgrade Portworx](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/upgrade-operator) to 2.3.5.
 
-3. Verify that all of your nodes have upgraded to 2.3.5:
+3. Verify that all of your nodes have upgraded to your specified Portworx version (e.g. 2.3.5):
 
     ```text
     oc get storagenode -n kube-system
@@ -36,13 +36,13 @@ Before you can upgrade your OpenShift environment to 4.3, you must upgrade Portw
     2. Change the `startPort` value in your `StorageCluster` spec to `17001`:
 
         ```text
-        apiVersion: core.libopenstorage.org/v1	      
-        kind: StorageCluster	      
-        metadata:	      
-          name: portworx	        
-          namespace: kube-system	        
-        spec:	      
+        apiVersion: core.libopenstorage.org/v1
+        kind: StorageCluster
+        metadata:
+          name: portworx
+          namespace: kube-system
+        spec:
           startPort: 17001
         ```
 
-Once Portworx is running on 2.3.5 and you've changed the port range, you may upgrade OpenShift to 4.3.
+Once these operations have been completed, you may upgrade OpenShift to 4.3 or newer.
