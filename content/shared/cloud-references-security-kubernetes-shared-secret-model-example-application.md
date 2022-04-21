@@ -26,7 +26,7 @@ hidden: true
 2. Create and apply the following `mysql.yaml` file:
 
     ```
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     metadata:
       name: mysql
@@ -37,6 +37,9 @@ hidden: true
           maxUnavailable: 1
         type: RollingUpdate
       replicas: 1
+      selector:
+        matchLabels:
+          app: mysql
       template:
         metadata:
           labels:
