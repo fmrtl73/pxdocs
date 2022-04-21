@@ -18,7 +18,6 @@ portworx:
     kvdb:
     - etcd:http://etcd0.yourdomain.com:4001
     - etcd:http://etcd1.yourdomain.com:4001
-    loggingurl: ""
     alertingurl: ""
     storage:
       devices:
@@ -28,15 +27,13 @@ portworx:
 
 ## Definitions
 
-**clusterid**:   Globally unique cluster ID.  Ex: ""07ea5dc0-4e9a-11e6-b2fd-0242ac110003"".   Must be either assigned by {{< pxEnterprise >}} or guaranteed to be unique
+**clusterid**:   Globally unique cluster ID.  Ex: `"07ea5dc0-4e9a-11e6-b2fd-0242ac110003"`.   Must be either assigned by {{< pxEnterprise >}} or guaranteed to be unique
 
-**mgtiface**:   Host ethernet interface used for Management traffic connecting to the 'loggingurl' endpoint.  Primarily used for statistics, configuration and control-path.   Ex: "enp5s0f0"
+**mgtiface**:   Host ethernet interface used for Management traffic.  Primarily used for statistics, configuration and control-path.   Ex: `"enp5s0f0"`
 
-**dataiface**:  Host ethernet interface used for backend activity, such as replication and resync.  Ex: "enp5s0f1"
+**dataiface**:  Host ethernet interface used for backend activity, such as replication and resync.  Ex: `"enp5s0f1"`
 
-**loggingurl**: Endpoint used communicating to {{< pxEnterprise >}} control (aka "Lighthouse").  Primary use is system statistics.  <!-- This breaks likchecker Ex:  "http://lighthouse.portworx.com/api/stats/listen" -->
-
-**kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to 'etcd' or 'consul'.
+**kvdb**:  Array of endpoints used for the key-value database.  Must be reachable and refer to `etcd` or `consul`.
 
 ```yaml
  Ex:
@@ -45,7 +42,7 @@ portworx:
     - etcd:http://etcd1.yourdomain.com:4001
 ```
 
-For 'consul', an example would be:
+For `consul`, an example would be:
 
 ```yaml
 Ex:

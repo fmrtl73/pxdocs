@@ -79,27 +79,6 @@ helm upgrade my-release --set imageVersion={{% currentVersion %}} -f ./helm/char
       kubectl apply -f stork.yaml
       ```
 
-## Upgrade Lighthouse
-
-1. On a machine that has kubectl access to your cluster, enter the following commands to download the latest Lighthouse specs:
-
-      ```text
-      KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      curl -o lh.yaml -L "https://install.portworx.com/{{% currentVersion %}}?kbver=${KBVER}&comp=lighthouse"
-      ```
-
-    If you are using your own private or custom registry for your container images, add `&reg=<your-registry-url>` to the URL. Example:
-
-      ```text
-      KBVER=$(kubectl version --short | awk -Fv '/Server Version: /{print $3}')
-      curl -o lh.yaml -L "https://install.portworx.com/{{% currentVersion %}}?kbver=${KBVER}&comp=lighthouse&reg=artifactory.company.org:6555"
-      ```
-2. Apply the spec by running:
-
-      ```text
-      kubectl apply -f lh.yaml
-      ```
-
 ## Customize the upgrade process
 
 #### Specify a different Portworx upgrade image

@@ -17,7 +17,6 @@ In addition to deploying the Portworx pods, the Operator also deploys other comp
 
 * Stork
 * Autopilot
-* Lighthouse
 * CSI
 * Monitoring
 

@@ -1,6 +1,6 @@
 ---
 title: Monitor Portworx with Sysdig
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, monitoring, prometheus, alertmanager, servicemonitor, grafana, lighthouse, px-central, px-kvdb, sysdig
+keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, monitoring, prometheus, alertmanager, servicemonitor, grafana, px-central, px-kvdb, sysdig
 description: Learn how to monitor Portworx with Sysdig
 ---
 

@@ -53,7 +53,3 @@ From the server node running px-enterprise container, you should see the followi
 
 ![PX-Cluster on Rackspace](/img/rackspace-pxctl-status.png "PX-Cluster on Azure")
 
-
-You should also be able to monitor cluster from {{< pxEnterprise >}} console:
-
-![Rackspace-Cluster on Lighthouse](/img/rackspace-cluster-on-lighthouse-updated.png "Rackspace-Cluster on Lighthouse")

@@ -10,7 +10,7 @@ aliases:
 The Portworx Operator manages the complete lifecycle of a Portworx cluster. Using the Operator, you can install, configure, and update Portworx.
 
 As shown in the diagram below, the Operator manages the Portworx platform consisting of the Portworx nodes,
-Stork, Lighthouse and other components that make running stateful applications seamless for the users.
+Stork, and other components that make running stateful applications seamless for the users.
 
 ![Portworx Operator](/img/px-operator-in-kubernetes.jpg)
 

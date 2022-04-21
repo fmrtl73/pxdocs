@@ -40,20 +40,20 @@ Global Storage Pool
 
 ### Add a new node to this cluster with no storage
 
-As shown in the command below, a new node is added to the cluster by using the same cluster token which is formed by
-the prefix token- and the cluster id of the existing cluster (which is bb4bcf13-d394-11e6-afae-0242ac110002 as shown above)
+As shown in the command below, a new node is added to the cluster by using the same cluster token which is formed by the cluster id of the existing cluster (which is `bb4bcf13-d394-11e6-afae-0242ac110002` as shown above):
 
 ```text
 docker run --restart=always --name px-enterprise -d --net=host --privileged=true -v /run/docker/plugins:/run/docker/plugins \
 -v /var/lib/osd:/var/lib/osd:shared -v /dev:/dev -v /etc/pwx:/etc/pwx -v /opt/pwx/bin:/export_bin:shared \
 -v /var/run/docker.sock:/var/run/docker.sock -v /mnt:/mnt:shared -v /var/cores:/var/cores -v /usr/src:/usr/src \
--e API_SERVER=http://lighthouse-new.portworx.com portworx/px-enterprise
--t token-bb4bcf4b-d394-11e6-afae-0242ac110002 -m team0:0 -d team0 -z
+portworx/px-enterprise -m team0:0 -d team0 -z
 ```
 
-NOTE: the -z option in the command above starts this node as a zero storage node
+The `-z` option in the command above starts this node as a zero storage node.
 
-NOTE: if you already have config.json in /etc/pwx/ then the config.json settings will take precedence over the -z option. If your deployment/automation scripts place the file on every node, please make sure to remove it, in order for -z option to take effect.
+{{<info>}}
+**NOTE:** If you already have `config.json` in `/etc/pwx/`, the `config.json` settings will take precedence over the `-z` option. If your deployment or automation scripts place the file on every node, make sure to remove it in order for `-z` option to take effect.
+{{</info>}}
 
 ### Display the cluster node list
 

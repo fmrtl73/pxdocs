@@ -56,7 +56,6 @@ In addition to managing a Portworx cluster, the Operator also manages the follow
 
 - Stork
 - Autopilot
-- Lighthouse
 
 For simplicity, the Portworx Operator handles the component upgrades without user intervention. When Portworx upgrades, the Operator upgrades the installed components to the recommended version as well.
 
@@ -99,21 +98,4 @@ spec:
   autopilot:
     enabled: true
     image: portworx/autopilot:<your_desired_autopilot_version>
-```
-
-### Force upgrade Lighthouse
-
-To override the operator selected Lighthouse image, edit the `StorageCluster` object and
-modify the `spec.userInterface.image` field, entering your desired Lighthouse version
-
-```text
-apiVersion: core.libopenstorage.org/v1
-kind: StorageCluster
-metadata:
-  name: portworx
-  namespace: kube-system
-spec:
-  userInterface:
-    enabled: true
-    image: portworx/px-lighthouse:<your_desired_lighthouse_version>
 ```

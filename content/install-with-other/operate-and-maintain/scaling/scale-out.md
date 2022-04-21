@@ -70,8 +70,6 @@ Below is an example of how to run Portworx in a new node so it joins an existing
 * Follow the instructions in the Installing
   [Portworx as OCI](/install-with-other/docker/standalone)
   page on starting Portworx in a new node
-* Provide cluster token token-bb4bcf4b-d394-11e6-afae-0242ac110002 that has a token- prefix to the cluster ID
-  to which we want to add the new node
 * Use the same CLUSTER_ID as the ID of the cluster which you want the node to join for the -c parameter
 
 Note the -s /dev/dm-1 command which picks up the storage that comes with the new node and the same cluster token

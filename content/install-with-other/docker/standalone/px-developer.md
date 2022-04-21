@@ -139,7 +139,6 @@ Example config.json:
           "etcd:https://[username]:[password]@[string].dblayer.com:[port]"
         ],
       "mgtiface": "bond0",
-      “loggingurl”: “http://dummy:80“,
       "storage": {
         "devices": [
           "/dev/xvdb",
@@ -153,8 +152,6 @@ Example config.json:
 **Important:**
 If you are using Compose.IO and the `kvdb` string ends with `[port]/v2/keys`, omit the `/v2/keys`. Before running the container, make sure you have saved off any data on the storage devices specified in the configuration.
 {{</info>}}
-
-Please also ensure "loggingurl:" is specified in `config.json`. It should either point to a valid lighthouse install endpoint or a dummy endpoint as shown above. This will enable all the stats to be published to monitoring frameworks like _Prometheus_:
 
 You can now start the Portworx container with the following command:
 

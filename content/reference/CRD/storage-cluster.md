@@ -33,7 +33,7 @@ This section provides a few examples of common Portworx configurations you can u
         useAll: true
     ```
 
-* Portworx with external ETCD, Stork, and Lighthouse.
+* Portworx with external ETCD and Stork.
 
     ```text
     apiVersion: core.libopenstorage.org/v1
@@ -303,7 +303,6 @@ This section describes the fields used to configure the network settings. If the
 | spec.<br>network.<br>dataInterface | Specifies the network interface Portworx uses for data traffic. | `string` | None |
 | spec.<br>network.<br>mgmtInterface| Indicates the network interface Portworx uses for control plane traffic. | `string` | None |
 
-
 ### Volume configuration
 
 This section describes the fields used to configure custom volume mounts for Portworx pods.
@@ -380,16 +379,6 @@ This section provides details on how to configure CSI for the StorageCluster. No
 | --- | --- | --- | --- |
 | spec.<br>csi.<br>enabled | Flag indicating whether CSI needs to be installed for the storage cluster. | `boolean` | true |
 | spec.<br>csi.<br>installSnapshotController | Flag indicating whether CSI Snapshot Controller needs to be installed for the storage cluster. | `boolean` | false |
-
-### Lighthouse configuration
-
-This section provides details on how to deploy and manage Lighthouse.
-
-| Field | Description | Type | Default |
-| --- | --- | --- | --- |
-| spec.<br>userInterface.<br>enabled | Enables or disables Lighthouse at any given time. | `boolean` | `false` |
-| spec.<br>userInterface.<br>image | Specifies the Lighthouse image. | `string` | None |
-| spec.<br>userInterface.<br>lockImage | Enables locking Lighthouse to the given image. When set to false, the Portworx Operator will overwrite the Lighthouse image to a recommended image for given Portworx version. | `boolean` | `false` |
 
 ### Autopilot configuration
 
