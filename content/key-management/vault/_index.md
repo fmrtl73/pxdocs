@@ -77,7 +77,7 @@ Once you've set up Vault, you're ready to set up your development environment.
     existing unseal keys shares. See "vault operator rekey" for more information.
     ```
 
-3. When you first start Vault, you must unseal it. Enter the following command to unseal the Vault server, repeat it 3 times: 
+3. When you first start Vault, you must unseal it. Enter the following command to unseal the Vault server. Repeat it 3 times: 
 
     ```text
     vault operator unseal
@@ -104,7 +104,7 @@ Once you've set up Vault, you're ready to set up your development environment.
     vault login <initial-root-token>
     ```
 
-5. Verify the installation by entering the following vault command, specify your own value for `<my-vault-secret>`:
+5. Verify the installation by entering the following vault command. Specify your own value for `<my-vault-secret>`:
 
     ```text 
     vault kv put secret/my-secret my-value=<my-vault-secret> 
@@ -131,28 +131,28 @@ Once you've set up Vault, you're ready to set up your development environment.
 
 With this method, Portworx requires a Vault static token that you should provide through a Kubernetes secret.
 
-   * Provide Vault credentials to Portworx. Refer to the [Vault credentials reference](#vault-credentials-reference) for details on the credentials. 
+Provide Vault credentials to Portworx. Refer to the [Vault credentials reference](#vault-credentials-reference) for details on the credentials. 
 
-     Portworx reads the Vault credentials required to authenticate with Vault through a Kubernetes secret. Create a Kubernetes secret with the name `px-vault` in the `portworx` namespace. Following is an example Kubernetes secret spec:
+The Vault credentials required to authenticate with Vault are provided to Portworx through a Kubernetes secret. Create a Kubernetes secret with the name `px-vault` in the `portworx` namespace. Following is an example Kubernetes secret spec:
 
-    ```text
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: px-vault
-      namespace: portworx
-    type: Opaque
-    data:
-      VAULT_ADDR: (required)<base64 encoded value of the vault endpoint address>
-      VAULT_TOKEN: (required)<base64 encoded value of the vault token>
-      VAULT_CACERT: (recommended)<base64 encoded file path where the CA Certificate is present on all the nodes>
-      VAULT_CAPATH: (recommended)<base64 encoded file path where the Certificate Authority is present on all the nodes>
-      VAULT_CLIENT_CERT: (recommended)<base64 encoded file path where the Client Certificate is present on all the nodes>
-      VAULT_CLIENT_KEY: (recommended)<base64 encoded file path where the Client Key is present on all the nodes>
-      VAULT_TLS_SERVER_NAME: (recommended)<base64 encoded value of the TLS server name>
-      VAULT_BACKEND_PATH: (optional)<base64 encoded value of the custom backend path if different than the default "secret">
-      VAULT_NAMESPACE: (optional)<base64 encoded value of the global vault namespace for portworx>
-    ```
+```text
+apiVersion: v1
+kind: Secret
+metadata:
+  name: px-vault
+  namespace: portworx
+type: Opaque
+data:
+  VAULT_ADDR: (required)<base64 encoded value of the vault endpoint address>
+  VAULT_TOKEN: (required)<base64 encoded value of the vault token>
+  VAULT_CACERT: (recommended)<base64 encoded file path where the CA Certificate is present on all the nodes>
+  VAULT_CAPATH: (recommended)<base64 encoded file path where the Certificate Authority is present on all the nodes>
+  VAULT_CLIENT_CERT: (recommended)<base64 encoded file path where the Client Certificate is present on all the nodes>
+  VAULT_CLIENT_KEY: (recommended)<base64 encoded file path where the Client Key is present on all the nodes>
+  VAULT_TLS_SERVER_NAME: (recommended)<base64 encoded value of the TLS server name>
+  VAULT_BACKEND_PATH: (optional)<base64 encoded value of the custom backend path if different than the default "secret">
+  VAULT_NAMESPACE: (optional)<base64 encoded value of the global vault namespace for portworx>
+```
 
 Portworx searches for this secret with name `px-vault` under the `portworx` namespace.
 
@@ -169,54 +169,54 @@ After configuring Vault using the Vault authentication method, proceed to [Step 
 
 This method allows Portworx to authenticate with Vault using a Kubernetes service account token. For more information about how to setup Kubernetes Vault authentication, refer to the [Vault documentation](https://www.vaultproject.io/docs/auth/kubernetes).
 
-  * Create a `ServiceAccount` for Vault authentication delegation.
+1. Create a `ServiceAccount` for Vault authentication delegation.
 
     Run the following `kubectl create` commands to create a `ServiceAccount` and `ClusterRoleBinding`. Vault uses this `ServiceAccount` and its associated token to authenticate requests from Portworx. Vault uses the [Kubernetes TokenReview API](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/#tokenreview-v1-authentication-k8s-io).
 
     <!-- I had to bump this to 1.19, as support for the previous version was dropped. Can we just use the latest for this and drop the version altogether? -->
 
-```text
-kubectl create serviceaccount vault-auth -n kube-system
-kubectl create clusterrolebinding vault-tokenreview-binding --clusterrole=system:auth-delegator --serviceaccount=kube-system:vault-auth
-```
+    ```text
+    kubectl create serviceaccount vault-auth -n kube-system
+    kubectl create clusterrolebinding vault-tokenreview-binding --clusterrole=system:auth-delegator --serviceaccount=kube-system:vault-auth
+    ```
 
-  * Enable Kubernetes authentication in Vault. Enter the following `vault auth` command to enable Kubernetes authentication in Vault:
+1. Enable Kubernetes authentication in Vault. Enter the following `vault auth` command to enable Kubernetes authentication in Vault:
 
-```text
-vault auth enable kubernetes
-```
+    ```text
+    vault auth enable kubernetes
+    ```
 
-  * Create a Kubernetes authentication configuration in Vault. Enter the following `export` commands to get the JWT token and CA certificate of Kubernetes `ServiceAccount`:
+1. Create a Kubernetes authentication configuration in Vault. Enter the following `export` commands to get the JWT token and CA certificate of Kubernetes `ServiceAccount`:
 
-```text
-export VAULT_SA_NAME=$(kubectl get sa vault-auth -n kube-system \
-     -o jsonpath="{.secrets[*]['name']}")
+    ```text
+    export VAULT_SA_NAME=$(kubectl get sa vault-auth -n kube-system \
+         -o jsonpath="{.secrets[*]['name']}")
 
-export SA_JWT_TOKEN=$(kubectl get secret $VAULT_SA_NAME -n kube-system \
-     -o jsonpath="{.data.token}" | base64 --decode; echo)
+    export SA_JWT_TOKEN=$(kubectl get secret $VAULT_SA_NAME -n kube-system \
+         -o jsonpath="{.data.token}" | base64 --decode; echo)
 
-export SA_CA_CRT=$(kubectl get secret $VAULT_SA_NAME -n kube-system \
-     -o jsonpath="{.data['ca\.crt']}" | base64 --decode; echo)
-```
+    export SA_CA_CRT=$(kubectl get secret $VAULT_SA_NAME -n kube-system \
+         -o jsonpath="{.data['ca\.crt']}" | base64 --decode; echo)
+    ```
 
     Enter the following `vault write` command, replacing `<kubernetes-endpoint>` with your kubernetes `api-server` endpoint to write a Kubernetes authentication configuration to Vault:
 
-```text
-vault write auth/kubernetes/config \
-        token_reviewer_jwt="$SA_JWT_TOKEN" \
-        kubernetes_host="<kubernetes-endpoint>" \
-        kubernetes_ca_cert="$SA_CA_CRT"
-```
+    ```text
+    vault write auth/kubernetes/config \
+            token_reviewer_jwt="$SA_JWT_TOKEN" \
+            kubernetes_host="<kubernetes-endpoint>" \
+            kubernetes_ca_cert="$SA_CA_CRT"
+    ```
 
-  * Create a Kubernetes authentication role for Portworx, named `portworx`, in Vault:
+1. Create a Kubernetes authentication role for Portworx, named `portworx`, in Vault:
 
-```text
-vault write auth/kubernetes/role/portworx \
-        bound_service_account_names=px-account \
-        bound_service_account_namespaces=kube-system \
-        policies=portworx \
-        ttl=<ttl>
-```
+    ```text
+    vault write auth/kubernetes/role/portworx \
+            bound_service_account_names=px-account \
+            bound_service_account_namespaces=kube-system \
+            policies=portworx \
+            ttl=<ttl>
+    ```
 
     {{<info>}}
 **NOTE:** If you deployed Portworx using the Operator, then you must enter the following command to create a Kubernetes authentication role, replacing `<namespace>` with the namespace in which you deployed Portworx:
@@ -230,7 +230,7 @@ vault write auth/kubernetes/role/portworx \
 ```
     {{</info>}}
 
-  * Provide Vault credentials to Portworx. Refer to [Vault credentials reference](#vault-credentials-reference) for details on the credentials. 
+1. Provide Vault credentials to Portworx. Refer to [Vault credentials reference](#vault-credentials-reference) for details on the credentials. 
 
     Portworx reads the Vault credentials required to authenticate with Vault through a Kubernetes secret. Create a Kubernetes secret with the name `px-vault` in the `portworx` namespace. Refer to the following example Kubernetes secret specification to create your own secret:
 
@@ -254,6 +254,30 @@ vault write auth/kubernetes/role/portworx \
       VAULT_NAMESPACE: <base64 encoded value of the global vault namespace for portworx>
     ```
 
+    Now update the Portworx DaemonSet or Operator's StorageCluster object to access the contents of this Kubernetes secret as environment variable. You will need to add an environment variable for each of the `VAULT_` parameters specified in the above secret:
+
+    ```text
+
+    env:
+    - name: VAULT_ADDR
+      valueFrom:
+        secretKeyRef:
+          name: px-vault
+          key: VAULT_ADDR
+    - name: VAULT_BACKEND_PATH
+      valueFrom:
+        secretKeyRef:
+          name: px-vault
+          key: VAULT_BACKEND_PATH
+    ...
+    - name: VAULT_AUTH_KUBERNETES_ROLE
+      valueFrom:
+        secretKeyRef:
+          name: px-vault
+          key: VAULT_AUTH_KUBERNETES_ROLE
+    ```
+
+
     {{<info>}}
   **NOTE:** Set the value of `VAULT_AUTH_KUBERNETES_ROLE` to the `base64` encoded value of the role created in the previous step.
     {{</info>}}
@@ -272,15 +296,13 @@ When generating the [Portworx Kubernetes specification file](https://central.por
 
 #### Existing Installation
 
-For an existing Portworx cluster, perform the following step to configure Vault as the secrets provider:
-
-  * Edit the Portworx DaemonSet `secret_type` field to `vault`, so that all the new Portworx nodes start using Vault:
+For an existing Portworx cluster, to configure Vault as the secrets provider, edit the Portworx DaemonSet `secret_type` field to `vault`, so that all the new Portworx nodes start using Vault:
 
 ```text
 kubectl edit daemonset portworx -n kube-system
 ```
 
-    Add the `"-secret_type", "vault"` arguments to the `portworx` container in the DaemonSet. It should look something like this:
+Add the `"-secret_type", "vault"` arguments to the `portworx` container in the DaemonSet. It should look something like this:
 
 ```text
 containers:
@@ -296,11 +318,11 @@ containers:
     name: portworx
 ```
 
-    Editing the DaemonSet will restart all the Portworx pods.
+Editing the DaemonSet will restart all the Portworx pods.
 
-    {{<info>}}
+{{<info>}}
 **NOTE:** If you installed Portworx using the Operator, then you must edit your `StorageCluster` object, setting the value of the `specs.secretsProvider` field to `vault`.
-    {{</info>}}
+{{</info>}}
 
 ## Other users {#other-users}
 
@@ -310,7 +332,6 @@ containers:
 
     * (Required) `VAULT_ADDR=`vault endpoint address
     * (Required) `VAULT_TOKEN=`vault token
-    * (Optional) `VAULT_BASE_PATH=`vault base path>
     * (Optional) `VAULT_BACKEND_PATH=`custom backend path if different than the default `secret`
     * (Optional) `VAULT_CACERT=`file path where the CA Certificate is present on all the nodes
     * (Optional) `VAULT_CAPATH=`file path where the Certificate Authority is present on all the nodes
@@ -345,17 +366,15 @@ If you configured Vault strictly with policies, then the Vault token provided to
 
  # V1 backends (Using default backend)
  # Provide full access to the portworx subkey
- # Provide -> VAULT_BASE_PATH=portworx to PX (optional)
- path "secret/portworx/*"
+ path "secret/*"
  {
  capabilities = ["create", "read", "update", "delete", "list"]
  }
 
  # V1 backends (Using custom backend)
  # Provide full access to the portworx subkey
- # Provide -> VAULT_BASE_PATH=portworx to PX (optional)
  # Provide -> VAULT_BACKEND_PATH=custom-backend (required)
- path "custom-backend/portworx/*"
+ path "custom-backend/*"
  {
  capabilities = ["create", "read", "update", "delete", "list"]
  }
@@ -363,17 +382,15 @@ If you configured Vault strictly with policies, then the Vault token provided to
 
  # V2 backends (Using default backend )
  # Provide full access to the data/portworx subkey
- # Provide -> VAULT_BASE_PATH=portworx to PX (optional)
- path "secret/data/portworx/*"
+ path "secret/data/*"
  {
  capabilities = ["create", "read", "update", "delete", "list"]
  }
 
  # V2 backends (Using custom backend )
  # Provide full access to the data/portworx subkey
- # Provide -> VAULT_BASE_PATH=portworx to PX (optional)
  # Provide -> VAULT_BACKEND_PATH=custom-backend (required)
- path "custom-backend/data/portworx/*"
+ path "custom-backend/data/*"
  {
  capabilities = ["create", "read", "update", "delete", "list"]
  }
@@ -411,10 +428,6 @@ Portworx requires the following Vault credentials to use its APIs:
 * **Vault Token [VAULT_TOKEN]**
 
     Vault authentication token. Refer to the [Vault tokens](https://www.vaultproject.io/docs/concepts/tokens) page for more information about Vault tokens. If you are using the [Kubernetes authentication method](#using-kubernetes-authentication-method) of Vault, then you need not provide the actual token to Portworx.
-
-* **Vault Base Path [VAULT_BASE_PATH]**
-
-    The base path under which Portworx has access to secrets.
 
 * **Vault Backend Path [VAULT_BACKEND_PATH]**
 
