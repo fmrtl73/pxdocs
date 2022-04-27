@@ -54,7 +54,7 @@ kubectl -n kube-system create secret generic px-essential \
 
 To install Portworx with OpenShift, you will first generate `StorageCluster` spec that you will deploy in your cluster.
 
-1. Generate the `StorageCluster` spec with the {{<iframe url="https://openshift4.install.portworx.com" text="Portworx spec generator tool.">}}
+1. Generate the `StorageCluster` spec with the [Portworx spec generator tool](https://central.portworx.com).
 
 2. Within the Portworx Operator page, select **Create Instance** to create a `StorageCluster` object.
 
