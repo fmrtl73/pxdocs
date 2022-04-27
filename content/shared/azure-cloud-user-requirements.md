@@ -5,7 +5,7 @@ keywords:
 hidden: true
 ---
 
-### Create a custom role for Portworx
+#### Create a custom role for Portworx
 
 ```text
 az role definition create --role-definition '{
@@ -34,7 +34,7 @@ az role definition create --role-definition '{
 }'
 ```
 
-### Create a Service Principal and secret in Azure AD
+#### Create a Service Principal and secret in Azure AD
 
 1. Find the AKS cluster Infrastructure Resource Group:
 

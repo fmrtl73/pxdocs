@@ -31,6 +31,10 @@ If you're installing Portworx on OpenShift on a cloud environment, Portworx requ
 
 {{< content "shared/azure-cloud-user-requirements.md" >}}
 
+### OpenShift on VMWare vSphere
+
+{{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-secret.md" >}}
+
 ## Open ports for worker nodes
 
 Ensure ports 17001-17020 on worker nodes are reachable from the control plane node and other worker nodes.
