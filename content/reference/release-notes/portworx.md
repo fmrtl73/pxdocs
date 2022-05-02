@@ -6,6 +6,15 @@ keywords: portworx, release notes
 series: release-notes
 ---
 
+## 2.10.1
+
+May 3, 2022
+
+### Fixes
+
+| **Issue Number** | **Issue Description** |
+| ---- | ---- |
+| PWX-19815 | `pxctl credentials create` commands were failing due to an RSA error when using Google Cloud KMS as the secret provider and trying to store credentials which were too long for the RSA key to handle .<br/><br/>**Resolution:** This patch adds the fix for the issue without changing the existing operation to add credentials. |
 
 ## 2.10.0
 
