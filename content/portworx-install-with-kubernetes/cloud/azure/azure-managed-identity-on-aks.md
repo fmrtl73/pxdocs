@@ -84,32 +84,34 @@ Perform the following steps to enable Azure managed identity on new AKS cluster:
 7. Create Kubernetes secret based on Client ID shown above:
 
     ```text
-    kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_CLIENT_ID
+    kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_CLIENT_ID=clientId
     ```
 
     Example:
 
     ```text
-    kubectl create secret generic -n kube-system px-azure --from-literal="68c2bc67-f3a5-459d-9b57-14597efcbc70”
+    kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_CLIENT_ID="68c2bc67-f3a5-459d-9b57-14597efcbc70”
     ```
 
-8. Pass Kubernetes Azure secret to Portworx environment variables:
+8. Follow the steps to generate the Operator and StorageCluster spec in [Install Portworx on AKS using the Operator](/portworx-install-with-kubernetes/cloud/azure/aks/deploy-px-operator/). Save the spec for the next step.
+
+9. Modify the StorageCluster spec that is automatically generated. In the `env` section, remove the `AZURE_CLIENT_SECRET` and `AZURE_TENANT_ID` sections. The finished section should match the following: 
 
     ```text
     env:
     name: AZURE_CLIENT_ID
-                  valueFrom:
-                    secretKeyRef:
-                      name: px-azure
-                      key: AZURE_CLIENT_ID
+      valueFrom:
+        secretKeyRef:
+          name: px-azure
+          key: AZURE_CLIENT_ID
     name: AZURE_CLIENT_SECRET
-                  valueFrom:
-                    secretKeyRef:
-                      name: px-azure
-                      key: AZURE_CLIENT_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: px-azure
+          key: AZURE_CLIENT_SECRET
     name: AZURE_TENANT_ID
-                  valueFrom:
-                    secretKeyRef:
-                      name: px-azure
-                      key: AZURE_TENANT_ID
+      valueFrom:
+        secretKeyRef:
+          name: px-azure
+          key: AZURE_TENANT_ID
     ```
