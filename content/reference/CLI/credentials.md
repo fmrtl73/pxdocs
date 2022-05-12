@@ -156,7 +156,7 @@ You can create and configure credentials for AWS by storing your secret access k
 ### Create credentials on AWS using IAM
 
 {{<info>}}
-**NOTE:** This feature requires {{< pxEnterprise >}} versions 2.5.1 or greater
+**NOTE:** This feature requires {{< pxEnterprise >}} version 2.5.1 or greater
 {{</info>}}
 
 Instead of storing your secret access key and access key ID on the host, you can grant Portworx bucket permissions using IAM. You can grant the EC2 instances on which Portworx is running, or you can grant permissions for a specific bucket.
@@ -278,6 +278,31 @@ Instead of storing your secret access key and access key ID on the host, you can
   Credentials created successfully, UUID: 12345678-a901-2bc3-4d56-7890ef1d23ab
   ```
 -->
+
+### Create credentials on Google by specifying the credential file
+
+{{<info>}}
+**NOTE:** This feature requires {{< pxEnterprise >}} version 2.10.1 or greater
+{{</info>}}
+
+1. Specify the following:
+    * The `--provider` flag with the name of the cloud provider (`google`)
+    * The `--google-project-id` flag with the relevant google project ID
+    * the `--google-json-key-file` flag with the path to the credentials
+    * The `--bucket` flag with your bucket's name
+
+    ```text
+    ./pxctl credentials create \
+    --provider google \
+    --google-project-id <project-id> \
+    --google-json-key-file /path/to/gcloud.json \
+    --bucket <bucket-name> \
+    <NAME>
+    ```
+    ```output
+    Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
+    ```
+
 
 ## Delete existing credentials
 

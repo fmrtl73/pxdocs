@@ -73,6 +73,13 @@ Created secret with id:  mysecret
 
 This creates a new key-value pair `mysecret=mysecretpassphrase`. Portworx will use Google Cloud KMS to encrypt the passphrase `mysecretpassphrase` and store it in its internal metadata store. To use this passphrase for encrypting volumes, you have to provide the secret ID `mysecret` while creating/attaching the volume.
 
+#### Known issue
+{{<info>}}
+Fixed in {{< pxEnterprise >}} version 2.10.1
+{{</info>}}
+
+* When the passphrase is  over 200 bytes long, users might see the error `crypto/rsa: message too long for RSA public key size`. 
+
 ### List existing secrets
 
 To list your secrets, run:

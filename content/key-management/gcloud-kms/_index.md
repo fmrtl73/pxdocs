@@ -146,6 +146,14 @@ Apply the patch
 kubectl -n kube-system patch ds portworx --patch "$(cat patch.yaml)" --type=strategic
 ```
 
+### Known Issues
+{{<info>}}
+Fixed in {{< pxEnterprise >}} version 2.10.1
+{{</info>}}
+
+* When creating Google Cloud credentials using Google KMS as the secret provider, users might encounter the error:
+`crypto/rsa: message too long for RSA public key size`
+
 ## Other users
 
 ### Step 1: Provide Google Cloud credentials to Portworx
