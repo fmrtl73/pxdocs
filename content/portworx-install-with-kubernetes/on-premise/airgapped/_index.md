@@ -2,7 +2,7 @@
 title: Air-gapped clusters
 keywords: Install, on-premises, kubernetes, k8s, air gapped
 description: How to install and upgrade Portworx on air-gapped clusters
-weight: 3
+weight: 300
 aliases:
   - /portworx-install-with-kubernetes/on-premise/airgapped/
 ---

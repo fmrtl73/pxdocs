@@ -2,7 +2,7 @@
 title: "Check a pool's cache status"
 keywords: storage pool, pool caching, px-cache
 description:
-weight: 7
+weight: 700
 hidden: true
 ---
 

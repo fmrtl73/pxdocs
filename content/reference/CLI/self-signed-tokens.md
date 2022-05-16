@@ -3,7 +3,7 @@ title: Generate self-signed tokens using pxctl
 linkTitle: Self-signed Tokens
 keywords: portworx, container, Kubernetes, storage, auth, authorization, authentication, login, token, context, generate, self-signed, security
 description: Learn to generate self-signed tokens using pxctl
-weight: 19
+weight: 1900
 ---
 
 With Portworx, you can use the `pxctl` command-line tool to generate a self-signed token. Run the following command to access the built-in help and see the available flags:

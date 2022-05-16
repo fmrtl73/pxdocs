@@ -3,7 +3,7 @@ title: "Automatically expand Portworx storage pools"
 linkTitle: "Expand storage pools by usage"
 keywords: autopilot, storage pool
 description: "Auto-expand storage pools"
-weight: 200
+weight: 20000
 ---
 
 You can use Autopilot to expand Portworx storage pools automatically when they begin to run out of space. Autopilot monitors the metrics in your cluster (e.g., via Prometheus) and detects high usage conditions. Once high usage conditions occur, Autopilot communicates with Portworx to resize the pool.

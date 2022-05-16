@@ -1,6 +1,6 @@
 ---
 title: Stateful applications
-weight: 3
+weight: 300
 keywords: stateful applications, concepts, kubernetes, k8s
 description: Learn essential concepts about running stateful applications using persistent volumes on Kubernetes
 series: k8s-101

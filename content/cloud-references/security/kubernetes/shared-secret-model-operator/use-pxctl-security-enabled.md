@@ -1,7 +1,7 @@
 ---
 title: "Use pxctl with security enabled"
 keywords: generate, token, jwt, pxctl, authorization, security, pxctl, context
-weight: 80
+weight: 8000
 series: ra-shared-secrets-model
 ---
 

@@ -2,7 +2,7 @@
 title: Multitenancy using namespaces
 description: Multitenancy support in Kubernetes using namespace secrets to store tokens for tenants
 keywords: portworx, multitenancy, kubernetes, sharedsecret
-weight: 20
+weight: 2000
 series: ra-kubernetes-security
 ---
 

@@ -3,7 +3,7 @@ title: Install Portworx on AKS using the DaemonSet
 linkTitle: Install using the DaemonSet
 keywords: on cloud, AKS, Azure Kubernetes Service, Microsoft, Kubernetes, k8s
 description: Learn about applying the spec with Portwork on Azure Kubernetes Service.
-weight: 4
+weight: 400
 ---
 
 ## Install

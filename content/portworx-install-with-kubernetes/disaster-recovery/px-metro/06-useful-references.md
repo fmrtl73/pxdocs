@@ -1,6 +1,6 @@
 ---
 title: 6. Useful references
-weight: 6
+weight: 600
 keywords: cloud, backup, restore, snapshot, DR, migration
 description: Useful references, video tutorials
 ---

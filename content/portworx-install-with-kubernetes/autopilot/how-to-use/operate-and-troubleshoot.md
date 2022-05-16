@@ -3,7 +3,7 @@ title: "Operating and Troubleshooting Autopilot"
 linkTitle: "Operating and Troubleshooting"
 keywords: troubleshoot, autopilot
 description: Instructions on common operating procedures and troubleshooting for Autopilot
-weight: 300
+weight: 30000
 ---
 
 This section provides common operational procedures for monitoring and troubleshooting your autopilot installation.

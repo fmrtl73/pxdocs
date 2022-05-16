@@ -2,7 +2,7 @@
 title: Install on Kubernetes with Docker EE
 keywords: Install, Docker EE, kubernetes, k8s
 description: Learn how to use Portworx to provide storage for your stateful services running on Kubernetes with Docker EE.
-weight: 2
+weight: 200
 noicon: true
 series: px-docker-install
 ---

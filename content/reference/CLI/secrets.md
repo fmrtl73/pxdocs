@@ -3,7 +3,7 @@ title: Manage your secrets using pxctl
 linkTitle: Manage secrets
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, AWS KMS, Kubernetes Secrets, Google Cloud KMS
 description: Manage your secrets using pxctl
-weight: 9
+weight: 900
 ---
 
 This section provides instructions for managing your authentication credentials and endpoints with the `pxctl secrets` command. Currently, `pxctl` provides support for the following secret store providers:

@@ -2,7 +2,7 @@
 title: Portworx on Equinix Metal with Google Anthos
 keywords: Install, Equinix Metal, Terraform, Anthos, bare metal
 description: Portworx can help you run stateful workloads with Docker. Find out how to deploy upon Packet.net servers!
-weight: 6
+weight: 600
 linkTitle: Equinix Metal
 noicon: true
 aliases:

@@ -3,7 +3,7 @@ title: Authorization using pxctl
 linkTitle: Authorization
 keywords: pxctl, command-line tool, cli, reference, authorization, auth-enabled, token, OIDC, self-signed, JWT, shared-secret, security
 description: Learn to interact with your authorization-enabled Portworx cluster using pxctl
-weight: 18
+weight: 1800
 ---
 
 ## Overview

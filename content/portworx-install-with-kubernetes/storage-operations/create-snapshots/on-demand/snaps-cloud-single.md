@@ -1,6 +1,6 @@
 ---
 title: Cloud backups for single PVCs
-weight: 2
+weight: 200
 hidden: true
 keywords: cloud backup, single PVC, stork, cloudsnaps, kubernetes, k8s
 description: Instructions for backing up a PVC with consistency to cloud and restore PVCs from the backup

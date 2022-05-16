@@ -4,7 +4,7 @@ keywords: Install, etcd, portworx, kvdb
 description: Instructions on installing and configuring an external ETCD cluster for Portworx
 linkTitle: Etcd for Portworx
 series: kb
-weight: 1
+weight: 100
 ---
 
 Portworx requires a key-value database such as etcd for configuring storage. A highly available clustered etcd with persistent storage is preferred.

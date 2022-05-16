@@ -2,7 +2,7 @@
 title: Portworx on Rackspace
 description: Follow these steps to easily install Portworx on Rackspace.  Try it today!
 keywords: Install, rackspace, bare metal
-weight: 5
+weight: 500
 linkTitle: Rackspace
 noicon: true
 ---

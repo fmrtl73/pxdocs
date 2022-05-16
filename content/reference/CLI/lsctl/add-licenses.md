@@ -3,7 +3,7 @@ title: Add licenses to a license server using lsctl
 linkTitle: Add licenses using lsctl
 description: CLI reference for lsctl commands
 keywords: lsctl, CLI, command line, command line tool, reference
-weight: 5
+weight: 500
 hidden: true
 ---
 

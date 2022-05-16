@@ -2,7 +2,7 @@
 title: Enabling Authorization
 description: Enable Portworx authorization in Kubernetes
 keywords: authorization, security, kubernetes, k8s
-weight: 100
+weight: 10000
 series: k8s-op-maintain-auth
 ---
 

@@ -2,7 +2,7 @@
 title: StorageCluster
 description: Explanation of Portworx Enterprise Operator and fields in StorageCluster object
 keywords: portworx, operator, storagecluster
-weight: 1
+weight: 100
 ---
 
 The Portworx cluster configuration is specified by a Kubernetes CRD (CustomResourceDefinition) called StorageCluster. The StorageCluster object acts as the definition of the Portworx Cluster.

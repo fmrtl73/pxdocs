@@ -2,7 +2,7 @@
 title: Enable pool caching
 keywords: storage pool, pool caching, px-cache
 description:
-weight: 4
+weight: 400
 hidden: true
 ---
 

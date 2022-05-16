@@ -1,7 +1,7 @@
 ---
 title: Upgrade Portworx on Kubernetes using the Daemonset
 linkTitle: Upgrade using the Daemonset
-weight: 3
+weight: 300
 keywords: Upgrade, upgrading, OCI, talisman, Kubernetes, k8s
 description: Steps on how to upgrade Portworx on Kubernetes
 ---

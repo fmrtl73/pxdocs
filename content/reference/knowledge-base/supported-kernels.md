@@ -2,7 +2,7 @@
 title: Supported Kernels
 keywords: Supported kernels, Install, Configure, Prerequisites
 description: Various kernels that are supported by Portworx and steps to install headers
-weight: 5
+weight: 500
 linkTitle: Supported Kernels
 series: kb
 ---

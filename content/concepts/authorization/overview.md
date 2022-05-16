@@ -2,7 +2,7 @@
 title: RBAC Overview
 description: Explanation on the RBAC security model used by Portworx
 keywords: portworx, security, ownership, tls, rbac, claims, jwt, oidc
-weight: 10
+weight: 1000
 series: authorization
 ---
 

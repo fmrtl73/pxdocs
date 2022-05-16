@@ -1,6 +1,6 @@
 ---
 title: (Other Schedulers) Encrypt Portworx volumes using Google Cloud KMS
-weight: 2
+weight: 200
 keywords: Encrypt volumes, other scheduleres, non-kubernetes, Google Cloud KMS, Key Management Service, gcloud, Volume Encryption
 description: Instructions on using Google Cloud KMS with Portworx for encrypting Portworx Volumes
 noicon: true

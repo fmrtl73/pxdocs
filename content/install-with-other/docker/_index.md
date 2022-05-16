@@ -2,7 +2,7 @@
 title: Docker
 keywords: Install, Docker, Swarm
 description: Learn how to deploy Portworx with Docker Swarm or just Docker without any orchestrator
-weight: 3
+weight: 300
 series: px-other
 hidesections: true
 ---

@@ -3,7 +3,7 @@ title: RBAC role management using pxctl
 linkTitle: RBAC Roles
 keywords: portworx, container, Kubernetes, storage, role, roles, rbac authorization, authentication, login, token, context, generate, security, role, system.user, system.admin, system.view
 description: RBAC role management using pxctl
-weight: 20
+weight: 2000
 ---
 
 ## Overview

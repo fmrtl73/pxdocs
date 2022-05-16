@@ -1,7 +1,7 @@
 ---
 title: "Step 2: StorageClass Setup"
 keywords: storageclass, csi, security, authorization
-weight: 40
+weight: 4000
 series: ra-shared-secrets-model
 ---
 

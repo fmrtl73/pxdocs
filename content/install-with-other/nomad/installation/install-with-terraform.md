@@ -3,7 +3,7 @@ title: Install with Terraform
 linkTitle: Install with Terraform
 keywords: Install, Nomad, Terraform
 description: Instructions for installing Portworx on Nomad with Terraform.
-weight: 2
+weight: 200
 series: px-install-on-nomad-with-others
 noicon: true
 ---

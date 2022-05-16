@@ -1,6 +1,6 @@
 ---
 title: Common errors
-weight: 2
+weight: 200
 keywords: Troubleshoot, common errors, Kubernetes, k8s
 description: Common errors
 ---

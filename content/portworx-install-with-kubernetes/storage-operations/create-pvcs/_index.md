@@ -1,6 +1,6 @@
 ---
 title: Create PVCs
-weight: 1
+weight: 100
 keywords: create PVC, dynamic provisioning of PVCS, kubernetes, k8s,
 description: Learn how to create and use PVCs
 series: k8s-storage

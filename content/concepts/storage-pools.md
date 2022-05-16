@@ -2,7 +2,7 @@
 title: Storage pools
 description: Understand what Portworx storage pools are.
 keywords: portworx, storage pool,
-weight: 700
+weight: 70000
 series: concepts
 ---
 

@@ -3,7 +3,7 @@ title: Deployment Architectures for Kubernetes-Based Stateful Applications
 linkTitle: Deployment architectures
 description: Understand various deployment architectures for Kubernetes-Based Stateful Applications
 keywords: Portworx, stateful applications, Kubernetes, k8s, deployment, architecture, HA, high-availability, DR, disaster recovery
-weight: 1
+weight: 100
 hideSections: true
 ---
 

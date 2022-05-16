@@ -3,7 +3,7 @@ title: Fix volume errors using Filesystem Check
 linkTitle: Volume check
 keywords: portworx, pxctl, command-line tool, cli, reference, filesystem check, fsck,
 description: Fix volume errors using Filesystem Check
-weight: 17
+weight: 1700
 ---
 
 Over the course of normal operation, the filesystems on volumes can accrue damage and errors. Filesystem Check or `fsck` is a tool that reports and fixes filesystem issues. This feature allows you to do the following:

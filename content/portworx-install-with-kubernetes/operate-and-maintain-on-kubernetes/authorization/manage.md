@@ -2,7 +2,7 @@
 title: PVCs and Stork with Authorization
 description: Manage PVC and Stork requests with authorization
 keywords: authorization, security, kubernetes, k8s
-weight: 200
+weight: 20000
 series: k8s-op-maintain-auth
 ---
 

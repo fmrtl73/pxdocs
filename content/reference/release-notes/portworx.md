@@ -1,6 +1,6 @@
 ---
 title: Portworx Release Notes
-weight: 200
+weight: 20000
 description: Notes on Portworx releases.
 keywords: portworx, release notes
 series: release-notes

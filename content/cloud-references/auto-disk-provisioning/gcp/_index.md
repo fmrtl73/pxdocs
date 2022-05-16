@@ -2,7 +2,7 @@
 title: Disk Provisioning on Google Cloud Platform (GCP)
 description: This page describes how to setup a production ready Portworx cluster in a Google Cloud Platform (GCP).
 keywords: Automatic Disk Provisioning, Dynamic Disk Provisioning, GCP, Google Cloud Platform
-weight: 2
+weight: 200
 linkTitle: GCP
 noicon: true
 ---

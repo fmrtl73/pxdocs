@@ -3,7 +3,7 @@ title: Install Portworx on AWS EKS using the DaemonSet
 linkTitle: Install using the DaemonSet
 keywords: Install, on cloud, EKS, Elastic Kubernetes Service, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on an AWS EKS (Elastic Kubernetes Service) cluster.
-weight: 3
+weight: 300
 noicon: true
 ---
 

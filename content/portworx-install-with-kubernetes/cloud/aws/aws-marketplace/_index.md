@@ -2,7 +2,7 @@
 title: AWS Marketplace
 keywords: Install, on cloud, EKS, Marketplace, Elastic Kubernetes Service, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on an AWS EKS (Elastic Kubernetes Service) cluster via the Amazon Marketplace.
-weight: 2
+weight: 200
 noicon: true
 series: px-k8s
 ---

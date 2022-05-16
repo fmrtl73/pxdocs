@@ -2,7 +2,7 @@
 title: Portworx CSI Driver
 description: Find out more about the Portworx CSI Driver and discover documentation for the different container schedulers we support
 keywords: portworx, kurbernetes, containers, storage, csi
-weight: 3
+weight: 300
 hidesections: true
 noicon: true
 disableprevnext: true

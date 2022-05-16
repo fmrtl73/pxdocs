@@ -1,7 +1,7 @@
 ---
 title: Upgrade Portworx or Kubernetes on an air-gapped cluster
 linkTitle: Upgrade Portworx or Kubernetes on an air-gapped cluster
-weight: 2
+weight: 200
 logo: /logos/other.png
 keywords: Install, on-premises, kubernetes, k8s, air gapped
 description: How to upgrade Portworx or Kubernetes version in an air-gapped cluster

@@ -3,7 +3,7 @@ title: DC/OS Secrets
 logo: /logos/dcos.png
 keywords: DC/OS Secrets, DCOS, Volume Encryption, Cloud Credentials, Auth Tokens
 description: Instructions on using DCOS secrets key management with Portworx
-weight: 3
+weight: 300
 disableprevnext: true
 series: key-management
 noicon: true

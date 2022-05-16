@@ -2,7 +2,7 @@
 title: Volume trash can
 description: Explanation of the trash can feature
 keywords: volume, delete, trashcan, trash, recycle, undelete, restore
-weight: 4
+weight: 400
 ---
 
 The trash can feature provides protection against accidental or inadvertent volume deletions which could result in loss of data. In a clustered environment such as Kubernetes, unintended deletion of a PV or a namespace will cause volumes to be lost. This feature is recommended in any environment which is prone to such inadvertent deletions, as it can help to prevent data loss.

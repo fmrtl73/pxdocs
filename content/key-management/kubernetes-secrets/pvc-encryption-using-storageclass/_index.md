@@ -1,6 +1,6 @@
 ---
 title: Encrypting PVCs using StorageClass with Kubernetes Secrets
-weight: 1
+weight: 100
 keywords: Encrypt PVC, storage class, kubernetes, k8s
 description: Instructions on using Kubernetes Secrets with Portworx for encrypting PVCs using StorageClass
 noicon: true

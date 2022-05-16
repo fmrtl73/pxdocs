@@ -5,7 +5,7 @@ keywords: autopilot
 description: Instructions on how to enable approvals for actions resulting from autopilot rules using kubectl and the ActionApproval CRD
 series: aut-approval-walkthroughs
 noicon: true
-weight: 100
+weight: 10000
 ---
 
 ## Prerequisites

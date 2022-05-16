@@ -3,7 +3,7 @@ title: Snapshots operations using pxctl
 linkTitle: Snapshots
 keywords: pxctl, command-line tool, cli, reference, snapshot, create snapshot, list snapshots, delete snapshot, schedule policies, snapshot schedule
 description: Learn how to manage snapshots using pxctl
-weight: 4
+weight: 400
 ---
 
 {{< content "shared/reference-CLI-intro-snapshots.md" >}}

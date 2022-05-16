@@ -3,7 +3,7 @@ title: Uninstall Portworx on VMware Tanzu
 description: Learn to scale a Portworx cluster up or down on VMware Tanzu with Auto Scaling.
 keywords: Automatic Disk Provisioning, Dynamic Disk Provisioning, VMWare, tanzu, vSphere ASG, Kubernetes, k8s
 linkTitle: Uninstall
-weight: 6
+weight: 600
 ---
 
 To begin uninstalling Portworx from VMware Tanzu, follow the steps in the Portworx uninstall section:

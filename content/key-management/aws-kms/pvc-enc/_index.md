@@ -1,6 +1,6 @@
 ---
 title: Encrypting Kubernetes PVCs with AWS KMS
-weight: 1
+weight: 100
 keywords: encryption, Kubernetes PVCs, k8s, AWS KMS, Amazon Web Services, Key Management Service
 description: Instructions on using AWS KMS with Portworx for encrypting PVCs
 noicon: true

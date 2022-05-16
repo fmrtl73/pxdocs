@@ -2,7 +2,7 @@
 title: Using Ark (pre v0.10) with Portworx
 keywords: portworx, container, Kubernetes, storage, k8s, pv, persistent disk, snapshot
 description: Learn how the Portworx plugin for Heptio Ark can help with disaster recovery in your Kubernetes clusters
-weight: 7
+weight: 700
 hidden: true
 noicon: true
 aliases:

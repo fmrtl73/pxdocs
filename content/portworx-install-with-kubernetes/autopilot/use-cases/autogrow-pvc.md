@@ -3,7 +3,7 @@ title: "Automatically grow PVCs"
 linkTitle: "Automatically grow PVCs"
 keywords: install, autopilot
 description: "Autogrow PVCs"
-weight: 100
+weight: 10000
 ---
 
 ## Using Autopilot to Autogrow PVCs

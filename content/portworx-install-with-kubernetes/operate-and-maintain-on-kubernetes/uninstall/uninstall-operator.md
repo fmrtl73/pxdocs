@@ -3,7 +3,7 @@ title: Uninstall Portworx from a Kubernetes cluster using the Operator
 linkTitle: Uninstall using the Operator
 keywords: portworx, container, kubernetes, storage, k8s, uninstall, wipe, cleanup
 description: Learn how to uninstall Portworx using the Operator.
-weight: 2
+weight: 200
 aliases:
   - /portworx-install-with-kubernetes/on-premise/openshift/operator/uninstall/
   - /portworx-install-with-kubernetes/openshift/operator/uninstall

@@ -2,7 +2,7 @@
 title: Volume Scaling with DCOS
 description: Learn how to implement and use volume scaling with DCOS. Try it today!
 keywords: volume scaling, stateful applications, dc/os, dcos, mesosphere
-weight: 5
+weight: 500
 linkTitle: Scaling Stateful Applications
 ---
 

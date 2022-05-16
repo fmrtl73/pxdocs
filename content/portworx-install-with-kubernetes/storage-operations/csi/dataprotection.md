@@ -2,7 +2,7 @@
 title: Data Protection and Snapshots
 keywords: csi, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, snapshot
 description: This explains how you can protect your data against failures with Stork or CSI Snapshotting
-weight: 3
+weight: 300
 ---
 
 ## Setup CSI Volume Snapshotting 

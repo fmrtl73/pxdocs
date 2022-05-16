@@ -1,6 +1,6 @@
 ---
 title: Uninstall on Kubernetes
-weight: 1
+weight: 100
 keywords: Uninstall, Kubernetes, k8s
 description: Steps on how to uninstall Portworx within a Kubernetes cluster
 series: k8s-op-maintain

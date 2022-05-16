@@ -2,7 +2,7 @@
 title: Filtering pxctl output with jq
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, monitoring, prometheus, alertmanager, servicemonitor, grafana, px-central, px-kvdb, jq
 description: Find out how to filter pxctl output using jq
-weight: 89
+weight: 8900
 ---
 
 The `pxctl` command line output displays a limited amount of information based on the context of the subcommand.

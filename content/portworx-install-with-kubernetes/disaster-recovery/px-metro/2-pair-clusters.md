@@ -1,6 +1,6 @@
 ---
 title: 2. Pair Clusters
-weight: 2
+weight: 200
 keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: Find out how to pair your clusters
 ---

@@ -2,7 +2,7 @@
 title: Upgrade Portworx on DCOS
 meta-description: This guide will help upgrading Portworx in DC/OS using the Portworx framework
 keywords: Upgrade, dcos, dc/os, mesosphere
-weight: 2
+weight: 200
 linkTitle: Upgrade
 ---
 

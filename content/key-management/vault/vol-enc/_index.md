@@ -1,6 +1,6 @@
 ---
 title: (Other Schedulers) Encrypt Portworx Volumes using Vault
-weight: 2
+weight: 200
 keywords: Vault Key Management, Hashicorp, encrypt volumes
 description: Instructions on using Vault with Portworx for encrypting Portworx Volumes
 noicon: true

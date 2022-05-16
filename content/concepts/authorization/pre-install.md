@@ -2,7 +2,7 @@
 title: Preparing To Enhance Security
 description: Explains what information is needed when enabling PX-Security
 keywords: installation, setup security, RBAC, Role Based Access Control, claims, JWT, JSON Web Token, OIDC, OpenID Connect, self generated
-weight: 20
+weight: 2000
 series: authorization
 ---
 

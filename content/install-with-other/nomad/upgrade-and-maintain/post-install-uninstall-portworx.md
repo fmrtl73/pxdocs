@@ -3,7 +3,7 @@ title: Uninstall Portworx using a Nomad job
 linkTitle: Uninstall Portworx
 keywords: Uninstall, Nomad
 description: Learn how to uninstall Portworx using a Nomad job.
-weight: 5
+weight: 500
 series: px-as-a-nomad-job
 series2: px-postinstall-nomad-job
 noicon: true

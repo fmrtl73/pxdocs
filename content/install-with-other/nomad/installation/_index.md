@@ -3,7 +3,7 @@ title: Install Portworx on Nomad
 linkTitle: Installation 
 keywords: Install, Nomad, CSI
 description: Instructions on installing Portworx on Nomad
-weight: 1
+weight: 100
 series: px-other
 ---
 

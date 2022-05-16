@@ -1,6 +1,6 @@
 ---
 title: Access via Non-Root Users
-weight: 6
+weight: 600
 keywords: access a portworx volume, non-root user, pre-provisioned volumes, PV, PVC, Kubernetes, k8s
 description: Find out how to access a Portworx volume (PVC/PV) with a non-root user
 ---

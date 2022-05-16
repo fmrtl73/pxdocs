@@ -1,6 +1,6 @@
 ---
 title: "Prerequisites"
-weight: 1
+weight: 100
 disableprevnext: true
 equalizeTableWidths: "50%"
 description: Start your installation.

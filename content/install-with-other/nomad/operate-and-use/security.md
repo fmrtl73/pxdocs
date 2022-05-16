@@ -3,7 +3,7 @@ title: Secure your volumes with PX Security
 linkTitle: Secure your volumes
 keywords: Install, Nomad, CSI
 description: Instructions on creating and using CSI volumes
-weight: 2
+weight: 200
 series: px-nomad-operate-and-use
 ---
 

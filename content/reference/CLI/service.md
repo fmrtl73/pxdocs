@@ -3,7 +3,7 @@ title: Service operations using pxctl
 linkTitle: Service
 keywords: pxctl, command-line tool, cli, reference, service, troubleshooting, diagnostics, call-home, maintenance mode
 description: How to use the pxctl service command.
-weight: 16
+weight: 1600
 ---
 
 The Portworx `pxctl` CLI tool allows you to run the following service operations:

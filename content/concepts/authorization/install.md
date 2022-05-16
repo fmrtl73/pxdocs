@@ -2,7 +2,7 @@
 title: Enabling PX-Security
 description: Explains how to enable PX-Security in Portworx
 keywords: enable authorization, security, RBAC, Role Based Access Control, JWT, JSON Web Token, OIDC, OpenID Connect, self-signed, claims, upgrade to auth, auth enabled cluster
-weight: 30
+weight: 3000
 series: authorization
 ---
 

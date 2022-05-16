@@ -2,7 +2,7 @@
 title: Docker interaction with Portworx
 description: Learn how Portworx Volumes work with Docker
 keywords: Portworx volumes, Docker, integration, how to
-weight: 1
+weight: 100
 linkTitle: How Portworx Volumes work with Docker
 ---
 

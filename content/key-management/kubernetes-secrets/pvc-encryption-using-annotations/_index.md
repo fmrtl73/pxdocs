@@ -1,6 +1,6 @@
 ---
 title: Encrypting PVCs using annotations with Kubernetes Secrets
-weight: 1
+weight: 100
 keywords: Encrypt PVC, annotations, kubernetes, k8s
 description: Instructions on using Kubernetes Secrets with Portworx for encrypting PVCs using annotations
 noicon: true

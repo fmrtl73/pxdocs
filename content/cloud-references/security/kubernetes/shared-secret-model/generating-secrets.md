@@ -1,7 +1,7 @@
 ---
 title: "Step 1: Generate shared secrets"
 keywords: portworx, sharedsecret, generate, secret
-weight: 10
+weight: 1000
 series: ra-shared-secrets-model
 ---
 

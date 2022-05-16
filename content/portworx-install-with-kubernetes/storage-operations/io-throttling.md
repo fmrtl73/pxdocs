@@ -2,7 +2,7 @@
 title: Application I/O Control
 keywords: stork, kubernetes, k8s
 description: 
-weight: 910
+weight: 91000
 ---
 
 Portworx volumes are created from a common storage pool and share their available IOPS and bandwidth between all other provisioned Portworx volumes. If an application's volumes start consuming too many resources, it can become a "noisy neighbor" and reduce the I/O and network bandwidth available to other volumes in the pool. 

@@ -3,7 +3,7 @@ title: Data Protection and Snapshots
 linkTitle: Data protection and snapshots
 keywords: Install, Nomad, CSI
 description: Instructions on creating and using CSI volumes
-weight: 3
+weight: 300
 series: px-nomad-operate-and-use
 ---
 

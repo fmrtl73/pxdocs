@@ -3,7 +3,7 @@ title: Harbor with Portworx on Kubernetes
 linkTitle: Harbor
 keywords: portworx, container, Kubernetes, harbor, storage, Docker, k8s, pvc
 description: See how Harbor can be deployed on Kubernetes using Portworx volumes.
-weight: 2
+weight: 200
 noicon: true
 ---
 

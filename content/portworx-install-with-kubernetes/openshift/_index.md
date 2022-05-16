@@ -1,6 +1,6 @@
 ---
 title: Install Portworx on OpenShift
-weight: 3
+weight: 300
 logo: /logos/open-shift.png
 keywords: Install, on-premises, OpenShift, kubernetes, k8s, air gapped
 description: How to install Portworx with OpenShift

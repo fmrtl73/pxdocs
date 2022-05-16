@@ -2,7 +2,7 @@
 title: IO profiles
 description: Learn what IO profiles for Portworx volumes are.  
 keywords: 
-weight: 600
+weight: 60000
 series: concepts
 ---
 

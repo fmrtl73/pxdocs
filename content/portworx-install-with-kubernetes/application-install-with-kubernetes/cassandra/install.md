@@ -3,7 +3,7 @@ title: Install
 linkTitle: Install
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, cassandra
 description: Install Cassandra with Portworx on Kubernetes
-weight: 2
+weight: 200
 ---
 
 ## Prerequisites

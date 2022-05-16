@@ -3,7 +3,7 @@ title: Operate and Maintain on DCOS
 linkTitle: Operate and Maintain
 description: Operating and Maintaining helpful tips and how-to!
 keywords: operate, maintain, DCOS, DC/OS, Mesosphere
-weight: 5
+weight: 500
 ---
 
 {{<info>}}

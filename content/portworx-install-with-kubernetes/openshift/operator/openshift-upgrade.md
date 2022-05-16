@@ -3,7 +3,7 @@ title: Preparing Portworx to upgrade to OpenShift 4.3 using the Operator
 linkTitle: Prepare to upgrade to OpenShift 4.3
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
 description: Find out how to upgrade Portworx for OpenShift 4.3 using Operator.
-weight: 4
+weight: 400
 ---
 
 Before you can upgrade your OpenShift environment to 4.3, you must upgrade Portworx to 2.3.5 and expose a new port range so that Portworx can continue to operate. Perform the following steps to upgrade Portworx to 2.3.5 in preparation for upgrading your OpenShift environment:

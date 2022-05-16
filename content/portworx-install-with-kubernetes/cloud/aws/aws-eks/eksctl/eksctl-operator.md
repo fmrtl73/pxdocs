@@ -3,7 +3,7 @@ title: Install Portworx on AWS EKS using eksctl and the Operator
 linkTitle: Install using the Operator
 keywords: Install, on cloud, EKS, Elastic Kubernetes Service, AWS, Amazon Web Services, Kubernetes, k8s, eksctl
 description: Install Portworx on an AWS EKS (Elastic Kubernetes Service) cluster using eksctl.
-weight: 2
+weight: 200
 noicon: true
 ---
 

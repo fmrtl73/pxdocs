@@ -1,6 +1,6 @@
 ---
 title: Open NFS ports
-weight: 4
+weight: 400
 keywords: sharedv4 volumes, ReadWriteMany, PVC, kubernetes, k8s
 description: Open the NFS ports required for sharedv4 volumes to work.
 hidden: true

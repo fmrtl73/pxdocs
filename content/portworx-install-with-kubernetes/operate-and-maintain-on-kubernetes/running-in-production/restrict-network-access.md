@@ -3,7 +3,7 @@ title: Securing Portworx API endpoints with Kubernetes Network Policies
 linkTitle: Securing Portworx API
 keywords: network policy, security, Kubernetes, k8s
 description: Securing Portworx API endpoints with Kubernetes Network Policies
-weight: 5
+weight: 500
 noicon: true
 hidden: true
 ---

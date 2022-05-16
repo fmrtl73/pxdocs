@@ -3,7 +3,7 @@ title: Operate Portworx on VMware Tanzu
 description: Learn how to operate Portworx cluster on VMware Tanzu.
 keywords: VMWare, tanzu, vSphere ASG, Kubernetes, k8s
 linkTitle: Operate
-weight: 4
+weight: 400
 noicon: true
 ---
 

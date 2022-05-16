@@ -1,6 +1,6 @@
 ---
 title: 5. Failback an application
-weight: 5
+weight: 500
 keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: Find out how to failback an application from the backup Kubernetes cluster to the original one.
 ---

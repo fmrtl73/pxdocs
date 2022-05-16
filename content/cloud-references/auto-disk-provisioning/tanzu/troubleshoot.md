@@ -3,7 +3,7 @@ title: Troubleshooting
 description: Learn how to address common setup errors and collect logs
 keywords: Automatic Disk Provisioning, Dynamic Disk Provisioning, VMWare, Tanzu, vSphere ASG, Kubernetes, k8s, troubleshooting
 linkTitle: Troubleshooting
-weight: 5
+weight: 500
 ---
 
 

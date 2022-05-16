@@ -3,7 +3,7 @@ title: Enable Portworx CSI using a Nomad job
 linkTitle: Enable CSI
 keywords: post-install, upgrade, Nomad, csi
 description: Learn how to enable Portworx CSI using a Nomad job
-weight: 1
+weight: 100
 series: px-postinstall-nomad-job
 noicon: true
 ---

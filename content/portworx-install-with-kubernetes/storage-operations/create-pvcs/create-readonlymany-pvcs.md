@@ -1,6 +1,6 @@
 ---
 title: Create PVCs using the ReadOnlyMany access mode
-weight: 12
+weight: 1200
 keywords: Portworx, container, Kubernetes, storage, k8s, PV, persistent disk, PVC, ReadOnlyMany
 description: Learn how to create PVCs using the ReadOnlyMany access mode
 series: k8s-vol

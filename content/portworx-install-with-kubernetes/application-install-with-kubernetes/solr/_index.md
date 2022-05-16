@@ -3,7 +3,7 @@ title: Solr on Kubernetes on Portworx
 linkTitle: Solr
 keywords: portworx, container, Kubernetes, ,Solr, storage, Docker, k8s, pvc
 description: See how stateful Solr can be deployed on Kubernetes using Portworx volumes.
-weight: 9
+weight: 900
 noicon: true
 ---
 

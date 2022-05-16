@@ -3,7 +3,7 @@ title: Dump and Upload cluster-wide secrets
 linkTitle: Dump and Upload cluster-wide secrets
 keywords: portworx, pxctl, command-line tool, cli, reference, alerts, monitoring, encrypted-volumes, encryption, secrets
 description: Migrate cluster-wide secrets used for encrypting volumes between clusters. 
-weight: 18
+weight: 1800
 ---
 
 Portworx provides the capability to encrypt volumes using cluster-wide secrets. A cluster-wide secret is a unique secret

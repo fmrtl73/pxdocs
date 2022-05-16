@@ -3,7 +3,7 @@ title: Run Portworx with Kubernetes on Mesosphere DC/OS
 description: Find out how to deploy Portworx with Kubernetes on DC/OS.
 keywords: Install, kubernetes, k8s, DCOS, DC/OS, Mesosphere
 linkTitle: Install on Kubernetes on DC/OS
-weight: 2
+weight: 200
 noicon: true
 ---
 

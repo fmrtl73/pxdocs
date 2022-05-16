@@ -2,7 +2,7 @@
 title: Performance Tuning
 keywords: performance tuning, container level optimization, volume level optimization, Portworx Enterprise,
 description: Create, manage and inspect storage volumes with pxctl CLI. Discover how to use Docker together with Portworx!
-weight: 1
+weight: 100
 ---
 
 Portworx has best practices for both global container level optimization, as well as volume granular optimization.

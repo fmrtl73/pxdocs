@@ -4,7 +4,7 @@ linkTitle: Stateful applications operations
 keywords: backup, restore, clone, stateful
 description: Backup, restore, and clone stateful applications
 hidden: false
-weight: 1
+weight: 100
 ---
 
 With Portworx, you can backup stateful applications and their volumes to an external object store and restore to the same cluster or to a new cluster. When it comes to timing, you can perform backup operations manually whenever you wish, or you can schedule them with a schedulePolicy. You can even use Portworx's backup functionality to clone applications between namespaces by restoring to a different namespace in the same cluster.

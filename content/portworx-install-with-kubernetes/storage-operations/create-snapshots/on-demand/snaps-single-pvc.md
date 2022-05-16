@@ -4,7 +4,7 @@ hidden: true
 keywords: snapshots, sinple PVC, kubernetes, k8s
 description: Instructions on taking snapshots of single PVCs and restoring PVCs from the snapshots
 series: k8s-local-snap
-weight: 8
+weight: 800
 ---
 
 This document will show you how to create a snapshot of a PVC backed by a Portworx volume.

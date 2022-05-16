@@ -1,7 +1,7 @@
 ---
 title: "Step 2: Generate multitenant tokens"
 keywords: multitenancy, generate, token, jwt, pxctl, authorization, security
-weight: 30
+weight: 3000
 ---
 
 Now that the system is up and running, you can create tokens.

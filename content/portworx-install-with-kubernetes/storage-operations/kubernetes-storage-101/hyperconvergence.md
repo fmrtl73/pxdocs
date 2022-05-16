@@ -1,6 +1,6 @@
 ---
 title: Hyperconvergence
-weight: 4
+weight: 400
 keywords: Hyperconvergence, concepts, kubernetes, k8s
 description: Learn essential concepts about keeping your applications hyperconverged with their data
 series: k8s-101

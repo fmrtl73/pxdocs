@@ -3,7 +3,7 @@ title: Encrypted volumes using pxctl
 keywords: pxctl, command-line tool, cli, reference, encrypted volumes, cluster-wide secret key, per-volume secret key, encrypted shared volumes
 description: This guide will give you an overview of how to use the Encryption feature for Portworx volumes.
 linkTitle: Encrypted Volumes
-weight: 14
+weight: 1400
 ---
 
 ## Encrypted Volumes

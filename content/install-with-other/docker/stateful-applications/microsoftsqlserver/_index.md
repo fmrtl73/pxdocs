@@ -2,7 +2,7 @@
 title: Microsoft SQL Server
 keywords: install, microsoft sql server, ms-sql, docker
 description: Follow this guide to learn how use Microsoft SQL Server with Portworx.
-weight: 2
+weight: 200
 noicon: true
 ---
 

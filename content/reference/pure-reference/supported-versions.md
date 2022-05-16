@@ -3,7 +3,7 @@ title: Supported Pure Storage FlashArray and FlashBlade models and versions
 linkTitle: Supported models and versions
 description: 
 keywords: FlashArray, FlashBlade
-weight: 5
+weight: 500
 ---
 
 Portworx supports the Pure FlashArray//C, FlashArray//X and FlashBlade models listed below:

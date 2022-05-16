@@ -2,7 +2,7 @@
 title: SchedulePolicy
 description: SchedulePolicy CRD reference
 keywords: Portworx, operator, SechedulePolicy, CRD, reference
-weight: 2
+weight: 200
 ---
 
 You can use a schedule policy to specify when Portworx should trigger a specific operation. Schedule policies do not contain any actions themselves. <!-- Also, they are not namespaced. //TODO: I'm not sure this is true. The migration example seems to be namespaced. -->

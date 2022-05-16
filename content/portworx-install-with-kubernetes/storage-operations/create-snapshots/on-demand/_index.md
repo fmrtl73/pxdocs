@@ -1,6 +1,6 @@
 ---
 title: On-demand snapshots
-weight: 2
+weight: 200
 hidesections: true
 linkTitle: On-demand snapshots
 keywords: on-demand snapshots, local snapshots, cloud snapshots, stork, kubernetes, k8s

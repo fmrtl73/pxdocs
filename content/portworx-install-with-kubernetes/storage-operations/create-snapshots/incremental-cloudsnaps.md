@@ -1,6 +1,6 @@
 ---
 title: Incremental cloud snapshots
-weight: 7
+weight: 700
 keywords: snapshots, cloudsnaps, kubernetes, k8s, incremental
 description: Learn how to configure the interval for full snapshots in cloudsnaps.
 ---

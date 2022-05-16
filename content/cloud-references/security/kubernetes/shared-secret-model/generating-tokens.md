@@ -1,7 +1,7 @@
 ---
 title: "Step 3: Generate tokens"
 keywords: generate, token, jwt, pxctl, authorization, security
-weight: 30
+weight: 3000
 series: ra-shared-secrets-model
 ---
 

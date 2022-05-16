@@ -3,7 +3,7 @@ title: Volume access using pxctl
 linkTitle: Volume Access
 keywords: portworx, pxctl, command-line tool, cli, reference, volume access rules, read access, write access, admin access, show volume access, add volume access, remove volume access, update volume access, volume ownership
 description: Learn to update volume access in your Portworx cluster
-weight: 16
+weight: 1600
 ---
 
 ## Overview

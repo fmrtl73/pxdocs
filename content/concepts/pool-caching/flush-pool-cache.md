@@ -2,7 +2,7 @@
 title: Flush a pool's cache
 keywords: storage pool, pool caching, px-cache
 description:
-weight: 5
+weight: 500
 hidden: true
 ---
 

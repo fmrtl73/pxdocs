@@ -1,7 +1,7 @@
 ---
 title: AWS
 logo: /logos/aws.png
-weight: 2
+weight: 200
 hidesections: true
 icon: /img/banner__kubernetes.png
 description: Learn how to deploy on AWS with Kubernetes.

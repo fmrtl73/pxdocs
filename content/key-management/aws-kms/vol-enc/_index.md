@@ -1,6 +1,6 @@
 ---
 title: (Other Schedulers) Encrypt Portworx Volumes using AWS KMS
-weight: 2
+weight: 200
 keywords: encryption, other schedulers, non-kubernetes, AWS KMS, Amazon Web Services, Key Management Service
 description: Instructions on using AWS KMS with Portworx for encrypting Portworx Volumes
 noicon: true

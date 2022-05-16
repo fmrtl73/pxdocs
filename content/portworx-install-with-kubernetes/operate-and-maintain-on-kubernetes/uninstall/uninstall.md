@@ -1,6 +1,6 @@
 ---
 title: Uninstall Portworx from a Kubernetes cluster using the DaemonSet
-weight: 3
+weight: 300
 keywords: Uninstall, air gapped, Kubernetes, k8s
 meta-description: Steps to uninstall Portworx from a Kubernetes cluster
 description: Steps to uninstall Portworx from the entire Kubernetes cluster

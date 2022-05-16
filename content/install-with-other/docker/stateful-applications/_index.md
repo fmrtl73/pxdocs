@@ -2,7 +2,7 @@
 title: Stateful applications
 description: Examples on running various stateful application with Docker using Portworx
 keywords: Install, stateful applications, docker, hadoop, sql server, microsoft, redis
-weight: 4
+weight: 400
 series: px-docker-post-install
 ---
 

@@ -2,7 +2,7 @@
 title: Redis
 keywords: install, redis, docker
 description: Follow this guide to learn how to use Redis with Portworx.
-weight: 2
+weight: 200
 noicon: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Create sharedv4 PVCs
-weight: 3
+weight: 300
 keywords: sharedv4 volumes, ReadWriteMany, PVC, kubernetes, k8s
 description: Learn how to use Portworx sharedv4 volumes (ReadWriteMany) in your Kubernetes cluster.
 series: k8s-vol

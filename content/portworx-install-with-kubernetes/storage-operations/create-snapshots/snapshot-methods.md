@@ -1,7 +1,7 @@
 ---
 title: Snapshot comparison methods
 linkTitle: Snapshot methods
-weight: 5
+weight: 500
 keywords: snapshots, extents, local, snapshot modes, kubernetes, k8s
 description: Learn how to create application consistent snapshots/backups and restore them.
 ---

@@ -3,7 +3,7 @@ title: Configure IO profiles for Portworx volumes on Kubernetes
 linkTitle: Configure IO profiles
 keywords: stork, kubernetes, k8s
 description: Learn how to apply IO profiles to Portworx volumes on Kubernetes.
-weight: 900
+weight: 90000
 ---
 
 Portworx volumes on Kubernetes can use different IO profiles to optimize the Portworx volumes' performance for specific use-cases. For information about what IO profiles are, as well as the different profiles available, see the [IO profiles](/concepts/io-profiles/) concept section. 

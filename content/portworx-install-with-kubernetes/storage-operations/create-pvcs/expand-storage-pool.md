@@ -1,6 +1,6 @@
 ---
 title: Expand your storage pool size
-weight: 4
+weight: 400
 keywords: portworx, storage class, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk,StatefulSets, volume placement
 description: Explore different methods for expanding your storage pool size.
 ---

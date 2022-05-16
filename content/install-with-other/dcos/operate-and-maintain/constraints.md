@@ -2,7 +2,7 @@
 title: Constraining Applications to Portworx nodes
 description: Learn how to use constraints on your DCOS cluster to control where Mesos schedules your stateful applications. Read our guide today!
 keywords: constraints, constraining applications, DCOS, DC/OS, Mesos, Mesosphere, 
-weight: 3
+weight: 300
 linkTitle: Constraining Applications to Portworx nodes
 ---
 

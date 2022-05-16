@@ -3,7 +3,7 @@ title: "Expand every Portworx storage pool in your cluster"
 linkTitle: "Expand all storage pools"
 keywords: autopilot, storage pool
 description: "Auto-expand storage pools"
-weight: 200
+weight: 20000
 ---
 
 You can use Autopilot to expand Portworx every storage pool in your cluster until they reach a certain capacity.

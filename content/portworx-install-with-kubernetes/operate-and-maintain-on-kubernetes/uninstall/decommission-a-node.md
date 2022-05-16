@@ -1,6 +1,6 @@
 ---
 title: Decommission a Node
-weight: 5
+weight: 500
 keywords: Uninstall, decomission a node, Kubernetes, k8s
 description: Steps to decommission a Portworx node in your Kubernetes clusters.
 series: k8s-uninstall

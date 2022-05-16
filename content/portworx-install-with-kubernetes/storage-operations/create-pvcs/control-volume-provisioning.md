@@ -1,6 +1,6 @@
 ---
 title: Control volume provisioning
-weight: 4
+weight: 400
 linkTitle: Control volume provisioning
 keywords: portworx, storage, pv, persistent disk, provisioning, thin-provisioning, thick-provisioning, over-provisioning
 description: Learn different strategies for controlling volume provisioning

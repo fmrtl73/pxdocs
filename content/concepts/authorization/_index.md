@@ -1,6 +1,6 @@
 ---
 title: Role-Based Access Control
-weight: 1
+weight: 100
 hidesections: true
 description: Understanding Portworx role-based access control (RBAC)
 series: concepts

@@ -3,7 +3,7 @@ title: Cassandra with Portworx on Kubernetes
 linkTitle: Cassandra
 keywords: install, cassandra, kubernetes, k8s, scaling, failover, statefulset, headless service
 description: Deploy Cassandra with Portworx on Kubernetes.
-weight: 1
+weight: 100
 aliases:
   - /scheduler/kubernetes/cassandra-k8s
   - /scheduler/kubernetes/cassandra-k8s.html

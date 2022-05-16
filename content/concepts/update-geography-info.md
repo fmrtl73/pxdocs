@@ -2,7 +2,7 @@
 title: Topology awareness
 description: Learn how to inform your Portworx nodes where they are placed in order to influence replication decisions and performance.
 keywords: cluster topology awareness, geography, locality, rack awareness, zone awareness, region awareness
-weight: 600
+weight: 60000
 series: concepts
 ---
 

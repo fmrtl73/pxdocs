@@ -1,7 +1,7 @@
 ---
 title: Air-gapped install bootstrap script reference
 linkTitle: Air-gapped install bootstrap script reference
-weight: 3
+weight: 300
 logo: /logos/other.png
 keywords: Install, on-premises, kubernetes, k8s, air gapped
 description: Reference for the installation script used when installing or upgrading Portworx on an air-gapped cluster

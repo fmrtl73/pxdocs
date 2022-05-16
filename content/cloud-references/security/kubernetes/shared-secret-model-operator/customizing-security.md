@@ -1,7 +1,7 @@
 ---
 title: "Customizing security setup"
 keywords: authorization, portworx, security, operator, rbac, jwt
-weight: 60
+weight: 6000
 series: ra-shared-secrets-model
 ---
 

@@ -3,7 +3,7 @@ title: Install on Docker Standalone
 description: Learn how to run Porworx as a runC container.
 keywords: Install, docker, standalone, runc container
 noicon: true
-weight: 1
+weight: 100
 series: px-docker-install
 ---
 

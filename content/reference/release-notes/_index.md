@@ -1,6 +1,6 @@
 ---
 title: Release Notes
-weight: 99
+weight: 9900
 description: Release notes for Portworx and related components.
 keywords: Release notes, Reference
 series: reference

@@ -3,7 +3,7 @@ title: Find cluster status using the `pxctl status` command
 description: Get a summary of your cluster's status
 keywords: portworx, pxctl, command-line tool, cli, reference
 linkTitle: Cluster status
-weight: 4
+weight: 400
 ---
 
 The `pxctl status` command provides an overview of your cluster, including:

@@ -3,7 +3,7 @@ title: Alerts using pxctl
 linkTitle: Alerts
 keywords: alerts, monitoring, pxctl, command-line tool, cli, cluster status, reference
 description: Monitor the status of your cluster through alerts. Learn how to use pxctl to access these alerts.
-weight: 17
+weight: 1700
 ---
 
 Portworx provides a way to monitor the status of your cluster through alerts.

@@ -3,7 +3,7 @@ title: Cluster operations using pxctl
 linkTitle: Cluster Operations
 keywords: pxctl, command-line tool, cli, reference, cluster operations, list nodes, inspect node, optimized restores
 description: This guide shows you how to use the pxctl to perform cluster operations.
-weight: 4
+weight: 400
 ---
 
 This document outlines how to manage your Portworx cluster operation with `pxctl cluster`.

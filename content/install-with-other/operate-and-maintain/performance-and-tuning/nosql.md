@@ -2,7 +2,7 @@
 title: NoSQL Performance
 keywords: NoSQL performance, Cassandra, cos, class of service, production, performance, overhead, latency, Portworx Enterprise
 description: Find out how Portworx outperforms Cassandra's three way replication when running on a 3-node cluster. See the demonstration for yourself!
-weight: 4
+weight: 400
 ---
 
 ## Containerized NoSQL Workloads: Cassandra performance gains with running {{< pxEnterprise >}}

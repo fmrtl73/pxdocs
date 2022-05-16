@@ -1,6 +1,6 @@
 ---
 title: Collecting diagnostics
-weight: 1
+weight: 100
 keywords: Troubleshoot, diags, phonehome, callhome
 description: Find out how to collect diagnostics for a Portworx cluster 
 ---

@@ -3,7 +3,7 @@ title: RabbitMQ with Portworx on Kubernetes
 linkTitle: RabbitMQ
 keywords: portworx, container, Kubernetes, rabbitMQ, storage, Docker, k8s, pvc
 description: See how RabbitMQ can be deployed on Kubernetes using Portworx volumes.
-weight: 2
+weight: 200
 noicon: true
 ---
 

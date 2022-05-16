@@ -1,6 +1,6 @@
 ---
 title: Create proxy volume PVCs
-weight: 4
+weight: 400
 keywords: create proxy volumes, PVC, kubernetes, k8s
 description: Proxy an external data source onto a Portworx volume.
 series: k8s-vol

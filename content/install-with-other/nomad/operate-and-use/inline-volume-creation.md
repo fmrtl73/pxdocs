@@ -2,7 +2,7 @@
 title: Inline volumes with Docker
 keywords: nomad, inline volume creation, storage on demand
 description: Learn how to use Portworx in order to enable applications to have storage provisioned on demand rathern than pre-provisioned.
-weight: 10
+weight: 1000
 noicon: true
 ---
 

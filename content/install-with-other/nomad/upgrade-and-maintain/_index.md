@@ -3,7 +3,7 @@ title: Upgrade and maintain
 linkTitle: Upgrade and maintain 
 keywords: Install, Nomad, CSI
 description: Instructions on installing Portworx on Nomad
-weight: 2
+weight: 200
 ---
 
 {{<info>}}

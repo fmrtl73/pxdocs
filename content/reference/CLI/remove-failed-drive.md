@@ -3,7 +3,7 @@ title: Remove or replace a failed drive
 description: Deal with a failed drive by either removing it or replacing it
 keywords: Portworx, troubleshoot
 series: troubleshoot-portworx
-weight: 90
+weight: 9000
 ---
 
 When a drive fails, Portworx continues to operate using available replicas on other nodes. To fully recover from a drive failure, you must replace or remove the failed drive from Portworx, and how you recover depends on the pool which contains the failed drive.

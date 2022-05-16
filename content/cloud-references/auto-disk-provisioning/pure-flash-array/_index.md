@@ -3,7 +3,7 @@ title: Disk provisioning on Pure Storage FlashArray
 description: Use Portworx with Pure Storage FlashArray as a cloud storage provider.
 keywords: FlashArray, cloud storage
 linkTitle: Pure FlashArray
-weight: 1
+weight: 100
 noicon: true
 ---
 

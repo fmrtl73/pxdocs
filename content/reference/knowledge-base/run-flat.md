@@ -2,7 +2,7 @@
 title: Run-flat mode
 keywords: run-flat, kvdb, offline, outage
 description: Describes Portworx run-flat mode
-weight: 7
+weight: 700
 series: kb
 ---
 

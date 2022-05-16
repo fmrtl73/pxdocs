@@ -1,7 +1,7 @@
 ---
 title: Kubernetes Snapshots and Backups
 linkTitle: Snapshots and Backups
-weight: 5
+weight: 500
 keywords: snapshots, backups, concepts, kubernetes, k8s, PVC
 description: Learn essential concepts about snaphots and backups of volumes on Kubernetes
 series: k8s-101

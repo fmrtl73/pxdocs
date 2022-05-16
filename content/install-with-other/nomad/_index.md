@@ -3,7 +3,7 @@ title: Portworx on Nomad
 linkTitle: Nomad
 keywords: Install, Nomad
 description: Instructions on installing Portworx on Nomad
-weight: 4
+weight: 400
 series: px-other
 ---
 

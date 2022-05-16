@@ -4,7 +4,7 @@ logo: /logos/aws.png
 keywords: AWS, KMS, Amazon Web Services, Key Management Service, KMS datakeys, Volume Encryption, Cloud Credentials
 description: Instructions on using AWS KMS with Portworx
 disableprevnext: true
-weight: 2
+weight: 200
 series: key-management
 noicon: true
 ---

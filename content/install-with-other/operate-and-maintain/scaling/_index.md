@@ -3,7 +3,7 @@ title: Scaling the Portworx cluster
 linkTitle: Scaling
 keywords: scale, scaling, scale up, scale down
 description: Articles on understanding how to scale up and down a Portworx cluster
-weight: 3
+weight: 300
 ---
 
 {{<info>}}

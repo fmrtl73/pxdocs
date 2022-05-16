@@ -2,7 +2,7 @@
 title: Frequently Asked Questions
 keywords: FAQs, Frequently Asked Questions, help, operations, maintenance
 description: Find answers to all the most frequently asked questions about Portworx.
-weight: 2
+weight: 200
 linkTitle: FAQs
 series: kb
 ---

@@ -3,7 +3,7 @@ title: Install as a Nomad Job
 linkTitle: Install as a Nomad job
 keywords: Install, nomad job
 description: Learn how to install Portworx using Nomad job with CSI enabled.
-weight: 1
+weight: 100
 series: px-as-a-nomad-job
 noicon: true
 ---

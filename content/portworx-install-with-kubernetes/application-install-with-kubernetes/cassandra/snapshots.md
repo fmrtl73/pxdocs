@@ -3,7 +3,7 @@ title: Snapshots
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones
 description: Cassandra snapshots
 linkTitle: Snapshots
-weight: 5
+weight: 500
 ---
 
 When you create a snapshot, Cassandra first flushes the application's memory. Then, it creates a hard-link to the `SSTable` files. This means that the snapshots are application-consistent, but the data stored on the underlying volume can be corrupted. Thus, if a failure occurs on the underlying volume, the data will be corrupted.

@@ -2,7 +2,7 @@
 title: Operate and Maintain
 keywords: operate, maintain, non-kubernetes, other orchestrators, dc/os, docker, ecs, nomad, digital-ocean, packet, rackspace, rancher
 description: Instructions on how to operate and maintain installations with Portworx on non-Kubernetes clusters
-weight: 9
+weight: 900
 series: px-other
 ---
 

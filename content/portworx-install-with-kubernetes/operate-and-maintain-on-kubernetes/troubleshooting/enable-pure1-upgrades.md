@@ -1,6 +1,6 @@
 ---
 title: Enabling Pure1 integration for upgrades
-weight: 1
+weight: 100
 keywords: Troubleshoot, diags, phonehome, callhome
 description: Find out how to enable the Portworx Pure1 integration for clusters that were created before PX 2.8.0
 hidden: true

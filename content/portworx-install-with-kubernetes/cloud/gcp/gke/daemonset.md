@@ -1,7 +1,7 @@
 ---
 title: Install Portworx on GCP GKE using the DaemonSet
 linkTitle: DaemonSet
-weight: 3
+weight: 300
 keywords: Install, GKE, Google Kubernetes Engine, k8s, gcloud
 description: Install Portworx with Google Kubernetes Engine (GKE).
 noicon: true

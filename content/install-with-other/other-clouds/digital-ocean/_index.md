@@ -2,7 +2,7 @@
 title: Portworx on the DigitalOcean Cloud Platform
 description: Find out how to use Protworx on DigitalOcean today!
 keywords: Install, digital ocean, terraform, terraporx, bare metal
-weight: 4
+weight: 400
 linkTitle: DigitalOcean
 noicon: true
 hidden: true

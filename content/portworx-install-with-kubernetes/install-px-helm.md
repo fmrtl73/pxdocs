@@ -3,7 +3,7 @@ title: "Install Portworx on Kubernetes via Helm"
 linkTitle: Helm
 keywords: install, portworx, kubernetes, k8s, helm, uninstall
 description: "Find out how to install Portworx on Kubernetes via the Portworx Helm chart"
-weight: 2
+weight: 200
 hidden: true
 ---
 

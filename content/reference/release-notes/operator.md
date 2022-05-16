@@ -3,7 +3,7 @@ layout: page
 title: "Operator Release Notes"
 description: Release notes for the Portworx Operator.
 keywords: portworx, release notes, operator
-weight: 350
+weight: 35000
 series: release-notes
 ---
 

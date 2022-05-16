@@ -2,7 +2,7 @@
 title: Run the Docker Registry with High Availability
 linkTitle: Docker Registry
 keywords: Install, docker registry, high availability, ha
-weight: 5
+weight: 500
 noicon: true
 ---
 

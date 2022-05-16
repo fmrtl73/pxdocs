@@ -3,7 +3,7 @@ title: Failover
 linkTitle: Failover
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, cassandra
 description: Learn how to failover Cassandra with Portworx on Kubernetes.
-weight: 4
+weight: 400
 ---
 
 ## Pod failover

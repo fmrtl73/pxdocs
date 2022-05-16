@@ -1,6 +1,6 @@
 ---
 title: Using Pre-provisioned Volumes
-weight: 10
+weight: 1000
 keywords: pre-provisioned volumes, Kubernetes, k8s
 description: Learn how to use a pre-provisioned Portworx volume in Kubernetes
 series: k8s-vol

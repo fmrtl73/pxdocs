@@ -1,6 +1,6 @@
 ---
 title: Configuring 3DSnaps
-weight: 3
+weight: 300
 keywords: 3dsnaps, snapshots, stork, kubernetes, k8s,
 description: Learn to take a 3DSnaps of a volume.
 ---

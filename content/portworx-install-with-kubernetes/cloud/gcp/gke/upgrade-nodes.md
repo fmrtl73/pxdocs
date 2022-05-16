@@ -1,6 +1,6 @@
 ---
 title: Upgrade GKE node types
-weight: 4
+weight: 400
 keywords: GKE, Google Kubernetes Engine, k8s, gcloud
 description: 
 noicon: true

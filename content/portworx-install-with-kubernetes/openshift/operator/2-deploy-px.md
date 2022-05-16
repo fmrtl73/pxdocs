@@ -2,7 +2,7 @@
 title: Deploy Portworx using the Operator
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
 description: Find out how to deploy Portworx using the Operator
-weight: 2
+weight: 200
 aliases:
   - /portworx-install-with-kubernetes/on-premise/openshift/operator/2-deploy-px/
 ---

@@ -3,7 +3,7 @@ title: Pure Storage FlashArray and FlashBlade storageCluster environment variabl
 linkTitle: FlashBlade and FlashArray env vars
 description: 
 keywords: FlashArray, FlashBlade
-weight: 6
+weight: 600
 ---
 
 This section provides configuration details for setting FlashArray and FlashBlade environment variables in the [`StorageCluster` object](/reference/crd/storage-cluster/). All fields are objects under the `spec.env[]` list:

@@ -1,7 +1,7 @@
 ---
 title: Troubleshoot Portworx on Kubernetes
 linkTitle: Troubleshoot and Get Support
-weight: 3
+weight: 300
 keywords: Troubleshoot, debug, kubernetes, k8s, collecting logs
 description: Useful information for troubleshooting Portworx on Kubernetes
 series: support

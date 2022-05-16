@@ -1,6 +1,6 @@
 ---
 title: 4. Failover an application
-weight: 4
+weight: 400
 keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: Find out how to failover an application from one Kubernetes cluster to another.
 ---

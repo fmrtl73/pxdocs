@@ -5,7 +5,7 @@ keywords: autopilot
 description: Instructions on how to enable approvals for actions resulting from autopilot rules using GitOps and Github
 series: aut-approval-walkthroughs
 noicon: true
-weight: 200
+weight: 20000
 ---
 
 

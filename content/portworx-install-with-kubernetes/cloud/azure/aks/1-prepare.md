@@ -2,7 +2,7 @@
 title: Prepare Your AKS Platform
 keywords: on cloud, AKS, Azure Kubernetes Service, Microsoft, Kubernetes, k8s
 description: Learn about preparing Portwork on Azure Kubernetes Service.
-weight: 2
+weight: 200
 ---
 
 To set up the Azure Kubernetes Service (AKS) to use Portworx, follow the steps below. For more information on AKS, see this [article](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes).

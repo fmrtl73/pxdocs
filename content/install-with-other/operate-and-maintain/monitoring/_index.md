@@ -2,7 +2,7 @@
 title: "Monitoring your cluster"
 keywords: monitoring, prometheus, alert manager, grafana, datadog
 description: How to monitor your Portworx cluster.
-weight: 2
+weight: 200
 ---
 
 {{<info>}}

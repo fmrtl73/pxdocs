@@ -3,7 +3,7 @@ title: Disk Provisioning on VMware vSphere
 description: Learn to scale a Portworx cluster up or down on VMware vSphere with Auto Scaling.
 keywords: Automatic Disk Provisioning, Dynamic Disk Provisioning, VMWare, vSphere ASG, Kubernetes, k8s
 linkTitle: VMware vSphere
-weight: 3
+weight: 300
 noicon: true
 ---
 

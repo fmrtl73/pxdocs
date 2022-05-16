@@ -2,7 +2,7 @@
 title: Portworx instructional videos
 keywords: portworx, learning, lightboard
 description: Learn about Portworx by watching informational Lightboard sessions.
-weight: 2
+weight: 200
 linkTitle: Portworx instructional videos
 series: kb
 noicon: true

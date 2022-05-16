@@ -4,7 +4,7 @@ linkTitle:
 keywords: backup, restore, clone, stateful
 description: Backup, restore, and clone stateful applications
 hidden: false
-weight: 2
+weight: 200
 ---
 
 With Stork 2.4.3 and newer, you can back up and restore customer-specific CRDs. Using this method, you create a Stork custom resource, called an ApplicationRegistration, which registers your CRD with Stork, allowing you to perform a migration, backup, and restore of your CRDs specified resources. 

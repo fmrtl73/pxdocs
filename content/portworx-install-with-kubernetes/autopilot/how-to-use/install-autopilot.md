@@ -3,7 +3,7 @@ title: "Autopilot Install and Setup"
 linkTitle: "Autopilot Install and Setup"
 keywords: install, autopilot
 description: Instructions on installation, configuration and upgrade of Autopilot
-weight: 100
+weight: 10000
 ---
 
 ## Installing Autopilot

@@ -3,7 +3,7 @@ title: Portworx on Rancher 1.x
 linkTitle: Rancher 1.x
 keywords: Install, Rancher 1.x, Cattle
 description: Instructions on installing Portworx using docker-compose and rancher-compose on Rancher 1.x by cattle scheduler
-weight: 6
+weight: 600
 series: px-rancher
 noicon: true
 ---

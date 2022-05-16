@@ -1,6 +1,6 @@
 ---
 title: Create and use local snapshots
-weight: 1
+weight: 100
 linkTitle: Local snapshots
 keywords: local snapshots, stork, kubernetes, k8s
 description: Learn to take a snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod.

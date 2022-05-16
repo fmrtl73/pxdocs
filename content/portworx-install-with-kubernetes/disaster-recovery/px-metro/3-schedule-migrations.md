@@ -1,6 +1,6 @@
 ---
 title: 3. Synchronize your Clusters
-weight: 3
+weight: 300
 keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: Find out how to synchronize your cluster by scheduling periodic migrations between them
 ---

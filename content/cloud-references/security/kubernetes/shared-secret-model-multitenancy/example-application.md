@@ -1,7 +1,7 @@
 ---
 title: Example application
 keywords: example, mysql, pvc
-weight: 50
+weight: 5000
 series: ra-shared-secrets-model
 ---
 

@@ -3,7 +3,7 @@ title: Install Portworx Universe on DC/OS for air-gapped clusters
 description: Find out how to deploy Portworx Universe on DC/OS for air-gapped clusters
 keywords: Install, air gapped, DCOS, DC/OS, Mesosphere, local universe
 linkTitle: Install Portworx Local Universe
-weight: 3
+weight: 300
 noicon: true
 ---
 

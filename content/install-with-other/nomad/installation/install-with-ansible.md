@@ -3,7 +3,7 @@ title: Install with Ansible
 linkTitle: Install with Ansible
 keywords: Install, Nomad, Ansible
 description: Instructions for installing Portworx on Nomad with Ansible.
-weight: 1
+weight: 100
 series: px-install-on-nomad-with-others
 noicon: true
 ---

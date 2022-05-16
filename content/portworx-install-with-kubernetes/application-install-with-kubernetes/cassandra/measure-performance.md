@@ -3,7 +3,7 @@ title: Performance
 linkTitle: Performance
 description: Measure the performance of Cassandra with Portworx on Kubernetes
 keywords: portworx, containers, cassandra, storage, performance, stress test
-weight: 6
+weight: 600
 ---
 
 <!--Maybe we should move this to the Docker section -->

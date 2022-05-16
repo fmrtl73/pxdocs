@@ -1,6 +1,6 @@
 ---
 title: Dynamic Provisioning of PVCs
-weight: 3
+weight: 300
 linkTitle: Dynamic Provisioning of PVCs
 keywords: storage class parameters, dynamic provisioning, PVC, storage class, StatefulSets, Kubernetes, k8s
 description: Learn how to use dynamically provisioned Portworx volumes with Kubernetes

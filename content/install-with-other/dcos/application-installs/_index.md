@@ -2,7 +2,7 @@
 title: Application Installs
 description: Application installation with Mesosphere DC/OS.
 keywords: Install applications, DC/OS, DCOS, Mesosphere
-weight: 4
+weight: 400
 ---
 
 {{<info>}}

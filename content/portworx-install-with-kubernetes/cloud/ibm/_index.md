@@ -2,7 +2,7 @@
 title: IBM Cloud
 logo: /logos/ibm.png
 linkTitle: IBM Cloud
-weight: 5
+weight: 500
 keywords: Install, IBM Cloud Kubernetes Service, k8s
 description: Deploy Portworx on IBM Cloud Kubernetes Service. See for yourself how easy it is!
 noicon: true

@@ -3,7 +3,7 @@ title: Install Portworx on AKS using the Operator
 linkTitle: Install using the Operator
 keywords: on cloud, AKS, Azure Kubernetes Service, Microsoft, Kubernetes, k8s
 description: Learn about applying the spec with Portwork on Azure Kubernetes Service.
-weight: 3
+weight: 300
 ---
 
 ## Install

@@ -3,7 +3,7 @@ title: Install Portworx on AWS KOPS using the DaemonSet
 linkTitle: Install using the DaemonSet
 keywords: Install, on cloud, KOPS, Kubernetes Operations, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on a Kubernetes KOPS cluster running on AWS.
-weight: 3
+weight: 300
 noicon: true
 ---
 

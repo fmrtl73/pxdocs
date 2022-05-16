@@ -2,7 +2,7 @@
 title: Use Ephemeral volumes
 keywords: csi, ephemeral, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk
 description: This explains how to use ephemeral volumes with the Portworx CSI Driver
-weight: 5
+weight: 500
 ---
 
 ## Generic Ephemeral volumes

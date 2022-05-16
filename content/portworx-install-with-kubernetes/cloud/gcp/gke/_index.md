@@ -1,6 +1,6 @@
 ---
 title: GKE
-weight: 1
+weight: 100
 keywords: Install, GKE, Google Kubernetes Engine, k8s, gcloud
 description: Install Portworx with Google Kubernetes Engine (GKE).
 noicon: true

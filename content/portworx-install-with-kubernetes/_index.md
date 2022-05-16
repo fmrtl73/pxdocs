@@ -1,6 +1,6 @@
 ---
 title: Portworx on Kubernetes
-weight: 2
+weight: 200
 hidesections: true
 description: Documentation on using Portworx in Kubernetes environments
 series: top

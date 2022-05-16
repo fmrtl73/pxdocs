@@ -2,7 +2,7 @@
 title: Running in Production
 keywords: production, operations, guide, data recovery, scaling out, alerts, monitoring, disaster recovery, upgrade, Kubernetes, k8s
 description: Production operations guide for Portworx on Kubernetes
-weight: 4
+weight: 400
 noicon: true
 series: k8s-op-maintain
 ---

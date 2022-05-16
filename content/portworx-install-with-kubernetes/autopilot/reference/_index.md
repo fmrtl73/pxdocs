@@ -5,7 +5,7 @@ keywords: autopilot
 description: References for the AutopilotRule specification, supported actions and other useful reference material
 series: autopilot-home
 noicon: true
-weight: 3
+weight: 300
 ---
 
 ## AutopilotRule CRD specification

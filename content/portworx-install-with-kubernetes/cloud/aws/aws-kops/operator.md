@@ -3,7 +3,7 @@ title: Install Portworx on AWS KOPS using the Operator
 linkTitle: Install using the Operator
 keywords: Install, on cloud, KOPS, Kubernetes Operations, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on a Kubernetes KOPS cluster running on AWS.
-weight: 2
+weight: 200
 noicon: true
 ---
 

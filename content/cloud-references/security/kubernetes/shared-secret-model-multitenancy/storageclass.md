@@ -1,7 +1,7 @@
 ---
 title: "Step 3: Set up the StorageClass"
 keywords: storageclass, csi, security, authorization
-weight: 40
+weight: 4000
 ---
 
 # StorageClass for CSI

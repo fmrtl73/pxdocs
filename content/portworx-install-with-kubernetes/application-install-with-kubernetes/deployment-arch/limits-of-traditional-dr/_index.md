@@ -3,7 +3,7 @@ title: The limits of traditional DR for Kubernetes applications
 linkTitle: The limits of traditional DR
 description: The limits of traditional DR for Kubernetes applications
 keywords: Portworx, stateful applications, Kubernetes, k8s, deployment, architecture, HA, high-availability, DR, disaster recovery
-weight: 3
+weight: 300
 ---
 
 Traditional backup and restore solutions for applications are implemented at the virtual machine (VM) level. This works when a single application runs on a single VM. Backing up the VM is synonymous with backing up the application. Containerized applications like those that run on Kubernetes, however, are much different. A single VM runs many pods, and not all of these pods are part of the same application. Likewise, a single application is spread over many VMs. This distribution of application components over a cluster of servers is the basic architectural pattern for containerized applications, so it is easy to see why backing up a VM is no longer sufficient. Backing up a VM proves both too much and too little data for effective disaster recovery. If I want to back up App 1, my VM backup might contain data for App 2 and App 3 as well. On the other hand, even if I backup the entire server, parts of App 1 are running on different VMs that are not captured by a single VM-based backup.

@@ -3,7 +3,7 @@ title: Cloud migrations using pxctl
 linkTitle: Cloud Migrations
 keywords: pxctl, command-line tool, cli, reference, cloud migration, migrate volumes, DR, disaster recovery, cluster pairing
 description: Learn to migrate volumes between clusters using pxctl
-weight: 12
+weight: 1200
 ---
 
 This document explains how to migrate Portworx volumes between clusters. In order to do this, we'll first have to pair up 2 clusters and then issue the migration command to Portworx.

@@ -2,7 +2,7 @@
 title: Secure your storage with the Operator
 description: Simple security setup using shared secrets and leveraging user authentication observed by Kubernetes
 keywords: portworx, kubernetes, security, jwt, secret, sharedsecret
-weight: 10
+weight: 1000
 series: ra-kubernetes-security
 ---
 

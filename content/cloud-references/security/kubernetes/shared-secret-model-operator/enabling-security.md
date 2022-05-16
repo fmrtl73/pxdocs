@@ -1,7 +1,7 @@
 ---
 title: "Step 1: Enable security in Portworx"
 keywords: authorization, portworx, security, operator, rbac, jwt
-weight: 20
+weight: 2000
 series: ra-shared-secrets-model
 ---
 

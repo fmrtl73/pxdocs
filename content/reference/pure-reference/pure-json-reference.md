@@ -3,7 +3,7 @@ title: Pure Storage FlashArray and FlashBlade JSON file reference
 linkTitle: FlashBlade and FlashArray JSON
 description: 
 keywords: FlashArray, FlashBlade
-weight: 4
+weight: 400
 aliases: /reference/pure-json-reference/
 ---
 

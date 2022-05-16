@@ -1,6 +1,6 @@
 ---
 title: Scale or Restrict
-weight: 6
+weight: 600
 keywords: Troubleshoot, restrict, scale as you grow, Kubernetes, k8s,
 description: Find out how to scale or restrict Portworx nodes in your Kubernetes cluster
 ---

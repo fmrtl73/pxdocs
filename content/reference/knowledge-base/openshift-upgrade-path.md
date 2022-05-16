@@ -2,7 +2,7 @@
 title: Operator OpenShift upgrade path
 keywords: Operator, OpenShift, OCP, upgrade
 description: Review which OpenShift versions you should upgrade to if you're running Portworx using the Operator.
-weight: 6
+weight: 600
 series: kb
 ---
 

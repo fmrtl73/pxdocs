@@ -1,7 +1,7 @@
 ---
 title: Encrypting PVCs using CSI and Kubernetes Secrets
 linkTitle: PVC Encryption with CSI and Kubernetes
-weight: 1
+weight: 100
 keywords: Portworx, Kubernetes, Kubernetes Secrets, containers, storage, encryption, CSI
 description: Instructions on using Kubernetes Secrets with Portworx for encrypting PVCs on CSI using StorageClass
 noicon: true

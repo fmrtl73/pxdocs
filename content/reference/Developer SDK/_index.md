@@ -2,7 +2,7 @@
 title: Portworx SDK
 keywords: OpenStorage SDK, API, gRPC, REST, monitoring, management, programmatic control
 description: Details on using the Portworx SDK for programmatic control
-weight: 3
+weight: 300
 linkTitle: Developer SDK
 noicon: true
 series: reference

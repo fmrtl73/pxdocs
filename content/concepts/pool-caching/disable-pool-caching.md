@@ -2,7 +2,7 @@
 title: Disable pool caching
 keywords: storage pool, pool caching, px-cache
 description:
-weight: 6
+weight: 600
 hidden: true
 ---
 

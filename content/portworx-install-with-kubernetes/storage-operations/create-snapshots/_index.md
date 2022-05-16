@@ -1,6 +1,6 @@
 ---
 title: Create and use snapshots
-weight: 2
+weight: 200
 hidesections: true
 keywords: snapshots, on-demand, scheduled, 3DSnaps, consistent snapshots, kubernetes, k8s
 description: Learn how to create application consistent snapshots/backups and restore them.

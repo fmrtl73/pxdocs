@@ -3,7 +3,7 @@ title: Asynchronous DR
 linkTitle: Asynchronous DR
 keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: How to achieve asynchronous DR across Kubernetes clusters using scheduled migrations
-weight: 2
+weight: 200
 ---
 
 ## Prerequisites

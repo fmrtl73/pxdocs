@@ -2,7 +2,7 @@
 title: Enable CSI
 keywords: csi, install, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk
 description: This explains at a high level what the Portworx CSI Driver as compared to the Portworx in-tree plugin
-weight: 1
+weight: 100
 ---
 
 

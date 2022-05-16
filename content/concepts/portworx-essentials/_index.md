@@ -1,6 +1,6 @@
 ---
 title: Portworx Essentials
-weight: 1
+weight: 100
 hidesections: true
 description: Learn about the Portworx Essential free product offering
 series: concepts

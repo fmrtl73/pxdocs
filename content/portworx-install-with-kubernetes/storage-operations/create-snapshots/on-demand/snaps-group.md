@@ -4,7 +4,7 @@ hidden: true
 keywords: snapshots, group of PVCs, stork, kubernetes, k8s
 description: Instructions on taking snapshots of a group of PVCs and restoring PVCs from the snapshots
 series: k8s-local-snap
-weight: 9
+weight: 900
 ---
 
 This document will show you how to create group snapshots of Portworx volumes and how you can restore those snapshots to use them in pods.

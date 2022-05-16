@@ -2,7 +2,7 @@
 title: Authorization
 description: Manage Portworx authoriztion in Kubernetes
 hidesections: true
-weight: 100
+weight: 10000
 series: k8s-op-maintain
 keywords: authorization, security, kubernetes, k8s
 ---

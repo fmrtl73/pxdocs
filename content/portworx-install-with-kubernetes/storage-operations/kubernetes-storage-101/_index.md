@@ -1,6 +1,6 @@
 ---
 title: Kubernetes Storage 101
-weight: 10
+weight: 1000
 keywords: stateful applications, concepts, kubernetes, k8s
 description: Learn essential concepts about Storage on Kubernetes
 series: k8s-storage

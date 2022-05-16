@@ -3,7 +3,7 @@ title: Stateful Application CRD Reference
 keywords:
 description: Backup, restore, and clone stateful applications
 hidden: false
-weight: 2
+weight: 200
 ---
 
 ## BackupLocation

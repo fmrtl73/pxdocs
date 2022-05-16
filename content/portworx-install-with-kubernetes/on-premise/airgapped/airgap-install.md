@@ -1,7 +1,7 @@
 ---
 title: Install Portworx on an air-gapped cluster
 linkTitle: Install Portworx on an air-gapped cluster
-weight: 1
+weight: 100
 logo: /logos/other.png
 keywords: Install, on-premises, kubernetes, k8s, air gapped
 description: How to install Portworx in an air-gapped Kubernetes cluster

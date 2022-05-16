@@ -1,6 +1,6 @@
 ---
 title: Enter Maintenance Mode
-weight: 7
+weight: 700
 keywords: Troubleshoot, maintenance mode, Kubernetes, k8s, drive removal, drive replacement, pool list, pool priority
 description: Steps needed to put Portworx into maintenance mode in a Kubernetes cluster
 ---

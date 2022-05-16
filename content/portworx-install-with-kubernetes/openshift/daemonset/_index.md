@@ -2,7 +2,7 @@
 title: Portworx DaemonSet
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift, daemonset
 description: How to install Portworx with OpenShift as DaemonSet
-weight: 1
+weight: 100
 aliases:
   - /portworx-install-with-kubernetes/on-premise/openshift/daemonset/
 ---

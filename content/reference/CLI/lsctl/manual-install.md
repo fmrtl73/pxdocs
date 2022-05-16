@@ -2,7 +2,7 @@
 title: Manually install a Portworx license server
 description: CLI reference for lsctl commands
 keywords: lsctl, CLI, command line, command line tool, reference
-weight: 2
+weight: 200
 hidden: true
 ---
 

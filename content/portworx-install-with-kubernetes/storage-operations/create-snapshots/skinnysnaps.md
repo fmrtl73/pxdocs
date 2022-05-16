@@ -1,6 +1,6 @@
 ---
 title: SkinnySnaps
-weight: 6
+weight: 600
 keywords: snapshots, on-demand, scheduled, consistent snapshots, kubernetes, k8s, skinnySnaps
 description: Learn what skinnySnaps are and how to use them.
 ---

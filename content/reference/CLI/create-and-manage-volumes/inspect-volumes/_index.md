@@ -3,7 +3,7 @@ title: Inspect Volumes
 keywords: pxctl, command-line tool, cli, inspect volume,
 description: This guide shows you how to inspect your volumes with pxctl.
 linkTitle: Inspect Volumes
-weight: 2
+weight: 200
 ---
 
 This document explains how you can get detailed information about the settings and the usage of your Portworx volumes. This can be used to investigate various aspects related to your Portworx cluster such as identifying bottlenecks or improving the overall performance.

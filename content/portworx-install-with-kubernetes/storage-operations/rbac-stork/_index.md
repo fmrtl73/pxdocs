@@ -4,7 +4,7 @@ linkTitle: "Configure RBAC for Stork"
 keywords: cloud, backup, restore, snapshot, DR, migration, stork, rbac, role, clusterrole
 description: Learn how to configure role-based access control to allow your users to perform Stork operations.
 noicon: true
-weight: 11
+weight: 1100
 ---
 
 Cluster administrators can allow certain users to perform Stork operations by creating and assigning custom roles for their users. Under the configuration described below, a Cluster administrator defines permissions in a user role which allows the user to perform Stork operations.

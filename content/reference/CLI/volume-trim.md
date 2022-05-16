@@ -3,7 +3,7 @@ title: Maintain volumes using Filesystem Trim
 linkTitle: Volume trim
 keywords: portworx, pxctl, command-line tool, cli, reference, volume trim, discard
 description: Maintain volumes using filesystem trim
-weight: 17
+weight: 1700
 ---
 
 A typical Portworx volume is formatted with ext4 and then used by a container application to store its content files and directories. Over time, your application might create and delete files and directories. On the volume, the space which was previous used by a deleted file gets freed in the filesystem metadata and the underlying block device is unaware of this fact. This can lead to the following inefficiencies:

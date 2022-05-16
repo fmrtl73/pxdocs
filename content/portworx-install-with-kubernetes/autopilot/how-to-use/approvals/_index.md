@@ -4,7 +4,7 @@ linkTitle: "Action approvals"
 keywords: autopilot
 hidesections: true
 description: Instructions on how to enable approvals for actions resulting from autopilot rules
-weight: 300
+weight: 30000
 ---
 
 ## Prerequisites

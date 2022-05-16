@@ -1,7 +1,7 @@
 ---
 title: IBM key management services
 logo: /logos/ibm.png
-weight: 1
+weight: 100
 keywords: IBM Key Protect, HPCS, encryption keys, secrets, Volume Encryption, Cloud Credentials
 description: Instructions on using IBM Key Protect or HPCS with Portworx
 disableprevnext: true

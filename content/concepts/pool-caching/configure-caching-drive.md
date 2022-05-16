@@ -2,7 +2,7 @@
 title: Configure a storage pool's caching properties
 keywords: storage pool, pool caching, px-cache
 description:
-weight: 3
+weight: 300
 hidden: true
 ---
 

@@ -3,7 +3,7 @@ title: Upgrade Portworx on Kubernetes using the Operator
 linkTitle: Upgrade using the Operator
 keywords: portworx, container, kubernetes, storage, k8s, upgrade
 description: Find out how to upgrade Portworx using the Operator.
-weight: 2
+weight: 200
 aliases:
   - /portworx-install-with-kubernetes/on-premise/openshift/operator/upgrade/
   - /portworx-install-with-kubernetes/openshift/operator/upgrade

@@ -3,7 +3,7 @@ title: "Automatically rebalance Portworx storage pools"
 linkTitle: "Rebalance storage pools"
 keywords: autopilot, storage pool
 description: "Auto-rebalance storage pools"
-weight: 300
+weight: 30000
 ---
 
 {{< content "shared/autopilot/aut-rebalance-intro.md" >}}

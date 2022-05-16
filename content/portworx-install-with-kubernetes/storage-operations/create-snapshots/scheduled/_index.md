@@ -1,6 +1,6 @@
 ---
 title: Scheduled snapshots
-weight: 2
+weight: 200
 hidesections: true
 linkTitle: Scheduled snapshots
 keywords: scheduled snapshots, stork, kubernetes, k8s

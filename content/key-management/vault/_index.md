@@ -3,7 +3,7 @@ title: Vault
 logo: /logos/hashicorp-vault.png
 keywords: Vault Key Management, Hashicorp, encryption keys, secrets, Volume Encryption, Cloud Credentials, secret store, passwords
 description: Instructions on using Vault key management with Portworx
-weight: 5
+weight: 500
 disableprevnext: true
 series: key-management
 noicon: true

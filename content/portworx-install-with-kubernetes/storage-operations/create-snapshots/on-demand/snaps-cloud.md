@@ -1,6 +1,6 @@
 ---
 title: Create and use cloud snapshots
-weight: 2
+weight: 200
 linkTitle: Cloud snapshots
 keywords: cloud snapshots, cloud snaps, stork, kubernetes, k8s
 description: Learn to take a cloud snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod. Try today!

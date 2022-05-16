@@ -1,6 +1,6 @@
 ---
 title: Resize a Portworx PVC
-weight: 4
+weight: 400
 linkTitle: Resize PVCs
 keywords: resize, resizing a PVC, Kubernetes, k8s,
 description: Step-by-step tutorial on how to resize a Portworx volume with Kubernetes

@@ -3,7 +3,7 @@ layout: page
 title: "Autopilot Release Notes"
 description: Release notes for the Portworx Autopilot component.
 keywords: portworx, release notes, components
-weight: 350
+weight: 35000
 series: release-notes
 ---
 

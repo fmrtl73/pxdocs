@@ -2,7 +2,7 @@
 title: Cloud Drives (ASG) using pxctl
 description: General reference for CLI Cloud Drives on ASG.
 keywords: pxctl, command-line tool, cli, reference, cloud drives, ASG, auto-scaling group
-weight: 10
+weight: 1000
 linkTitle: Cloud Drives (ASG)
 ---
 

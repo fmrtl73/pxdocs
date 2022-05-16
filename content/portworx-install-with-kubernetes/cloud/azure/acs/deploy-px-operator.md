@@ -3,7 +3,7 @@ title: Install Portworx on ACS using the Operator
 linkTitle: Install using the Operator
 keywords: Install, on cloud, ACS, Azure Container Service, Microsoft, Kubernetes, k8s
 description: Learn about applying the spec with Portworx on Kubernetes with ACS.
-weight: 3
+weight: 300
 ---
 
 ## Install

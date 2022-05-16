@@ -3,7 +3,7 @@ title: Scale up
 linkTitle: Scale up
 keywords: portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, cassandra, scaling, scale up
 description: Scale up your Cassandra cluster
-weight: 3
+weight: 300
 ---
 
 Portworx runs as a `DaemonSet` in Kubernetes. Hence, when you add a node or a worker to your Kubernetes cluster, you do not need to install Portworx on it.

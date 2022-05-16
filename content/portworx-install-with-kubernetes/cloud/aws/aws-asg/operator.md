@@ -1,7 +1,7 @@
 ---
 title: Install Portworx on AWS ASG using the Operator
 linkTitle: Install using the Operator
-weight: 2
+weight: 200
 keywords: Install, on cloud, ASG, Auto-Scaling Groups, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on an AWS cluster which uses autoscaling groups (ASG).
 noicon: true

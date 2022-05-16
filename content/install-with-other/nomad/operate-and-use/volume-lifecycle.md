@@ -3,7 +3,7 @@ title: Volume Lifecycle Basics with CSI
 linkTitle: Volume lifecycle basics
 keywords: Install, Nomad, CSI
 description: Instructions on creating and using CSI volumes
-weight: 1
+weight: 100
 series: px-nomad-operate-and-use
 ---
 

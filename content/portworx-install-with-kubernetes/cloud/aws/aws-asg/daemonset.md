@@ -1,7 +1,7 @@
 ---
 title: Install Portworx on AWS ASG using the DaemonSet
 linkTitle: Install using the DaemonSet
-weight: 3
+weight: 300
 keywords: Install, on cloud, ASG, Auto-Scaling Groups, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on an AWS cluster which uses autoscaling groups (ASG).
 noicon: true

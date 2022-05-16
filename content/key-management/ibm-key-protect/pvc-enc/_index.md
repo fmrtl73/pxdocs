@@ -1,6 +1,6 @@
 ---
 title: Encrypting Kubernetes PVCs with IBM key management services
-weight: 1
+weight: 100
 keywords:  IBM Key Protect, HPCS, encrypt Kubernetes PVC, k8s
 description: Instructions on using IBM key management services with Portworx for encrypting PVCs in Kubernetes
 noicon: true

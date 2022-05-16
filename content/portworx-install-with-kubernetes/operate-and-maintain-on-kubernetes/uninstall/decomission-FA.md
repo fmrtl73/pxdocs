@@ -1,6 +1,6 @@
 ---
 title: Decommission Portworx nodes with FlashArray Cloud drives
-weight: 6
+weight: 600
 linkTitle: Decommission FlashArray nodes
 keywords: 
 description: 

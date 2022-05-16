@@ -1,7 +1,7 @@
 ---
 title: Upgrade Portworx on Kubernetes
 linkTitle: Upgrade
-weight: 1
+weight: 100
 keywords: Upgrade, upgrading, OCI, talisman, Kubernetes, k8s
 description: Steps on how to upgrade Portworx on Kubernetes
 series: k8s-op-maintain

@@ -2,7 +2,7 @@
 title: Hadoop and HDFS
 keywords: install, hadoop, hdfs, docker
 description: Follow this guide to learn how to reliably deploy Hadoop containers using Portworx.
-weight: 2
+weight: 200
 noicon: true
 ---
 

@@ -2,7 +2,7 @@
 title: Portworx Authorization with DC/OS
 description: Learn how to enable auth and interact with your auth enabled Portworx cluster through DC/OS.
 keywords: authorization, DCOS, DC/OS, Mesoshphere
-weight: 3
+weight: 300
 linkTitle: Authorization with Portworx clusters
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: RelaxedReclaim
-weight: 8
+weight: 800
 keywords: snapshots, scheduled, kubernetes, k8s, relaxed, RelaxedReclaim
 description: Employ a reclaim policy that spreads load over time. 
 ---

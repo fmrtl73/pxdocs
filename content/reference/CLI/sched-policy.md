@@ -3,7 +3,7 @@ title: Manage snapshot schedule policies using pxctl
 linkTitle: Snapshot Schedule Policies
 keywords: portworx, pxctl, snapshot, reference, schedule, policy
 description: Learn how to manage snapshot schedule policies using pxctl
-weight: 5
+weight: 500
 ---
 
 ## Overview

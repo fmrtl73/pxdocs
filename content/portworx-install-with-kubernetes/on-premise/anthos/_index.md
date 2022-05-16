@@ -2,7 +2,7 @@
 title: Anthos
 linkTitle: Anthos
 logo: /logos/anthos.png
-weight: 4
+weight: 400
 keywords: Install, on-premises, anthos, kubernetes, k8s, air gapped
 description: How to install Portworx on Anthos
 ---

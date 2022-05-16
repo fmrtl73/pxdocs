@@ -3,7 +3,7 @@ title: DR and multi-data center HA architectures
 linkTitle: DR and multi-DC HA
 description: DR and multi-data center HA architectures
 keywords: Portworx, stateful applications, Kubernetes, k8s, deployment, architecture, HA, high-availability, DR, disaster recovery
-weight: 2
+weight: 200
 ---
 
 Portworx offers multiple options for DR and multi-data center HA beyond what is provided with the single data center/multiple AZ deployment options. For more on why you cannot simply use your traditional DR system for Kubernetes applications, see the [Limits of traditional DR for Kubernetes applications](/portworx-install-with-kubernetes/application-install-with-kubernetes/deployment-arch/limits-of-traditional-dr) section.

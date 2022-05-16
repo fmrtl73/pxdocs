@@ -2,7 +2,7 @@
 title: Raw Block Devices
 keywords: csi, install, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk, raw, block, device
 description: This explains how to use raw block devices with the Portworx CSI Driver.
-weight: 6
+weight: 600
 ---
 
 The Portworx CSI Driver supports both File and Block volume types in Kubernetes PVCs. While file has more supported features, block support for `ReadWriteOnly` PVCs was added in Portworx enterprise 2.8.0. 

@@ -1,6 +1,6 @@
 ---
 title: Portworx Support
-weight: 9
+weight: 900
 series: top
 icon: /img/banner__prerequisites.png
 description: Information about how to get support for Portworx products

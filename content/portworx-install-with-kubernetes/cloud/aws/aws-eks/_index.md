@@ -2,7 +2,7 @@
 title: Elastic Kubernetes Service (EKS)
 keywords: Install, on cloud, EKS, Elastic Kubernetes Service, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on an AWS EKS (Elastic Kubernetes Service) cluster.
-weight: 1
+weight: 100
 noicon: true
 series: px-k8s
 ---

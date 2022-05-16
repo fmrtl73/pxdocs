@@ -3,7 +3,7 @@ title: Kubernetes Secrets
 logo: /logos/other.png
 keywords: Kubernetes Secrets, k8s, encryption keys, secrets, Volume Encryption, Cloud Credentials, secret store
 description: Instructions on using Kubernetes secrets with Portworx
-weight: 4
+weight: 400
 disableprevnext: true
 series: key-management
 noicon: true

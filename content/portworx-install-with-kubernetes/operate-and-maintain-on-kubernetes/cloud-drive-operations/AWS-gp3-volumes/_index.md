@@ -1,7 +1,7 @@
 ---
 title: AWS gp3 volumes
 linkTitle: 
-weight: 1
+weight: 100
 keywords: gp3, cloud drives
 description: Add new gp3 volumes or upgrade existing gp2 volumes to gp3
 ---

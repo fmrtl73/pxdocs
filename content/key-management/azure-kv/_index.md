@@ -3,7 +3,7 @@ title: Azure Key Vault
 logo: /logos/azure-log.png
 keywords: Key Vault Secrets, Microsoft Azure Secrets, Volume Encryption, Cloud Credentials, passwords
 description: Instructions on using Azure key vault(Secrets) with Portworx
-weight: 7
+weight: 700
 disableprevnext: true
 series: key-management
 noicon: true

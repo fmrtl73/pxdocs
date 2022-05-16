@@ -2,7 +2,7 @@
 title: Deploy Portworx using Azure managed identity on new AKS cluster
 keywords: Install, deploy Portworx using Azure managed identity, AKS cluster, Azure Kubernetes Service, Kubernetes, k8s
 description: Learn about deploying Portworxon using Azure managed identity on new AKS cluster.
-weight: 1
+weight: 100
 linkTitle: Azure managed identity on AKS
 ---
 

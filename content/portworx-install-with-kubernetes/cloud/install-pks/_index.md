@@ -4,7 +4,7 @@ linkTitle: PKS
 logo: /logos/pks.png
 keywords: Install, PKS, Pivotal Container Service, Kubernetes, k8s, Bosh Director
 description: How to install and manage PKS
-weight: 4
+weight: 400
 noicon: true
 ---
 

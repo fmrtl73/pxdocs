@@ -3,7 +3,7 @@ title: Single data center/multiple AZ Portworx deployment options
 linkTitle: Single data center
 description: Single data center/multiple AZ Portworx deployment options
 keywords: Portworx, stateful applications, Kubernetes, k8s, deployment, architecture, HA, high-availability, DR, disaster recovery
-weight: 1
+weight: 100
 ---
 
 ## Option 1- Dedicated Portworx storage cluster

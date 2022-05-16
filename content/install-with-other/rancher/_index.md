@@ -1,6 +1,6 @@
 ---
 title: Rancher
-weight: 3
+weight: 300
 keywords: Install, Rancher, Cattle, Helm
 description: Learn how to install Portworx on Kubernetes using Rancher
 series: rancher

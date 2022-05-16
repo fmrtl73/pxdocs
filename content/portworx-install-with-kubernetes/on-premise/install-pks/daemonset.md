@@ -2,7 +2,7 @@
 title: Install Portworx on PKS using the DaemonSet
 linkTitle: Install using the DaemonSet
 logo: /logos/pks.png
-weight: 3
+weight: 300
 description: Install, on-premises, PKS, Pivotal Container Service, kubernetes, k8s, air gapped
 keywords: portworx, PKS, kubernetes
 noicon: true

@@ -1,6 +1,6 @@
 ---
 title: 1. Prepare your Portworx Cluster
-weight: 1
+weight: 100
 keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: Find out how to install a single stretch Portworx cluster across multiple Kubernetes clusters.
 ---

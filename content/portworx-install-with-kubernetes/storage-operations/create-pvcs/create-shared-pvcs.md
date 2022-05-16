@@ -1,6 +1,6 @@
 ---
 title: Create shared PVCs
-weight: 11
+weight: 1100
 keywords: shared PVC, kubernetes, k8s
 description: Learn how to use Portworx shared volumes (ReadWriteMany) in your Kubernetes cluster.
 series: k8s-vol

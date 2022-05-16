@@ -1,6 +1,6 @@
 ---
 title: Unlink a Portworx Essentials cluster
-weight: 10
+weight: 1000
 keywords: Troubleshoot, PX-Central, Kubernetes, k8s
 description: This article shows how you can unlink a Portworx Essentials cluster
 ---

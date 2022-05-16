@@ -2,7 +2,7 @@
 title: FIO Performance
 keywords: fio performance, tuning, benchmarking, cos, class of service, production, overhead
 description: Check out Portworx performance stats meaured with FIO! Portworx operates typically within less than 3% overhead of the underlying storage hardware.
-weight: 2
+weight: 200
 ---
 
 Portworx operates typically within less than 3% overhead of the underlying storage hardware.

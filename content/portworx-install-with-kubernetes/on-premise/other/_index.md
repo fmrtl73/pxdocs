@@ -1,7 +1,7 @@
 ---
 title: All other on-premises Kubernetes clusters
 linkTitle: All other
-weight: 3
+weight: 300
 logo: /logos/other.png
 keywords: Install, on-premises, kubernetes, k8s, air gapped
 description: How to install Portworx with Kubernetes

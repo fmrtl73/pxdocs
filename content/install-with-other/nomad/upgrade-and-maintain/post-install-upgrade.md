@@ -3,7 +3,7 @@ title: Upgrade Portworx using a Nomad job
 linkTitle: Upgrade Portworx
 keywords: post-install, upgrade, Nomad
 description: Learn how to upgrade Portworx using a Nomad job.
-weight: 1
+weight: 100
 series: px-as-a-nomad-job
 series2: px-postinstall-nomad-job
 noicon: true

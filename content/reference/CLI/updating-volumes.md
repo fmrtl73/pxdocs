@@ -2,7 +2,7 @@
 title: Updating Volumes using pxctl
 keywords: pxctl, command-line tool, cli, reference, share volume, unshare volume, replication factor, sticky option, increase replication factor, decrease replication factor, update replication factor
 description: Updating volumes is done simply with Portworx. Use the pxctl volume update  command to update a specific parameters. Try today!
-weight: 3
+weight: 300
 ---
 
 This section will walk you through the commands for updating your Portworx volumes.

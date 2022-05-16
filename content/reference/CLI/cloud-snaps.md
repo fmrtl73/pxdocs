@@ -3,7 +3,7 @@ title: Cloud Snapshots and Recovery using pxctl
 linkTitle: Cloud Snaps
 keywords: pxctl, command-line tool, cli, reference, cloud snapshots, volume backups, cloud storage, persistent disk, backup database
 description: Learn to take a cloud snapshot of a Portworx volume using pxctl and use that snapshot
-weight: 8
+weight: 800
 ---
 
 ## Overview of cloud backups
