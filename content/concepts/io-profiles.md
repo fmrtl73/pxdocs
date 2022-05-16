@@ -16,7 +16,6 @@ Portworx currently features the following IO profiles:
 * db
 * db_remote
 * sequential
-* random
 
 
 ### The auto profile
@@ -47,10 +46,6 @@ This implements a write-back flush coalescing algorithm. This algorithm attempts
 
 This profile optimizes the read-ahead algorithm for sequential workloads, such as backup operations. 
 
-### The random profile
-
-This profile records the IO pattern of recent access and optimizes the read-ahead and data layout algorithms for workloads involving short-term random patterns.
-
 ## Configure profiles
 
 You can configure IO profiles through Kubernetes specs or at the Portworx level, depending on your needs and what operator you're running with.
@@ -59,4 +54,4 @@ For information about how to configure IO profiles for volumes on Kubernetes clu
 {{< widelink url="/portworx-install-with-kubernetes/storage-operations/io-profile-in-k8s/" >}}Configure IO profiles for Portworx volumes on Kubernetes{{</widelink>}}
 
 For information about how to configure IO profiles from volumes using `pxctl`, follow this link:
-{{< widelink url="/install-with-other/operate-and-maintain/performance-and-tuning/tuning" >}}Configure IO profiles from volumes using `pxctl`{{</widelink>}}
+{{< widelink url="/install-with-other/operate-and-maintain/performance-and-tuning/tuning" >}}Configure IO profiles from volumes using <code>pxctl</code>{{</widelink>}}
