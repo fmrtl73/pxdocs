@@ -8,6 +8,10 @@ weight: 400
 noicon: true
 ---
 
+{{<info>}}
+**NOTE:**  If you have a compute load that can elastically increase or decrease based on workload demand, you might want to learn how to [install Portworx in disaggregated mode](/portworx-install-with-kubernetes/disaggregated/).
+{{</info>}}
+
 ## Step 1: PKS preparation
 
 Before installing Portworx, let's ensure the PKS environment is prepared correctly.

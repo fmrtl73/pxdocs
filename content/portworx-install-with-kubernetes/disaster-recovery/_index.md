@@ -3,7 +3,7 @@ title: Disaster Recovery (DR) for Kubernetes
 linkTitle: Disaster Recovery (DR)
 keywords: DR, Disaster Recovery, Kubernetes, k8s, cloud, backup, restore, snapshot, migration
 hidesections: true
-weight: 700
+weight: 800
 ---
 
 This section describes the different methods for achieving Disaster Recovery (DR) between *multiple* Kubernetes clusters when using Portworx.
