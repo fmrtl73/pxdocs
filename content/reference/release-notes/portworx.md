@@ -255,6 +255,19 @@ Portworx is aware of the following issues, check future release notes for fixes 
 | PWX-21276 | If some valid and some invalid FlashArray or FlashBlade endpoints are provided, Portworx will fail to start. If invalid credentials or endpoints are entered (or an API token expires), Portworx will fail to start.<br/><br/>**Workaround:** Correct the credentials in the secret and restart Portworx. |
 | PD-1024 | When using Portworx with FlashBlade (FB), users store login credentials, such as FA/FB IPs and access tokens, in the `px-pure-secret` Kubernetes secret. In the event that an access token expires or is otherwise invalidated, Portworx automatically provisions workloads onto the next accessible FB to avoid interruptions. <br/><br/>As a result, users may not be alerted when FlashBlades become inaccessible, and workloads can concentrate on the remaining FlashBlades, impacting performance. <br/><br/>**Workaround:** To avoid this issue, ensure the credentials stored in `px-pure-secret` are valid. If you find invalid credentials, correct them and restart Portworx to restore full use.|
 
+
+## 2.8.1.6
+
+May 20, 2022
+
+### Fixes
+
+The following issues have been fixed:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PWX-23997 | A kernel panic occurs if any application tools try to perform a grep operation or user file system level commands on the `pxd-control` device. <br/><br/>**User Impact:** The affected node will experience a kernel panic due to the Portworx kernel module being unable to handle the filesystem user level commands.<br/><br/>**Resolution:** Portworx now handles these kinds of commands on `pxd-control` devices by denying access, preventing kernel panic. |
+
 ## 2.8.1.5
 
 Mar 1, 2022
