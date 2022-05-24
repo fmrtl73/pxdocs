@@ -860,8 +860,14 @@ pxctl service pool delete --help
 ```output
 Delete pool
 
+Note:
+  This operation is supported only on on-prem local disks and AWS cloud-drive
+
 Usage:
   pxctl service pool delete [flags]
+
+Examples:
+pxctl service pool delete [flags] poolID
 
 Flags:
   -h, --help   help for delete
