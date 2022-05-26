@@ -4,6 +4,8 @@ weight: 20000
 description: Notes on Portworx releases.
 keywords: portworx, release notes
 series: release-notes
+aliases:
+    - /reference/release-notes/portworx
 ---
 
 ## 2.10.1

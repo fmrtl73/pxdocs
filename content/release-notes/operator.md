@@ -5,6 +5,8 @@ description: Release notes for the Portworx Operator.
 keywords: portworx, release notes, operator
 weight: 35000
 series: release-notes
+aliases:
+    - /reference/release-notes/operator
 ---
 
 ## 1.8.0

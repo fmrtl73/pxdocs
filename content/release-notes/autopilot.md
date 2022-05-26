@@ -5,6 +5,8 @@ description: Release notes for the Portworx Autopilot component.
 keywords: portworx, release notes, components
 weight: 35000
 series: release-notes
+aliases:
+    - /reference/release-notes/autopilot
 ---
 
 ## 1.3.2
