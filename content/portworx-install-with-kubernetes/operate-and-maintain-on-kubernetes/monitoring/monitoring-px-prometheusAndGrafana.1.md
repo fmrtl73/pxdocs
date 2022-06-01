@@ -33,12 +33,14 @@ Grafana is a dashboarding and visualization tool with integrations to several ti
 
 ## Installation
 
+If you installed Portworx using the Operator, skip to [Installing Grafana](#installing-grafana).
+
 ### Install the Prometheus Operator
 Enter the following commands to download and apply the Prometheus Operator YAML for your Kubernetes version:
 
 ```text
 VER=$(kubectl version --short | awk -Fv '/Server Version: / {print $3}')
-kubectl apply -f  "http://install.portworx.com/2.9/?comp=prometheus-operator&kbver=$VER"
+kubectl apply -f  "http://install.portworx.com/{{% currentVersion %}}/?comp=prometheus-operator&kbver=$VER"
 ```
 
 ### Install the Service Monitor
@@ -86,7 +88,7 @@ Next, apply the spec:
 kubectl apply -f <service-monitor.yaml>
 ```
 
-### Install and configure Prometheus Alertmanager
+### Optional: Specify alerting rules for  Prometheus Alertmanager
 
 1. Specify your alerting rules. Create a file named `alertmanager.yaml`, specifying your configuration options for the following:
 
@@ -102,6 +104,7 @@ kubectl apply -f <service-monitor.yaml>
       * **api_url:** with your Slack API URL. To retrieve your Slack API URL, you must follow the steps in the [Sending messages using Incoming Webhooks](https://api.slack.com/messaging/webhooks) page of the Slack documentation.
       * **channel:** with the Slack channel you want to send notifications to.
       * **text:** with the text of the notification
+
 
             ```text
             global:
@@ -143,7 +146,7 @@ kubectl apply -f <service-monitor.yaml>
 For a description of the properties in this schema, see the [Configuration file](https://prometheus.io/docs/alerting/configuration/#configuration-file) section of the Prometheus documentation.
     {{</info>}}
 
-2. Create a secret from the `alertmanager.yaml` file:
+1. Create a secret from the `alertmanager.yaml` file:
 
     ```text
     kubectl create secret generic alertmanager-portworx --from-file=alertmanager.yaml -n kube-system
@@ -153,8 +156,9 @@ For a description of the properties in this schema, see the [Configuration file]
     secret/alertmanager-portworx created
     ```
 
+###  Install and configure Prometheus Alertmanager
 
-3. Create a file named `alertmanager-cluster.yaml`, and copy in the following spec:
+1. Create a file named `alertmanager-cluster.yaml`, and copy in the following spec:
 
     ```text
     apiVersion: monitoring.coreos.com/v1
@@ -169,7 +173,7 @@ For a description of the properties in this schema, see the [Configuration file]
     ```
 
 
-4. Apply the spec by entering the following command:
+1. Apply the spec by entering the following command:
 
     ```text
     kubectl apply -f alertmanager-cluster.yaml
@@ -179,26 +183,26 @@ For a description of the properties in this schema, see the [Configuration file]
     alertmanager.monitoring.coreos.com/portworx created
     ```
 
-5. Create a file named `alertmanager-service.yaml` with the following content:
+1. Create a file named `alertmanager-service.yaml` with the following content:
 
-      ```text
-      apiVersion: v1
-      kind: Service
-      metadata:
-        name: alertmanager-portworx
-        namespace: kube-system
-      spec:
-        type: NodePort
-        ports:
-        - name: web
-          port: 9093
-          protocol: TCP
-          targetPort: web
-        selector:
-          alertmanager: portworx
-      ```
+    ```text
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: alertmanager-portworx
+      namespace: kube-system
+    spec:
+      type: NodePort
+      ports:
+      - name: web
+        port: 9093
+        protocol: TCP
+        targetPort: web
+      selector:
+        alertmanager: portworx
+    ```
 
-6. Apply the spec by entering the following command:
+1. Apply the spec by entering the following command:
 
     ```text
     kubectl apply -f alertmanager-service.yaml
@@ -230,9 +234,9 @@ kubectl apply -f prometheus-cluster.yaml
 
 Find out what endpoint prometheus has, by default it deploys as a ClusterIP
 
-  ```text
-  kubectl get svc -n kube-system prometheus
-  ```
+```text
+kubectl get svc -n kube-system prometheus
+```
 
 Navigate to the Prometheus web UI by going to the service ip. You should be able to navigate to the `Targets` and `Rules` section of the Prometheus dashboard which lists the Portworx cluster endpoints as well as the Alerting rules as specified earlier.
 
@@ -262,7 +266,7 @@ Navigate to the Prometheus web UI by going to the service ip. You should be able
     curl "https://docs.portworx.com/samples/k8s/pxc/portworx-volume-dashboard.json" -o portworx-volume-dashboard.json && \
     curl "https://docs.portworx.com/samples/k8s/pxc/portworx-performance-dashboard.json" -o portworx-performance-dashboard.json && \
     curl "https://docs.portworx.com/samples/k8s/pxc/portworx-etcd-dashboard.json" -o portworx-etcd-dashboard.json && \
-    kubectl -n kube-system create configmap grafana-dashboards --from-file=portworx-cluster-dashboard.json --from-file=portworx-node-dashboard.json --from-file=portworx-volume-dashboard.json --from-file=portworx-etcd-dashboard.json
+    kubectl -n kube-system create configmap grafana-dashboards --from-file=portworx-cluster-dashboard.json --from-file=portworx-performance-dashboard.json --from-file=portworx-node-dashboard.json --from-file=portworx-volume-dashboard.json --from-file=portworx-etcd-dashboard.json
     ```
 4. Finally, download the {{< direct-download url="/samples/k8s/pxc/grafana.yaml" name="grafana.yaml" >}} file and apply it:
 
