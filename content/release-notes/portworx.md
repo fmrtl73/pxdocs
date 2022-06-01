@@ -8,6 +8,17 @@ aliases:
     - /reference/release-notes/portworx
 ---
 
+## 2.10.2
+
+June 1, 2022
+
+### Fixes
+
+| **Issue Number** | **Issue Description** |
+| ---- | ---- |
+| PWX-23364 | Fixed a CSI volume provisioning issue where orphaned Portworx volumes were left behind if a PVC deletion was issued before volume creation finished.<br/><br/>**Resolution:** Users should upgrade their Portworx version if they are seeing orphaned Portworx CSI volumes with no associated PVC/PV. |
+
+
 ## 2.10.1
 
 May 5, 2022
