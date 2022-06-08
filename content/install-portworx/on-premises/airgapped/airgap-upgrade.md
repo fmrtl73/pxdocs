@@ -6,6 +6,8 @@ logo: /logos/other.png
 keywords: Install, on-premises, kubernetes, k8s, air gapped
 description: How to upgrade Portworx or Kubernetes version in an air-gapped cluster
 noicon: true
+aliases:
+    - /portworx-install-with-kubernetes/on-premise/airgapped/airgap-upgrade/
 ---
 
 During installation, Portworx fetches required images and packages from the internet. If you're installing Portworx onto an air-gapped cluster, you'll need to perform extra steps to make these resources available.

@@ -5,6 +5,8 @@ weight: 200
 keywords: Install, on-premises, kubernetes, k8s, operator
 description: Learn how to install Portworx with Kubernetes using the Operator
 noicon: true
+aliases:
+    - /portworx-install-with-kubernetes/on-premise/other/operator/
 ---
 
 This topic provides instructions for installing Portworx with Kubernetes on-prem using the Operator.

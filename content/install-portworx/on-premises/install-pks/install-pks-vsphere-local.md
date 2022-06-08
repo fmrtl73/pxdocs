@@ -5,6 +5,8 @@ keywords: Install, on-premises, PKS, Pivotal Container Service, vsphere, kuberne
 meta-description: "Find out how to install Portworx in a PKS Kubernetes cluster on vSphere and have Portworx provide highly available volumes to any application deployed via Kubernetes."
 hidden: true
 disableprevnext: true
+aliases:
+    - /portworx-install-with-kubernetes/on-premise/install-pks/install-pks-vsphere-local/
 ---
 
 {{<info>}}The deployment model on this page is still in alpha stage. If possible, {{<companyName>}} recommends you use [Portworx install on PKS on vSphere using shared datastores](/install-portworx/on-premises/install-pks/){{</info>}}

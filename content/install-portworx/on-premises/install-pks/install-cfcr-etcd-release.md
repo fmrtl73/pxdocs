@@ -2,6 +2,8 @@
 title: Installing Etcd using CFCR etcd release
 keywords: Install, on-premises, PKS, Pivotal Container Service, kubernetes, k8s, air gapped, etcd, bosh, cfcr
 hidden: true
+aliases:
+    - /portworx-install-with-kubernetes/on-premise/install-pks/install-cfcr-etcd-release/
 ---
 
 **CFCR** provides an etcd release which can be deployed in PKS environments.

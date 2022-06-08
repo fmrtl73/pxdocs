@@ -7,6 +7,8 @@ keywords: Install, on-premises, kubernetes, k8s, air gapped
 description: How to install Portworx with Kubernetes
 noicon: true
 series2: k8s-airgapped
+aliases:
+    - /portworx-install-with-kubernetes/on-premise/other/
 ---
 
 You can deploy Portworx on your internet-capable Kubernetes cluster using either the Operator or using the DaemonSet.

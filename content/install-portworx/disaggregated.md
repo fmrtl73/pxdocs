@@ -3,6 +3,8 @@ title: Disaggregated installation
 description: Learn how to install Portworx in disaggregated mode.
 keywords: disaggregated, storageless, autoscaling
 weight: 500
+aliases:
+    - /portworx-install-with-kubernetes/disaggregated/
 ---
 
 In a [disaggregated](/cloud-references/deployment-arch/#approach-a-separate-storage-and-compute-clusters) deployment of Portworx, the storage nodes are separate from the compute (or _storageless_) nodes. Based on the environment in which you are deploying Portworx, the installation instructions for disaggregated mode change.

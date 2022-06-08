@@ -5,6 +5,8 @@ logo: /logos/anthos.png
 weight: 400
 keywords: Install, on-premises, anthos, kubernetes, k8s, air gapped
 description: How to install Portworx on Anthos
+aliases:
+    - /portworx-install-with-kubernetes/on-premise/anthos/
 ---
 
 Portworx has been certified with the following Anthos versions:

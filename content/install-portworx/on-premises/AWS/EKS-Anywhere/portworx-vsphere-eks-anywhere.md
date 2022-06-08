@@ -3,6 +3,8 @@ title: Install Portworx on vSphere with Amazon EKS Anywhere
 linkTitle: Amazon EKS Anywhere
 description: This section describes lists the steps to deploy Portworx on vSphere having Amazon EKS Anywhere.
 keywords: portworx, VMware, vSphere, EKS Anywhere, Amazon EKS Anywhere
+aliases: 
+    - /portworx-install-with-kubernetes/on-premise/aws/eks-anywhere/portworx-vsphere-eks-anywhere/
 ---
 
 
