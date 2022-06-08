@@ -1791,7 +1791,7 @@ July 24, 2019
 
 ### Key Features
 
-1. [Cloud drive support for Microsoft Azure](/portworx-install-with-kubernetes/cloud/azure/aks/)
+1. [Cloud drive support for Microsoft Azure](/install-portworx/cloud/azure/aks/)
 2. [Enhanced Volume placement strategies for advanced volume provisioning rules](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
 3. Support for Red Hat Enterprise Linux 8 with CRI-O
 
@@ -2492,7 +2492,7 @@ September 20, 2018
 
 * OpenStorage SDK support. Link to [SDK](https://libopenstorage.github.io/w/)
 * Dynamic VM datastore provisioning support Kubernetes on vSphere/ESX environment
-* Pivotal Kubernetes Service (PKS) support with automated storage management for [PKS](/portworx-install-with-kubernetes/cloud/install-pks)
+* Pivotal Kubernetes Service (PKS) support with automated storage management for [PKS](/install-portworx/on-premises/install-pks/)
 
 ### Errata
 

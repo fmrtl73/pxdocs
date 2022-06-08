@@ -15,7 +15,7 @@ Portworx clusters can run in the cloud or on premises. The volume format is the 
 Portworx supports non-disruptive upgrades; however, other factors can cause downtime. In addition, every environment is different such as Portworx DaemonSet vs. Operator, the number of replicas per volume, type of volume, version of Portworx, upgrading Stork, and other factors such as Air-gapped environments and kernel upgrades being done in parallel. Therefore, we recommended consulting with technical support if your goal is to achieve a non-disruptive upgrade.
 
 ### Is there a Hardware/Software compatibility list?
-Hardware : No. But there are minimum resource recommendation listed [here](/start-here-installation/#installation-prerequisites)
+Hardware : No. But there are minimum resource recommendation listed [here](/install-portworx/prerequisites/#installation-prerequisites)
 
 Software:   Linux kernel 3.10 and above;     Docker 1.11 and above.
 

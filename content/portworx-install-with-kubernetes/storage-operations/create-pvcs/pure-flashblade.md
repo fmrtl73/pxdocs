@@ -99,7 +99,7 @@ Once you've ensured you meet the prerequisites and your physical network topolog
     {{</info>}}
 
 
-3. Deploy Portworx [on your on-premises Kubernetes cluster](/portworx-install-with-kubernetes/on-premise/other). Ensure **CSI** is enabled.
+3. Deploy Portworx [on your on-premises Kubernetes cluster](/install-portworx/on-premises/other/). Ensure **CSI** is enabled.
 
 Once deployed, Portworx detects that the FlashBlade secret is present when it starts up, and can use the specified FlashBlade as a Direct Access filesystem.
 

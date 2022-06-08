@@ -13,7 +13,7 @@ The Portworx Helm chart deploys Portworx and [Stork](https://docs.portworx.com/s
 
 * Helm has been installed on the client machine from where you would install the chart. (https://docs.helm.sh/using_helm/#installing-helm)
 * Tiller version 2.9.0 and above
-* Portworx pre-requisites [here](/start-here-installation/#installation-prerequisites)
+* Portworx pre-requisites [here](/install-portworx/prerequisites/#installation-prerequisites)
 
 ## Install
 

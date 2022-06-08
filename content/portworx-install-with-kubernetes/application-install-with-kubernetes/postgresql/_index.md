@@ -11,7 +11,7 @@ Perform the steps in this topic to deploy PostgreSQL with Portworx on Kubernetes
 
 ## Prerequisites
 
-* **A running Portworx cluster**. Refer to the [Installation](/start-here-installation/#installation) page for details about how to install Portworx.
+* **A running Portworx cluster**. Refer to the [Installation](/install-portworx/prerequisites/#installation) page for details about how to install Portworx.
 * **Kubectl**. Refer to the [Install and Set Up kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) page of the Kubernetes documentation for details about installing `kubectl`.
 * **Stork**. Refer to the [Using Stork with Portworx](/portworx-install-with-kubernetes/storage-operations/stork/) page for details about installing Stork.
 

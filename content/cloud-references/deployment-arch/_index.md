@@ -29,7 +29,7 @@ These two approaches are discussed below.
 
 ### Why
 
-You might choose to [deploy using a disaggregated model](/portworx-install-with-kubernetes/disaggregated/) if you have a very dynamic compute environment, where the number of compute nodes can elastically increase or decrease based on workload demand. Some examples of what can cause this elasticity are:
+You might choose to [deploy using a disaggregated model](/install-portworx/disaggregated/) if you have a very dynamic compute environment, where the number of compute nodes can elastically increase or decrease based on workload demand. Some examples of what can cause this elasticity are:
 
 * Autoscaling up or down due to increasing and decreasing demands. An example would be to temporarily increase the number of worker nodes from 30 to 50 to handle the number of PODs in the system.
 * Instance upgrades due to kernel updates, security patches etc

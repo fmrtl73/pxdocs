@@ -90,7 +90,7 @@ Once you've configured your physical network and ensured that you meet the prere
 **NOTE:** You must name the secret `px-pure-secret`.
     {{</info>}}
 
-1. Generate an [install spec](/portworx-install-with-kubernetes/on-premise/other) for your on-prem cluster. Make the following selections when you create your spec using the spec generator:
+1. Generate an [install spec](/install-portworx/on-premises/other/) for your on-prem cluster. Make the following selections when you create your spec using the spec generator:
 
    * On the **Storage** tab, select the **Cloud** storage environment. <!-- TODO: need UI example from dev. -->
    * Ensure **CSI** is enabled

@@ -6,6 +6,7 @@ keywords: Release notes, Reference
 hidesections: true
 aliases:
     - /reference/release-notes/
+series: top
 ---
 The following sections provide release notes for Portworx and various related components:
 

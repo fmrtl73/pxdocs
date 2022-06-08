@@ -8,7 +8,7 @@ noicon: true
 ---
 
 {{<info>}}
-This document presents the **DC/OS** method of installing Portworx on the Azure Container Service Engine (ACS). Please refer to the [Azure Container Service (ACS)](/portworx-install-with-kubernetes/cloud/azure/acs/) page if you want to install Portworx with Kubernetes on the Azure Container Service Engine (ACS).
+This document presents the **DC/OS** method of installing Portworx on the Azure Container Service Engine (ACS). Please refer to the [Azure Container Service (ACS)](/install-portworx/cloud/azure/acs/) page if you want to install Portworx with Kubernetes on the Azure Container Service Engine (ACS).
 {{</info>}}
 
 ### Overview
