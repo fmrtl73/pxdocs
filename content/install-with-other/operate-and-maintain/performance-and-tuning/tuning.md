@@ -32,7 +32,7 @@ pxctl volume create --size=10 --repl=3 --io_profile=db_remote demovolume
 or
 
 ```text
-docker volume create -d pxd io_priority=high,size=10G,repl=3,io_profile=random,name=demovolume
+docker volume create -d pxd io_priority=high,size=10G,repl=3,io_profile=db_remote,name=demovolume
 ```
 
 For more information about IO profiles, see the [IO profiles](/concepts/io-profiles) section of the documentation.
