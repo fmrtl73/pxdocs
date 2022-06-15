@@ -15,7 +15,7 @@ A Portworx cluster on Tanzu can contain a mixture of storage and storageless nod
 
 When scaling down a Tanzu cluster, do not scale down the cluster size lower than the total number of storage nodes in the Portworx cluster.
 
-You can find out the number of storage nodes by running `pxctl status` on any PX node. This will list all nodes in the cluster and mention which ones are storage nodes.
+You can find out the number of storage nodes by running `pxctl status` on any Portworx node. This will list all nodes in the cluster and mention which ones are storage nodes.
 
 To control the number of storage nodes in the cluster, use the `spec.cloudStorage.maxStorageNodesPerZone` or `spec.cloudStorage.maxStorageNodes` configuration in [`StorageCluster`](/reference/crd/storage-cluster/).
 

@@ -130,5 +130,5 @@ If you provided the prefix of a datastore cluster names to Portworx during insta
 
 The [Portworx VMware installation](/cloud-references/auto-disk-provisioning/vsphere/#installation) takes in a prefix for the datastores or datastore clusters you want to use for Portworx using the environment variable `VSPHERE_DATASTORE_PREFIX`.
 
-* When the provided prefix is for datastores, Portworx will pick the datastore with the most free available space to create it's VMDK.
+* When the provided prefix is for datastores, Portworx will pick the datastore with the most free available space to create its VMDK.
 * When the provided prefix is for datastore clusters, Portworx will use vSphere storage resource manager APIs to get recommendation on the datastore to use within the datastore cluster. From the provided recommendations, Portworx uses the first datastore in the list.

@@ -2,14 +2,14 @@
 title: Enabling Pure1 integration for upgrades
 weight: 100
 keywords: Troubleshoot, diags, phonehome, callhome
-description: Find out how to enable the Portworx Pure1 integration for clusters that were created before PX 2.8.0
+description: Find out how to enable the Portworx Pure1 integration for clusters that were created before Portworx 2.8.0
 hidden: true
 ---
 
 This page covers enabling Pure1 integration for following cases
 
-* You had a running PX cluster prior to PX 2.8.0, and you are now upgrading to 2.8.0 or above
-* You installed PX 2.8.0 or above but did not enable Pure1 integration and want to do so now
+* You had a running Portworx cluster prior to Portworx 2.8.0, and you are now upgrading to 2.8.0 or above
+* You installed Portworx 2.8.0 or above but did not enable Pure1 integration and want to do so now
 
 ## Pre-requisites
 

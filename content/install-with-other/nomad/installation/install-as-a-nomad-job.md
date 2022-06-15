@@ -168,13 +168,13 @@ plugin "docker" {
     ```
 
 
-### Enable PX Security
+### Enable PX-Security
 
 Portworx uses a secure system secret to communicate with itself and other Portworx nodes, and a shared secret to generate application, volume, user, and admin tokens. 
 
-To enable PX Security, update the "env" section in your job config.
+To enable PX-Security, update the "env" section in your job config.
 
-1. Generate a secure system secret for PX Security. You can store this in an environment variable temporarily:
+1. Generate a secure system secret for PX-Security. You can store this in an environment variable temporarily:
 
     ```text
     PORTWORX_AUTH_SYSTEM_KEY=$(cat /dev/urandom | base64 | fold -w 64 | head -n 1) \
@@ -192,7 +192,7 @@ To enable PX Security, update the "env" section in your job config.
     PORTWORX_AUTH_JWT_ISSUER=portworx-uswest-02-cluster1.io
     ```
 
-4. Populate the values in your `portworx.nomad` job "env" section with the values you generated in the steps above:
+4. Populate the values in your `portworx.nomad` job `env` section with the values you generated in the steps above:
 
     ```text
           # setup environment variables for px-nodes
@@ -256,7 +256,7 @@ c44ee856  6138409d  portworx    0        run      running  2m9s ago  10s ago
 
 You can also follow the logs to wait for Portworx to be ready.
 
-In the example below, I am using the first allocation ID, i.e. 20a20fd0:
+In the example below, I am using the first allocation ID, which is `20a20fd0`:
 
 ```text
 nomad alloc logs -f 20a20fd0
@@ -307,6 +307,6 @@ If Portworx crashes or you stop it on a node, Nomad will currently not detect th
 
 ## Post-Install
 
-Once you have successfully installed Portworx using a Nomad job, below sections are useful.
+Once you have successfully installed Portworx using a Nomad job, the following sections might be useful.
 
 {{<homelist series2="px-postinstall-nomad-job">}}

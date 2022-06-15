@@ -14,7 +14,7 @@ Before you can install Portworx on your OpenShift cluster, you must first instal
 
 * Your cluster must be running OpenShift 4 or higher.
 * You must have an OpenShift cluster deployed on infrastructure meeting the [minimum requirements](/install-portworx/prerequisites/) for Portworx.
-* Ensure that any underlying nodes used for PX in OCP have Secure Boot disabled.
+* Ensure that any underlying nodes used for Portworx in OCP have Secure Boot disabled.
 
 ## Install the Portworx Operator
 

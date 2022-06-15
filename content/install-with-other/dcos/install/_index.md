@@ -81,7 +81,7 @@ If you add more agents to your DCOS cluster and you want to install Portworx on 
 `node count` to start install on the new nodes. This will relaunch the service scheduler and install Portworx on the nodes
 which didn't have it previously.
 
-![Scale up PX Nodes](/img/dcos-px-scale-up.png)
+![Scale up Portworx Nodes](/img/dcos-px-scale-up.png)
 
 ## Install DCOS Portworx CLI
 To install the `dcos portworx` CLI, run the following DCOS CLI command:

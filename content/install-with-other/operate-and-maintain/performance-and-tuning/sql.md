@@ -1,7 +1,7 @@
 ---
 title: SQL Performance
 keywords: mysql, portworx, cos, class of service, production, performance, overhead
-description: View Portworx erformance as measured by running a mysql workload against the baremetal server and then against a PX volume on that same server.
+description: View Portworx erformance as measured by running a mysql workload against the baremetal server and then against a Portworx volume on that same server.
 weight: 300
 ---
 

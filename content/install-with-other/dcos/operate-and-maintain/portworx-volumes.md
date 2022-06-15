@@ -10,7 +10,7 @@ linkTitle: FAQ
 
 Portworx volumes are created, instantiated, and [managed by DCOS](http://mesos.apache.org/documentation/latest/isolators/docker-volume/). Portworx volumes can be used with both Docker containers and Mesos/UCR container.
 
-When using Docker containers, volumes are provisioned and mounted using Docker and it's volume drivers directly.
+When using Docker containers, volumes are provisioned and mounted using Docker and its volume drivers directly.
 
 When using Mesos/UCR containers DCOS uses [dvdcli]( https://github.com/codedellemc/dvdcli) to provision and mount volumes. `dvdcli` talks to Portworx using the docker plugin API, see here to understand Portworx implementation of the
 [API](/install-with-other/docker/how-to/volume-plugin)

@@ -1,8 +1,8 @@
 ---
-title: Adding journal device to existing PX Nodes
+title: Adding journal device to existing Portworx nodes
 hidden: true
 keywords: journal device, kubernetes, k8s
-description: Discover how to add a journal device  to a PX node to increase performance.
+description: Discover how to add a journal device to a Portworx node to increase performance.
 ---
 
 ## Adding Journal Device to an existing node.

@@ -21,4 +21,4 @@ To install Portworx with Kubernetes, you must first generate Kubernetes manifest
 
     ![Screenshot showing Portworx license selector](/img/pxcentral-license.png)
 
-Portworx can also be installed using it's Helm chart by following instructions [here](/portworx-install-with-kubernetes/install-px-helm). The above method is recommended over helm as the wizard will guide you based on your environment.
+Portworx can also be installed using its Helm chart by following instructions [here](/portworx-install-with-kubernetes/install-px-helm). The above method is recommended over helm as the wizard will guide you based on your environment.

@@ -62,13 +62,13 @@ Perform the following steps to deploy this example:
 
 ### Create specs
 
-{{<info>}}**TESTING ONLY:** The specs below all volumes to initially land on a single PX node. This is done so that we can test the rebalance rule later on to rebalance the volumes across all nodes. {{</info>}}
+{{<info>}}**TESTING ONLY:** The specs below all volumes to initially land on a single Portworx node. This is done so that we can test the rebalance rule later on to rebalance the volumes across all nodes. {{</info>}}
 
 #### Application and PVC specs
 
 Create the storage and application spec files:
 
-1. Identify the ID of a single PX node in the cluster.
+1. Identify the ID of a single Portworx node in the cluster.
         
     List the cluster nodes and pick the first node. In this example, we will pick the first node _073ae0c7-d5e8-4c6c-982e-75339f2ada81_ in the list.
 
@@ -146,7 +146,7 @@ Create the storage and application spec files:
     kubectl get pvc -n pg3
     ```
     
-    The output from this command should show that the provisioned space for the pool for the PX node that you selected in Step 1 has gone up by 90Gi since all the volumes are created there. You will see this in the `PROVISIONED` column of the output.
+    The output from this command should show that the provisioned space for the pool for the Portworx node that you selected in Step 1 has gone up by 90Gi since all the volumes are created there. You will see this in the `PROVISIONED` column of the output.
     
     ```text
     kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status --output-type wide

@@ -322,5 +322,5 @@ weight: 200
 
 ## Related topics
 
-* [Cassandra on Kubernetes: Step-by-step guide for the most popular k8s platforms](https://portworx.com/cassandra-kubernetes/)
+* [Cassandra on Kubernetes: Step-by-step guide for the most popular Kubernetes platforms](https://portworx.com/cassandra-kubernetes/)
 * [Run multiple Cassandra rings on the same hosts](https://portworx.com/run-multiple-cassandra-clusters-hosts/)

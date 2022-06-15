@@ -65,7 +65,7 @@ Perform the following steps to deploy this example:
 
 First, create the storage and application spec files:
 
-1. Identify the ID of a single PX node in the cluster.
+1. Identify the ID of a single Portworx node in the cluster.
         
     List the cluster nodes and pick the first node. In this example, we will pick the first node _073ae0c7-d5e8-4c6c-982e-75339f2ada81_ in the list.
 
@@ -121,7 +121,7 @@ First, create the storage and application spec files:
 
 4. Create the StorageClass and create 3 PVCs in 3 unique namespaces. 
 
-    In the cluster used in example, each node has a 30Gi pool. So creating 2 30Gi volumes on a single node will cause it's provisioned space percentage to be 200%. This will trigger� the rebalance rule. 
+    In the cluster used in example, each node has a 30Gi pool. So creating 2 30Gi volumes on a single node will cause its provisioned space percentage to be 200%. This will trigger the rebalance rule. 
     
     Update the PVC size in the storage field in above spec as per the pool sizes in your cluster.
 
@@ -142,7 +142,7 @@ First, create the storage and application spec files:
     kubectl get pvc -n pg2
     ```
     
-    The output from this command should show that the provisioned space for the pool for the PX node that you selected in Step 1 has gone up since all the volumes are created there. You will see this in the `PROVISIONED` column of the output:
+    The output from this command should show that the provisioned space for the pool for the Portworx node that you selected in Step 1 has gone up since all the volumes are created there. You will see this in the `PROVISIONED` column of the output:
     
     ```text
     kubectl exec $PX_POD -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status --output-type wide

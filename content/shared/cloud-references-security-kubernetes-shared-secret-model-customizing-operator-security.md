@@ -9,7 +9,7 @@ This optional document guides you through customizing your Portworx Operator Sec
 ## Prerequisites
 
 * Portworx Operator 1.4 or later
-* Portworx Security enabled
+* PX-Security enabled
 
 ### Add a custom issuer, shared secret, and tokenLifetime to your StorageCluster
 

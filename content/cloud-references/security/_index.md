@@ -8,7 +8,7 @@ hidesections: true
 ---
 
 The following reference architectures provide different models on how to
-integrate Portworx security with container orchestration systems like Kubernetes
+integrate PX-Security with container orchestration systems like Kubernetes
 and DCOS.
 
 {{<homelist series="security-ref-archs">}}

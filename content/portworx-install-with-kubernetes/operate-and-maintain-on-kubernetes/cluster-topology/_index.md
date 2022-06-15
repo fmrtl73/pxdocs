@@ -15,7 +15,7 @@ You can provide your cluster topology information to Portworx using Kubernetes n
 
 For Kubernetes clusters on well-known cloud providers (AWS, GCP, Azure, IBM, VMware etc), the Kubernetes nodes are prepopulated well-known failure domain labels.
 
-Portworx parses these labels to update it's understanding of the cluster topology. Users don't need to perform any additional steps.
+Portworx parses these labels to update its understanding of the cluster topology. Users don't need to perform any additional steps.
 
 |**Label Name** |**Purpose**|
 |-------------------------|------------|

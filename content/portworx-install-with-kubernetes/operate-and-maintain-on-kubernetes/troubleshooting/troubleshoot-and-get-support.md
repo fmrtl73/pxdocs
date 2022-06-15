@@ -75,20 +75,20 @@ We are always available on Slack. Join us! [![Slack](/img/slack.png)](https://po
 
 ### Etcd
 
-* Px container will fail to come up if it cannot reach etcd. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
+* Portworx container will fail to come up if it cannot reach etcd. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
   * The etcd location specified when creating the Portworx cluster needs to be reachable from all nodes.
   * Run `curl <etcd_location>/version` from each node to ensure reachability. For e.g `curl "http://192.168.33.10:2379/version"`
-* If you deployed etcd as a Kubernetes service, use the ClusterIP instead of the kube-dns name. Portworx nodes cannot resolve kube-dns entries since px containers are in the host network.
+* If you deployed etcd as a Kubernetes service, use the ClusterIP instead of the kube-dns name. Portworx nodes cannot resolve kube-dns entries since Portworx containers are in the host network.
 
 ### Internal Kvdb
 * In an event of a disaster where, internal kvdb is in an unrecoverable error state follow this [doc](/concepts/internal-kvdb#backup) to recover your Portworx cluster
 
 ### The Portworx cluster
 
-* Ports 9001 - 9022 must be open for internal network traffic between nodes running Portworx. Without this, px cluster nodes will not be able to communicate and cluster will be down.
+* Ports 9001 - 9022 must be open for internal network traffic between nodes running Portworx. Without this, Portworx cluster nodes will not be able to communicate and cluster will be down.
 * If one of your nodes has a custom taint, the Portworx pod will not get scheduled on that node unless you add a toleration in the Portworx DaemonSet spec. Read [here](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature) for more information about taints and tolerations.
-* When the px container boots on a node for the first time, it attempts to download kernel headers to compile it’s kernel module. This can fail if the host sits behind a proxy. To workaround this, install the kernel headers on the host. For example on centos, this will be ```yum install kernel-headers-`uname -r``` and ``yum install kernel-devel-`uname -r```
-* If one of the px nodes is in maintenance mode, this could be because one or more of the drives has failed. In this mode, you can replace up to one failed drive. If there are multiple drive failures, a node can be decommissioned from the cluster. Once the node is decommissioned, the drives can be replaced and recommissioned into the cluster.
+* When the Portworx container boots on a node for the first time, it attempts to download kernel headers to compile it’s kernel module. This can fail if the host sits behind a proxy. To workaround this, install the kernel headers on the host. For example on centos, this will be ```yum install kernel-headers-`uname -r``` and ``yum install kernel-devel-`uname -r```
+* If one of the Portworx nodes is in maintenance mode, this could be because one or more of the drives has failed. In this mode, you can replace up to one failed drive. If there are multiple drive failures, a node can be decommissioned from the cluster. Once the node is decommissioned, the drives can be replaced and recommissioned into the cluster.
 * After you labeled a node with `px/enabled=remove` \(or `px/service=restart`\), and Portworx is not uninstalling \(or, restarting\):
   * On a “busy cluster”, Kubernetes can take some time until it processes the node-labels change, and notifies Portowrx service – please allow a few minutes for labels to be processed.
   * Sometimes it may happen that Kubernetes labels processing stops altogether - in this case please reinstall the “oci-monitor” component by applying and then deleting the `px/enabled=false` label:  `kubectl label nodes --all px/enabled=false; sleep 30; kubectl label nodes --all px/enabled-`
@@ -103,7 +103,7 @@ We are always available on Slack. Join us! [![Slack](/img/slack.png)](https://po
 
 If the PVC creation is failing, this could be due the following reasons
 
-* A firewall/iptables rule for port 9001 is present on the hosts running px containers. This prevents the create volume call to come to the Portworx API server.
+* A firewall/iptables rule for port 9001 is present on the hosts running Portworx containers. This prevents the create volume call to come to the Portworx API server.
 * For Kubernetes versions 1.6.4 and before, Portworx may not running on the Kubernetes control plane node.
 * For Kubernetes versions 1.6.5 and above, if you don’t have Portworx running on the control plane node, ensure that
   * The `portworx-service` Kubernetes `Service` is running in the `kube-system` namespace.
@@ -114,7 +114,7 @@ If the PVC creation is failing, this could be due the following reasons
 
 ### PVC Controller
 
-If you are running Portworx in AKS and run into port conflict in the PVC controller, you can overwrite the default PVC Controller ports using the `portworx.io/pvc-controller-port` and `portworx.io/pvc-controller-secure-port` annotations on the `StorageCluster` object:
+If you are running Portworx in AKS and run into port conflict in the PVC controller, you can overwrite the default PVC Controller ports using the `portworx.io/pvc-controller-port` and `portworx.io/pvc-controller-secure-port` annotations on the `StorageCluster` object:
 
 ```text
 apiVersion: core.libopenstorage.org/v1

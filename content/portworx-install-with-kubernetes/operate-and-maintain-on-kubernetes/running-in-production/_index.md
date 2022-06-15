@@ -11,7 +11,7 @@ series: k8s-op-maintain
 
 #### Initial Software Setup for Production
 
-* Follow the instructions in the [k8s install](/portworx-install-with-kubernetes) page in the docs.
+* Follow the instructions to [install with Kubernetes](/portworx-install-with-kubernetes).
 * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will form the Portworx cluster
 * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
 * etcd - Setup etcd as a 3-node etcd cluster _outside_ the container orchestrator to ensure maximum stability. Refer to the following [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) on how to install etcd and also configure it for maximum stability.
@@ -19,7 +19,7 @@ series: k8s-op-maintain
 #### Configuring the Server or the Compute Infrastructure
 
 * Check and ensure a _minimum_ 2 cores and 4GB of RAM are allocated for Portworx.
-* The base operating system of the server supports linux kernel 3.10+ . Newer 4.x linux kernels have many performance and stability related fixes and is recommended.
+* The base operating system of the server supports linux kernel 3.10+. Newer 4.x Linux kernels have many performance and stability related fixes and are recommended.
 
       ```text
       uname -r
@@ -31,9 +31,9 @@ series: k8s-op-maintain
 
 #### Configuring the Networking Infrastructure
 
-* Make sure the following ports are open in all the servers. 9001-9022
+* Make sure the following ports are open in all the servers: `9001-9022`
 * Configure separate networks for Data and Management networks to isolate the traffic
-  * Data network is specified giving the ‘-d’ switch and Management networks with the ‘-m’ switch. Refer to [scheduler guides](/portworx-install-with-kubernetes) for specifics to enable it in your scheduler.
+  * Data network is specified giving the `-d` switch and Management networks with the `-m` switch. Refer to [scheduler guides](/portworx-install-with-kubernetes) for specifics to enable it in your scheduler.
   * With multiple NICs, create a bonded ethernet port for data interface for improved availability and performance.
 
 #### Configuring and Provisioning Underlying Storage
@@ -287,7 +287,7 @@ While Prometheus can be deployed as a container within the container orchestrato
 
 #### Stuck Volume Detection and Resolution
 
-* With K8s, it is possible that even after the application container terminates, a volume is left attached. This volume is still available for use in any other node. Portworx makes sure that if a volume is not in use by an application, it can be attached to any other node in the system
+* With Kubernetes, it is possible that even after the application container terminates, a volume is left attached. This volume is still available for use in any other node. Portworx makes sure that if a volume is not in use by an application, it can be attached to any other node in the system
 * With this attach operation, the Portworx will automatically manage the volume attach status with no user intervention required and continue to serve the volume I/Os even a container attaches to the same volume from a different node.
 
 #### Scaling out a cluster nodes in the Cloud and On-Prem

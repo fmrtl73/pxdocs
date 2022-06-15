@@ -22,7 +22,7 @@ The general workflow of using an AutopilotRule with approvals enabled consists o
 The general workflow expands to the following steps. The Example section later will cover a detailed working example.
 
 1. Create an AutopilotRule with `enforcement: approvalRequired`  in the spec
-2. Wait until the objects meet the conditions specified in the rule. For example, if the rule is to expand a volume when it's usage is greater than 50%, wait for this condition.
+2. Wait until the objects meet the conditions specified in the rule. For example, if the rule is to expand a volume when its usage is greater than 50%, wait for this condition.
 3. Once the conditions are met, list of the action approvals in the namespace. Identity the item in the list for the concerned object.
 4. Update the `approvalState` field in the ActionApproval object spec to `approved` or `declined`.
 5. Based on whether you approved or declined in the previous step, the action will either proceed or get declined respectively.

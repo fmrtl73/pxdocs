@@ -13,7 +13,7 @@ weight: 30000
 
 ## Overview 
 
-When you create an AutopilotRule in your cluster, Autopilot will execute actions on the objects in the cluster when the conditions in the AutopilotRule are met. An example action would be resize of a PVC when it's usage increases.
+When you create an AutopilotRule in your cluster, Autopilot will execute actions on the objects in the cluster when the conditions in the AutopilotRule are met. An example action would be resize of a PVC when its usage increases.
 
 The diagram below captures this workflow. Autopilot monitors the cluster, predicts actions that need to be taken based on the rules you have created and acts upon them by executing the actions.
 

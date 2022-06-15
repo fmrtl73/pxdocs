@@ -204,7 +204,7 @@ This section explains the fields used to configure the `StorageCluster` object.
 | spec.<br>customImageRegistry | The custom container registry server Portworx uses to fetch the Docker images. You may include the repository as well. | `string` | None |
 | spec.<br>secretsProvider | The name of the secrets provider Portworx uses to store your credentials. To use features like cloud snapshots or volume encryption, you must configure a secret store provider. Refer to the [Secret store management page](/key-management/) for more details. | `string` |  None |
 | spec.<br>runtimeOptions | A collection of key-value pairs that overwrites the runtime options. | `map[string]string` | None |
-| spec.<br>security | An object for specifying Portworx Security configurations. Refer to the [Operator Security page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/enable/) for more details. | `object` | None |
+| spec.<br>security | An object for specifying PX-Security configurations. Refer to the [Operator Security page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/enable/) for more details. | `object` | None |
 | spec.<br>featureGates | A collection of key-value pairs specifying which Portworx features should be enabled or disabled. [^1] | `map[string]string` | None |
 | spec.<br>env[] | A list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826). Similar to how environment variables are provided in Kubernetes, you can directly provide values to Portworx or import them from a source like a `Secret`, `ConfigMap`, etc. | `[]object` | None |
 | spec.<br>metadata.<br>annotations | A map of components and custom annotations. [^2] | map[string]map[string]string | None |
@@ -419,7 +419,7 @@ This section provides details on how to override certain cluster level configura
 | spec.<br>security.<br>enabled | Enables or disables Security at any given time. | `boolean` | `false` |
 | spec.<br>security.<br>auth.<br>guestAccess | Determines how the guest role will be updated in your cluster. The options are Enabled, Disabled, or Managed. Managed will cause the operator to ignore updating the system.guest role. Enabled and Disabled will allow or disable guest role access, respectively. | `string` | Enabled |
 | spec.<br>security.<br>auth.<br>selfSigned.<br>tokenLifetime | The length operator-generated tokens will be alive until being refreshed. | `string` | 24h |
-| spec.<br>security.<br>auth.<br>selfSigned.<br>issuer | The issuer name to be used when configuring Portworx Security. This field maps to the `PORTWORX_AUTH_JWT_ISSUER` environment variable in the Portworx Daemonset. | `string` | operator.portworx.io |
+| spec.<br>security.<br>auth.<br>selfSigned.<br>issuer | The issuer name to be used when configuring PX-Security. This field maps to the `PORTWORX_AUTH_JWT_ISSUER` environment variable in the Portworx Daemonset. | `string` | operator.portworx.io |
 | spec.<br>security.<br>auth.<br>selfSigned.<br>sharedSecret | The Kubernetes secret name for retrieving and storing your shared secret. This field can be used to add a pre-existing shared secret or for customizing which secret name the operator will use for its auto-generated shared secret key. This field maps to the `PORTWORX_AUTH_JWT_SHAREDSECRET` environment variable in the Portworx Daemonset. | `string` | px-shared-secret |
 
 ### StorageCluster Annotations

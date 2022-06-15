@@ -211,9 +211,9 @@ Portworx nodes can be made aware of the rack on which they are a placed as well 
 
 {{< youtube Csr8HNi4nRw >}}
 
-## Management and Visibility with PX Central On-prem
+## Management and Visibility with Portworx Central On-prem
 
-PX-Central is a graphical user interface that allows you to monitor and manage your Portworx clusters on-premises or in the cloud. In this lightboard we will walk through the differences with the SaaS version and explain the variations of what you can accomplish using PX Central.
+PX-Central is a graphical user interface that allows you to monitor and manage your Portworx clusters on-premises or in the cloud. In this lightboard we will walk through the differences with the SaaS version and explain the variations of what you can accomplish using Portworx Central.
 
 {{< youtube Mr_mWdfpyHg >}}
 

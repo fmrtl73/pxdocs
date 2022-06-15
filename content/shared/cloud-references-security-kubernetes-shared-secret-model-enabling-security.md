@@ -5,7 +5,7 @@ hidden: true
 ---
 
 
-This document guides you through enabling Portworx Security in your cluster by adding a single flag to your `StorageCluster` object.
+This document guides you through enabling PX-Security in your cluster by adding a single flag to your `StorageCluster` object.
 
 ## Prerequisites
 
@@ -13,7 +13,7 @@ This document guides you through enabling Portworx Security in your cluster by a
 
 ## Overview
 
-The Operator includes first-class support for Portworx Security in the `StorageCluster` spec. This means that the operator will auto-generate the following for you if security is enabled:
+The Operator includes first-class support for PX-Security in the `StorageCluster` spec. This means that the operator will auto-generate the following for you if security is enabled:
 
 * Shared Secret stored under the secret `px-shared-secret`
 * Admin token stored under the secret `px-admin-token` 

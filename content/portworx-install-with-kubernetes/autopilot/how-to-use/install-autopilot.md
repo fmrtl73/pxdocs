@@ -29,13 +29,13 @@ In the example above, `http://prometheus:9090` becomes the Prometheus endpoint. 
 
 {{<info>}}*Why `http://prometheus:9090`* ?
 
-`prometheus` is the name of the Kubernetes service for Prometheus in the kube-system namespace. Since Autopilot also runs as a pod in the kube-system namespace, it can access Prometheus using it's Kubernetes service name and port.
+`prometheus` is the name of the Kubernetes service for Prometheus in the kube-system namespace. Since Autopilot also runs as a pod in the kube-system namespace, it can access Prometheus using its Kubernetes service name and port.
 
 {{</info>}}
 
 ### Configuring the ConfigMap
 
-Replace `http://prometheus:9090` in the following ConfigMap with your Prometheus service endpoint, if it's different. Once replaced, apply this ConfigMap in your cluster:
+Replace `http://prometheus:9090` in the following ConfigMap with your Prometheus service endpoint, if it is different. Once replaced, apply this ConfigMap in your cluster:
 
 ```text
 

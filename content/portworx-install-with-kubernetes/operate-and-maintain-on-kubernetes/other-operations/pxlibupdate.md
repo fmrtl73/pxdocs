@@ -40,7 +40,7 @@ Then apply the spec.
 kubectl apply -f pxlibupdate-spec.yaml
 ```
 
-The update is deployed as a daemonset.  Once it is successfully started, a restart of PX will be required, and it will use the updated archive.
+The update is deployed as a daemonset.  Once it is successfully started, a restart of Portworx will be required, and it will use the updated archive.
 
 To restart PX, label all your Kubernetes nodes as below.
 
@@ -48,6 +48,6 @@ To restart PX, label all your Kubernetes nodes as below.
 kubectl label nodes --all px/service=restart --overwrite
 ```
 
-The DaemonSet above will update the pre-compiled module archives within the PX install location on the node (i.e /opt/pwx).
+The DaemonSet above will update the pre-compiled module archives within the Portworx install location on the node (for example, `/opt/pwx`).
 
-Note that this process assumes that PX is already installed since it will only update an existing installation.  The existing installation's version will be checked for compatibility with the update container and if it's not compatible the update will not be done.
+Note that this process assumes that Portworx is already installed since it will only update an existing installation.  The existing installation's version will be checked for compatibility with the update container, and if it is not compatible, then the update will not be done.

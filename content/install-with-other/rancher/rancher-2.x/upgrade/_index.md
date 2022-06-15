@@ -25,7 +25,7 @@ Perform the following steps to upgrade Portworx:
 
 3. Go to the **Advanced Settings** section and change the value of the **Portworx version to be deployed** input field (for e.g `2.5.1`):
 
-    ![Rancher change PX version](/img/rancher-change-px-version.png)
+    ![Rancher change Portworx version](/img/rancher-change-px-version.png)
 
 4. Click Upgrade. Rancher will now upgrade `Portworx`:
 

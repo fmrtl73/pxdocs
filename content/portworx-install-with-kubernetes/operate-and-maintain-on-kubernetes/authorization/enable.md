@@ -33,7 +33,7 @@ spec:
     enabled: true
 ```
 
-For a detailed guide of installing Portworx Security with the Operator, please see [Securing your storage with the Operator](/cloud-references/security/kubernetes/shared-secret-model-operator/).
+For a detailed guide of installing PX-Security with the Operator, please see [Securing your storage with the Operator](/cloud-references/security/kubernetes/shared-secret-model-operator/).
 
 
 ### Migrating from Portworx Manifest to StorageCluster Security spec
@@ -69,9 +69,9 @@ kubectl create secret generic -n kube-system px-shared-secret \
 
 5. You can now apply the StorageCluster spec and wait until Portworx is ready.
 
-### Migrating to auto-generated Portworx Security system secrets
+### Migrating to auto-generated PX-Security system secrets
 
-Another feature of Portworx Operator Security is that you can allow the Operator to auto-generate all required system secrets. This can greatly decrease the complexity of your PX Security deployment. The auto-generated secrets are random 64 character strings and are base64 encoded. This is a zero downtime migration and can be achieved with the following `StorageCluster` changes:
+Another feature of Portworx Operator Security is that you can allow the Operator to auto-generate all required system secrets. This can greatly decrease the complexity of your PX-Security deployment. The auto-generated secrets are random 64 character strings and are base64 encoded. This is a zero downtime migration and can be achieved with the following `StorageCluster` changes:
 
 1. Add the following to your `StorageCluster` security spec:
 
@@ -110,7 +110,7 @@ setup an environment variable from a Secret:
     PORTWORX_AUTH_SHARED_SECRET=$(cat /dev/urandom | base64 | fold -w 64 | head -n 1)
     ```
 
-2. Create a secret for all Portworx Security keys: 
+2. Create a secret for all PX-Security keys: 
 
     ```text
     kubectl create secret generic pxkeys \

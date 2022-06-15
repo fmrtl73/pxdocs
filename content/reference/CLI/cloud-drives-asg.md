@@ -234,6 +234,6 @@ pxctl clouddrive transfer submit [FLAG]
 
 | **Flag** | **Description** |
 |----|----|
-|  `-d, --dest` (string) | ID of the instance who should own the drive set. This is the 'InstanceID' displayed in the output of the 'pxctl clouddrive list' command. The destination instance needs to be a storage less node (with no Drive IDs) and in the same zone (if your cluster has zones). This is optional and if not provided, an online storageless node will be used. |
+|  `-d, --dest` (string) | ID of the instance who should own the drive set. This is the `InstanceID` displayed in the output of the `pxctl clouddrive list` command. The destination instance needs to be a storage less node (with no Drive IDs) and in the same zone (if your cluster has zones). This is optional and if not provided, an online storageless node will be used. |
 | ` -h, --help`          | help for submit |
-|  `-s, --src` (string)  | (Required) ID of the PX node who currently owns the drive set. This is the 'NodeID' displayed in the output of the 'pxctl clouddrive list' command. |
+|  `-s, --src` (string)  | (Required) ID of the Portworx node who currently owns the drive set. This is the `NodeID` displayed in the output of the `pxctl clouddrive list` command. |

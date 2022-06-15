@@ -76,7 +76,7 @@ spec:
     value: "true"
 ```
 
-Once this env variable is set, PX will run the nodes which are labeled as `portworx.io/node-type=storage` as storage nodes, and it will run the nodes labeled as `portworx.io/node-type=storageless` as storageless nodes.
+Once this environment variable is set, Portworx will run the nodes which are labeled as `portworx.io/node-type=storage` as storage nodes, and it will run the nodes labeled as `portworx.io/node-type=storageless` as storageless nodes.
 
 
 ## On-premises environments

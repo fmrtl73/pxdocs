@@ -52,7 +52,7 @@ Perform the following steps to install Portworx:
        
      * In the **Portworx version to be deployed.** field, select the Portworx version you want to deploy. Currently recommended version is **2.5.1**
         
-        ![Screenshot showing the PX Version section of the Helm chart form](/img/rancherPXVersion.png)
+        ![Screenshot showing the Portworx Version section of the Helm chart form](/img/rancherPXVersion.png)
 
 
 6.  Select the **Launch** button to deploy Portworx to your cluster:

@@ -39,7 +39,7 @@ The token contains a section called _claims_ which not only identifies the user 
 
 ## Security Tokens
 
-Portworx security supports two types of token generation models: _OIDC_ and
+PX-Security supports two types of token generation models: _OIDC_ and
 _self-generated_ tokens. OpenID Connect (or OIDC) is a standard model for user authentication and management and is a great solution for enterprise customers due to its integration with SAML 2.0, Active Directory, and/or LDAP. The second model is a self-generated token, where the administrator would generate a token using their own TA application. For convenience, Portworx provides a method of generating tokens using `pxctl`.
 
 For Portworx to verify the tokens are valid, they must be signed with either a:
@@ -73,7 +73,7 @@ Token generation can be done by any JWT compliant application which sets the cla
 
 Due to its ability to manage thousands of users, it is highly recommended that enterprise customers deploy an OIDC service. There are multiple public and private OIDC providers. Customers could use public providers such as Okta.com, Auth0.com, etc, or private providers such as Keycloak, CloudFoundry UAA, Dex, or Tremolo Security OpenUnison.
 
-In the case where the claims required by Portworx security do not match with those provided by the customer, most OIDCs have a mapping feature. This feature allows the OIDC system to return a token to Portworx where the claims have the appropriate information. Some OIDCs may namespace custom claims. This is supported by Portworx, but the namespace value must be provided to the system during initialization.
+In the case where the claims required by PX-Security do not match with those provided by the customer, most OIDCs have a mapping feature. This feature allows the OIDC system to return a token to Portworx where the claims have the appropriate information. Some OIDCs may namespace custom claims. This is supported by Portworx, but the namespace value must be provided to the system during initialization.
 
 ## Portworx RBAC Security Models
 

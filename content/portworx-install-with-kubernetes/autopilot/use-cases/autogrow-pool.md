@@ -16,7 +16,7 @@ Autopilot uses Portworx APIs to expand storage pools, and these APIs currently s
 
 ## Prerequisites
 
-* **Portworx version**: Autopilot uses Portworx APIs to expand storage pools which is available only in PX 2.3.1 and above
+* **Portworx version**: Autopilot uses Portworx APIs to expand storage pools which is available only in Portworx 2.3.1 and above
 * **Portworx cloud drives**: Your Portworx installation must use one of the supported cloud drives where Portworx provisions the backing drives using the cloud provider
 * **Autopilot version**: 1.0.0 and above
 

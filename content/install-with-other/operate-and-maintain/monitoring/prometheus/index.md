@@ -13,8 +13,8 @@ These stats are exported at port 9001; your application can poll http://&lt;IP_A
 
 ## Integration with Prometheus
 
-### Step 1: Configuring Prometheus to watch px node
-Add your px node as a target in Prometheus config file:
+### Step 1: Configuring Prometheus to watch a Portworx node
+Add your Portworx node as a target in Prometheus config file:
 
 ![Prometheus Config File](/img/prometheus-config.png "Prometheus Config File")
 

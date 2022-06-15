@@ -1,7 +1,7 @@
 ---
 title: Secure your volumes 
 keywords: csi, portworx, container, Kubernetes, storage, Docker, k8s, pv, security
-description: This page explains how you can start securing your volume with PX Security
+description: This page explains how you can start securing your volume with PX-Security
 weight: 400
 ---
 

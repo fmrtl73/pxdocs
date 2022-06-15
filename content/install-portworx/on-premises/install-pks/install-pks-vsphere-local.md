@@ -20,7 +20,7 @@ aliases:
 Below diagram gives an overview of the Portworx architecture for PKS on vSphere using local datastores.
 
 * Portworx runs as a Daemonset hence each Kubernetes minion/worker will have the Portworx daemon running.
-* A **Single** Portworx instance on each ESXi host will create it's disk on the configured Datastore. So if there are 2 worker VMs on a single ESXi, Portworx instance on the first worker VM will create and manage the disks. Subsequent Portworx instances on that ESXi host will still be part of the cluster and will function as storageless nodes.
+* A **Single** Portworx instance on each ESXi host will create its disk on the configured Datastore. So if there are 2 worker VMs on a single ESXi, Portworx instance on the first worker VM will create and manage the disks. Subsequent Portworx instances on that ESXi host will still be part of the cluster and will function as storageless nodes.
 * Portworx will aggregate all of the disks and form a single storage cluster. End users can carve PVCs (Persistent Volume Claims), PVs (Persistent Volumes) and Snapshots from this storage cluster.
 * Portworx tracks and manages the disks that it creates. So in a failure event, if a new VM spins up, Portworx on the new VM will be able to attach to the same disk that was previously created by the node on the failed VM.
 
