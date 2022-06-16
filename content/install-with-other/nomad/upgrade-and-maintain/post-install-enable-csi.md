@@ -14,9 +14,10 @@ Enable Portworx CSI with Nomad by editing the `portworx.nomad` file you used for
 
     ```text
     csi_plugin {
-        id = "portworx"
-        type = "monolith"
-        mount_dir = "/var/lib/csi"
+        id             = "portworx"
+        type           = "monolith"
+        mount_dir      = "/var/lib/csi"
+        health_timeout = "30m"
     }
     ```
 

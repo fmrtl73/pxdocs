@@ -113,9 +113,10 @@ plugin "docker" {
 
           # CSI Driver config
           csi_plugin {
-            id        = "portworx"
-            type      = "monolith"
-            mount_dir = "/var/lib/csi"
+            id             = "portworx"
+            type           = "monolith"
+            mount_dir      = "/var/lib/csi"
+            health_timeout = "30m"
           } 
 
           # container config
