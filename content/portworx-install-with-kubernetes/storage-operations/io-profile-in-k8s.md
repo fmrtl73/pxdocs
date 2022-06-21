@@ -48,3 +48,8 @@ You can direct a group of volumes to use a specific IO profile by defining it at
         requests:
           storage: 10Gi
     ```
+
+
+## Related topics
+
+* [Performance optimization options in the IO path](/reference/performance-io-path/)

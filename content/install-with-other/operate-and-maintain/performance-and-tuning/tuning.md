@@ -35,4 +35,7 @@ or
 docker volume create -d pxd io_priority=high,size=10G,repl=3,io_profile=db_remote,name=demovolume
 ```
 
-For more information about IO profiles, see the [IO profiles](/concepts/io-profiles) section of the documentation.
+## Related topics
+
+* [IO profiles](/concepts/io-profiles/)
+* [Performance optimization options in the IO path](/reference/performance-io-path/)
