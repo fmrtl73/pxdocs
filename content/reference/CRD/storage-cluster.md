@@ -231,7 +231,7 @@ This section explains the fields used to configure the `StorageCluster` object.
     ```
     Please note that you can also use `CSI: "True"` or `CSI: "1"`.
 
-[^2]: The following example configures annotations for storage pods. Change `<custom-domain/custom-key>: <custom-val>` to whatever `key: val` pairs you wish to provide.
+[^2]: The following example configures custom annotations. Change `<custom-domain/custom-key>: <custom-val>` to whatever `key: val` pairs you wish to provide.
 
     ```text
     spec:
@@ -239,8 +239,20 @@ This section explains the fields used to configure the `StorageCluster` object.
         annotations:
           pod/storage:
             <custom-domain/custom-key>: <custom-val>
+          service/portworx-api:
+            <custom-domain/custom-key>: <custom-val>
+          service/portworx-service:
+            <custom-domain/custom-key>: <custom-val>
+          service/portworx-kvdb-service:
+            <custom-domain/custom-key>: <custom-val>
     ```
-    Note that `StorageCluster.spec.metadata.annotations` is different from `StorageCluster.metadata.annotations`. Currently, custom annotations are only supported on storage pods.
+    Note that `StorageCluster.spec.metadata.annotations` is different from `StorageCluster.metadata.annotations`.
+    Currently, custom annotations are supported on following types of components:
+
+    | Type | Components |
+    | --- | --- |
+    | Pod | storage pods |
+    | Service | portworx-api<br> portworx-service<br> portworx-kvdb-service |
 
 [^3]: The following example configures labels for the `portworx-api` service. Change `<custom-label-key>: <custom-val>` to whatever `key: val` pairs you wish to provide.
 
@@ -427,3 +439,4 @@ This section provides details on how to override certain cluster level configura
 | Annotation | Description |
 | --- | --- |
 | `portworx.io/misc-args` | Arguments that you specify in this annotation are passed to portworx container verbatim. For example:<br>`portworx.io/misc-args: "-cluster_domain cluster-1"` |
+| `portworx.io/service-type` | Annotation to configure type of services created by operator. For example:<br>`portworx.io/service-type: "LoadBalancer"` to specify `LoadBalancer` type for all services.<br> For Operator 1.8.1 and higher, the value can be a list of service names and corresponding type configurations split in `;`, service not specified will use its default type. For example:<br>`portworx.io/service-type: "portworx-service:LoadBalancer;portworx-api:ClusterIP;portworx-kvdb-service:LoadBalancer"` |
