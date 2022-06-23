@@ -9,6 +9,23 @@ aliases:
     - /reference/release-notes/operator
 ---
 
+## 1.8.1
+June 22, 2022
+
+### Updates
+
+* Added support for Operator to run on IPv6 environment.
+* You can now enable CSI topology feature by setting the `.Spec.CSI.Topology.Enabled` flag to `true` in the StorageCluster CRD, the default value is `false`. The feature is only supported on FlashArray direct access volumes.
+* Operator now uses custom SecurityContextConstraints `portworx` instead of `privileged` on OpenShift.
+* You can now add custom annotations to any service created by Operator.
+* You can now configure `ServiceType` on any service created by Operator.
+
+### Bug Fixes
+
+* Fixed pod recreation race condition during OCP upgrade by introducing exponential back-off to pod recreation when the `operator.libopenstorage.org/cordoned-restart-delay-secs` annotation is not set. 
+* Fixed the incorrect CSI provisioner arguments when custom image registry path contains ":".
+
+
 ## 1.8.0
 
 Apr 14, 2022
