@@ -3,8 +3,10 @@ title: Etcd for Portworx
 keywords: Install, etcd, portworx, kvdb
 description: Instructions on installing and configuring an external ETCD cluster for Portworx
 linkTitle: Etcd for Portworx
-series: kb
-weight: 100
+series: reference
+weight: 600
+aliases:
+  - /reference/knowledge-base/etcd/
 ---
 
 Portworx requires a key-value database such as etcd for configuring storage. A highly available clustered etcd with persistent storage is preferred.
@@ -30,7 +32,7 @@ You can use one of the following methods to setup an etcd cluster
 
 #### Setup an ETCD cluster with a static set of nodes
 
-If you have 3 static nodes where you want to run etcd follow [this](/reference/knowledge-base/etcd-quick-setup) guide to setup systemd services for an etcd cluster.
+If you have 3 static nodes where you want to run etcd follow [this](/reference/etcd-quick-setup) guide to setup systemd services for an etcd cluster.
 
 #### Setup an ETCD cluster using the official documentation
 

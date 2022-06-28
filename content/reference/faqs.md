@@ -2,9 +2,11 @@
 title: Frequently Asked Questions
 keywords: FAQs, Frequently Asked Questions, help, operations, maintenance
 description: Find answers to all the most frequently asked questions about Portworx.
-weight: 200
+weight: 4000
 linkTitle: FAQs
-series: kb
+series: reference
+aliases:
+  - /reference/knowledge-base/faqs/
 ---
 
 ### Can Portworx run in the cloud? On-premises? Both?

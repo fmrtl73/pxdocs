@@ -3,6 +3,8 @@ title: Etcd Quick Setup
 keywords: etcd, quick setup, install, maintenance, kvdb
 hidden: true
 disableprevnext: true
+aliases:
+  - /reference/knowledge-base/etcd-quick-setup/
 ---
 
 Following guide will setup a 3 node etcd cluster. Etcd will be running as a systemd services on the nodes.

@@ -3,7 +3,7 @@ title: Using the Portworx REST API
 linkTitle: REST API
 keywords: REST API, gRPC interface, integration, interoperability
 description: Details on using the Portworx REST API
-weight: 300
+weight: 3000
 noicon: true
 series: reference
 ---

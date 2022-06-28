@@ -3,7 +3,9 @@ title: Run-flat mode
 keywords: run-flat, kvdb, offline, outage
 description: Describes Portworx run-flat mode
 weight: 700
-series: kb
+series: concepts
+aliases:
+  - /reference/knowledge-base/run-flat/
 ---
 
 Portworx requires a key-value database such as etcd for configuring storage. A highly available clustered etcd with persistent storage is preferred. You can setup an external etcd and configure Portworx to use it, or you can let Portworx spin up its own key-value database by using the [internal KVDB](/concepts/internal-kvdb/).
