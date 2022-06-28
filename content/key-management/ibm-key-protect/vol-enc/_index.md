@@ -1,4 +1,14 @@
-You can use one of the following methods to encrypt Portworx volumes with Google Cloud KMS, depending on how you provide the secret password to Portworx:
+---
+title: (Other Schedulers) Encrypting Portworx Volumes using IBM Key Protect
+weight: 200
+keywords: IBM Key Protect, encrypt volume, other schedulers, non-kubernetes
+description: Instructions on using IBM Key Protect with Portworx for encrypting Portworx Volumes
+noicon: true
+series: ibm-key-protect-uses
+hidden: true
+---
+
+You can use one of the following methods to encrypt Portworx volumes with IBM Key Protect, depending on how you provide the secret password to Portworx:
 
 - [Encrypt volumes using per volume secrets](#encrypt-volumes-using-per-volume-secrets)
 - [Encrypt volumes using a cluster-wide secret](#encrypt-volumes-using-a-cluster-wide-secret)
