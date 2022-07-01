@@ -8,6 +8,16 @@ aliases:
     - /reference/release-notes/portworx
 ---
 
+## 2.10.3
+
+June 30, 2022
+
+### Improvements
+
+| **Improvement Number** | **Improvement Description** |
+| ---- | ---- |
+| PWX-23523 | CSI Volume Provisioning is now distributed across all Portworx nodes in a cluster. Large volume provisioning performance increases should be seen for large enough volumes. There is no user impact for customers other than higher performance for burst CSI volume provisioning. |
+
 ## 2.10.2
 
 June 1, 2022
