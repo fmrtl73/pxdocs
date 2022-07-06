@@ -10,7 +10,7 @@ series2: k8s-pvc-enc
 hidden: false
 ---
 
-This article discusses the PVC encryption methods used with the Kubernetes Container Storage Interface. For detaile about using Portworx with CSI, refer to the [Portworx with CSI](/portworx-install-with-kubernetes/storage-operations/csi/) page.
+This article discusses the PVC encryption methods used with the Kubernetes Container Storage Interface. For details about using Portworx with CSI, refer to the [Portworx with CSI](/portworx-install-with-kubernetes/storage-operations/csi/) page.
 
 ## Prerequisites
 
@@ -25,14 +25,14 @@ You can encrypt your volumes in one of two ways:
 
 ### Encrypt your volumes per storage class
 
-You can encrypt your volumes by specifying the encryption key in a Kubernetes secret. This secret can be same as the one created to host the authentication token. Using this method, you can handle both authentication and encryption together, and multiple PVCs referring to this storage class will use the same secret for encryption.
+You can encrypt your volumes by specifying the encryption key in a Kubernetes secret. This secret can be same as the one created to host the authentication token. Using this method, you can handle both authentication and encryption together, and multiple PVCs referring to this storage class can use the same secret for encryption.
 
 #### Step 1: Create a Kubernetes secret that contains the passphrase used for encrypting the Portworx volume
 
-Enter the following `kubectl create secret generic` command, specifying your own passphrase in `mysecret-passcode-for-encryption` which will encrypt the PVC:
+Enter the following `kubectl create secret generic` command, specifying your own passphrase in `mysecret-passcode-for-encryption`, which encrypts the PVC:
 
 ```text
-kubectl create secret generic volume-secrets -n portworx --from-literal=mysql-pvc-secret-key=mysecret-passcode-for-encryption
+kubectl create secret generic volume-secrets -n kube-system --from-literal=mysql-pvc-secret-key=mysecret-passcode-for-encryption
 ```
 
 #### Step 2: Create a CSI Kubernetes secret that points to the Kubernetes encryption secret
@@ -42,7 +42,7 @@ The CSI implementation reads the Kubernetes secret `px-secret` and passes its co
 Enter the following `kubectl create secret generic` command:
 
 ```text
-kubectl create secret generic px-secret -n portworx --from-literal=SECRET_NAME=volume-secrets --from-literal=SECRET_KEY=mysql-pvc-secret-key --from-literal=SECRET_CONTEXT=portworx
+kubectl create secret generic px-secret -n kube-system --from-literal=SECRET_NAME=volume-secrets --from-literal=SECRET_KEY=mysql-pvc-secret-key --from-literal=SECRET_CONTEXT=portworx
 ```
 
 #### Step 3: Create a CSI storage class for encrypted PVC
@@ -58,15 +58,21 @@ Create the storage class which refers to the CSI secret you created in step 2 ab
     apiVersion: storage.k8s.io/v1
     kind: StorageClass
     metadata:
-      name: portworx-sc
+      name: px-csi-db-encrypted-k8s
     provisioner: pxd.portworx.com
     parameters:
-      repl: "1"
+      repl: "3"
       secure: "true"
+      io_profile: auto
+      io_priority: "high" 
+      cow_ondemand: "false"
       csi.storage.k8s.io/provisioner-secret-name: px-secret
-      csi.storage.k8s.io/provisioner-secret-namespace: portworx
+      csi.storage.k8s.io/provisioner-secret-namespace: kube-system
       csi.storage.k8s.io/node-publish-secret-name: px-secret
-      csi.storage.k8s.io/node-publish-secret-namespace: portworx
+      csi.storage.k8s.io/node-publish-secret-namespace: kube-system
+    reclaimPolicy: Delete
+    volumeBindingMode: Immediate
+    allowVolumeExpansion: true
     ```
 
 
@@ -76,16 +82,16 @@ You can encrypt volumes by allowing your users to specify encryption keys in the
 
 #### Step 1: Create two Kubernetes secrets which will be used for two different PVCs
 
-Enter the following `kubectl create secret generic` command for your first PVC, specifying your own passphrase in `mysecret-passcode-for-encryption` which will encrypt the PVC:
+Enter the following `kubectl create secret generic` command for your first PVC, specifying your own passphrase in `mysecret-passcode-for-encryption` which encrypts the PVC:
 
 ```text
-kubectl create secret generic volume-secrets-1 -n portworx --from-literal=mysql-pvc-secret-key-1=mysecret-passcode-for-encryption-1
+kubectl create secret generic volume-secrets-1 -n kube-system --from-literal=mysql-pvc-secret-key-1=mysecret-passcode-for-encryption-1
 ```
 
 Enter the same command for your second PVC, and optionally, specify a different secret name and a different namespace. This example places both PVCs in a single namespace:
 
 ```text
-kubectl create secret generic volume-secrets-2 -n portworx --from-literal=mysql-pvc-secret-key-2=mysecret-passcode-for-encryption-2
+kubectl create secret generic volume-secrets-2 -n kube-system --from-literal=mysql-pvc-secret-key-2=mysecret-passcode-for-encryption-2
 ```
 
 #### Step 2: Create two CSI Kubernetes secrets that will point to their own encryption Kubernetes secrets
@@ -93,20 +99,20 @@ kubectl create secret generic volume-secrets-2 -n portworx --from-literal=mysql-
 Enter the following `kubectl create secret generic` command for your first PVC, specifying the following options:
 
   * This secret's name, `mysql-pvc-1` in this example
-  * The `-n` option and the same namespace as the kubernetes secret it will point to, `portworx` in this example
-  * The `--from-literal=SECRET_NAME=` option and the name of the kubernetes secret this will point to
-  * The `--from-literal=SECRET_KEY=` option and the the key inside the second secret that houses the encryption key
+  * The `-n` option with the same namespace which the kubernetes secret points to`kube-system`, in this example
+  * The `--from-literal=SECRET_NAME=` option and the name of the kubernetes secret this must point to 
+  * The `--from-literal=SECRET_KEY=` option and the key inside the second secret that houses the encryption key
   * The `--from-literal=SECRET_CONTEXT=` option and the secret's namespace
 
 
 ```text
-kubectl create secret generic mysql-pvc-1 -n portworx --from-literal=SECRET_NAME=volume-secrets-1 --from-literal=SECRET_KEY=mysql-pvc-secret-key-1 --from-literal=SECRET_CONTEXT=portworx
+kubectl create secret generic mysql-pvc-1 -n kube-system --from-literal=SECRET_NAME=volume-secrets-1 --from-literal=SECRET_KEY=mysql-pvc-secret-key-1 --from-literal=SECRET_CONTEXT=portworx
 ```
 
 Enter the same command for your second PVC, but specify a different secret name and optionally, a different namespace:
 
 ```text
-kubectl create secret generic mysql-pvc-2 -n portworx --from-literal=SECRET_NAME=volume-secrets-2 --from-literal=SECRET_KEY=mysql-pvc-secret-key-2 --from-literal=SECRET_CONTEXT=portworx
+kubectl create secret generic mysql-pvc-2 -n kube-system --from-literal=SECRET_NAME=volume-secrets-2 --from-literal=SECRET_KEY=mysql-pvc-secret-key-2 --from-literal=SECRET_CONTEXT=portworx
 ```
 
 #### Step 3: Create a CSI storage class for encrypted PVCs
@@ -114,32 +120,38 @@ kubectl create secret generic mysql-pvc-2 -n portworx --from-literal=SECRET_NAME
 Create a StorageClass CRD, specifying the `${pvc.name}` and `${pvc.namespace}` template variables:
 
 ```text
-apiVersion: storage.k8s.io/v1
 kind: StorageClass
+apiVersion: storage.k8s.io/v1
 metadata:
-  name: portworx-sc
+  name: px-csi-db-encrypted-k8s
 provisioner: pxd.portworx.com
 parameters:
-  repl: "1"
+  repl: "3"
   secure: "true"
+  io_profile: auto
+  io_priority: "high" 
+  cow_ondemand: "false"
   csi.storage.k8s.io/provisioner-secret-name: ${pvc.name}
   csi.storage.k8s.io/provisioner-secret-namespace: ${pvc.namespace}
   csi.storage.k8s.io/node-publish-secret-name: ${pvc.name}
   csi.storage.k8s.io/node-publish-secret-namespace: ${pvc.namespace}
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+allowVolumeExpansion: true
 ```
 
 #### Step 4: Create encrypted PVCs
 
-Create 2 encrypted PVCs, one for each of the secrets you created in the preceding steps:
+Create two encrypted PVCs, one for each of the secrets you created in the preceding steps:
 
-1. Create the `mysql-pvc-1` PVC that uses the passcode you created in **Step 1: Create two kubernetes secrets which will be used for two different PVCs**. In the example, that passcode is `mysecret-passcode-for-encryption-1`:
+1. Create the `mysql-pvc-1` PVC that uses the passcode you created in **Step 1: Create two kubernetes secrets which is used for two different PVCs**. In the example, that passcode is `mysecret-passcode-for-encryption-1`:
 
       ```text
       kind: PersistentVolumeClaim
       apiVersion: v1
       metadata:
         name: mysql-pvc-1
-        namespace: portworx
+        namespace: kube-system
       spec:
         storageClassName: portworx-sc
         accessModes:
@@ -156,7 +168,7 @@ Create 2 encrypted PVCs, one for each of the secrets you created in the precedin
       apiVersion: v1
       metadata:
         name: mysql-pvc-2
-        namespace: portworx
+        namespace: kube-system
       spec:
         storageClassName: portworx-sc
         accessModes:
