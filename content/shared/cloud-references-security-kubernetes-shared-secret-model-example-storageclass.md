@@ -7,7 +7,7 @@ hidden: true
 # StorageClass for non-CSI
 
 In the previous section, you saved the Kubernetes token in a secret called
-`px-user-token` in the `portworx` namespace. Now you can create a storage class
+`px-user-token` in the `kube-system` namespace. Now you can create a storage class
 which points Portworx to authenticate the request using the token in the
 that secret.
 
@@ -26,7 +26,7 @@ The example below demonstrates a storage class with token secrets added:
     parameters:
       repl: "1"
       openstorage.io/auth-secret-name: px-user-token
-      openstorage.io/auth-secret-namespace: portworx
+      openstorage.io/auth-secret-namespace: kube-system
     allowVolumeExpansion: true
     ```
 
@@ -54,11 +54,11 @@ _controller-expand_.
     parameters:
       repl: "1"
       csi.storage.k8s.io/provisioner-secret-name: px-user-token
-      csi.storage.k8s.io/provisioner-secret-namespace: portworx
+      csi.storage.k8s.io/provisioner-secret-namespace: kube-system
       csi.storage.k8s.io/node-publish-secret-name: px-user-token
-      csi.storage.k8s.io/node-publish-secret-namespace: portworx
+      csi.storage.k8s.io/node-publish-secret-namespace: kube-system
       csi.storage.k8s.io/controller-expand-secret-name: px-user-token
-      csi.storage.k8s.io/controller-expand-secret-namespace: portworx
+      csi.storage.k8s.io/controller-expand-secret-namespace: kube-system
     allowVolumeExpansion: true
     ```
 
