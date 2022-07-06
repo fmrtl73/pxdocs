@@ -174,8 +174,7 @@ To see all services and APIs you can use within your custom roles, see our [API 
 ## Using your custom roles
 Once you've created your custom roles, you can simply add the role names during token generation/user management.
 
-* For OIDC, see your provider documentation on how to add the `roles` identifier to your tokens. __Note:__ Some OIDC providers have differently scoped roles at the system or user level. Please ensure that you've added the roles at the base level of the token.
-* For self-signed tokens, add the custom role in your auth-config during token creation:
+ Add the custom role in your auth-config during token creation:
 
 ```
 name: Jim Stevens

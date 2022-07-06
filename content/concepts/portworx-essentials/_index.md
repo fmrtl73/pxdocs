@@ -75,7 +75,6 @@ The following tables list what features {{< pxEssentials >}} supports and any li
 
 | **Feature** | **Support** |
 |----|----|
-| Security and identity integrated with Kubernetes namespace and OIDC providers | Not Supported |
 | Encryption with bring-your-own-encryption | Limited to cluster-wide encryption |
 | Disaster Recovery for campus and WAN deployments | Not supported |
 | Capacity Management with Autopilot | Not supported |
@@ -109,7 +108,6 @@ If you're using Portworx with FlashBlade or FlashArray, you have access to an en
 | Cluster-level migration [Kube-motion/Data Migration] | no	(feature upgrade needed) |
 | Disaster Recovery [PX-DR] | no (feature upgrade needed) |
 | Autopilot Capacity Management	| no (feature upgrade needed) |
-| OIDC Security	| no (feature upgrade needed) |
 | Bare-metal hosts | yes |
 | Virtual machine hosts | yes |
 

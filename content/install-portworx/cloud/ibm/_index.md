@@ -10,7 +10,7 @@ aliases:
     - /portworx-install-with-kubernetes/cloud/ibm
 ---
 
-This guide shows how you can deploy Portworx on an [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/container-service) or [Red Hat OpenShift on IBM Cloud](https://www.ibm.com/cloud/redhat) cluster.
+This guide shows how you can deploy Portworx on an [IBM Cloud Kubernetes Service](https://www.ibm.com/cloud/kubernetes-service) or [Red Hat OpenShift on IBM Cloud](https://www.ibm.com/cloud/redhat) cluster.
 
 ## Prerequisites
 

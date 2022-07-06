@@ -1,14 +1,14 @@
 ---
 title: Authorization using pxctl
 linkTitle: Authorization
-keywords: pxctl, command-line tool, cli, reference, authorization, auth-enabled, token, OIDC, self-signed, JWT, shared-secret, security
+keywords: pxctl, command-line tool, cli, reference, authorization, auth-enabled, token, self-signed, JWT, shared-secret, security
 description: Learn to interact with your authorization-enabled Portworx cluster using pxctl
 weight: 1800
 ---
 
 ## Overview
 
-This document outlines how to interact with an authorization-enabled Portworx cluster. The main way to do it is by using the `pxctl context` command. Also, you can integrate with an __OIDC provided token__ or __generate self-signed tokens__ through `pxctl`. See the [generate self-signed tokens](/reference/cli/self-signed-tokens) page for more details.
+This page outlines how to interact with an authorization-enabled Portworx cluster. The main way to do it is by using the `pxctl context` command. Also, you can integrate with a generated token through `pxctl` command-line tool. Use your own JWT compliant application to generate security token. For more details, refer to the [Generate tokens](/reference/cli/generate-token) page.
 
 ## Contexts
 
@@ -19,14 +19,9 @@ Portworx stores the following locally to your home directory, allowing you to sw
  - privileges
  - tokens
 
-- contexts,
-- associated clusters,
-- privileges, and
-- tokens
-
-local to your home directory. This allows you to switch between these configurations with a few commands.
 
 {{<info>}}
+**Note:**
 Since Portworx stores the context locally on each node, you must create your context on the node you're working on.
 {{</info>}}
 
@@ -119,6 +114,7 @@ contextconfig:
 Once you've created your contexts, use the `pxctl context` command to switch between them. Under the hood, Portworx reads your current context and then uses the associated token for all commands.
 
 {{<info>}}
+**Note:**
 Alternatively, you can use the global `--context` flag to run a single command with a given context.
 {{</info>}}
 
@@ -134,21 +130,6 @@ Unset the current context with:
 pxctl context unset
 ```
 
-## Generate tokens
-
-Portworx supports two methods of authorization:
-
-- OIDC and
-- self-signed.
-
-To generate a token through your OIDC provider, see the documentation on generating bearer tokens on the website of the provider. The following links direct you to the most commonly used OIDC providers:
-
-- [Keycloak](https://www.keycloak.org/docs/latest/server_development/index.html#admin-rest-api)
-- [Auth0](https://auth0.com/docs/api/authentication#get-token)
-- [Okta](https://developer.okta.com/docs/api/getting_started/getting_a_token/#token-expiration)
-
-Note that, for self-signed tokens, you can use your own JWT compliant application. Furthermore, for convenience, the `pxctl` CLI tool provides a command for generating tokens. See the [self-signed tokens](/reference/cli/self-signed-tokens) page for more details.
-
 ## How to debug token issues
 
 This section explains how to debug common token issues.
@@ -160,6 +141,7 @@ This section explains how to debug common token issues.
 **Find the root cause**: Take a look into your token permissions. Decode and verify your token with a JWT token decoding tool such as [jwt.io](https://jwt.io/)
 
 {{<info>}}
+**Note:**
 The [jwt.io](https://jwt.io/) debugger does client-side validation and debugging. It does not store your token anywhere.
 {{</info>}}
 
