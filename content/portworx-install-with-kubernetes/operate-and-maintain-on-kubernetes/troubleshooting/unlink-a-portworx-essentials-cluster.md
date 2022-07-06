@@ -7,7 +7,7 @@ description: This article shows how you can unlink a Portworx Essentials cluster
 
 The maximum number of {{< pxEssentials >}} clusters that you can associate with your user account is 1. Thus, before you create a new {{< pxEssentials >}} cluster, you must first unlink your existing cluster.
 
-For details about the {{< pxEssentials >}} license, refer to the [{{< pxEssentials >}}](/concepts/portworx-essentials/) page.
+For details about the {{< pxEssentials >}} license, refer to the [Portworx Essentials](/reference/licensing/portworx-essential) page.
 
 
 # Unlink a {{< pxEssentials >}} cluster

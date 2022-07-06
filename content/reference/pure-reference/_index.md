@@ -1,7 +1,7 @@
 ---
 title: Portworx with FlashArray and FlashBlade reference
 linkTitle: FlashArray and FlashBlade
-weight: 400
+weight: 500
 description: 
 keywords: FlashArray, FlashBlade
 ---

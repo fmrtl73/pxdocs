@@ -2,7 +2,7 @@
 title: Portworx Metrics for monitoring
 keywords: portworx, learning, lightboard
 description: See reference tables for all Portworx metrics available for monitoring applications.
-weight: 500
+weight: 600
 noicon: true
 ---
 

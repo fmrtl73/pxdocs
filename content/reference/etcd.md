@@ -4,7 +4,7 @@ keywords: Install, etcd, portworx, kvdb
 description: Instructions on installing and configuring an external ETCD cluster for Portworx
 linkTitle: Etcd for Portworx
 series: reference
-weight: 600
+weight: 700
 aliases:
   - /reference/knowledge-base/etcd/
 ---

@@ -1,10 +1,10 @@
 ---
-title: Portworx Essentials
-weight: 100
-hidesections: true
+title: Portworx Essentials license
 description: Learn about the Portworx Essential free product offering
-series: concepts
 keywords: portworx, essentials
+weight: 200
+aliases: 
+    - /concepts/portworx-essentials/
 ---
 
 {{< pxEssentials >}} is a free Portworx license with limited functionality that allows you to run small production or proof-of-concept workloads. Essentials limits capacity and advanced features, but otherwise functions the same way as the fully-featured {{< pxEnterprise >}} version of Portworx.
