@@ -30,15 +30,49 @@ When you enter the `pxctl service pool expand` command, Portworx uses your cloud
 
 You can control the pool expand operation by specifying which operation you want to use: `resize-disk` or `add-disk`, or you can specify `auto` to let Portworx determine the best way to resize your storage pools based on your cloud provider.
 
-##### Prerequisites
+### Prerequisites
 
 You must be running Portworx on one of the following cloud providers:
 
   * AWS
   * Azure
   * GCP
+  * IBM VPC Gen2 Platform (Portworx 2.11.0 or newer)
 
-##### Expand a cloud-based pool automatically
+{{<info>}}
+**NOTE:** For IBM, you must have the IBM Block CSI driver version 4.4 or newer. To check your version, run the following command:
+
+```text
+ibmcloud ks cluster addon ls --cluster <cluster-id>
+```
+
+If you need to update the IBM CSI driver on your cluster, perform the following steps:
+
+1. Remove the currrent version using the following command:
+
+    ```text
+    ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster <cluster-id>
+    ```
+
+1. Enable `cluster addon` with `--version 4.4`:
+
+    ```text
+    ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster <cluster-id> --version 4.4
+    ```
+
+1. Check that the correct version is present:
+
+    ```text
+    ibmcloud ks cluster addon ls --cluster <cluster-id>
+    ```
+    ```output
+    OK
+    Name Version Health State Health Status
+    vpc-block-csi-driver 4.4* (4.3 default) - Enabling
+    ```
+{{</info>}}
+
+### Expand a cloud-based pool automatically
 
 Expand a cloud-based pool by entering the `pxctl service pool expand` command with the following options:
 
