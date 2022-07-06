@@ -261,29 +261,43 @@ Usage:
 
 Flags:
       --auto-decommission-timeout uint                  Timeout (in minutes) after which storage-less nodes will be automatically decommissioned. Timeout cannot be set to zero. (default 20)
+      --auto-fstrim string                              Enable/Disable automatic fstrim (Valid Values: [on off]) (default "off")
       --cache-flush string                              Enable periodic cache flush (Valid Values: [enabled disabled]) (default "disabled")
       --cache-flush-seconds uint                        Interval at which cache flush would be performed. (default 30)
       --cloudsnap-abort-timeout-minutes uint            Timeout in minutes for stalled cloudsnap abort. Should be => 10 minutes (default 10)
       --cloudsnap-catalog string                        Enable or disable cloudsnap catalog collection (Valid Values: [on off]) (default "off")
       --cloudsnap-cleanup-failed-hours uint             Time in hours after which the failed cloudsnaps are deleted for a configured credential. 0 disables deleting failed cloudsnaps
+      --cloudsnap-err-retry-limit uint                  Retry limit on error for cloudsnap operations with objectstore. (Valid Range: [1 15]) (default 3)
+      -b, --cloudsnap-full-backup-frequency uint        Sets the full backup frequency. (Valid Range: [1 120]) (default 7)
       --cloudsnap-max-threads uint                      Number of cloudsnap threads doing concurrent uploads/downloads. Valid values  >= 2  and <= 16, others automatically rounded (default 16)
       --cloudsnap-metadata-upload-mb-bytes-limit uint   Do not use cloudsnap using metadata optimization if metadata size if over this limit in size in mebibytes. Value set to 0 disables this check. (default 10240)
       --cloudsnap-metadata-upload-percent-limit uint    Do not use cloudsnap using metadata optimization if metadata size if over this limit in percent with respect to upload size. Value set to 0 disables this check. (default 15)
+      --cloudsnap-network-limit-cluster uint            Cluster-wide average network bandwith usage limit in mebibytes per second, use 0 to disable this limit
       --cloudsnap-nw-interface string                   network interface name used by cloudsnaps(data, mgmt, eth0, etc)
       --cloudsnap-using-metadata-enabled string         Enable cloudsnap using metadata optimization (Valid Values: [on off]) (default "off")
       --concurrent-api-limit uint                       Maximum number of concurrent api invocations allowed (default 20)
+      --default-rpc-timeout int                         Default RPC timeout (in minutes) for all client communications (default 5)
       --disable-provisioning-labels string              Semi-colon separate string of labels, example 'node=uuid1,uuid2;io_priority=high'. Use '' to reset to default.
       --disabled-temporary-kvdb-loss-support string     Enable or disable temporary kvdb loss support (Valid Values: [on off]) (default "off")
       --domain-policy string                            Domain policy for domains (Valid Values: [strict eventual]) (default "strict")
+      --fstrim-io-rate uint                             Maximum throughput (in MBytes) at which fstrim would free blocks to backing store, in each interval(fstrim-io-rate-interval). Minimum is 10MB (default 100)
+      --fstrim-io-rate-interval uint                    Internal(in seconds) associated with the fstrim-io-rate(MB) is freed to backing store. Minimum 1 second. (default 1)
+      --fstrim-max-io-rate string                       Maximum throughput (KiB, MiB or GiB) at which fstrim would free blocks to backing store, in each interval. (default "1GB")
+      --fstrim-min-io-rate string                       Minimum throughput (MiB or GiB) at which fstrim would free blocks to backing store, in each interval. (default "1MiB")
   -h, --help                                            help for update
       --internal-snapshot-interval uint                 Interval (in minutes) after which internal snapshots are rotated (default 30)
       --io-profile-derive-interval-minutes uint         Configure periodic interval (in minutes) to compute the IO profile for volume. Only applies to volumes with "auto" IO profile. (default 2)
       --license-expiry-check days                       Number of days to raise alert before license expires. Set to zero to disable alerts. (default 7)
       --license-expiry-check-interval string            Interval for license expiry checks.  Valid only if 'license-expiry-check' is defined. (default "6h")
+      --lttng-cmd string                                Lttng command to execute (Valid Values: [ start stop pause resume])
+      --lttng-disk-usage uint                           Amount of disk space (GB) to be utilized by lttng trace files. Greater than 0 enables traces and 0 disables it
+      --lttng-log-level string                          Lttng loglevel setting (Valid Values: [err emerg alert debug_unit debug_line unset debug_function debug_module debug_process debug_system notice debug_program debug warning info crit]) (default "unset")
       --optimized-restores string                       Enable or disable optimized restores (Valid Values: [on off]) (default "off")
       --provisioning-commit-labels string               Json, example of global rule followed by node specific and pool specific rule: '[{'OverCommitPercent': 200, 'SnapReservePercent': 30},{'OverCommitPercent': 50, 'SnapReservePercent':30, 'LabelSelector':{'node':'node-1,node-2', 'poolLabel':'poolValue'},]'. Use '[]' to reset to default.
       --px-http-proxy string                            proxy to be used by px services(cloudsnap, etc) (default "off")
       --re-add-wait-timeout uint                        Timeout (in minutes) after which re-add will abort and new replication node is added instead. Set timeout to zero to disable replica move. (default 1440)
+      --relaxedreclaim-delete-seconds uint              The number of seconds to wait before deleting the volume/snapshot staged in RelaxedReclaim queue. Set to zero to disable RelaxedReclaim.
+      --relaxedreclaim-max-pending uint                 Maximum number of volumes/snapshots that can be staged for RelaxedReclaim. (default 256)
       --repl-move-timeout uint                          Timeout (in minutes) after which offline replicas will be moved to available nodes. Set timeout to zero to disable replica move. (default 1440)
       --repl-move-timestamp-records-threshold uint      Timestamp record threshold after which offline replicas will be moved to available nodes. Set threshold to zero to disable replica move. (default 134217728)
       --resync-repl-add string                          Enable or disable repl-add based resync (Valid Values: [on off]) (default "off")
@@ -349,6 +363,37 @@ pxctl cluster options update --cloudsnap-nw-interface <your-network-interface>
 ```output
 Currently cloudsnap network interface is set to :data, changing this will affect new cloudsnaps and not the current onesDo you still want to change this now? (Y/N): y
 Successfully updated cluster wide options
+```
+
+## Configure retry limit on an error 
+
+You can configure the number of retries for an error from the object store. These retries are performed with a 10-second backoff delay, followed by progressively longer delays (incrementing by 10-second intervals) between each attempt. If the object store has multiple IP addresses as the endpoints, then for a given request, the retries are done on each of these endpoints.
+
+Set the limit by running the `pxctl cluster options update` command with the `--cloudsnap-err-retry-limit` option, as shown in the following example:
+
+```text 
+pxctl cluster options update --cloudsnap-err-retry-limit 7
+```
+
+```output
+Successfully updated cluster-wide options
+```
+
+Verify if the limit is set.
+
+```text
+pxctl cluster options list
+```
+
+```output
+Auto decommission timeout (minutes)  :  20
+Replica move timeout (minutes)       :  1440
+Internal Snapshot Interval (minutes) :  30
+Re-add timeout (minutes)             :  1440
+Resync repl-add                      :  off
+Domain policy                        :  strict
+Optimized Restores                   :  on
+Cloudsnap Error Retry Limit          :  7
 ```
 
 ### Related topics
