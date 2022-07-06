@@ -44,7 +44,7 @@ If you are deploying Portworx without the Portworx operator, then perform the fo
             secretKeyRef:
               name: pxkeys
               key: system-secret
-        - name: "PORTWORX_AUTH_STORK_KEY"
+        - name: "PORTWORX_AUTH_SYSTEM_APPS_KEY"
           valueFrom:
             secretKeyRef:
               name: pxkeys

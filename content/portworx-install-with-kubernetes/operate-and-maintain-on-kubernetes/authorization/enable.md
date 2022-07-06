@@ -90,7 +90,7 @@ Another feature of Portworx Operator Security is that you can allow the Operator
             sharedSecret: 'px-shared-secret'
     ```
 
-2. Remove the `PORTWORX_AUTH_SYSTEM_KEY` and `PORTWORX_AUTH_STORK_KEY` environment variables in your `StorageCluster` spec.env.
+2. Remove the `PORTWORX_AUTH_SYSTEM_KEY` and `PORTWORX_AUTH_SYSTEM_APPS_KEY` environment variables in your `StorageCluster` spec.env.
 
 3. Remove the `PX_SHARED_SECRET` environment variable in your `StorageCluster` spec.stork.env
 
@@ -106,7 +106,7 @@ setup an environment variable from a Secret:
 
     ```text
     PORTWORX_AUTH_SYSTEM_KEY=$(cat /dev/urandom | base64 | fold -w 64 | head -n 1) \
-    PORTWORX_AUTH_STORK_KEY=$(cat /dev/urandom | base64 | fold -w 64 | head -n 1) \
+    PORTWORX_AUTH_SYSTEM_APPS_KEY=$(cat /dev/urandom | base64 | fold -w 64 | head -n 1) \
     PORTWORX_AUTH_SHARED_SECRET=$(cat /dev/urandom | base64 | fold -w 64 | head -n 1)
     ```
 
@@ -116,7 +116,7 @@ setup an environment variable from a Secret:
     kubectl create secret generic pxkeys \
       --from-literal=system-secret=$PORTWORX_AUTH_SYSTEM_KEY \
       --from-literal=shared-secret=$PORTWORX_AUTH_SHARED_SECRET \
-      --from-literal=stork-secret=$PORTWORX_AUTH_STORK_KEY
+      --from-literal=stork-secret=$PORTWORX_AUTH_SYSTEM_APPS_KEY
     ```
 
 3. Edit your Portworx manifest YAML to include the following:
@@ -145,7 +145,7 @@ setup an environment variable from a Secret:
             secretKeyRef:
               name: pxkeys
               key: system-secret
-        - name: "PORTWORX_AUTH_STORK_KEY"
+        - name: "PORTWORX_AUTH_SYSTEM_APPS_KEY"
           valueFrom:
             secretKeyRef:
               name: pxkeys
