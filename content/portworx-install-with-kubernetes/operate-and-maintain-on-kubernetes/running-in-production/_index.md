@@ -12,14 +12,14 @@ series: k8s-op-maintain
 #### Initial Software Setup for Production
 
 * Follow the instructions to [install with Kubernetes](/portworx-install-with-kubernetes).
-* Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will form the Portworx cluster
+* Ensure all nodes in the cluster have NTP running, and the times are synchronized across all the nodes that will form the Portworx cluster
 * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
 * etcd - Setup etcd as a 3-node etcd cluster _outside_ the container orchestrator to ensure maximum stability. Refer to the following [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) on how to install etcd and also configure it for maximum stability.
 
 #### Configuring the Server or the Compute Infrastructure
 
 * Check and ensure a _minimum_ 2 cores and 4GB of RAM are allocated for Portworx.
-* The base operating system of the server supports linux kernel 3.10+. Newer 4.x Linux kernels have many performance and stability related fixes and are recommended.
+* The base operating system of the server supports Linux kernel 3.10+. Newer 4.x Linux kernels have many performance and stability related fixes and are recommended.
 
       ```text
       uname -r
@@ -34,7 +34,7 @@ series: k8s-op-maintain
 * Make sure the following ports are open in all the servers: `9001-9022`
 * Configure separate networks for Data and Management networks to isolate the traffic
   * Data network is specified giving the `-d` switch and Management networks with the `-m` switch. Refer to [scheduler guides](/portworx-install-with-kubernetes) for specifics to enable it in your scheduler.
-  * With multiple NICs, create a bonded ethernet port for data interface for improved availability and performance.
+  * With multiple NICs, create a bonded Ethernet port for data interface for improved availability and performance.
 
 #### Configuring and Provisioning Underlying Storage
 
@@ -51,12 +51,12 @@ series: k8s-op-maintain
       ```
 
 * HW RAID - If there are a large number of drives in a server and drive failure tolerance is required per server, enable HW RAID \(if available\) and give the block device from a HW RAID volume for Portworx to manage.
-* Portworx classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` \(or `priority_io` in kubernetes px spec\) and they offer the levels `high`, `medium` and `low`
+* Portworx classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` \(or `priority_io` in Kubernetes Portworx spec\) and they offer the levels `high`, `medium` and `low`
 * The `priority_io` of a pool is determined automatically by Portworx. If the intention is to run low latency transactional workloads like databases on Portworx, then {{<companyName>}} recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
 
 **Working with drives with AWS Auto scaling group**
 
-Portworx supports automatic management of EBS volumes. If you are using AWS ASG to manage Portworx nodes,then you should to use the ASG [feature](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
+Portworx supports automatic management of EBS volumes. If you are using AWS ASG to manage Portworx nodes, then you should to use the ASG [feature](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
 
 #### Portworx node topology
 
@@ -91,7 +91,7 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 #### Volume Management Best Practices
 
-* Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. Monitor for for Volume Space Low alerts
+* Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity threshold alerts. Monitor for Volume Space Low alerts
 
       ```
       30|VolumeSpaceLow|ALARM|VOLUME|Triggered when the free space available in a volume goes below a threshold.
@@ -113,7 +113,7 @@ Failure domains in terms of RACK information can be passed in as described [here
         repl: "3"
       ```
 
-* Portworx makes best effort to distribute volumes evenly across all nodes and based on the `iopriority` that is requested. When Portworx cannot find the appropriate media type that is requested to create a given `iopriority` type, it will attempt to create the volume with the next available `iopriority` level.
+* Portworx makes the best effort to distribute volumes evenly across all nodes and based on the `priority_io` that is requested. When Portworx cannot find the appropriate media type that is requested to create a given `priority_io` type, it will attempt to create the volume with the next available `priority_io` level.
 
       ```text
       kind: StorageClass
@@ -188,13 +188,13 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 This [page](/concepts) gives more details on different volume types, how to create them and update the configuration for the volumes
 
-* In order to ensure hyper-convergence, ensure you have Stork installed and running in the cluster. See the install instructions in the previous section
+* In order to ensure hyper-convergence, ensure you have Stork installed and running in the cluster. See install instructions in the previous section
 
 #### Data Protection for Containers
 
 * Snapshots - Follow DR best practices and ensure volume snapshots are scheduled for instantaneous recovery in the case of app failures.
 * Portworx support 64 snapshots per volume.
-* Refer to this [document](/reference/cli/snapshots) for a brief overview on how to manage snapshots via `pxctl`. In Kubernetes, most snapshot functionality can be handled via kubernetes command line.
+* Refer to this [document](/reference/cli/snapshots) for a brief overview on how to manage snapshots via `pxctl`. In Kubernetes, most snapshot functionality can be handled via Kubernetes command line.
 * Periodic scheduled snapshots can be setup by defining the `snap_interval` in the Portworx StorageClass. An example is shown below.
 
       ```text
@@ -278,10 +278,10 @@ While Prometheus can be deployed as a container within the container orchestrato
 * A Portworx node may hang or appear to hang because of any of the following reasons
   * Underlying media being too slow to respond and thus Portworx trying to error recovery of the media
   * Kernel hangs or panics that are impacting overall operations of the system
-  * Other applications that are not properly constrainted putting heavy memory pressure on the system
+  * Other applications that are not properly constrained putting heavy memory pressure on the system
   * Applications consuming a lot of CPU that are not properly constrained
 * Docker Daemon issues where Docker itself has hung and thus resulting on all other containers not responding properly
-* Running Portworx as a OCI container greatly alleviates any issues introduced by Docker Daemon hanging or not being responsive as Portworx runs as a OCI container and not as a docker container thus eliminating the docker dependency
+* Running Portworx as an OCI container greatly alleviates any issues introduced by Docker Daemon hanging or not being responsive as Portworx runs as an OCI container and not as a docker container thus eliminating the docker dependency
 * If Portworx appears to not respond, a restart of the Portworx OCI container via `systemctl` would help.
 * Any Portworx restart within 10 mins will ensure that applications continue to run without experiencing volume unmounts/outage
 
@@ -299,7 +299,7 @@ While Prometheus can be deployed as a container within the container orchestrato
   * Perform sizing of your data needs and determine the amount and type of storage \(EBS volumes\) needed per ecs instance.
   * Create EBS volume [templates](/portworx-install-with-kubernetes/cloud/aws/aws-asg) to match the number of EBS volumes needed per EC2 instance
   * Create a [Stateful AMI](/portworx-install-with-kubernetes/cloud/aws/aws-asg) to associate with your auto-scaling group
-  * Once everything is setup as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This [page](/portworx-install-with-kubernetes/cloud/aws/aws-asg) describes how Portworx handles the volume management in a auto-scaling cluster.
+  * Once everything is setup as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This [page](/portworx-install-with-kubernetes/cloud/aws/aws-asg) describes how Portworx handles the volume management in an auto-scaling cluster.
 
 **Scaling out a cluster on-prem**
 
@@ -346,8 +346,8 @@ While Prometheus can be deployed as a container within the container orchestrato
 **OS upgrades and Docker Upgrades .**
 
 * Work with the Portworx, Inc. support team before planning major upgrades. Ensure all volumes have the latest snapshots before performing upgrade
-* Ensure kernel-devel packages are installed after a OS migration
-* If Portworx is run as a OCI container, Docker Upgrades and Restarts do not impact Portworx runtime. {{<companyName>}} recommends you run Portworx as a OCI container
+* Ensure kernel-devel packages are installed after an OS migration
+* If Portworx is run as an OCI container, Docker Upgrades and Restarts do not impact Portworx runtime. {{<companyName>}} recommends you run Portworx as an OCI container
 
 ### Day 3 Operations
 
