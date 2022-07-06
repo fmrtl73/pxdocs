@@ -151,3 +151,4 @@ spec:
 
 * [Pure.json file reference](/reference/pure-reference/pure-json-reference/)
 * [Disk provisioning on Pure Storage FlashArray](/cloud-references/auto-disk-provisioning/pure-flash-array/)
+* [CSI topology for FlashArray and FlashBlade Direct Access volumes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology/csi-topology)
