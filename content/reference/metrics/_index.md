@@ -28,6 +28,7 @@ noicon: true
 | px_cluster_disk_available_bytes | Available storage space in bytes for this node |
 | px_cluster_disk_utilized_bytes | Utilized storage space in bytes for this node |
 | px_cluster_pendingio | Number of read and write operations currently in progress for this node |
+| px_cluster_trashcan_volumes | Number of volumes currently in the trashcan |
 
 ## cluster_status stats
 | Name | Description |
@@ -143,6 +144,7 @@ noicon: true
 | px_node_stats_relaxed_reclaim_pending | The number of volumes in RelaxedReclaim pending queue |
 | px_node_stats_relaxed_reclaim_skipped | The number of volume deletes that were skipped from being delayed even when RelaxedReclaim was enabled. |
 | px_node_stats_relaxed_reclaim_deleted | The number of volume deletes done through RelaxedReclaim |
+| px_node_stats_num_volumes | The number of volumes hosted on this node |
 
 ## node_status stats
 | Name | Description |
@@ -291,3 +293,5 @@ noicon: true
 | px_volume_unique_blocks | Size(in bytes) of unique blocks for this volume |
 | px_volume_timestamp_records | Number of timestamp records accumulated |
 | px_volume_timestamp_records_per_node | Number of timestamp records accumulated for a node |
+| px_volume_num_discard_ops | Number of discard operations for this volume |
+| px_volume_discarded_bytes | Number of discarded bytes for this volume |
