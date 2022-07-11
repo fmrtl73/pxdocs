@@ -11,9 +11,29 @@ IPv6 is supported by Portworx in the following configurations:
 
 | Operating system                    | Kubernetes version | Portworx configuration |
 | ----------------------------------- | ------------------ | ---------------------- |
-| CentOS 7.9 Kernel: 3.10.0-1160.53.1 | 1.23.0             | Portworx Operator based installation<br>Dual network - Management and Data traffic on a separate network<br>Air-gapped with all required images pushed to an internal registry |
-| CentOS 7.6 Kernel: 5.7.12-1         | 1.20.0             | Portworx Operator based installation<br>Single network - Management and Data traffic on a same network<br>Air-gapped with all required images pushed to an internal registry |
-| Ubuntu 18.04.4 Kernel: v5.3         | 1.23.0             | Portworx Operator based installation<br>Single network - Management and Data traffic on a same network<br>Air-gapped with all required images pushed to an internal registry |
+| CentOS 7.9 Kernel: 3.10.0-1160.53.1 | 1.23.0             | <ul><li>Portworx Operator based installation</li><li>Dual network - Management and Data traffic on a separate network</li><li>Air-gapped with all required images pushed to an internal registry</li></ul> |
+| CentOS 7.6 Kernel: 5.7.12-1         | 1.20.0             | <ul><li>Portworx Operator based installation</li><li>Single network - Management and Data traffic on a same network</li><li>Air-gapped with all required images pushed to an internal registry</li></ul> |
+| Ubuntu 18.04.4 Kernel: v5.3         | 1.23.0             | <ul><li>Portworx Operator based installation</li><li>Single network - Management and Data traffic on a same network</li><li>Air-gapped with all required images pushed to an internal registry</li></ul> |
+
+## Supported features
+
+Portworx supports the following features with IPv6:
+
+* All basic features of Portworx
+* Prometheus monitoring
+* Autopilot
+
+## Unsupported features
+
+Portworx does not support the following features with IPv6:
+
+* Portworx installation with mixed mode (IPv4 & IPv6) 
+* Portworx installation with Cloud Drives
+* Portworx installation with proxy
+* PX-Central License Server
+* PX-Backup
+* Asynchronous and Synchronous disaster recovery (DR)
+* Telemetry
 
 ## Enable IPv6 support
 
