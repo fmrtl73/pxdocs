@@ -8,6 +8,98 @@ aliases:
     - /reference/release-notes/portworx
 ---
 
+## 2.11.0
+
+July 11, 2022
+
+### New features
+
+Portworx by Pure Storage is proud to introduce the following new features:
+
+* On-premises users who want to use Pure Storage FlashArray with Portworx on Kubernetes can [provision and attach FlashArray LUNs as a Direct Access volume](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flasharray/).
+* The [CSI topology feature](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology/csi-topology/) allows users of FlashArray Direct Access volumes and FlashBlade Direct Access filesystems to direct their applications to provision storage on a FlashArray Direct Access volume or FlashBlade Direct Access filesystem that is in the same set of Kubernetes nodes where the application pod is located.
+* You can now [use Portworx with IBM cloud drives](/install-portworx/cloud/ibm/ibm-cloud-drives) on VPC Gen2 infrastructure. Portworx will use the IBM CSI provider to automatically provision and manage its own storage disks. 
+* You can enable [pay-as-you-go billing](/reference/licensing/portworx-enterprise/pay-as-you-go-air-gapped) for an air-gapped cluster with no outbound connectivity by acquiring a pay-as-you-go account key from Portworx. This key can be used on any cluster to activate the license, provided you can report usage collected by the metering module.
+* You can now deploy Portworx in [IPv6](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/ipv6/) networking enabled environments.
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+| ---- | ---- |
+| PWX-24195 | Portworx supports using BackupLocation CR with IAM policy as an AWS s3 target for cloudsnaps triggered through Stork using ApplicationBackup CR. When Portworx detects that a BackupLocation is provided as a target, it uses the IAM role of the instance, where it is running, for authentication with s3. |
+| PWX-23392 | Updated the Portworx CSI driver to CSI 1.6 spec. |
+| PWX-23326 | Updated CSI Provisioner, Snapshotter, Snapshot Controller, Node Driver Registrar, and Volume Health controller to the latest releases. |
+| PWX-24188 | A warning log is removed, which was printed when Docker inquired about a volume name that Portworx could not find. |
+| PWX-23103 | Added a detailed warning message for volume provision issues when there are conflicting volumes in the trashcan. Volume provisioning with volume placement rules can be blocked by matching volumes in the trashcan. The new warning message informs you which trashcan volumes are causing a conflict. |
+| PWX-22045 | Portworx now starts faster on high-scale clusters. During the Portworx start-up process, you will see a reduction in API calls to cloud providers. In particular, AWS API calls related to EBS volumes will be reduced. |
+| PWX-20012 | Enabled support for `pd-balanced` disk type on Google Cloud environment. You can now specify `pd-balanced` as one of the disk types (such as, `type=pd-balanced, size=700`) in the device spec file.  |
+| PWX-24054 | `pxctl service pool delete --help` command is enhanced to show Note and Example in addition to usage information. For example,<br>`Note: This operation is supported only on on-prem local disks and AWS cloud-drive` <br>`Examples: pxctl service pool delete [flags] poolID ` |
+|PWX-23196| You can now configure the number of retries for an error from the object store. Each of these retries involves a 10-second backoff delay, followed by progressively longer delays (incrementing by 10-second intervals) between each attempt. If the object store has multiple IP addresses as the endpoints, then for a given request, the retries are done on each of these endpoints. |
+| PWX-23408 | Added support to migrate PSO volumes into Portworx through the PSO2PX migration tool.  |
+| PWX-24332 | The Portworx diags bundle now includes the output of the `pxctl clouddrive list` command when available.    |
+| PWX-23523 | CSI volume provisioning is now distributed across all Portworx nodes in a cluster providing higher performance for burst CSI volume provisioning. |
+|   PWX-22993   |   Portworx can now be activated in PAYG (pay-as-you-go)/SAAS mode using the command<br>`pxctl license activate saas --key <pay_key>`.  |
+|   PWX-23172   |   Added support for cgroups-v2 host configurations, running with docker and cri-o container runtimes. |
+|   PWX-23576   |   Renamed the `PX-Essentials FA/FB` license SKU to `Portworx CSI for FA/FB` SKU.  |
+|   PWX-23678   |   Added support for `px-els` (Portworx Embedded License Server) to install and operate in IPv6 network configurations. |
+| PWX-23179 | Provides a way to do an in-place restore from a SkinnySnap. Now you can create a clone from a SkinnySnap and use the clone to restore the parent volume. |
+
+
+
+### Fixes
+
+The following issues have been fixed:
+
+| **Issue Number** | **Issue Description** |
+| ---- | ---- |
+|   PWX-14944   |   Removed invalid tokens from PX-Security audit logs. When a non-JWT or invalid token was passed to the PX Security authentication layer, it was being logged. There is no impact to the user with this change.  |
+|   PWX-22891   |   For On-premise Portworx installations not using cloud drives, a KVDB failover could potentially fail since Portworx on the node fails to find the configured KVDB device since its name had changed after the initial install.  <br><br>**Resolution:** Portworx will now fingerprint all the KVDB drives provided on all nodes regardless of whether they will run KVDB or not at install time. This ensures a KVDB failover happens even if device name changes on certain nodes. |
+|   PWX-22914   |   When undergoing an Anthos/EKS/GKE upgrade, Portworx could experience excessive delays due to internal KVDB failovers. <br/><br/>**Resolution:** The KVDB failover rules now no longer consider storageless nodes as a KVDB candidate unless they have a dedicated `kvdb-storage` or are labeled with `px/metadata-node=true`. |
+|   PWX-23018   |   In a DR setup, destination clusters sometimes ended up with volumes in the trashcan if the trashcan feature was enabled. Users had to either delete the volumes from the trashcan in the destination cluster or disable the trashcan feature in the destination cluster. |
+|   PWX-23185   |   Cloudsnap restore operations sometimes slowed if a rebalance started on the same pool. <br/><br/>**Resolution:** Portorx now avoids rebalancing volumes being restored from cloudsnaps.   |
+|   PWX-23229   |   If the IP address of a node changed after reboot with an active cloudsnap, the cloudsnap operation failed with "Failed to read/write extents" error. This resulted in a failed backup, and users needed to reissue the cloudsnap.<br><br>**Resolution:** Reattach the snapshot after node restart to avoid a snapshot being in an incorrect attachment state.     |
+|   PWX-23384   |   When using a sharedv4 service volume with NFSv4 (default), users had to configure the `mountd` service to run on a single port even though NFSv4 does not use `mountd`. <br/><br/>**Resolution:** Portworx now skips the check for the `mountd` port when using NFSv4 and omits the `mountd` port from the Kubernetes service and endpoints objects.  |
+|   PWX-23457   |   Portworx showed Pure volumes separately in the `pxctl license list` output even when there were no explicit limits for Pure volumes, which was confusing. <br/><br/>**Resolution:** This output has been improved. |
+|   PWX-23490   |   Previously, upgrading from Portworx versions 2.9.0 up to anything before 2.11.0 did not update the decision matrix. <br/><br/>**Resolution:** Starting with 2.11.0, Portworx will now update the decision matrix at boot-time.  |
+|   PWX-23546   |   The `px-storage` process restarted if the write complete message was received after a node restarted.    |
+|   PWX-23623   |   Portworx logged benign warnings that the container runtime was not initialized.  <br/><br/>**Resolution:** Portworx no longer logs these warnings.   |
+|   PWX-23710   |   When Kubernetes was installed on top of the containerd container runtime, the Portworx installation may not have properly cleaned up the `containerd-shim` process and container directories.  As a consequence, nodes may have needed to be rebooted for the Portworx upgrade process to complete.  |
+|   PWX-23979   |   KVDB entries for deleted volumes were not removed from KVDB. As a result, KVDB sizes might have increased in some cases where volumes were constantly being deleted and scheduled snapshot and cloudsnaps are configured.   |
+|   PWX-24047   |   Portworx will no longer use Kubernetes DNS (originally introduced with PWX-22491). In several configurations, Kubernetes DNS did not work properly. <br/><br/>**Resolution:** Portworx now relies on a more stable host's DNS config instead.   |
+|   PWX-24105   |   In rare cases, Portworx on a node may have repeatedly restarted because of a panic due to nil pointer dereference when deleting a pod for a sharedv4 volume.<br><br>**Resolution:** Portworx will not come up until the relevant pod is deleted manually from Kubernetes by scaling down the application. |
+|   PWX-24112   |    IBM `csi-resizer` would sometimes crash when resizing volumes.<br><br>**Resolution:**This issue is addressed in the IBM Block CSI Driver version 4.4. Check the version on your cluster using the command<br>`ibmcloud ks cluster addon ls --cluster <cluster-id>`.   |
+|   PWX-24187   |   The PAYG (pay-as-you-go) license disables the license when there are issues with reporting/billing Portworx usage. After reporting/billing gets reestablished, the license is automatically enabled. Portworx did not add the default license features, requiring a restart of the `portworx.service` to properly re-establish the license.  |
+|   PWX-24297   |   Portworx updated the decision matrix in the config map, causing nil pointer exceptions to appear in non-Kubernetes environments. <br><br>**Resolution:** Portworx now checks that the config map exists before updating it.    |
+|   PWX-24433   |   When Docker or CRI-O is not initialized on a cluster, Portworx would periodically print the following log line: `Unable to list containers. err scheduler not initialized`.<br><br>**Resolution:** The log line is now suppressed when Portworx detects that there is runtime like Docker or CRI-O that is not initialized.    |
+|   PWX-24410   |   DaemonSet YAML installs using private container registry server were using invalid image-paths (incompatible with air-gapped, or PX-Operator), thus resulting in a failure to load the required images.<br><br>**Resolution:** Fixed regression introduced with Portworx version 2.10.0, when custom container registry server was in use.    |
+|   PWX-22481   |   A pod could take upwards of 10 mins to terminate if a Sharedv4 service failover and a namespace deletion happens at the same time.<br><br>**Resolution:** Scale down the pods to 0 before deleting the namespace.   |
+| PWX-22128 | Async DR creates new volume (clone from its previously downloaded snapshot) on the destination cluster every time the volume is migrated. If cloudbackups are configured for the volumes from destination cluster, then every backup for a volume results in being full, as these volumes are newly created on every migration for the same volume. This change fixes this issue and allows the backups from destination cluster to be incremental. <br/><br/>**Resolution:** When a volume is migrated, the volume is in-place restored to its previously downloaded snapshot and the incremental diff is downloaded to the volume without creating any new volume. Since there is no new volume being created, any backups for this volume can now be incremental. |
+
+
+
+### Deprecations
+
+The following features have been deprecated:
+
+* Legacy shared volumes 
+* Volume groups
+* Hashicorp Consul support
+
+### Known issues (Errata)
+
+| **Issue Number** | **Issue Description** |
+| ---- | ---- |
+| PD-1325 | On IBM cloud drive, if `pxctl sv pool expand` with a resize-disk operation fails due to an underlying IBM issue, you will see the following error signature: `Error: timed out waiting for the condition`. This indicates that the IBM provider failed and could not perform the operation within 3 minutes.<br><br>**Workaround:** If the underlying disk on the host has expanded, then issue the command `pxctl sv pool update --resize --uid <>` to complete the pool expand operation. If the underlying disk on the host have not expanded, check the IBM csi-controller pods for any potential errors reported by IBM. |
+| PD-1327 | On IBM clouddrive, if a `pxctl service pool expand -s <target-size>` with resize-disk for a target size `X` fails, you cannot issue another pool expand operation with a target size lower than the value `X`. On IBM clouddrive, a resize of the underlying disk is issued by changing the size on the associated PVC object. If IBM csi-driver fails to act upon this PVC size change, the pool expand operation will fail, but the PVC size cannot be reduced back to older value. You will see the following error: `spec.resources.requests.storage: Forbidden: field can not be less than previous value`.<br><br>**Workaround:** When a pool expand operation and a subsequent IBM PVC resize is triggered, it is expected by the IBM CSI resizer pod to eventually reconcile and complete the resize operation. Once the underlying disk on the host has expanded, then issue the command `pxctl sv pool update --resize --uid <>` to complete the pool expand operation. If the underlying disk on the host has not expanded, check IBM csi-resizer pods for any potential errors reported by IBM. |
+| PD-1339 | When a Portworx storage pool contains a repl 1 volume replica, pool expansion operations report following error: `service pool expand: resize for pool <pool-uuid> is already in progress. found attached volumes: [vol3] that have it's only replica on this pool.Will not proceed with pool expansion. Stop applications using these volumes or increase replicas to proceed. resizeType=RESIZE_TYPE_ADD_DISK,skipWaitForCleanVolumes=false,newSize=150`.<br><br>The actual reason of failure is not `resize for pool <pool-uuid> is already in progress`; the correct reason of failure is `found attached volumes: [vol3] that have it's only replica on this pool.Will not proceed with pool expansion. Stop applications using these volumes or increase replicas to proceed. resizeType=RESIZE_TYPE_ADD_DISK,skipWaitForCleanVolumes=false,newSize=150`.<br><br>**Workaround:** The command `pxctl sv pool show` displays the correct error message. |
+| PD-1354 | When a PVC for a FlashArray DirectAccess volume is being provisioned, Portworx makes a call to the backend FlashArray to provision the volume. If Portworx is killed or crashes while this call is in progress or just before this call is invoked, the PVC will stay in a `Pending` state forever.<br><br>**Workaround:** For a PVC which is stuck in `Pending` state, check the events for an error signature indicating that calls to the Portworx service have timed out. If such a case arises, clean up the PVC and retry PVC creation. |
+| PD-1374 | For FlashArray volumes, resizing might hang when there is a management connection failure.<br><br>**Workaround:** Manually bring out the volume from the maintenance mode.  |
+| PD-1360 | When a snapshot volume is detached, you see the `Error in stats  	 :  Volume does not have a coordinator` error message. <br><br>**Workaround:** This message appears because the volume is created, but not attached or formatted. A coordinator node is not created until a volume is attached. |
+| PD-1388 | the Prometheus Operator pulls the wrong Prometheus image. In air-gapped environments, Prometheus pod deployment will fail with an `ImagePullBackOff` error. <br/><br/>**Workaround:** Before installing Portworx, upload a Prometheus image with the `latest` tag to your private registry. |
+ 
+
 ## 2.10.3
 
 June 30, 2022
@@ -173,6 +265,7 @@ The following issues have been fixed:
 | PWX-22218 | Portworx failed to mount volumes into asymmetrical shared mounts. <br/><br/>**User impact:** When using asymmetrical shared mounts (e.g. mounting different directories between host/container), it was not possible to mount Portworx volumes into these directories. <br/><br/>**Resolution:** After the fix, asymmetrical shared mounts work properly (i.e. you can mount volumes into such directories). |
 | PWX-22178 | On Kubernetes installations that use the CRI-O container runtime, setting up a custom bidirectional (shared) mount for the Portworx pod did not propagate to `portworx.service`. Instead, it would be set up as a regular bind-mount, that could not be used to mount the PXD devices. <br/><br/>**Resolution:** The bidirectional mounts are now properly propagated to `portworx.service`.|
 | PWX-21544 | When coming out of run-flat mode after more than 10 minutes have elapsed, a Portworx quorum node sometimes failed to start a watch on the internal KVDB because the required KVDB revision had already been compacted. <br/><br/>**User impact:** When using an internal KVDB, there may have been a brief outage when Portworx exits run-flat mode. |
+ 
 
 
 ### Known issues (Errata)
