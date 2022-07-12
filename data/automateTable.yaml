@@ -1,0 +1,9 @@
+exampleTable:
+  heading: 
+    - heading 1
+    - heading 2
+    - heading 3
+    - heading 4
+  tableData: 
+    - ['row1 item1','row1 item2','row1 item3','row1 item4'] 
+    - ['row2 item1','row2 item2','row2 item3','row2 item4'] 
