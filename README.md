@@ -111,3 +111,23 @@ include::/docs/content/test2.ad[]
 **Note:**
 
 I don't currently recommend using this for production purposes. If you need to use an AsciiDoc feature, ask first. 
+
+## automateTable shortcode
+
+This shortcode generates a table from a yaml file located in the site’s data directory.
+
+```
+{{<automateTable source="exampleTable">}}
+```
+
+Right now, the yaml file is formatted as follows. We can change this up a bit if we need to match a generated output.
+
+```
+exampleTable:
+  heading: 
+    - heading 1
+    - heading 2
+  tableData: 
+    - ['row1 item1','row1 item2','row1 item3','row1 item4'] 
+    - ['row2 item1','row2 item2','row2 item3','row2 item4'] 
+```
