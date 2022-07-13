@@ -114,20 +114,31 @@ I don't currently recommend using this for production purposes. If you need to u
 
 ## automateTable shortcode
 
-This shortcode generates a table from a yaml file located in the site’s data directory.
+This shortcode generates a table from a yaml file located in the site’s data directory:
 
 ```
 {{<automateTable source="exampleTable">}}
 ```
 
-Right now, the yaml file is formatted as follows. We can change this up a bit if we need to match a generated output.
+The yaml file is formatted as follows:
 
 ```
 exampleTable:
   heading: 
-    - heading 1
-    - heading 2
+    - name: 'heading 1'
+      colspan: 4
   tableData: 
-    - ['row1 item1','row1 item2','row1 item3','row1 item4'] 
-    - ['row2 item1','row2 item2','row2 item3','row2 item4'] 
+    - ['row1 item1<br/><br/><ul><li>list item</li></ul>','row1 item2','row1 item3','row1 item4'] 
+    - ['row2 item1','row2 item2','row2 item3','row2 item4']
 ```
+
+Note: 
+
+* You can use html to add lists and other style elements to text in a table cell.
+* The colspan attribute sets the width (in columns) of the table headings you provide.
+
+| | |
+| --- | --- |
+| `exampleTable` | This field defines the table name you call in the shortcode within the text. For example, if you wished to place a table on the fontpage of the site called `exampleTable`, you'd place the shortcode `{{<automateTable source="exampleTable">}}` into the `_index.md` file. |
+| `heading` | contains table headings (`name`) and how many cells you want the table headings to span (`colspan`). There is no default `colspan` value, you must specify a numerical value. |
+| `tableData` | a list of arrays. Each array is a row, and each entry in the array is a cell in the row. This is designed to keep the yaml table-like and make manual data entry here a little easier. |
