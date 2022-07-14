@@ -8,6 +8,22 @@ aliases:
   - /reference/knowledge-base/openshift-upgrade-path/
 ---
 
+## Portworx 2.11.0
+
+This upgrade path was tested with Portworx 2.11.0 and Operator 1.8.0.
+
+{{<info>}}
+**NOTE:** If you are not on the same OCP version as in the tested upgrade example shown below, please upgrade to the next available version that is used in the upgrade path and continue as shown in the table below.
+{{</info>}}
+
+| **Channel version** | **OpenShift version** | **Kubernetes version**  |
+|---------------------|-----------------------|-------------------------|
+| stable-4.10 | 4.10.18 | 1.23.5 |
+| stable-4.9 | 4.9.36 | 1.22.8 |
+| stable-4.8 | 4.8.42 | 1.21.11 |
+| stable-4.7 | 4.7.48 | 1.20.14 |
+| stable-4.6 | 4.6.56 | 1.19.16 |
+
 ## Portworx 2.10.0
 
 This upgrade path was tested with Portworx 2.10.0 and Operator 1.8.0.

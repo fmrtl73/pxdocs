@@ -45,7 +45,6 @@ Before you install Portworx on Kubernetes, ensure that you're using a supported 
 | vSphere with Tanzu (TKGs) | <ul><li>v1.19.14+vmware.1-tkg.1.8753786</li><li>v1.20.9+vmware.1-tkg.1.a4cee5b</li></ul> |
 | Tanzu Kubernetes Grid Integrated (TKGI) | <ul><li>PKS Version: 1.9.6-build.7; k8s Version: 1.18.18</li><li>PKS Version: 1.10.7-build.6; k8s Version: 1.19.16</li><li>PKS Version: 1.12.1-build.10; k8s Version: 1.21.5</li><li>PKS Version: 1.13.2-build.16; k8s Version: 1.22.6</li></ul> | 
 
-
 {{<info>}}
 **K3s users:** You must use CSI integration to generate / use PVCs.
 {{</info>}}

@@ -17,5 +17,5 @@ Portworx requires the following Purity versions:
 
 | **Model** | **Minimum supported version** | **Maxmimum supported version** |
 |----|----|----|
-| FlashArray//C, FlashArray//X | Purity version 4.8.0 | Purity version 6.2.4 |
-| FlashBlade |  Purity version 2.2.0 | Purity version 3.2.4 |
+| FlashArray//C, FlashArray//X | Purity version 5.3.16 | Purity version 6.3.1 |
+| FlashBlade |  Purity version 3.2.4 | Purity version 4.0 |
