@@ -213,7 +213,7 @@ To take a snapshot, perform the following steps:
 
 	```text
 	kind: VolumeSnapshot
-	apiVersion: snapshot.storage.k8s.io/v1beta1
+	apiVersion: snapshot.storage.k8s.io/v1
 	metadata:
 	  name: volumesnapshot-of-pure-claim-block
 	spec:
