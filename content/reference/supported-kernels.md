@@ -50,6 +50,7 @@ apt install linux-headers-$(uname -r)
 | RHEL 7.9	| Up to 3.10.0-1127.el7.x86_64 |
 | RHEL 8.4  | Up to 4.18.0-305.25.1.el8_4.x86_64 |
 | RHEL 8.5  | Up to 4.18.0-348.20.1.el8_5.x86_64 |
+| RHEL 8.5 (Ootpa)  | 4.18.0-372.16.1.el8_6.x86_64  |
 | Debian 9	| Up to 4.9.0-13-amd64 | 
 | Debian 10 | Up to 4.19.0-20-cloud-amd64 |
 | OEL 7.9 | Up to 3.10.0-1160.59.1.el7.x86_64 |
