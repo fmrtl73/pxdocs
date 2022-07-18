@@ -7,6 +7,18 @@ series: release-notes
 aliases:
     - /reference/release-notes/portworx
 ---
+## 2.11.1
+
+July 18, 2022
+
+### Fixes
+
+| **Issue Number** | **Issue Description** |
+| ---- | ---- |
+| PWX-24519 | The mount path was not erased if you restarted Portworx at the wrong time during an unmount operation when using CSI. This caused pods to be stuck in the terminating state.<br><br>**Resolution:** When you restart Portworx now, it ensures that the mount path is deleted.  |
+| PWX-24514 | When a cluster is configured with PX-Security and using Floating license, it was not possible to add new nodes to the Portworx cluster.<br><br>**Resolution:** You can now add new nodes to the cluster.  |
+| PWX-23487 | On certain kernel versions (5.4.x and later) during startup, volume attach sometimes got stuck, preventing Portworx from starting. This is because a system-generated IO can occur on the volume while the volume attach is in progress, causing the volume attach to wait for IO completion, which in turn waits for startup to complete, resulting in a deadlock. <br><br>**Resolution:** Portworx now avoids the deadlock by preventing access to the volume until attach is complete. This functionality is only enabled after a system reboot. |
+
 
 ## 2.11.0
 
