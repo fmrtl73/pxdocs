@@ -27,7 +27,7 @@ purityVersions:
       colspan: 1
   tableData: 
     - ['FlashArray//C, FlashArray//X','Purity version 5.3.16','Purity version 6.3.1'] 
-    - ['FlashBlade','Purity version 3.2.4','Purity version 4.0']
+    - ['FlashBlade','Purity version 2.2.0','Purity version 4.0']
 ocpUpgradePath:
   heading: 
     - name: 'Channel version'
