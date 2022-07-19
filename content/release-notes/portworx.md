@@ -216,9 +216,21 @@ Portworx by Pure Storage is proud to introduce the following new features:
 | PD-1165 | Due to an incomplete container image, Portworx installation or upgrade operations can get stuck with the message: `could not create container: parent snapshot <> does not exist: not found`.<br/><br/>**Workaround:** Identify the `px-enterprise` image and remove it. The following sample commands do this:<br/><br/><code>ctr -n k8s.io i ls \| grep docker.io/portworx/px-enterprise:2.10.0</code> <br/><br/><code>ctr -n k8s.io i rm docker.io/portworx/px-enterprise:2.10.0</code>|
 
 
+## 2.9.1.4
+
+Apr 1, 2022
+
+### Notes
+
+* This version addresses security vulnerabilities.
+
 ## 2.9.1.3
 
 Mar 15, 2022
+
+### Fixes
+
+The following issues have been fixed:
 
 |**Issue Number**|**Issue Description**|
 |----|----|
