@@ -15,7 +15,4 @@ Portworx supports the Pure FlashArray//C, FlashArray//X and FlashBlade models li
 Portworx requires the following Purity versions:
 
 
-| **Model** | **Minimum supported version** | **Maxmimum supported version** |
-|----|----|----|
-| FlashArray//C, FlashArray//X | Purity version 5.3.16 | Purity version 6.3.1 |
-| FlashBlade |  Purity version 2.2.0 | Purity version 4.0 |
+{{<automateTable source="purityVersions">}}
