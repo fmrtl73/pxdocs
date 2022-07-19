@@ -9,7 +9,7 @@ aliases:
 ---
 ## 2.11.1
 
-July 18, 2022
+July 19, 2022
 
 ### Fixes
 
