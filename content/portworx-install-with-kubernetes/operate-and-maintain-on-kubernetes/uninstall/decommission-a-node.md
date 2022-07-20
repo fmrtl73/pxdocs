@@ -119,3 +119,7 @@ If you want to permanently decommision the node, you can skip **Step 5. (Optiona
 ## Step 5. (Optional) Rejoin node to the cluster
 
 If you want Portworx to start again on this node and join as a new node, follow the [node rejoin steps](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/k8s-node-rejoin).
+
+## Step 6. (FlashArray cloud drives only) Disconnect or delete drives from your FlashArray
+
+If you are using Pure FlashArray as a cloud drive provider, follow the additional instructions to [decommission FlashArray nodes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decomission-fa/).
