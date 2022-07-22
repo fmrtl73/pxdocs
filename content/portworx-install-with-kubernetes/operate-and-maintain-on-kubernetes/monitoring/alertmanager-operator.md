@@ -12,7 +12,7 @@ Perform the following steps to set up an Alertmanager configuration and enable P
 1. Create a secret called `alertmanager-portworx` in the same namespace as the StorageCluster object. This secret should contain a valid [Alertmanager configuration](https://prometheus.io/docs/alerting/latest/configuration/). The key for this should be called `alertmanager.yaml`. 
 
     ```text
-    kubectl -n kube-system create secret generic alertmanager-portworx --from-file=alertmanager.yaml=alertmanager.yaml
+    kubectl -n kube-system create secret generic alertmanager-portworx --from-file=alertmanager.yaml
     ```
 2. Edit your StorageCluster object to enable Prometheus and Alertmanager:
    
