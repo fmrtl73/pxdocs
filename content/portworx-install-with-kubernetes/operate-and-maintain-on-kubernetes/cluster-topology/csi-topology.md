@@ -57,7 +57,7 @@ To enable the CSI topology feature, perform the following steps:
             enabled: true
     ```
 
-2. Create a `pure-secret` containing the information for your FlashArrays. Include `Labels` that specify the topology for each FlashArray. The keys must match a set of specific strings, but you can define your own values. For example:
+2. Create a `px-pure-secret` containing the information for your FlashArrays. Include `Labels` that specify the topology for each FlashArray. The keys must match a set of specific strings, but you can define your own values. For example:
 
     ```text
     {
@@ -151,10 +151,10 @@ To enable the CSI topology feature, perform the following steps:
         enabled: true
     ```
 
-2. Edit the `pure-secret` for your FlashArray to include topology `Labels` using the following command:
+2. Edit the `px-pure-secret` for your FlashArray to include topology `Labels` using the following command:
 
     ```text
-    kubectl edit secrets pure-secret
+    kubectl edit secrets px-pure-secret
     ```
 
     Include `Labels` that specify the topology for each FlashArray. The keys must match a set of specific strings, but you can define your own values. For example:
