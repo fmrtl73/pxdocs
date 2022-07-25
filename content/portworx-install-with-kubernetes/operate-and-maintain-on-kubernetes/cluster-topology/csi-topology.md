@@ -36,6 +36,10 @@ In order to use the CSI topology feature with a FlashArray Direct Access volume 
 * `topology.portworx.io/node`
 * `topology.portworx.io/hypervisor`
 
+{{<info>}}
+**NOTE:** If you are a PSO user, you can use `topology.purestorage.com` labels when you migrate from PSO to Portworx using the pso2px tool.
+{{</info>}}
+
 ### Enable on a new cluster
 
 {{<info>}}
@@ -130,7 +134,7 @@ To enable the CSI topology feature, perform the following steps:
           csi.storage.k8s.io/fstype: ext4
         allowedTopologies:
           - matchLabelExpressions:
-              - key: topology.purestorage.com/rack
+              - key: topology.portworx.io/rack
                 values:
                   - rack-0
                   - rack-1
