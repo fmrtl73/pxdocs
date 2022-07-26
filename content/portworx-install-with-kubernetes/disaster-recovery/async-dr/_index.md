@@ -27,56 +27,8 @@ With asynchronous DR, you can replicate Kubernetes applications and their data b
 * The standby Kubernetes cluster has running controllers, configuration and PVCs that map to a local volumes.
 * Incremental changes in Kubernetes applications and Portworx data are continuously sent to the standby cluster.
 
-The Asynchronous DR feature supports the following Kubernetes resources:
-
-* PersistentVolumeClaim
-* PersistentVolume
-* Deployment
-* DeploymentConfig
-* StatefulSet
-* ConfigMap
-* Service
-* Secret
-* DaemonSet
-* ServiceAccount
-* Role
-* RoleBinding
-* ClusterRole
-* ClusterRoleBinding
-* ImageStream
-* Ingress
-* Route
-* Template
-* CronJob
-* ResourceQuota
-* ReplicaSet
-* LimitRange
-* NetworkPolicy
-* PodDisruptionBudget
-
-Asynchronous DR also supports the following CRDs out-of-the-box:
-
-* CassandraDatacenter
-* CouchbaseBucket
-* CouchbaseCluster
-* CouchbaseEphemeralBucket
-* CouchbaseMemcachedBucket
-* CouchbaseReplication
-* CouchbaseUser
-* CouchbaseGroup
-* CouchbaseRoleBinding
-* CouchbaseBackup
-* CouchbaseBackupRestore
-* IBPCA
-* IBPConsole
-* IBPOrderer
-* IBPPeer
-* RedisEnterpriseCluster
-* RedisEnterpriseDatabase
-
-## Add CRDs
-
-If Portworx doesn't have the CRD you need, you can register a new one. Refer to the [Application Registration](/portworx-install-with-kubernetes/storage-operations/stateful-applications/application-registration/) document for instructions on how to do this.
+The list of supported Kubernetes resources can be found [here](#supported-kubernetes-resources)
+If a custom CR that you need is not present in this list, you can register a new one. Refer to the [Application Registration](/portworx-install-with-kubernetes/storage-operations/stateful-applications/application-registration/) document for instructions on how to do this.
 
 ## Enable load balancing on cloud clusters
 
@@ -105,213 +57,7 @@ spec:
   type: loadBalancer
 ```
 
-## Generate and Apply a ClusterPair Spec
-
-In Kubernetes, you must define a trust object called **ClusterPair**. Portworx requires this object to communicate with the destination cluster. The ClusterPair object pairs the Portworx storage driver with the Kubernetes scheduler, allowing the volumes and resources to be migrated between clusters.
-
-The ClusterPair is generated and used in the following way:
-
-   * The **ClusterPair** spec is generated on the **destination** cluster.
-   * The generated spec is then applied on the **source** cluster
-
-Perform the following steps to create a cluster pair:
-
-{{<info>}}
-**NOTE:** You must run the `pxctl` commands in this document either on your Portworx nodes directly, or from inside the Portworx containers on your Kubernetes control plane node. 
-{{</info>}} 
-
-### Create object store credentials for cloud clusters
-
-**You must create object store credentials on both the destination and source clusters before you can create a cluster pair.**
-The options you use to create your object store credentials differ based on which object store you use:
-
-#### Create Amazon s3 credentials
-
-1. Find the UUID of your destination cluster
-
-2. Enter the `pxctl credentials create` command, specifying the following:
-
-    * The `--provider` flag with the name of the cloud provider (`s3`).
-    * The `--s3-access-key` flag with your secret access key
-    * The `--s3-secret-key` flag with your access key ID
-    * The `--s3-region` flag with the name of the S3 region (`us-east-1`)
-    * The `--s3-endpoint` flag with the  name of the endpoint (`s3.amazonaws.com`)
-    * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
-    * `clusterPair_` with the UUID of your destination cluster. Enter the following command into your cluster to find its UUID:
-      ```text
-      PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
-      kubectl exec $PX_POD -n kube-system --  /opt/pwx/bin/pxctl status | grep UUID | awk '{print $3}'
-      ```
-
-    ```text
-    /opt/pwx/bin/pxctl credentials create \
-    --provider s3 \
-    --s3-access-key <aws_access_key> \
-    --s3-secret-key <aws_secret_key> \
-    --s3-region us-east-1  \
-    --s3-endpoint s3.amazonaws.com \
-    --s3-storage-class STANDARD \
-    clusterPair_<UUID_of_destination_cluster>
-    ```
-
-#### Create Microsoft Azure credentials
-
-1. Find the UUID of your destination cluster
-
-2. Enter the `pxctl credentials create` command, specifying the following:
-
-    * `--provider` as `azure`
-    * `--azure-account-name` with the name of your Azure account
-    * `--azure-account-key` with your Azure account key
-    * `clusterPair_` with the UUID of your destination cluster appended. Enter the following command into your cluster to find its UUID:
-      ```text
-      PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
-      kubectl exec $PX_POD -n kube-system --  /opt/pwx/bin/pxctl status | grep UUID | awk '{print $3}'
-      ```
-
-    ```text
-    /opt/pwx/bin/pxctl credentials create \
-    --provider azure \
-    --azure-account-name <your_azure_account_name> \
-    --azure-account-key <your_azure_account_key> \
-    clusterPair_<UUID_of_destination_cluster>
-    ```
-
-#### Create Google Cloud Platform credentials
-
-1. Find the UUID of your destination cluster
-
-2. Enter the `pxctl credentials create` command, specifying the following:
-
-    * `--provider` as `google`
-    * `--google-project-id` with the string of your Google project ID
-    * `--google-json-key-file` with the filename of your GCP JSON key file
-    * `clusterPair_` with the UUID of your destination cluster appended. Enter the following command into your cluster to find its UUID:
-      ```text
-      PX_POD=$(kubectl get pods -l name=portworx -n kube-system -o jsonpath='{.items[0].metadata.name}')
-      kubectl exec $PX_POD -n kube-system --  /opt/pwx/bin/pxctl status | grep UUID | awk '{print $3}'
-      ```
-
-    ```text
-    /opt/pwx/bin/pxctl credentials create \
-    --provider google \
-    --google-project-id <your_google_project_ID> \
-    --google-json-key-file <your_GCP_JSON_key_file> \
-    clusterPair_<UUID_of_destination_cluster>
-    ```
-
-### Generate a ClusterPair on the destination cluster
-
-To generate the ClusterPair spec, run the following command on the **destination** cluster:
-
-```text
-storkctl generate clusterpair -n <migrationnamespace> <remotecluster>
-```
-Here, `remotecluster` is the Kubernetes object that will be created on the **source** cluster representing the pair relationship, and `migrationnamespace` is the Kubernetes namespace of the **source** cluster that you want to migrate to the **destination** cluster.
-
-During the actual migration, you will reference this name to identify the destination of your migration.
-
-```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: ClusterPair
-metadata:
-    creationTimestamp: null
-    name: remotecluster
-    namespace: migrationnamespace
-spec:
-   config:
-      clusters:
-         kubernetes:
-            LocationOfOrigin: /etc/kubernetes/admin.conf
-            certificate-authority-data: <CA_DATA>
-            server: https://192.168.56.74:6443
-      contexts:
-         kubernetes-admin@kubernetes:
-            LocationOfOrigin: /etc/kubernetes/admin.conf
-            cluster: kubernetes
-            user: kubernetes-admin
-      current-context: kubernetes-admin@kubernetes
-      preferences: {}
-      users:
-         kubernetes-admin:
-            LocationOfOrigin: /etc/kubernetes/admin.conf
-            client-certificate-data: <CLIENT_CERT_DATA>
-            client-key-data: <CLIENT_KEY_DATA>
-    options:
-       <insert_storage_options_here>: ""
-       mode: DisasterRecovery
-status:
-  remoteStorageId: ""
-  schedulerStatus: ""
-  storageStatus: ""
-```
-
-### Enable disaster recovery mode
-
-{{<info>}}**NOTE:** You must have a DR enabled Portworx license at both the source _and_ destination cluster to enable disaster recovery mode. If you do not have these licenses, enabling disaster recovery mode will fail.{{</info>}}
-
-Enable disaster recovery mode by specifying the following fields in the `options` section of your `ClusterPair`:
-
-* `ip`, with the IP address of the remote Portworx node
-* `port`, with the port of the remote Portworx node
-* `token`, with the token of the destination cluster. To retrieve the token, run the `pxctl cluster token show` command on a node in the destination cluster. Refer to the [Show your destination cluster token](/portworx-install-with-kubernetes/migration/#show-your-destination-cluster-token) section from the [Migration with Stork on Kubernetes](/portworx-install-with-kubernetes/migration/) page for details.
-* `mode`: by default, every seventh migration is a full migration. If you specify `mode: DisasterRecovery`, then every migration is incremental.
-
-    ```text
-    apiVersion: stork.libopenstorage.org/v1alpha1
-    kind: ClusterPair
-    metadata:
-      creationTimestamp: null
-      name: remotecluster
-    spec:
-      config:
-        clusters:
-          kubernetes:
-            LocationOfOrigin: /etc/kubernetes/admin.conf
-            certificate-authority-data: <CA_DATA>
-            server: https://192.168.56.74:6443
-        contexts:
-          kubernetes-admin@kubernetes:
-            LocationOfOrigin: /etc/kubernetes/admin.conf
-            cluster: kubernetes
-            user: kubernetes-admin
-        current-context: kubernetes-admin@kubernetes
-        preferences: {}
-        users:
-          kubernetes-admin:
-            LocationOfOrigin: /etc/kubernetes/admin.conf
-            client-certificate-data: <CLIENT_CERT_DATA>
-            client-key-data: <CLIENT_KEY_DATA>
-      options:
-        ip:     <ip_of_remote_px_node>
-        port:   <port_of_remote_px_node_default_9001>
-        token:  <token_from_step_3>
-        mode: DisasterRecovery
-    status:
-      remoteStorageId: ""
-      schedulerStatus: ""
-      storageStatus: ""
-    ```
-
-### Verify the ClusterPair
-
-To verify that you have generated the ClusterPair and that it is ready, run the following command and look for `STORAGE-STATUS` and `SCHEDULER-STATUS` values set to `Ready`:
-
-```text
-storkctl -n <namespace> get clusterpair
-```
-```output
-NAME            STORAGE-STATUS   SCHEDULER-STATUS   CREATED
-remotecluster   Ready            Ready              07 Mar 22 19:01 PST
-```
-
-### Apply the ClusterPair spec on the source cluster
-
-To apply the ClusterPair spec, apply the ClusterPair YAML spec on the source cluster. To create the ClusterPair, run the following command from a location where you have `kubectl` access to the source cluster:
-
-```text
-kubectl apply -f <clusterpair-name>.yaml -n <namespace>
-```
+{{< content "shared/portworx-install-with-kubernetes-cluster-pair.md" >}}
 
 ## Schedule a migration
 
@@ -542,6 +288,53 @@ To delete a cluster pair, run the following command:
 kubectl delete clusterpair remotecluster -n mysql
 ```
 
+## Supported Kubernetes Resources
+The Asynchronous DR feature supports the following Kubernetes resources:
+
+* PersistentVolumeClaim
+* PersistentVolume
+* Deployment
+* DeploymentConfig
+* StatefulSet
+* ConfigMap
+* Service
+* Secret
+* DaemonSet
+* ServiceAccount
+* Role
+* RoleBinding
+* ClusterRole
+* ClusterRoleBinding
+* ImageStream
+* Ingress
+* Route
+* Template
+* CronJob
+* ResourceQuota
+* ReplicaSet
+* LimitRange
+* NetworkPolicy
+* PodDisruptionBudget
+
+Asynchronous DR also supports the following CRDs out-of-the-box:
+
+* CassandraDatacenter
+* CouchbaseBucket
+* CouchbaseCluster
+* CouchbaseEphemeralBucket
+* CouchbaseMemcachedBucket
+* CouchbaseReplication
+* CouchbaseUser
+* CouchbaseGroup
+* CouchbaseRoleBinding
+* CouchbaseBackup
+* CouchbaseBackupRestore
+* IBPCA
+* IBPConsole
+* IBPOrderer
+* IBPPeer
+* RedisEnterpriseCluster
+* RedisEnterpriseDatabase
 
 
 ## Related videos

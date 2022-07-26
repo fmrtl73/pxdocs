@@ -79,13 +79,39 @@ status:
 
 Save the resulting spec to a file named `clusterpair.yaml`.
 
+### Using Rancher Projects with ClusterPair
+
+{{<info>}}**NOTE**: If you are not using Rancher, skip to the [next section](#apply-the-generated-clusterpair-on-the-source-cluster). {{</info>}}
+
+Rancher has a concept of Projects that allow grouping of resources and Kubernetes namespaces. Depending on the resource and how it is created, Rancher adds the following label or annotation:
+```text
+field.cattle.io/projectID: <project-short-UUID>
+```
+The `projectID` uniquely identifies the project, and the annotation or label on the Kubernetes object provides a way to tie a Kubernetes object back to a Rancher project. 
+
+From version 2.11.2 or newer, Stork has the capability to map projects from the source cluster to the destination cluster when it migrates Kubernetes resources. It will ensure that the following are transformed
+when migrating Kubernetes resources to a destination cluster:
+* Labels and annotations for projectID `field.cattle.io/projectID` on any Kubernetes resource on the source cluster are transformed to their respective projectIDs on the destination cluster.
+* Namespace Selectors on a NetworkPolicy object which refer to the `field.cattle.io/projectID` label will be transformed to their respective projectIDs on the destination cluster.
+* Namespace Selectors on a Pod object (Kubernetes version 1.24 or newer) which refer to the `field.cattle.io/projectID` label will be transformed to their respective projectIDs on the destination cluster.
+
 {{<info>}}
 **NOTE:**
-For an example that uses more than one storage fabric, see the [Asynchronous DR](/portworx-install-with-kubernetes/disaster-recovery/async-dr/#enable-disaster-recovery-mode) page.
+
+* Rancher project mappings are supported only with Stork version 2.11.2 or newer.
+* All the Rancher projects need to be created on both the source and the destination cluster.
 {{</info>}}
 
+While creating the ClusterPair, use the argument `--project-mappings` to indicate which projectID on the source cluster maps to a projectID on the destination cluster. 
+For example:
 
-#### Apply the generated ClusterPair on the source cluster
+```text
+storkctl generate clusterpair -n <migrationnamespace> <remotecluster> --project-mappings  <projectID-A1>=<projectID-A2>,<projectID-B1>: <projectID-B2>
+```
+The project mappings are provided as a comma-separate key=value pairs. In this example, `projectID-A1` on source cluster maps to `projectID-A2` on the destination cluster, while `projectID-B1` on the source cluster maps to `projectID-B2`
+on the destination cluster.
+
+### Apply the generated ClusterPair on the source cluster
 
 On the **source** cluster create the clusterpair by applying the generated spec.
 

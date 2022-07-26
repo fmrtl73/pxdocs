@@ -26,150 +26,8 @@ release. As future releases are made, the two clusters can have different {{< px
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be
 reachable by the source cluster.
 
-{{< content "shared/portworx-install-with-kubernetes-disaster-recovery-cluster-pair.md" >}}
+{{< content "shared/portworx-install-with-kubernetes-cluster-pair.md" >}}
 
-```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: ClusterPair
-metadata:
-  creationTimestamp: null
-  name: remotecluster
-  namespace: migrationnamespace
-spec:
-  config:
-    clusters:
-      kubernetes:
-        LocationOfOrigin: /etc/kubernetes/admin.conf
-        certificate-authority-data: <CA_DATA>
-        server: https://192.168.56.74:6443
-    contexts:
-      kubernetes-admin@kubernetes:
-        LocationOfOrigin: /etc/kubernetes/admin.conf
-        cluster: kubernetes
-        user: kubernetes-admin
-    current-context: kubernetes-admin@kubernetes
-    preferences: {}
-    users:
-      kubernetes-admin:
-        LocationOfOrigin: /etc/kubernetes/admin.conf
-        client-certificate-data: <CLIENT_CERT_DATA>
-        client-key-data: <CLIENT_KEY_DATA>
-  options:
-      <insert_storage_options_here>: ""
-status:
-  remoteStorageId: ""
-  schedulerStatus: ""
-  storageStatus: ""
-```
-
-## Show your destination cluster token
-
-On the destination cluster, run the following command from one of the Portworx nodes to get the cluster token. You'll need this token in later steps:
-
-```text
-pxctl cluster token show
-```
-
-#### Update ClusterPair with storage options
-
-Next, let's edit the  **ClusterPair** spec. Under `spec.options`, add  the following Portworx clusterpair information:
-
-   1. **ip**: the IP address of one of the Portworx nodes on the destination cluster
-   2. **port**: the port on which the Portworx API server is listening for requests.
-      Default is 9001 if not specified
-   3. **token**: the cluster token generated in the [previous step](#show-your-destination-cluster-token)
-
-The updated **ClusterPair** should look like this:
-
-```text
-apiVersion: stork.libopenstorage.org/v1alpha1
-kind: ClusterPair
-metadata:
-  creationTimestamp: null
-  name: remotecluster
-  namespace: migrationnamespace
-spec:
-  config:
-      clusters:
-        kubernetes:
-          LocationOfOrigin: /etc/kubernetes/admin.conf
-          certificate-authority-data: <CA_DATA>
-          server: https://192.168.56.74:6443
-      contexts:
-        kubernetes-admin@kubernetes:
-          LocationOfOrigin: /etc/kubernetes/admin.conf
-          cluster: kubernetes
-          user: kubernetes-admin
-      current-context: kubernetes-admin@kubernetes
-      preferences: {}
-      users:
-        kubernetes-admin:
-          LocationOfOrigin: /etc/kubernetes/admin.conf
-          client-certificate-data: <CLIENT_CERT_DATA>
-          client-key-data: <CLIENT_KEY_DATA>
-  options:
-      ip: "<ip-address-of-node-in-the-destination-cluster>"
-      port: "<port_of_remote_px_node_default_9001>"
-      token: "<token_generated_from_destination_cluster>"
-status:
-  remoteStorageId: ""
-  schedulerStatus: ""
-  storageStatus: ""
-```
-
-Instead of the IP address of the node in the destination cluster, you can use the hostname, or any DNS name.
-
-{{<info>}}
-In the updated spec, ensure values for all fields under options are quoted.
-{{</info>}}
-
-Copy and save this to a file called `clusterpair.yaml` on the source cluster.
-
-### Create a ClusterPair
-
-#### Apply the generated ClusterPair on the source cluster
-
-On the **source** cluster, create the clusterpair by applying `clusterpair.yaml`:
-
-```text
-kubectl apply -f clusterpair.yaml
-```
-```output
-clusterpair.stork.libopenstorage.org/remotecluster created
-```
-
-Note that, when the ClusterPair gets created, Portworx also creates a 100 GiB volume called `ObjectstoreVolume`. If you plan to migrate volumes that are significantly larger than 100GiB, make sure you check out first the [Migrating Large Volumes](#migrating-large-volumes) section.
-
-{{<info>}}
-If an `Invalid token for already paired cluster` error displays, enter the `pxctl cluster pair list` command to check for any any existing cluster pairs and delete them. Re-apply the stork cluster pair yaml once you've deleted the cluster pairs.
-{{</info>}}
-
-#### Verifying the Pair status
-
-Once you apply the above spec on the source cluster, you should be able to check the status of the pairing:
-
-```text
-storkctl get clusterpair -n migrationnamespace
-```
-```output
-NAME               STORAGE-STATUS   SCHEDULER-STATUS   CREATED
-remotecluster      Ready            Ready              26 Oct 18 03:11 UTC
-```
-On a successful pairing, you should see the "Storage Status" and "Scheduler Status" as "Ready":
-
-If so, you’re all set and ready to [migrate] (#migrating-volumes-and-resources).
-
-#### Troubleshooting
-
-If instead, you see an error, you should get more information by running:
-
-```text
-kubectl describe clusterpair remotecluster
-```
-
-{{<info>}}
-You might need to perform additional steps for [GKE](gke) and [EKS](eks)
-{{</info>}}
 
 ## Migrating Volumes and Resources
 
@@ -261,7 +119,7 @@ Alternatively, you can use your own cloud (S3, Azure, or Google) instead of Obje
   * **kind:** as `Migration`
   * **metadata.name:** with the name of the object that performs the migration
   * **metadata.namespace:** with the name of the namespace in which you want to create the object
-  * **spec.clusterPair:** with the name of the `ClusterPair` object created in the [Create a ClusterPair](#create-a-clusterpair) section
+  * **spec.clusterPair:** with the name of the `ClusterPair` object created in the [Create a ClusterPair](#generate-and-apply-a-clusterpair-spec) section
   * **spec.includeResources:** with a boolean value specifying if the migration should include PVCs and other applications specs. If you set this field to `false`, Portworx will only migrate your volumes
   * **spec.startApplications:** with a boolean value specifying if Portworx should automatically start applications on the destination cluster. If you set this field to `false`, then the `Deployment` and `StatefulSet` objects on the destination cluster will be set to zero. Note that, on the destination cluster, Portworx uses the `stork.openstorage.org/migrationReplicas` annotation to store the number of replicas from the source cluster
   * **spec.namespaces**: with the list of namespaces you want to migrate
