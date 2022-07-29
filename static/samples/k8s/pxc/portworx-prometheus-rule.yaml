@@ -110,7 +110,7 @@ spec:
         description: Portworx cluster member(s) has(have) been down for more than
           5 minutes.
         summary: Portworx cluster member(s) is(are) down.
-      expr: (max(px_cluster_status_cluster_size) - count(px_cluster_status_cluster_size))
+      expr: (max(px_cluster_status_size) - max(px_cluster_status_nodes_online))
         > 0
       for: 5m
       labels:
@@ -137,6 +137,7 @@ spec:
         description: Portworx node {{$labels.node_id}} from cluster {{$labels.cluster}} is reporting that the cluster is unable to talk to kvdb. Please check KVDB health and the node's connection to KVDB and the other nodes in the cluster.
         summary: Portworx cluster {{$labels.cluster}} is unable to talk to kvdb.
       expr: px_kvdb_health_state_cluster_view == 2
+      for: 5m
       labels:
         issue: Portworx cluster {{$labels.cluster}} is unable to talk to kvdb.
         severity: critical
