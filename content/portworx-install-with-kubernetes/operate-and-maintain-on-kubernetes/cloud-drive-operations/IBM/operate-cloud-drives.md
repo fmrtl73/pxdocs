@@ -56,10 +56,7 @@ See [Expand your storage pool size](/portworx-install-with-kubernetes/storage-op
 
 If a VolumeAttachment gets deleted, the node will not boot and will return an error such as `cannot delete va, name: <va-name>`.
 
-To recover from this state, do one of the following:
-
-* Perform a node replace operation from the IBM Cloud UI.
-* Wipe the node and reinstall Portworx.
+To recover from this state, perform a node replace operation from the IBM Cloud UI.
 
 ## Related topics
 
