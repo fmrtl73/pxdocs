@@ -49,20 +49,23 @@ CSI cloud drive configuration requires a StorageClass with the CSI driver set as
     kubectl get csidriver
     ```
 
-2. Create a StorageClass. In the `provisioner` field, enter the CSI driver name you got in the step above:
+2. Create a StorageClass on your specified datastore. In the `provisioner` field, enter the CSI driver name you got in the step above. Provide the datastore URL in the `datastoreurl` field from your VSpere client. 
 
-    ```text
-    apiVersion: storage.k8s.io/v1
+    ```text 
     kind: StorageClass
+    apiVersion: storage.k8s.io/v1
     metadata:
-    annotations:
-      storageclass.kubernetes.io/is-default-class: "true"
-    name: vsphere-immediate-sc
+      name: vsphere-immediate-sc
+      annotations:
+         storageclass.kubernetes.io/is-default-class: "true"
     provisioner: <csi_driver_name>
+    parameters:
+      datastoreurl: "<your-datastore-url>" 
     allowVolumeExpansion: true
     reclaimPolicy: Delete
     volumeBindingMode: Immediate
     ```
+    {{<info>}}**NOTE:** You can also specify the SPBM policies in the StorageClass with the `storagepolicyname` parameter.{{</info>}}
 
 ## Install Portworx
 
