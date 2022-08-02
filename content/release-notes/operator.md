@@ -9,6 +9,26 @@ aliases:
     - /reference/release-notes/operator
 ---
 
+## 1.9.0
+Aug 1, 2022
+
+### Updates
+
+* Daemonset to Operator migration is now Generally Available. This includes the following features:
+ * The ability to perform a dry run of the migration
+ * Migration for generic helm chart from Daemonset to the Operator
+ * Support for the `OnDelete` migration strategy
+ * Support for various configurations such as external KVDB, custom volumes, environment variables, service type, and annotations
+* You can now use the [`generic helm chart`](https://github.com/portworx/helm/tree/portworx-operator-v1) to install Portworx with the Operator. Note: Only AWS EKS has been validated for cloud deployments.
+* Support for enabling [`pprof`](https://pkg.go.dev/runtime/pprof#hdr-Profiling_a_Go_program) in order to get Portworx Operator container profiles for memory, CPU, and so on.
+* The Operator now creates example CSI storage classes.
+* The Operator now enables the CSI snapshot controller by default on Kubernetes 1.17 and newer.
+
+### Bug Fixes
+
+* Fixed an issue where KVDB pods were repeatedly created when a pod was in the `evicted` or `outOfPods` status. 
+
+
 ## 1.8.1
 June 22, 2022
 
