@@ -9,48 +9,50 @@ hidden: true
 
 The Portworx Helm chart deploys Portworx and [Stork](https://docs.portworx.com/scheduler/kubernetes/stork.html) in your Kubernetes cluster.
 
-## Pre-requisites
+## Prerequisites
 
-* Helm has been installed on the client machine from where you would install the chart. (https://docs.helm.sh/using_helm/#installing-helm)
-* Tiller version 2.9.0 and above
-* Portworx pre-requisites [here](/install-portworx/prerequisites/#installation-prerequisites)
+* Helm has been installed on the client machine from where you would install the [chart](https://docs.helm.sh/using_helm/#installing-helm)
+* [Portworx pre-requisites](/install-portworx/prerequisites/#installation-prerequisites)
 
 ## Install
 
-To install Portworx via the chart with the release name `my-release` run the following commands.
+To install Portworx via the chart with the release name `my-release` run the following commands:
 
-First clone the Portworx Helm chart repo.
+1. Clone the Portworx Helm chart repository.
 
-```text
-git clone https://github.com/portworx/helm.git
-```
+    ```text
+    git clone https://github.com/portworx/helm.git
+    ```
+2. Specify the values for the options in the [values.yaml](https://github.com/portworx/helm/blob/master/charts/portworx/values.yaml) file as per your requirement.
 
-Now install the chart and substitute relevant values for your setup.
+3. Install the chart using the following command:
 
-{{<info>}}`clusterName` should be a unique name identifying your Portworx cluster. The default value is `mycluster`, but it is suggested to update it with your naming scheme.{{</info>}}
-
-For eg:
-
-```text
-helm install --debug --name my-release --set etcdEndPoint=etcd:http://192.168.70.90:2379,clusterName=$(uuidgen) ./helm/charts/portworx/
-```
-
-Refer to all the configuration options while deploying Portworx via the Helm chart:
-[Configurable Options](https://github.com/portworx/helm/tree/master/charts/portworx#configuration)
+    ```text
+    helm install my-release ./helm/charts/portworx/ --debug
+    ```
 
 ## Uninstall
 
-Below are the steps to wipe your entire Portworx installation.
+Follow the steps below to wipe your entire Portworx installation.
 
-1. Run cluster-scoped wipe command below. This has to be run from the client machine which has kubectl access.
+1. Add the following to the [values.yaml](https://github.com/portworx/helm/blob/master/charts/portworx/values.yaml) file if the `deleteStrategy` parameter was not set during installation: 
 
     ```text
-    curl -fsL "https://install.portworx.com/px-wipe" | bash
+    deleteStrategy:                          
+        type: UninstallAndWipe
     ```
-2. Delete the helm release
+2. Run the following command to use the updated *values.yaml* file:
+    
+    ```text
+    helm upgrade my-release ./helm/charts/portworx/ --debug
+    ```
+
+     {{<info>}}**NOTE:** Skip step 1 and step 2 if the `deleteStrategy` parameter was set during installation.{{</info>}}
+
+3. Delete the Helm release by running the following command:
 
     ```text
-    helm delete <release name> --purge
+    helm delete my-release --debug
     ```
 
 ## Post-Install
