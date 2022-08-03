@@ -722,7 +722,6 @@ Flags:
   -r, --repl uint                           replication factor(If not specified, inherits cloudsnaps repl factor) (Valid Range: [1 3]) (default 1)
       --secret_key string                   secret_key used to decrypt an encrypted volume
       --secret_options string               Secret options is used to pass specific secret parameters. Usage: --secret_options=k1=v1,k2=v2
-      --shared                              make this a globally shared namespace volume(If not specified, inherits cloudsnap's shared option)
       --sharedv4                            set sharedv4 setting(if not specified, inherits cloudsnap's sharedv4 option)
   -s, --snap string                         Cloud-snap id to restore
       --sticky                              sticky volumes cannot be deleted until the flag is disabled(if not specified, inherits cloudsnap's sticky option)

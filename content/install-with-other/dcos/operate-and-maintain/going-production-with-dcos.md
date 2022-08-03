@@ -142,10 +142,10 @@ Failure domains in terms of RACK information can be passed in as described [here
   pxctl volume update dbasevol --sticky=off
   ```
 
-* For applications that require shared access from multiple containers running in different hosts, {{<companyName>}} recommends running shared volumes. Shared volumes can be configured as follows:
+* For applications that require shared access from multiple containers running in different hosts, {{<companyName>}} recommends running sharedv4 volumes. Sharedv4 volumes can be configured as follows:
 
   ```text
-  pxctl volume create wordpressvol --shared --size=100 --repl=3
+  pxctl volume create wordpressvol --sharedv4 --size=100 --repl=3
   ```
 
   This [page](/concepts) gives more details on different volume types, how to create them and update the configuration for the volumes

@@ -1,33 +1,31 @@
 ---
-title: Shared and Sharedv4 Volumes
+title: Sharedv4 Volumes
 linkTitle: Shared Volumes
-description: Explanation on Portworx Shared and Sharedv4 volumes to allow multiple containers access to one volume
+description: Explanation on Portworx Sharedv4 volumes to allow multiple containers access to one volume
 keywords: portworx, PX-Developer, container, Shared Volume, Sharedv4 Volume, NFS, storage
 hidden: true
 ---
 
-Through shared and sharedv4 volumes (also known as a **global namespace**), a single volume’s filesystem is concurrently available to multiple containers running on multiple hosts.
+Through sharedv4 volumes (also known as a **global namespace**), a single volume’s filesystem is concurrently available to multiple containers running on multiple hosts.
 
 {{<info>}}
 **Note:**
 
-* You do not need to use shared/sharedv4 volumes to have your data accessible on any host in the cluster. Any Portworx volumes can be exclusively accessed from any host as long as they are not simultaneously accessed. Shared volumes are for providing simultaneous (concurrent or shared) access to a volume from multiple hosts at the same time.
+* You do not need to use sharedv4 volumes to have your data accessible on any host in the cluster. Any Portworx volumes can be exclusively accessed from any host as long as they are not simultaneously accessed. Sharedv4 volumes are for providing simultaneous (concurrent or shared) access to a volume from multiple hosts at the same time.
 * You do not necessarily need a replication factor of greater than 1 on your volume in order for it to be shared. Even a volume with a replication factor of 1 can be shared on as many nodes as there are in your cluster.
-* IOPS might be misleading due to batching of small blocksize I/Os into a larger one before I/O reaches the `pxd` device, especially when using sharedV4 volumes. Bandwidth is more consistent.
+* IOPS might be misleading when using sharedv4 volumes due to batching of small blocksize I/Os into a larger one before I/O reaches the `pxd` device. Bandwidth is more consistent.
 {{</info>}}
 
 A typical pattern is for a single container to have one or more volumes. Conversely, many scenarios would benefit from multiple containers being able to access the same volume, possibly from different hosts. Accordingly, the shared volume feature enables a single volume to be read/write accessible by multiple containers. Example use cases include:
 
-* A technical computing workload sourcing its input and writing its output to a shared volume.
-* Scaling a number of Wordpress containers based on load while managing a single shared volume.
+* A technical computing workload sourcing its input and writing its output to a sharedv4 volume.
+* Scaling a number of Wordpress containers based on load while managing a single sharedv4 volume.
 * Collecting logs to a central location.
 
 {{<info>}}
 **Note:**
-Usage of shared or sharedv4 volumes for databases is not recommended because they have a small metadata overhead. Additionally, typical databases do not support concurrent writes to the underlying database at the same time.
+Usage of sharedv4 volumes for databases is not recommended because they have a small metadata overhead. Additionally, typical databases do not support concurrent writes to the underlying database at the same time.
 {{</info>}}
-
-The difference between shared and sharedv4 volumes is the underlying protocol that is used to share this global namespace across multiple hosts.
 
 ## Sharedv4 failover and failover strategy
 

@@ -26,10 +26,10 @@ ID	      	     		NAME		SIZE	HA SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
 822124500500459627	 encrypted_volume	10 GiB	1    no yes		LOW		1	up - detached
 ```
 
-To create a **shared encrypted** volume using the cluster wide secret key run the following command
+To create a **sharedv4 encrypted** volume using the cluster wide secret key run the following command
 
 ```text
-pxctl volume create --shared --secure --size 10 encrypted_volume
+pxctl volume create --sharedv4 --secure --size 10 encrypted_volume
 ```
 
 ```output

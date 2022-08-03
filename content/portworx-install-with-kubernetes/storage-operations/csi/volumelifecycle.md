@@ -3,6 +3,8 @@ title: Volume Lifecycle Basics
 keywords: csi, portworx, container, Kubernetes, storage, Docker, k8s, pv, persistent disk
 description: This explains at a high level what the Portworx CSI Driver as compared to the Portworx in-tree plugin
 weight: 200
+aliases:
+    - /portworx-install-with-kubernetes/storage-operations/create-pvcs/create-shared-pvcs-csi/
 ---
 
 ## Create and use persistent volumes
@@ -77,9 +79,9 @@ Create and use volumes with CSI by configuring specs you create for your storage
               claimName: px-mysql-pvc
     ```
 
-## Create shared CSI-enabled volumes
+## Create sharedv4 CSI-enabled volumes
 
-Create shared CSI-enabled volumes by configuring the specs for you create for your storage class and PVCs:
+Create sharedv4 CSI-enabled volumes by configuring the specs for you create for your storage class and PVCs:
 
 1. Create a StorageClass `storageclass.yaml` file and apply it:
 

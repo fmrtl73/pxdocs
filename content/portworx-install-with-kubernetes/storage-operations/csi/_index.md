@@ -13,7 +13,7 @@ Using Portworx with CSI, you can perform the following operations:
 * Create and use CSI-enabled persistent volumes
 * Secure your CSI-enabled volumes with token authorization and encryption defined at the StorageClass or the PVC level
 * Take snapshots of CSI-enabled volumes
-* Create shared CSI-enabled volumes
+* Create sharedv4 CSI-enabled volumes
 
 ## Supported features
 

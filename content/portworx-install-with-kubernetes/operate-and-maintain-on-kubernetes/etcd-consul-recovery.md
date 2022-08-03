@@ -1,28 +1,28 @@
 ---
-title: Etcd/Consul Recovery
+title: Etcd Recovery
 hidden: true
-keywords: etcd, consul, disaster recovery, disaster proof, site failure, node failure, power failure, kubernetes, k8s
+keywords: etcd, disaster recovery, disaster proof, site failure, node failure, power failure, kubernetes, k8s
 description: Etcd Disaster Recovery
 ---
 
-{{< pxEnterprise >}} requires a key-value database like etcd or consul to store its metadata and configuration. This key-value database is a critical component for smooth functioning of Portworx. This page describes how to configure a resilient and highly available etcd cluster and recovery procedures in an event of an etcd disaster.
+{{< pxEnterprise >}} requires a key-value database like etcd to store its metadata and configuration. This key-value database is a critical component for smooth functioning of Portworx. This page describes how to configure a resilient and highly available etcd cluster and recovery procedures in an event of an etcd disaster.
 
-### Recovering Portworx keys in etcd/consul
+### Recovering Portworx keys in etcd
 
-From Portworx versions > 1.3 when Portworx nodes lose connectivity with etcd or consul, it dumps all the essential keys and values into a file. This file is dumped under `/var/cores/kvdb_dump` directory on the node.
+From Portworx versions > 1.3 when Portworx nodes lose connectivity with etcd, it dumps all the essential keys and values into a file. This file is dumped under `/var/cores/kvdb_dump` directory on the node.
 
 Each file is dumped with a timestamp when it was generated like `pwx_kvdb_2018-05-25T22:59:08Z.dump`
 
 Each node will dump such a file. Choose one such file which you think has the latest keys and values.
 
-You will need a tool `px-kvdb-restore`, to recover the actual keys and values from this file and put it into your new etcd or consul cluster.
+You will need a tool `px-kvdb-restore`, to recover the actual keys and values from this file and put it into your new etcd cluster.
 
 To get access to this tool please contact the Portworx, Inc. support team.
 
 Before running the kvdb restore tool:
 
-* Make sure you have a healthy etcd or consul cluster.
-* Modify the config.json on all the Portworx nodes to point to the new etcd or consul cluster.
+* Make sure you have a healthy etcd cluster.
+* Modify the config.json on all the Portworx nodes to point to the new etcd cluster.
 * Select the node which has the latest key dump and run the restore tool on that node.
 
 #### px-kvdb-restore
@@ -57,9 +57,9 @@ If the tool finds existing keys under the same cluster ID, it aborts the restore
 * Ensure the snaps are stored in a different location or cloud storage like S3, so they can be retrieved from other sites if one of your site is down.
 * Follow this [link](https://coreos.com/etcd/docs/latest/op-guide/recovery.html) to learn more on how to restore etcd cluster from its snapshots.
 
-### Portworx behavior on etcd/consul failure
+### Portworx behavior on etcd failure
 
-The following table summarizes how Portworx responds to an etcd or consul disaster and its levels of recovery available.
+The following table summarizes how Portworx responds to an etcd disaster and its levels of recovery available.
 
 | Portworx state when snapshot was taken | Portworx state just before disaster | Portworx state after disaster recovery |
 |-----------------|:---------------|:-------------------------------|

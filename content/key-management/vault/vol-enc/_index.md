@@ -34,12 +34,12 @@ You can use one of the following methods to encrypt Portworx volumes with Google
     With Portworx, you can create two types of encrypted volumes:
 
    * **Encrypted Volumes**. You can access a regular volume from a single node.
-   * **Shared Encrypted Volumes**. You can access an encrypted shared volume from multiple nodes.
+   * **Shared Encrypted Volumes**. You can access an encrypted sharedv4 volume from multiple nodes.
 
-    To create a **shared encrypted volume**, you must specify the `--shared` parameter as follows:
+    To create a **shared encrypted volume**, you must specify the `--sharedv4` parameter as follows:
 
     ```text
-    pxctl volume create --shared --secret_key key1 --secure enc_shared_vol
+    pxctl volume create --sharedv4 --secret_key key1 --secure enc_shared_vol
     ```
 
     ```output
@@ -66,12 +66,12 @@ You can use one of the following methods to encrypt Portworx volumes with Google
     docker volume create --volume-driver pxd secret_key=key1,name=enc_vol
     ```
 
-    To create an **encrypted shared** volume using a specific secret through docker, you must specify the `-shared=true` option.
+    To create an **encrypted sharedv4** volume using a specific secret through docker, you must specify the `-sharedv4=true` option.
 
     Example:
 
     ```text
-    docker volume create --volume-driver pxd shared=true,secret_key=key1,name=enc_shared_vol
+    docker volume create --volume-driver pxd sharedv4=true,secret_key=key1,name=enc_shared_vol
     ```
 
 2. You can use the `pxctl volume list` command to list your volumes:
@@ -162,12 +162,12 @@ Portworx will use this cluster-wide secret as a passphrase to encrypt your volum
     With Portworx, you can create two types of encrypted volumes:
 
     * **Encrypted Volumes**. You can access a regular volume from a single node.
-    * **Shared Encrypted Volumes**. You can access an encrypted shared volume from multiple nodes.
+    * **Shared Encrypted Volumes**. You can access an encrypted sharedv4 volume from multiple nodes.
 
-    To create a **shared encrypted volume**, you must specify the `--shared` parameter as follows:
+    To create a **shared encrypted volume**, you must specify the `--sharedv4` parameter as follows:
 
     ```text
-    pxctl volume create --shared --secure --size 10 enc_vol
+    pxctl volume create --sharedv4 --secure --size 10 enc_vol
     ```
 
     ```output

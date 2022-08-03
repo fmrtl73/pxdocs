@@ -20,7 +20,7 @@ For scheduler-specific information, refer to the following pages:
 | **Feature**  | **Kubernetes** | **Nomad** |
 |----------|------------|-------|
 | Volume Lifecycle               | Yes                                    | Yes                                                                                                                                                         |
-| Shared Volumes                 | Yes                                    | Yes                                                                                                                                                         |
+| Sharedv4 Volumes               | Yes                                    | Yes                                                                                                                                                         |
 | Volume Cloning                 | Yes                                    | Yes                                                                                                                                                         |
 | CSI Snapshotting               | Yes                                    | Yes                                                                                                                                                         |
 | CSI Spec 1.4                   | Yes                                    | Yes                                                                                                                                                         |

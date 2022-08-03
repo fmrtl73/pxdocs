@@ -20,7 +20,7 @@ Below steps demonstrate how to set up a three-node cluster for [Jenkins](https:/
 
 ```text
 docker volume create -d pxd --name jenkins_vol --opt \
-        size=4 --opt block_size=64 --opt repl=3 --opt fs=ext4 --opt shared=true
+        size=4 --opt block_size=64 --opt repl=3 --opt fs=ext4 --opt sharedv4=true
 ```
 
 * This command creates a volume called _jenkins\_vol_.

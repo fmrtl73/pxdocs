@@ -9,7 +9,7 @@ noicon: true
 This reference architecture document shows how you can deploy WordPress, an open-source content management system, with Portworx on Kubernetes. This architecture provides the following benefits:
 
 * Portworx enables reliable and persistent storage to ensure WordPress runs with HA
-* Portworx enables shared volumes for file uploads
+* Portworx enables sharedv4 volumes for file uploads
 * Kubernetes automatically replicates your MySQL data
 * You can horizontally scale the WordPress container using multi-writer semantics for the file-uploads directory <!-- I don't understand the meaning of this sentence -->
 * The cluster automatically repairs itself in the event of a node failure
@@ -110,7 +110,7 @@ A PersistentVolume (PV) is a piece of storage in the cluster that has been provi
     ```
 
     {{<info>}}
-**NOTE:** The `shared: "true"` flag creates a globally shared namespace volume which can be used by multiple Pods.
+**NOTE:** The `sharedv4: "true"` flag creates a globally shared namespace volume which can be used by multiple Pods.
     {{</info>}}
 
 2. Apply the spec:

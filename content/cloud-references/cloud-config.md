@@ -42,14 +42,6 @@ portworx:
     - etcd:http://etcd1.yourdomain.com:4001
 ```
 
-For `consul`, an example would be:
-
-```yaml
-Ex:
-    kvdb:
-        consul:http://consul.yourdomain.com:8500
-```
-
 **storage**:   Array of devices to be used as part of the Portworx Storage Fabric. This can be either volume-ids for cloud providers or path to attached devices.
 
 ```yaml

@@ -170,7 +170,6 @@ Flags:
       --secret_key string                   secret_key to use to fetch secret_data for the PBKDF2 function
       --secret_options string               Secret options is used to pass specific secret parameters. Usage: --secret_options=k1=v1,k2=v2
       --secure                              encrypt this volume using AES-256
-      --shared                              make this a globally shared namespace volume
       --sharedv4                            export this volume via Sharedv4 at /var/lib/osd/exports
       --sharedv4_mount_options string       comma separated list of sharedv4 client mount options provided as key=value pairs
   -s, --size uint                           volume size in GB (default 1)

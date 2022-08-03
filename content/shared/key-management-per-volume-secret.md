@@ -17,7 +17,7 @@ pxctl volume create --secure --secret_key key1 enc_vol
 Encrypted volume successfully created: 374663852714325215
 ```
 
-To create a **shared encrypted** volume run the following command:
+To create a **sharedv4 encrypted** volume run the following command:
 
 ```text
 pxctl volume create --sharedv4 --secret_key key1 --secure --size 10 enc_shared_vol

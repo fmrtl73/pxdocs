@@ -97,9 +97,9 @@ To register a pre-provisioned volume, you must first create a volume on one of t
     ```
 
 
-## Shared volume creation
+## Sharedv4 volume creation
 
-Perform the following steps to dynamically provision a shared Portworx CSI volume: 
+Perform the following steps to dynamically provision a sharedv4 Portworx CSI volume: 
 
 1. Create a file `volume-shared.hcl` with the following content:
 

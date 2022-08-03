@@ -44,7 +44,7 @@ enable etcd (if you do not have an external etcd service). To have a custom etcd
 [this doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
 
 ### Portworx Options
-Specify your kvdb (consul or etcd) server if you don't want to use the etcd cluster with this service. If the etcd cluster
+Specify your kvdb (etcd) server if you don't want to use the etcd cluster with this service. If the etcd cluster
 is enabled this config value will be ignored.
 
 {{<info>}}

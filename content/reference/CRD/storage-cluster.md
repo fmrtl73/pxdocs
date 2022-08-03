@@ -272,7 +272,7 @@ This section explains the fields used to configure Portworx with a KVDB. Note th
 | Field | Description | Type | Default |
 | --- | --- | --- | --- |
 | spec.<br>kvdb.<br>internal | Specifies if Portworx starts with the [internal KVDB](/concepts/internal-kvdb). | `boolean` | `true` |
-| spec.<br>kvdb.endpoints[]<br> | A list of endpoints for your external key-value database like ETCD or Consul. This field takes precedence over the `spec.kvdb.internal` field. That is, if you specify the endpoints, Portworx ignores the `spec.kvdb.internal` field and it uses the external KVDB. | `[]string` | None |
+| spec.<br>kvdb.endpoints[]<br> | A list of endpoints for your external key-value database like ETCD. This field takes precedence over the `spec.kvdb.internal` field. That is, if you specify the endpoints, Portworx ignores the `spec.kvdb.internal` field and it uses the external KVDB. | `[]string` | None |
 | spec.<br>kvdb.<br>authSecret | Indicates the name of the secret Portworx uses to authenticate against your KVDB. The secret must be placed in the same namespace as the `StorageCluster` object. The secret should provide the following information: <br> - `username` (optional) <br> - `password` (optional) <br> - `kvdb-ca.crt` (the CA certificate) <br> - `kvdb.key` (certificate key) <br> - `kvdb.crt` (etcd certificate) <br> - `acl-token` (optional) <br>For example, create a directory called etcd-secrets, copy the files into it and create a secret with `kubectl -n kube-system create secret generic px-kvdb-auth --from-file=etcd-secrets/`| `string` | None |
 
 ### Storage configuration

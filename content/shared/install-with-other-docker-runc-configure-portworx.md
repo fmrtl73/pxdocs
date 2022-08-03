@@ -30,13 +30,6 @@ px-runc install -k etcd://my.company.com:2379 -c MY_CLUSTER_ID -s /dev/sdc -s /d
 px-runc install -k etcd://70.0.1.65:2379 -c MY_CLUSTER_ID -s /dev/sdc -m eth1 -d eth2 {{ include.sched-flags }}
 ```
 
-**Install Portworx using Consul:**
-
-```text
-px-runc install -k consul://my.company.com:8500 -c MY_CLUSTER_ID -s /dev/sdc -s /dev/sdb2 {{ include.sched-flags }}
-px-runc install -k consul://70.0.2.65:8500 -c MY_CLUSTER_ID -s /dev/sdc -m eth1 -d eth2 {{ include.sched-flags }}
-```
-
 #### Modify the Portworx configuration
 
 After the initial installation, you can modify the Portworx configuration file at `/etc/pwx/config.json`. See the [schema definition](/shared/install-with-other-docker-config-json) page for more details. Once you're done making changes to the Portworx configuration file, restart Portworx by running:

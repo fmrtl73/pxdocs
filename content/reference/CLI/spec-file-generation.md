@@ -16,7 +16,7 @@ Below are the parameters you can specify when generating the spec file.
 | Parameter | **Description** | **Example** |
 | --- | --- | --- |
 | c | Specifies the unique name for the Portworx cluster. | c=test\_cluster |
-| k | Your key value database, such as an etcd cluster or a consul cluster.  If using secure `etcd`, specify `https` in the URL and ensure all certificates are in the `/etc/pwx/` directory on each host pointed to by the Portworx container. | k=etcd:`http://etcd.fake.net:2379`|
+| k | Your key value database, such as an etcd cluster.  If using secure `etcd`, specify `https` in the URL and ensure all certificates are in the `/etc/pwx/` directory on each host pointed to by the Portworx container. | k=etcd:`http://etcd.fake.net:2379`|
 
 **Optional Parameters**
 
@@ -43,7 +43,6 @@ Below are the parameters you can specify when generating the spec file.
 | ca | Location of CA file for ETCD authentication. | ca=/path/to/server.ca |
 | cert | Location of certificate for ETCD authentication. | cert=/path/to/server.crt |
 | key | Location of certificate key for ETCD authentication. | key=/path/to/server.key |
-| acl | ACL token value used for Consul authentication. | acl=398073a8-5091-4d9c-871a-bbbeb030d1f6 |
 | e | Comma-separated list of environment variables that will be exported to Portworx. For a list of all of these variables, See the _Environment Variables_ section in the notes below. | e=MYENV1=myvalue1,MYENV2=myvalue2 |
 
 ### Environment Variables \(_e_ parameter\)

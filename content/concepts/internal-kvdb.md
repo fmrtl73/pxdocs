@@ -6,7 +6,7 @@ weight: 30000
 series: concepts
 ---
 
-Starting with version 2.0, you can install Portworx with a built-in internal KVDB. Portworx automatically deploys the internal KVDB cluster on a set of three nodes in your cluster and removes the requirement for an external KVDB such as etcd or Consul.
+Starting with version 2.0, you can install Portworx with a built-in internal KVDB. Portworx automatically deploys the internal KVDB cluster on a set of three nodes in your cluster and removes the requirement for an external KVDB such as etcd.
 
 ## Install
 
@@ -23,7 +23,7 @@ While deploying the Portworx framework, provide the `-b` argument in the extra a
 
 #### Other schedulers
 
-For all other schedulers, Portworx requires an external etcd or consul, to bootstrap its internal KVDB. Portworx will use this external etcd or consul, to discover its own internal KVDB nodes. While installing Portworx provide the `-b` argument to instruct Portworx to setup internal KVDB. Along with `-b`, provide the `-k` argument with a list of external etcd or consul endpoints.
+For all other schedulers, Portworx requires an external etcd, to bootstrap its internal KVDB. Portworx will use this external etcd, to discover its own internal KVDB nodes. While installing Portworx provide the `-b` argument to instruct Portworx to setup internal KVDB. Along with `-b`, provide the `-k` argument with a list of external etcd endpoints.
 
 
 ## Storage for internal KVDB

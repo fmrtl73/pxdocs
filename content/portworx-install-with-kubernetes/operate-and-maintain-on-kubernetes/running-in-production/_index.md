@@ -171,7 +171,7 @@ Failure domains in terms of RACK information can be passed in as described [here
         sticky: "true"
       ```
 
-* For applications that require shared access from multiple containers running in different hosts, {{<companyName>}} recommends running shared volumes. Shared volumes can be configured as follows by adding `shared: "true"` to the storage class:
+* For applications that require shared access from multiple containers running in different hosts, {{<companyName>}} recommends running sharedv4 volumes. Sharedv4 volumes can be configured as follows by adding `sharedv4: "true"` to the storage class:
 
       ```text
       kind: StorageClass
@@ -183,7 +183,7 @@ Failure domains in terms of RACK information can be passed in as described [here
         repl: "3"
         priority_io: "high"
         racks: "rack1"
-        shared: "true"
+        sharedv4: "true"
       ```
 
 This [page](/concepts) gives more details on different volume types, how to create them and update the configuration for the volumes

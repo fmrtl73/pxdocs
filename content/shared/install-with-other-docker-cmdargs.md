@@ -11,7 +11,7 @@ Below is the list of arguments you can pass to `px-runc`:
 
 ```text
 -c <id>                   [REQUIRED] Specifies the cluster ID that this PX instance is to join
--k <kvdb://host:port>     [REQUIRED] Points to your key value database, such as an etcd cluster or a consul cluster
+-k <kvdb://host:port>     [REQUIRED] Points to your key value database, such as an etcd cluster
 -b                        Use in-built kvdb. Provide the kvdb endpoints required for bootstrap with -k option.
 -s <device path>          [REQUIRED unless -a/-A are used] Specify storage devices that PX should use for storing the data
 -xs <omit device path>    Specify storage devices that PX should NOT use for storing the data (useful with -a/-A)
@@ -43,7 +43,6 @@ Below is the list of arguments you can pass to `px-runc`:
 -ca <file>                Specify location of CA file for ETCD authentication
 -cert <file>              Specify location of certificate for ETCD authentication
 -key <file>               Specify location of certificate key for ETCD authentication
--acltoken <token>         Specify ACL token for Consul authentication
 +internal-kvdb-options:
 -kvdb_cluster_size <#>    Size of the internal kvdb cluster (dfl: 3)
 -kvdb_recovery            Starts the nodes in kvdb recovery mode

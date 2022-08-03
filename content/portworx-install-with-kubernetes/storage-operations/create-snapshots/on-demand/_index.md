@@ -6,12 +6,16 @@ linkTitle: On-demand snapshots
 keywords: on-demand snapshots, local snapshots, cloud snapshots, stork, kubernetes, k8s
 description: Learn how to create on-demand consistent snapshots/backups and restore them.
 series: k8s-storage-snapshots
+aliases:
+    - /portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group/
+    - /portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group-cloud/
+    - /portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-group-legacy/
 ---
 
 This document will show you how to create snapshots of Portworx volumes and how you can clone those snapshots to PVCs and use them with your applications.
 
 {{<info>}}
-The suggested way to manage snapshots on Kuberenetes is to use Stork. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-annotations).
+The suggested way to manage snapshots on Kubernetes is to use Stork. If you are looking to create Portworx snapshots using PVC annotations, you will find [instructions here](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-annotations).
 {{</info>}}
 
 ## Snapshot types

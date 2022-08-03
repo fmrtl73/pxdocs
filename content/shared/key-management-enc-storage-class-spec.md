@@ -18,4 +18,4 @@ parameters:
   repl: "3"
 ```
 
-To create a **shared encrypted volume** set the `shared` parameter to `true` as well.
+To create a **sharedv4 encrypted volume** set the `sharedv4` parameter to `true` as well.

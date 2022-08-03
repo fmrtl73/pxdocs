@@ -100,14 +100,14 @@ docker run --rm -it --mount src=secret_key=key1,name=enc_vol,dst=/mnt
 Before running the above commands, make sure the secret `key1` exists in the secret endpoint.
 {{</info>}}
 
-## Encrypted Shared Volumes
+## Encrypted Sharedv4 Volumes
 
-With Portworx, you can create encrypted shared volumes that can be accessed from multiple nodes.
+With Portworx, you can create encrypted sharedv4 volumes that can be accessed from multiple nodes.
 
-The `--shared` flag is used to indicate that we would want to share an encrypted volume:
+The `--sharedv4` flag is used to indicate that we would want to share an encrypted volume:
 
 ```text
-pxctl volume create --shared --secure --size 10 encrypted_volume
+pxctl volume create --sharedv4 --secure --size 10 encrypted_volume
 ```
 
 ```output
@@ -146,9 +146,9 @@ Replica sets on nodes:
 Replication Status	 :  Detached
 ```
 
-You can enable or disable sharing during runtime by passing the `--shared on/off` flag.
+You can enable or disable sharing during runtime by passing the `--sharedv4 on/off` flag.
 
-Note that volumes must be detached to toggle the `shared` flag during run-time.
+Note that volumes must be detached to toggle the `sharedv4` flag during run-time.
 
 The Portworx cluster must be authenticated to access the secret store for the encryption keys.
 

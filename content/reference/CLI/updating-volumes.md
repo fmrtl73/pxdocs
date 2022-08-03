@@ -36,7 +36,6 @@ Flags:
       --nodiscard string                    Disable discard support for this volume (Valid Values: [on off]) (default "off")
       --queue_depth uint                    block device queue depth (Valid Range: [1 256]) (default 128)
       --scale uint                          New scale factor (Valid Range: [1 1024]) (default 1)
-      --shared string                       set shared setting (Valid Values: [on off]) (default "off")
       --sharedv4 string                     set sharedv4 setting (Valid Values: [on off]) (default "off")
       --sharedv4_failover_strategy string   set sharedv4 failover strategy. (Use empty value to clear this setting) (Valid Values: [aggressive normal ])
       --sharedv4_mount_options string       Set sharedv4 client mount options for a volume. Provide the mount options as a comma-separated key=value pairs. (Use empty value to reset mount options)
@@ -60,7 +59,7 @@ Global Flags:
 
 ## Sharing and unsharing volumes
 
-You can use the `--shared` flag to share or unshare a given volume across multiple namespaces.
+You can use the `--sharedv4` flag to share or unshare a given volume across multiple namespaces.
 
 Say we've created a volume named `clitest`. You can see its settings using this command:
 
@@ -91,14 +90,14 @@ Volume	:  970758537931791410
 			Node 	 :  10.99.117.133
 ```
 
-Note that the `shared` field is shown as `no`, indicating that `clitest` is not a shared volume.
+Note that the `shared` field is shown as `no`, indicating that `clitest` is not a sharedv4 volume.
 
 Before turning on sharing, make sure no applications are actively using the volume. Kubernetes users can scale down their application pods so that the volume is in a detached state.
 
 Next, let's turn on sharing:
 
 ```text
-pxctl volume update clitest --shared=on
+pxctl volume update clitest --sharedv4=on
 ```
 
 At this point, the volume's sharing settings should have been updated. We can easily check by running `pxctl volume inspect` on the volume again:
@@ -114,7 +113,7 @@ Volume	:  970758537931791410
 	Format          	 :  ext4
 	HA              	 :  1
 	IO Priority     	 :  LOW
-	Shared          	 :  yes
+	Shared          	 :  v4
 	Status          	 :  up
 	State           	 :  detached
 	Reads           	 :  0
@@ -130,12 +129,12 @@ Volume	:  970758537931791410
 			Node 	 :  10.99.117.133
 ```
 
-As shown above, the `shared` field is set to `yes` indicating that `clitest` is now a shared volume
+As shown above, the `shared` field is set to `v4` indicating that `clitest` is now a sharedv4 volume.
 
 
 ### Related topics
 
-* For more information about creating shared Portworx volumes through Kubernetes, refer to the [Create shared PVCs](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-shared-pvcs/) page.
+* For more information about creating shared Portworx volumes through Kubernetes, refer to the [Create sharedv4 PVCs](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs/) page.
 
 ## Changing a volume's sticky option
 

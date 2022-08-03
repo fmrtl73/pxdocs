@@ -92,18 +92,6 @@ plugin "docker" {
           kill_timeout = "120s"   # allow portworx 2 min to gracefully shut down
           kill_signal = "SIGTERM" # use SIGTERM to shut down the nodes
 
-          # consul service check for portworx instances
-          service {
-            name = "portworx"
-            check {
-              port     = "portworx"
-              type     = "http"
-              path     = "/health"
-              interval = "10s"
-              timeout  = "2s"
-            }
-          }
-
           # setup environment variables for px-nodes
           env {
             AUTO_NODE_RECOVERY_TIMEOUT_IN_SECS = "1500"

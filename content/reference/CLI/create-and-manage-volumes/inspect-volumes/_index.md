@@ -85,7 +85,7 @@ You can also modify the replication factor of a volume by running the `pxctl vol
  See the [class-of-service](/concepts/class-of-service) page to get a better understanding of how performance levels work in Portworx. Additionally, note that Portworx provides an easy way to [manage storage pools](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode/#storage-pool-maintenance) through the `pxctl service pool` command.
 
 - __Creation time__: indicates the creation date and time of the volume.
-- __Shared__: this field tells whether the volume is `shared` or not. A shared volume is available to multiple containers running on different hosts at the same time. See the [shared volumes](/shared/concepts-shared-volumes) page for more details
+- __Shared__: this field tells whether the volume is `sharedv4` or not. A sharedv4 volume is available to multiple containers running on different hosts at the same time. See the [sharedv4 volumes](/shared/concepts-shared-volumes) page for more details
 - __Status__: indicates the status of the volume. Possible values are `Up` and `Pending`. `Up` means that Portworx created the volume successfully. `Pending` means that Portworx currently creates the volume. 
 - __State__: shows whether the volume is `Attached` or `Detached`. `Attached` means that the volume is attached to a node and you can perform read and write operations on the volume. `Detached` means that the volume is not used and you can't perform read and write operation on the volume.
 - __Reads__: the number of `read` operations served by the volume.

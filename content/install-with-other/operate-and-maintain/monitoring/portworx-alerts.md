@@ -162,8 +162,6 @@ Each alert has a severity from one of the following levels:
 | VolumeNodiscardMntOptsValidationFailed | VOLUME | NOTIFY | volume discard/nodiscard mount options not configured correctly | px_alerts_volumenodiscardmntoptsvalidationfailed_total |
 | VolumeIOThrottleWarning | VOLUME | WARNING | volume max_iops/max_bandwidth options not enforced | px_alerts_volumeiothrottlewarning_total |
 | VolGroupOperationFailure | CLUSTER | ALARM | Triggered when a volume group operation fails. | px_alerts_volgroupoperationfailure_total |
-| VolGroupOperationSuccess | CLUSTER | NOTIFY | Triggered when a volume group operation succeeds. | px_alerts_volgroupoperationsuccess_total |
-| VolGroupStateChange | CLUSTER | WARNING | Triggered when a volume group’s state changes. | px_alerts_volgroupstatechange_total |
 | ContainerOperationFailure | CLUSTER | ALARM | Container operation failed | px_alerts_containeroperationfailure_total |
 | ContainerOperationSuccess | CLUSTER | ALARM | Container operation succeeded | px_alerts_containeroperationsuccess_total |
 | ContainerStateChange | CLUSTER | ALARM | Container state changed | px_alerts_containerstatechange_total |

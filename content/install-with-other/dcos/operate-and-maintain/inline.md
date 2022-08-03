@@ -2,7 +2,7 @@
 title: Dynamic volume creation through DCOS
 description: Read the overview on how volumes can be created dynamically through DCOS. Gain a better understanding of dynamic volumes here!
 keywords: inline volume spec, dynamic volumes, DCOS, DC/OS, Mesosphere, Marathon
-hidden: 4
+hidden: true
 linkTitle: Dynamically Creating Volumes
 ---
 
@@ -32,7 +32,7 @@ IO priority      - io_priority=[1,2,3] or [high,medium,low]
 Volume size      - size=[1..9][G|M|T]
 HA factor        - repl=[1,2,3]
 Block size       - bs=[4096...]
-Shared volume    - shared=true
+Shared volume    - sharedv4=true
 File System      - fs=[xfs|ext4]
 Encryption       - passphrase=secret
 ```

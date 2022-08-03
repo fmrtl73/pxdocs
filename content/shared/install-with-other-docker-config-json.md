@@ -173,14 +173,6 @@ For 'etcd', an example would be:
 ]
 ```
 
-For `consul`, an example would be:
-
-```text
-"kvdb": [
-  "consul:http://consul.yourdomain.com:8500"
-]
-```
-
 **storage**: Array of devices to be used as part of the Portworx Storage Fabric.  Includes optional `debug_level` flag (`low`, `medium`, `high` [default]) in the clause.
 
 ```text

@@ -8,7 +8,7 @@ hidden: true
 To install and configure Portworx Developer Edition via the _Docker_ CLI, use the command-line steps described in this section.
 
 {{<info>}}
-**Important:** Portworx stores configuration metadata in a KVDB (key/value store), such as _Etcd_ or _Consul_. {{<companyName>}} recommends setting up a dedicated kvdb for Portworx to use. If you want to set one up, see the [etcd example](/reference/etcd) for Portworx.
+**Important:** Portworx stores configuration metadata in a KVDB (key/value store), such as _Etcd_. {{<companyName>}} recommends setting up a dedicated kvdb for Portworx to use. If you want to set one up, see the [etcd example](/reference/etcd) for Portworx.
 {{</info>}}
 
 ### Install and configure Docker
@@ -178,7 +178,7 @@ At this point, Portworx should be running on your system. To verify, type:
 docker ps
 ```
 
-#### Authenticated `etcd` and `consul`
+#### Authenticated `etcd`
 
 To use `etcd` with authentication and a `cafile`, use this in your `config.json`:
 
@@ -190,16 +190,6 @@ To use `etcd` with authentication and a `cafile`, use this in your `config.json`
  "cafile": "/etc/pwx/pwx-ca.crt",
  "certfile": "/etc/pwx/pwx-user-cert.crt",
  "certkey": "/etc/pwx/pwx-user-key.key",
-```
-
-To use `consul` with an `acltoken`, use this in your `config.json`:
-
-```text
-"kvdb": [
-   "consul:http://<ip1>:<port>",
-   "consul:http://<ip2>:<port>"
- ],
- "acltoken": "<token>",
 ```
 
 Alternatively, you could specify and explicit username and password as follows:
