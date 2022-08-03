@@ -124,16 +124,18 @@ The `ClusterConfig` dictates what resources `eksctl` requests from EKS for the p
 
 To install Portworx with Kubernetes, you must first generate Kubernetes manifests that you will deploy in your cluster:
 
-1. Navigate to <a href="https://central.portworx.com" target="tab">PX-Central</a> and log in or create an account
-3. Select **Install and Run** to open the Spec Generator
+1. Navigate to <a href="https://central.portworx.com" target="tab">PX-Central</a> and log in or create an account.
 
-    ![Screenshot showing install and run](/img/pxcentral-install.png)
+2. Click **Continue** with Portworx Enterprise option:
 
-4. Select **New Spec**
+    ![Px-central Product Catalog](/img/pxcentral-install.png)
 
-    ![Screenshot showing new spec button](/img/pxcentral-spec.png)
+3. Choose an appropriate license for your requirement and click **Continue**:
 
-5. Generate a spec with the following selections:
+    ![Screenshot showing Portworx license selector](/img/pxcentral-license.png)
+
+
+4. Generate a spec with the following selections:
 
     * On the **Storage** tab, specify **AWS** and configure your storage devices based on your needs
     * On the **Customize** tab, select the **Amazon Elastic Container Service for Kubernetes (EKS)** option

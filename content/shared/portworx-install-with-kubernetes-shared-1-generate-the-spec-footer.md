@@ -8,16 +8,13 @@ description: Learn how to install Portworx with Kubenetes
 
 To install Portworx with Kubernetes, you must first generate Kubernetes manifests that you will deploy in your cluster:
 
-1. Navigate to <a href="https://central.portworx.com" target="tab">PX-Central</a> and log in, or create an account
-2. Select **Install and Run** to open the Spec Generator
+1. Navigate to <a href="https://central.portworx.com" target="tab">PX-Central</a> and log in, or create an account.
+
+2. Click **Continue** with Portworx Enterprise option:
 
     ![Screenshot showing install and run](/img/pxcentral-install.png)
 
-3. Select **New Spec**
-
-    ![Screenshot showing new spec button](/img/pxcentral-spec.png)
-
-4. Choose either **{{< pxEnterprise >}}** or **{{< pxEssentials >}}**, depending on which license you intend to use:
+3. Choose an appropriate license for your requirement and click **Continue**:
 
     ![Screenshot showing Portworx license selector](/img/pxcentral-license.png)
 
