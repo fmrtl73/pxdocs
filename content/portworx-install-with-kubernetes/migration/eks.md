@@ -21,29 +21,52 @@ secret/aws-creds created
 ```
 
 ## Pass the Secret to Stork
-Mount the secret created above in the Stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates:
 
-* Add the following under spec.template.spec:
+### When Stork is deployed through the Operator
 
-```text
-volumes:
-- name: aws-creds
-  secret:
-       secretName: aws-creds
-```
-
-* Add the following under spec.template.spec.containers:
+The credentials created in the previous step need to be provided to Stork. When deployed through Portworx Operator, add the following to the `stork` section of the StorageCluster spec:
 
 ```text
-volumeMounts:
-- mountPath: /root/.aws/
-  name: aws-creds
-  readOnly: true
+  stork:
+    enabled: true    
+    volumes:
+    - name: aws-creds
+      mountPath: /root/.aws/
+      readOnly: true
+      secret:
+        secretName: aws-creds
 ```
 
-Save the changes and wait for all the Stork pods to be in running state after applying the
-changes:
+### When Stork is deployed using the Portworx DaemonSet model
 
-```text
-kubectl get pods -n kube-system -l name=stork
-```
+Mount the secret created above in the Stork deployment by performing the following steps.
+
+1. Run the following command to make updates:
+
+    ```text
+    kubectl edit deployment -n kube-system stork
+    ```
+
+1. Add the following under `spec.template.spec`:
+
+    ```text
+    volumes:
+    - name: aws-creds
+      secret:
+           secretName: aws-creds
+    ```
+
+1. Add the following under `spec.template.spec.containers`:
+
+    ```text
+    volumeMounts:
+    - mountPath: /root/.aws/
+      name: aws-creds
+      readOnly: true
+    ```
+
+1. Save the changes and wait for all the Stork pods to be in running state after applying the changes:
+
+    ```text
+    kubectl get pods -n kube-system -l name=stork
+    ```

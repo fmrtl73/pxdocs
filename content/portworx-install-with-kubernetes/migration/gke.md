@@ -30,9 +30,36 @@ secret/gke-creds created
 ```
 
 ## Pass the Secret to Stork
-Mount the secret created above in the Stork deployment. Run `kubectl edit deployment -n kube-system stork` and make the following updates:
 
-* Add the following under spec.template.spec:
+### When Stork is deployed through the Operator
+
+The credentials created in the previous step need to be provided to Stork. When deployed through Portworx Operator, add the following to the `stork` section of the StorageCluster spec:
+
+```text
+  stork:
+    enabled: true    
+    volumes:
+    - name: gke-creds
+      mountPath: /root/.gke/gcs-key.json
+      readOnly: true
+      secret:
+        secretName: gke-creds
+    env:
+    - name: CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE
+      value: /root/.gke/gcs-key.json
+```
+
+### When Stork is deployed using the Portworx DaemonSet model
+
+Mount the secret created above in the Stork deployment by performing the following steps.
+
+1. Run the following command to make updates:
+
+    ```text
+    kubectl edit deployment -n kube-system stork
+    ```
+
+1. Add the following under `spec.template.spec`:
 
     ```text
     volumes:
@@ -41,7 +68,7 @@ Mount the secret created above in the Stork deployment. Run `kubectl edit deploy
         secretName: gke-creds
     ```
 
-* Add the following under spec.template.spec.containers
+1. Add the following under `spec.template.spec.containers`:
 
     ```text
     volumeMounts:
@@ -50,7 +77,7 @@ Mount the secret created above in the Stork deployment. Run `kubectl edit deploy
       readOnly: true
     ```
 
-* Add the following under spec.template.spec.containers
+1. Add the following under `spec.template.spec.containers`:
 
     ```text
     env:
@@ -58,16 +85,15 @@ Mount the secret created above in the Stork deployment. Run `kubectl edit deploy
       value: /root/.gke/gcs-key.json
     ```
 
-Save the changes and wait for all the Stork pods to be in running state after applying the
-changes:
+1. Save the changes and wait for all the Stork pods to be in running state after applying the changes:
 
-```text
-kubectl get pods -n kube-system -l name=stork
-```
+    ```text
+    kubectl get pods -n kube-system -l name=stork
+    ```
 
 ## Update ClusterRoleBinding
 
-Create a clusterrolebinding to give your account the cluster-admin role
+Create a `clusterrolebinding` to give your account the cluster-admin role:
 
 ```text
 kubectl create clusterrolebinding stork-cluster-admin-binding --clusterrole=cluster-admin --user=<your_iam_account>
