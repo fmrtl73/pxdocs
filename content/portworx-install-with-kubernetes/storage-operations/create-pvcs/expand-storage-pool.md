@@ -30,6 +30,10 @@ When you enter the `pxctl service pool expand` command, Portworx uses your cloud
 
 You can control the pool expand operation by specifying which operation you want to use: `resize-disk` or `add-disk`, or you can specify `auto` to let Portworx determine the best way to resize your storage pools based on your cloud provider.
 
+{{<info>}}
+**NOTE:** For all cloud providers, the maximum supported drives (boot and other drives, including cloud drives) per node is 8. You can check the existing number of drives in a node using the `lsblk` command. 
+{{</info>}}
+
 ### Prerequisites
 
 You must be running Portworx on one of the following cloud providers:
