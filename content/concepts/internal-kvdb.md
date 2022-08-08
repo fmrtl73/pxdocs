@@ -6,7 +6,7 @@ weight: 30000
 series: concepts
 ---
 
-Starting with version 2.0, you can install Portworx with a built-in internal KVDB. Portworx automatically deploys the internal KVDB cluster on a set of three nodes in your cluster and removes the requirement for an external KVDB such as etcd.
+You can install Portworx with a built-in internal KVDB. Portworx automatically deploys the internal KVDB cluster on a set of three nodes in your cluster and removes the requirement for an external KVDB such as etcd.
 
 ## Install
 

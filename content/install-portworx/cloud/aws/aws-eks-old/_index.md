@@ -7,6 +7,7 @@ noicon: true
 series: px-k8s
 aliases:
     - /portworx-install-with-kubernetes/cloud/aws/aws-eks/
+hidden: true
 ---
 
 The following topics provide steps for installing Portworx with EKS (Elastic Kubernetes Service). You can install Portworx using Kubernetes, or using `eksctl`.

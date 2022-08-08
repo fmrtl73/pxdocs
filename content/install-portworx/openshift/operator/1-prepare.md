@@ -1,6 +1,6 @@
 ---
 title: Install the Portworx Operator
-weight: 100
+weight: 300
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift, operator
 description: Find out how to prepare your OpenShift cluster by installing the Operator.
 aliases:

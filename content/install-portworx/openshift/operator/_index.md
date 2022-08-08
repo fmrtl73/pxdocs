@@ -1,5 +1,6 @@
 ---
-title: Portworx Operator
+title: Install Portworx on OpenShift on all other environments
+linkTitle: All other environments
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift, operator
 description: How to install Portworx with OpenShift using Operator
 weight: 200

@@ -9,6 +9,7 @@ noicon: true
 series2: k8s-airgapped
 aliases:
     - /portworx-install-with-kubernetes/on-premise/other/
+hidden: true
 ---
 
 You can deploy Portworx on your internet-capable Kubernetes cluster using either the Operator or using the DaemonSet.

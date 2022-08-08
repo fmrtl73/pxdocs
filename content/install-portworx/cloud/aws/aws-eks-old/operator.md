@@ -7,6 +7,7 @@ weight: 200
 noicon: true
 aliases:
     - /portworx-install-with-kubernetes/cloud/aws/aws-eks/operator/
+hidden: true
 ---
 
 This topic explains how to install Portworx with EKS (Elastic Kubernetes Service). Follow the steps in this topic in order.

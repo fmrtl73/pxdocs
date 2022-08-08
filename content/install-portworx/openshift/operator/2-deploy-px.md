@@ -2,7 +2,7 @@
 title: Deploy Portworx using the Operator
 keywords: portworx, container, kubernetes, storage, docker, k8s, pv, persistent disk, openshift
 description: Find out how to deploy Portworx using the Operator
-weight: 200
+weight: 400
 aliases:
   - /portworx-install-with-kubernetes/on-premise/openshift/operator/2-deploy-px/
   - /portworx-install-with-kubernetes/openshift/operator/2-deploy-px/
@@ -31,10 +31,6 @@ If you're installing Portworx on OpenShift on a cloud environment, Portworx requ
 ### OpenShift on Azure
 
 {{< content "shared/azure-cloud-user-requirements.md" >}}
-
-### OpenShift on VMWare vSphere
-
-{{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-secret.md" >}}
 
 ## Open ports for worker nodes
 
