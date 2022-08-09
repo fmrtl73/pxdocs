@@ -56,8 +56,7 @@ For more information on the rules of each of the values, visit the
 You can create a token. In the following example, the
 issuer is set to match the setting in the Portworx manifest to `portworx.com` as set
 the value for `-jwt-issuer`. The example also sets the duration of the token
-to one year. You can adjust it to a much shorter duration if you plan
-on refreshing the token often.
+to one day, which can be set manually with an API request.
 
 <!-- this isn't really concept information, so much as it's notes to the task, consider moving this information directly to the steps that occur with it. -->
 
@@ -79,7 +78,7 @@ the secret is saved in the environment variable `$PORTWORX_AUTH_SHARED_SECRET`.
         --auth-config=admin.yaml \
         --issuer=portworx.com \
         --shared-secret=$PORTWORX_AUTH_SHARED_SECRET \
-        --token-duration=1y)
+        --token-duration=1d)
     ```
 
 3. Create a token for the Kubernetes using `kubernetes.yaml`:
@@ -89,7 +88,7 @@ the secret is saved in the environment variable `$PORTWORX_AUTH_SHARED_SECRET`.
         --auth-config=kube.yaml \
         --issuer=portworx.com \
         --shared-secret=$PORTWORX_AUTH_SHARED_SECRET \
-        --token-duration=1y)
+        --token-duration=1d)
     ```
 
 4. Save the storage admin token in the `pxctl` [context](/reference/cli/authorization/#contexts):
