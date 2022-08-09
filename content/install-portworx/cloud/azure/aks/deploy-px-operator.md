@@ -19,6 +19,28 @@ weight: 300
 
 {{</info>}}
 
+### (Optional) Enable Azure cloud drive encryption using your own key
+
+ You can encrypt your Azure cloud drives that are managed by Portwox by using your own key stored in Azure Key Vault.
+ 
+**Prerequisites**
+
+Azure KeyVault instance created in the same region as the AKS cluster. 
+
+**Procedure**
+
+1. Create a Disk Encryption Set ID by using the instructions on [this page](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-enable-customer-managed-keys-portal) in the Microsoft documentation.
+
+2. Append the `diskEncryptionSetID` value from step 1 to the spec and deploy Portworx using the updated spec:
+
+    ```text
+    cloudStorage:
+        deviceSpecs:
+        - type=Premium_LRS,size=50,diskEncryptionSetID=/subscriptions/<subscription>/resourceGroups/<resource-group>/providers/Microsoft.Compute/diskEncryptionSets/<disk-encryption-set-name>
+    secretsProvider: azure-kv
+    ```
+    
+
 {{< content "shared/operator-apply-the-spec.md" >}}
 
 {{< content "shared/operator-monitor.md" >}}
