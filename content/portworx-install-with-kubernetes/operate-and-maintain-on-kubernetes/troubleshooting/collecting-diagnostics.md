@@ -1,5 +1,5 @@
 ---
-title: Collecting diagnostics
+title: Collect diagnostics
 weight: 100
 keywords: Troubleshoot, diags, phonehome, callhome
 description: Find out how to collect diagnostics for a Portworx cluster 
@@ -25,7 +25,7 @@ With Portworx 2.8.0 or above, Portworx can now automatically upload its diags to
 
 When working on a support case, provide your Cluster UUID to Portworx support. They will be able to retrieve your diags from Pure1.
 
-{{<info>}} **What is my cluster's UUID?**
+### Find your cluster's UUID?
 If you are using operator-based install, you can find this here (See `CLUSTER UUID` column):
 
 ```text
@@ -42,53 +42,32 @@ Another place to find your cluster's UUID is in the output of `/opt/pwx/bin/pxct
 pxctl status | grep 'Cluster UUID'
 ```
 ```output
-        Cluster UUID: 199ccacd-4253-4e57-9a3d-b2249dff3501
+Cluster UUID: 199ccacd-4253-4e57-9a3d-b2249dff3501
 ```
-{{</info>}}
 
 ## Pre-requisites
 
-* Portworx 2.8.0 or above
-* For Operator based installations, Portworx Operator 1.5.0 or above
-* For DaemonSet based installs, a Portworx spec generated using [the spec generator](https://central.portworx.com/)
+* Portworx 2.8.0 or later
+* For Operator based installations, Portworx Operator 1.5.0 or above using [the spec generator](https://central.portworx.com/)
 * Outbound access to the internet to allow connection to Pure1
 
-## Enabling Pure1 integration
+## Enable Pure1 integration
 
 Enabling telemetry adds a new `telemetry` sidecar container to Portworx pods. This container is responsible for uploading Portworx diagnostics to Pure1. 
 
 ### Fresh installs
 
-Telemetry and metrics collector are disabled by default for all new clusters with Portworx 2.8.0 or above. See [Pre-requisites](#pre-requisites).
+Telemetry and metrics collector are disabled by default for all new clusters in Portworx 2.8.0 or later. However, you can enable this function when you generate a StorageCluster spec.
 
 ### Upgrades 
 
-If you are upgrading from Portworx version prior to 2.8.0, follow the [Enabling Pure1 integration for upgrades](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/enable-pure1-upgrades) page for instructions.
+If you are upgrading from Portworx version prior to 2.8.0, follow the [Enable Pure1 integration for upgrades](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/enable-pure1-upgrades) page for instructions.
 
-## Disabling Pure1 integration
-
-#### Operator based install
-
-To enable the metrics collector and telemetry integration with Pure1, add the following section in your StorageCluster spec:
-
-```text
-spec:
-  monitoring:
-    telemetry:
-      enabled: true 
-```
-
-This adds the `telemetry` container to the Portworx pod.
-
-#### DaemonSet based install
-
-To disable the metrics collector and telemetry integration for DaemonSet based install, remove the `telemetry` container from the Portworx DaemonSet.
-
-## Collecting diagnostics
+## Collect diagnostics
 
 Portworx diagnostics are collected in primarily 2 ways:
 
-### 1. On demand
+### On demand
 
 This is done via the pxctl CLI. The most common command used here is:
 
@@ -98,8 +77,28 @@ This is done via the pxctl CLI. The most common command used here is:
 
 This generates the diagnostics bundle on the node. If the Pure1 telemetry is enabled, it will be automatically uploaded to Pure1.
 
-See [Generate a complete diagnostics package](/reference/cli/service/#generate-a-complete-diagnostics-package) for the entire CLI syntax.
-
-### 2. On crash
+### On crash
 
 If a Portworx process runs into an issue on a node, it will automatically collect diagnostics. If the Pure1 telemetry is enabled, it will be automatically uploaded to Pure1.
+
+## Disable Pure1 integration
+
+#### Operator based install
+
+To disable the metrics collector and telemetry integration, add the following section in your StorageCluster spec:
+
+```text
+spec:
+  monitoring:
+    telemetry:
+      enabled: false 
+```
+
+This removes the `telemetry` container from the Portworx pod.
+
+#### DaemonSet based install
+
+To disable the metrics collector and telemetry integration for DaemonSet based install, remove the `telemetry` container from the Portworx DaemonSet.
+
+See [Generate a complete diagnostics package](/reference/cli/service/#generate-a-complete-diagnostics-package) for the entire CLI syntax.
+

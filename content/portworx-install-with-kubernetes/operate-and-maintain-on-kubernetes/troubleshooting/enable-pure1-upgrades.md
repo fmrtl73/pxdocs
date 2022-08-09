@@ -1,5 +1,5 @@
 ---
-title: Enabling Pure1 integration for upgrades
+title: Enable Pure1 integration for upgrades
 weight: 100
 keywords: Troubleshoot, diags, phonehome, callhome
 description: Find out how to enable the Portworx Pure1 integration for clusters that were created before Portworx 2.8.0
@@ -8,18 +8,31 @@ hidden: true
 
 This page covers enabling Pure1 integration for following cases
 
-* You had a running Portworx cluster prior to Portworx 2.8.0, and you are now upgrading to 2.8.0 or above
-* You installed Portworx 2.8.0 or above but did not enable Pure1 integration and want to do so now
+* You had a running Portworx cluster prior to Portworx 2.8.0, and you are now upgrading to 2.8.0 or later
+* You installed Portworx 2.8.0 or later but did not enable Pure1 integration and want to do so now
 
 ## Pre-requisites
 
-* Portworx 2.8.0 or above
+* Portworx 2.8.0 or later
 * Outbound access to the internet to allow connection to Pure1
 
 ## Operator based install
 
-* Ensure you have running Portworx Operator 1.5.0 or above.
-* After you upgrade the Portworx version to 2.8.0 or above in the StorageCluster spec, telemetry will automatically be enabled. This will add the `telemetry` container in Portworx pod.
+* Ensure you have running Portworx Operator 1.5.0 or later.
+
+* After you upgrade to the Portworx version 2.8.0 or later in the StorageCluster spec, telemetry is supported but disabled by default.
+
+To enable the metrics collector and telemetry integration with Pure1, add the following section in your StorageCluster spec:
+
+```text
+spec:
+  monitoring:
+    telemetry:
+      enabled: true 
+```
+This adds the telemetry container to the Portworx pod and automatically creates the `pure-telemetry-certs` secret in the `kube-system` namespace. You can also enable telemetry from [PX-Central](https://central.portworx.com/specGen/wizard) via **Advanced Settings** on the **Customize** page.
+
+  ![Pure1 Integration](/img/enable-Pure1-integration.png)
 
 ## DaemonSet based install
 
@@ -66,7 +79,7 @@ This will be a 2-step process. First add the volumes in the pod spec needed for 
 
 Step a: Add following to the volumes section in the Portworx DaemonSet.
 
-{{<info>}}Note that above is in addition to any existing volumes in your Portworx DaemonSet spec{{</info>}}
+{{<info>}}**NOTE:** The above is in addition to any existing volumes in your Portworx DaemonSet spec{{</info>}}
 
 ```text
       volumes:
