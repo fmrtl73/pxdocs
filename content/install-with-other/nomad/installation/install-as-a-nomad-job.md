@@ -109,7 +109,7 @@ plugin "docker" {
 
           # container config
           config {
-            image        = "portworx/oci-monitor:2.8.0"
+            image        = "portworx/oci-monitor:2.11.1"
             network_mode = "host"
             ipc_mode = "host"
             privileged = true
