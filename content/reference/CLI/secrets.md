@@ -15,7 +15,7 @@ This section provides instructions for managing your authentication credentials 
 
 {{< content "shared/reference-CLI-secrets-definition.md" >}}
 
-Before using the `pxctl secrets` command to manage your secrets, make sure you've configured a secret store provider. See the [Secret store management](/key-management/) page for more details.
+Before using the `pxctl secrets` command to manage your secrets, make sure you've configured a secret store provider. See the [Secret store management](/operations/key-management/) page for more details.
 
 {{<info>}}
 To use encrypted volumes and ACLs, you need to ensure that Portworx is authenticated with the secrets endpoint.
@@ -48,7 +48,7 @@ You can list your AWS KMS secrets with:
 pxctl secrets aws list-secrets
 ```
 
-For more details on how to create data keys in AWS KMS and use them to encrypt your Portworx volumes, see the [AWS KMS](/key-management/aws-kms) page.
+For more details on how to create data keys in AWS KMS and use them to encrypt your Portworx volumes, see the [AWS KMS](/operations/key-management/aws-kms) page.
 
 ## Google Cloud KMS
 
@@ -91,12 +91,12 @@ pxctl secrets gcloud list-secrets
 
 ## DC/OS Secrets
 
-For information on how to configure Portworx with DC/OS Secrets, see the [DCOS Secrets](/key-management/dc-os-secrets/) page.
+For information on how to configure Portworx with DC/OS Secrets, see the [DCOS Secrets](/operations/key-management/dc-os-secrets/) page.
 
 
 ## Kubernetes Secrets
 
-To find out how to configure Portworx with Kubernetes Secrets, see the [Kubernetes Secrets](/key-management/kubernetes-secrets/) page.
+To find out how to configure Portworx with Kubernetes Secrets, see the [Kubernetes Secrets](/operations/key-management/kubernetes-secrets/) page.
 
 ## Vault
 
@@ -104,7 +104,7 @@ To find out how to configure Portworx with Kubernetes Secrets, see the [Kubernet
 To install and configure Vault, see the [Vault install](https://www.vaultproject.io/docs/install) page.
 {{</info>}}
 
-For a step-by-step guide on how you can connect your Portworx cluster to a Vault endpoint and then use the Vault endpoint to store secrets, see the[Vault](/key-management/vault) page.
+For a step-by-step guide on how you can connect your Portworx cluster to a Vault endpoint and then use the Vault endpoint to store secrets, see the[Vault](/operations/key-management/vault) page.
 
 ## KVDB
 

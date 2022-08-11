@@ -5,7 +5,7 @@ keywords: Install, elasticsearch, kibana, DCOS, DC/OS
 ---
 
 {{<info>}}
-This document presents the **DC/OS** method of installing Elastic Search and Kibana with Portworx. Please refer to the [Elastic Search and Kibana with Portworx on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana/) page if you are running Portworx on Kubernetes.
+This document presents the **DC/OS** method of installing Elastic Search and Kibana with Portworx. Please refer to the [Elastic Search and Kibana with Portworx on Kubernetes](/operations/operate-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana/) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
 This guide will help you to install the Elasticsearch service on your DCOS cluster backed by Portworx volumes for persistent storage.

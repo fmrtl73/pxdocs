@@ -135,7 +135,7 @@ NODE       ObjectstoreSuccess             SEVERITY_TYPE_NOTIFY
 NODE       ObjectstoreStateChange         SEVERITY_TYPE_NOTIFY
 ```
 
-For more details on alerts, see [Portworx Alerts](/install-with-other/operate-and-maintain/monitoring/portworx-alerts).
+For more details on alerts, see [Portworx Alerts](/operations/operate-other/monitoring/portworx-alerts).
 
 ## Reported alerts
 
@@ -192,14 +192,13 @@ Type    ID    Resource    Severity    Count    LastSeen    FirstSeen    Descript
 {{<info>}}
 {{<companyName>}} recommends setting up monitoring with Prometheus and AlertsManager.
 
-* If you are using Portworx with Kubernetes, see [Install Prometheus and Grafana using Daemonset](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/).
-* If you are using Portworx with other orchestrators, see [Alerting with Portworx](/install-with-other/operate-and-maintain/monitoring/alerting/).
-
+* If you are using Portworx with Kubernetes, see [Install Prometheus and Grafana using Daemonset](/operations/operate-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/).
+* If you are using Portworx with other orchestrators, see [Alerting with Portworx](/operations/operate-other/monitoring/alerting/).
 {{</info>}}
 
 
 ## Related topics
 
-* For information about monitoring Portworx on Kubernetes using tools like Prometheus, Grafana, or Sysdig, refer to the [Monitoring](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/) page.
-* If you are running Portworx on other orchestrators, see the [Alering with Portworx](/install-with-other/operate-and-maintain/monitoring/alerting/) page.
+* For information about monitoring Portworx on Kubernetes using tools like Prometheus, Grafana, or Sysdig, refer to the [Monitoring](/operations/operate-kubernetes/monitoring/) page.
+* If you are running Portworx on other orchestrators, see the [Alering with Portworx](/operations/operate-other/monitoring/alerting/) page.
 

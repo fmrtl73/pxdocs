@@ -20,4 +20,4 @@ To install Portworx with Kubernetes, you must first generate Kubernetes manifest
 
 {{<info>}}**NOTE**: If you're using a cloud provider, **do not add volumes of different types** when configuring storage devices for during spec generation. For example, do not add both GP2 and GP3 for AWS, standard and ssd for GCP, or Standard and Premium for Azure. This can cause performance issues and errors.{{</info>}}
 
-Portworx can also be installed using its Helm chart by following instructions [here](/portworx-install-with-kubernetes/install-px-helm). The above method is recommended over helm as the wizard will guide you based on your environment.
+Portworx can also be installed using its Helm chart by following instructions [here](/operations/operate-kubernetes/install-px-helm). The above method is recommended over helm as the wizard will guide you based on your environment.

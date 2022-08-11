@@ -50,7 +50,7 @@ The default failover strategy for sharedv4 service volumes is `aggressive`, beca
 
 These defaults can be changed in the following ways:
 
-* [Setting a value for `sharedv4_failover_strategy` in StorageClass](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs/) before provisioning a volume.
+* [Setting a value for `sharedv4_failover_strategy` in StorageClass](/operations/operate-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs/) before provisioning a volume.
 * Using a `pxctl volume update` command if a volume has been provisioned already. For example:
   ```text
   pxctl volume update --sharedv4_failover_strategy=normal <volume_ID>

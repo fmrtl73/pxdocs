@@ -11,7 +11,7 @@ aliases:
 ---
 
 {{<info>}}
-This document presents the **non-Kubernetes** method of migrating volumes between two Portworx clusters. Please refer to the [Migration with Stork on Kubernetes](/portworx-install-with-kubernetes/migration) page if you are running Portworx on Kubernetes.
+This document presents the **non-Kubernetes** method of migrating volumes between two Portworx clusters. Please refer to the [Migration with Stork on Kubernetes](/operations/operate-kubernetes/migration) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
 ## Overview
@@ -22,7 +22,7 @@ This method can be used to migrate volumes between two Portworx clusters. It wil
 
 * **Version**: The source AND destination clusters need the v2.0 or later
 release of {{< pxEnterprise >}} on both clusters. As future releases are made, the two clusters can have different {{< pxEnterprise >}} versions (e.g. v2.1 and v2.3).
-* **Secret Store** : Make sure you have configured a [secret store](/key-management) on both your clusters.
+* **Secret Store** : Make sure you have configured a [secret store](/operations/key-management) on both your clusters.
 This will be used to store the credentials for the objectstore.
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be
 reachable by the source cluster.

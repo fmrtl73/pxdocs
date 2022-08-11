@@ -7,7 +7,7 @@ weight: 100
 noicon: true
 ---
 
-{{<info>}}If you are running on Kubernetes, visit [Portworx on Kubernetes on AWS](/portworx-install-with-kubernetes/cloud/aws){{</info>}}
+{{<info>}}If you are running on Kubernetes, visit [Portworx on Kubernetes on AWS](/install-portworx/cloud/aws){{</info>}}
 
 Below guide explains how Portworx dynamic disk provisioning works on AWS and the requirements for it. This is typically useful when an autoscaling group (ASG) is managing your AWS instances.
 

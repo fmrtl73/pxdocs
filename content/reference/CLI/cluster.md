@@ -139,7 +139,7 @@ Global Flags:
 
 ### Related topics
 
-* For more information about decommissioning a Portworx node through Kubernetes, refer to the [Decommission a Node](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/) page.
+* For more information about decommissioning a Portworx node through Kubernetes, refer to the [Decommission a Node](/operations/operate-kubernetes/uninstall/decommission-a-node/) page.
 
 ## Showing nodes based on IO Priority
 
@@ -398,7 +398,7 @@ Cloudsnap Error Retry Limit          :  7
 
 ### Related topics
 
-* For more information about creating and managing the snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page.
+* For more information about creating and managing the snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots/) page.
 
 
 ## pxctl cluster options update --provisioning-commit-labels reference

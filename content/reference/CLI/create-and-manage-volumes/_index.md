@@ -358,7 +358,7 @@ You can pass the inline specs through the scheduler application template. The fo
 
 ### Related topics
 
-* For information about creating shared Portworx volumes through Kubernetes, refer to the [ReadWriteMany and ReadWriteOnce](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/volumes/#readwritemany-and-readwriteonce) section.
+* For information about creating shared Portworx volumes through Kubernetes, refer to the [ReadWriteMany and ReadWriteOnce](/operations/operate-kubernetes/storage-operations/kubernetes-storage-101/volumes/#readwritemany-and-readwriteonce) section.
 
 
 ## Delete volumes
@@ -462,7 +462,7 @@ Snapshots are read-only. To restore a volume from a snapshot, use the `pxctl vol
 
 ### Related topics
 
-* For information about creating snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page.
+* For information about creating snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots/) page.
 
 ## Clone volumes
 
@@ -519,7 +519,7 @@ Volume clone successful: 55898055774694370
 
 ### Related topics
 
-* For information about creating a clone from a snapshot through Kubernetes, refer to the [On-demand snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/) page.
+* For information about creating a clone from a snapshot through Kubernetes, refer to the [On-demand snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots/on-demand/) page.
 
 ## Restore a volume
 
@@ -529,7 +529,7 @@ Volume clone successful: 55898055774694370
 ### Related topics
 
 * To learn how to enable the volume trash can feature on a cluster, see [Volume trash can](/reference/cli/trashcan/).
-* For information about restoring a Portworx volume with data from a snapshot through Kubernetes, refer to the [Restore snapshots](/portworx-install-with-kubernetes/storage-operations/kubernetes-storage-101/snapshots/#restore-snapshots) page.
+* For information about restoring a Portworx volume with data from a snapshot through Kubernetes, refer to the [Restore snapshots](/operations/operate-kubernetes/storage-operations/kubernetes-storage-101/snapshots/#restore-snapshots) page.
 
 
 ## Update the snap interval of a volume
@@ -538,7 +538,7 @@ Please see the documentation for [snapshots] (/reference/cli/snapshots) for more
 
 ### Related topics
 
-* For information about creating scheduled snapshots of a Portworx volume through Kubernetes, refer to the [Scheduled snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/scheduled/) page.
+* For information about creating scheduled snapshots of a Portworx volume through Kubernetes, refer to the [Scheduled snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots/scheduled/) page.
 
 ## Show volume stats
 

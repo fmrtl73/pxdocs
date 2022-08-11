@@ -108,7 +108,7 @@ etcd.key:  414  bytes
 
 Portworx supports PKS (Pivotal Container Service) on various platforms.
 
-If running on **AWS**, continue at [Portworx install with AWS Auto Scaling Groups](/portworx-install-with-kubernetes/cloud/aws/aws-asg).
+If running on **AWS**, continue at [Portworx install with AWS Auto Scaling Groups](/install-portworx/cloud/aws/aws-asg).
 
 If running on **GCP**, continue at [Portworx install on Google Cloud Platform](/cloud-references/auto-disk-provisioning/gcp).
 

@@ -21,7 +21,7 @@ With Portworx, there are two ways of migrating volumes between clusters:
 
 ### Configuring a secret store
 
-Before we begin, make sure you have configured a [secret store] (/key-management/) on both clusters. This will be used to store the credentials for the objectstore.
+Before we begin, make sure you have configured a [secret store] (/operations/key-management/) on both clusters. This will be used to store the credentials for the objectstore.
 
 ## Pairing clusters
 
@@ -188,4 +188,4 @@ If the migration is successful, you should see the volume(s) with the same name 
 
 ## Related topics
 
-For information about migrating Portworx volumes between clusters using Stork and Kubernetes, refer to the [Migration](/portworx-install-with-kubernetes/migration/) page.
+For information about migrating Portworx volumes between clusters using Stork and Kubernetes, refer to the [Migration](/operations/operate-kubernetes/migration/) page.

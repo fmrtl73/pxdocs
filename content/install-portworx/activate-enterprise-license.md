@@ -11,19 +11,19 @@ The license that you selected when you deployed Portworx determines what feature
 
 How you activate your enterprise license depends on your environment. Activate your Enterprise license using one of the following methods: 
 
-* [Activate using Activation ID](/reference/licensing/portworx-enterprise/activation-id) 
-* [Activate license on an air-gapped cluster using Cluster UUID](/reference/licensing/portworx-enterprise/cluster-uuid-air-gapped)
-* [Activate license on an air-gapped cluster using SaaS key](/reference/licensing/portworx-enterprise/pay-as-you-go-air-gapped)
+* [Activate using Activation ID](/operations/licensing/portworx-enterprise/activation-id) 
+* [Activate license on an air-gapped cluster using Cluster UUID](/operations/licensing/portworx-enterprise/cluster-uuid-air-gapped)
+* [Activate license on an air-gapped cluster using SaaS key](/operations/licensing/portworx-enterprise/pay-as-you-go-air-gapped)
 
 {{<info>}}
 **NOTE:**
 
-* You can obtain a paid enterprise license by contacting support@purestorage.com. See the [Portworx Enterprise license](/reference/licensing/portworx-enterprise) section for more information about enterprise licensing.
+* You can obtain a paid enterprise license by contacting support@purestorage.com. See the [Portworx Enterprise license](/operations/licensing/portworx-enterprise) section for more information about enterprise licensing.
 * You cannot extend the trial license with another trial license.
 {{</info>}}
 
 ## Related topics
 
-* [Licensing operations](/reference/licensing/license-operations)
-* [Portworx Essentials license](/reference/licensing/portworx-essential)
-* [Portworx Enterprise license](/reference/licensing/portworx-enterprise)
+* [Licensing operations](/operations/licensing/license-operations)
+* [Portworx Essentials license](/operations/licensing/portworx-essential)
+* [Portworx Enterprise license](/operations/licensing/portworx-enterprise)

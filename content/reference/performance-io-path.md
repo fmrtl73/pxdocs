@@ -56,4 +56,4 @@ This feature is enabled by default. It can be disabled by using the `--io_profil
 ## Related topics
 
 * [IO profiles](/concepts/io-profiles/)
-* [Performance tuning](/install-with-other/operate-and-maintain/performance-and-tuning/tuning/)
+* [Performance tuning](/operations/operate-other/performance-and-tuning/tuning/)

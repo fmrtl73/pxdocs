@@ -154,5 +154,5 @@ that your token does not accidentally contain a newline character. This is due t
 
 ## Related topics
 
-* For information about enabling and managing Portworx authorization through Kubernetes, refer to the [Authorization](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/) page.
+* For information about enabling and managing Portworx authorization through Kubernetes, refer to the [Authorization](/operations/operate-kubernetes/authorization/) page.
 

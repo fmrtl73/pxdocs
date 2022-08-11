@@ -7,7 +7,7 @@ description: Shared content about Portworx installation in OpenShift
 
 ### Airgapped clusters
 
-If your nodes are airgapped and don't have access to common internet registries, first follow [Airgapped clusters](/portworx-install-with-kubernetes/on-premise/airgapped) to fetch Portworx images.
+If your nodes are airgapped and don't have access to common internet registries, first follow [Airgapped clusters](/install-portworx/on-premises/airgapped) to fetch Portworx images.
 
 ### Select nodes where Portworx will installed
 

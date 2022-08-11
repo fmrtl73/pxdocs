@@ -144,9 +144,8 @@ It is recommended to upgrade the nodes in a **staggered manner**. This way, the 
 
 ### Related topics
 
-* For information about upgrading Portworx through Kubernetes, refer to the [Upgrade on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/) page.
-
-* If you’re using the Portworx Operator, refer to the [Upgrade Portworx using the Operator](/portworx-install-with-kubernetes/on-premise/openshift/operator/upgrade/) page.
+* For information about upgrading Portworx through Kubernetes, refer to the [Upgrade on Kubernetes](/operations/operate-kubernetes/upgrade/) page.
+* If you’re using the Portworx Operator, refer to the [Upgrade Portworx using the Operator](/install-portworx/openshift/operator/openshift-upgrade/) page.
 
 ## Login/Authentication
 

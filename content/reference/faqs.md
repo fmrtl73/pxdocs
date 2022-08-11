@@ -45,10 +45,10 @@ No.  Portworx software-only, deployed as a OCI container
 Portworx supports all major container orchestrators and platforms like Kubernetes, Mesos, Swarm, Openshift, Tectonic, DC/OS, Docker UCP, Nomad and others.
 
 ### Can storage be added to a server and used after the server has joined the cluster?
-Yes.  Drives can be added easily to a server after the server has joined the cluster. Follow this [link](/install-with-other/operate-and-maintain/scaling/scale-up) to learn more about
+Yes.  Drives can be added easily to a server after the server has joined the cluster. Follow this [link](/operations/operate-other/scaling/scale-up) to learn more about
 
 ### What happens when a drive fails?
-On a drive failure, Portworx will enter a storageless operation mode and continue to give access to replicas in the other nodes, if the volumes are configured to have replication factor more than one. Portworx needs to be put into maintenance mode in order to service (remove and replace) the drive. Follow this [link](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode) to learn more about maintenance mode operations.
+On a drive failure, Portworx will enter a storageless operation mode and continue to give access to replicas in the other nodes, if the volumes are configured to have replication factor more than one. Portworx needs to be put into maintenance mode in order to service (remove and replace) the drive. Follow this [link](/operations/operate-kubernetes/maintenance-mode) to learn more about maintenance mode operations.
 
 ### Do servers in a cluster need to be all be configured exactly the same?
 No.  Servers in a Portworx cluster can use block storage of any type, profile, capacity and performance class.

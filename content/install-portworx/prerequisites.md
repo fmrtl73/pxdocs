@@ -24,13 +24,13 @@ The minimum supported size for a Portworx cluster is three nodes. Each node must
 
 |**Network** ||
 |--- | ---|
-|Open needed ports | Portworx requires different open ports depending on how it's installed:<ul><li>Spec-based installations require all Portworx nodes to have open TCP ports at 9001-9022 and an open UDP port at 9002.</li><li>Portworx on OpenShift 4+ requires open TCP ports at 17001-17020 and an open UDP port at 17002.</li></ul>Portworx also requires an open KVDB port. For example, if you're using `etcd` externally, open port 2379.<br/><br/>If you intend to use Portworx with sharedv4 volumes, you may need to [open your NFS ports](/portworx-install-with-kubernetes/storage-operations/create-pvcs/open-nfs-ports).|
+|Open needed ports | Portworx requires different open ports depending on how it's installed:<ul><li>Spec-based installations require all Portworx nodes to have open TCP ports at 9001-9022 and an open UDP port at 9002.</li><li>Portworx on OpenShift 4+ requires open TCP ports at 17001-17020 and an open UDP port at 17002.</li></ul>Portworx also requires an open KVDB port. For example, if you're using `etcd` externally, open port 2379.<br/><br/>If you intend to use Portworx with sharedv4 volumes, you may need to [open your NFS ports](/operations/operate-kubernetes/storage-operations/create-pvcs/open-nfs-ports).|
 
 |**Software** ||
 |--- | ---|
 |Linux kernel | Version 3.10 or greater.|
 |Docker | Version 1.13.1 or greater.|
-|Key-value store | Portworx needs a key-value store to perform its operations. As such, install a clustered key-value database \(`etcd`\) with a three node cluster.<br><br>With Portworx 2.0 or greater, you can use Internal KVDB during installation. In this mode, Portworx will create and manage an internal key-value store (kvdb) cluster.<br><br>If you plan of using your own etcd, refer to [Etcd for Portworx](/reference/etcd) for details on recommendations for installing and tuning etcd.|
+|Key-value store | Portworx needs a key-value store to perform its operations. As such, install a clustered key-value database \(`etcd`\) with a three node cluster.<br><br>With Portworx 2.0 or greater, you can use Internal KVDB during installation. In this mode, Portworx will create and manage an internal key-value store (kvdb) cluster.<br><br>If you plan of using your own etcd, refer to [Etcd for Portworx](/operations/etcd) for details on recommendations for installing and tuning etcd.|
 |Disable swap|Please disable swap on all nodes that will run the Portworx software.  Ensure that the swap device is not automatically mounted on server reboot.|
 
 ## Supported Kubernetes versions

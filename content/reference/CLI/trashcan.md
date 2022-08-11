@@ -52,7 +52,7 @@ Successfully restored: <desired-vol-name> from <trashcan-vol-id>
 
 This removes the volume from the trash can as well.
 
-To use the restored volume with your application, follow the steps for [using the Portworx volume](/portworx-install-with-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes/#using-the-portworx-volume).
+To use the restored volume with your application, follow the steps for [using the Portworx volume](/operations/operate-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes/#using-the-portworx-volume).
 
 
 ## Disable the trash can

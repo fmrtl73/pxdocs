@@ -51,7 +51,7 @@ This profile optimizes the read-ahead algorithm for sequential workloads, such a
 You can configure IO profiles through Kubernetes specs or at the Portworx level, depending on your needs and what operator you're running with.
 
 For information about how to configure IO profiles for volumes on Kubernetes clusters, follow this link:
-{{< widelink url="/portworx-install-with-kubernetes/storage-operations/io-profile-in-k8s/" >}}Configure IO profiles for Portworx volumes on Kubernetes{{</widelink>}}
+{{< widelink url="/operations/operate-kubernetes/storage-operations/io-profile-in-k8s/" >}}Configure IO profiles for Portworx volumes on Kubernetes{{</widelink>}}
 
 For information about how to configure IO profiles from volumes using `pxctl`, follow this link:
-{{< widelink url="/install-with-other/operate-and-maintain/performance-and-tuning/tuning" >}}Configure IO profiles from volumes using <code>pxctl</code>{{</widelink>}}
+{{< widelink url="/operations/operate-other/performance-and-tuning/tuning" >}}Configure IO profiles from volumes using <code>pxctl</code>{{</widelink>}}

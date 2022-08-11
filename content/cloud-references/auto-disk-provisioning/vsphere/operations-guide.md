@@ -75,9 +75,9 @@ Drive Set List
 
 Portworx exposes many useful metrics out of the box. Refer to the [Portworx Metrics for monitoring](/reference/metrics/) page for the full list of metrics.
 
-Portworx also alerts users on a predefined set of alerts that are listed on the [Portworx Alerts](/install-with-other/operate-and-maintain/monitoring/portworx-alerts/) page.
+Portworx also alerts users on a predefined set of alerts that are listed on the [Portworx Alerts](/operations/operate-other/monitoring/portworx-alerts/) page.
 
-The [Prometheus and Grafana on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) page describes how to use Prometheus and Grafana to monitor Portworx in a Kubernetes cluster and extract the metrics and alerts.
+The [Prometheus and Grafana on Kubernetes](/operations/operate-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) page describes how to use Prometheus and Grafana to monitor Portworx in a Kubernetes cluster and extract the metrics and alerts.
 
 ## Capacity Management
 

@@ -12,7 +12,7 @@ This document describes how to install and configure Portworx with an IBM Cloud 
 
 {{<info>}}**NOTE:**
 
-* Portworx supports a maximum of 3 cloud drives per node at install time. Once Portworx is installed, you can add more disks (up to a maximum of 8 disks per node) to the Portworx storage pool [using the `pxctl service pool expand` command with the IBM Block CSI Driver version 4.4 or newer](/portworx-install-with-kubernetes/storage-operations/create-pvcs/expand-storage-pool/#prerequisites).
+* Portworx supports a maximum of 3 cloud drives per node at install time. Once Portworx is installed, you can add more disks (up to a maximum of 8 disks per node) to the Portworx storage pool [using the `pxctl service pool expand` command with the IBM Block CSI Driver version 4.4 or newer](/operations/operate-kubernetes/storage-operations/create-pvcs/expand-storage-pool/#prerequisites).
 * The IBM Cloud drives feature is supported only on VPC Gen2 infrastructure. It is not supported on IBM Classic infrastructure.
 {{</info>}}
 
@@ -76,7 +76,7 @@ This document describes how to install and configure Portworx with an IBM Cloud 
 
 ## Uninstall
 
-1. Uninstall Portworx [using the Operator](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall-operator/) or [using DaemonSet](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall/).
+1. Uninstall Portworx [using the Operator](/operations/operate-kubernetes/uninstall/uninstall-operator/) or [using DaemonSet](/operations/operate-kubernetes/uninstall/uninstall/).
 
 1. Wipe Portworx drives by deleting VolumeAttachments, PVCs, and PVs. To get VolumeAttachments, run the following command:
 
@@ -117,4 +117,4 @@ kubectl patch volumeattachment  <volumeattachment_name> -n kube-system -p '{"met
 
 ## Related topics
 
-* [Operate IBM Cloud Drives](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cloud-drive-operations/ibm/operate-cloud-drives)
+* [Operate IBM Cloud Drives](/operations/operate-kubernetes/cloud-drive-operations/ibm/operate-cloud-drives)

@@ -6,7 +6,7 @@ hidden: true
 
 
 This document guides you through editing the Portworx manifest YAML file as shown in
-the Enabling authorization section [example](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/enable/#example).
+the Enabling authorization section [example](/operations/operate-kubernetes/authorization/enable/#example).
 
 This procedure instructs Kubernetes to create and provide Portworx with
 environment variables whose values are retrieved securely from the Secret object

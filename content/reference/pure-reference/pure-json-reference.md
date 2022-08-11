@@ -54,4 +54,4 @@ Portworx uses a single secret for both FlashArray and FlashBlade configuration. 
 ## Related topics
 
 * [Disk provisioning on Pure Storage FlashArray](/cloud-references/auto-disk-provisioning/pure-flash-array/)
-* [Configure FlashBlade as a Direct Access filesystem](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flashblade/)
+* [Configure FlashBlade as a Direct Access filesystem](/operations/operate-kubernetes/storage-operations/create-pvcs/pure-flashblade/)

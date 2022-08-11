@@ -11,7 +11,7 @@ linkTitle: Cloud Credentials
 This document provides instructions for managing your cloud credentials using `pxctl`.
 
 
-The cloud provider credentials are stored in an external secret store. Before you use the commands from below, you should configure a secret provider of your choice with Portworx. For more information, head over to the [Key Management](/key-management) page.
+The cloud provider credentials are stored in an external secret store. Before you use the commands from below, you should configure a secret provider of your choice with Portworx. For more information, head over to the [Key Management](/operations/key-management) page.
 
 ## Overview
 
@@ -352,4 +352,4 @@ pxctl credentials delete-refs <name-or-UUID>
 
 ## Related topics
 
-* For information about integrating Portworx with Kubernetes Secrets, refer to the [Kubernetes Secrets](/key-management/kubernetes-secrets/) page.
+* For information about integrating Portworx with Kubernetes Secrets, refer to the [Kubernetes Secrets](/operations/key-management/kubernetes-secrets/) page.

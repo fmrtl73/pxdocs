@@ -111,7 +111,7 @@ When there is an operational failure, you can use the `pxctl service diags` comm
 
 The diagnostics package will be available at /var/cores. It will be automatically uploaded to Pure1 if telemetry is enabled. 
 
-See [Auto-uploading diags using Pure1 integration ](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/collecting-diagnostics/#auto-uploading-diags-using-pure1-integration) for details on enabling Pure1 telemetry.
+See [Auto-uploading diags using Pure1 integration ](/operations/operate-kubernetes/troubleshooting/collecting-diagnostics/#auto-uploading-diags-using-pure1-integration) for details on enabling Pure1 telemetry.
 
 ```text
 pxctl service diags --help

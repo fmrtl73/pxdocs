@@ -10,7 +10,7 @@ aliases:
 ---
 
 {{<info>}}
-This document presents the **Docker** (or podman) method of installing a Portworx cluster using `runC` containers. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+This document presents the **Docker** (or podman) method of installing a Portworx cluster using `runC` containers. Please refer to the [Portworx on Kubernetes](/operations/operate-kubernetes/) page if you want to install Portworx on Kubernetes.
 {{</info>}}
 
 ## Why OCI
@@ -38,7 +38,7 @@ To install and setup the Portworx OCI bundle, perform the following steps:
 * **Schedulers**: If you are installing Portworx into a Kubernetes or Mesosphere DC/OS cluster, {{<companyName>}} recommends using [Stork](https://github.com/libopenstorage/stork).
 * **Firewall**: Ensure ports 9001-9022 are open on the cluster nodes that run Portworx.
 * **NTP**: Ensure all nodes running Portworx are time-synchronized by installing and running the NTP service.
-* **KVdb**: Portworx requires a key-value database like etcd. {{<companyName>}} recommends a highly available etcd cluster with persistent storage. See the [etcd installation](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) page for more details.
+* **KVdb**: Portworx requires a key-value database like etcd. {{<companyName>}} recommends a highly available etcd cluster with persistent storage. See the [etcd installation](/operations/operate-kubernetes/etcd) page for more details.
 * **Storage**: At least one Portwox node should have extra storage available, either as an unformatted partition or as a disk-drive. Note that Portworx automatically formats any storage devices you pass as parameters to the `px-runc` installer. The following example command passes the `/dev/sdb` and `/dev/sdc3` storage devices as parameters:
 
     ```

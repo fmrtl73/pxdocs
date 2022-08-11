@@ -7,7 +7,7 @@ linkTitle: Authorization with Portworx clusters
 ---
 
 {{<info>}}
-This document presents the **DC/OS** method of enabling authorization for your Portworx cluster. Please refer to the [Authorization](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization/) page if you are running Portworx on Kubernetes.
+This document presents the **DC/OS** method of enabling authorization for your Portworx cluster. Please refer to the [Authorization](/operations/operate-kubernetes/authorization/) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
 Once your Portworx Cluster has been [setup as auth-enabled](/concepts/authorization/install), there are a few steps you must take to integrate DC/OS with your auth-protected cluster.
@@ -21,7 +21,7 @@ There are two ways you can authenticate with your cluster now that it is auth-en
 ### DC/OS token_secret (recommended)
 This is the recommended method for authenticating with your auth-enabled Portworx Cluster. You must pass the `token_secret` parameter/option during volume operations. Found below is an example of how you can create a DC/OS secret and reference it with `docker volume create`. The same `token_secret` parameter can be used with other DC/OS and docker volume commands.
 
-First, you need to create a [DC/OS secret](/key-management/dc-os-secrets/) for your auth token(s)
+First, you need to create a [DC/OS secret](/operations/key-management/dc-os-secrets/) for your auth token(s)
 
 ```text
 dcos security secrets create --value=<auth-token> pwx/secrets/user1-token

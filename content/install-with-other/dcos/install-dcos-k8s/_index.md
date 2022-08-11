@@ -22,7 +22,7 @@ to `mesos`.
 
 When using Kubernetes on DC/OS you will be able to use Portworx from your DC/OS
 cluster. You only need to create a Kubernetes Service and proxy pods for Portworx to allow the
-in-tree Kubernetes volume plugin to dynamically create and use Portworx volumes. This will also install [Stork](/portworx-install-with-kubernetes/storage-operations/stork).
+in-tree Kubernetes volume plugin to dynamically create and use Portworx volumes. This will also install [Stork](/operations/operate-kubernetes/storage-operations/stork).
 
 You can create the Service by running the following command:
 ```text
@@ -36,7 +36,7 @@ After the above spec has been applied, you can create volumes and snapshots
 using Kubernetes.
 Please use the following guides:
 
-* [Dynamic Provisioning](/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning)
-* [Using Pre-provisioned volumes](/portworx-install-with-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes)
-* [Creating and using snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
+* [Dynamic Provisioning](/operations/operate-kubernetes/storage-operations/create-pvcs/dynamic-provisioning)
+* [Using Pre-provisioned volumes](/operations/operate-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes)
+* [Creating and using snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots)
 * [Volume encryption](/reference/cli/encrypted-volumes)

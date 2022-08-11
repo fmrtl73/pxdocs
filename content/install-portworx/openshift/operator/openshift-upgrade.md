@@ -12,7 +12,7 @@ Before you can upgrade your OpenShift environment to 4.3, you must upgrade Portw
 
 1. From the OpenShift console, upgrade the Portworx Operator to version 1.1.1 or newer.
 
-2. [Upgrade Portworx](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/upgrade/upgrade-operator) to 2.3.5.
+2. [Upgrade Portworx](/operations/operate-kubernetes/upgrade/upgrade-operator) to 2.3.5.
 
 3. Verify that all of your nodes have upgraded to your specified Portworx version (e.g. 2.3.5):
 

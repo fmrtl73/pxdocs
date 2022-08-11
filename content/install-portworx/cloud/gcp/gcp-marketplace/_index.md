@@ -136,4 +136,4 @@ This will remove all Portworx specific state from the nodes and clean all the di
 
 Once the above script completes successfully you can delete the Application object created by GCP.
 
-You can find more information about uninstalling Portworx [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/).
+You can find more information about uninstalling Portworx [here](/operations/operate-kubernetes/uninstall/).

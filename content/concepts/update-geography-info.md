@@ -22,7 +22,7 @@ If Portworx nodes are provided with the information about their region then they
 
 ## Providing topology for Kubernetes
 
-To update the topology information (zone, region and rack) on Kubernetes, follow the steps on [Cluster Topology awareness for Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology).
+To update the topology information (zone, region and rack) on Kubernetes, follow the steps on [Cluster Topology awareness for Kubernetes](/operations/operate-kubernetes/cluster-topology).
 
 ## Providing topology for non-Kubernetes clusters
 

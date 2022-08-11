@@ -54,7 +54,7 @@ Portworx deploys it’s full stack of software in a linux container. In this sho
 #### Resources
 
  - [Deployment Architectures Docs](/cloud-references/deployment-arch)
- - [Hyperconvergence Docs](/portworx-install-with-kubernetes/storage-operations/hyperconvergence/)
+ - [Hyperconvergence Docs](/operations/operate-kubernetes/storage-operations/hyperconvergence/)
 
 ## Deploying Portworx on Kubernetes
 
@@ -64,7 +64,7 @@ In this video, learn how Portworx runs on any distribution of Kubernetes and wha
 
 #### Resources
 
- - [Install with Kubernetes](/portworx-install-with-kubernetes/)
+ - [Install with Kubernetes](/operations/operate-kubernetes/)
  - [Try Installing Portworx on Kubernetes yourself](https://play.instruqt.com/embed/portworx/tracks/deploy-px-k8s-2-6?token=em_qFw-geFyUsN91lXc)
  - [Access Kubernetes Spec Generator in PX-Central](https://central.portworx.com/)
 
@@ -77,7 +77,7 @@ In this video, learn how Portworx runs on any distribution of Kubernetes and wha
 #### Resources
 
  - [Topology Info for Replication Placement Docs](/concepts/update-geography-info/)
- - [Dynamic Provisioning Parameters](/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/)
+ - [Dynamic Provisioning Parameters](/operations/operate-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/)
  - [Example deploying MySQL with Portworx Replication](https://play.instruqt.com/embed/portworx/tracks/px-mysql?token=em_QA3AzPZquo_D_fLH)
 
 ## Volume snapshot types
@@ -89,7 +89,7 @@ Learn how Portworx provides data protection with snapshots. This short video wil
 #### Resources
 
  - [Snapshots Docs](/reference/cli/snapshots/)
- - [Create Snapshots on Kubernetes Docs](/portworx-install-with-kubernetes/storage-operations/create-snapshots/)
+ - [Create Snapshots on Kubernetes Docs](/operations/operate-kubernetes/storage-operations/create-snapshots/)
  - [Cloud Snapshots Docs](/reference/cli/cloud-snaps/)
 
 ## What is RTO and RPO
@@ -100,7 +100,7 @@ Understanding Recovery Time Objects (RTO) and Recovery Point Object (RPO) is vit
 
 #### Resources
 
- - [Disaster Recovery Configuration with Kubernetes Docs](/portworx-install-with-kubernetes/disaster-recovery/)
+ - [Disaster Recovery Configuration with Kubernetes Docs](/operations/operate-kubernetes/disaster-recovery/)
  - [RPO and RTO Blog](https://portworx.com/kubernetes-data-management-perspective-understanding-rto-rpo/)
  - [Zero PO Disaster Recovery Blog](https://portworx.com/achieving-zero-rpo-disaster-recovery-kubernetes/)
 
@@ -113,9 +113,9 @@ Disaster Recovery is a critical component of every data management solution. In 
 
 #### Resources
 
- - [Portworx Disaster Recovery Docs](/portworx-install-with-kubernetes/disaster-recovery/)
- - [Portworx Synchronous Disaster Recovery](/portworx-install-with-kubernetes/disaster-recovery/px-metro/)
- - [Portworx Asynchronous Disaster Recovery](/portworx-install-with-kubernetes/disaster-recovery/async-dr/)
+ - [Portworx Disaster Recovery Docs](/operations/operate-kubernetes/disaster-recovery/)
+ - [Portworx Synchronous Disaster Recovery](/operations/operate-kubernetes/disaster-recovery/px-metro/)
+ - [Portworx Asynchronous Disaster Recovery](/operations/operate-kubernetes/disaster-recovery/async-dr/)
 
 ## What are Shared Volumes
 
@@ -137,8 +137,8 @@ Capacity management is a key aspect for application development and in complex m
 
 #### Resources
 
- - [Portworx Capacity Management Docs](/portworx-install-with-kubernetes/autopilot/)
- - [Portworx Capacity Management Reference](/portworx-install-with-kubernetes/autopilot/reference/)
+ - [Portworx Capacity Management Docs](/operations/operate-kubernetes/autopilot/)
+ - [Portworx Capacity Management Reference](/operations/operate-kubernetes/autopilot/reference/)
  - [CockroachDB Demo](https://www.youtube.com/watch?v=vCnUczaSXDA)
 
 ## Introduction to Portworx on Red Hat Openshift
@@ -149,7 +149,7 @@ In this lightboard session viewers will learn the basics of running Potworx on O
 
 #### Resources
 
- - [Install Portworx on OpenShift](/portworx-install-with-kubernetes/on-premise/openshift/)
+ - [Install Portworx on OpenShift](/install-portworx/openshift/)
 
 ## Data Locality with Stork (Storage Orchestrator for Kubernetes)
 
@@ -160,7 +160,7 @@ Stork is the Portworx’s storage scheduler for Kubernetes that helps achieve ev
 #### Resources
 
  - [Introducing STORK: Intelligent Storage Orchestration for Kubernetes](https://portworx.com/stork-storage-orchestration-kubernetes/)
- - [Using Stork with Portworx](/portworx-install-with-kubernetes/storage-operations/stork/)
+ - [Using Stork with Portworx](/operations/operate-kubernetes/storage-operations/stork/)
 
 ## Application Aware Snapshots using Pre and Post Rules
 
@@ -170,7 +170,7 @@ Portworx supports specifying pre and post rules that are run on the application 
 
 #### Resources
 
- - [Create Pre and Post Rules for Snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snaps-3d/#step-1-create-rules)
+ - [Create Pre and Post Rules for Snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots/snaps-3d/#step-1-create-rules)
 
 ## Understand how PX-Autopilot can be used to automatically add disks to your storage pool
 
@@ -180,7 +180,7 @@ Users use an Autopilot Rule which a CRD within Kubernetes to tell Autopilot whic
 
 #### Resources
 
- - [Working with AutoPilot Rules](/portworx-install-with-kubernetes/autopilot/how-to-use/working-with-rules/)
+ - [Working with AutoPilot Rules](/operations/operate-kubernetes/autopilot/how-to-use/working-with-rules/)
 
 ## Learn about Volume Placement Strategies like Volume Affinity and Anti-Affinity
 
@@ -190,7 +190,7 @@ When you provision volumes, Portworx places them throughout the cluster and acro
 
 #### Resources
 
- - [Volume Placement Strategies](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
+ - [Volume Placement Strategies](/operations/operate-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
  - [Kubernetes StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
 
 ## Configuring your storage cluster

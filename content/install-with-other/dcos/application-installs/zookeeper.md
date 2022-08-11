@@ -5,7 +5,7 @@ keywords: Install, Zookeeper, HDFS, DCOS, DC/OS
 ---
 
 {{<info>}}
-This document presents the **DC/OS** method of installing Zookeeper with Portworx. Please refer to the [Kafka and Zookeeper with Portworx on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper) page if you are running Portworx on Kubernetes.
+This document presents the **DC/OS** method of installing Zookeeper with Portworx. Please refer to the [Kafka and Zookeeper with Portworx on Kubernetes](/operations/operate-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
 DC/OS provides a Zookeeper service that makes it easy to deploy and manage Zookeeper on Mesosphere DC/OS. This guide will help you to install and run the containerized Zookeeper service backed by Portworx volumes for [persistent DCOS storage](https://portworx.com/use-case/persistent-storage-dcos/).

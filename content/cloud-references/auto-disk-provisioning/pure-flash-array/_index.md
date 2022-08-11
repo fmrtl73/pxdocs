@@ -115,4 +115,4 @@ Once deployed, Portworx detects that the FlashArray secret is present when it st
 ## Related topics
 
 * [Pure.json file reference](/reference/pure-reference/pure-json-reference/)
-* [Configure FlashBlade as a Direct Access filesystem](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flashblade/)
+* [Configure FlashBlade as a Direct Access filesystem](/operations/operate-kubernetes/storage-operations/create-pvcs/pure-flashblade/)

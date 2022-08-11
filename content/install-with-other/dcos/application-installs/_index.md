@@ -6,7 +6,7 @@ weight: 400
 ---
 
 {{<info>}}
-This document presents the **DC/OS** method of installing stateful applications with Portworx. Please refer to the [Stateful applications on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/) page if you want to install stateful applications with Portworx on Kubernetes.
+This document presents the **DC/OS** method of installing stateful applications with Portworx. Please refer to the [Stateful applications on Kubernetes](/operations/operate-kubernetes/application-install-with-kubernetes/) page if you want to install stateful applications with Portworx on Kubernetes.
 {{</info>}}
 
 

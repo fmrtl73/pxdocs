@@ -41,7 +41,7 @@ To modify the defaults, click on the `Review & Run` button next to the package o
 
 On the `Edit configuration` page you can change the default configuration for Portworx deployment. Here you can choose to
 enable etcd (if you do not have an external etcd service). To have a custom etcd installation please refer to
-[this doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
+[this doc](/operations/operate-kubernetes/etcd).
 
 ### Portworx Options
 Specify your kvdb (etcd) server if you don't want to use the etcd cluster with this service. If the etcd cluster
@@ -59,7 +59,7 @@ to `portworx options` to force Portworx to use these disks or wipe the filesyste
 {{</info>}}
 
 ### Secrets Options
-To use DC/OS secrets for Volume Encryption and storing Cloud Credentials, refer [Portworx with DC/OS Secrets](/key-management/dc-os-secrets).
+To use DC/OS secrets for Volume Encryption and storing Cloud Credentials, refer [Portworx with DC/OS Secrets](/operations/key-management/dc-os-secrets).
 
 ### Etcd Options
 By default a 3 node etcd cluster will be created with 5GB of local persistent storage. The size of the persistent disks can

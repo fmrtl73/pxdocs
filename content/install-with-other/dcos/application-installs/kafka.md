@@ -5,7 +5,7 @@ keywords: Install, Kafka, DCOS, DC/OS
 ---
 
 {{<info>}}
-This document presents the **DC/OS** method of installing Kafka with Portworx. Please refer to the [Kafka and Zookeeper with Portworx on Kubernetes](/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper) page if you are running Portworx on Kubernetes.
+This document presents the **DC/OS** method of installing Kafka with Portworx. Please refer to the [Kafka and Zookeeper with Portworx on Kubernetes](/operations/operate-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
 This guide will help you to install the Kafka service on your DCOS cluster backed by Portworx volumes for persistent storage.

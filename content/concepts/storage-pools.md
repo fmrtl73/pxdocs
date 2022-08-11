@@ -24,7 +24,7 @@ You can form and manage storage pools using the `pxctl` command-line utility. Yo
 
 You can form a maximum of 32 storage pools on a single node. You may also have nodes with no storage at all in your cluster; nodes with no storage are **storageless**.
 
-You can monitor your storage pools using Prometheus or the `pxctl` command-line utility. Refer to the [Portworx integration with Prometheus](/install-with-other/operate-and-maintain/monitoring/prometheus) for details on how to monitor your Portworx cluster with Prometheus. The [Alerts using pxctl](/reference/cli/alerts) page provides details about monitoring the status of your cluster with the `pxctl` command-line utility.
+You can monitor your storage pools using Prometheus or the `pxctl` command-line utility. Refer to the [Portworx integration with Prometheus](/operations/operate-other/monitoring/prometheus) for details on how to monitor your Portworx cluster with Prometheus. The [Alerts using pxctl](/reference/cli/alerts) page provides details about monitoring the status of your cluster with the `pxctl` command-line utility.
 
 ## Related topics
 

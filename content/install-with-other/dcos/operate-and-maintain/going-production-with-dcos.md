@@ -7,7 +7,7 @@ linkTitle: Running Portworx in Production with DC/OS
 ---
 
 {{<info>}}
-This document presents the **DC/OS** method of running Portworx in production. Please refer to the [Running in Production](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/running-in-production/) page if you are running Portworx on Kubernetes.
+This document presents the **DC/OS** method of running Portworx in production. Please refer to the [Running in Production](/operations/operate-kubernetes/running-in-production/) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
 ## DAY 1 Operations
@@ -23,7 +23,7 @@ This document presents the **DC/OS** method of running Portworx in production. P
   * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will
     form the Portworx cluster
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`
-  * etcd -  Setup etcd as a 3-node etcd cluster *outside* the  container orchestrator to ensure maximum stability. Refer to the following [page](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd) on how to install etcd and also configure it for maximum stability.
+  * etcd -  Setup etcd as a 3-node etcd cluster *outside* the  container orchestrator to ensure maximum stability. Refer to the following [page](/operations/operate-kubernetes/etcd) on how to install etcd and also configure it for maximum stability.
 
 ### Configuring the Server or the Compute Infrastructure
 
@@ -59,14 +59,14 @@ uname -r
 
 * Portworx classifies drive media into different performance levels and groups them in separate pools for volume data. These levels are called `io_priority` and they offer the levels  `high`, `medium` and `low`
 
-* The `io_priority` of a pool is determined automatically by Portworx. If the intention is to run low latency transactional workloads like databases on Portworx, then {{<companyName>}} recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode)
+* The `io_priority` of a pool is determined automatically by Portworx. If the intention is to run low latency transactional workloads like databases on Portworx, then {{<companyName>}} recommends having NVMe or other SAS/SATA SSDs in the system. Pool priority can be managed as documented [here](/operations/operate-kubernetes/maintenance-mode)
 
 * This [page](/concepts/class-of-service) offers more information on different io_prioirty levels
 
 
 ####  Working with drives with AWS Auto scaling group
 
-Portworx supports automatic management of EBS volumes. If you are using AWS ASG to manage Portworx nodes,then you should to use the ASG [feature](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
+Portworx supports automatic management of EBS volumes. If you are using AWS ASG to manage Portworx nodes,then you should to use the ASG [feature](/install-portworx/cloud/aws/aws-asg)
 
 ### Portworx Node Topology
 
@@ -104,7 +104,7 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 ### Volume Management Best Practices
 
-* Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity for `VolumeSpaceLow` alerts. These alerts are triggered when the free available space goes below a threshold. See [this page](/install-with-other/operate-and-maintain/monitoring/portworx-alerts) for more details.
+* Volumes - Portworx volumes are thinly provisioned by default. Make sure to monitor for capacity for `VolumeSpaceLow` alerts. These alerts are triggered when the free available space goes below a threshold. See [this page](/operations/operate-other/monitoring/portworx-alerts) for more details.
 
 * For applications needing node level availability and read parallelism across nodes, it is recommended to set the volumes with replication factor 2 or replication factor 3/
 
@@ -172,7 +172,7 @@ Failure domains in terms of RACK information can be passed in as described [here
   pxctl volume create --daily @08:00 --daily @18:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
   ```
 
-* Here is more information on how to setup [snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots) in {{< pxEnterprise >}}.
+* Here is more information on how to setup [snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots) in {{< pxEnterprise >}}.
 
 * For DR, it is recommended to setup cloudsnaps as well. This is covered in detail in the Day 3 - Cloudsnaps section
 
@@ -182,11 +182,11 @@ Failure domains in terms of RACK information can be passed in as described [here
 
 While Prometheus can be deployed as a container within the container orchestrator, many of Portworx, Inc.'s production customers deploy Prometheus in a separate cluster that is dedicated for managing and monitoring their large scale container orchestrator infrastructure.
 
-  * The [Portworx integration with Prometheus](/install-with-other/operate-and-maintain/monitoring/prometheus) page
+  * The [Portworx integration with Prometheus](/operations/operate-other/monitoring/prometheus) page
 shows how Prometheus can be set up to monitor Portworx
-  * Configure Grafana via this [template](/install-with-other/operate-and-maintain/monitoring/grafana)
-  * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/install-with-other/operate-and-maintain/monitoring/alerting)
-  * List of Portworx Alerts are documented [here](/install-with-other/operate-and-maintain/monitoring/portworx-alerts)
+  * Configure Grafana via this [template](/operations/operate-other/monitoring/grafana)
+  * Here is how Alerts Manager can be configured for looking for alerts with [Alerts Manager](/operations/operate-other/monitoring/alerting)
+  * List of Portworx Alerts are documented [here](/operations/operate-other/monitoring/portworx-alerts)
 
 ## Day 2 Operations
 
@@ -217,15 +217,15 @@ shows how Prometheus can be set up to monitor Portworx
 #### Scaling out a cluster in cloud
 
 * The best way to scale a cluster is via ASG integration on AWS.
-* This feature is called Stateful Autoscaling and is described [here](/portworx-install-with-kubernetes/cloud/aws/aws-asg/).
+* This feature is called Stateful Autoscaling and is described [here](/install-portworx/cloud/aws/aws-asg/).
   * Perform sizing of your data needs and determine the amount and type of storage (EBS volumes) needed per ECS instance.
   * Create EBS volume [templates](/cloud-references/auto-disk-provisioning/aws/#ebs-volume-template) to match the number of EBS volumes needed per EC2 instance.
   * Create a stateful AMI to associate it with your auto-scaling group.
-  * Once everything is setup, as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This [page](/portworx-install-with-kubernetes/cloud/aws/aws-asg/) desribes how Portworx handles the volume management in a auto-scaling cluster.
+  * Once everything is setup, as described in the steps above, then the cluster can be scaled up and down via ASG. Portworx will automatically manage the EBS volume creation and preserve the volumes across the cluster scaling up and down. This [page](/install-portworx/cloud/aws/aws-asg/) desribes how Portworx handles the volume management in a auto-scaling cluster.
 
 #### Scaling out a cluster on-prem
 
-* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/install-with-other/operate-and-maintain/scaling/scale-out) shows how to scale up a existing cluster by adding more nodes.
+* The best way to scale the cluster on-prem is by having the new nodes join the existing cluster. This [page](/operations/operate-other/scaling/scale-out) shows how to scale up a existing cluster by adding more nodes.
 
 * Using DC/OS, if Portworx is installed as a framework, you can also scale a Portworx cluster by using the DC/OS Portworx [framework](/install-with-other/dcos/operate-and-maintain/volume-scaling/).
 
@@ -239,14 +239,14 @@ shows how Prometheus can be set up to monitor Portworx
 * Ensure the volumes in the node have replicas in other nodes.
   * If the volumes have replication factor of 1, increase the [replication factor](/reference/cli/updating-volumes).
   * Ensure the services are failed over to a different node when the node is taken into maintenance mode.
-* Follow the instructions in this [page](/install-with-other/operate-and-maintain/scaling/scale-up) to add storage each node.
+* Follow the instructions in this [page](/operations/operate-other/scaling/scale-up) to add storage each node.
 
 ### Server and Networking Replacements and Upgrades
 
 * Servers running Portworx can be replaced by performing decommissioning of the server to safely remove them from the cluster.
 * Ensure that all the volumes in the cluster are replicated before decommissioning the node so that the data is still available for the containers mounting the volumes after the node is decommisioned.
 * Use `pxctl cluster delete` command to manually remove the node from the cluster.
-* Follow the instructions in this page to [delete](/install-with-other/operate-and-maintain/scaling/scale-down/#prevention-of-data-loss) nodes in the cluster
+* Follow the instructions in this page to [delete](/operations/operate-other/scaling/scale-down/#prevention-of-data-loss) nodes in the cluster
 * Once the node is decommissioned, components like network adapters, storage adapters that need to be replaced can be replaced.
 * The server can be replaced as well.
 * Once the replacement is done, the node can be joined back to the cluster by going through the steps described in the scaling-out the cluster section.
@@ -294,7 +294,7 @@ shows how Prometheus can be set up to monitor Portworx
 * It is recommended to take atleast one cloudsnap a day for each volume in production in the cluster.
 * Cloudsnaps can be scheduled via the Portworx CLI for hourly, daily, weekly or monthly snaps.
 * Cloudsnaps can also be scheduled to happen at a particular time. It is recommended to schedule cloudsnaps at a time when the application data traffic is light to ensure faster back-ups.
-* Follow [DR best practices](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/dr-best-practices) and setup periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup.
+* Follow [DR best practices](/operations/operate-kubernetes/dr-best-practices) and setup periodic cloudsnaps so in case of a disaster, Portworx volumes can be restored from an offsite backup.
 
 ### Drive Replacements
 
@@ -378,5 +378,5 @@ Pool ID: 1
   * Ensure all volumes have replicas in other nodes if you still need to access the data.
   * Replace the bad drive(s) with new drive(s).
   * Add the node to the cluster as a new node.
-     (refer to [adding cluster nodes](/install-with-other/operate-and-maintain/scaling/scale-out)).
+     (refer to [adding cluster nodes](/operations/operate-other/scaling/scale-out)).
   * Ensure the cluster is operational and the new node has been added to the cluster via `pxctl cluster status` and `pxctl cluster list`.

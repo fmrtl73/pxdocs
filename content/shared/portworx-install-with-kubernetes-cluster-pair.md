@@ -275,5 +275,5 @@ kubectl describe clusterpair remotecluster -n <namespace>
 ```
 
 {{<info>}}
-**NOTE:** You might need to perform additional steps if you are using [GKE](/portworx-install-with-kubernetes/migration/gke) or [EKS](/portworx-install-with-kubernetes/migration/eks).
+**NOTE:** You might need to perform additional steps if you are using [GKE](/operations/operate-kubernetes/migration/gke) or [EKS](/operations/operate-kubernetes/migration/eks).
 {{</info>}}

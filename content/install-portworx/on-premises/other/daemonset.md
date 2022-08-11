@@ -13,7 +13,7 @@ This topic provides instructions for installing Portworx with Kubernetes on-prem
 
 ## Install
 
-{{<info>}}**Airgapped clusters**: If your nodes are airgapped and don't have access to common internet registries, first follow [Airgapped clusters](/portworx-install-with-kubernetes/on-premise/airgapped) to fetch Portworx images.{{</info>}}
+{{<info>}}**Airgapped clusters**: If your nodes are airgapped and don't have access to common internet registries, first follow [Airgapped clusters](/install-portworx/on-premises/airgapped) to fetch Portworx images.{{</info>}}
 
 {{< content "shared/portworx-install-with-kubernetes-shared-1-generate-the-spec-footer.md" >}}
 
@@ -23,4 +23,4 @@ This topic provides instructions for installing Portworx with Kubernetes on-prem
 
 ## Related topics
 
-* Refer to the [Advanced installation parameters](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/other-operations/advanced-installation-parameters/) page for details about how to specify advanced installation parameters.
+* Refer to the [Advanced installation parameters](/operations/operate-kubernetes/other-operations/advanced-installation-parameters/) page for details about how to specify advanced installation parameters.

@@ -8,7 +8,7 @@ hidden: true
 To install and configure Portworx Developer Edition via the _Docker_ CLI, use the command-line steps described in this section.
 
 {{<info>}}
-**Important:** Portworx stores configuration metadata in a KVDB (key/value store), such as _Etcd_. {{<companyName>}} recommends setting up a dedicated kvdb for Portworx to use. If you want to set one up, see the [etcd example](/reference/etcd) for Portworx.
+**Important:** Portworx stores configuration metadata in a KVDB (key/value store), such as _Etcd_. {{<companyName>}} recommends setting up a dedicated kvdb for Portworx to use. If you want to set one up, see the [etcd example](/operations/etcd) for Portworx.
 {{</info>}}
 
 ### Install and configure Docker

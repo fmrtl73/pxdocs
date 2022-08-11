@@ -66,11 +66,11 @@ July 11, 2022
 
 Portworx by Pure Storage is proud to introduce the following new features:
 
-* On-premises users who want to use Pure Storage FlashArray with Portworx on Kubernetes can [provision and attach FlashArray LUNs as a Direct Access volume](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flasharray/).
-* The [CSI topology feature](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/cluster-topology/csi-topology/) allows users of FlashArray Direct Access volumes and FlashBlade Direct Access filesystems to direct their applications to provision storage on a FlashArray Direct Access volume or FlashBlade Direct Access filesystem that is in the same set of Kubernetes nodes where the application pod is located.
+* On-premises users who want to use Pure Storage FlashArray with Portworx on Kubernetes can [provision and attach FlashArray LUNs as a Direct Access volume](/operations/operate-kubernetes/storage-operations/create-pvcs/pure-flasharray/).
+* The [CSI topology feature](/operations/operate-kubernetes/cluster-topology/csi-topology/) allows users of FlashArray Direct Access volumes and FlashBlade Direct Access filesystems to direct their applications to provision storage on a FlashArray Direct Access volume or FlashBlade Direct Access filesystem that is in the same set of Kubernetes nodes where the application pod is located.
 * You can now [use Portworx with IBM cloud drives](/install-portworx/cloud/ibm/ibm-cloud-drives) on VPC Gen2 infrastructure. Portworx will use the IBM CSI provider to automatically provision and manage its own storage disks. 
-* You can enable [pay-as-you-go billing](/reference/licensing/portworx-enterprise/pay-as-you-go-air-gapped) for an air-gapped cluster with no outbound connectivity by acquiring a pay-as-you-go account key from Portworx. This key can be used on any cluster to activate the license, provided you can report usage collected by the metering module.
-* You can now deploy Portworx in [IPv6](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/ipv6/) networking enabled environments.
+* You can enable [pay-as-you-go billing](/operations/licensing/portworx-enterprise/pay-as-you-go-air-gapped) for an air-gapped cluster with no outbound connectivity by acquiring a pay-as-you-go account key from Portworx. This key can be used on any cluster to activate the license, provided you can report usage collected by the metering module.
+* You can now deploy Portworx in [IPv6](/operations/operate-kubernetes/ipv6/) networking enabled environments.
 
 ### Improvements
 
@@ -189,7 +189,7 @@ April 7, 2022
 
 Portworx by Pure Storage is proud to introduce the following new features:
 
-* The Portworx [Application Control](/portworx-install-with-kubernetes/storage-operations/io-throttling/) feature provides a method for controlling an individual Portworx volume’s IO or bandwidth usage of backend pool resources. Portworx volumes are created from a common backend pool and share their available IOPS and bandwidth amongst all other provisioned Portworx volumes.
+* The Portworx [Application Control](/operations/operate-kubernetes/storage-operations/io-throttling/) feature provides a method for controlling an individual Portworx volume’s IO or bandwidth usage of backend pool resources. Portworx volumes are created from a common backend pool and share their available IOPS and bandwidth amongst all other provisioned Portworx volumes.
 * The [volume trash can](/reference/cli/trashcan/) feature provides protection against accidental or inadvertent volume deletions which could result in loss of data. In a clustered environment such as Kubernetes, unintended deletion of a PV or a namespace will cause volumes to be lost. This feature is recommended in any environment which is prone to such inadvertent deletions, as it can help to prevent data loss.
 * You can enable [automatic filesystem trimming](/reference/cli/volume-trim/#automatic-filesystem-trim-operations) (auto fstrim) at the volume, node, or cluster level. When you enable auto fstrim at the cluster or node level and enable `nodiscard` on your volumes, auto fstrim monitors the unused space in all filesystems mounted on Portworx volumes and automatically triggers a trim job to return unused space back to the pool, and you do not have to manually issue trim jobs.
 
@@ -298,7 +298,7 @@ Jan 27, 2022
 
 Portworx by Pure Storage is proud to introduce the following new features:
 
-* Support for [Pure FlashBlade as a Direct Access filesystem](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flashblade) has graduated from early access to Generally Available! With this feature, Portworx directly provisions FlashBlade NFS filesystems, maps them to a user PVC, and mounts them to pods. Reach out to your account team to enable this feature. 
+* Support for [Pure FlashBlade as a Direct Access filesystem](/operations/operate-kubernetes/storage-operations/create-pvcs/pure-flashblade) has graduated from early access to Generally Available! With this feature, Portworx directly provisions FlashBlade NFS filesystems, maps them to a user PVC, and mounts them to pods. Reach out to your account team to enable this feature. 
 * Support for [Pure FlashArray cloud drives](/cloud-references/auto-disk-provisioning/pure-flash-array/) has graduated from early access to Generally Available! Use FlashArrays as a cloud storage provider. Reach out to your account team to enable this feature. 
 
 ### Improvements
@@ -345,7 +345,7 @@ Portworx is aware of the following issues, check future release notes for fixes 
 | PD-1063 | If the Kubernetes ETCD is unstable, Portworx may experience intermittent access issues to the Kubernetes API. <br/><br/>**Workaround:** If a pool expand operation fails with the error message: `could not retrieve portworx-storage-decision-matrix config map: etcdserver: leader changed"`, retry the pool expand operation. |
 | PD-1093 | Application pods can get stuck in the `ContainerCreating` state. Check for _both_ of the following conditions to determine if volume attachment has failed:<ul><li>When you run `kubectl describe pod`, you see the following message:<br/>`MountVolume.SetUp failed for volume "<volume-name>" failed to attach volume: Volume: <vol-id> is attached on: <node-where-vol-is-attached>`</li><li>In your Portworx logs, you see the following error:<br/>`attach_if_mounted: failed to attach dev <vol-id> (-12ev)`</li></ul>**Workaround:** Restart the Portworx service on this node. You can also schedule the app on a different node, which moves the volume attachment location. |
 | PD-1071 | If you manually disconnect any connected volumes from FlashArray, the Portworx node may become stuck attempting to reconnect to the original volume if there are pending I/Os.<br/><br/>**Workaround:** Reconnecting the volume will resolve this issue at the next Portworx restart and the node will return to a healthy state. |
-| PD-1095 | If you uninstall Portworx with `deleteStrategy` set to [`Uninstall`](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall-operator/) (and not `UninstallAndWipe`), then you reinstall Portworx, the telemetry service and metrics collector will be unable to push metrics and may run into a `CrashLoopBack` state. This is for certificate security reasons.<br/><br/>**Workaround:** [Contact Support](/support/) to reissue the certificate. |
+| PD-1095 | If you uninstall Portworx with `deleteStrategy` set to [`Uninstall`](/operations/operate-kubernetes/uninstall/uninstall-operator/) (and not `UninstallAndWipe`), then you reinstall Portworx, the telemetry service and metrics collector will be unable to push metrics and may run into a `CrashLoopBack` state. This is for certificate security reasons.<br/><br/>**Workaround:** [Contact Support](/support/) to reissue the certificate. |
 
 ## 2.9.0
 
@@ -536,14 +536,14 @@ July 30, 2021
 
 Portworx by Pure Storage is proud to introduce the following new features:
 
-* Early access support for [Pure FlashBlade as a Direct Access filesystem](/portworx-install-with-kubernetes/storage-operations/create-pvcs/pure-flashblade). With this feature, Portworx directly provisions FlashBlade NFS filesystems, maps them to a user PVC, and mounts them to pods. Reach out to your account team to enable this feature. 
+* Early access support for [Pure FlashBlade as a Direct Access filesystem](/operations/operate-kubernetes/storage-operations/create-pvcs/pure-flashblade). With this feature, Portworx directly provisions FlashBlade NFS filesystems, maps them to a user PVC, and mounts them to pods. Reach out to your account team to enable this feature. 
 * Early access support for [Pure FlashArray cloud drives](/cloud-references/auto-disk-provisioning/pure-flash-array/). Use FlashArrays as a cloud storage provider. Reach out to your account team to enable this feature. 
-* [Snapshot optimization using extent metadata](/portworx-install-with-kubernetes/storage-operations/create-snapshots/snapshot-methods): Reduce the amount of data sent to your cloud storage provider when taking cloud snapshots. 
-* [SkinnySnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/skinnysnaps): improve the performance of your storage pools when taking volume snapshots. 
-* [Sharedv4 service volumes](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs): improve fault tolerance by associating sharedv4 volumes with a Kubernetes service.
+* [Snapshot optimization using extent metadata](/operations/operate-kubernetes/storage-operations/create-snapshots/snapshot-methods): Reduce the amount of data sent to your cloud storage provider when taking cloud snapshots. 
+* [SkinnySnaps](/operations/operate-kubernetes/storage-operations/create-snapshots/skinnysnaps): improve the performance of your storage pools when taking volume snapshots. 
+* [Sharedv4 service volumes](/operations/operate-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs): improve fault tolerance by associating sharedv4 volumes with a Kubernetes service.
 * You can now install [Portworx on Nomad with CSI enabled](/install-with-other/nomad/installation/install-as-a-nomad-job).
 * [Install and scale](/cloud-references/auto-disk-provisioning/tanzu/install) a Portworx cluster on VMware Tanzu with CSI.
-* [With Pure1 integration](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/troubleshooting/collecting-diagnostics), Portworx can now automatically upload its diags to Pure Storage's call home service called **Pure1**.
+* [With Pure1 integration](/operations/operate-kubernetes/troubleshooting/collecting-diagnostics), Portworx can now automatically upload its diags to Pure Storage's call home service called **Pure1**.
 
 ### Improvements
 
@@ -624,7 +624,7 @@ Portworx is aware of the following issues, check future release notes for fixes 
 | PWX-20423 | Portworx uses a set of default export options in storage classes which cannot currently be overridden. The `export_options` parameter only allows extending the current default options. | 
 | PD-915 | If a storage node is removed or replaced from the cluster and that node was the NFS server for a sharedv4 volume, client application pods running on other nodes can get stuck in pod Terminating state when deleted.<br/><br/>**User impact:** Application pods using sharedv4 volumes remotely will get stuck in Terminating state.<br/><br/>**Recommendation:** <ul><li>Find the node where the pod is stuck in terminating state</li><li>Find pod UUID: <code>kubectl get pods -n <namespace> <pod> -o yaml \| grep uid \| tail -n1</code></li><li>Run <code>mount \| grep \<pod_uuid\> \| grep \<vol-name\></code></li><li>Unmount the path: <code>umount -f -l \<mounted_path\></code></li></ul> |
 | PD-914 | When a pod that is using a sharedv4 *service* volume, is scheduled on the same node where the volume is attached, Portworx sets up the pod to access the volume locally via a bind mount. If the pod is scheduled on a different node, the pod uses an NFS mount to access the volume remotely. If there is a sharedv4 service failover, the volume gets attached to a different node. After the failover, pods that were accessing the volume remotely over NFS, continue to have an access to the volume. But the pods that were accessing the volume locally via bind-mount, lose access to the volume even after Portworx is ready on the node since the volume is no longer attached to that node. Such pods need to be deleted and recreated so that they start accessing the volume remotely over NFS. If the stork is enabled in the Kuberenetes cluster, it automatically deletes such pods. But sometimes a manual intervention may be required if the stork is either not installed or fails to restart such pods. <br/><br/>**Recommendation:** Enable stork to reduce the likelihood of running into this issue. If you do run into this issue, use the command `kubectl pod delete -n <namespae> <pod>` to delete the pods which cannot access sharedv4 service volume anymore because the sharedv4 service failed over to another node. <br/><br/>This problem does not apply to the pods that are using "sharedv4" volumes without the `service` feature. <br/><br/>This problem does not apply to the pods that are accessing "sharedv4 service" volumes remotely i.e. from a node other than the one where volume is attached. |
-| PD-926 | For information about Sharedv4 service known issues, see the notes in the [Provision a Sharedv4 Volume](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs) section of the documentation.  |
+| PD-926 | For information about Sharedv4 service known issues, see the notes in the [Provision a Sharedv4 Volume](/operations/operate-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs) section of the documentation.  |
 
 ## 2.7.4
 
@@ -886,7 +886,7 @@ December 7, 2020
 
 * [Announcing a new command](/reference/cli/cloud-drives-asg/#transfer-cloud-drives-to-a-storageless-node) for transferring a Portworx cloud driveset from one storage node to a storageless node. This command is currently supported only for Google Cloud Platform, and is not supported when Portworx is installed using an internal KVDB. 
 * Portworx now allows you to [drain/remove volume attachments](/reference/cli/service/#drain-volume-attachments) from a node through the `pxctl service node drain-attachments` command.
-* Portworx [now supports](/key-management/ibm-key-protect/) IBM Hyper Protect Crypto Services (IBM HPCS) as a key management store.
+* Portworx [now supports](/operations/key-management/ibm-key-protect/) IBM Hyper Protect Crypto Services (IBM HPCS) as a key management store.
 
 ### Improvements
 
@@ -1046,7 +1046,7 @@ October 2, 2020
 
 ### New features
 
-* [Introducing Portworx on the AWS Marketplace](/portworx-install-with-kubernetes/cloud/aws/aws-marketplace/): deploy Portworx from the AWS Marketplace and pay through the AWS Marketplace Metering Service. 
+* [Introducing Portworx on the AWS Marketplace](/install-portworx/cloud/aws/aws-marketplace/): deploy Portworx from the AWS Marketplace and pay through the AWS Marketplace Metering Service. 
 
 ### Improvements
 
@@ -1128,7 +1128,7 @@ August 25, 2020
 
 * [Announcing guest (public) role access](/concepts/authorization/overview/#guest-access): the guest role allows your users to access and manipulate public volumes.
 * Portworx now features K3s support: deploy Portworx on the K3s distribution.
-* [Check out proxy volumes (NFS)](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-proxy-volume-pvcs): use this feature to proxy an external NFS share onto your volumes.
+* [Check out proxy volumes (NFS)](/operations/operate-kubernetes/storage-operations/create-pvcs/create-proxy-volume-pvcs): use this feature to proxy an external NFS share onto your volumes.
 * Introducing automatic cluster-wide capacity distribution and balancing. You can also run [rebalance operations manually](/reference/cli/service/#rebalance-storage-across-drives). 
 
 ### Improvements
@@ -1706,7 +1706,7 @@ November 18, 2019
 
 ### New Features
 
-* The `pxctl service pool expand` command is now available, allowing you to expand storage pools by adding drives and consuming unused drive capacity. See the [Expand your storage pool size](/portworx-install-with-kubernetes/storage-operations/create-pvcs/expand-storage-pool/) section of the documentation for more information.
+* The `pxctl service pool expand` command is now available, allowing you to expand storage pools by adding drives and consuming unused drive capacity. See the [Expand your storage pool size](/operations/operate-kubernetes/storage-operations/create-pvcs/expand-storage-pool/) section of the documentation for more information.
 
 ### Improvements
 
@@ -1732,7 +1732,7 @@ November 12, 2019
 
 ### New Features
 
-* Introducing new ways to control [volume provisioning](/portworx-install-with-kubernetes/storage-operations/create-pvcs/control-volume-provisioning/): customize provisioning ratios, disable thin provisioning, or disable provisioning entirely.
+* Introducing new ways to control [volume provisioning](/operations/operate-kubernetes/storage-operations/create-pvcs/control-volume-provisioning/): customize provisioning ratios, disable thin provisioning, or disable provisioning entirely.
 
 ### Improvements
 
@@ -1828,10 +1828,10 @@ September 30, 2019
 ### New Features
 
 * Introducing [Storage pool caching](/concepts/pool-caching/), this feature is available on new clusters only.
-* Portworx now features [stateful application backup and cloning](/portworx-install-with-kubernetes/storage-operations/stateful-applications/), allowing you new ways to manage your stateful applications.
+* Portworx now features [stateful application backup and cloning](/operations/operate-kubernetes/storage-operations/stateful-applications/), allowing you new ways to manage your stateful applications.
 * Visit [PX-Central](https://central.portworx.com), a place where you can learn all about getting started with Portworx.
 * New [jq filtering documentation](/reference/cli/filtering-output-with-jq/) demonstrates how you can filter `pxctl` output.
-* The [Portworx CSI](/portworx-install-with-kubernetes/storage-operations/csi/) driver is now generally available for Kubernetes 1.13 and higher.
+* The [Portworx CSI](/operations/operate-kubernetes/storage-operations/csi/) driver is now generally available for Kubernetes 1.13 and higher.
 
 ### Improvements
 
@@ -1957,7 +1957,7 @@ July 24, 2019
 ### Key Features
 
 1. [Cloud drive support for Microsoft Azure](/install-portworx/cloud/azure/aks/)
-2. [Enhanced Volume placement strategies for advanced volume provisioning rules](/portworx-install-with-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
+2. [Enhanced Volume placement strategies for advanced volume provisioning rules](/operations/operate-kubernetes/storage-operations/create-pvcs/volume-placement-strategies/)
 3. Support for Red Hat Enterprise Linux 8 with CRI-O
 
 ### Enhancements
@@ -2116,15 +2116,15 @@ April 19, 2019
 
 * PX-Security
   * [General Concepts](/concepts/authorization)
-  * [Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/authorization)
+  * [Kubernetes](/operations/operate-kubernetes/authorization)
   * [CLI Volume access](/reference/cli/volume-access)
   * [CLI Authorization](/reference/cli/authorization)
   * [CLI Role](/reference/cli/role)
-* [PX-DR](/portworx-install-with-kubernetes/disaster-recovery)
-  * [Metro DR](/portworx-install-with-kubernetes/disaster-recovery/px-metro)
-  * [Asynchronous DR](/portworx-install-with-kubernetes/disaster-recovery/async-dr)
-* [Automated application level scheduled snaps and cloudsnaps](/portworx-install-with-kubernetes/storage-operations/create-snapshots/scheduled)
-* [Automated app-consistent cluster to cluster migration](/portworx-install-with-kubernetes/migration/#pre-and-post-exec-rules)
+* [PX-DR](/operations/operate-kubernetes/disaster-recovery)
+  * [Metro DR](/operations/operate-kubernetes/disaster-recovery/px-metro)
+  * [Asynchronous DR](/operations/operate-kubernetes/disaster-recovery/async-dr)
+* [Automated application level scheduled snaps and cloudsnaps](/operations/operate-kubernetes/storage-operations/create-snapshots/scheduled)
+* [Automated app-consistent cluster to cluster migration](/operations/operate-kubernetes/migration/#pre-and-post-exec-rules)
 * [Optimized incremental cloudsnap restores](/reference/cli/cloud-snaps/)
 
 ### Key Fixes
@@ -2752,15 +2752,15 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 
 ### Key Features and Enhancements
 
-* 3DSnaps - Ability to take [application-consistent](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
+* 3DSnaps - Ability to take [application-consistent](/operations/operate-kubernetes/storage-operations/create-snapshots)
   snapshots cluster wide (Available in 05/14 GA version)
   * Volume Group snapshots - Ability to take crash-consistent snapshots on group of volumes based on a user-defined label
-* GCP/GKE automated disk management based on [disk templates](/portworx-install-with-kubernetes/cloud/gcp/gke/)
-* [Kubernetes per volume secret support](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs) to enable
+* GCP/GKE automated disk management based on [disk templates](/install-portworx/cloud/gcp/gke/)
+* [Kubernetes per volume secret support](/operations/operate-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs) to enable
   volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
 * DC/OS vault integration - Use [Vault integrated with DC/OS](/install-with-other/dcos)
 * Support Pool Resize - Available in Maintenance Mode only
-* Container Storage Interface (CSI) [Tech Preview](/portworx-install-with-kubernetes/storage-operations/csi)
+* Container Storage Interface (CSI) [Tech Preview](/operations/operate-kubernetes/storage-operations/csi)
 * Support port mapping used by Portworx from 9001-9015 to a custom port number range by passing the starting
   port number in [install arguments](/install-with-other/docker/standalone)
 * Provide ability to do a [license transfer](/reference/knowledge-base/licensing/licensing-operations) from one cluster to another cluster
@@ -2870,7 +2870,7 @@ _**Upgrade Note 3**_: Container information parsing code has been disabled and h
 * Added `pxctl service node-wipe` to wipe Portworx metadata from a decommisioned node in the cluster
 * Change `snap_interval` parameter to `periodic` in `pxctl volume` commands
 * Add schduler information in `pxctl status` display
-* Add info about cloud volumes CLI [Kubernetes](/cloud-references/auto-disk-provisioning/gcp), [others](/portworx-install-with-kubernetes/cloud/aws/aws-asg)
+* Add info about cloud volumes CLI [Kubernetes](/cloud-references/auto-disk-provisioning/gcp), [others](/install-portworx/cloud/aws/aws-asg)
 * `pxctl service add --journal -d <device>` to add journal device support
 
 ### Key Fixes
@@ -3120,7 +3120,7 @@ November 22, 2017
 
 ### Key Features and Enhancements
 
-* PWX-4178 Perform snapshots in kubernetes via [annotations](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-annotations)
+* PWX-4178 Perform snapshots in kubernetes via [annotations](/operations/operate-kubernetes/storage-operations/create-snapshots/on-demand/snaps-annotations)
 
 ## 1.2.11.4
 
@@ -3174,7 +3174,7 @@ October 31, 2017
   The option “–labels x1=” results in the labels x2=v2 \(removes a label\).
 
 * Improvements to alerts:
-  * Additional alerts indicate the cluster status in much more finer detail. This document has more details on all the alerts posted by Portworx: [Here](/install-with-other/operate-and-maintain/monitoring/alerting)
+  * Additional alerts indicate the cluster status in much more finer detail. This document has more details on all the alerts posted by Portworx: [Here](/operations/operate-other/monitoring/alerting)
   * Rate limiting for alerts so that an alert isn’t repeatedly posted within a short timeframe.
 * You can now update the io\_profile field by using the `pxctl volume update` command so the parameter can be enabled for existing volumes.
 
@@ -3313,7 +3313,7 @@ If you are upgrading from an older version of Portworx (1.2.8 or older) and have
 
 * Provide the ability to cancel a replication add or HA increase operation
 * Automatically decommission a storage less node in the cluster if it has been offline for longer than 48 hours
-* [Kubernetes snapshots driver for {{< pxEnterprise >}}](/portworx-install-with-kubernetes/storage-operations/create-snapshots)
+* [Kubernetes snapshots driver for {{< pxEnterprise >}}](/operations/operate-kubernetes/storage-operations/create-snapshots)
 * Improve Kubernetes mount/unmount handling with POD failovers and moves
 
 ### Key Fixes
@@ -3426,12 +3426,12 @@ April 27, 2017
 
 ### Key Features and Enhancements
 
-* [AWS Auto-scaling integration with Portworx](/portworx-install-with-kubernetes/cloud/aws/aws-asg) managing EBS volumes for EC2 instances in AWS ASG
+* [AWS Auto-scaling integration with Portworx](/install-portworx/cloud/aws/aws-asg) managing EBS volumes for EC2 instances in AWS ASG
 * [Multi-cloud Backup and Restore](/reference/cli/cloud-snaps) of Portworx volumes
 * [Encrypted Volumes](/reference/cli/encrypted-volumes) with Data-at-rest and Data-in-flight encryption
 * Docker V2 Plugin Support
-* [Prometheus Integeration](/install-with-other/operate-and-maintain/monitoring/prometheus)
-* [Hashicorp Vault](/key-management/vault), [AWS KMS integration](/portworx-install-with-kubernetes/cloud/aws) and Docker Secrets Integration
+* [Prometheus Integeration](/operations/operate-other/monitoring/prometheus)
+* [Hashicorp Vault](/operations/key-management/vault), [AWS KMS integration](/install-portworx/cloud/aws) and Docker Secrets Integration
 * [Dynamically resize](/reference/cli/updating-volumes) Portworx volumes with no application downtime
 * Improved the security of the Portworx container
 

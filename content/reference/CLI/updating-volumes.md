@@ -134,7 +134,7 @@ As shown above, the `shared` field is set to `v4` indicating that `clitest` is n
 
 ### Related topics
 
-* For more information about creating shared Portworx volumes through Kubernetes, refer to the [Create sharedv4 PVCs](/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs/) page.
+* For more information about creating shared Portworx volumes through Kubernetes, refer to the [Create sharedv4 PVCs](/operations/operate-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs/) page.
 
 ## Changing a volume's sticky option
 
@@ -297,7 +297,7 @@ Volume	:  485002114762355071
 
 ### Related topics
 
-For more information about dynamically resizing a volume (PVC) using Kubernetes and Portworx, refer to the [Resize a Portworx PVC](/portworx-install-with-kubernetes/storage-operations/create-pvcs/resize-pvc/) page.
+For more information about dynamically resizing a volume (PVC) using Kubernetes and Portworx, refer to the [Resize a Portworx PVC](/operations/operate-kubernetes/storage-operations/create-pvcs/resize-pvc/) page.
 
 ## Update a volume's replication factor
 

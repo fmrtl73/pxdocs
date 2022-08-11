@@ -4,7 +4,7 @@ description: Portworx vSphere generic spec generation
 keywords: portworx, VMware, vSphere ASG
 hidden: true
 aliases:
-    - /portworx-install-with-kubernetes/on-premise/install-pks/vsphere-pks-generate-spec-internal-kvdb/
+    - /install-portworx/on-premises/install-pks/vsphere-pks-generate-spec-internal-kvdb/
 ---
 
 Now generate the spec with the following curl command.

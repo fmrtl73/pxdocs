@@ -8,7 +8,7 @@ weight: 600
 
 To begin uninstalling Portworx from VMware Tanzu, follow the steps in the Portworx uninstall section:
 
-{{<widelink url="/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall-operator/">}}
+{{<widelink url="/operations/operate-kubernetes/uninstall/uninstall-operator/">}}
 Uninstall Portworx using the Operator
 {{</widelink>}}
 

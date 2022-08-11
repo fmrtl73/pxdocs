@@ -10,7 +10,7 @@ weight: 1400
 
 {{< content "shared/encryption/intro.md" >}}
 
-To know more about the supported secret providers and how to configure them with Portworx, refer to the [Setup Secrets Provider](/key-management) page.
+To know more about the supported secret providers and how to configure them with Portworx, refer to the [Setup Secrets Provider](/operations/key-management) page.
 
 ## Creating and using encrypted volumes
 
@@ -154,4 +154,4 @@ The Portworx cluster must be authenticated to access the secret store for the en
 
 ## Related topics
 
-* For information about encrypting your Portworx volumes using Kubernetes secrets, refer to the [Using Kubernetes Secrets with Portworx](/key-management/kubernetes-secrets/#using-kubernetes-secrets-with-portworx) section.
+* For information about encrypting your Portworx volumes using Kubernetes secrets, refer to the [Using Kubernetes Secrets with Portworx](/operations/key-management/kubernetes-secrets/#using-kubernetes-secrets-with-portworx) section.

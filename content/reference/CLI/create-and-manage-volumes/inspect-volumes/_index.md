@@ -82,7 +82,7 @@ You can also modify the replication factor of a volume by running the `pxctl vol
  pxctl volume create --io_priority high volume-name
  ```
 
- See the [class-of-service](/concepts/class-of-service) page to get a better understanding of how performance levels work in Portworx. Additionally, note that Portworx provides an easy way to [manage storage pools](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/maintenance-mode/#storage-pool-maintenance) through the `pxctl service pool` command.
+ See the [class-of-service](/concepts/class-of-service) page to get a better understanding of how performance levels work in Portworx. Additionally, note that Portworx provides an easy way to [manage storage pools](/operations/operate-kubernetes/maintenance-mode/#storage-pool-maintenance) through the `pxctl service pool` command.
 
 - __Creation time__: indicates the creation date and time of the volume.
 - __Shared__: this field tells whether the volume is `sharedv4` or not. A sharedv4 volume is available to multiple containers running on different hosts at the same time. See the [sharedv4 volumes](/shared/concepts-shared-volumes) page for more details

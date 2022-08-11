@@ -7,7 +7,7 @@ linkTitle: GCP
 noicon: true
 ---
 
-{{<info>}}If you are running on GKE, visit [Portworx on GKE](/portworx-install-with-kubernetes/cloud/gcp/gke/).{{</info>}}
+{{<info>}}If you are running on GKE, visit [Portworx on GKE](/install-portworx/cloud/gcp/gke/).{{</info>}}
 
 The steps below will help you enable dynamic provisioning of Portworx volumes in your GCP cluster.
 
@@ -15,7 +15,7 @@ The steps below will help you enable dynamic provisioning of Portworx volumes in
 
 **Key-value store**
 
-Portworx uses a key-value store for its clustering metadata. Please have a clustered key-value database (etcd) installed and ready. For etcd installation instructions refer this [doc](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/etcd).
+Portworx uses a key-value store for its clustering metadata. Please have a clustered key-value database (etcd) installed and ready. For etcd installation instructions refer this [doc](/operations/operate-kubernetes/etcd).
 
 **Firewall**
 

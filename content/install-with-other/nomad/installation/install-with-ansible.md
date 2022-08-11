@@ -9,7 +9,7 @@ noicon: true
 ---
 
 {{<info>}}
-This document presents a **non-Kubernetes** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+This document presents a **non-Kubernetes** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/operations/operate-kubernetes/) page if you want to install Portworx on Kubernetes.
 {{</info>}}
 
 
@@ -19,7 +19,7 @@ To install with **Ansible**, please use the [Ansible Galaxy Role](https://galaxy
 
 ## Upgrading
 
-If you have installed Portworx with Ansible, Portworx needs to be upgraded through the CLI on a node-by-node basis. Please see the [upgrade instructions](/install-with-other/operate-and-maintain)
+If you have installed Portworx with Ansible, Portworx needs to be upgraded through the CLI on a node-by-node basis. Please see the [upgrade instructions](/operations/operate-other/)
 
 ## Scaling
 

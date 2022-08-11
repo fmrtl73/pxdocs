@@ -70,7 +70,7 @@ Use "pxctl cloudsnap [command] --help" for more information about a command.
 
 ### Login to the secrets database
 
-Note that the cloud credentials are stored in an external secret store. Hence, before creating the credentials, make sure that you have [configured a secret provider](/key-management) of your choice.
+Note that the cloud credentials are stored in an external secret store. Hence, before creating the credentials, make sure that you have [configured a secret provider](/operations/key-management) of your choice.
 
 Now, we can login to the secrets database by typing:
 
@@ -967,4 +967,4 @@ Cloudsnap schedule deleted successfully
 ```
 ## Related topics
 
-* For information about creating and managing cloud snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use cloud snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/on-demand/snaps-cloud/) page.
+* For information about creating and managing cloud snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use cloud snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots/on-demand/snaps-cloud/) page.

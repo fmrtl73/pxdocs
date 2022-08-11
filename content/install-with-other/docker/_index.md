@@ -8,7 +8,7 @@ hidesections: true
 ---
 
 {{<info>}}
-This document presents the **Docker** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/portworx-install-with-kubernetes/) page if you want to install Portworx on Kubernetes.
+This document presents the **Docker** method of installing a Portworx cluster. Please refer to the [Portworx on Kubernetes](/operations/operate-kubernetes/) page if you want to install Portworx on Kubernetes.
 {{</info>}}
 
 This section provides information on installing Portworx on a cluster that uses Docker Swarm or just vanilla Docker (no orchestrator).

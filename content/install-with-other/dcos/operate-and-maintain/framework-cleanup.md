@@ -43,7 +43,7 @@ dcos node ssh --master-proxy --leader \
 ## Cleanup the Portworx framework
 
 {{<info>}}
-This section presents the **DC/OS** method of cleaning up the Portworx framework. Please refer to the [Uninstall on Kubernetes](/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/) page if you are running Portworx on Kubernetes.
+This section presents the **DC/OS** method of cleaning up the Portworx framework. Please refer to the [Uninstall on Kubernetes](/operations/operate-kubernetes/uninstall/) page if you are running Portworx on Kubernetes.
 {{</info>}}
 
 If you are trying to cleanup Portworx framework, you will have to perform additional steps to cleanup the remnants

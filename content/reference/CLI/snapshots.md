@@ -296,4 +296,4 @@ Volume	:  1125771388930868153
 
 ## Related topics
 
-For information about creating snapshots of your Portworx volumes, refer to the [Create and use snapshots](/portworx-install-with-kubernetes/storage-operations/create-snapshots/) page.
+For information about creating snapshots of your Portworx volumes, refer to the [Create and use snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots/) page.
