@@ -75,7 +75,7 @@ Once you've ensured you meet the prerequisites and your physical network topolog
             {
                 "MgmtEndPoint": "<fa-management-endpoint>",
                 "APIToken": "<fa-api-token>"
-            },
+            }
         ]
     }
     ```
