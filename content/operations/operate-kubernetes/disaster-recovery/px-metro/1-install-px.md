@@ -350,7 +350,7 @@ Following is the witness script mentioned in the [Setup a witness node](#setup-a
   usage
   exit 1
   ;;
-  Once PX is up and running place the witness node in maintenance.
+  # Once PX is up and running place the witness node in maintenance.
   esac
   shift
   done
