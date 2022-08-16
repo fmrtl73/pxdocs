@@ -541,7 +541,7 @@ Portworx by Pure Storage is proud to introduce the following new features:
 * [Snapshot optimization using extent metadata](/operations/operate-kubernetes/storage-operations/create-snapshots/snapshot-methods): Reduce the amount of data sent to your cloud storage provider when taking cloud snapshots. 
 * [SkinnySnaps](/operations/operate-kubernetes/storage-operations/create-snapshots/skinnysnaps): improve the performance of your storage pools when taking volume snapshots. 
 * [Sharedv4 service volumes](/operations/operate-kubernetes/storage-operations/create-pvcs/create-sharedv4-pvcs): improve fault tolerance by associating sharedv4 volumes with a Kubernetes service.
-* You can now install [Portworx on Nomad with CSI enabled](/install-with-other/nomad/installation/install-as-a-nomad-job).
+* You can now install [Portworx on Nomad with CSI enabled](/install-portworx/install-with-other/nomad/installation/install-as-a-nomad-job).
 * [Install and scale](/cloud-references/auto-disk-provisioning/tanzu/install) a Portworx cluster on VMware Tanzu with CSI.
 * [With Pure1 integration](/operations/operate-kubernetes/troubleshooting/collecting-diagnostics), Portworx can now automatically upload its diags to Pure Storage's call home service called **Pure1**.
 
@@ -2758,11 +2758,11 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 * GCP/GKE automated disk management based on [disk templates](/install-portworx/cloud/gcp/gke/)
 * [Kubernetes per volume secret support](/operations/operate-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs) to enable
   volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
-* DC/OS vault integration - Use [Vault integrated with DC/OS](/install-with-other/dcos)
+* DC/OS vault integration - Use [Vault integrated with DC/OS](/install-portworx/install-with-other/dcos)
 * Support Pool Resize - Available in Maintenance Mode only
 * Container Storage Interface (CSI) [Tech Preview](/operations/operate-kubernetes/storage-operations/csi)
 * Support port mapping used by Portworx from 9001-9015 to a custom port number range by passing the starting
-  port number in [install arguments](/install-with-other/docker/standalone)
+  port number in [install arguments](/install-portworx/install-with-other/docker/standalone)
 * Provide ability to do a [license transfer](/reference/knowledge-base/licensing/licensing-operations) from one cluster to another cluster
 * Add support for [cloudsnap deletes](/reference/cli/cloud-snaps#deleting-a-cloud-backup)
 
@@ -3128,7 +3128,7 @@ November 20, 2017
 
 ### Key Features and Enhancements
 
-* {{< pxEnterprise >}} container is now available in [OCI Format](/install-with-other/docker/standalone)
+* {{< pxEnterprise >}} container is now available in [OCI Format](/install-portworx/install-with-other/docker/standalone)
 * Enhancements for db workloads to handle slow media
 
 ### Key Fixes

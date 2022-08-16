@@ -12,7 +12,7 @@ Portworx has best practices for both global container level optimization, as wel
 
 {{<companyName>}} recommends you use a journal device to absorb Portworx metadata writes. Journal writes are small with frequent syncs and therefore only SSD/NVME should be configured as a journal device.
 
-The journal device should be 3GB. Using a larger device will not help, since Portworx will only use these amounts of storage. You can specify the journal device using the `-j` option during installation. See the [Install on Docker Standalone](/install-with-other/docker/standalone) page for more details.
+The journal device should be 3GB. Using a larger device will not help, since Portworx will only use these amounts of storage. You can specify the journal device using the `-j` option during installation. See the [Install on Docker Standalone](/install-portworx/install-with-other/docker/standalone) page for more details.
 
 {{<info>}}
 **NOTE:**

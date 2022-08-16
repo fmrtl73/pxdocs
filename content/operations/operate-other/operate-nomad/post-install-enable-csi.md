@@ -9,7 +9,7 @@ noicon: true
 aliases:
     - /install-with-other/nomad/upgrade-and-maintain/post-install-enable-csi/
 ---
-Enable Portworx CSI with Nomad by editing the `portworx.nomad` file you used for initial deployment and make the following adjustments. After following these steps, your `portworx.nomad` file should look like the example in the [nomad job installation guide](/install-with-other/nomad/installation/install-as-a-nomad-job/).
+Enable Portworx CSI with Nomad by editing the `portworx.nomad` file you used for initial deployment and make the following adjustments. After following these steps, your `portworx.nomad` file should look like the example in the [nomad job installation guide](/install-portworx/install-with-other/nomad/installation/install-as-a-nomad-job/).
 
 1. Add the `csi_plugin` stanza to Nomad job specification inside of the "portworx" group:
 

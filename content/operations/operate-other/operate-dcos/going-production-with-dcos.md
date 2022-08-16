@@ -16,11 +16,11 @@ This document presents the **DC/OS** method of running Portworx in production. P
 ### Initial Software Setup for Production
 
 * Deployment - Portworx can be deployed either as a DC/OS framework or as a systemd service directly in the system
-  Refer to the install instructions for running Portworx as a DC/OS framework [page](/install-with-other/dcos). This deploys Portworx as a OCI container and as a framework in DC/OS
+  Refer to the install instructions for running Portworx as a DC/OS framework [page](/install-portworx/install-with-other/dcos). This deploys Portworx as a OCI container and as a framework in DC/OS
 
  (OR)
 
-  * Deploy Portworx directly as [OCI container](/install-with-other/docker/standalone)
+  * Deploy Portworx directly as [OCI container](/install-portworx/install-with-other/docker/standalone)
   * Ensure all nodes in the cluster have NTP running and the times are synchronized across all the nodes that will
     form the Portworx cluster
   * All nodes in the cluster should have achieved quorum and `pxctl status` should display the cluster as `operational`

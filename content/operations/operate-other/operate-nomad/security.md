@@ -12,7 +12,7 @@ This section covers information on utilizing the Portworx CSI driver on Nomad.
 
 ## Prerequisites
 
-Be sure to [enable PX security](/install-with-other/nomad/installation/install-as-a-nomad-job/#enable-px-security) when installing Portworx.
+Be sure to [enable PX security](/install-portworx/install-with-other/nomad/installation/install-as-a-nomad-job/#enable-px-security) when installing Portworx.
 
 ## Configure Authorization and Authentication
 

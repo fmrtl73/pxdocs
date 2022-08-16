@@ -69,7 +69,7 @@ The storage is available at `/dev/dm-1`.
 
 Below is an example of how to run Portworx in a new node so it joins an existing cluster.
 * Follow the instructions in the Installing
-  [Portworx as OCI](/install-with-other/docker/standalone)
+  [Portworx as OCI](/install-portworx/install-with-other/docker/standalone)
   page on starting Portworx in a new node
 * Use the same CLUSTER_ID as the ID of the cluster which you want the node to join for the -c parameter
 

@@ -18,7 +18,7 @@ The source code for these services can be found here: [Portworx DCOS-Commons Fra
 This framework is only supported directly by Portworx, Inc.. Please contact support@portworx.com directly for any support issues related with using this framework.
 {{</info>}}
 
-Please make sure you have installed [Portworx on DCOS](/install-with-other/dcos) before proceeding further.
+Please make sure you have installed [Portworx on DCOS](/install-portworx/install-with-other/dcos) before proceeding further.
 
 Running this framework requires a privileged user that can run sudo without tty access \(See [here](https://www.shell-tips.com/2014/09/08/sudo-sorry-you-must-have-a-tty-to-run-sudo)\). The default user for this framework is set to `nobody`. If `nobody` does not have the appropriate privileges please update the user during install.
 

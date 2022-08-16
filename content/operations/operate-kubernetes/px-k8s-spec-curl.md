@@ -56,7 +56,7 @@ Below are all parameters that can be given in the query string.
 | ca     | Location of CA file for ETCD authentication.                                                                                          | <var>ca=/path/to/server.ca</var>                           |
 | cert   | Location of certificate for ETCD authentication.                                                                                      | <var>cert=/path/to/server.crt</var>                        |
 | key    | Location of certificate key for ETCD authentication.                                                                                  | <var>key=/path/to/server.key</var>                         |
-| e      | Comma-separated list of environment variables that will be exported to Portworx. To view a list of all Portworx environment variables, go to [passing environment variables](/install-with-other/docker/standalone). | <var>e=MYENV1=myvalue1,MYENV2=myvalue2</var> |
+| e      | Comma-separated list of environment variables that will be exported to Portworx. To view a list of all Portworx environment variables, go to [passing environment variables](/install-portworx/install-with-other/docker/standalone). | <var>e=MYENV1=myvalue1,MYENV2=myvalue2</var> |
 
 {{<info>}}
 **Note:**<br/> If using secure etcd provide "https" in the URL and make sure all the certificates are in the `/etc/pwx/` directory on each host which is bind mounted inside Portworx container.
