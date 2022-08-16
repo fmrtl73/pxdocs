@@ -21,7 +21,7 @@ through CSI.
 {{</info>}}
 
 ## (Optional) Deploy an AWS Portworx-ready cluster
-Using [this AWS CloudFormation template](/install-with-other/dcos/operate-and-maintain/px-ready-aws-cf), you can easily deploy a
+Using [this AWS CloudFormation template](/operations/operate-other/operate-dcos/px-ready-aws-cf), you can easily deploy a
 DCOS 1.10 cluster that is "Portworx-ready".
 
 ## Pre-install (only required if moving from a Portworx Docker installation)

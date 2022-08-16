@@ -2834,7 +2834,7 @@ April 6, 2018
 
 This is a patch update with the following fix
 
-* PWX-5115 - Fix `nodes` option in [docker inline volume create](/install-with-other/docker/how-to/volume-plugin) and supply nodes value as semicolon separated values
+* PWX-5115 - Fix `nodes` option in [docker inline volume create](/operations/operate-other/operate-docker/volume-plugin) and supply nodes value as semicolon separated values
 
 ## 1.3.0
 

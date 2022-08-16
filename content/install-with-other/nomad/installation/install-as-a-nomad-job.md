@@ -201,7 +201,7 @@ To enable PX-Security, update the "env" section in your job config.
     ```
 
 {{<info>}}
-**NOTE:** To start using Portworx on Nomad with security enabled, you can follow the steps on [securing your volumes](/install-with-other/nomad/operate-and-use/security/).
+**NOTE:** To start using Portworx on Nomad with security enabled, you can follow the steps on [securing your volumes](/operations/operate-other/operate-nomad/security/).
 {{</info>}}
 
 ## Monitoring the installation process

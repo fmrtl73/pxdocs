@@ -226,4 +226,4 @@ To add nodes in order to increase capacity and enable high availability, simply 
 
 ### Application Examples
 
-Then, to continue with other examples of running stateful applications and databases with _Docker_ and Portworx, see [this link](/install-with-other/docker/stateful-applications/).
+Then, to continue with other examples of running stateful applications and databases with _Docker_ and Portworx, see [this link](/operations/operate-other/operate-docker/stateful-applications/).
