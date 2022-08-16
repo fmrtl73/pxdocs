@@ -8,6 +8,8 @@ keywords: portworx, PKS, kubernetes
 noicon: true
 aliases:
     - /portworx-install-with-kubernetes/on-premise/install-pks/operator/
+    - /portworx-install-with-kubernetes/on-premise/install-pks/daemonset/
+    - /install-portworx/on-premises/install-pks/daemonset/
 ---
 
 {{< content "shared/on-prem-pks-common-install.md" >}}

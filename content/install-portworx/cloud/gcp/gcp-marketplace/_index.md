@@ -1,5 +1,6 @@
 ---
-title: GCP Marketplace
+title: Install Portworx using the GCP Marketplace
+linkTitle: GCP Marketplace
 logo: /logos/gcp.png
 weight: 200
 keywords: Install, GCP Marketplace, Google Cloud Platform, Kubernetes, k8s, gcloud

@@ -1,6 +1,6 @@
 ---
 title: Install Portworx on OpenShift on vSphere
-linkTitle: Install on vSphere
+linkTitle: vSphere
 weight: 100
 keywords: Install, on-premises, OpenShift, kubernetes, k8s, vSphere
 description: How to install Portworx on OpenShift on vSphere

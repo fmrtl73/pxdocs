@@ -1,15 +1,18 @@
 ---
-title: Install Portworx on AWS KOPS using the Operator
-linkTitle: Install using the Operator
+title: Install Portworx on Kubernetes using Kubernetes Operations
+linkTitle: Kubernetes Operations (KOPS)
 keywords: Install, on cloud, KOPS, Kubernetes Operations, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on a Kubernetes KOPS cluster running on AWS.
 weight: 200
 noicon: true
 aliases:
     - /portworx-install-with-kubernetes/cloud/aws/aws-kops/operator/
+    - /install-portworx/cloud/aws/aws-kops/operator/
+    - /install-portworx/cloud/aws/aws-kops/daemonset/
+    - /portworx-install-with-kubernetes/cloud/aws/aws-kops/
 ---
 
-This topic explains how to install Portworx with Kubernetes on AWS (KOPS). Follow the steps in this topic in order.
+This topic explains how to install Portworx on Kubernetes using Kubernetes Operations (KOPS). Follow the steps in this topic in order.
 
 ## Prepare
 

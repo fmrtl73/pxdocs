@@ -1,6 +1,7 @@
 ---
 title: Install Portworx on Azure Red Hat OpenShift (ARO)
-weight: 300
+linkTitle: Azure Red Hat OpensShift
+weight: 200
 keywords: Install, on-premises, OpenShift, kubernetes, k8s, ARO, Azure, OpenShift
 description: Install Portworx on Azure Red Hat OpenShift
 linkTitle: Install on Azure Red Hat OpenShift

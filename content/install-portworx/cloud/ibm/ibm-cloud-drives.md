@@ -5,7 +5,6 @@ linkTitle: Install and configure IBM Cloud Drives
 weight: 500
 keywords: IBM Cloud Kubernetes Service, IBM cloud drive, VPC Gen-2
 description: Learn how to install and configure Portworx with IBM Cloud Drives.
-noicon: true
 ---
 
 This document describes how to install and configure Portworx with an IBM Cloud drive.

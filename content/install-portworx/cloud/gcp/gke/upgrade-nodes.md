@@ -1,9 +1,9 @@
 ---
-title: Upgrade GKE node types
+title: Upgrade Google Kubernetes Engine node types
+linkTitle: Upgrade GKE node types
 weight: 400
 keywords: GKE, Google Kubernetes Engine, k8s, gcloud
 description: 
-noicon: true
 aliases:
     - /portworx-install-with-kubernetes/cloud/gcp/gke/upgrade-nodes/
 ---

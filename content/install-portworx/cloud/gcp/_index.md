@@ -4,7 +4,6 @@ logo: /logos/gcp.png
 weight: 100
 keywords: Install, GCP, Google Cloud Platform, Kubernetes, k8s, gcloud
 description: Set up a production-ready Portworx cluster on Google Cloud Platform (GCP).
-noicon: true
 hidesections: true
 aliases:
     - /portworx-install-with-kubernetes/cloud/gcp

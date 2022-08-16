@@ -1,15 +1,18 @@
 ---
-title: Install Portworx on AWS ASG using the Operator
-linkTitle: Install using the Operator
-weight: 200
+title: Install Portworx on Auto Scaling groups
+linkTitle: Auto Scaling groups (ASG)
+weight: 100
 keywords: Install, on cloud, ASG, Auto-Scaling Groups, AWS, Amazon Web Services, Kubernetes, k8s
 description: Install Portworx on an AWS cluster which uses autoscaling groups (ASG).
 noicon: true
 aliases:
+    - /portworx-install-with-kubernetes/cloud/aws/aws-asg/
     - /portworx-install-with-kubernetes/cloud/aws/aws-asg/operator/
+    - /install-portworx/cloud/aws/aws-asg/daemonset/
+    - /install-portworx/cloud/aws/aws-asg/operator/
 ---
 
-This topic explains how to install Portworx with Kubernetes on AWS (Auto-Scaling Groups). Follow the steps in this topic in order.
+This topic explains how to install Portworx with Kubernetes on Amazon Web Services (AWS) Auto Scaling groups (ASG). Follow the steps in this topic in order.
 
 For more information on using Auto-Scaling groups, go [here](https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html).
 

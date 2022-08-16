@@ -1,9 +1,11 @@
 ---
-title: Install Portworx on AKS using the Operator
-linkTitle: Install using the Operator
+title: Install Portworx on AKS
+linkTitle: Install Portworx
 keywords: on cloud, AKS, Azure Kubernetes Service, Microsoft, Kubernetes, k8s
 description: Learn about applying the spec with Portwork on Azure Kubernetes Service.
 weight: 300
+aliases:
+    - /install-portworx/cloud/azure/aks/deploy-px-daemonset/
 ---
 
 ## Install

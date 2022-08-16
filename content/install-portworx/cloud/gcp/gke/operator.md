@@ -1,12 +1,13 @@
 ---
-title: Install Portworx on GCP GKE using the Operator
-linkTitle: Operator
+title: Install Portworx on Google Kubernetes Engine
+linkTitle: Install on GKE
 weight: 200
 keywords: Install, GKE, Google Kubernetes Engine, k8s, gcloud
 description: Install Portworx with Google Kubernetes Engine (GKE).
-noicon: true
 aliases:
     - /portworx-install-with-kubernetes/cloud/gcp/gke/operator/
+    - /portworx-install-with-kubernetes/cloud/gcp/gke/daemonset/
+    - /install-portworx/gcp/gke/daemonset/
 ---
 
 This document shows how to install Portworx with Google Kubernetes Engine (GKE).

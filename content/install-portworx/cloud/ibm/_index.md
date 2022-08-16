@@ -1,11 +1,11 @@
 ---
-title: IBM Cloud
+title: Install Portworx on IBM Cloud
+linkTitle: IBM Cloud
 logo: /logos/ibm.png
 linkTitle: IBM Cloud
 weight: 500
 keywords: Install, IBM Cloud Kubernetes Service, k8s
 description: Deploy Portworx on IBM Cloud Kubernetes Service. See for yourself how easy it is!
-noicon: true
 aliases:
     - /portworx-install-with-kubernetes/cloud/ibm
 ---

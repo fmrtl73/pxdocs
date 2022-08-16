@@ -1,5 +1,5 @@
 ---
-title: PKS (cloud)
+title: Install Portworx on VMWare PKS running on cloud environments
 linkTitle: PKS
 logo: /logos/pks.png
 keywords: Install, PKS, Pivotal Container Service, Kubernetes, k8s, Bosh Director
@@ -8,7 +8,10 @@ weight: 400
 noicon: true
 aliases:
     - /portworx-install-with-kubernetes/cloud/pks
+    - /install-portworx/cloud/install-pks/
 ---
+
+Perform the steps in this document to install Portworx on VMWare Pivotal Container Service (PKS) running on cloud environments.
 
 {{<info>}}
 **NOTE:**  If you have a compute load that can elastically increase or decrease based on workload demand, you might want to learn how to [install Portworx in disaggregated mode](/install-portworx/disaggregated/).
@@ -112,4 +115,4 @@ If running on **AWS**, continue at [Portworx install with AWS Auto Scaling Group
 
 If running on **GCP**, continue at [Portworx install on Google Cloud Platform](/cloud-references/auto-disk-provisioning/gcp).
 
-If running on **VMware vSphere**, continue at [Portworx install on PKS on vSphere](/install-portworx/on-premises/install-pks/daemonset/#installing-portworx).
+If running on **VMware vSphere**, continue at [Portworx install on PKS on vSphere](/install-portworx/on-premises/install-pks/operator/#installing-portworx).
