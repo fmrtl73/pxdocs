@@ -26,7 +26,7 @@ The following tables list what features {{< pxEssentials >}} supports and any li
 | Maximum clusters per {{< pxEssentials >}} license | 1 |
 | Maximum nodes per cluster | 5 |
 | Host type supported | VMs and bare metal servers |
-| Max containers mounting volumes per host | 30 |
+| Number of attached volumes per node maximum | 30 |
 | Host storage capacity limits | 1TB per host |
 | Cluster storage capacity limits | 5TB per cluster |
 | Support (includes updates, upgrades) | [Online Support](https://forums.portworx.com) |
