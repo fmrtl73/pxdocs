@@ -27,24 +27,30 @@ You can specify a template spec which will be used by Portworx to create new EBS
 
 The spec follows the following format:
 ```
-"type=<EBS volume type>,size=<size of EBS volume>,iops=<IOPS value>,enc=<true/false>,kms=<CMK>"
+"type=<EBS volume type>,size=<size of EBS volume>,iops=<IOPS value>,enc=<true/false>,kms=<CMK>,tags=<key:value;key:value>,throughput=<throughput of the disk>"
 ```
 
-* __type__: Following two types are supported
+* __type__: The following types are supported:
     * _gp2_
+    * _gp3_
     * _io1_ (For io1 volumes specifying the iops value is mandatory.)
+
 * __size__: This is the size of the EBS volume in GB
 * __iops__: This is the required IOs per second from the EBS volume.
-* __enc__:  This needs to be set to true if EBS volumes need to be encrypted. Default: false
-* __kms__:  This is the AWS KMS key to encrypt the EBS volume. i.e.`<key>` in `arn:aws:kms:us-east-1:<account-id>:key/<key>`
+* __enc__: This needs to be set to true if EBS volumes need to be encrypted. Default: false
+* __kms__: This is the AWS KMS key to encrypt the EBS volume. i.e.`<key>` in `arn:aws:kms:us-east-1:<account-id>:key/<key>`
+* __tags__: This adds custom labels to EBS volumes created on EKS drives. The key-value pairs are added as labels to the newly created volumes.
+* __throughput__: This is used to specify the throughput of the disk. Valid only for _gp3_ disk type. The ratio between the accompanying `iops` parameter and the `throughput` value must not exceed .25. For example, if the value of `iops` is 4000, the value of `throughput` must not exceed 1000.
 
 See [EBS details](https://aws.amazon.com/ebs/details/) for more details on above parameters.
 
-Examples
+#### Examples
 
 * `"type=gp2,size=200"`
 * `"type=gp2,size=100","type=io1,size=200,iops=1000"`
 * `"type=gp2,size=100,enc=true,kms=AKXXXXXXXX123","type=io1,size=200,iops=1000,enc=true,kms=AKXXXXXXXXX123"`
+* `type=gp2,size=100,tags=key:value;key:value`
+* `type=gp3,size=199,iops=4000,throughput=1000`
 
 ### Limiting storage nodes
 
