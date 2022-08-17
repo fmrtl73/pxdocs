@@ -16,20 +16,20 @@ To get started with {{< pxEssentials >}}, sign up and generate a spec on [PX-Cen
 
 ## {{< pxEssentials >}} available features and limitations
 
-The following tables list what features {{< pxEssentials >}} supports and any limitations it may have:
+The following tables list what features {{< pxEssentials >}} includes and any limitations it may have:
 
 ### {{< pxEssentials >}}
 
-| **Feature** | **Support** |
+| **Feature** | **Included** |
 |----|----|
 | Maximum {{< pxEssentials >}} licenses per user  | 1 |
 | Maximum clusters per {{< pxEssentials >}} license | 1 |
 | Maximum nodes per cluster | 5 |
-| Host type supported | VMs and bare metal servers |
+| Host type included | VMs and bare metal servers |
 | Number of attached volumes per node maximum | 30 |
 | Host storage capacity limits | 1TB per host |
 | Cluster storage capacity limits | 5TB per cluster |
-| Support (includes updates, upgrades) | [Online Support](https://forums.portworx.com) |
+| Online support | [Forum access](https://forums.portworx.com) |
 | Telemetry requirement (install/operate) | Users must have telemetry enabled in order to use {{< pxEssentials >}}.|
 | Licensing | Users must have a {{< pxEssentials >}} license (available for free at PX-Central)|
 
@@ -39,59 +39,59 @@ The following tables list what features {{< pxEssentials >}} supports and any li
 
 ### PX-Store
 
-| **Feature** | **Support** |
+| **Feature** | **Included** |
 |----|----|
-| Container-optimized volumes with elastic scaling (no application downtime) | Supported |
+| Container-optimized volumes with elastic scaling (no application downtime) | Included |
 | Maximum number of volumes per cluster | 200 |
 | Maximum volume size | 1TB |
-| Storage performance tiers (high, medium, low) | Supported |
-| Application-aware I/O tuning | Supported |
-| Read/Write many across multiple containers | Supported |
-| Failover across nodes, racks, and availability zones | Supported |
-| Form storage pools from aggregated volumes across hosts | Supported |
-| Synchronous Replication <!-- what about async? --> | Supported |
-| Volume Consistency Groups <!-- not sure what this is --> | Supported |
+| Storage performance tiers (high, medium, low) | Included |
+| Application-aware I/O tuning | Included |
+| Read/Write many across multiple containers | Included |
+| Failover across nodes, racks, and availability zones | Included |
+| Form storage pools from aggregated volumes across hosts | Included |
+| Synchronous Replication <!-- what about async? --> | Included |
+| Volume Consistency Groups <!-- not sure what this is --> | Included |
 
 <!-- make columns on the left the same as from the website -->
 
 ### Data Management
 
-| **Feature** | **Support** |
+| **Feature** | **Included** |
 |----|----|
-|PX-Migrate: Migrate volumes and Kubernetes applications across clusters. | Not supported |
+|PX-Migrate: Migrate volumes and Kubernetes applications across clusters. | Not included |
 | Snapshots of stateful applications | Limited to 5 snapshots per volume|
 | Cloudsnap backups to cloud storage | Limited to 1 cloudsnap per day per volume |
-| Auto-scaling groups (ASG) with support for AWS, GCP, Azure. | Supported |
+| Auto-scaling groups (ASG), including AWS, GCP, Azure. | Included |
 
 ### PX-Central
 
-| **Feature** | **Support** |
+| **Feature** | **Included** |
 |----|----|
 | Cluster management UI | Single user, single cluster |
-| Proactive centralized monitoring | Supported |
-| Cluster management CLI | Supported |
-| PX-Central on-premises with license server | Not Supported |
+| Proactive centralized monitoring | Included |
+| Cluster management CLI | Included |
+| PX-Central on-premises with license server | Not included |
 
 ### Advanced Functionality
 
-| **Feature** | **Support** |
+| **Feature** | **Included** |
 |----|----|
 | Encryption with bring-your-own-encryption | Limited to cluster-wide encryption |
-| Disaster Recovery for campus and WAN deployments | Not supported |
-| Capacity Management with Autopilot | Not supported |
+| Disaster Recovery for campus and WAN deployments | Not included |
+| Capacity Management with Autopilot | Not included |
 
 ### Orchestrator
 
-| **Feature** | **Support** |
+| **Feature** | **Included** |
 |----|----|
-| Scheduler integration: Kubernetes, Openshift | Supported |
-| Integration with Managed K8S services: EKS, AKS, GKE, PKS, IKS, RKE | Supported |
+| Scheduler integration: Kubernetes, Openshift | Included |
+| Integration with Managed K8S services: EKS, AKS, GKE, PKS, IKS, RKE | Included |
 
 ## The FlashBlade and FlashArray {{< pxEssentials >}} license
 
 If you're using Portworx with FlashBlade or FlashArray, you have access to an enhanced version of the {{< pxEssentials >}} license. Portworx enables this license when it detects the presence of the `pure.json` secret and at least one valid set of credentials.
 
-| **Feature** | **Support** |
+| **Feature** | **Included** |
 |----|----|
 | Maximum number of nodes | No limit |
 | Number of volumes per cluster maximum | 200 (does not include direct access volumes) |
