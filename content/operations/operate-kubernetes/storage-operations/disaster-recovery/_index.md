@@ -21,7 +21,7 @@ plugin.
 
 Run the following command to install the Portworx plugin for Velero:
 ```text
-velero plugin add portworx/velero-plugin:1.0.0
+velero plugin add portworx/velero-plugin:1.0.2
 ```
 
 This should add an init container to your Velero deployment to install the
