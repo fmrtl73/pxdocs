@@ -66,16 +66,3 @@ spec:
 
 ### Disabling scheduler convergence
 You can disable Stork's hyperconverged pod prioritization with the `stork.libopenstorage.org/disableHyperconvergence: "true"` pod annotation.
-
-### Initializer (Experimental feature in Stork v1.1)
-
-If you are not able to update the schedulerName for you applications to use
-Stork, you can enable the app-initializer feature. This uses the Kubernetes
-[AdmissionController Initializer](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#initializers)
-feature to automatically update the scheduler to Stork if your application
-(deployment or statefulset) is using volumes backed by Portworx.
-
-To enable the Initializer you need to:
-* [Enable the Intializer feature in your Kubernetes cluster](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#enable-initializers-alpha-feature) since it is an alpha feature in Kubernetes.
-* Add the `--app-initializer=true` option in the Stork deployment
-* Add the [stork-initializer spec](https://raw.githubusercontent.com/libopenstorage/stork/master/specs/stork-initializer.yaml) to your Kubernetes cluster using `kubectl apply -f stork-initializer.yaml`
