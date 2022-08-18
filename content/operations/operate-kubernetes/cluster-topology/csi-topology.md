@@ -120,7 +120,7 @@ To enable the CSI topology feature, perform the following steps:
         parameters:
           backend: "pure_block"
           max_bandwidth: "10G"
-          max_iops: "10G"
+          max_iops: "30000"
           csi.storage.k8s.io/fstype: ext4
         volumeBindingMode: WaitForFirstConsumer
         allowVolumeExpansion: true
@@ -157,7 +157,7 @@ To enable the CSI topology feature, perform the following steps:
         parameters:
           backend: "pure_block"
           max_bandwidth: "10G"
-          max_iops: "10G"
+          max_iops: "30000"
           csi.storage.k8s.io/fstype: ext4
         volumeBindingMode: WaitForFirstConsumer
         allowedTopologies:
