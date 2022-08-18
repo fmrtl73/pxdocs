@@ -23,9 +23,10 @@ Portworx products support the following license types:
 |      License type      |  Description
 |:-----------------------|:-------------------------------------------------------------------------------------------------------------------------------
 | Portworx Essentials           | Free Portworx license with limited functionality, suitable to run small production or proof-of-concept workloads.
-| Trial                  | Default license installed with 30 days trial period for full Portworx Enterprise functionality.
+| Portworx CSI for FA/FB | Free Portworx license with a limited feature set. It provides essential container storage capabilities for Portworx on FlashArray and FlashBlade and is supported only for DirectAccess. |
+| Trial                  | Same as the Portworx Enterprise license. It is a default license installed with 30 days trial period for full Portworx Enterprise functionality |
 | {{< pxEnterprise >}} VM       | Enterprise license, suitable for Virtual Machine (VM) installs on-prem and in cloud
-| {{< pxEnterprise >}} Metal    | Enterprise license, suitable for installs on any bare metal hardware
+| {{< pxEnterprise >}} Metal    | Enterprise license, suitable for installs on any bare metal hardware |
 
 
 Depending on the type of container you are installing, a different license will be automatically activated. For example, the Portworx Enterprise automatically activates the Trial license (limited to 30 days), which you can upgrade to a {{< pxEnterprise >}} license at any time.
@@ -34,23 +35,29 @@ Depending on the type of container you are installing, a different license will 
 
 In the following table, you can see the overview of features that are controlled via licensing.
 
-|       Description            |  Type  | Details
-|:-----------------------------|:------:|:------------------------------------------------------------------------------------
-| Number of nodes maximum      | number | Defines the maximum number of nodes in a cluster
-| Number of volumes maximum    | number | Defines max number of volumes on a single node
-| Volume capacity [TB] maximum | number | Defines max size of a single volume
-| Storage aggregation          | yes/no | Defines if volumes may be aggregated across multiple nodes
-| Shared volumes               | yes/no | Defines if volumes may be shared w/ other nodes
-| Volume sets                  | yes/no | Defines if volumes may be scaled
-| BYOK data encryption         | yes/no | Defines if volumes may be encrypted
-| Resize volumes on demand     | yes/no | Defines if volumes can be resized
-| Snapshot to object store     | yes/no | Defines if volumes may be snapshotted to Amazon S3, MS Azure and Google storage
-| Cluster level migration      | yes/no | Defines if applications and data (using K8s namespace) can be migrated between paired clusters
-| Disaster Recovery (PX-DR)[Add-on]    | yes/no | Enables synchronous and asynchronous DR features (requires 2.1 or later, needs additional license)
-| Virtual machine hosts        | yes/no | Software may be deployed on VMs (including Amazon EC2, OpenStack Nova, etc...)
-| Bare-metal hosts             | yes/no | Software may be deployed on commodity hardware
-
-
+| License feature                                        | Description                                                                                                                                                                 | Portworx Essentials | Portworx CSI for FlashArray and FlashBlade | Portworx Enterprise |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------ | ------------------- |
+| Number of nodes maximum                                | Defines the maximum number of nodes in a cluster                                                                                                                            | 5                   | 1000                                       | 1000                |
+| Number of volumes per cluster maximum                  | Defines max number of volumes on a single node                                                                                                                              | 200                 | 100000 Pure, <br>200 Portworx                   | 100000              |
+| Volume capacity \[TB\] maximum                         | Defines max size of a single volume                                                                                                                                         | 1 TB                | 40 TB                                      | 40 TB               |
+| Node disk capacity \[TB\] maximum                      | Defines max storage capacity of a single node                                                                                                                               | 1 TB                | 256 TB                                     | 256 TB              |
+| Node disk capacity extension                           | Defines is the storage capacity can be extended                                                                                                                             | no                  | yes                                        | yes                 |
+| Number of snapshots per volume maximum                 | Number of volume snapshots allowed per single volume                                                                                                                        | 5                   | 5                                          | 64                  |
+| Number of attached volumes per node maximum            | Number of attached volumes on a single node                                                                                                                                 | 30                  | 128                                        | 256                 |
+| Storage aggregation                                    | Defines if volumes may be aggregated across multiple nodes                                                                                                                  | no                  | no                                         | yes                 |
+| Shared volumes                                         | Defines if volumes may be shared w/ other nodes                                                                                                                             | yes                 | yes                                        | yes                 |
+| Volume sets                                            | Defines if volumes may be scaled                                                                                                                                            | yes                 | yes                                        | yes                 |
+| BYOK data encryption                                   | "Bring your own key" for data encryption                                                                                                                                    | yes                 | yes                                        | yes                 |
+| Limit BYOK encryption to cluster-wide secrets          | Limits the use of data-encryption keys to only a cluster-wide secrets                                                                                                       | limited             | limited                                    | unlimited           |
+| Resize volumes on demand                               | Defines if volumes can be resized                                                                                                                                           | yes                 | yes                                        | yes                 |
+| Snapshot to object store \[CloudSnap\]                 | Defines if cloud-snapshots can be used (for example, volume snapshot to Amazon S3 service)                                                                                          | yes                 | yes                                        | yes                 |
+| Number of CloudSnaps daily per volume maximum          | Limits how many cloud-snapshots can customers do (per volume, in a day)                                                                                                     | 1                   | 1                                          | unlimited           |
+| Cluster-level migration \[Kube-motion/Data Migration\] | Defines if the Data Migration can be used, see [Data Migration](https://docs.portworx.com/install-with-other/datamigration/) | no                  | no                                         | yes                 |
+| Disaster Recovery \[PX-DR\]                            | Enables synchronous and asynchronous DR features (requires 2.1 version or later, needs additional license)                                                                          | no                  | no                                         | (AddOn required)    |
+| Autopilot Capacity Management                          | Defines if Autopilot can be used                                                                                                                                            | no                  | no                                         | yes                 |
+| OIDC Security                                          | Defines if PX-Security can be used, see [PX-Security on an existing cluster](https://docs.portworx.com/concepts/authorization/install/)            | no                  | no                                         | yes                 |
+| Bare-metal hosts                                       | Software may be deployed on commodity hardware                                                                                                                              | yes                 | yes                                        | yes                 |
+| Virtual machine hosts                                  | Software may be deployed on VMs (including Amazon EC2, OpenStack Nova)                                                                                                | yes                 | yes                                        | yes                 |
 ## Trial License
 
 The trial license activates automatically when the [Portworx Enterprise license](/operations/licensing/portworx-enterprise) is installed.

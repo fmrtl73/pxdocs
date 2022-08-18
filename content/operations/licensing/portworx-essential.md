@@ -87,7 +87,7 @@ The following tables list what features {{< pxEssentials >}} includes and any li
 | Scheduler integration: Kubernetes, Openshift | Included |
 | Integration with Managed K8S services: EKS, AKS, GKE, PKS, IKS, RKE | Included |
 
-## The FlashBlade and FlashArray {{< pxEssentials >}} license
+## Portworx CSI for FlashArray and FlashBlade license
 
 If you're using Portworx with FlashBlade or FlashArray, you have access to an enhanced version of the {{< pxEssentials >}} license. Portworx enables this license when it detects the presence of the `pure.json` secret and at least one valid set of credentials.
 
