@@ -125,7 +125,7 @@ This section provides a few examples of common Portworx configurations you can u
           effect: NoExecute
     ```
 
-* Portworx with custom image registry, network interfaces, and miscellaneous options
+* Portworx with custom image registry, network interfaces, and miscellaneous options.
 
     ```text
     apiVersion: core.libopenstorage.org/v1
@@ -438,5 +438,5 @@ This section provides details on how to override certain cluster level configura
 
 | Annotation | Description |
 | --- | --- |
-| `portworx.io/misc-args` | Arguments that you specify in this annotation are passed to portworx container verbatim. For example:<br>`portworx.io/misc-args: "-cluster_domain cluster-1"` |
+| `portworx.io/misc-args` | Arguments that you specify in this annotation are passed to portworx container verbatim. For example:<br> `portworx.io/misc-args: "-cluster_domain datacenter1 --tracefile-diskusage 5"` <br>Note that you cannot use `=` to specify the value of an argument. |
 | `portworx.io/service-type` | Annotation to configure type of services created by operator. For example:<br>`portworx.io/service-type: "LoadBalancer"` to specify `LoadBalancer` type for all services.<br> For Operator 1.8.1 and higher, the value can be a list of service names and corresponding type configurations split in `;`, service not specified will use its default type. For example:<br>`portworx.io/service-type: "portworx-service:LoadBalancer;portworx-api:ClusterIP;portworx-kvdb-service:LoadBalancer"` |
