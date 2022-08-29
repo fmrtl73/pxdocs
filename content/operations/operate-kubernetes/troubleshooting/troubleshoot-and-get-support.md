@@ -156,11 +156,3 @@ If you need to change the [dnsPolicy](https://kubernetes.io/docs/concepts/servic
 * If a pod is stuck in CrashLoopBackoff state, check the logs of the pod using `kubectl logs <pod-name> [<container-name>]` and look for the failure reason. It could be because of any of the following reasons
   * Portworx was down on this node for a period of more than 10 minutes. This caused the volume to go into read-only state. Hence the application pod can no longer write to the volume filesystem. To fix this issue, delete the pod. A new pod will get created and the volume will be setup again. The pod will resume with the same persistent data since that is being backed by a PVC provisioned by Portworx.
   * The application container found existing data in the mounted PVC volume and was expecting an empty volume.
-
-### Known issues
-
-**Kubernetes on CoreOS deployed through Tectonic**
-
-* This issue is fixed in Tectonic 1.6.7. So if are using a version equal or higher, this does not apply to you.
-* [Tectonic](https://coreos.com/tectonic/) is deploying the Kubernetes controller manager in the docker `none` network. As a result, when the controller manager invokes a call on `http://localhost:9001` to Portworx to create a new volume, this results in the connection refused error since controller manager is not in the host network. This issue is observed when using dynamically provisioned Portworx volumes using a StorageClass. If you are using pre-provisioned volumes, you can ignore this issue.
-* To workaround this, you need to set `hostNetwork: true` in the spec file `modules/bootkube/resources/manifests/kube-controller-manager.yaml` and then run the tectonic installer to deploy kubernetes.
