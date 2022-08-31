@@ -9,28 +9,24 @@ hidden: true
 
 ```text
 az role definition create --role-definition '{
-        "Name": "portworx-cloud-drive",
-        "Description": "",
-        "AssignableScopes": [
-            "/subscriptions/72c299a4-xxxx-xxxx-xxxx-6855109979d9"
-        ],
-        "Permissions": [
-            {
-                "Actions": [
-                    "Microsoft.ContainerService/managedClusters/agentPools/read",
-                    "Microsoft.Compute/disks/delete",
-                    "Microsoft.Compute/disks/write",
-                    "Microsoft.Compute/disks/read",
-                    "Microsoft.Compute/virtualMachines/write",
-                    "Microsoft.Compute/virtualMachines/read",
-                    "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/write",
-                    "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/read"
-                ],
-                "NotActions": [],
-                "DataActions": [],
-                "NotDataActions": []
-            }
-        ]
+    "Name": "portworx-cloud-drive",
+    "Description": "",
+    "AssignableScopes": [
+        "/subscriptions/<your-subscription-id>"
+    ],
+    "Actions": [
+        "Microsoft.ContainerService/managedClusters/agentPools/read",
+        "Microsoft.Compute/disks/delete",
+        "Microsoft.Compute/disks/write",
+        "Microsoft.Compute/disks/read",
+        "Microsoft.Compute/virtualMachines/write",
+        "Microsoft.Compute/virtualMachines/read",
+        "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/write",
+        "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/read"
+    ],
+    "NotActions": [],
+    "DataActions": [],
+    "NotDataActions": []
 }'
 ```
 
