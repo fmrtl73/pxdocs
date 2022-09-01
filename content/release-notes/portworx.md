@@ -35,7 +35,6 @@ Portworx has upgraded or enhanced functionality in the following areas:
 | **Issue Number** | **Issue Description** |
 | ---- | ---- |
 | PWX-23465 | Backups were not encrypted if `BackupLocation` in Kubernetes had an encryption key set for cloudsnaps. (Note that this should not be confused with encrypted volumes. This encryption key, if set, is applied only to cloudsnaps irrespective of encrypted volumes.)<br><br>**Resolution:** Backups are now encrypted in this case. |
-| PWX-24818 | Portworx would not install on Ubuntu 22.04 LTS nodes.<br><br>**Resolution:** Installation now works on Ubuntu 22.04 LTS nodes. |
 | PWX-24731 | The Grafana image was not included into the list of images for the air-gapped bootstrap script. Customers using Prometheus monitoring needed to manually copy the Grafana container image into their environments.<br><br>**Resolution:** The air-gapped bootstrap script has been updated and now includes the Grafana image. |
 
 ### Known issues (Errata)
