@@ -13,8 +13,8 @@ aliases:
 * **Secret Store** : Make sure you have configured a [secret store](/operations/key-management) on both your clusters. This will be used to store the credentials for the objectstore.
 * **Network Connectivity**: Ports 9001 and 9010 on the destination cluster should be reachable by the source cluster.
 * **Stork helper**: `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
-* **Default Storage Class**: Make sure you have configured only one default storage class. Having multiple default storage classes will cause PVC migrations to fail.
 {{< content "shared/portworx-install-with-kubernetes-disaster-recovery-stork-helper.md" >}}
+* **Default Storage Class**: Make sure you have configured only one default storage class. Having multiple default storage classes will cause PVC migrations to fail.
 * **License**: You will need a DR enabled Portworx license at both the source and destination cluster to use this feature.
 * If the destination cluster runs on **GKE**, follow the steps in the [Migration with Stork on GKE](/operations/operate-kubernetes/migration/gke/) page.
 * If the destination cluster runs on **EKS**, follow the steps in the [Migration with Stork on EKS](/operations/operate-kubernetes/migration/eks/) page.
@@ -314,8 +314,11 @@ The Asynchronous DR feature supports the following Kubernetes resources:
 * ResourceQuota
 * ReplicaSet
 * LimitRange
-* NetworkPolicy
 * PodDisruptionBudget
+* NetworkPolicy
+
+  {{<info>}}**NOTE:** By default, Stork skips migrating NetworkPolicies which have `CIDR` set. To migrate NetworkPolicies which have `CIDR` set, use the `skipNetworkPolicyCheck: true` flag in the Migration object. {{</info>}}
+
 
 Asynchronous DR also supports the following CRDs out-of-the-box:
 
