@@ -44,6 +44,10 @@ The example in this document uses an S3 bucket to store application backup data.
 
 If you're restoring backups to a different cluster from the one you took your backups from, you must create a backupLocation CRD on your new cluster that matches the backupLocation CRD on your original cluster.
 
+{{<info>}}
+**NOTE:** If you want to use S3 Object Lock, refer to [S3 Object Lock in PX-Backup](https://backup.docs.portworx.com/use-px-backup/s3-object-lock/).
+{{</info>}}
+
 You can specify your object store credentials directly in the BackupLocation configuration as plaintext or use a Kubernetes secret:
 
 #### Plaintext credentials
