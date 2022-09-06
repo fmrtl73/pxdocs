@@ -7,14 +7,6 @@
             "type": "datasource",
             "pluginId": "prometheus",
             "pluginName": "Prometheus"
-        },
-        {
-            "name": "DS_PROMETHEUS_ALERTMANAGER",
-            "label": "Prometheus AlertManager",
-            "description": "",
-            "type": "datasource",
-            "pluginId": "camptocamp-prometheus-alertmanager-datasource",
-            "pluginName": "Prometheus AlertManager"
         }
     ],
     "__requires": [
@@ -249,82 +241,6 @@
                 }
             ],
             "valueName": "current"
-        },
-        {
-            "columns": [],
-            "datasource": "${DS_PROMETHEUS_ALERTMANAGER}",
-            "fontSize": "100%",
-            "gridPos": {
-                "h": 6,
-                "w": 14,
-                "x": 10,
-                "y": 1
-            },
-            "id": 76,
-            "links": [],
-            "pageSize": null,
-            "scroll": true,
-            "showHeader": true,
-            "sort": {
-                "col": null,
-                "desc": false
-            },
-            "styles": [
-                {
-                    "alias": "Time",
-                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                    "pattern": "Time",
-                    "type": "date"
-                },
-                {
-                    "alias": "",
-                    "colorMode": null,
-                    "colors": [
-                        "rgba(245, 54, 54, 0.9)",
-                        "rgba(237, 129, 40, 0.89)",
-                        "rgba(50, 172, 45, 0.97)"
-                    ],
-                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                    "decimals": 2,
-                    "pattern": "severity",
-                    "preserveFormat": false,
-                    "sanitize": false,
-                    "thresholds": [],
-                    "type": "string",
-                    "unit": "short"
-                },
-                {
-                    "alias": "",
-                    "colorMode": null,
-                    "colors": [
-                        "rgba(245, 54, 54, 0.9)",
-                        "rgba(237, 129, 40, 0.89)",
-                        "rgba(50, 172, 45, 0.97)"
-                    ],
-                    "decimals": 2,
-                    "pattern": "/.*/",
-                    "thresholds": [],
-                    "type": "number",
-                    "unit": "short"
-                }
-            ],
-            "targets": [
-                {
-                    "annotations": false,
-                    "expr": "{cluster=\"$Cluster\"}",
-                    "format": "table",
-                    "intervalFactor": 1,
-                    "labelSelector": "alertname, issue, cluster, instance",
-                    "legendFormat": "",
-                    "refId": "A",
-                    "target": "Query",
-                    "type": "table"
-                }
-            ],
-            "title": "Alert List",
-            "transform": "table",
-            "transparent": false,
-            "type": "table"
         },
         {
             "cacheTimeout": null,
