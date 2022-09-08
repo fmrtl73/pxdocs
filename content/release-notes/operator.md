@@ -9,6 +9,17 @@ aliases:
     - /reference/release-notes/operator
 ---
 
+## 1.9.1
+Sep 8, 2022
+
+### Updates
+* Added support for Kubernetes version 1.24: 
+    * Added `docker.io` prefix for component images deployed by Operator.
+    * To determine Kubernetes master nodes, Operator now uses the `control-plane` node role instead of `master`.
+
+### Bug Fixes
+* In Operator 1.9.0, when you enabled the CSI snapshot controller explicitly in the StorageCluster, the `csi-snapshot-controller` sidecar containers might have been removed during an upgrade or restart operation. This issue is fixed in Operator 1.9.1.
+
 ## 1.9.0
 Aug 1, 2022
 
@@ -26,7 +37,11 @@ Aug 1, 2022
 
 ### Bug Fixes
 
-* Fixed an issue where KVDB pods were repeatedly created when a pod was in the `evicted` or `outOfPods` status. 
+* Fixed an issue where KVDB pods were repeatedly created when a pod was in the `evicted` or `outOfPods` status.
+
+### Known Issues
+
+* When you upgrade Operator to version 1.9.0, the snapshot controller containers are removed from `px-csi-ext` deployment when the `installSnapshotController` flag is set to true explicitly in the StorageCluster spec.<br>**Workaround:** To fix this issue, either restart Operator or upgrade to a newer version.
 
 
 ## 1.8.1
