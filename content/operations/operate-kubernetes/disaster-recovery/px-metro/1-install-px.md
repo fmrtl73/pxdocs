@@ -6,7 +6,7 @@ description: Find out how to install a single stretch Portworx cluster across mu
 aliases:
     - /portworx-install-with-kubernetes/disaster-recovery/px-metro/1-install-px/
 ---
-The goal of this document is to setup a single Portworx cluster that spans across multiple Kubernetes clusters.
+Follow the instructions on this page to setup a single Portworx cluster that spans across multiple Kubernetes clusters.
 
 ## Prerequisites
 
@@ -17,11 +17,7 @@ The goal of this document is to setup a single Portworx cluster that spans acros
 * **Network Connectivity**: Ports 9001 to 9020 open between the two Kubernetes clusters.
 * **External Kvdb**: A kvdb like etcd setup outside of the Kubernetes clusters.
 * **License**: A DR enabled {{< pxEnterprise >}} license on both the source and destination clusters to use this feature.
-* **Witness node requirements**: 4 cores minimum, 8 cores recommended, 4GB minimum, 8GB recommended
-
-{{<info>}}
-**NOTE**: Additional steps are required when installing on a Tanzu cluster. Check below for details 
-{{</info>}}
+* **Witness node requirements**: 4 cores minimum, 8 cores recommended, 4 GB minimum, 8 GB recommended. Also, ensure that [Docker engine](https://docs.docker.com/engine/install/) is installed.
 
 ## Installing Portworx
 
@@ -29,78 +25,65 @@ In this mode of operation, a single Portworx cluster will stretch across multipl
 
 ### New Installation
 
-To install Portworx on each of the Kubernetes clusters, you will need to generate a separate Portworx Kubernetes
-manifest file for each of them using the Portworx spec generator in [PX-Central](https://central.portworx.com).
+To install Portworx on each of the Kubernetes clusters, you need to generate a separate Portworx Kubernetes
+manifest file for each of them using the Portworx spec generator at [PX-Central](https://central.portworx.com).
 
-While generating the spec file for each Kubernetes cluster, make sure you provide the same values for the following
-arguments:
+While generating the spec file for each Kubernetes cluster, specify the same **ClusterID** and **Kvdb Endpoints** in each Kubernetes manifest file to ensure that a single Portworx cluster will stretch across multiple Kubernetes clusters:
 
-#### Operator Install
 * **Cluster ID** (StorageCluster: metadata.name)
 * **Kvdb Endpoints** (StorageCluster: spec.kvdb.endpoints)
-
-#### DaemonSet Install
-* **Cluster ID** (Portworx install argument: `-c`)
-* **Kvdb Endpoints** (Portworx install argument: `-k`)
-
-Specifying the same **ClusterID** and **Kvdb Endpoints** in each Kubernetes manifest file ensures that a single Portworx
-cluster will stretch across multiple Kubernetes clusters.
 
 ### Existing Installation
 
-If you already have an existing Kubernetes cluster, you can add another Kubernetes cluster and let its nodes join the
-same Portworx cluster.
-
-To achieve this, make sure you provide the following arguments same as your existing cluster:
-
-#### Operator Install
-* **Cluster ID** (StorageCluster: metadata.name)
-* **Kvdb Endpoints** (StorageCluster: spec.kvdb.endpoints)
-
-#### DaemonSet Install
-* **Cluster ID** (Portworx install argument: `-c`)
-* **Kvdb Endpoints** (Portworx install argument: `-k`)
-
-Specifying the same **ClusterID** and **Kvdb Endpoints** as your existing cluster ensures that a single Portworx cluster
-will stretch across multiple Kubernetes clusters.
-
-If your Kubernetes clusters have exactly the same configuration, you can use the URL specified by
-the `install-source` annotation on the existing Portworx installation to fetch the spec for your new cluster:
-
-#### Operator Install
-Use the `portworx.io/install-source` annotation:
-```text
-apiVersion: core.libopenstorage.org/v1
-kind: StorageCluster
-metadata:
-  annotations:
-    portworx.io/install-source: "https://install.portworx.com/{{% currentVersion %}}?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
-```
-
-#### DaemonSet Install
-Use the `portworx.com/install-source` annotation:
-```text
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  annotations:
-    portworx.com/install-source: "https://install.portworx.com/{{% currentVersion %}}?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
-```
-
-Otherwise you can always generate a new spec using the Portworx spec generator
-in [PX-Central](https://central.portworx.com).
+If you already have an existing Kubernetes cluster, you can add another Kubernetes cluster and let its nodes join the same Portworx cluster. 
 
 {{<info>}}
 **NOTE**: If your existing Kubernetes cluster uses internal kvdb, then you cannot stretch your Portworx clusters across
 multiple Kubernetes cluster. This mode of deployments requires an external kvdb running outside your Kubernetes cluster
 {{</info>}}
+#### Operator Install
 
+1. If your Kubernetes clusters have exactly the same configuration, use the URL specified in the `install-source` annotation field on the existing Portworx installation to fetch the spec for your new cluster:
+
+  ```text
+  apiVersion: core.libopenstorage.org/v1
+  kind: StorageCluster
+  metadata:
+    annotations:
+      portworx.io/install-source: "https://install.portworx.com/{{% currentVersion %}}?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true&lh=true&st=k8s"
+  ```
+    Otherwise, generate a new spec from [PX-Central](https://central.portworx.com).
+
+2. Specify the same **ClusterID** and **Kvdb Endpoints** as your existing cluster, so that a single Portworx cluster will stretch across multiple Kubernetes clusters:
+
+  * **Cluster ID** (StorageCluster: metadata.name)
+  * **Kvdb Endpoints** (StorageCluster: spec.kvdb.endpoints)
+
+  
+#### DaemonSet Install
+
+1. If your Kubernetes clusters have exactly the same configuration, use the URL specified by
+the `install-source` annotation field on the existing Portworx installation to fetch the spec for your new cluster:
+
+  ```text
+  apiVersion: apps/v1
+  kind: DaemonSet
+  metadata:
+    annotations:
+      portworx.com/install-source: "https://install.portworx.com/{{% currentVersion %}}?mc=false&kbver=1.11.9&k=etcd%3Ahttp%3A%2F%2F100.26.199.167%3A2379&s=%22type%3Dgp2%2Csize%3D150%22&c=px-cluster-2f6d696f-a728-46ec-bfbc-dcece1765579&stork=true& lh=true&st=k8s"
+  ```
+  
+    Otherwise, generate a new spec from [PX-Central](https://central.portworx.com).
+
+2. Specify the same **ClusterID** and **Kvdb Endpoints** as your existing cluster, so that a single Portworx cluster will stretch across multiple Kubernetes clusters:  
+
+  * **Cluster ID** (Portworx install argument: `-c`)
+  * **Kvdb Endpoints** (Portworx install argument: `-k`)
+  
 ### Specifying cluster domains
 
 A cluster domain identifies a subset of nodes from the stretch Portworx cluster that are a part of the same failure
-domain. In this case, your Kubernetes clusters are separated across a metropolitan area network and we wish to achieve
-DR across them. So each Kubernetes cluster and its nodes are one cluster domain. This cluster domain information needs
-to be explicitly specified to Portworx through the `-cluster_domain` install argument.
+domain. In this case, your Kubernetes clusters are separated across a metropolitan area network, and you can achieve DR across them. So each Kubernetes cluster and its nodes are one cluster domain. This cluster domain information needs to be explicitly specified to Portworx through the `-cluster_domain` install argument.
 
 Once you have generated the Kubernetes manifest file, add the `cluster_domain` argument. You can also edit a running Portworx install and add this new field. The value for `cluster_domain` must be different for each Kubernetes cluster, for example:
 
@@ -134,129 +117,32 @@ Add the `-cluster_domain` argument in the `args` section of the DaemonSet. The f
              "-x", "kubernetes"]
 
 ```
-
-#### Installing on a Tanzu cluster
-
-{{<info>}}
-**NOTE**: This section is intended for users who are using Tanzu, skip this section if you're not using Tanzu.
-{{</info>}}
-
-The existing Sync DR implementation assumes the availability of cloud drives for each of the two clusters. In Tanzu cloud drive is a PVC, which is a cluster-scoped resource and in order to help clusters distinguish between their drives,
-they should be labeled accordingly.
-
-* Label your worker nodes **on both** clusters with the `px-dr` label. Set your cluster domain as a
-  value.
-
-    ```
-    kubectl label nodes <list_of_nodes or --all> px-dr=<cluster_domain_name>
-    ```
-
-* Add the `--node_pool_label` parameter to the spec with a key `px-dr`
-
-    ```text
-          containers:
-            - name: portworx
-              image: portworx/oci-monitor:2.8
-              args:
-                ["-k", "etcd:http://100.26.199.167:2379,etcd:http://100.26.199.168:2379,etcd:http://100.26.199.169:2379", "-c", "px-dr-cluster", "-cluster_domain", "us-east-1a", "-a", "-secret_type", "k8s",
-                 "-x", "kubernetes", --node_pool_label=px-dr]
-    ```
-
-{{<info>}}
-**NOTE:** 
-
-* Other arguments are for illustration purposes only, Use args from your existing specs. Only add `--node_pool_label=px-dr`.
-* Only deploy Portworx in this mode when your Kubernetes clusters are separated by a metropolitan area network with a maximum latency of 10ms. Pure Storage does not recommended you run in this mode if your Kubernetes clusters are distributed across regions, such as AWS regions `us-east` and `us-west`. 
-{{</info>}}
-
-A cluster domain and, in turn, the set of nodes which are a part of that domain are associated with either of the
-following states:
-
-* **Active State**: Nodes from an active cluster domain participate in the cluster activities. Applications **can** be
-  scheduled on the nodes which are a part of an active cluster domain.
-* **Inactive State**: Nodes from an inactive cluster domain do not participate in the cluster activities.
-  Applications **cannot** be scheduled on such nodes.
-
-Once the Kubernetes manifest is applied on both the clusters, Portworx will form the stretch cluster. You can run the
-following commands to ensure Portworx is successfully installed in a stretch fashion.
-
-**Kubernetes Cluster 1 running in `us-east-1a`**
-
-```text
-kubectl get nodes -o wide
-```
-
-```output
-ip-172-20-33-100.ec2.internal   Ready     node      3h        v1.11.9   18.205.7.13      Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
-ip-172-20-36-212.ec2.internal   Ready     node      3h        v1.11.9   18.213.118.236   Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
-ip-172-20-48-24.ec2.internal    Ready     master    3h        v1.11.9   18.215.34.139    Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
-ip-172-20-59-248.ec2.internal   Ready     node      3h        v1.11.9   34.200.228.223   Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
-```
-
-**Kubernetes Cluster 2 running in `us-east-1b`**
-
-```text
-kubectl get nodes -o wide
-```
-
-```output
-ip-172-40-34-140.ec2.internal   Ready     node      3h        v1.11.9   34.204.2.95     Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
-ip-172-40-35-23.ec2.internal    Ready     master    3h        v1.11.9   34.238.44.60    Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
-ip-172-40-40-230.ec2.internal   Ready     node      3h        v1.11.9   52.90.187.179   Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
-ip-172-40-50-47.ec2.internal    Ready     node      3h        v1.11.9   3.84.27.79      Debian GNU/Linux 9 (stretch)   4.9.0-7-amd64    docker://17.3.2
-```
-
-A single Portworx cluster running across both the Kubernetes clusters
-
-```text
-kubectl exec portworx-d6rk7 -n kube-system -- /opt/pwx/bin/pxctl status
-```
-
-```output
-Status: PX is operational
-License: Trial (expires in 31 days)
-Node ID: 04de0858-4081-47c3-a2ab-f0835b788738
-        IP: 172.40.40.230
-        Local Storage Pool: 1 pool
-        POOL    IO_PRIORITY     RAID_LEVEL      USABLE  USED    STATUS  ZONE            REGION
-        0       LOW             raid0           150 GiB 9.0 GiB Online  us-east-1b      us-east-1
-        Local Storage Devices: 1 device
-        Device  Path            Media Type              Size            Last-Scan
-        0:1     /dev/xvdf       STORAGE_MEDIUM_SSD      150 GiB         09 Apr 19 22:57 UTC
-        total                   -                       150 GiB
-        Cache Devices:
-        No cache devices
-Cluster Summary
-        Cluster ID: px-dr-cluster
-        Cluster UUID: 27558ed9-7ddd-4424-92d4-5dfe2af572e0
-        Scheduler: kubernetes
-        Nodes: 6 node(s) with storage (6 online)
-        IP              ID                                      SchedulerNodeName               StorageNode     Used    Capacity        Status  StorageStatus   Version         Kernel          OS
-        172.20.33.100   c665fe35-57d9-4302-b6f7-a978f17cd020    ip-172-20-33-100.ec2.internal   Yes             0 B     150 GiB         Online  Up              2.1.0.0-cb23fd1 4.9.0-7-amd64   Debian GNU/Linux 9 (stretch)
-        172.40.50.47    bbb2f11d-c6ad-46e7-a52f-530f313869f3    ip-172-40-50-47.ec2.internal    Yes             0 B     150 GiB         Online  Up              2.1.0.0-cb23fd1 4.9.0-7-amd64   Debian GNU/Linux 9 (stretch)
-        172.40.34.140   a888a08e-0596-43a5-8d02-6faf19e8724c    ip-172-40-34-140.ec2.internal   Yes             0 B     150 GiB         Online  Up              2.1.0.0-cb23fd1 4.9.0-7-amd64   Debian GNU/Linux 9 (stretch)
-        172.20.36.212   7a83c652-ffaf-452f-978c-82b0da1d2580    ip-172-20-36-212.ec2.internal   Yes             0 B     150 GiB         Online  Up              2.1.0.0-cb23fd1 4.9.0-7-amd64   Debian GNU/Linux 9 (stretch)
-        172.20.59.248   11e0656a-45a5-4a5b-b4e6-51e130959644    ip-172-20-59-248.ec2.internal   Yes             0 B     150 GiB         Online  Up              2.1.0.0-cb23fd1 4.9.0-7-amd64   Debian GNU/Linux 9 (stretch)
-        172.40.40.230   04de0858-4081-47c3-a2ab-f0835b788738    ip-172-40-40-230.ec2.internal   Yes             0 B     150 GiB         Online  Up (This node)  2.1.0.0-cb23fd1 4.9.0-7-amd64   Debian GNU/Linux 9 (stretch)
-Global Storage Pool
-        Total Used      :  0 B
-        Total Capacity  :  900 GiB
-```
+{{<info>}}**NOTE:** Additional steps are required when installing on a Tanzu cluster. For instructions, refer to [Installing on a Tanzu cluster](/operations/operate-kubernetes/disaster-recovery/px-metro/tanzu) page.{{</info>}}
 
 ### Setup a witness node
 
 To set up a witness node: 
 
-1. Install the [Docker engine](https://docs.docker.com/engine/install/).
+1. Check your Portworx Enterprise version:
 
-2. Install the witness node, after the Docker engine is up and running:
+  ```text
+  kubectl get pods -A -o jsonpath="{.items[*].spec.containers[*].image}" | xargs -n1 | sort -u | grep oci-monitor
+  ```
+
+2. Install the witness node with the same Portworx Enterprise version that you retrieved in the previous step, after the Docker engine is up and running:
 
     ```txt
-    chmod +x ./witness-install.sh ./witness-install.sh --cluster-id=px-cluster – etcd="etcd:http://70.0.68.196:2379,etcd:http://70.0.93.183:2379,etcd:http://70.0.68.196:2379"
+    chmod +x ./witness-install.sh ./witness-install.sh --cluster-id=px-cluster --etcd="etcd:http://70.0.68.196:2379,etcd:http://70.0.93.183:2379,etcd:http://70.0.68.196:2379" --docker-image=portworx/px-enterprise:<your-px-version>
     ```
 
 3. Set up a single storage-less Portworx node on the designated VM using the [witness script](#appendix).
 
+   {{<info>}}**NOTE:** 
+
+   * Refer to [Upgrade the Portworx OCI bundle](/install-portworx/install-with-other/docker/standalone#upgrade-the-portworx-oci-bundle) section to upgrade witness node.
+
+   * Refer to [Uninstall the Portworx OCI bundle](/install-portworx/install-with-other/docker/standalone#uninstall-the-portworx-oci-bundle) section to uninstall witness node.
+   {{</info>}}
 ### Install storkctl
 
 `storkctl` is a command-line tool for interacting with a set of scheduler extensions.
@@ -314,59 +200,59 @@ Following is the witness script mentioned in the [Setup a witness node](#setup-a
 ```txt
 #!/bin/bash
 
-  PX_DOCKER_IMAGE=portworx/px-enterprise:2.7.0
+PX_DOCKER_IMAGE=portworx/px-enterprise:2.11.0
 
-  function usage()
-  {
-  echo "Install Portworx as a witness node"
-  echo ""
-  echo "./install-witness.sh"
-  echo "--help"
-  echo "--cluster-id=$CLUSTER_ID"
-  echo "--etcd=$ETCD"
-  echo "--docker-image=$PX_DOCKER_IMAGE"
-  echo ""
-  }
+function usage()
+{
+echo "Install Portworx as a witness node"
+echo ""
+echo "./install-witness.sh"
+echo "--help"
+echo "--cluster-id=$CLUSTER_ID"
+echo "--etcd=$ETCD"
+echo "--docker-image=$PX_DOCKER_IMAGE"
+echo ""
+}
 
-  while [ "$1" != "" ]; do
-  PARAM=`echo $1 | awk -F= '{print $1}'`
-  VALUE=`echo $1 | awk -F= '{print $2}'`
-  case $PARAM in
-  --help)
-  usage
-  exit
-  ;;
-  --cluster-id)
-  CLUSTER_ID=$VALUE
-  ;;
-  --docker-image)
-  PX_DOCKER_IMAGE=$VALUE
-  ;;
-  --etcd)
-  ETCD=$VALUE
-  ;;
-  *)
-  echo "ERROR: unknown parameter \"$PARAM\""
-  usage
-  exit 1
-  ;;
-  # Once PX is up and running place the witness node in maintenance.
-  esac
-  shift
-  done
+while [ "$1" != "" ]; do
+PARAM=`echo $1 | awk -F= '{print $1}'`
+VALUE=`echo $1 | awk -F= '{print $2}'`
+case $PARAM in
+--help)
+usage
+exit
+;;
+--cluster-id)
+CLUSTER_ID=$VALUE
+;;
+--docker-image)
+PX_DOCKER_IMAGE=$VALUE
+;;
+--etcd)
+ETCD=$VALUE
+;;
+*)
+echo "ERROR: unknown parameter \"$PARAM\""
+usage
+exit 1
+;;
+# Once PX is up and running place the witness node in maintenance.
+esac
+shift
+done
 
-  sudo docker run --entrypoint /runc-entry-point.sh \
-  --rm -i --privileged=true \
-  -v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
-  $PX_DOCKER_IMAGE
+sudo docker run --entrypoint /runc-entry-point.sh \
+--rm -i --privileged=true \
+-v /opt/pwx:/opt/pwx -v /etc/pwx:/etc/pwx \
+$PX_DOCKER_IMAGE
 
-  /opt/pwx/bin/px-runc install -k $ETCD -c $CLUSTER_ID --cluster_domain witness -a
+/opt/pwx/bin/px-runc install -k $ETCD -c $CLUSTER_ID --cluster_domain witness -a
 
-  sudo systemctl daemon-reload
-  sudo systemctl enable portworx
-  sudo systemctl start portworx
+sudo systemctl daemon-reload
+sudo systemctl enable portworx
+sudo systemctl start portworx
 
-  watch -n 1 --color /opt/pwx/bin/pxctl --color status 
+watch -n 1 --color /opt/pwx/bin/pxctl --color status 
 ```
 
 In the witness script:

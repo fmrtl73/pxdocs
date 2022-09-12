@@ -1,12 +1,14 @@
 ---
-title: 3. Synchronize your Clusters
+title: 3. Synchronize your clusters or Schedule migrations
+linkTitle: 3. Synchronize your clusters
 weight: 300
 keywords: Asynchronous DR, disaster recovery, kubernetes, k8s, cloud, backup, restore, snapshot, migration
 description: Find out how to synchronize your cluster by scheduling periodic migrations between them
 aliases:
     - /portworx-install-with-kubernetes/disaster-recovery/px-metro/3-schedule-migrations/
+   
 ---
-To keep the Kubernetes resource between your paired source and destination cluster in sync, you need to periodically migrate them.
+To keep the Kubernetes resources between your paired source and destination cluster in sync, you need to periodically migrate them.
 
 For reference,
 
