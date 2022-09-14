@@ -9,6 +9,16 @@ aliases:
 ---
 
 
+## 2.11.3
+
+Sep 13, 2022
+
+### Fixes
+| **Issue Number** | **Issue Description** |
+| ---- | ---- |
+| PWX-26745 | In Portworx versions 2.11.0 through 2.11.2, Async DR restore takes longer than in previous versions.<br><br>**Resolution:** In version 2.11.3, this issue has been resolved. |
+ 
+
 ## 2.11.2
 
 August 11, 2022
