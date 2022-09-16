@@ -7,13 +7,13 @@ hidden: true
 
 ### Monitor the Portworx nodes
 
-1. Enter the following kubectl get command, waiting until all Portworx nodes show as ready in the output:
+1. Enter the following `kubectl get` command and wait until all Portworx nodes show as ready in the output:
 
     ```text
     kubectl -n kube-system get storagenodes -l name=portworx
     ```
 
-2. Enter the following kubectl describe command with the NAME of one of the Portworx nodes to show the current installation status for individual nodes:
+2. Enter the following `kubectl describe` command with the _name_ of one of the Portworx nodes to show the current installation status for individual nodes:
 
     ```text
     kubectl -n kube-system describe storagenode <portworx-node-name>
