@@ -142,3 +142,12 @@ Note:
 | `exampleTable` | This field defines the table name you call in the shortcode within the text. For example, if you wished to place a table on the fontpage of the site called `exampleTable`, you'd place the shortcode `{{<automateTable source="exampleTable">}}` into the `_index.md` file. |
 | `heading` | contains table headings (`name`) and how many cells you want the table headings to span (`colspan`). There is no default `colspan` value, you must specify a numerical value. |
 | `tableData` | a list of arrays. Each array is a row, and each entry in the array is a cell in the row. This is designed to keep the yaml table-like and make manual data entry here a little easier. |
+
+## variable shortcode
+
+This shortcode allows you to specify a variable in the `names.yaml` file in the site's data folder and reference it anywhere in the text. It uses a `key:value` format. Define the variable name using the key, and Hugo will replace it with the `value` in the output.
+
+The shortcode is formated as follows:
+```
+{{<variable var="key">}}
+```
