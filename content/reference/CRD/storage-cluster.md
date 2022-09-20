@@ -347,6 +347,7 @@ This section provides details on how to specify an update strategy.
 | --- | --- | --- | --- |
 | spec.<br>updateStrategy.<br>type | Indicates the update strategy. Currently, Portworx supports the following update strategies- `RollingUpdate` and `OnDelete`. | `object` | `RollingUpdate` |
 | spec.<br>updateStrategy.<br>rollingUpdate.<br>maxUnavailable | Similarly to how Kubernetes rolling update strategies work, this field specifies how many nodes can be down at any given time. Note that you can specify this as a number or percentage. | `int` or `string` | `1` |
+| spec.<br>autoUpdateComponents | Indicates the update strategy for the component images (such as Stork, Autopilot, Prometheus, and so on). Portworx supports the following auto update strategies for the component images:<br> <ul><li>`None`: Updates the component images only when the Portworx image changes in `StorageCluster.spec.image`.</li><li>`Once`: Updates the component images once even if the Portworx image does not change. This is useful when the component images on the manifest server change due to bug fixes.</li><li>`Always`: Regularly checks for the updates on the manifest server, and updates the component images if required.</li>| `string` | None |
 
 ### Delete/Uninstall strategy
 
