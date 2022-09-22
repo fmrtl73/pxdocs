@@ -65,6 +65,7 @@ By default, Portworx automatically adds the following labels to each of its stor
 
 | Field  	| Description    | Optional? | Default |
 |---------|----------------|-----------|---------|
+|**enforcement**|Specifies if the given rule is required (hard) or preferred (soft). Portworx will fail volume creation if it cannot provision volumes matching a rule with hard enforcement enabled. |Yes|required|
 |**topologyKey**|Key for the node label that the system uses to denote a topology domain. The key can be for any node label that is present on the Kubernetes node. Using topologyKey requires nodes to be consistently labelled, i.e. every node in the cluster must have an appropriate label matching topologyKey. If some or all nodes are missing the specified topologyKey label, it can lead to unintended behavior.|Yes* * required if matchExpressions is empty|empty|
 
 ##### Example use cases
