@@ -108,13 +108,26 @@ If you are not using `OnDelete` for your StorageCluster update strategy, proceed
 
 If the StorageCluster update strategy is `OnDelete` (which means that DaemonSet has the `OnDelete` update strategy or the StorageCluster was updated manually to include this strategy), you will need to manually migrate Portworx pods on the nodes. Migration will be blocked until all Portworx nodes are migrated. After all Portworx nodes are migrated, Operator will migrate the components automatically.
 
-Change the node migration label to `Starting` to trigger migration on a node after KVDB pods are created:
+1. Run the following command to approve the migration:
+   
+   ```text
+   kubectl -n kube-system annotate storagecluster --all --overwrite portworx.io/migration-approved='true'
+   ```
+2. Change the migration label to `Starting` on the KVDB nodes:
 
-```text
-kubectl label node <k8s-node-name> portworx.io/daemonset-migration=Starting --overwrite
-```
 
-Once all KVDB nodes are migrated, Operator starts migration on multiple nodes at once as long as the quorum is maintained.
+   ```text
+   kubectl label node <kvdb-node> portworx.io/daemonset-migration=Starting --overwrite
+   ```
+      A KVDB node should be migrated one at a time, and wait until all KVDB nodes are migrated and pods are created:
+
+2. Change the migration label to `Starting` on nodes to trigger migration on a Portworx node:
+
+   ```text
+   kubectl label node <portworx-node> portworx.io/daemonset-migration=Starting --overwrite
+   ```
+
+   Operator starts migrating the labeled nodes at once.
 
 {{<info>}}**NOTES**:
 
@@ -122,6 +135,7 @@ Once all KVDB nodes are migrated, Operator starts migration on multiple nodes at
 * If the update strategy is changed from `RollingUpdate` to `OnDelete` during the nodes migration, the procedure will be blocked after the current node migration is done, then the procedure will wait for manual approval.
 {{</info>}}
 
+You can skip the next section and proceed to [this section](#check-migration-status) to verify the status of your migration.
 ### Approve the migration
 
 To approve the migration, run the following command:
