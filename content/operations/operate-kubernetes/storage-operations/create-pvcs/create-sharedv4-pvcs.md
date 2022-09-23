@@ -29,6 +29,7 @@ To increase fault tolerance, you can enable **Sharedv4 service** volumes by [set
 * Sharedv4 service volumes default to using NFSv4.0.
 * <u>Known issues</u>: 
   * On failover, Applications may receive an error for non idempotent requests. For example, if an `mkdir` call is issued prior to failover, the client can resend it to the new server, which returns an `EEXIST` error if the directory was created by the first call.
+* Sharedv4 service volumes are not supported on Portworx clusters setup in Metro DR deployment model.
 {{</info>}}
 
 ### Step 1: Create a StorageClass
