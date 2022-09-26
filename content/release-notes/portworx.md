@@ -27,7 +27,7 @@ August 11, 2022
 
 Portworx by Pure Storage is proud to introduce the following new feature:
 
-* You can now enable [encryption on the Azure cloud drives using your own key](/install-portworx/cloud/azure/aks/deploy-px-operator#optional-enable-azure-cloud-drive-encryption-using-your-own-key) stored in Azure Key Vault.
+* You can now enable [encryption on the Azure cloud drives using your own key](/install-portworx/cloud/azure/aks/#generate-the-specs) stored in Azure Key Vault.
 
 ### Notes
 

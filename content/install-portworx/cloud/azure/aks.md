@@ -5,6 +5,9 @@ description: Learn about installing Portwork on Azure Kubernetes Service.
 weight: 100
 aliases:
     - /install-portworx/cloud/azure/acs/
+    - /install-portworx/cloud/azure/aks/1-prepare
+    - /install-portworx/cloud/azure/aks/deploy-px-operator
+    - /install-portworx/cloud/azure/aks/deploy-px-daemonset/
 ---
 
 This topic explains how to install Portworx on Azure Kubernetes Service (AKS). Follow the steps in this topic in order.
@@ -18,10 +21,11 @@ This topic explains how to install Portworx on Azure Kubernetes Service (AKS). F
 * An AKS cluster that meets the [Portworx prerequisites](/install-portworx/prerequisites)
 * The Azure CLI must be [installed](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 * Disk type supported: Premium or Standard
-* Portworx recommends that you set max number of storage nodes. When specified Portworx will ensure **X** number of storage nodes exist in the zone.
-* For production environments Portworx, Inc. recommends 3 Availability Zones (AZs) with one node per zone
-* Portworx recommends you set Max storage nodes per availability zone, Portworx will ensure that many storage nodes exist in the zone
-* For existing clusters, name of "AKS cluster Infrastructure Resource Group" or initial Resource Group name used to create the cluster and cluster name
+* Portworx recommends that you set max number of storage nodes. When specified Portworx will ensure the desired number of storage nodes exist in the zone.
+* For production environments Portworx, Inc. recommends 3 Availability Zones (AZs) with one node per zone.
+* Portworx recommends you set Max storage nodes per availability zone, Portworx will ensure that many storage nodes exist in the zone.
+* For existing clusters, name of "AKS cluster Infrastructure Resource Group" or initial Resource Group name used to create the cluster and cluster name.
+* If you're using Azure Cloud Drive encryption using your own key, you must have an Azure KeyVault instance created in the same region as the AKS cluster.
 
 
 ## Prepare your AKS platform
@@ -167,10 +171,32 @@ To install Portworx with Kubernetes, you must first generate Kubernetes manifest
 3. Ensure that **Use the Portworx Operator** is selected, then select your desired Portworx Version. Click **Next** to continue to the next tab. 
 4. Select **Cloud** followed by **Azure**. Portworx recommends you to use **Create using a Spec** and select **Premium** volume type.
     {{<info>}}
-**NOTE:** Portworx recommends you to set **Max storage nodes per availability zone**. Portworx will ensure that many storage nodes exist in the zone. 
+**NOTE:** 
+
+* Portworx recommends you to set **Max storage nodes per availability zone**. Portworx will ensure that many storage nodes exist in the zone. 
+* If you’re using a cloud provider, do not add volumes of different types (Standard and Premium) when configuring storage devices during spec generation. This can cause performance issues and errors.
     {{</info>}}
 5. In the Networking section click **Next**.
-6. In the Customize section select **Azure Kubernetes Service (AKS)** and click **Finish**.
+6. *(Optional)* Enable Azure cloud drive encryption using your own key:
+
+    1. Create a Disk Encryption Set ID by using the instructions on [this page](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-enable-customer-managed-keys-portal) in the Microsoft documentation.
+
+    2. Append the `diskEncryptionSetID` value from step 1 to the spec and deploy Portworx using the updated spec:
+
+        ```text
+        cloudStorage:
+            deviceSpecs:
+            - type=Premium_LRS,size=50,diskEncryptionSetID=/subscriptions/<subscription>/resourceGroups/<resource-group>/providers/Microsoft.Compute/diskEncryptionSets/<disk-encryption-set-name>
+        secretsProvider: azure-kv
+        ```
+
+    {{<info>}}
+**NOTE:** To deploy Portworx to an Azure Sovereign cloud, you must go to the **Customize** page and set the value of the `AZURE_ENVIRONMENT` variable. The following example screenshot shows how you can deploy Portworx to the Azure US Government cloud:
+
+![Screenshot showing the AZURE_ENVIRONMENT variable](/img/azure-sovereign-example.png)
+    {{</info>}}
+
+7. In the Customize section select **Azure Kubernetes Service (AKS)** and click **Finish**.
 
 ### Apply specs
 
