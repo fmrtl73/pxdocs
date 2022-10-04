@@ -8,7 +8,7 @@ linkTitle: Azure managed identity on AKS
 
 Perform the following steps to enable Azure managed identity on new AKS cluster:
 
-1. Login to the Azure and set the subscription:
+1. Log in to Azure and set the subscription:
 
     ```text
     az login
@@ -39,10 +39,12 @@ Perform the following steps to enable Azure managed identity on new AKS cluster:
     az aks show -g myResourceGroup -n myManagedCluster --query identityProfile
     ```
 
-    Example:
+    For example:
 
     ```text
     az aks show -g cass-rg -n msi-test --query identityProfile
+    ```
+    ```output
     {
       "kubeletidentity": {
         "clientId": "68c2bc67-f3a5-459d-9b57-14597efcbc70",
@@ -59,12 +61,14 @@ Perform the following steps to enable Azure managed identity on new AKS cluster:
      az role assignment create --assignee-object-id ObjectId --role "Contributor" --resource-group nodeResourceGroup
     ```
 
-    Example:
+    For example:
 
     ```text
     az aks show -g myResourceGroup -n myManagedCluster --query nodeResourceGroup
     "MC_cass-rg_msi-test_eastus"
     az role assignment create --assignee-object-id "c099f8ac-ba91-4c13-9456-3e5614296a35" --role "Contributor" --resource-group "MC_cass-rg_msi-test_eastus"
+    ```
+    ```output
     {
       "canDelegate": null,
       "condition": null,
@@ -81,19 +85,19 @@ Perform the following steps to enable Azure managed identity on new AKS cluster:
     } 
     ```
 
-7. Create Kubernetes secret based on Client ID shown above:
+7. Create a Kubernetes secret based on clientId that you retrieved in step 5:
 
     ```text
     kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_CLIENT_ID=clientId
     ```
 
-    Example:
+    For example:
 
     ```text
     kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_CLIENT_ID="68c2bc67-f3a5-459d-9b57-14597efcbc70”
     ```
 
-8. Follow the steps to generate the Operator and StorageCluster spec in [Install Portworx on AKS using the Operator](/install-portworx/cloud/azure/aks/deploy-px-operator/). Save the spec for the next step.
+8. Follow the steps to generate the Operator and StorageCluster spec in [Install Portworx on AKS using the Operator](/install-portworx/cloud/azure/aks/#install-portworx-on-aks-using-the-operator). Save the spec for the next step.
 
 9. Modify the StorageCluster spec that is automatically generated. In the `env` section, remove the `AZURE_CLIENT_SECRET` and `AZURE_TENANT_ID` sections. The finished section should match the following: 
 

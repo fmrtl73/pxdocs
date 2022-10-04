@@ -35,7 +35,7 @@ To set up the Azure Kubernetes Service (AKS) to use Portworx, follow the steps b
 <!-- this doesn't directly apply to installation now, so I think we should remove it
 For more information on AKS, see [this article](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes). -->
 
-1. Login to the Azure, save your az login subscription ID (`"id"`) for future reference:
+1. Log in to Azure and save your `az login` subscription ID (`"id"`) for future reference:
 
     ```text
     az login
@@ -59,7 +59,7 @@ For more information on AKS, see [this article](https://docs.microsoft.com/en-us
     ]
     ```
 
-2. Set the subscription
+2. Set the subscription:
 
     ```text
     az account set --subscription <Your-Azure-Subscription-UUID>
@@ -81,7 +81,7 @@ For more information on AKS, see [this article](https://docs.microsoft.com/en-us
 
     -->
 
-3. Create an Azure Resource Group by specifying its name and location in which you will be deploying your AKS cluster:
+3. Create an Azure Resource Group by specifying its name and the location in which you will be deploying your AKS cluster:
 
     ```text
     az group create --name <resource-group-name> --location <location>
@@ -143,11 +143,11 @@ For more information on AKS, see [this article](https://docs.microsoft.com/en-us
     }
     ```
 
-2. Create a secret called `px-azure` to give Portworx access to Azure APIs. Take the following fields from the previous output and apply them in the following command:
+2. Create a secret called `px-azure` to give Portworx access to Azure APIs. Take the following fields from the previous output and use them in the following command:
 
-    * `AZURE_TENANT_ID` with `tenant`
-    * `AZURE_CLIENT_ID` with `appId`
-    * `AZURE_CLIENT_SECRET` with `password`
+    * Set `AZURE_TENANT_ID` to the value for `tenant`
+    * Set `AZURE_CLIENT_ID` to the value for `appId`
+    * Set `AZURE_CLIENT_SECRET` to the value for `password`
 
     ```text
     kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_TENANT_ID=<tenant> \

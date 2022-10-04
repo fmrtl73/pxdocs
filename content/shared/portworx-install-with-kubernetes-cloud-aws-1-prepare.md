@@ -38,7 +38,7 @@ Portworx creates and attaches EBS volumes. As such, it needs the AWS permissions
 }
 ```
 
-You can provide these permissions to Portworx in one of following ways:
+You can provide these permissions to Portworx in one of the following ways:
 
-1. Instance Privileges: Provide above permissions for all the instances in the autoscaling cluster by applying the corresponding IAM role. More info about IAM roles and policies can be found [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
-2. Environment Variables: Create a User with the above policy and provide the security credentials (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY) to Portworx.
+* Instance Privileges: Provide above permissions for all the instances in the autoscaling cluster by applying the corresponding IAM role. More info about IAM roles and policies can be found [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
+* Environment Variables: Create a User with the above policy and provide the security credentials (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) to Portworx.

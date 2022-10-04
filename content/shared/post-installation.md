@@ -44,7 +44,7 @@ Note the name of one of your `px-cluster` pods. You'll run `pxctl` commands from
 You can find the status of the Portworx cluster by running `pxctl status` commands from a pod. Enter the following `kubectl exec` command, specifying the pod name you retrieved in the previous section:
 
 ```text
-kubectl exec px-cluster-1c3edc42-4541-48fc-b173-3e9bf3cd834d-vpptx -n kube-system -- /opt/pwx/bin/pxctl status
+kubectl exec <pod-name> -n kube-system -- /opt/pwx/bin/pxctl status
 ```
 ```output
 Defaulted container "portworx" out of: portworx, csi-node-driver-registrar
@@ -116,7 +116,7 @@ The Portworx status will display `PX is operational` if your cluster is running 
 * Verify the Portworx cluster provision status. Enter the following `kubectl exec` command, specifying the pod name you retrieved in the previous section:
 
     ```text
-    kubectl exec px-cluster-1c3edc42-4541-48fc-b173-3e9bf3cd834d-vpptx -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status
+    kubectl exec <pod-name> -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status
     ```
 
     ```output
@@ -186,9 +186,9 @@ Perform the following steps to create a PVC:
     stork-snapshot-sc                    stork-snapshot                  Delete          Immediate           true                   43d
     ```
 
-    `Kubectl` will return details about the storageClasses available to you. Verify `px-csi-db` appears in the list. 
+    `kubectl` returns details about the StorageClasses available to you. Verify that `px-csi-db` appears in the list. 
 
-2. Enter the `kubectl get pvc` command, if this is the only StroageClass and PVC you've created, you should see only one entry in the output:
+2. Enter the `kubectl get pvc` command. If this is the only StroageClass and PVC that you've created, you should see only one entry in the output:
 
     ```text
     kubectl get pvc <your-pvc-name>
@@ -198,6 +198,6 @@ Perform the following steps to create a PVC:
     example-pvc   Bound    pvc-dce346e8-ff02-4dfb-935c-2377767c8ce0   2Gi        RWO            example-storageclass   3m7s
     ```
 
-    `Kubectl` will return details about your PVC if it was created correctly. Verify the configuration details appear as you intended. 
+    `kubectl` returns details about your PVC if it was created correctly. Verify that the configuration details appear as you intended. 
 
 
