@@ -9,6 +9,25 @@ aliases:
 ---
 
 
+
+## 2.11.4
+
+Oct 4, 2022
+
+### Improvements
+
+Portworx has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+| ---- | ---- |
+| PWX-27053| Added runtime knobs to modify the amount of work that a resync workflow does at any instant of time. These knobs will facilitate throttling of resync operation.|
+
+
+### Fixes
+
+| **Issue Number** | **Issue Description** |
+| ---- | ---- |
+| PWX-27028| While performing writes on the target, the resync operation pinned down resources even when the write operation had no priority to execute.<br><br>**Resolution:** In version 2.11.4, this issue is fixed.
 ## 2.11.3
 
 Sep 13, 2022
