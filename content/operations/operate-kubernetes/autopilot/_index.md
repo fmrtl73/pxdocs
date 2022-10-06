@@ -4,7 +4,7 @@ linkTitle: "Autopilot"
 keywords: autopilot
 description: Rule based engine to manage your Kubernetes cluster
 hidesections: true
-weight: 800
+weight: 700
 series: operations-k8s
 aliases:
     - /portworx-install-with-kubernetes/autopilot/

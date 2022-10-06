@@ -4,6 +4,7 @@ linkTitle: Migrate from DaemonSet to Operator
 keywords: migrate, daemonset, operator, migration, installation
 description: Learn how to migrate your Portworx cluster from a DaemonSet installation to a Portworx Operator installation.
 series: k8s-op-maintain
+weight: 1300
 ---
 
 This page describes how to migrate your Portworx cluster from a DaemonSet installation to a Portworx Operator installation.

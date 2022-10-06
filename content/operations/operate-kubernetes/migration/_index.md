@@ -5,6 +5,7 @@ keywords: cloud, backup, restore, snapshot, DR, migration, migration
 description: How to migrate stateful applications on Kubernetes
 series: operations-k8s
 noicon: true
+weight: 1400
 aliases:
   - /cloud-references/migration/migration-stork.html
   - /cloud-references/migration/migration-stork

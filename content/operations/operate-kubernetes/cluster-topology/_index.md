@@ -1,6 +1,6 @@
 ---
 title: Cluster Topology awareness
-weight: 400
+weight: 200
 keywords: cluster topology awarness, kubernetes k8s, geography, locality, rack, zone, region
 description: Learn how Portworx nodes can detect where they are placed in the Kubernetes cluster to influence replicas and performance.
 noicon: true

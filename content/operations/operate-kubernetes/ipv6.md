@@ -4,6 +4,7 @@ keywords: ipv6
 description: Instructions for setting up Portworx to accept IPv6 addresses.
 linkTitle: IPv6 with Portworx
 series: operations-k8s
+weight: 1200
 aliases:
     - /portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/ipv6/
 ---

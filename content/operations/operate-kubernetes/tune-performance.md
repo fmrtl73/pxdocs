@@ -3,6 +3,7 @@ title: Tune performance
 keywords: performance tuning, optimize
 description: Improve the performance of your Portworx cluster on Kubernetes
 series: operations-k8s
+weight: 1500
 aliases:
     - /portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/tune-performance/
 ---
