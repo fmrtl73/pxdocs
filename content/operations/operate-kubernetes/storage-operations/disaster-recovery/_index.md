@@ -19,23 +19,27 @@ plugin.
 
 ## Install Velero Plugin
 
-Run the following command to install the Portworx plugin for Velero:
+Portworx needs to be added as a plugin to your existing Velero installation.
+Run the following command to install the Portworx plugin:
 ```text
-velero plugin add portworx/velero-plugin:1.0.2
+velero plugin add portworx/velero-plugin:1.0.3
 ```
 
-This should add an init container to your Velero deployment to install the
-plugin.
+This should add an init container to your Velero deployment to install the plugin.
 
 ## Configure Velero to use Portworx snapshots
 
 Once the plugin is installed, you need to create VolumeSnapshotLocation objects for Velero to use when
 taking volume snapshots. These specify whether you want to take local or cloud snapshots.
 
+Run the following command to create a VolumeSnapshotLocation for local snapshots.
 ```text
-velero snapshot-location create portworx-local --provider portworx.io/portworx
+velero snapshot-location create portworx-local --provider portworx.io/portworx --config type=local
+```
 
-# credId is optional, required only if Portworx is configured with more than one credential.
+Run the following command to create a VolumeSnapshotLocation for cloud snapshots.
+
+```text
 velero snapshot-location create portworx-cloud --provider portworx.io/portworx --config type=cloud,credId=<UUID>
 ```
 
@@ -50,9 +54,25 @@ portworx-cloud   54m
 portworx-local   54m
 ```
 
+The valid configuration parameters that can be given through the `--config` argument in the above commands are:
+
+* **type**: Defines the type of snapshot. Valid values: [cloud | local]
+* **credID**: Defines the credential Portworx should use when triggering a cloud snapshot.
+* **PX_NAMESPACE**: Specify the namespace in which Portworx is installed. This parameter is not required if Portworx
+  is installed in `kube-system` namespace. This option is similar to what is specified in other Portworx components 
+  like Stork.
+* **portworx.io/cloudsnap-incremental-count**: Specify the number of incremental cloud snapshots Portworx should take
+  before triggering a full backup. This option is similar to what is specified in other Portworx components like Stork.
+
+Here is a sample command that uses all the available config parameters:
+
+```text
+velero snapshot-location create portworx-cloud --provider portworx.io/portworx --config type=cloud,credId=<UUID>,PX_NAMESPACE=portworx,portworx.io/cloudsnap-incremental-count=7
+```
+
 ## Creating backups
 
-Once the plugin has been installed and configured, everytime you take backups
+Once you have installed and configured the plugin, every time you take backups
 using Velero and include PVCs, it will also take Portworx snapshots of your volumes.
 
 ### Local Backups
