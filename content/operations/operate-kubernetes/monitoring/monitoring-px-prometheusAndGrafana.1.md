@@ -18,7 +18,7 @@ This document walks you through the steps required to monitor your Portworx clus
 
 The following instructions allows you to monitor Portworx via Prometheus and allow the Alertmanager to provide alerts based on configured rules.
 
-The Prometheus [Operator](https://coreos.com/operators/prometheus/docs/latest/user-guides/getting-started.html) creates, configures and manages a prometheus cluster.
+The Prometheus [Operator](https://prometheus-operator.dev/docs/user-guides/getting-started/) creates, configures and manages a prometheus cluster.
 
 The Prometheus operator manages 3 customer resource definitions namely:
 

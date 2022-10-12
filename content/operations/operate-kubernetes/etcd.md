@@ -16,7 +16,7 @@ For production Portworx clusters {{<companyName>}} recommends the following conf
 3. Minimum 8G of memory dedicated to each etcd node.
 4. Each Etcd node in the etcd cluster backed with storage disks (minimum 100GB)
 
-More detailed set of hardware requirements as recommended by etcd can be found [here](https://coreos.com/etcd/docs/latest/op-guide/hardware.html#example-hardware-configurations)
+More detailed set of hardware requirements as recommended by etcd can be found [here](https://etcd.io/docs/latest/op-guide/hardware/#example-hardware-configurations).
 
 ### Setup
 
@@ -28,7 +28,7 @@ If you have 3 static nodes where you want to run etcd follow [this](/operations/
 
 #### Setup ETCD cluster using CoreOS documentation
 
-Follow [this](https://coreos.com/etcd/docs/latest/op-guide/clustering.html) detailed step by step process provided by etcd to setup a brand new multi-node cluster.
+Follow [this](https://etcd.io/docs/latest/op-guide/clustering/) detailed step by step process provided by etcd to setup a brand new multi-node cluster.
 
 #### Setup ETCD cluster using Ansible Playbook
 
@@ -69,6 +69,6 @@ etcd --snapshot-count=5000
 ```
 
 For a more detailed setup, maintenance and tuning information refer the following coreos etcd reference docs.
-- [Maintenance](https://coreos.com/etcd/docs/latest/op-guide/maintenance.html)
-- [Tuning](https://coreos.com/etcd/docs/latest/tuning.html)
-- [Troubleshooting](https://coreos.com/etcd/docs/latest/op-guide/recovery.html)
+- [Maintenance](https://etcd.io/docs/latest/op-guide/maintenance/)
+- [Tuning](https://etcd.io/docs/latest/tuning/)
+- [Troubleshooting](https://etcd.io/docs/latest/op-guide/recovery/)

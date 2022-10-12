@@ -56,7 +56,7 @@ If the tool finds existing keys under the same cluster ID, it aborts the restore
 
 * Ensure your etcd cluster that is used for storing Portworx configuration data is snapshotted and backed up periodically. Make sure you follow all the etcd recommendations mentioned [here](/operations/operate-kubernetes/etcd)
 * Ensure the snaps are stored in a different location or cloud storage like S3, so they can be retrieved from other sites if one of your site is down.
-* Follow this [link](https://coreos.com/etcd/docs/latest/op-guide/recovery.html) to learn more on how to restore etcd cluster from its snapshots.
+* Follow this [link](https://etcd.io/docs/latest/op-guide/recovery/) to learn more on how to restore etcd cluster from its snapshots.
 
 ### Portworx behavior on etcd failure
 
