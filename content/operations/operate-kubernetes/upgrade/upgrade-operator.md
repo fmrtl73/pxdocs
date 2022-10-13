@@ -44,7 +44,7 @@ portworx.io/misc-args: "-rt_opts wait-before-retry-period-in-secs=360"
       ```text
       kubectl get storagecluster -n kube-system
       ```
-      ```
+      ```output
       NAME                                              CLUSTER UUID                           STATUS   VERSION   AGE
       px-cluster-2dc24b8d-dcf5-46d7-b4ea-0477837b54c7   9443277e-ea51-40da-b9b1-7b4739f27cf3   Online   2.10.3    43d
       ```
@@ -58,7 +58,7 @@ portworx.io/misc-args: "-rt_opts wait-before-retry-period-in-secs=360"
       kubectl edit storagecluster -n kube-system <storagecluster-name>
       ```
 
-3. Change the `spec.image` value to the version you want to update Portworx to:
+      Change the `spec.image` value to the version you want to update Portworx to:
 
       ```text
       apiVersion: core.libopenstorage.org/v1
@@ -67,17 +67,17 @@ portworx.io/misc-args: "-rt_opts wait-before-retry-period-in-secs=360"
         name: portworx
         namespace: kube-system
       spec:
-        image: portworx/oci-monitor:{{<highlight>}}\<your-desired-version\>{{</highlight>}}
+        image: portworx/oci-monitor:{{<highlight>}}<your-desired-version>{{</highlight>}}
       ```
-      ```
+      ```output
       storagecluster.core.libopenstorage.org/px-cluster-2dc24b8d-dcf5-46d7-b4ea-0477837b54c7 edited
       ```
 
       {{<info>}}
-**NOTE:** To look up desired version, refer to the [Portworx release notes](/release-notes/portworx/)
+**NOTE:** To look up recent versions, refer to the [Portworx release notes](/release-notes/portworx/)
       {{</info>}}
 
-4. Verify your upgrade using `kubectl get` command and make note of the version displayed under "VERSION".
+4. Verify your upgrade using `kubectl get` command and make note of the version displayed under `VERSION`.
 
       ```text
       kubectl get storagenodes -n kube-system -l name=portworx
