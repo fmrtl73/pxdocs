@@ -30,17 +30,17 @@ You will need to provide Portworx with a vCenter server user that will need to e
 
 If you create a custom role as above, make sure to select "Propagate to children" when assigning the user to the role.
 
-{{<info>}}All commands in the subsequent steps need to be run on a machine with kubectl access.{{</info>}}
+{{<info>}}**NOTE:** All commands in the subsequent steps need to be run on a machine with `kubectl` access.{{</info>}}
 
 ### Step 2: Create a Kubernetes secret with your vCenter user and password
 
 {{< content "shared/cloud-references-auto-disk-provisioning-vsphere-vsphere-secret.md" >}}
 
-### Step 3: Generate rest of the specs
+### Step 3: Generate the specs
 
 #### vSphere environment details
 
-Export following env variables based on your vSphere environment. These variables will be used in a later step when generating the yaml spec.
+Export the following environment variables based on your vSphere environment. These variables will be used in a later step when generating the yaml spec.
 
 ```text
 # Hostname or IP of your vCenter server
@@ -57,16 +57,16 @@ export VSPHERE_VCENTER_PORT=443
 
 A disk template defines the VMDK properties that Portworx will use as a reference for creating the actual disks out of which Portworx will create the virtual volumes for your PVCs.
 
-Following example will create a 150GB zeroed thick vmdk on each VM.
+The template adheres to the following format:
+
+```
+type=<vmdk type>,size=<size of the vmdk>
+```
+- __type__: Supported types are _thin_, _zeroedthick_, _eagerzeroedthick_, and _lazyzeroedthick_
+- __size__: This is the size of the VMDK in GiB
+
+The following example will create a 150GB zeroed thick vmdk on each VM:
 
 ```text
 export VSPHERE_DISK_TEMPLATE=type=zeroedthick,size=150
 ```
-
-The template follows the following format:
-
-```
-"type=<vmdk type>,size=<size of the vmdk>"
-```
-- __type__: Supported types are _thin_, _zeroedthick_ ,_eagerzeroedthick_, _lazyzeroedthick_
-- __size__: This is the size of the VMDK in GiB
