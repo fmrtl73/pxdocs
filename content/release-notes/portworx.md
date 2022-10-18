@@ -2786,7 +2786,7 @@ All customers on 1.2.x release will be able to upgrade to 1.4 but in a few speci
 * GCP/GKE automated disk management based on [disk templates](/install-portworx/cloud/gcp/gke/)
 * [Kubernetes per volume secret support](/operations/operate-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs) to enable
   volume encryption keys per Kubernetes PVC and using the Kubernetes secrets for key storage
-* DC/OS vault integration - Use [Vault integrated with DC/OS](/install-portworx/install-with-other/dcos)
+* DC/OS vault integration - Use Vault integrated with DC/OS
 * Support Pool Resize - Available in Maintenance Mode only
 * Container Storage Interface (CSI) [Tech Preview](/operations/operate-kubernetes/storage-operations/csi)
 * Support port mapping used by Portworx from 9001-9015 to a custom port number range by passing the starting
