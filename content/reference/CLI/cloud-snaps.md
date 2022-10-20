@@ -1,445 +1,970 @@
 ---
-title: Cloud Snaps
-keywords: portworx, container, Kubernetes, storage, Docker, k8s, flexvol, pv, persistent disk, snapshots, stork, clones, cloud, cloudsnap
-description: Learn to take a cloud snapshot of a volume from a Kubernetes persistent volume claim (PVC) and use that snapshot as the volume for a new pod. Try today!
-weight: 3
+title: Cloud Snapshots and Recovery using pxctl
+linkTitle: Cloud Snaps
+keywords: pxctl, command-line tool, cli, reference, cloud snapshots, volume backups, cloud storage, persistent disk, backup database
+description: Learn to take a cloud snapshot of a Portworx volume using pxctl and use that snapshot
+weight: 800
 ---
 
-## Multi-Cloud Backup and Recovery of PX Volumes
+## Overview of cloud backups
 
-This document outlines how PX volumes can be backed up to different cloud provider's object storage including any S3-compatible object storage. If a user wishes to restore any of the backups, they can restore the volume from that point in the timeline. This enables administrators running persistent container workloads on-prem or in the cloud to safely backup their mission critical database volumes to cloud storage and restore them on-demand, enabling a seamless DR integration for their important business application data.
+This document outlines how to back-up Portworx volumes to different cloud providers' object storage, including any S3-compatible object storage. To restore a specific backup, the user can restore the volume from that point in time.
 
-### Supported Cloud Providers
+Portworx helps administrators running persistent container workloads, on-prem or in the cloud, to safely backup their mission-critical database volumes to any supported cloud storage. Next, they can restore them on-demand. This way, Portworx enables a **seamless DR integration** for all the important business application data.
 
-Portworx PX-Enterprise supports the following cloud providerss
-1. Amazon S3 and any S3-compatible Object Storage
-2. Azure Blob Storage
-3. Google Cloud Storage
+### Supported cloud providers
 
-### Backing up a PX Volume to cloud storage
+{{< pxEnterprise >}} supports the following cloud providers:
 
-The first backup uploaded to the cloud is a full backup. After that, subsequent backups are incremental.
-After 6 incremental backups, every 7th backup is a full backup.
+1.  Amazon S3 and any S3-compatible Object Storage
+2.  Azure Blob Storage
+3.  Google Cloud Storage
 
-### Restoring a PX Volume from cloud storage
+## Performing cloud backups of a Portworx volume
 
-Any PX Volume backup can be restored to a PX Volume in the cluster. The restored volume inherits the attributes such as file system, size and block size from the backup. Replication level and aggregation level of the restored volume defaults to 1 irrespective of the replication and aggregation level of the volume that was backed up. Users can increase replication or aggregation level level once the restore is complete on the restored volume.
-
-### Performing Cloud Backups of a PX Volume
-
-Performing cloud backups of a PX Volume is available via `pxctl cloudsnap` command. This command has the following operations available for the full lifecycle management of cloud backups.
+Portworx volumes can be backed up to cloud via `pxctl cloudsnap`. If you run this command with the `--help` flag, it shows the list of available operations for the **full lifecycle management** of your cloud backups:
 
 ```text
-# opt/pwx/bin/pxctl cloudsnap --help
-NAME:
-   pxctl cloudsnap - Backup and restore snapshots to/from cloud
-
-USAGE:
-   pxctl cloudsnap command [command options] [arguments...]
-
-COMMANDS:
-    backup, b         Backup a snapshot to cloud
-    restore, r        Restore volume to a cloud snapshot
-    list, l           List snapshot in cloud
-    status, s         Report status of active backups/restores
-    history, h        Show history of cloudsnap operations
-    stop, st          stop an active backup/restore
-    schedules, sched  Manage schedules for cloud-snaps
-    catalog, t        Display catalog for the backup in cloud
-    delete, d         Delete a cloudsnap from the objectstore. This is not reversible.
-
-OPTIONS:
-   --help, -h  show help
+pxctl cloudsnap --help
 ```
 
-#### Set the required cloud credentials ####
+```output
+Backup and restore snapshots to/from cloud
 
-For this, we will use `pxctl credentials create` command. These cloud credentials are stored in an external secret store. Before you use the command to create credentials, ensure that you have [configured a secret provider of your choice](/key-management).
+Usage:
+  pxctl cloudsnap [flags]
+  pxctl cloudsnap [command]
+
+Aliases:
+  cloudsnap, cs
+
+Available Commands:
+  backup       Backup a snapshot to cloud
+  backup-group Backup a group of snapshot for a given list of volumes, group id, or labels to cloud
+  catalog      Display catalog for the backup in cloud
+  delete       Delete a cloudsnap from the objectstore. This is not reversible.
+  history      Show history of cloudsnap operations
+  list         List snapshot in cloud
+  restore      Restore volume to a cloud snapshot
+  schedules    Manage schedules for cloud-snaps
+  status       Report status of active backups/restores
+  stop         stop an active backup/restore
+
+Flags:
+  -h, --help   help for cloudsnap
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl cloudsnap [command] --help" for more information about a command.
+```
+
+### Login to the secrets database
+
+Note that the cloud credentials are stored in an external secret store. Hence, before creating the credentials, make sure that you have [configured a secret provider](/operations/key-management) of your choice.
+
+Now, we can login to the secrets database by typing:
 
 ```text
-# pxctl credentials create
-
-NAME:
-   pxctl credentials create - Create a credential for cloud-snap
-
-USAGE:
-   pxctl credentials create [command options] [arguments...]
-
-OPTIONS:
-   --provider value                            Object store provider type [s3, azure, google]
-   --s3-access-key value
-   --s3-secret-key value
-   --s3-region value
-   --s3-endpoint value                         Endpoint of the S3 server, in host:port format
-   --s3-disable-ssl
-   --azure-account-name value
-   --azure-account-key value
-   --google-project-id value
-   --google-json-key-file value
-   --encryption-passphrase value,
-   --enc value  Passphrase to be used for encrypting data in the cloudsnaps
+pxctl secrets kvdb login
 ```
 
-For Azure:
-
-```text
-# pxctl credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV
-```
-
-For AWS:
-
-By default, Portworx creates a bucket (ID same as cluster UUID) to upload cloudsnaps. With Portworx version 1.5.0 onwards,uploading to a pre-created bucket by a user is supported. Thus the AWS credential provided to Portworx should either have the capability to create a bucket or the bucket provided to Portworx at minimum must have the permissions mentioned below. If you prefer that a user specified bucket be used for cloudsnaps, specify the bucket id with `--bucket` option while creating the credentials.
-
-With user specified bucket (applicable only from 1.5.0 onwards):
-```text
-# pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com --bucket bucket-id
-```
-User created/specified bucket at minimum must have following permissions: Replace `<bucket-name>` with name of your user-provided bucket.
-```json
-{
-     "Version": "2012-10-17",
-     "Statement": [
-			{
-				"Sid": "VisualEditor0",
-				"Effect": "Allow",
-				"Action": [
-					"s3:ListAllMyBuckets",
-					"s3:GetBucketLocation"
-				],
-				"Resource": "*"
-			},
-			{
-				"Sid": "VisualEditor1",
-				"Effect": "Allow",
-				"Action": "s3:*",
-				"Resource": [
-					"arn:aws:s3:::<bucket-name>",
-					"arn:aws:s3:::<bucket-name/*"
-				]
-			}
-		]
- }
-```
-
-Without user specified bucket:
-```text
-# pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com
-```
-
-For Google Cloud:
-
-```text
-# pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json
-```
-`pxctl credentials create` enables the user to configure the credentials for each supported cloud provider.
-
-An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore to be able to decrypt the data succesfuly.
-
-These credentials can only be created once and cannot be modified. In order to maintain security, once configured, the secret parts of the credentials will not be displayed.
-
-#### List the credentials to verify ####
-
-Use `pxctl credentials list` to verify the credentials supplied.
-
-```text
-# pxctl credentials list
-
-S3 Credentials
-UUID                                         REGION            ENDPOINT                ACCESS KEY            SSL ENABLED        ENCRYPTION
-5c69ca53-6d21-4086-85f0-fb423327b024        us-east-1        s3.amazonaws.com        AKIAJ7CDD7XGRWVZ7A        true           false
-
-Azure Credentials
-UUID                                        ACCOUNT NAME        ENCRYPTION
-c0e559a7-8d96-4f28-9556-7d01b2e4df33        portworxtest        false
-
-Google Credentials
-UUID						PROJECT ID     ENCRYPTION
-8bd266b5-da9f-4114-84a2-309bbb3838c6		px-test        false
-
-```
-
-`pxctl credentials list`  only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed.  These credentials will be stored as part of the secret endpoint given for PX for persisting authentication across reboots. Please refer to `pxctl secrets` help for more information.
-
-#### Perform Cloud Backup ####
-
-The actual backup of the PX Volume is done via the `pxctl cloudsnap backup` command
-
-```text
-# pxctl cloudsnap backup
-
-NAME:
-   pxctl cloudsnap backup - Backup a snapshot to cloud
-
-USAGE:
-   pxctl cloudsnap backup [command options] [arguments...]
-
-OPTIONS:
-   --volume value, -v value       source volume
-   --full, -f                     force a full backup
-   --cred-uuid value, --cr value  Cloud credentials ID to be used for the backup
-
-```
-
-This command is used to backup a single volume to the cloud provider using the specified credentials.
-This command decides whether to take a full or incremental backup depending on the existing backups for the volume.
-If it is the first backup for the volume it takes a full backup of the volume. If its not the first backup, it takes an incremental backup from the previous full/incremental backup.
-
-```text
-# pxctl cloudsnap backup volume1 --cred-uuid 82998914-5245-4739-a218-3b0b06160332
-```
-
-Users can force the full backup any time by giving the --full option.
-If only one credential is configured on the cluster, then the cred-uuid option may be skipped on the command line.
-
-Here are a few steps to perform cloud backups successfully
-
-* List all the available volumes to choose the volume to backup
-
-```text
-# pxctl volume list
-ID			NAME	SIZE	HA	SHARED	ENCRYPTED	IO_PRIORITY	SCALE	STATUS
-538316104266867971	NewVol	4 GiB	1	no	no		LOW		1	up - attached on 70.0.9.73
-980081626967128253	evol	2 GiB	1	no	no		LOW		1	up - detached
-```
-
-* List the configured credentials
-
-```text
-# pxctl cloudsnap credentials list
-
-Azure Credentials
-UUID						ACCOUNT NAME		ENCRYPTION
-ef092623-f9ba-4697-aeb5-0d5d6d9b5742		portworxtest		false
-```
-
-Authenticate the nodes where the storage for volume to be backed up is provisioned.
-
-* Login to the secrets database to use encryption in-flight
-
-```text
-# pxctl secrets kvdb login
+```output
 Successful Login to Secrets Endpoint!
 ```
 
-* Now issue the backup command
-
-Note that in this particular example,  since only one credential is configured, there is no need to specify the credentials on the command line
-
-```text
-# pxctl cloudsnap backup NewVol
-Cloudsnap backup started successfully
-```
-
-* Watch the status of the backup
-
-```text
-# pxctl cloudsnap status
-SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
-538316104266867971	Backup-Active	62914560	20.620429615s
-980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
-```
-
-Once the volume is backed up to the cloud successfully, listing the remote cloudsnaps will display the backup that just completed.
-
-* List the backups in cloud
-
-```text
-# pxctl cloudsnap list
-SOURCEVOLUME	CLOUD-SNAP-ID					CREATED-TIME			STATUS
-evol		pqr9-cl1/980081626967128253-941778877687318172	Sat, 08 Apr 2017 05:09:49 UTC	Done
-NewVol		pqr9-cl1/538316104266867971-807625803401928868	Sat, 08 Apr 2017 05:17:21 UTC	Done
-```
-
-#### Restore from a Cloud Backup ####
-
-Use `pxctl cloudsnap restore` to restore from a cloud backup.
-
-Here is the command syntax.
-
-```text
-# pxctl cloudsnap restore
-
-NAME:
-   pxctl cloudsnap restore - Restore volume to a cloud snapshot
-
-USAGE:
-   pxctl cloudsnap restore [command options] [arguments...]
-
-OPTIONS:
-   --snap value, -s value         Cloud-snap id
-   --node value, -n value         Optional node ID for provisioning restore volume storage
-   --cred-uuid value, --cr value  Cloud credentials ID to be used for the restore
-
-```
-
-This command is used to restore a successful backup from cloud. It requires the cloudsnap ID which can be used to restore and credentials for the cloud storage provider or the object storage. Restore happens on any node where storage can be provisioned. In this release restored volume will have a replication factor of 1. The restored volume can be updated to different replication factors using `pxctl volume ha-update` command.
-
-The command usage is as follows.
-```text
-# pxctl cloudsnap restore --snap cs30/669945798649540757-864783518531595119 --cr 82998914-5245-4739-a218-3b0b06160332
-```
-
-Upon successful start of the command it returns the volume id created to restore the cloud snap
-If the command fails to succeed, it shows the failure reason.
-
-The restored volume will not be attached or mounted automatically.
-
-
-* Use `pxctl cloudsnap list` to list the available backups.
-
-`pxctl cloudsnap list` helps enumerate the list of available backups in the cloud. This command assumes that you have all the credentials setup properly. If the credentials are not setup, then the backups available in those clouds won't be listed by this command.
-
-```text
-# pxctl cloudsnap list
-SOURCEVOLUME 	CLOUD-SNAP-ID					CREATED-TIME			STATUS
-dvol		pqr9-cl1/520877607140844016-50466873928636534	Fri, 07 Apr 2017 20:22:43 UTC	Done
-NewVol		pqr9-cl1/538316104266867971-807625803401928868	Sat, 08 Apr 2017 05:17:21 UTC	Done
-```
-
-* Choose one of them to restore
-
-```text
-# pxctl cloudsnap restore -s pqr9-cl1/538316104266867971-807625803401928868
-Cloudsnap restore started successfully: 622390253290820715
-```
-`pxctl cloudsnap status` gives the status of the restore processes as well.
-
-```text
-# pxctl cloudsnap status
-SOURCEVOLUME		STATE		BYTES-PROCESSED	TIME-ELAPSED	COMPLETED			ERROR
-622390253290820715	Restore-Active	99614720	10.144539084s
-980081626967128253	Backup-Done	68383234	4.522017785s	Sat, 08 Apr 2017 05:09:54 UTC
-538316104266867971	Backup-Done	1979809411	2m39.761333366s	Sat, 08 Apr 2017 05:20:01 UTC
-```
-
-#### Deleting a Cloud Backup ###
-
 {{<info>}}
-**Note:**<br/> This is only supported from PX version 1.4 onwards
+**Kubernetes users:** This is not required if you are using Portworx 2.0 and higher on _Kubernetes_ and you have `-secret_type` as k8s in Daemonset
 {{</info>}}
 
-You can delete backups from the cloud using the `/opt/pwx/bin/pxctl cloudsnap delete` command. The command will mark a cloudsnap for deletion and a job will take care of deleting objects associated with these backups from the objectstore.
+### Set the required cloud credentials
 
-Only cloudsnaps which do not have any dependant cloudsnaps (ie incrementals) can be deleted. If there are dependant cloudsnaps then the command will throw an error with the list of cloudsnaps that need to be deleted first.
-
-For example to delete the backup `pqr9-cl1/538316104266867971-807625803401928868`:
+For this, we will use the `pxctl credentials create` command. To see the list of available command line options, type:
 
 ```text
-# pxctl cloudsnap delete --snap pqr9-cl1/538316104266867971-807625803401928868
+pxctl credentials create --help
+```
+
+```output
+Create a credential for cloud providers
+
+Usage:
+  pxctl credentials create [flags]
+
+Aliases:
+  create, c
+
+Examples:
+/opt/pwx/bin/pxctl cred create [flags] <name>
+
+Flags:
+      --azure-account-key string
+      --azure-account-name string
+      --bucket string                  Optional pre-created bucket name
+      --disable-path-style             optional, required for virtual-host-style access
+      --encryption-passphrase string   Passphrase to be used for encrypting data in the cloudsnaps
+      --google-json-key-file string
+      --google-project-id string
+  -h, --help                           help for create
+      --provider string                Cloud provider type [s3, azure, google]
+      --s3-access-key string
+      --s3-disable-ssl
+      --s3-endpoint strings            Endpoint of the S3 servers, in comma separated host:port format
+      --s3-region string
+      --s3-secret-key string
+      --s3-storage-class string        Storage class type [STANDARD, STANDARD_IA]
+      --use-iam                        Optional, use instance IAM for credentials, current support only for s3(ec2 IAM) and azure
+      --use-proxy                      optional, currently supported for s3 only, requires cluster wide proxy(under cluster options)
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+```
+
+#### Azure
+
+Here's how you can create the credentials for _Azure_:
+
+```text
+pxctl credentials create --provider azure --azure-account-name portworxtest --azure-account-key zbJSSpOOWENBGHSY12ZLERJJV my-azure-cred
+```
+
+At this point, we can list the configured credentials as follows:
+
+```text
+pxctl cloudsnap credentials list
+```
+
+```output
+Azure Credentials
+UUID                        ACCOUNT NAME        ENCRYPTION
+ef092623-f9ba-4697-aeb5-0d5d6d9b5742        portworxtest        false
+```
+
+{{<info>}}
+Note that that listing the credentials does mean that connection to a secret-store endpoint has been validated.
+{{</info>}}
+
+#### AWS
+
+If you are using _AWS_, Portworx creates a bucket (`ID` same as the cluster `UUID`) to upload cloudsnaps by default. Starting with Portworx version 1.5.0, users can upload to a pre-created bucket. Thus, the _AWS_ credentials provided to Portworx should either:
+
+*   have the capability to create a bucket or
+*   the bucket provided to Portworx at a minimum must have the permissions mentioned below.
+
+If you prefer that a user-specified bucket be used for cloudsnaps, specify the bucket id with the `--bucket` option while creating the credentials.
+
+##### With a user-specified bucket
+
+Say you are using `us-east-1 region`. If so, you should type something like the following:
+
+```text
+pxctl credentials create --provider s3  --s3-access-key <AccessKey> --s3-secret-key <secretKey> --s3-region us-east-1 --s3-endpoint s3.amazonaws.com --bucket bucket-id my-s3-cred
+```
+
+If you are using a different region, replace the `--s3-region` and `--s3-endpoint` parameters with the appropriate values. For more information about region-specific endpoints, check out the "Amazon Simple Storage Service (Amazon S3)" section on [this page](https://docs.aws.amazon.com/general/latest/gr/rande.html).
+
+If you use the above command to create the credentials for an s3 endpoint that supports only virt-host-style access, then you will hit an error like below:
+
+```text
+createCred: error validating credential during create: SecondLevelDomainForbidden: Please use virtual hosted style to access. status code: 403, request id: xxyyzzaabbcc, host id:,
+```
+
+In this case, you should specify the `--disable-path-style` parameter while creating credentials as follows:
+
+```text
+pxctl credentials create mycreds --provider=s3 --s3-disable-ssl --s3-region=us-east-1 --s3-access-key=<S3-ACCESS_KEY> --s3-secret-key=<S3-SECRET_KEY> --s3-endpoint=mys3-enpoint.com --disable-path-style --bucket=mybucket
+```
+
+```output
+Credentials created successfully, UUID:77c336ac-9937-46cf-ad42-297ea41c8022
+```
+
+The user created/specified bucket at a minimum must have the following permissions:
+
+```text
+{
+     "Version": "2012-10-17",
+     "Statement": [
+            {
+                "Sid": "VisualEditor0",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:ListAllMyBuckets",
+                    "s3:GetBucketLocation"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Sid": "VisualEditor1",
+                "Effect": "Allow",
+                "Action": "s3:*",
+                "Resource": [
+                    "arn:aws:s3:::<bucket-name>",
+                    "arn:aws:s3:::<bucket-name/*"
+                ]
+            }
+        ]
+ }
+```
+
+{{<info>}}
+Note: Replace `<bucket-name>` with name of your user-provided bucket.
+{{</info>}}
+
+
+##### Without a user-specified bucket
+
+```text
+pxctl credentials create --provider s3  --s3-access-key AKIAJ7CDD7XGRWVZ7A --s3-secret-key mbJKlOWER4512ONMlwSzXHYA --s3-region us-east-1 --s3-endpoint s3.amazonaws.com my-s3-cred
+```
+
+##### Configure a cluster-wide proxy
+
+You can set up a cluster-wide proxy for Portworx to use when uploading cloud snaps to an S3 bucket. Portworx uses this proxy setting in conjunction with the `--use-proxy` flag on cloudsnap credentials to send backup data through the proxy. Perform the steps in this section to configure a cluster-wide proxy and create credentials that use it.
+
+{{<info>}}
+**NOTE:** This proxy is currently used only by cloudsnaps, the rest of the Portworx network traffic does not use this proxy.
+{{</info>}}
+
+1. Update your Portworx cluster-wide options by entering the `pxctl cluster options update` command with the `--px-http-proxy` flag and the URL of your proxy:
+
+    ```text
+    pxctl cluster options update --px-http-proxy http://192.0.2.0:9999
+    ```
+
+2. Create credentials for your cloudsnap with or without a user-specified bucket, specifying the `--use-proxy` flag:
+
+    * With a user-specified bucket:
+
+    ```text
+    pxctl credentials create --use-proxy \
+    --provider s3  \
+    --s3-access-key <AccessKey> \
+    --s3-secret-key <secretKey> \
+    --s3-region us-east-1 \
+    --s3-endpoint s3.amazonaws.com \
+    --bucket bucket-id \
+    credentialName
+    ```
+
+    * Without a user-specified bucket:
+
+    ```text
+    pxctl credentials create --use-proxy \
+    --provider s3 \
+    --s3-access-key <AccessKey> \
+    --s3-secret-key <secretKey> \
+    --s3-region us-east-1 \
+    --s3-endpoint s3.amazonaws.com \
+    credentialName
+    ```
+
+#### Google Cloud
+
+1. Make sure the user or service account used by Portworx has the following roles:
+
+   * Editor
+   * Storage
+   * Object Admin
+   * Storage Object Viewer
+
+    For more information about roles and permissions within GCP, see the [Granting, changing, and revoking access to resources](https://cloud.google.com/iam/docs/granting-changing-revoking-access) section of the GCP documentation.
+
+2. Enter the `pxctl credentials create` command  specifying:
+
+   * The `provider` flag with the name of the provider (`google`)
+   * The `--google-project-id` flag with your Google project ID
+   * The `--google-json-key-file` flag with the name of the JSON file containing your key
+   * The name of your cloud credentials
+
+    Example:
+
+    ```text
+    pxctl credentials create --provider google --google-project-id px-test --google-json-key-file px-test.json my-google-cred
+    ```
+
+#### Configure credentials
+
+`pxctl credentials create` enables the user to configure the credentials for each supported cloud provider.
+
+An additional encryption key can also be provided for each credential. If provided, all the data being backed up to the cloud will be encrypted using this key. The same key needs to be provided when configuring the credentials for restore. This way, Portworx will be able to decrypt the data successfully.
+
+These credentials can only be created once and cannot be modified. In order to maintain security, once configured, the secret parts of the credentials will not be displayed.
+
+### List the credentials to verify
+
+Use `pxctl credentials list` to verify the credentials supplied as follows:
+
+```text
+pxctl credentials list
+```
+
+```output
+S3 Credentials
+UUID                        NAME        REGION            ENDPOINT                        ACCESS KEY            SSL ENABLED        ENCRYPTION        BUCKET        WRITE THROUGHPUT (KBPS)
+af563a4d-afd7-48df-90f7-8e8f9414ff77        my-s3-cred    us-east-1        70.0.99.121:9010,70.0.99.122:9010,70.0.99.123:9010    AB6R80F3SY0VW9NS6HYQ        false            false            <nil>        1979
+
+Google Credentials
+UUID                        NAME            PROJECT ID        ENCRYPTION        BUCKET        WRITE THROUGHPUT (KBPS)
+6585cf56-4ccf-42cc-a235-76aaf6fb10f4        my-google-cred        235475231246        false            <nil>        1502
+
+Azure Credentials
+UUID                        NAME            ACCOUNT NAME        ENCRYPTION        BUCKET        WRITE THROUGHPUT (KBPS)
+1672e1c9-c513-44db-b8b5-b59e3d35a3a2        my-azure-cred        pwx-test        false            <nil>        724
+```
+
+`pxctl credentials list` only displays non-secret values of the credentials. Secrets are neither stored locally nor displayed. The credentials will be stored as part of the secret endpoint given to Portworx for persisting authentication across reboots.
+
+{{< content "shared/reference-CLI-secrets-definition.md" >}}
+
+You can find more details on how to manage your cloud credentials with `pxctl` by checking out the [Credentials](/reference/cli/credentials) page.
+
+### Perform cloud backups of single volumes
+
+The actual backup of the Portworx volume is done via the `pxctl cloudsnap backup`.
+
+To get more details, run it with the `--help` flag:
+
+```text
+pxctl cloudsnap backup --help
+```
+
+```output
+Backup a snapshot to cloud
+
+Usage:
+  pxctl cloudsnap backup [flags]
+
+Aliases:
+  backup, b
+
+Examples:
+/opt/pwx/bin/pxctl cloudsnap backup [flags] volName
+
+Flags:
+      --cred-id string   Cloud credentials ID to be used for the backup
+  -d, --delete-local     Deletes local snap created for backup after backup is done, also forces next backup to be full
+  -i, --frequency uint   Maximum number of incremental cloudsnaps after which full is forced, default 7
+  -f, --full             Force a full backup
+  -h, --help             help for backup
+      --label pairs      list of comma-separated name=value pairs
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+```
+
+As an example, to back up a volume named `volume1`, you would use something like:
+
+```text
+pxctl cloudsnap backup volume1 --cred-id 82998914-5245-4739-a218-3b0b06160332
+
+```
+
+Here are a few things to consider about this command:
+
+* it is used to back up a single volume to the cloud provider of your choice using the specified credentials.
+* it decides whether to take a full or an incremental backup depending on the existing backups for the volume, as follows:
+ * the first backup uploaded to the cloud is always a full backup.
+ * after that, subsequent backups are incremental.
+ * after 6 incremental backups, every 7th backup is a full backup.
+* users can force a full backup any time by giving the `--full` flag.
+* if only one credential is configured on the cluster, then the `cred-id` option may be skipped.
+
+Next, we’re going to focus on the steps to perform a successful cloud backup:
+
+* List all the available volumes to choose the volume to backup:
+
+ ```text
+ pxctl volume list
+ ```
+
+ ```output
+ ID            NAME    SIZE    HA    SHARED    ENCRYPTED    IO_PRIORITY    SCALE    STATUS
+ 56706279008755778    NewVol    4 GiB    1    no    no        LOW        1    up - attached on 70.0.9.73
+ 980081626967128253    evol    2 GiB    1    no    no        LOW        1    up - detached
+ ```
+
+* Now, run the backup command:
+
+ ```text
+ pxctl cloudsnap backup NewVol
+ ```
+
+ ```output
+ Cloudsnap backup started successfully with id: 3f4f0a67-e12a-4d35-81ad-985657757352
+ ```
+
+ {{<info>}}
+ Note that, in this particular example, since only one credential is configured, there is no need to specify the credentials on the command line.
+ {{</info>}}
+
+* While Portworx is working, let's check the progress of our backups:
+
+ ```text
+ pxctl cloudsnap status
+ ```
+
+ ```output
+ NAME                    SOURCEVOLUME                                    STATE        NODE        BYTES-PROCESSED    TIME-ELAPSED    COMPLETED
+ 39f66859-14b1-4ce0-a4c0-c858e714689e    2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr    Backup-Done    70.0.73.246    420044800    17.460186585s    Wed, 16 Jan 2019 22:27:30 UTC
+ 3f4f0a67-e12a-4d35-81ad-985657757352    2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463    Backup-Active    70.0.73.246    1247805440    10.525438874s
+ ```
+
+ You could also check the status of a particular job, by passing the `task-id` returned upon the successful execution of the `pxctl cloudsnap backup` command:
+
+ ```text
+ pxctl cloudsnap status --name 3f4f0a67-e12a-4d35-81ad-985657757352
+ ```
+
+ ```output
+ NAME                    SOURCEVOLUME                                    STATE        NODE        BYTES-PROCESSED    TIME-ELAPSED    COMPLETED
+ 3f4f0a67-e12a-4d35-81ad-985657757352    2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463    Backup-Active    70.0.73.246    1840250880    16.57831394s
+ ```
+
+ Once the volume is backed up to the cloud successfully, listing the remote cloudsnaps will display the backup that has just been completed.
+
+
+### List your cloud backups
+
+Use the `pxctl cloudsnap list` command to list your cloud backups:
+
+```text
+pxctl cloudsnap list
+```
+
+```output
+SOURCEVOLUME                    SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
+volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-619248560586769719        Wed, 16 Jan 2019 21:51:53 UTC        Manual        Done
+volume20190116214922                590114184663672482        2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr        Wed, 16 Jan 2019 22:27:13 UTC        Manual        Done
+NewVol                        56706279008755778        2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463        Thu, 17 Jan 2019 00:03:59 UTC        Manual        Done
+```
+
+{{<info>}}
+**Note:** This command assumes that all your credentials are properly set up. If that is not the case, the cloud backups won't show up.
+{{</info>}}
+
+If you enter the `pxctl cloudsnap list` command followed by the `--help` flag, you'll see the available options:
+
+```text
+pxctl cloudsnap list --help
+```
+
+```output
+List snapshot in cloud
+
+Usage:
+  pxctl cloudsnap list [flags]
+
+Aliases:
+  list, l
+
+Flags:
+  -a, --all                   List cloud backups of all clusters in cloud
+  -i, --cloudsnap-id string   Optional cloudsnap id to list(lists a single entry)
+  -c, --cluster string        Optional cluster id to list cloud backups. Current cluster-id is default
+      --cred-id string        Cloud credentials ID to be used for the backup
+  -h, --help                  help for list
+      --label pairs           Optional list of comma-separated name=value pairs to match with cloudsnap metadata
+  -x, --max uint              Optional number to limit display of backups in each page
+  -m, --migration             Optional, lists migration related cloudbackups
+  -p, --paginate              Paginate list with user input to continue
+  -s, --src string            Optional source volume to list cloud backups
+  -t, --status string         Optional backup status(failed. aborted, stopped) to list cloud backups; Defaults to Done
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+```
+
+Run the following command to list cloudsnaps of a volume that are not present in the cluster, but the volume belonged to this cluster in the past:
+
+```text
+pxctl cloudsnap list -d
+```
+
+Output:
+```text
+SOURCEVOLUME	SOURCEVOLUMEID	CLOUD-SNAP-ID		CREATED-TIME	TYPE	STATUS	BELONGS-TO-CLUSTER	NAMESPACE
+testvol	 521362534280354159	 4c668781-0ab7-4699-86cd-a0c01d17b162/521362534280354159-116521897362456321	Wed, 24 Mar 2021 20:42:58 UTC	Manual Done	Yes
+```
+
+```text
+pxctl cloudsnap list -d -c 4f568y9-23446acd7-0987-24875
+```
+
+Output:
+```
+Failed to enumerate backups:  Invalid arguments, cloudsnaps of deleted voluemes/MissingSrcVolumes can be listed for current cluster only
+```
+
+The above command lists only the cloudsnaps of deleted volumes for current cluster. Therefore, the cluster-uuid/bucket input is not expected and returns error to the caller.
+
+### Inspect a cloud snapshot
+
+The `pxctl cloudsnap list` command displays all the cloud snapshots for a given credential, source volume, or type of cloud snapshot. To view more details about a particular cloud snapshot, you must specify the `-i` flag with the ID of the cloud snapshot you want to inspect.
+
+Example:
+
+1. Start by listing your cloud snapshots with:
+
+      ```text
+      pxctl cloudsnap list
+      ```
+
+      ```output
+      SOURCEVOLUME            SOURCEVOLUMEID            CLOUD-SNAP-ID                                        CREATED-TIME                TYPE        STATUS
+      agg-cs_journal_1        10769800556491614        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325        Thu, 24 Oct 2019 19:02:08 UTC        Manual        Done
+      agg-cs_0            365276421799434338        fe431d7d-0b42-4a4b-9496-f3e9050d0f68/365276421799434338-461608030527675278        Thu, 24 Oct 2019 19:02:47 UTC        Manual        Done
+```
+
+
+2. To inspect the first cloud snapshot (`fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325`) and print the output in JSON format, enter the following command:
+
+      ```text
+      pxctl -j cloudsnap list --cloudsnap-id fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325
+      ```
+
+      ```output
+      [
+      {
+        "ID": "fe431d7d-0b42-4a4b-9496-f3e9050d0f68/10769800556491614-673132711323933325",
+        "SrcVolumeID": "10769800556491614",
+        "SrcVolumeName": "agg-cs_journal_1",
+        "Timestamp": "2019-10-24T19:02:08Z",
+        "Metadata": {
+        "cloudsnapType": "Manual",
+        "compression": "lz77",
+        "sizeBytes": "2152751104",
+        "starttime": "Thu, 24 Oct 2019 19:02:08 UTC",
+        "status": "Done",
+        "updatetime": "Thu, 24 Oct 2019 19:06:12 UTC",
+        "version": "V2.00",
+        "volume": "{\"DevSpec\":{\"size\":137438953472,\"format\":2,\"block_size\":4096,\"ha_level\":1,\"cos\":3,\"volume_labels\":{\"best_effort_location_provisioning\":\"true\",\"name\":\"vContainer\"},\"replica_set\":{},\"aggregation_level\":1,\"scale\":1,\"journal\":true,\"queue_depth\":128,\"force_unsupported_fs_type\":true,\"io_strategy\":{}},\"UsedSize\":0,\"PoolId\":0,\"ClusterId\":\"PX-INT-C0-BVT-MN-NS-BRANCH_476_24_Oct_19_04_49_UTC\",\"PublicSecretData\":null,\"Labels\":null}",
+        "volumename": "agg-cs_journal_1"
+        },
+        "Status": "Done"
+      }
+      ```
+
+### Perform cloud backup of a group of volumes
+
+Portworx 2.0.3 and higher supports backing up multiple volumes to cloud at the same consistency point. To see the available command line options, run:
+
+```text
+pxctl cloudsnap backup-group --help
+```
+
+```output
+Backup a group of snapshot for a given list of volumes, group id, or labels to cloud
+
+Usage:
+  pxctl cloudsnap backup-group [flags]
+
+Aliases:
+  backup-group, bg
+
+Flags:
+      --cred-id string      Cloud credentials ID to be used for the backup
+  -d, --delete-local        Deletes local snap created for backup after backup is done, also forces next backup to be full
+      --full                Force a full backup
+      --group string        group id
+  -h, --help                help for backup-group
+      --label pairs         list of comma-separated name=value pairs
+  -v, --volume_ids string   list of comma-separated volume IDs
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+```
+
+#### Examples
+
+The below command  takes a group cloud backup of volumes _vol1_ and _vol2_:
+
+```text
+pxctl cloudsnap backup-group --volume_ids vol1,vol2
+```
+
+```output
+Group Cloudsnap backup started successfully with groupID:a1c8ba67-90e1-4c58-acbe-8eaca61a02ae
+```
+
+Then, you can grab the `groupID` from above and use it to check the status of the group cloud snapshot. The following command will show the status of each cloud snapshot in the group:
+
+```text
+pxctl cloudsnap status --name a1c8ba67-90e1-4c58-acbe-8eaca61a02ae
+```
+
+```output
+NAME                                    SOURCEVOLUME                                                                    STATE           NODE            BYTES-PROCESSED TIME-ELAPSED    COMPLETED
+29bf533d-1469-4610-953e-bd24f945e6de    fb468067-d7aa-40ff-992d-8f40a9e51c9a/201412281295404839-463199598055620776-incr Backup-Done     192.168.56.92   0 B             1.627836177s    Fri, 08 Mar 2019 22:12:14 UTC
+650e26f3-f7c9-42c5-b830-2601da6d5fff    fb468067-d7aa-40ff-992d-8f40a9e51c9a/592806372953104727-884041223239759095-incr Backup-Done     192.168.56.92   0 B             1.629703129s    Fri, 08 Mar 2019 22:12:14 UTC
+```
+
+You can also take a group cloud backup by selecting the volumes based on their labels. In the example below, we have 2 volumes with the label *app=mysql*:
+
+```text
+ pxctl volume list --label app=mysql
+```
+
+```output
+ID                      NAME    SIZE    HA      SHARED  ENCRYPTED       IO_PRIORITY     STATUS          SNAP-ENABLED
+592806372953104727      vol1    1 GiB   1       no      no              LOW             up - detached   no
+201412281295404839      vol2    1 GiB   1       no      no              LOW             up - detached   no
+```
+
+To back them up as a group to the cloud backup, run the following:
+
+```text
+pxctl cloudsnap backup-group --label app=mysql
+```
+
+```output
+Group Cloudsnap backup started successfully with groupID:3b1de846-1078-40e6-ac1a-2e66ef3986d1
+```
+
+### Extent based cloudsnaps
+
+{{<info>}}This feature is not available in versions prior to 2.0.{{</info>}}
+
+With {{< pxEnterprise >}} 2.0, Portworx has enhanced the way cloud backups are done. Now, users can resume interrupted backups or restores.
+
+For example, if the node performing backups or restores restarts, the backup/restore will resume once that node becomes operational.
+
+This feature is also available for cloud backups of aggregated volumes. Here are a few points to consider in this regard:
+
+* For aggregated volumes, aggregated parts are backed up/restored sequentially.
+
+* Each aggregated part is backed up/restored on one of the nodes where the replica of that aggregated part is provisioned.
+
+* If not enough nodes are available to create the required aggregation level, aggregated volumes are restored to a non-aggregated volume(i.e. `aggregation=1`).
+
+### Restore from a cloud backup
+
+Use `pxctl cloudsnap restore` to restore from a cloud backup. To see the available command options and arguments, run the following:
+
+```text
+pxctl cloudsnap restore --help
+```
+
+```output
+Restore volume to a cloud snapshot
+
+Usage:
+  pxctl cloudsnap restore [flags]
+
+Aliases:
+  restore, r
+
+Flags:
+  -a, --aggregation_level string            aggregation level(If not specified, inherits cloudsnap's aggregation level) (Valid Values: [1 2 3 auto]) (default "1")
+      --best_effort_location_provisioning   requested nodes, zones, racks are optional
+      --cred-id string                      Cloud credentials ID to be used for the restore
+  -d, --daily hh:mm,k                       daily snapshot at specified hh:mm,k (keeps 7 by default)
+      --enforce_cg                          enforce group during provision
+      --fastpath                            Enable fastpath IO support for this volume(If not specified, inherits cloudsnap's fastpath option)
+  -g, --group string                        group
+  -h, --help                                help for restore
+      --io_priority string                  IO Priority(If not specified, inherits cloudsnap's IO Priority) (Valid Values: [high medium low]) (default "low")
+      --io_profile string                   IO Profile((defaults to cloudsnap's IO Profile) (Valid Values: [sequential cms sync_shared db db_remote]) (default "sequential")
+      --journal                             Journal data for this volume(If not specified, inherits cloudsnap's journal option)
+  -l, --label pairs                         list of comma-separated name=value pairs
+      --match_src_vol_provisioning          provision the restore volume on same pools as the source volume(src volume must exist)
+  -m, --monthly day@hh:mm,k                 monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+      --nodes string                        comma-separated Node Ids or Pool Ids
+      --nodiscard                           Disable discard support for this volume(If not specified, inherits cloudsnap's discard option)
+  -p, --periodic mins,k                     periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
+  -q, --queue_depth uint                    block device queue depth(If not specified, inherits cloudsnap's queuedepth) (Valid Range: [1 256]) (default 128)
+      --racks string                        comma-separated Rack names
+  -r, --repl uint                           replication factor(If not specified, inherits cloudsnaps repl factor) (Valid Range: [1 3]) (default 1)
+      --secret_key string                   secret_key used to decrypt an encrypted volume
+      --secret_options string               Secret options is used to pass specific secret parameters. Usage: --secret_options=k1=v1,k2=v2
+      --sharedv4                            set sharedv4 setting(if not specified, inherits cloudsnap's sharedv4 option)
+  -s, --snap string                         Cloud-snap id to restore
+      --sticky                              sticky volumes cannot be deleted until the flag is disabled(if not specified, inherits cloudsnap's sticky option)
+      --storagepolicy string                storage policy name(If not specified, inherits cloudsnap's storage policy)
+  -v, --volume string                       Volume name to be created for restore
+  -w, --weekly weekday@hh:mm,k              weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
+      --zones string                        comma-separated Zone names
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+```
+
+This command is used to restore a successful backup from the cloud. It requires the cloudsnap ID and the credentials for the cloud storage provider or the object storage. Restore happens on any node where storage can be provisioned.
+
+You can restore a backup of a Portworx to one of your Portworx volumes in the cluster. Once restored, the volume inherits the attributes from the backup (e.g.: file system, size and block size). The replication level of the restored volume defaults to 1, irrespective of the replication level of the volume that was backed up. Users can increase the replication factor once the restore is complete on the restored volume.
+
+To restore a backup from cloud, enter the following command:
+
+```text
+pxctl cloudsnap restore --snap 2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463
+```
+
+```output
+Cloudsnap restore started successfully on volume: 104172750626071399 with task name:59c4cfd5-4160-45db-b326-f37b327d9225
+```
+
+Once a restore gets started, `pxctl` shows the id of the volume created to restore the cloud snap together with the task-id.
+
+While the restore process is running, run the `pxctl cloudsnap status` command to see its status:
+
+```text
+pxctl cloudsnap status
+```
+
+```output
+NAME                    SOURCEVOLUME                                    STATE        NODE        BYTES-PROCESSED    TIME-ELAPSED    COMPLETED
+3f4f0a67-e12a-4d35-81ad-985657757352    2e4d4b67-95d7-481e-aec5-14223ac55170/56706279008755778-725134927222077463    Backup-Done    70.0.73.246    11988570112    3m29.825766964s    Thu, 17 Jan 2019 00:07:29 UTC
+39f66859-14b1-4ce0-a4c0-c858e714689e    2e4d4b67-95d7-481e-aec5-14223ac55170/590114184663672482-951325819047337066-incr    Backup-Done    70.0.73.246    420044800    17.460186585s    Wed, 16 Jan 2019 22:27:30 UTC
+59c4cfd5-4160-45db-b326-f37b327d9225    2e4d4b67-95d7-481e-aec5-14223ac55170/212160250617983239-283838486341798860    Restore-Done    70.0.73.246    1079287808    3.174541219s    Thu, 17 Jan 2019 00:15:19 UTC
+```
+
+If you want to see the status of a particular process, run the `pxctl cloudsnap status` command and pass it the `--name` flag with the name of the task you want to inspect:
+
+```text
+pxctl cloudsnap status --name 59c4cfd5-4160-45db-b326-f37b327d9225
+```
+
+```output
+59c4cfd5-4160-45db-b326-f37b327d9225    2e4d4b67-95d7-481e-aec5-14223ac55170/212160250617983239-283838486341798860    Restore-Done    70.0.73.246    1079287808    3.174541219s    Thu, 17 Jan 2019 00:15:19 UTC
+```
+
+If the restore command fails, it shows the reason why it failed.
+
+Note that the restored volume will not be attached or mounted automatically.
+
+{{<info>}}
+**NOTE:**
+
+* As long as the backup was taken from a Portworx cluster of version 2.0 or greater, Portworx restores cloudsnaps with the same `repl` value of the volume the backup was taken from.
+* With {{< pxEnterprise >}} 2.1.0, users can choose to do optimized restores.  Optimized restores create a snapshot of every successful restore and use that snapshot for the next incremental restore of the same volume. For more details about optimized restores, visit the [Enabling optimized restores](/reference/cli/cluster/#enabling-optimized-restores) section.
+{{</info>}}
+
+### The naming scheme for cloud backups
+
+{{< content "shared/cloud-snaps-naming-scheme.md" >}}
+
+### Deleting a Cloud Backup
+
+{{<info>}}
+This feature is only supported starting with Portworx version 1.4 or later.
+{{</info>}}
+
+To delete a cloud backup, run:
+
+```text
+pxctl cloudsnap delete
+```
+
+The command will flag a cloudsnap for deletion and a job will take care of deleting objects associated with these backups from the objectstore.
+
+Only cloudsnaps which do not have any dependant cloudsnaps (ie incrementals) can be deleted. If there are dependent cloudsnaps then the command will throw an error and will show the list of cloudsnaps that need to be deleted first.
+
+{{<info>}}
+For Portworx versions above and including 2.1, delete requests are queued and processed in the background. Since querying cloud to figure out dependent backups can take a while, user requests to delete the backups are added to a queue and an immediate response is returned to the user. If a cloud backup could not be deleted because of other dependent backups, an alert is logged and this will be deleted when all other dependent backups are deleted by the user.
+{{</info>}}
+
+As an example, to delete the backup `pqr9-cl1/538316104266867971-807625803401928868`, you could run the following:
+
+```text
+pxctl cloudsnap delete --snap pqr9-cl1/538316104266867971-807625803401928868
+```
+
+```output
 Cloudsnap deleted successfully
-# pxctl cloudsnap list
-SOURCEVOLUME 	CLOUD-SNAP-ID					CREATED-TIME			STATUS
-dvol		pqr9-cl1/520877607140844016-50466873928636534	Fri, 07 Apr 2017 20:22:43 UTC	Done
+pxctl cloudsnap list
+SOURCEVOLUME     CLOUD-SNAP-ID                    CREATED-TIME            STATUS
+dvol        pqr9-cl1/520877607140844016-50466873928636534    Fri, 07 Apr 2017 20:22:43 UTC    Done
 ```
 
-## Cloud operations
+{{<info>}}
+**Note:** Portworx cloudsnap deletes are optimized with S3 batch-deletes API.
+{{</info>}}
 
-Help for specific cloudsnap commands can be found by running the following command
+### Cloud backup schedules
 
-Note: All cloudsnap operations requires secrets login to configured endpoint with/without encryption. Please refer pxctl secrets cmd help.
+Cloud backup schedules allow backups to be uploaded to cloud at periodic intervals of time. These schedules can be managed through `pxctl`.
 
-Also, to see how to configure cloud provider credentials, click the link below.
-
-[Credentials](/reference/cli/credentials)
-
-**pxctl cloudsnap –help**
+To view the list of available commands and flags, use:
 
 ```text
-/opt/pwx/bin/pxctl cloudsnap --help
-NAME:
-   pxctl cloudsnap - Backup and restore snapshots to/from cloud
-
-USAGE:
-   pxctl cloudsnap command [command options] [arguments...]
-
-COMMANDS:
-     backup, b         Backup a snapshot to cloud
-     restore, r        Restore volume to a cloud snapshot
-     list, l           List snapshot in cloud
-     status, s         Report status of active backups/restores
-     history, h        Show history of cloudsnap operations
-     stop, st          stop an active backup/restore
-     schedules, sched  Manage schedules for cloud-snaps
-     catalog, t        Display catalog for the backup in cloud
-     delete, d         Delete a cloudsnap from the objectstore. This is not reversible.
-
-OPTIONS:
-   --help, -h  show help
+pxctl cloudsnap schedules --help
 ```
 
-**pxctl cloudsnap backup**
+```output
+Manage schedules for cloud-snaps
 
-`pxctl cloudsnap backup` command is used to backup a single volume to the configured cloud provider through credential command line. If it will be the first backup for the volume a full backup of the volume is generated. If it is not the first backup, it only generates an incremental backup from the previous full/incremental backup. If a single cloud provider credential is created then there is no need to specify the credentials on the command line.
+Usage:
+  pxctl cloudsnap schedules [flags]
+  pxctl cloudsnap schedules [command]
+
+Aliases:
+  schedules, sched
+
+Available Commands:
+  create       Create a cloud-snap schedule for a volume
+  delete       Delete a cloud-snap schedule
+  list         List the configured cloud-snap schedules
+  update       update cloud-snap schedule for a volume
+
+Flags:
+  -h, --help   help for schedules
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl cloudsnap schedules [command] --help" for more information about a command.
+```
+
+<!--
+We added a new command:
+  update       update cloud-snap schedule for a volume
+-->
+#### Creating a cloud backup schedule
+
+Cloud backup schedules can be created using `pxctl cloudsnap schedules create`. To get help on using this command, run:
 
 ```text
-/opt/pwx/bin/pxctl cloudsnap backup vol1
-Cloudsnap backup started successfully
+pxctl cloudsnap schedules create  --help
 ```
 
-If multiple cloud providers credentials are created then need to specify the credential to use for backup on command line
+```output
+Create a cloud-snap schedule for a volume
+
+Usage:
+  pxctl cloudsnap schedules create [flags]
+
+Aliases:
+  create, c
+
+Examples:
+/opt/pwx/bin/pxctl cloudsnap schedules create [flags] volName
+
+Flags:
+      --cred-id string    Cloud credentials ID to be used for the backup
+  -d, --daily strings     Daily snapshot at specified hh:mm (UTC)
+  -f, --full              Force scheduled backups to be full always
+  -h, --help              help for create
+  -x, --max uint          Maximum number of cloud snaps to maintain, default 7 (default 7)
+  -m, --monthly strings   Monthly snapshot at specified day@hh:mm (UTC)
+  -p, --periodic string   Cloudsnap interval in minutes (default "0")
+  -r, --retention uint    Retention period for cloud snaps in number of days
+  -w, --weekly strings    Weekly snapshot at specified weekday@hh:mm (UTC)
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+```
+
+Let's look at a simple example:
 
 ```text
-/opt/pwx/bin/pxctl cloudsnap backup vol1 --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff
-Cloudsnap backup started successfully
+ pxctl cloudsnap schedules create testVol --daily 21:00 --max 15 --cred-id cc84ef11-6d94-4c20-b4b9-01615119a442
+ ```
+
+```output
+ Cloudsnap schedule created successfully
 ```
 
-Note: All cloudsnap backups and restores can be monitored through CloudSnap status command which is described in following sections
+The above command creates a daily schedule that retains a maximum of 15 backups in the cloud. Use the `--max` parameter to indicate the number of backups you want to retain in the cloud. Then, the most recent `--max` number of backups are retained and older backups are deleted periodically.
 
-**pxctl cloudsnap restore**
+{{<info>}}
+Note that, while listing cloud backups, you may see more than the `--max` number of backups. Due to the incremental nature of backups, we may need to retain more than `--max` backups in order to allow `--max` backups to be restored at any given time.
+{{</info>}}
 
-`pxctl cloudsnap restore` command is used to restore a successful backup from cloud. \(Use cloudsnap list command to get the cloudsnap Id\). It requires cloudsnap Id \(to be restored\) and credentials. Restore happens on any node in the cluster where storage can be provisioned. In this release, restored volume will be of replication factor 1. This volume can be updated to different repl factors using volume ha-update command.
+#### Listing Cloud Backup Schedules
+You can list the backup schedules that are currently configured using the following command:
 
 ```text
-sudo /opt/pwx/bin/pxctl cloudsnap restore --snap gossip12/181112018587037740-545317760526242886
-Cloudsnap restore started successfully: 315244422215869148
+pxctl cloudsnap schedules list
 ```
 
-Note: All cloudsnap backups and restores can be monitored through CloudSnap status command which is described in following sections
+```output
+UUID                        VOLUMEID            MAX-BACKUPS        FULL        SCHEDULE(UTC)
+078557a3-26c7-49b1-9822-34e6f816c2d1        648038464574631167        15            false        daily @21:00
+```
 
-**pxctl cloudsnap status**
 
-`pxctl cloudsnap status` can be used to check the status of cloudsnap operations
+#### Deleting a Cloud Backup Schedule
+Run the following to delete a backup schedule:
 
 ```text
-/opt/pwx/bin/pxctl cloudsnap status
-SOURCEVOLUME		   STATE		      BYTES-PROCESSED	TIME-ELAPSED		COMPLETED			            ERROR
-1040525385624900824	Restore-Done	11753581193	      8m32.231744596s	Wed, 05 Apr 2017 06:57:08 UTC
-1137394071301823388	Backup-Done	   11753581193	      1m46.023734966s	Wed, 05 Apr 2017 05:03:42 UTC
-13292162184271348	   Backup-Done	   27206221391	      4m25.740022954s	Wed, 05 Apr 2017 22:39:41 UTC
-454969905909227504	Backup-Active	91944386560	      4h8m19.283242837s
-827276927130532677	Restore-Failed	0									                                       Failed to authenticate creds ID
+pxctl cloudsnap schedules  delete --uuid 078557a3-26c7-49b1-9822-34e6f816c2d1
 ```
 
-**pxctl cloudsnap list**
-
-`pxctl cloudsnap list` is used to list all the cloud snapshots
-
-```text
-/opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --all
-SOURCEVOLUME 			CLOUD-SNAP-ID									CREATED-TIME				STATUS
-vol1			gossip12/181112018587037740-545317760526242886		Sun, 09 Apr 2017 14:35:28 UTC		Done
+```output
+Cloudsnap schedule deleted successfully
 ```
+## Related topics
 
-Filtering on cluster ID or volume ID is available and can be done as follows:
-
-```text
-/opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --src vol1
-SOURCEVOLUME 		CLOUD-SNAP-ID					CREATED-TIME				STATUS
-vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Done
-vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
-
-/opt/pwx/bin/pxctl cloudsnap list --cred-uuid ffffffff-ffff-ffff-1111-ffffffffffff --cluster cs25
-SOURCEVOLUME 		CLOUD-SNAP-ID					CREATED-TIME				STATUS
-vol1			1137394071301823388-283948499973931602		Wed, 05 Apr 2017 04:50:35 UTC		Done
-vol1			1137394071301823388-674319852060841900		Wed, 05 Apr 2017 05:01:56 UTC		Done
-volshared1	13292162184271348-457364119636591866		Wed, 05 Apr 2017 22:35:16 UTC		Done
-```
-
-**pxctl cloudsnap delete**
-
-`pxctl cloudsnap delete` can be used to delete cloudsnaps. This is not reversible and will cause the backups to be permanently deleted from the cloud, so use with care.
-
-```text
-/opt/pwx/bin/pxctl cloudsnap  delete --snap gossip12/181112018587037740-545317760526242886
-Cloudsnap deleted successfully
-```
+* For information about creating and managing cloud snapshots of your Portworx volumes through Kubernetes, refer to the [Create and use cloud snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots/on-demand/snaps-cloud/) page.

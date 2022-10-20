@@ -1,6 +1,9 @@
 ---
 title: CLI
-description: General reference for CLI, Volumes and other resources.
-keywords: portworx, containers, storage, volumes, CLI
-weight: 1
+description: CLI reference for pxctl commands
+keywords: pxctl, CLI, command line, command line tool, reference
+weight: 200
+series: reference
+aliases: 
+    - /reference/cli/objectstore
 ---

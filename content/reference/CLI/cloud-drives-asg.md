@@ -1,44 +1,67 @@
 ---
-title: Cloud Drives (ASG)
+title: Cloud Drives (ASG) using pxctl
 description: General reference for CLI Cloud Drives on ASG.
-keywords: portworx, containers, storage, volumes, CLI, ASG
-weight: 2
+keywords: pxctl, command-line tool, cli, reference, cloud drives, ASG, auto-scaling group
+weight: 1000
+linkTitle: Cloud Drives (ASG)
 ---
 
-#### CloudDrive operations {#clouddrive-operations}
+## Cloud Drive operations
 
-Portworx when running in ASG mode provides a set of CLI commands to display the information about all EBS volumes and their attachment information.
+If Portworx is managing your cloud drives, the CLI provides a set of commands that display information about your EBS volumes.
 
-**Cloud Drive Help**
+### Cloud Drive Help
+
+Run the `pxctl clouddrive` command with the `--help` flag to display the list of the available subcommands and flags.
 
 ```text
-/opt/pwx/bin/pxctl clouddrive --help
-NAME:
-   pxctl clouddrive - Manage cloud drives
-
-USAGE:
-   pxctl clouddrive command [command options] [arguments...]
-
-COMMANDS:
-     list, l       List all the cloud drives currently being used
-     inspect, i    Inspect and view all the drives of a DriveSet
-
-OPTIONS:
-   --help, -h  show help
+pxctl clouddrive --help
 ```
 
-{{<info>}}
-**Note:** Following commands are only available for PX version &gt; 1.3
-{{</info>}}
+```output
+Manage cloud drives
 
-**Listing all Cloud Drives**
+Usage:
+  pxctl clouddrive [flags]
+  pxctl clouddrive [command]
 
-Run the following command to display all the cloud drives being used by Portworx.
+Aliases:
+  clouddrive, cd
+
+Available Commands:
+  inspect       Inspect and view all the drives of a DriveSet
+  list          List all the cloud drives currently being used
+  list-drives   List all the cloud drives currently being used
+  transfer      Transfers the cloud drive set from given source node to a destination node
+  update-labels Updates the labels on the drive set for the provided node.
+
+Flags:
+  -h, --help   help for clouddrive
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl clouddrive [command] --help" for more information about a command.
+```
+
+### Listing all Cloud Drives
+
+Enter the following command to display all the cloud drives used by Portworx:
 
 ```text
+pxctl clouddrive list
+```
 
-/opt/pwx/bin/pxctl clouddrive list
-
+```output
 Cloud Drives Summary
         Number of nodes in the cluster:  3
         Number of drive sets in use:  3
@@ -52,14 +75,16 @@ Drive Set List
         2                ip-172-20-52-178.ec2.internal        i-09169ceb37b251bac        us-east-1a        vol-0bd9aaab0fb615351, vol-0c9f027d111844227
 ```
 
-**Inspecting Cloud Drives**
+### Inspecting Cloud Drives
 
-Run the following command to display more information about the drives attached on a node.
+To display more detailed information about the drives attached to a node, run the `pxctl clouddrive inspect` with the `--node` id flag and pass it the id of the node.
+
 
 ```text
+pxctl clouddrive inspect --node ip-172-20-53-168.ec2.internal
+```
 
-/opt/pwx/bin/pxctl clouddrive inspect --nodeid ip-172-20-53-168.ec2.internal
-
+```output
 Drive Set Configuration
         Number of drives in the Drive Set:  2
         NodeID:  ip-172-20-53-168.ec2.internal
@@ -81,3 +106,134 @@ Drive Set Configuration
                 Iops:  100
                 Path:  /dev/xvdg
 ```
+
+### Transfer cloud drives to a storageless node
+
+The `pxctl clouddrive transfer` operation allows you to move your cloud drives from an existing node to a storageless node using a single command. Using this command, you can transfer cloud drives to new nodes more quickly and with fewer steps than manually detaching, then reattaching cloud drives.
+
+The `pxctl clouddrive transfer` command works by:
+
+1. Putting your storage pools in maintenance mode
+2. Detaching the cloud drive from the source node
+3. Attaching it to the destination node
+4. Ending maintenance mode
+
+{{<info>}}
+**NOTE:**
+
+* This command is only supported on Google cloud.
+* This is not supported when Portworx is installed using an internal KVDB.
+{{</info>}}
+
+#### Initiate a cloud drive transfer to a storageless node
+
+Perform the following steps to transfer cloud drives to a storageless node:
+
+1. Create replacement nodes and add them to your cluster, or identify an existing storageless node you want to transfer your cloud storage drives to.
+2. Enter the `pxctl clouddrive transfer submit` command, specifying the following options:
+
+     * The `-s` flag with the ID of the Portworx node that currently owns the drive set. This is the 'NodeID' displayed in the output of the 'pxctl clouddrive list' command.
+
+     * **Optional:** The `-d` flag with the ID of the instance you want to transfer the drive set to. You can find the instance ID of your node by entering the `pxctl clouddrive list` command. The destination instance must be a storageless node (i.e. have no Drive IDs) and in the same zone, if your cluster has zones.
+
+     ```text
+     pxctl clouddrive transfer submit -s <source-node-ID> -d <dest-node-ID>
+     ```
+     ```output
+     Request to transfer clouddrive submitted, Check status using: pxctl cd transfer status -i 123456789
+     ```
+
+Once you start a cloud drive transfer, the operation will run in the background.
+
+#### View all running cloud drive transfer jobs
+
+If you need to see a list of all running cloud drive transfer jobs, enter the `pxctl clouddrive transfer list` command:
+
+```text
+pxctl clouddrive transfer list
+```
+```output
+JOB                     TYPE                    STATE   CREATE TIME                     SOURCE                                  DESTINATION                                STATUS
+185053872653979650      CLOUD_DRIVE_TRANSFER    DONE    2020-12-01T11:32:36.476277607Z  c2a01375-25b6-431d-a3fa-5ee7eb9612f7    gke-user-cd-transfer-default-pool-bf423c1c-d7w5  cloud driveset transfer completed successfully
+786018947866995085      CLOUD_DRIVE_TRANSFER    DONE    2020-12-01T10:49:33.507921219Z  320412b9-3ee4-40c4-b5b1-abcd12b5d661    gke-user-cd-transfer-default-pool-abcd11a5-5hb8  cloud driveset transfer completed successfully
+```
+
+#### Monitor the status of a cloud drive transfer
+
+If you want to monitor the status of a specific running cloud drive transfer job, enter the `pxctl clouddrive transfer status` command with the `--job-id` flag and the ID of the job you want to see the status of:
+
+```text
+pxctl clouddrive transfer status --job-id 185053872653979650
+```
+```output
+Cloud Transfer Job Status:
+
+Job ID                   : 185053872653979650
+Job State                : DONE
+Last updated             : Tue, 01 Dec 2020 11:34:09 UTC
+Transfer Source          : c2a01375-25b6-431d-a3fa-5ee7eb9612f7
+Transfer Destination     : gke-user-cd-transfer-default-pool-abcd3c1c-d7w5
+Status                   : cloud driveset transfer completed successfully
+```
+
+### Command reference: pxctl clouddrive transfer
+
+#### pxctl clouddrive transfer
+
+##### Command syntax
+
+```text
+pxctl clouddrive transfer [FLAG]
+pxctl clouddrive transfer [COMMAND]
+```
+
+##### Flags
+
+| **Flag** | **Description** |
+|----|----|
+| `-h, --help` | Help for transfer |
+
+#### pxctl clouddrive transfer list
+
+##### Command syntax
+
+```text
+pxctl clouddrive transfer list [FLAG]
+```
+
+##### Flags
+
+| **Flag** | **Description** |
+|----|----|
+| `-h, --help` | Help for list |
+
+#### pxctl clouddrive transfer status
+
+##### Command syntax
+
+```text
+pxctl clouddrive transfer status [FLAG]
+```
+
+##### Flags
+
+| **Flag** | **Description** |
+|----|----|
+| `-h, --help`           | help for status
+| `-i, --job-id` (string)  | The ID of the job you want to view the status for. (Required) |
+
+#### pxctl clouddrive transfer submit
+
+##### Command syntax
+
+```text
+pxctl clouddrive transfer submit [FLAG]
+```
+
+##### Flags
+
+| **Flag** | **Description** |
+|----|----|
+|  `-d, --dest` (string) | ID of the instance who should own the drive set. This is the `InstanceID` displayed in the output of the `pxctl clouddrive list` command. The destination instance needs to be a storage less node (with no Drive IDs) and in the same zone (if your cluster has zones). This is optional and if not provided, an online storageless node will be used. |
+| ` -h, --help`          | help for submit |
+|  `-s, --src` (string)  | (Required) ID of the Portworx node who currently owns the drive set. This is the `NodeID` displayed in the output of the `pxctl clouddrive list` command. |

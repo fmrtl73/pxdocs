@@ -1,0 +1,80 @@
+# exampleTable:
+#   heading: 
+#     - name: 'heading 1'
+#       colspan: 4
+#   tableData: 
+#     - ['row1 item1<br/><br/><ul><li>list item</li></ul>','row1 item2','row1 item3','row1 item4'] 
+#     - ['row2 item1','row2 item2','row2 item3','row2 item4']
+supportedK8s:
+  heading: 
+    - name: 'Type'
+      colspan: 1
+    - name: 'Supported Kubernetes Version'
+      colspan: 1
+  tableData: 
+    - ['On-prem Kubernetes','<ul><li>1.19</li><li>1.20</li><li>1.21</li><li>1.22</li><li>1.23</li><li>1.24</li></ul>'] 
+    - ['Managed Kubernetes','<ul><li><strong>KOPS:</strong> 1.21</li><li><strong>GKE:</strong> 1.22</li><li><strong>AKS:</strong> 1.21 & 1.22</li><li><strong>EKS:</strong> 1.21</li><li><strong>IKS:</strong> 1.22 & 1.23</li><li><strong>PKS:</strong> 1.17</li></ul>']
+    - ['Distribution Kubernetes','<ul><li><strong>Openshift 4.6:</strong> 1.19 (Openshift version verified up to 4.6.48) </li><li><strong>Openshift 4.7:</strong> 1.20 (Openshift version verified up to 4.7.37)</li><li><strong>Openshift 4.8:</strong> 1.21 (Openshift version verified up to 4.8.20) </li><li><strong>Openshift 4.9:</strong> 1.22 (Openshift version verified up to 4.9.7)</li><li><strong>Openshift 4.10:</strong> 1.23 (Openshift version verified up to 4.10.9)</li></ul>']
+    - ['vSphere with Tanzu (TKGs)','<ul><li>v1.19.14+vmware.1-tkg.1.8753786</li><li>v1.20.9+vmware.1-tkg.1.a4cee5b</li><li>v1.21.6+vmware.1-tkg.1.b3d708a</li></ul>']
+    - ['Tanzu Kubernetes Grid Integrated (TKGI)','<ul><li>PKS Version: 1.9.6-build.7; k8s Version: 1.18.18</li><li>PKS Version: 1.10.7-build.6; k8s Version: 1.19.16</li><li>PKS Version: 1.12.1-build.10; k8s Version: 1.21.5</li><li>PKS Version: 1.13.2-build.16; k8s Version: 1.22.6</li></ul>']
+purityVersions:
+  heading: 
+    - name: 'Model'
+      colspan: 1
+    - name: 'Minimum supported version'
+      colspan: 1
+    - name: 'Maxmimum supported version'
+      colspan: 1
+  tableData: 
+    - ['FlashArray//C, FlashArray//X','Purity version 5.3.16','Purity version 6.3.1'] 
+    - ['FlashBlade','Purity version 2.2.0','Purity version 4.0']
+ocpUpgradePath:
+  heading: 
+    - name: 'Channel version'
+      colspan: 1
+    - name: 'OpenShift version'
+      colspan: 1
+    - name: 'Kubernetes version'
+      colspan: 1
+  tableData: 
+    - ['stable-4.6','4.6.56','1.19.16'] 
+    - ['stable-4.7','4.7.48','1.20.14']
+    - ['stable-4.8','4.8.42','1.21.11']
+    - ['stable-4.9','4.9.36','1.22.8']
+    - ['stable-4.10','4.10.18','1.23.5']
+qualifiedLinuxDistros:
+  heading: 
+    - name: 'Linux Distro'
+      colspan: 1
+    - name: 'Kernel Version'
+      colspan: 1
+  tableData: 
+    - ['CentOS 7.8-vanilla', '3.10.0-1127.el7.x86_64']
+    - [ 'CentOS 8.2-vanilla','4.18.0-193.el8.x86_64']
+    - [ 'Ubuntu 18.04.5 LTS','5.4.0-1040-gcp']
+    - [ 'Ubuntu 20.04.02 LTS','5.4.0-73-generic'] 
+    - [ 'Ubuntu 20.10','5.13.0-1028-gcp'] 
+    - [ 'Ubuntu 21.04','5.11.0-1007-gcp']
+    - [ 'Fedora 27','Up to 4.18.19-100.fc27.x86_64']
+    - [ 'Fedora 28','Up to 5.0.16-100.fc28.x86_64']
+    - [ 'Fedora 33','Up to 5.14.18-100.fc33.x86_64']
+    - [ 'FlatCar Alpha','5.10.93-flatcar']
+    - [ 'FlatCar Beta','5.10.93-flatcar']
+    - [ 'FlatCar Stable','5.10.107-flatcar'] 
+    - [ 'RHEL 7.6','4.20.13-1.el7.elrepo.x86_64'] 
+    - [ 'RHEL 7.9','Up to 3.10.0-1127.el7.x86_64']
+    - [ 'RHEL 8.4','Up to 4.18.0-305.25.1.el8_4.x86_64']
+    - [ 'RHEL 8.5 (Ootpa)','Up to 4.18.0-372.16.1.el8_6.x86_64']
+    - [ 'Debian 9','Up to 4.9.0-13-amd64'] 
+    - [ 'Debian 10','Up to 4.19.0-20-cloud-amd64']
+    - [ 'OEL 7.9','Up to 3.10.0-1160.59.1.el7.x86_64']
+cloudLinuxDistros:
+  heading: 
+    - name: 'Cloud Distro'
+      colspan: 1
+    - name: 'Kernel Version'
+      colspan: 1
+  tableData: 
+    - ['Amazon Linux v2', '4.14.232-177.418.amzn2.x86_64']
+    - [ 'Photon 3.0','4.19.132-6.ph3']
+    - [ 'Photon 4.0','5.10.4-16.ph4']

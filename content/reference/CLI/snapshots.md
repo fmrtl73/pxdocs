@@ -1,259 +1,272 @@
 ---
-title: Snapshots
-keywords: portworx, pxctl, snapshot, reference
-description: Learn how container volume snapshots can be created explicitly by pxctl snap create commands or through a schedule that is set on the volume. Try today!
-weight: 10
+title: Snapshots operations using pxctl
+linkTitle: Snapshots
+keywords: pxctl, command-line tool, cli, reference, snapshot, create snapshot, list snapshots, delete snapshot, schedule policies, snapshot schedule
+description: Learn how to manage snapshots using pxctl
+weight: 400
 ---
 
-Snapshots are efficient point-in-time read-only copies of volumes. Snapshots created can be used to read data from the snapshot, restore data from the snapshot and also create clones from the snapshot. They are implemented using a copy-on-write technique, so that they only use space in places where they differ from their parent volume. Snapshots can be created explicitly by `pxctl snapshot create` commands or through a schedule that is set on the volume.
+{{< content "shared/reference-CLI-intro-snapshots.md" >}}
 
-### `pxctl` Snapshot Commands {#pxctl-snapshot-commands}
+## Creating snapshots
 
-Snapshots are managed with the `pxctl volume snapshot` command.
+{{< content "shared/reference-CLI-creating-snapshots.md" >}}
 
-```text
-pxctl volume snapshot
-NAME:
-   pxctl volume snapshot - Manage volume snapshots
+## Listing Snapshots
 
-USAGE:
-   pxctl volume snapshot command [command options] [arguments...]
-
-COMMANDS:
-     create, c  Create a volume snapshot
-
-OPTIONS:
-   --help, -h  show help
-```
-
-#### Creation Snapshots {#creation-snapshots}
-
-To create a user snaphsot for a volume , Use `pxctl snapshot create` command.
+To list existing snapshots, you can use `pxctl volume list`. Let's have a look at the available flags:
 
 ```text
-pxctl volume snapshot create --name mysnap --label color=blue,fabric=wool myvol
-Volume snap successful: 234835613696329810
+pxctl volume list --help
 ```
 
-The string of digits in the output is the volume ID of the new snapshot. You can use this ID\(`234835613696329810`\) or the name\(`mysnap`\), to refer to the snapshot in subsequent `pxctl` commands. The label values allow you to tag the snapshot with descriptive information of your choosing. You can use them to filter the output of the `pxctl volume list` command.
+```output
+List volumes in the cluster
 
-There is an implementation limit of 64 snapshots per volume.
+Usage:
+  pxctl volume list [flags]
 
-#### Listing Snapshots {#listing-snapshots}
+Aliases:
+  list, l
 
-Snapshots are listed using pxctl volume list command.
+Flags:
+  -a, --all                   show all volumes, including snapshots
+  -g, --group string          show all volumes for given group
+  -h, --help                  help for list
+  -l, --label string          list of comma-separated name=value pairs
+      --name string           volume name used during creation if any
+      --node string           show all volumes whose replica is present on the given node
+  -p, --parent string         show all snapshots created for given volume
+      --pool-uid string       show all volumes whose replica is present on the given pool
+      --sched-policy string   filter volumes by sched policy
+  -s, --snapshot              show all snapshots (read-only volumes)
+      --snapshot-schedule     show all schedule created snapshots
+  -t, --time                  show all volumes sorted by creation time
+  -v, --volumes               show only volumes
 
-```text
-NAME:
-   pxctl volume list - List volumes in the cluster
-
-USAGE:
-   pxctl volume list [command options]
-
-OPTIONS:
-   --all, -a                 show all volumes, including snapshots
-   --node-id value           show all volumes whose replica is present on the given node
-   --name value              volume name used during creation if any
-   --label pairs, -l pairs   list of comma-separated name=value pairs
-   --snapshot, -s            show all snapshots (read-only volumes)
-   --snapshot-schedule, --ss show all schedule created snapshots
-   --parent value, -p value  show all snapshots created for given volume
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
 ```
 
-User created snapshots can be listed using one of the following ways
+### User created snapshots
+
+To list your _user created snapshots_, use one of the following commands:
 
 ```text
 pxctl volume list --all
+```
+
+```output
 ID          NAME                                    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITY SCALE   STATUS
 234835613696329810  mysnap                                  1 GiB   1   no  no      no      LOW     1   up - detached
 1125771388930868153 myvol                                   1 GiB   1   no  no      no      LOW     1   up - detached
 ```
 
+{{<info>}}
+The above command shows **all volumes, including snapshots**.
+{{</info>}}
+
 \(or\)
 
 ```text
 pxctl volume list --snapshot
+```
+
+```output
 ID          NAME                                    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITY SCALE   STATUS
 234835613696329810  mysnap                                  1 GiB   1   no  no      no      LOW     1   up - detached
 ```
 
-All scheduled snapshots can be listed using –snapshot-schedule option.
+{{<info>}}
+The above command shows **only snapshots**.
+{{</info>}}
+
+### Scheduled snapshots
+
+To list all your scheduled snapshots, run this command:
 
 ```text
 pxctl volume list --snapshot-schedule
+```
+
+```output
 ID          NAME                                    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITYSCALE    STATUS
 423119103642927058  myvol_periodic_2018_Feb_26_21_12                    1 GiB   1   no  no      no      LOW     1up - detached
 ```
 
-You can filter the results with the –parent and –label options. For instance, –parent myvol will show only snapshots whose parent is myvol, i.e., mysnap in this example Giving labels restricts the list to snapshots that have all of the specified labels. For instance, –label fabric=wool would again show mysnap but –label fabric=cotton wo
+### Filtering the results
+
+You can filter the results with the `–parent` and `–label` options. For instance, `–parent myvol` will show only snapshots whose parent is `myvol` (i.e. `mynsap`):
 
 ```text
 pxctl volume list --parent myvol --snapshot
-ID          NAME    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITY SCALE   STATUS
-234835613696329810  mysnap  1 GiB   1   no  no      no      LOW     1   up - detached
+```
 
-pxctl volume list --parent myvol --snapshot --label fabric=wool
+```output
 ID          NAME    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITY SCALE   STATUS
 234835613696329810  mysnap  1 GiB   1   no  no      no      LOW     1   up - detached
 ```
 
-#### Deleting Snapshots {#deleting-snapshots}
-
-Snapshot can be deleted using `pxctl volume delete` command.
+Giving labels restricts the list to snapshots that have all of the specified labels. For instance, –`label fabric=wool` would again show `mysnap` but `–label fabric=cotton` won't.
 
 ```text
-NAME:
-   pxctl volume delete - Delete a volume
-
-USAGE:
-   pxctl volume delete volume-name-or-ID
-
+pxctl volume list --parent myvol --snapshot --label fabric=wool
 ```
 
-`pxctl volume delete` deletes snapshots. The argument is the name or ID of the snapshot that you wish to delete. The snapshot must be detached in order to delete it.
+```output
+ID          NAME    SIZE    HA  SHARED  ENCRYPTED   COMPRESSED  IO_PRIORITY SCALE   STATUS
+234835613696329810  mysnap  1 GiB   1   no  no      no      LOW     1   up - detached
+```
+
+## Deleting snapshots
+
+To delete a snapshot, run `pxctl volume delete` with the `name` or the `id` of the snapshot you want to delete as an argument:
 
 ```text
 pxctl volume delete mysnap
+```
+
+```output
 Delete volume 'mysnap', proceed ? (Y/N): y
 Volume mysnap successfully deleted.
 ```
 
-#### Schedule Policy {#schedule-policy}
+{{<info>}}
+Only detached snapshots can be deleted.
+{{</info>}}
 
-To create a snapshot policy, use `pxctl sched-policy create` command.
+## Restoring snapshots
 
-```text
-NAME:
-   pxctl sched-policy create - Create a schedule policy
+{{< content "shared/reference-CLI-restore-volume-from-snapshot.md" >}}
 
-USAGE:
-   pxctl sched-policy create [command options] policy-name
+## Snapshot schedule policies
 
-OPTIONS:
-   --periodic mins,k, -p mins,k                  periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
-   --daily hh:mm,k, -d hh:mm,k                   daily snapshot at specified hh:mm,k (keeps 7 by default)
-   --weekly weekday@hh:mm,k, -w weekday@hh:mm,k  weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-   --monthly day@hh:mm,k, -m day@hh:mm,k         monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+You can use the `pxctl sched-policy` command to create and manage your snapshot schedule policies.
+
+{{< content "shared/reference-CLI-sched-policy.md" >}}
+
+For more information on how to create, list, update, and delete your snapshot schedule policies with `pxctl`, see [this page](/reference/cli/sched-policy).
+
+## Snapshot schedules
+
+If you create a volume and a snapshot schedule at the same time, you can use and combine as needed the following four scheduling options:
+
+- –-periodic,
+- –-daily,
+- –-weekly and
+- –-monthly.
+
+Scheduled snapshots have names of the form `<Parent-Name>_<freq>_<creation_time>`, where `<freq>` denotes the schedule frequency (i.e., periodic, daily, weekly, monthly):
+
 ```
-
-The below example creates a policy `p1` with periodic and weekly schedules.
-
-```text
-pxctl sched-policy create --periodic 60,5 --weekly sunday@12:00,4 p1
-```
-
-Schedule policies can be addded to the volume either during volume create or after volume create.
-
-```text
-pxctl volume create --policy p1 vol1
-(or)
-pxctl volume snap-interval-update --policy p1 vol1
-```
-
-#### Listing Schedule Policies {#listing-schedule-policies}
-
-To list the schedule policies, Use `pxctl sched-policy list` command
-
-```text
-NAME:
-   pxctl sched-policy list - List all schedule policies
-
-USAGE:
-      pxctl sched-policy list [arguments...]
-```
-
-#### Update Schedule Policy {#update-schedule-policy}
-
-To update the schedule policy, Use `pxctl sched-policy update` command
-
-```text
-NAME:
-  pxctl sched-policy update - Update a schedule policy
-
-USAGE:
-   pxctl sched-policy update [command options] policy-name
-
-OPTIONS:
-   --periodic mins,k, -p mins,k                  periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
-   --daily hh:mm,k, -d hh:mm,k                   daily snapshot at specified hh:mm,k (keeps 7 by default)
-   --weekly weekday@hh:mm,k, -w weekday@hh:mm,k  weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-   --monthly day@hh:mm,k, -m day@hh:mm,k         monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
-```
-
-#### Delete Schedule Policy {#delete-schedule-policy}
-
-To delete the schedule policy, Use `pxctl sched-policy delete` command.
-
-```text
-NAME:
-   pxctl sched-policy delete - Delete a schedule policy
-
-USAGE:
-   pxctl sched-policy delete policy-name
-```
-
-#### Snapshot Schedules {#snapshot-schedules}
-
-Creation of snapshot schedules during volume create uses four scheduling options \[–periodic, –daily, –weekly and –monthly\], which you can combine as desired. Scheduled snapshots have names of the form `<Parent-Name>_<freq>_<creation_time>`, where `<freq>` denotes the schedule frequency, i.e., periodic, daily, weekly, monthly. For example,
-
-```text
 myvol_periodic_2018_Feb_26_21_12
 myvol_daily_2018_Feb_26_12_00
 ```
 
-The example below sets a schedule of periodic snapshot for every 60 min and daily snapshot at 8:00am and weekly snapshot on friday at 23:30pm and monthly snapshot on the 1st of the month at 6:00am.
+As an example, to create a new volume named `myvol` and to schedule:
+
+1. a periodic snapshot for every 60 min and a
+2. daily snapshot at 8:00 am and a
+3. weekly snapshot on Friday at 23:30 pm and
+4. monthly snapshot on the 1st of the month at 6:00 am.
+
+you would run this command:
 
 ```text
 pxctl volume create --periodic 60 --daily @08:00 --weekly Friday@23:30 --monthly 1@06:00 myvol
 ```
 
-The example below keeps a count of 10 periodic snapshot that triggers every 120 min and 3 daily snapshots that tirggers at 8:00am
+Here's another example. In order to create a volume named `myvol` and to schedule:
+
+1. 10 periodic snapshots that trigger every 120 min and
+2. 3 daily snapshots that trigger at 8:00 am
+
+you would run the following:
 
 ```text
 pxctl volume create --periodic 120,10 --daily @08:00,3 myvol
 ```
 
+{{<info>}}
 Once the count is reached, the oldest existing one will be deleted if necessary.
+{{</info>}}
 
-#### Changing Snapshot Schedule {#changing-snapshot-schedule}
 
-To change the snapshot schedule for a given volume, use `pxctl volume snap-interval-update` command
+### Changing a snapshot schedule
+
+To change the snapshot schedule for a given volume, use the `pxctl volume snap-interval-update` command.
+
+First, let's see the available flags:
 
 ```text
-NAME:
-   pxctl volume snap-interval-update - Update volume configuration
-
-USAGE:
-   pxctl volume snap-interval-update [command options] volume-name-or-ID
-
-OPTIONS:
-   --periodic mins,k, -p mins,k                  periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
-   --daily hh:mm,k, -d hh:mm,k                   daily snapshot at specified hh:mm,k (keeps 7 by default)
-   --weekly weekday@hh:mm,k, -w weekday@hh:mm,k  weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
-   --monthly day@hh:mm,k, -m day@hh:mm,k         monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
-   --policy value, --sp value                    policy names separated by comma
+pxctl volume snap-interval-update --help
 ```
 
-In the below example, the old snapshot schedule is replaced with 5 daily snapshot triggering at 15:00pm
+```output
+Update volume configuration
+
+Usage:
+  pxctl volume snap-interval-update [flags]
+
+Aliases:
+  snap-interval-update, snap
+
+Examples:
+pxctl volume snap-interval-update [flags] volName
+
+Flags:
+  -d, --daily strings     daily snapshot at specified hh:mm,k (keeps 7 by default)
+  -h, --help              help for snap-interval-update
+  -m, --monthly strings   monthly snapshot at specified day@hh:mm,k (keeps 12 by default)
+  -p, --periodic string   periodic snapshot interval in mins,k (keeps 5 by default), 0 disables all schedule snapshots
+      --policy string     policy names separated by comma
+  -w, --weekly strings    weekly snapshot at specified weekday@hh:mm,k (keeps 5 by default)
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+```
+
+In the below example, the old snapshot schedule is replaced with a daily snapshot triggered at 15:00 pm (5 snapshots are kept):
 
 ```text
 pxctl volume snap-interval-update --daily @15:00,5 myvol
 ```
 
-#### Disabling Scheduled Snapshots {#disabling-scheduled-snapshots}
+### Disabling scheduled snapshots
 
-To disable scheduled snapshot for a given volume, use `--periodic 0` on snap-interval-update.
+To disable scheduled snapshot for a given volume, use `--periodic 0` on `snap-interval-update`:
 
 ```text
 pxctl volume snap-interval-update --periodic 0 myvol
 ```
 
-#### View Snapshot Schedule on Volume {#view-snapshot-schedule-on-volume}
+### View the snapshot schedule for a volume
 
-If a schedule is set on a volume and to view that schedule use `pxctl volume inspect` command.
+To view the snapshot schedule for a volume, use the `pxctl volume inspect` command as follows:
 
 ```text
 pxctl volume inspect myvol
+```
+
+```output
 Volume	:  1125771388930868153
 	Name            	 :  myvol
 	Size            	 :  1.0 GiB
@@ -281,4 +294,6 @@ Volume	:  1125771388930868153
 
 ```
 
-If you are looking snapshot commands for Portworx version 1.2, [go here](/reference/cli/version-1.2)
+## Related topics
+
+For information about creating snapshots of your Portworx volumes, refer to the [Create and use snapshots](/operations/operate-kubernetes/storage-operations/create-snapshots/) page.

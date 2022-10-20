@@ -1,0 +1,30 @@
+DirectoryPath: "../public"
+IgnoreURLs:
+- "linkedin.com"
+- "rackspace.com" # TODO: https?:\/\/[www]*[\.]*[support]*\.rackspace\.com[\/a-z\-]*
+- "youtube.com" # TODO: https?:\/\/[www]*[\.]*\.youtube\.com[\/a-zA-Z0-9\-\?\=\_\&]*
+- "https://cloud.ibm.com/registration"
+- "https://cloud.ibm.com/docs/"
+- "https://docs.mesosphere.com"
+- "https://www.katacoda.com"
+- "https://katacoda.com"
+- "https://twitter.com/portwx"
+- "https://learn.hashicorp.com/consul"
+- "https://www.vaultproject.io/"
+- "https://docs.vmware.com/"
+- "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token"
+- "http://docs.rancher.com/rancher/latest/en/quick-start-guide/"
+- "https://docs.rancher.com/rancher/v1.2/en/hosts/amazon/"
+IgnoreDirs:
+- "css"
+- "icons"
+- "images"
+- "img"
+- "js"
+- "logos"
+- "samples"
+- "shared"
+CacheExpires: "72h"
+IgnoreInternalEmptyHash: true
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreAltMissing: true

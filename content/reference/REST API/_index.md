@@ -1,15 +1,14 @@
 ---
-title: REST API
-keywords: portworx, REST, API
-description: Portworx data services can be managed and monitored through RESTful APIs. View REST API Reference and documentation from Portworx today!
-weight: 3
+title: Using the Portworx REST API
+linkTitle: REST API
+keywords: REST API, gRPC interface, integration, interoperability
+description: Details on using the Portworx REST API
+weight: 3000
 noicon: true
+series: reference
 ---
 
-Portworx data services can be managed and monitored through RESTful API's.
+## This API is deprecated.
 
-The Portworx REST APIs are available at Port 9001 on the management IP interface of any of the nodes in a Portworx Cluster.
+Please use the [OpenStorage SDK](/reference/developer-sdk) REST or gRPC interfaces
 
-The API documentation can be accessed at the following link.
-
-[Portworx Openstorage API](http://api.openstorage.org/openstorage/index.html)

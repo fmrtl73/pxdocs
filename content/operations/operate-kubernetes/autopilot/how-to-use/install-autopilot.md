@@ -1,0 +1,92 @@
+---
+title: "Autopilot Install and Setup"
+linkTitle: "Autopilot Install and Setup"
+keywords: install, autopilot
+description: Instructions on installation, configuration and upgrade of Autopilot
+weight: 10000
+aliases:
+    - /portworx-install-with-kubernetes/autopilot/how-to-use/install-autopilot/
+---
+## Installing Autopilot
+
+### Prerequisites
+
+#### Prometheus
+
+Autopilot requires a running Prometheus instance in your cluster. If you don't have Prometheus configured in your cluster, refer to the [Prometheus and Grafana](/operations/operate-kubernetes/monitoring/monitoring-px-prometheusandgrafana.1/) to set it up.
+
+Once you have it installed, find the Prometheus service endpoint in your cluster. Depending on how you installed Prometheus, the precise steps to find this may vary. In most clusters, you can find a service named Prometheus:
+
+```text
+kubectl get service -n kube-system prometheus
+```
+```output
+NAME         TYPE           CLUSTER-IP    EXTERNAL-IP     PORT(S)          AGE
+prometheus   LoadBalancer   10.0.201.44   52.175.223.52   9090:30613/TCP   11d
+```
+
+In the example above, `http://prometheus:9090` becomes the Prometheus endpoint. Portworx uses this endpoint in the [Autopilot Configuration](/reference/crd/storage-cluster/#autopilot-configuration) section.
+
+
+{{<info>}}*Why `http://prometheus:9090`* ?
+
+`prometheus` is the name of the Kubernetes service for Prometheus in the kube-system namespace. Since Autopilot also runs as a pod in the kube-system namespace, it can access Prometheus using its Kubernetes service name and port.
+
+{{</info>}}
+
+### Configuring the ConfigMap
+
+Replace `http://prometheus:9090` in the following ConfigMap with your Prometheus service endpoint, if it is different. Once replaced, apply this ConfigMap in your cluster:
+
+```text
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: autopilot-config
+  namespace: kube-system
+data:
+  config.yaml: |-
+    providers:
+       - name: default
+         type: prometheus
+         params: url=http://prometheus:9090
+    min_poll_interval: 2
+```
+
+This ConfigMap serves as a configuration for Autopilot.
+
+### Installing Autopilot
+
+To install Autopilot, fetch the Autopilot manifest from the Portworx spec generator by clicking [here](https://install.portworx.com/?comp=autopilot)
+and apply it in your cluster.
+
+
+#### Autopilot with PX-Security 
+
+If you're installing Autopilot with PX-Security using the Operator, you must modify the StorageCluster yaml. Add the following PX_SHARED_SECRET env var to the `autopilot` section: 
+
+```text
+  autopilot:
+...
+    env:
+    - name: PX_SHARED_SECRET
+      valueFrom:
+        secretKeyRef:
+          key: apps-secret
+          name: px-system-secrets
+```
+
+## Upgrading Autopilot
+
+To upgrade Autopilot, change the image tag in the deployment with the `kubectl set image` command. The following example upgrades Autopilot to the 1.3.0 version:
+
+```text
+kubectl set image deployment.v1.apps/autopilot -n kube-system autopilot=portworx/autopilot:1.3.0
+```
+```output
+deployment.apps/autopilot image updated
+```
+
+{{<info>}}**NOTE:** The command above assumes Autopilot is installed in the `kube-system` namespace. Change the namespace according to where it's installed in your cluster.{{</info>}}
+

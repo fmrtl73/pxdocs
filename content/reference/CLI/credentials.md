@@ -1,47 +1,72 @@
 ---
-title: Credentials
-keywords: portworx, pxctl, command-line tool, cli, reference
+title: Managing cloud credentials using pxctl
+keywords: pxctl, command-line tool, cli, reference, cloud credentials, manage credentials, create credentials, list credentials, validate credentials, delete credentials
 description: Trying to create, list, validate or delete credentials for cloud providers? Follow this step-by-step tutorial from Portworx!
-weight: 5
+weight: 600
+linkTitle: Cloud Credentials
 ---
 
-**Prerequisite**
+## Prerequisites
 
-The cloud provider credentials are stored in an external secret store. Before you use these commands, you should configure a secret provider of your choice with Portworx. For more information, click the link below.
+This document provides instructions for managing your cloud credentials using `pxctl`.
 
-[Key Management](/key-management)
 
-**pxctl credentials**
+The cloud provider credentials are stored in an external secret store. Before you use the commands from below, you should configure a secret provider of your choice with Portworx. For more information, head over to the [Key Management](/operations/key-management) page.
 
-This command is used to create/list/validate/delete the credentials for cloud providers. These credentials will be used, for example, for cloudsnap of volume to the cloud.
+## Overview
 
-Note: It will create a bucket with the portworx cluster ID to use for the backups
+You can use the `pxctl credentials` command to create, list, validate, or delete your cloud credentials. Then, Portworx will use these credentials, for example, to back up your volumes to the cloud.
+
+Enter the `pxctl credentials --help` command to display the list of subcommands:
 
 ```text
-/opt/pwx/bin/pxctl credentials
-NAME:
-   pxctl credentials - Manage credentials for cloud providers
-
-USAGE:
-   pxctl credentials command [command options] [arguments...]
-
-COMMANDS:
-     create, c    Create a credential for cloud providers
-     list, l      List all credentials for cloud-snap
-     delete, d    Delete a credential for cloud-snap
-     validate, v  Validate a credential for cloud-snap
-
-OPTIONS:
-   --help, -h  show help
+/opt/pwx/bin/pxctl credentials --help
 ```
 
-**pxctl credentials list**
+```output
+Manage credentials for cloud providers
 
-`pxctl credentials list` is used to list all configured credential keys
+Usage:
+  pxctl credentials [flags]
+  pxctl credentials [command]
+
+Aliases:
+  credentials, cred
+
+Available Commands:
+  create      Create a credential for cloud providers
+  delete      Delete a credential for cloud
+  delete-refs Delete references to a credential
+  list        List all credentials for cloud
+  validate    Validate a credential for cloud
+
+Flags:
+  -h, --help   help for credentials
+
+Global Flags:
+      --ca string            path to root certificate for ssl usage
+      --cert string          path to client certificate for ssl usage
+      --color                output with color coding
+      --config string        config file (default is $HOME/.pxctl.yaml)
+      --context string       context name that overrides the current auth context
+  -j, --json                 output in json
+      --key string           path to client key for ssl usage
+      --output-type string   use "wide" to show more details
+      --raw                  raw CLI output for instrumentation
+      --ssl                  ssl enabled for portworx
+
+Use "pxctl credentials [command] --help" for more information about a command.
+```
+
+## List credentials
+
+To list all configured credentials, use this command:
 
 ```text
-/opt/pwx/bin/pxctl credentials list
+pxctl credentials list
+```
 
+```output
 S3 Credentials
 UUID						REGION			ENDPOINT			ACCESS KEY			SSL ENABLED	ENCRYPTION
 ffffffff-ffff-ffff-1111-ffffffffffff		us-east-1		s3.amazonaws.com		AAAAAAAAAAAAAAAAAAAA		false		false
@@ -51,34 +76,280 @@ UUID						ACCOUNT NAME		ENCRYPTION
 ffffffff-ffff-ffff-ffff-ffffffffffff		portworxtest		false
 ```
 
-**pxctl credentials create**
+##  Create and configure credentials
 
-`pxctl credentials create` is used to create/configure credentials for various cloud providers
+You can create and configure credentials in multiple ways depending on your cloud provider and how you want to manage them.
 
-```text
-/opt/pwx/bin/pxctl cred create \
-  --provider s3 \
-  --s3-access-key ***** \
-  --s3-secret-key ***** \
-  --s3-region us-east-1 \
-  --s3-endpoint s3.amazonaws.com
+### Create credentials on AWS by specifying your keys
+
+{{<info>}}
+**NOTE:** The `--s3-storage-class` flag requires {{< pxEnterprise >}} version 2.5.3 or higher
+{{</info>}}
+
+Enter the `pxctl credentials create` command, specifying:
+
+* The `--provider` flag with the name of the cloud provider (`s3`).
+* The `--s3-access-key` flag with your secret access key
+* The `--s3-secret-key` flag with your access key ID
+* The `--s3-region` flag with the name of the S3 region (`us-east-1`)
+* The `--s3-endpoint` flag with the  name of the endpoint (`s3.amazonaws.com`)
+* The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+* The name of your cloud credentials
+
+    ```text
+    pxctl credentials create \
+      --provider s3 \
+      --s3-access-key <YOUR-SECRET-ACCESS-KEY>
+      --s3-secret-key <YOUR-ACCESS-KEY-ID> \
+      --s3-region us-east-1 \
+      --s3-endpoint s3.amazonaws.com \
+      --s3-storage-class STANDARD \
+      <NAME>
+    ```
+
+```output
 Credentials created successfully
 ```
 
-**pxctl credentials delete**
+{{<info>}}
+**Note:** This command will create a bucket with the Portworx cluster ID to use for the backups.
+{{</info>}}
 
-`pxctl credentials delete` is used to delete the credentials from the cloud providers.
+<!--
+### Create credentials on AWS by storing keys as environment variables
+
+{{<info>}}
+**NOTE:** This feature requires {{< pxEnterprise >}} version 2.5.1 or higher
+{{</info>}}
+
+You can create and configure credentials for AWS by storing your secret access key and access key ID as environment variables. When you run the `pxctl credentials create`, Portworx uses the environment variables to create the credential:
+
+1. Create the following environment variables, adding your own access key ID and secret access key, and provide them to the Portworx container through either daemon set parameters or the `runc install` command:
+
+    ```text
+    AWS_SECRET_ACCESS_KEY=xxx
+    AWS_ACCESS_KEY_ID=yyy
+    ```
+2. Enter the `pxctl credentials create` command, specifying:
+
+    * The `--provider` flag with the name of the cloud provider (`s3`).
+    * The `--s3-region` flag with the name of the S3 region (`us-east-1`)
+    * The `--s3-endpoint` flag with the name of the endpoint (`s3.amazonaws.com`)
+    * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+    * The `use-iam` flag
+    * The name of your cloud credentials
+
+    ```text
+    ./pxctl credentials create \
+    --provider s3 \
+    --s3-region us-east-1 \
+    --s3-endpoint s3.amazonaws.com \
+    --s3-storage-class STANDARD \
+    --use-iam \
+    <NAME>
+    ```
+    ```output
+    Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
+    ```
+-->
+
+### Create credentials on AWS using IAM
+
+{{<info>}}
+**NOTE:** This feature requires {{< pxEnterprise >}} version 2.5.1 or greater
+{{</info>}}
+
+Instead of storing your secret access key and access key ID on the host, you can grant Portworx bucket permissions using IAM. You can grant the EC2 instances on which Portworx is running, or you can grant permissions for a specific bucket.
+
+#### Grant IAM permissions for your EC2 instance in general
+
+1. In AWS, grant IAM permissions for an EC2 instance with no bucket:
+
+    ```text
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "VisualEditor0",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:PutObject",
+                    "s3:GetObject",
+                    "s3:ListAllMyBuckets",
+                    "s3:CreateBucket",
+                    "s3:ListBucket",
+                    "s3:DeleteObject",
+                    "s3:GetBucketLocation"
+                ],
+                "Resource": "*"
+            }
+        ]
+    }
+    ```
+
+
+2. Enter the following pxctl credentials create command, specifying the following:
+
+    * The `--provider` flag with the name of the cloud provider (`s3`).
+    * The `--s3-region` flag with the the S3 region associated with your account
+    * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+    * The `use-iam` flag
+    * The name of your cloud credentials
+
+    ```text
+    ./pxctl credentials create \
+    --provider s3 \
+    --s3-region us-east-1 \
+    --s3-storage-class STANDARD \
+    --use-iam \
+    <NAME>
+    ```
+    ```output
+    Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
+    ```
+
+#### Grant IAM permissions for a specific bucket
+
+1. In AWS, grant IAM permissions for a specific bucket:
+
+    ```text
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "VisualEditor0",
+                "Effect": "Allow",
+                "Action": [
+                    "s3:ListAllMyBuckets",
+                    "s3:GetBucketLocation"
+                ],
+                "Resource": "*"
+            },
+            {
+                "Sid": "VisualEditor1",
+                "Effect": "Allow",
+                "Action": "s3:*",
+                "Resource": [
+                    "arn:aws:s3:::<bucket-name>",
+                    "arn:aws:s3:::<bucket-name>/*"
+                ]
+            }
+        ]
+    }
+    ```
+
+2. Enter the following pxctl credentials create command, specifying the following:
+
+    * The `--provider` flag with the name of the cloud provider (`s3`)
+    * The `--s3-region` flag with your bucket's s3 region
+    * The optional `--s3-storage-class` flag with either the `STANDARD` or `STANDARD-IA` value, depending on which storage class you prefer
+    * The `--bucket` flag with your bucket's name
+    * The `use-iam` flag
+    * The name of your cloud credentials
+
+    ```text
+    ./pxctl credentials create \
+    --provider s3 \
+    --s3-region <region> \
+    --s3-storage-class STANDARD \
+    --bucket <bucket-name> \
+    --use-iam \
+    <NAME>
+    ```
+    ```output
+    Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
+    ```
+
+<!-- What is s3cred in these? Is it the access key ID? -->
+<!-- disabling, not release ready:
+### Create credentials on Azure
+
+1. [Grant your Azure instance](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/tutorial-linux-vm-access-storage#grant-your-vm-access-to-an-azure-storage-container) the following permissions:
+
+* `Storage Blob Data Reader`
+* `Storage Blob Data Contributor`
+
+2. Enter the following pxctl credentials create command, specifying your own Azure account name and credentials:
+
+  ```text
+  ./pxctl cred c --provider azure --azure-account-name <account-name> --use-iam azurecred
+  ```
+  ```output
+  Credentials created successfully, UUID: 12345678-a901-2bc3-4d56-7890ef1d23ab
+  ```
+-->
+
+### Create credentials on Google by specifying the credential file
+
+{{<info>}}
+**NOTE:** This feature requires {{< pxEnterprise >}} version 2.10.1 or greater
+{{</info>}}
+
+1. Specify the following:
+    * The `--provider` flag with the name of the cloud provider (`google`)
+    * The `--google-project-id` flag with the relevant google project ID
+    * the `--google-json-key-file` flag with the path to the credentials
+    * The `--bucket` flag with your bucket's name
+
+    ```text
+    ./pxctl credentials create \
+    --provider google \
+    --google-project-id <project-id> \
+    --google-json-key-file /path/to/gcloud.json \
+    --bucket <bucket-name> \
+    <NAME>
+    ```
+    ```output
+    Credentials created successfully, UUID:12345678-a901-2bc3-4d56-7890ef1d23ab
+    ```
+
+
+## Delete existing credentials
+
+To delete a particular set of credentials, you can run `pxctl credentials delete` with the `uuid` or the `name` as parameters like this:
 
 ```text
-/opt/pwx/bin/pxctl cred delete --uuid ffffffff-ffff-ffff-1111-ffffffffffff
+pxctl credentials delete <uuid or name>
+```
+
+```output
 Credential deleted successfully
 ```
 
-**pxctl credentials validate**
+{{<info>}}
+Don't forget to replace `<uuid or name>` with the actual `uuid` or `name` of the credentials you want to delete.
+{{</info>}}
 
-`pxctl credentials validate` validates the existing credentials
+
+## Validate credentials
+
+If you want to validate a set of credentials for a particular cloud provider, run the following:
+
 
 ```text
-/opt/pwx/bin/pxctl cred validate --uuid ffffffff-ffff-ffff-1111-ffffffffffff
+pxctl credentials validate <uuid or name>
+```
+
+```output
 Credential validated successfully
 ```
+
+{{<info>}}
+Don't forget to replace `<uuid or name>` with the actual `uuid` or `name` of the credentials you want to delete.
+{{</info>}}
+
+## Delete pending credential references from the KVDB
+
+ Requests to delete cloudsnaps are long-running operations, and are executed asynchronously in the background. Portworx stores these requests in the KVDB so that it can resume delete operations if the node restarts or is otherwise interrupted. Portworx periodically retires these delete requests as part of a cleanup routine.
+
+ If the credentials for these cloudsnaps are configured through Kubernetes secrets, the credential object must be available at the time Portworx attempts to delete it. If the credential object is deleted while the cloudsnap delete requests are pending, these delete requests will fail and continue to remain in the KVDB where they will continue to log alerts about the failure to delete.
+
+ If this happens in your cluster, you can use the use the `pxctl credentials delete-refs` command to delete these pending references to credentials from the KVDB:
+
+```text
+pxctl credentials delete-refs <name-or-UUID>
+```
+
+## Related topics
+
+* For information about integrating Portworx with Kubernetes Secrets, refer to the [Kubernetes Secrets](/operations/key-management/kubernetes-secrets/) page.

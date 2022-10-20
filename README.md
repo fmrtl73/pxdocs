@@ -4,47 +4,64 @@
 
 A [hugo](https://gohugo.io/) implementation of the Portworx documentation.
 
-## Development
+## Contributing to the docs
 
-To develop the docs site locally - first ensure you have [docker](https://docs.docker.com/install/) installed.
+* Click the Fork button in the upper-right area of the screen to create a copy of this repository in your GitHub account. This copy is called a fork. 
+* Make any changes you want in your fork, and when you are ready to send those changes, go to your fork and create a new pull request.
+* Once your pull request is created, assign the PR to a reviewer who is the SME (subject matter expert). As the owner of the pull request, it is your responsibility to modify your pull request to address the feedback that has been provided to you by the reviewer.
 
-Then clone the repo:
+Below are useful pages that will be useful if you are contributing to the docs.
 
-```bash
-git clone https://github.com/portworx/pxdocs
-cd pxdocs
-```
+* [Recommended git workflow for contributing](GIT_WORKFLOW.md)
+* [Tip and tricks for editing content](TIPS_AND_TRICKS.md)
+* [Documentation on search functionality](SEARCH.md)
+* Recommended editors
+    * [Visual Code](https://code.visualstudio.com/)
+    * [Atom](https://atom.io/)
 
-Then we pull in the theme from the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo:
+## Versioning and Branching
 
-```bash
-make update-theme
-```
+Following is a table that maps each version in the dropdown to the git branch in the repository.
 
-Finally - launch the website:
+| Git branch | Portworx version                    |
+|------------|-------------------------------------|
+| master     | 2.4.x                               |
+| 2.3        | 2.3.x                               |
+| 2.2        | 2.2.x                               |
+| 2.1        | 2.1.x                               |
+| 2.0.3      | 2.0.3.x                             |
+| 2.0        | 2.0.1, 2.0.2                        |
+| 1.7        | 1.7.x                               |
 
+[Documentation on version dropdown](VERSIONS.md) has details on making changes to version branches.
 
-```bash
-make develop
-```
+## Running the site locally
 
-You can then view the site in your browser at [http://localhost:1313](http://localhost:1313).  As you edit content in the `content` folder - the browser will refresh as you save files.
+To develop the docs site locally:
 
-## versions
+1. Ensure you have [docker](https://docs.docker.com/install/) installed.
+2. Initialize the submodules the Makefile depends on: 
+   
+   ```
+   git submodule init
+   git submodule update
+   ```
 
-Each version of the docs is kept on a different branch.  For example do `git checkout 1.3` before running `make develop` to edit the `1.3` version of the docs.
+3. Pull in the theme from the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo using below command:
 
-To activate the version dropdown that appears in production - the following variables need to be exported before you run `make develop`:
+   ```bash
+   make update-theme
+   ```
 
-```bash
-export VERSIONS_ALL="1.3,1.4"
-export VERSIONS_CURRENT="1.3"
-export VERSIONS_BASE_URL="docs.portworx.wk1.co"
-```
+4. Launch the website locally using:
 
-**note** if you use the version dropdown - it will redirect to the live site.  If you want to edit a different version locally - use `git checkout <VERSION>`
+   ```bash
+   make develop
+   ```
 
-## updating the theme
+You can then view the site in your browser at [http://localhost:1313](http://localhost:1313).  As you edit content in the `content` folder - the browser will refresh automatically as you save files.
+
+## Updating the theme
 
 It's important to make sure the theme the docs site uses is up to date.  To do this:
 
@@ -58,127 +75,79 @@ Make sure you update the theme for each of the version branches if the theme cha
 
 If you want to make changes to the templates or CSS - these files live in the `layouts` and `static` folder of the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo.  Make the changes there and then re-update each of the version branches.
 
-## publish site
+If you've added a new branch to `pxdocs tooling` and Git can't find the branch locally, you may need to update the submodules from remote specifically: `git submodule update --remote`.
 
-If you want to generate the built website locally - you can:
+### Updating the theme to a custom branch
 
-```bash
-make publish
-```
-
-This will generate a `public` folder in which the static docs website for the current version branch is placed.
-
-## algolia search
-
-If you want the algolia search bar to be activated locally for testing - you will need to export the following variables - get these from an administrator:
+Production build should only use the master branch of the [pxdocs-tooling](https://github.com/portworx/pxdocs-tooling) repo. For testing private changes, you can use the following:
 
 ```bash
-export ALGOLIA_APP_ID=XXX
-export ALGOLIA_API_KEY=XXX
-export ALGOLIA_ADMIN_KEY=XXX
-export ALGOLIA_INDEX_NAME=local-docs
+TOOLING_BRANCH=my-branch make update-theme
 ```
 
-Then you will need to update the remote algolia index with the contents of the site:
+This will update the submodule for tooling/theme to the given "my-branch".
+
+### Resetting the theme
 
 ```bash
-make search-index
+make reset-theme
 ```
 
-Finally run `make develop` as normal and the algolia search bar should display with the content of the site indexed.
 
-You can always re-run the `make search` command again to re-index.
-
-## deployment
+## Deployment to production
 
 Deployment of your changes is handled by Travis upon a git push to the git repo.  Once you have made changes and viewed them locally - a `git push` of the version branch you are working on will result in the content being deployed into production.
 
-## editing content
+## AsciiDoc support
 
-Each page is written in [Markdown](https://daringfireball.net/projects/markdown/syntax) and uses [front-matter](https://gohugo.io/content-management/front-matter/) in YAML format to describe the page.
+This doc set now features **experimental** support for AsciiDoc. 
 
-The important fields in the front-matter are as follow:
-
- * `title` - the name of the page and the name that will appear on the menu
- * `weight` - what order the page will appear in the menu and previous & next links within sections
-
-#### sections
-
-The menu on the left hand side is build from the `section` pages.  A section is created by making `_index.md` file within a folder.
-
-You can make sections within sections by placing folders with `_index.md` files recursively in a folder tree - the menu will render the sections into the same tree represented by the folders.
-
-#### reusing content
-
-To re-use the same content across multiple pages - we use the `content` shortcode.  Here is an example from the kubernetes installation section where there are multiple sections re-using the same page content:
+Currently, all includes or references must be absolute and rely on a directory (`/docs`) that's built for into the container at buildtime. Format absolute links from this directory like so:
 
 ```
----
-title: 2. Secure ETCD and Certificates
-weight: 2
----
-
-{{% content "portworx-install-with-kubernetes/shared/2-secure-etcd-and-certificates.md" %}}
+include::/docs/content/test2.ad[]
 ```
 
-This page will live inside it's section but render the content from the `portworx-install-with-kubernetes/shared/2-secure-etcd-and-certificates.md` file.
+**Note:**
 
-To create a section that has shared content but is not rendered in the tree (like the `shared` folder in the example above) - we use the `hidden` value of the front-matter.  Here is the `_index.md` for the shared section that provides the content files used above:
+I don't currently recommend using this for production purposes. If you need to use an AsciiDoc feature, ask first. 
 
+## automateTable shortcode
 
-```
----
-title: Shared
-hidden: true
----
-
-Shared content for kubernetes installation
-```
-
-This means we can add files into the `shared` folder but they won't show up in the menu.
-
-#### Linking between sections
-
-Pages within a section will display **next** and **previous** links based on the `weight` property of the front-matter.  Sometimes it's useful to put a manual link into a page (or shared content) to keep the flow going.
-
-Use the `widelink` shortcode to do this as follows:
+This shortcode generates a table from a yaml file located in the site’s data directory:
 
 ```
-{{< widelink url="/application-install-with-kubernetes" >}}Stateful applications on Kubernetes{{</widelink>}}
+{{<automateTable source="exampleTable">}}
 ```
 
-This will render the wide orange links to the page url given.
+The yaml file is formatted as follows:
 
-#### Section homepages
-
-The `_index.md` page of a section can contain content and it will list all of the pages and/or sections that live below it.
-
-You can disable the list of child links using the `hidesections` property of the front-matter in the `_index.md` page - then it will only render the section page content.
-
-#### Redirects
-
-To control redirecting from old page URLs to new pages - you must put a `redirect_from` parameter into the front-matter of the new page.
-
-An example to redirect two stale URLs to a page:
-
-```yaml
----
-title: 1. Prepare your platform
-weight: 1
-redirect_from:
-  - /cloud/azure/k8s_tectonic.html
-  - /apples/pears.html
----
+```
+exampleTable:
+  heading: 
+    - name: 'heading 1'
+      colspan: 4
+  tableData: 
+    - ['row1 item1<br/><br/><ul><li>list item</li></ul>','row1 item2','row1 item3','row1 item4'] 
+    - ['row2 item1','row2 item2','row2 item3','row2 item4']
 ```
 
-#### Updating the HEAD meta tags (title, keywords & description)
+Note: 
 
-To change the site HEAD meta tags - change the following values in `config.yaml`:
+* You can use html to add lists and other style elements to text in a table cell.
+* The colspan attribute sets the width (in columns) of the table headings you provide.
 
- * title
- * params.description
- * params.keywords
+| | |
+| --- | --- |
+| `exampleTable` | This field defines the table name you call in the shortcode within the text. For example, if you wished to place a table on the fontpage of the site called `exampleTable`, you'd place the shortcode `{{<automateTable source="exampleTable">}}` into the `_index.md` file. |
+| `heading` | contains table headings (`name`) and how many cells you want the table headings to span (`colspan`). There is no default `colspan` value, you must specify a numerical value. |
+| `tableData` | a list of arrays. Each array is a row, and each entry in the array is a cell in the row. This is designed to keep the yaml table-like and make manual data entry here a little easier. |
 
-## hugo docs
+## variable shortcode
 
-Because the site is based on hugo - you can use any of the shortcodes, functions and variables listed in the [hugo documentation](https://gohugo.io/documentation/)
+This shortcode allows you to specify a variable in the `names.yaml` file in the site's data folder and reference it anywhere in the text. It uses a `key:value` format. Define the variable name using the key, and Hugo will replace it with the `value` in the output.
+
+The shortcode is formated as follows:
+```
+{{<variable var="key">}}
+```
